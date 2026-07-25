@@ -41,7 +41,9 @@
   <header class="site-header" data-od-id="site-header">
     <div class="container header-inner">
       <div class="brand-container">
-        <img src="assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+        <a href="#top" data-od-id="brand-logo-link" class="brand-logo-link">
+          <img src="assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+        </a>
         <a class="brand" href="#top" data-od-id="brand">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
       </div>
       <style>
@@ -50,7 +52,6 @@
           align-items: flex-start;
           gap: 12px;
           flex-shrink: 1;
-          flex-wrap: wrap;
         }
         .brand-logo {
           height: 40px;
@@ -58,23 +59,35 @@
           border-radius: 50%;
           object-fit: cover;
           flex-shrink: 0;
+          margin-top: 2px;
         }
         @media (min-width: 480px) {
           .brand-logo { height: 44px; width: 44px; }
-          .site-header .brand { font-size: 14px; }
+          .site-header .brand { font-size: 13px; }
         }
         @media (min-width: 896px) {
           .brand-logo { height: 48px; width: 48px; }
-          .site-header .brand { font-size: 16px; }
+          .site-header .brand { font-size: 15px; }
         }
         .site-header .brand {
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.06em;
           text-transform: uppercase;
-          line-height: 1.2;
-          max-width: 120px;
+          line-height: 1.3;
+          max-width: 100px;
           word-break: break-word;
+        }
+        .brand-logo-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          border-radius: 50%;
+          transition: opacity 150ms ease-standard;
+        }
+        .brand-logo-link:hover {
+          opacity: 0.8;
         }
       </style>
       <div class="header-right">
@@ -96,10 +109,8 @@
         <div class="nav-actions">
           <a class="btn btn-primary" href="#" data-od-id="header-cta">Sign Up</a>
         </div>
-        <div class="nav-actions-mobile">
-          <a class="btn btn-primary btn-sm" href="#" data-od-id="header-cta-mobile">Sign Up</a>
-        </div>
       </div>
+      <a class="btn btn-primary btn-sm nav-actions-mobile" href="#" data-od-id="header-cta-mobile">Sign Up</a>
       <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
         <span></span>
       </button>
@@ -261,11 +272,15 @@
         </div>
         <div class="mode-grid">
           <article class="mode-card card-lift" data-od-id="mode-classroom">
-            <div class="mode-img">
-              <img src="assets/images/mode-classroom.jpg" alt="Classroom coaching" data-fallback width="640" height="400" />
-            </div>
+            <button class="mode-card-toggle" type="button" aria-expanded="false">
+              <div class="mode-img">
+                <img src="assets/images/mode-classroom.jpg" alt="Classroom coaching" data-fallback width="640" height="400" />
+              </div>
+              <div class="mode-card-title">
+                <h3>CLASSROOM</h3>
+              </div>
+            </button>
             <div class="mode-body">
-              <h3>CLASSROOM</h3>
               <p>Learn face-to-face at our coaching centre — structured, focused, and deeply personal.</p>
               <ul>
                 <li>Direct access to the professor</li>
@@ -277,9 +292,14 @@
             </div>
           </article>
           <article class="mode-card card-lift" data-od-id="mode-online">
-            <div class="mode-img">
-              <img src="assets/images/mode-online.jpg" alt="Online live classes" data-fallback width="640" height="400" />
-            </div>
+            <button class="mode-card-toggle" type="button" aria-expanded="false">
+              <div class="mode-img">
+                <img src="assets/images/mode-online.jpg" alt="Online live classes" data-fallback width="640" height="400" />
+              </div>
+              <div class="mode-card-title">
+                <h3>ONLINE</h3>
+              </div>
+            </button>
             <div class="mode-body">
               <h3>ONLINE</h3>
               <p>Join live classes on Google Meet — same professor, same quality, no matter where you are.</p>
@@ -293,9 +313,14 @@
             </div>
           </article>
           <article class="mode-card card-lift" data-od-id="mode-hybrid">
-            <div class="mode-img">
-              <img src="assets/images/mode-hybrid.jpg" alt="Hybrid learning" data-fallback width="640" height="400" />
-            </div>
+            <button class="mode-card-toggle" type="button" aria-expanded="false">
+              <div class="mode-img">
+                <img src="assets/images/mode-hybrid.jpg" alt="Hybrid learning" data-fallback width="640" height="400" />
+              </div>
+              <div class="mode-card-title">
+                <h3>HYBRID</h3>
+              </div>
+            </button>
             <div class="mode-body">
               <h3>HYBRID</h3>
               <p>Best of both worlds - Learn face-to-face at our Classroom or Join live classes on Google Meet.</p>
