@@ -372,8 +372,9 @@ h3, .h3 {
 }
 .nav-dropdown-menu {
   position: absolute;
-  top: calc(100% - 12px);
-  left: 0;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -381,24 +382,20 @@ h3, .h3 {
   min-width: 180px;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-4px);
   transition: opacity var(--motion-base) var(--ease-standard),
-              visibility var(--motion-base) var(--ease-standard),
-              transform var(--motion-base) var(--ease-standard);
+              visibility var(--motion-base) var(--ease-standard);
   box-shadow: 0 4px 12px color-mix(in oklab, var(--fg), transparent 92%);
   z-index: 1000;
-  margin-top: 12px;
 }
 .nav-dropdown:hover .nav-dropdown-menu,
 .nav-dropdown-trigger[aria-expanded="true"] ~ .nav-dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
 }
 .nav-dropdown-menu a {
   display: block;
   padding: var(--space-2) var(--space-4);
-  font-size: var(--text-sm);
+  font-size: 14px;
   font-weight: 600;
   color: var(--fg);
   text-decoration: none;
