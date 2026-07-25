@@ -219,4 +219,16 @@
       if (ph) ph.style.display = "none";
     });
   });
+
+  /* Mode card expansion on mobile */
+  var modeCardToggles = document.querySelectorAll(".mode-card-toggle");
+  modeCardToggles.forEach(function (toggle) {
+    toggle.addEventListener("click", function () {
+      var card = toggle.closest(".mode-card");
+      if (card) {
+        card.classList.toggle("expanded");
+        toggle.setAttribute("aria-expanded", String(card.classList.contains("expanded")));
+      }
+    });
+  });
 })();
