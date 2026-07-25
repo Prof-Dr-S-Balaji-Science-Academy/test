@@ -397,17 +397,18 @@ h3, .h3 {
   flex-shrink: 0; 
 }
 .nav-actions-mobile {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   flex-shrink: 0;
+  order: 2;
 }
 @media (min-width: 896px) {
   .nav-actions { 
     display: flex; 
   }
   .nav-actions-mobile { 
-    display: none; 
+    display: none !important; 
   }
 }
 .menu-toggle {
@@ -925,24 +926,45 @@ h3, .h3 {
     display: flex;
     flex-direction: column;
   }
+  .mode-card-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: left;
+  }
   .mode-img {
     border-radius: 0;
     aspect-ratio: 2 / 1;
   }
-  .mode-body {
-    display: flex;
-    flex-direction: column;
+  .mode-card-title {
     padding: var(--space-4);
     background: white;
   }
+  .mode-card-title h3 {
+    margin: 0;
+  }
+  .mode-body {
+    display: none;
+    padding: var(--space-4);
+    background: white;
+    border-top: 1px solid var(--border);
+    flex-direction: column;
+  }
   .mode-body h3 {
-    margin-bottom: 0;
-    text-align: center;
+    margin-bottom: var(--space-3);
+    display: none;
   }
   .mode-body p,
   .mode-body ul,
   .mode-body a {
-    display: none;
+    display: block;
+  }
+  .mode-card.expanded .mode-body {
+    display: flex;
   }
 }
 
@@ -1288,8 +1310,8 @@ h3, .h3 {
   gap: var(--space-2);
 }
 .socials a {
-  width: 44px;
-  height: 44px;
+  width: 31px;
+  height: 31px;
   border-radius: 50%;
   background: var(--dark-card);
   color: var(--bg);
@@ -1299,10 +1321,10 @@ h3, .h3 {
   transition: background var(--motion-fast);
 }
 .socials a:hover { background: var(--accent); }
-.socials svg { width: 18px; height: 18px; }
+.socials svg { width: 12px; height: 12px; }
 .socials img {
-  width: 24px;
-  height: 24px;
+  width: 17px;
+  height: 17px;
   object-fit: contain;
   filter: brightness(0) invert(1);
 }
