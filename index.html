@@ -40,6 +40,9 @@
 <body>
   <header class="site-header" data-od-id="site-header">
     <div class="container header-inner">
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
+        <span></span>
+      </button>
       <div class="brand-container">
         <a href="#top" data-od-id="brand-logo-link" class="brand-logo-link">
           <img src="assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
@@ -52,7 +55,7 @@
           align-items: center;
           gap: 12px;
           flex-shrink: 0;
-          white-space: nowrap;
+          order: 1;
         }
         .brand-logo {
           height: 40px;
@@ -68,24 +71,21 @@
           .brand-logo { height: 48px; width: 48px; }
         }
         .site-header .brand {
-          font-size: 13px;
+          font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.06em;
           text-transform: uppercase;
           line-height: 1.25;
           color: var(--fg);
           text-decoration: none;
-          white-space: nowrap;
-        }
-        @media (max-width: 895px) {
-          .site-header .brand {
-            font-size: 11px;
-            display: none;
-          }
+          max-width: 90px;
+          word-break: break-word;
         }
         @media (min-width: 896px) {
           .site-header .brand {
             font-size: 14px;
+            white-space: nowrap;
+            max-width: none;
           }
         }
         .brand-logo-link {
@@ -121,9 +121,6 @@
         </div>
       </div>
       <a class="btn btn-primary btn-sm nav-actions-mobile" href="#" data-od-id="header-cta-mobile">Sign Up</a>
-      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
-        <span></span>
-      </button>
     </div>
   </header>
 
