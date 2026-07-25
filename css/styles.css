@@ -252,7 +252,8 @@ h3, .h3 {
 .btn-block { width: 100%; }
 .btn-sm {
   padding: 8px 16px;
-  font-size: var(--text-sm);
+  font-size: 14px;
+  font-weight: 600;
   min-height: 40px;
 }
 
@@ -291,24 +292,40 @@ h3, .h3 {
   display: none;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--space-6);
+  gap: var(--space-4);
   margin-left: auto;
   flex-shrink: 0;
 }
 .nav-desktop {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: clamp(12px, 1.4vw, 28px);
+  justify-content: flex-start;
+  gap: 0;
 }
 .nav-desktop a {
-  font-size: var(--text-sm);
+  font-size: 14px;
   font-weight: 600;
   color: var(--fg);
   text-decoration: none;
   white-space: nowrap;
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  transition: background var(--motion-fast) var(--ease-standard), color var(--motion-fast);
 }
-.nav-desktop a:hover { color: var(--accent); }
+.nav-desktop a:hover { 
+  background: var(--surface);
+  color: var(--accent);
+}
+.nav-actions-mobile {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  order: 2;
+}
+.menu-toggle {
+  order: 3;
+}
 .nav-dropdown {
   position: relative;
   display: inline-block;
@@ -317,25 +334,25 @@ h3, .h3 {
   align-items: center;
 }
 .nav-dropdown-trigger {
-  font-size: var(--text-sm);
+  font-size: 14px;
   font-weight: 600;
   color: var(--fg);
   text-decoration: none;
   white-space: nowrap;
   background: none;
-  padding: 0;
+  padding: 8px 12px;
   border: none;
   cursor: pointer;
-  transition: color var(--motion-fast) var(--ease-standard);
+  transition: background var(--motion-fast) var(--ease-standard), color var(--motion-fast);
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  height: var(--header-h);
-  align-items: center;
+  border-radius: var(--radius-pill);
 }
 .nav-dropdown-trigger:hover,
 .nav-dropdown:hover .nav-dropdown-trigger { 
-  color: var(--accent); 
+  background: var(--surface);
+  color: var(--accent);
 }
 .nav-dropdown-trigger::after {
   content: "";
@@ -530,7 +547,8 @@ h3, .h3 {
   .header-right { display: flex; }
   .menu-toggle { display: none; }
   .nav-mobile { display: none !important; }
-  .brand { max-width: none; font-size: 13px; letter-spacing: 0.08em; }
+  .nav-actions-mobile { display: none !important; }
+  .brand { max-width: none; font-size: 14px; letter-spacing: 0.08em; }
 }
 
 /* Hero */
