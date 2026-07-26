@@ -328,7 +328,6 @@ h3, .h3 {
   place-items: center;
   border-radius: var(--radius-sm);
   flex-shrink: 0;
-  margin-left: auto;
 }
 .nav-dropdown {
   position: relative;
