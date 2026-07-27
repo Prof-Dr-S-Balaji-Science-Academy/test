@@ -194,27 +194,29 @@
               <strong>Regular Practice Tests</strong>
               <span>Topic-wise tests and chapter tests to track progress regularly</span>
             </div>
-            <div class="highlight-box">
-              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
-              <strong>Doubt Clearing Sessions</strong>
-              <span>Dedicated doubt solving sessions to clear concepts and build confidence</span>
-            </div>
-            <div class="highlight-box">
-              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.35-4.35"></path>
-              </svg>
-              <strong>Problem Solving Sessions</strong>
-              <span>Learn effective problem solving techniques and approach strategies</span>
-            </div>
+
             <div class="highlight-box">
               <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
               <strong>Full Length Exams</strong>
               <span>Board-pattern full length exams with detailed analysis and feedback</span>
+            </div>
+          </div>
+          <div class="batch-timings-card">
+            <strong class="batch-timings-title">Batch Timings</strong>
+            <div class="batch-timings-content">
+              <div class="batch-col">
+                <span class="batch-name">Weekday Batch</span>
+                <span class="batch-days">Mon – Sat</span>
+                <span class="batch-time">5:30 AM – 6:30 AM</span>
+              </div>
+              <div class="batch-separator"></div>
+              <div class="batch-col">
+                <span class="batch-name">Weekend Batch</span>
+                <span class="batch-days">Sat: 6:00 PM – 8:30 PM</span>
+                <span class="batch-time">Sun: 6:00 AM – 8:30 AM</span>
+              </div>
             </div>
           </div>
           <div class="program-guarantee">
@@ -409,6 +411,57 @@
       margin: 0 0 var(--space-3) 0;
       opacity: 0.95;
     }
+    .batch-timings-card {
+      background: var(--accent);
+      color: white;
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      margin-bottom: var(--space-3);
+    }
+    .batch-timings-title {
+      display: block;
+      font-size: var(--text-base);
+      font-weight: 700;
+      margin-bottom: var(--space-3);
+      color: white;
+    }
+    .batch-timings-content {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+    .batch-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .batch-col:first-child {
+      padding-right: var(--space-3);
+    }
+    .batch-col:last-child {
+      padding-left: var(--space-3);
+    }
+    .batch-separator {
+      width: 1px;
+      background: rgba(255, 255, 255, 0.35);
+      flex-shrink: 0;
+      align-self: stretch;
+    }
+    .batch-name {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: white;
+    }
+    .batch-days {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .batch-time {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
     .btn-primary-light {
       background: white !important;
       color: var(--accent) !important;
