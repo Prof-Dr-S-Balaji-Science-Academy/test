@@ -12,16 +12,14 @@
     { id: 'sb12-chemistry', label: 'State Board\n12 Chemistry', icon: 'chemistry' }
   ];
 
-  // Color scheme for nodes (primary, secondary, tertiary, quaternary, quinary)
   const COLOR_SCHEME = {
-    primary: '#0052ff',      // Coinbase Blue
-    secondary: '#578bfa',    // Lighter blue
-    tertiary: '#a8c5fc',     // Even lighter
-    quaternary: '#d4e0ff',   // Very light
-    quinary: '#eef0f3'       // Almost white
+    primary: '#0052ff',
+    secondary: '#578bfa',
+    tertiary: '#a8c5fc',
+    quaternary: '#d4e0ff',
+    quinary: '#eef0f3'
   };
 
-  // Sample mockup data structure (will be replaced with actual JSON)
   const MOCKUP_CHAPTERS = [
     {
       id: 'ch1',
@@ -40,32 +38,15 @@
               level: 1,
               expanded: true,
               children: [
-                { 
-                  id: 't1', 
-                  text: 'Core Principles', 
-                  level: 2, 
-                  expanded: false,
-                  children: [
-                    { id: 'q1', text: 'Definition', level: 3, children: [] },
-                    { id: 'q2', text: 'Applications', level: 3, children: [] }
-                  ]
-                },
-                { 
-                  id: 't2', 
-                  text: 'Key Terms', 
-                  level: 2,
-                  expanded: false,
-                  children: [
-                    { id: 'q3', text: 'Definitions', level: 3, children: [] },
-                    { id: 'q4', text: 'Examples', level: 3, children: [] }
-                  ]
-                },
-                { 
-                  id: 't3', 
-                  text: 'Basic Laws', 
-                  level: 2,
-                  children: []
-                }
+                { id: 't1', text: 'Core Principles', level: 2, expanded: false, children: [
+                  { id: 'q1', text: 'Definition', level: 3, children: [] },
+                  { id: 'q2', text: 'Applications', level: 3, children: [] }
+                ]},
+                { id: 't2', text: 'Key Terms', level: 2, expanded: false, children: [
+                  { id: 'q3', text: 'Definitions', level: 3, children: [] },
+                  { id: 'q4', text: 'Examples', level: 3, children: [] }
+                ]},
+                { id: 't3', text: 'Basic Laws', level: 2, children: [] }
               ]
             },
             {
@@ -74,22 +55,11 @@
               level: 1,
               expanded: true,
               children: [
-                { 
-                  id: 't4', 
-                  text: 'Physical Properties', 
-                  level: 2,
-                  expanded: false,
-                  children: [
-                    { id: 'q5', text: 'Measurement', level: 3, children: [] },
-                    { id: 'q6', text: 'Units', level: 3, children: [] }
-                  ]
-                },
-                { 
-                  id: 't5', 
-                  text: 'Chemical Properties', 
-                  level: 2,
-                  children: []
-                }
+                { id: 't4', text: 'Physical', level: 2, expanded: false, children: [
+                  { id: 'q5', text: 'Measurement', level: 3, children: [] },
+                  { id: 'q6', text: 'Units', level: 3, children: [] }
+                ]},
+                { id: 't5', text: 'Chemical', level: 2, children: [] }
               ]
             },
             {
@@ -98,19 +68,8 @@
               level: 1,
               expanded: false,
               children: [
-                { id: 't6', text: 'Real World Examples', level: 2, children: [] },
-                { id: 't7', text: 'Industrial Uses', level: 2, children: [] },
-                { id: 't8', text: 'Modern Technology', level: 2, children: [] }
-              ]
-            },
-            {
-              id: 's4',
-              text: 'Practice Problems',
-              level: 1,
-              expanded: false,
-              children: [
-                { id: 't9', text: 'Solved Examples', level: 2, children: [] },
-                { id: 't10', text: 'Practice Questions', level: 2, children: [] }
+                { id: 't6', text: 'Real World', level: 2, children: [] },
+                { id: 't7', text: 'Industrial', level: 2, children: [] }
               ]
             }
           ]
@@ -134,18 +93,8 @@
               level: 1,
               expanded: true,
               children: [
-                { 
-                  id: 't1', 
-                  text: 'System Analysis', 
-                  level: 2,
-                  children: []
-                },
-                { 
-                  id: 't2', 
-                  text: 'Interactions', 
-                  level: 2,
-                  children: []
-                }
+                { id: 't1', text: 'Analysis', level: 2, children: [] },
+                { id: 't2', text: 'Interactions', level: 2, children: [] }
               ]
             },
             {
@@ -154,43 +103,7 @@
               level: 1,
               expanded: false,
               children: [
-                { id: 't3', text: 'Methods', level: 2, children: [] },
-                { id: 't4', text: 'Strategies', level: 2, children: [] }
-              ]
-            }
-          ]
-        }
-      }
-    },
-    {
-      id: 'ch3',
-      number: 3,
-      title: 'Case Studies',
-      mindmapData: {
-        root: {
-          id: 'root',
-          text: 'Chapter Three',
-          level: 0,
-          expanded: true,
-          children: [
-            {
-              id: 's1',
-              text: 'Case Study 1',
-              level: 1,
-              expanded: false,
-              children: [
-                { id: 't1', text: 'Background', level: 2, children: [] },
-                { id: 't2', text: 'Analysis', level: 2, children: [] }
-              ]
-            },
-            {
-              id: 's2',
-              text: 'Case Study 2',
-              level: 1,
-              expanded: false,
-              children: [
-                { id: 't3', text: 'Overview', level: 2, children: [] },
-                { id: 't4', text: 'Findings', level: 2, children: [] }
+                { id: 't3', text: 'Methods', level: 2, children: [] }
               ]
             }
           ]
@@ -218,7 +131,6 @@
   const bookSelector = document.getElementById('bookSelector');
   const chaptersSidebar = document.getElementById('chaptersSidebar');
   const chaptersList = document.getElementById('chaptersList');
-  const noChaptersPlaceholder = document.getElementById('noChaptersPlaceholder');
   const mindmapCanvas = document.getElementById('mindmapCanvas');
   const mindmapSvg = document.getElementById('mindmap-svg');
   const mindmapPlaceholder = document.getElementById('mindmapPlaceholder');
@@ -227,7 +139,6 @@
   const zoomOut = document.getElementById('zoomOut');
   const zoomReset = document.getElementById('zoomReset');
   const mobileChaptersToggle = document.getElementById('mobileChaptersToggle');
-  const mindmapWorkspace = document.getElementById('mindmapWorkspace');
 
   // ============================================================================
   // SVG ICON GENERATORS
@@ -245,16 +156,18 @@
   }
 
   // ============================================================================
-  // BOOK SELECTOR
+  // BOOK SELECTOR INITIALIZATION
   // ============================================================================
   function initializeBookSelector() {
-    bookSelector.innerHTML = BOOKS.map(book => `
+    const html = BOOKS.map(book => `
       <label class="book-card" data-book-id="${book.id}">
         <input type="radio" name="book" value="${book.id}" />
         ${createIcon(book.icon)}
         <span class="book-label">${book.label}</span>
       </label>
     `).join('');
+    
+    bookSelector.innerHTML = html;
 
     document.querySelectorAll('.book-card input[type="radio"]').forEach(radio => {
       radio.addEventListener('change', (e) => {
@@ -266,7 +179,7 @@
   }
 
   // ============================================================================
-  // BOOK SELECTION LOGIC
+  // BOOK SELECTION
   // ============================================================================
   function selectBook(bookId) {
     state.selectedBook = bookId;
@@ -275,27 +188,24 @@
     state.zoom = 1;
     state.pan = { x: 0, y: 0 };
 
-    // Update UI
     document.querySelectorAll('.book-card').forEach(card => {
       card.classList.toggle('active', card.dataset.bookId === bookId);
     });
 
-    // Load chapters (from mockup data for now)
     state.chapters = MOCKUP_CHAPTERS;
     renderChapters();
-
-    // Show chapters sidebar
-    chaptersList.style.display = 'block';
-    noChaptersPlaceholder.style.display = 'none';
-
-    // Reset mindmap
+    
+    document.getElementById('chaptersList').style.display = 'block';
+    document.getElementById('noChaptersPlaceholder').style.display = 'none';
+    
     clearMindmap();
   }
 
   // ============================================================================
-  // CHAPTERS SIDEBAR
+  // CHAPTERS RENDERING
   // ============================================================================
   function renderChapters() {
+    const chaptersList = document.getElementById('chaptersList');
     chaptersList.innerHTML = state.chapters.map(chapter => `
       <div class="chapter-item" data-chapter-id="${chapter.id}">
         <span class="chapter-number">Ch ${chapter.number}</span>
@@ -305,8 +215,7 @@
 
     document.querySelectorAll('.chapter-item').forEach(item => {
       item.addEventListener('click', () => {
-        const chapterId = item.dataset.chapterId;
-        selectChapter(chapterId);
+        selectChapter(item.dataset.chapterId);
       });
     });
   }
@@ -322,18 +231,15 @@
 
     state.mindmapData = JSON.parse(JSON.stringify(chapter.mindmapData));
 
-    // Update UI
     document.querySelectorAll('.chapter-item').forEach(item => {
       item.classList.toggle('active', item.dataset.chapterId === chapterId);
     });
 
-    // Close mobile sidebar after selection
     if (window.innerWidth < 896) {
       chaptersSidebar.classList.remove('active');
       mindmapCanvasWrapper.classList.add('active');
     }
 
-    // Render mindmap
     renderMindmap();
   }
 
@@ -349,141 +255,37 @@
     mindmapPlaceholder.style.display = 'none';
     mindmapSvg.style.display = 'block';
 
-    // Clear SVG
     while (mindmapSvg.firstChild) {
       mindmapSvg.removeChild(mindmapSvg.firstChild);
     }
 
-    // Calculate layout
     const layout = calculateLayout(state.mindmapData.root);
-    
-    // Draw connections
     drawConnections(layout);
-
-    // Draw nodes
     drawNodes(layout);
-
-    // Set SVG viewBox based on layout
     updateSvgViewBox(layout);
-
-    // Add event listeners
     attachNodeListeners();
   }
 
-  function clearMindmap() {
-    mindmapPlaceholder.style.display = 'grid';
-    mindmapSvg.style.display = 'block';
-    mindmapSvg.innerHTML = '';
-    
-    // Draw default mockup with empty nodes
-    const svg = mindmapSvg;
-    svg.setAttribute('viewBox', '-50 -150 600 300');
-    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-    
-    // Primary node
-    const primary = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    primary.setAttribute('cx', '0');
-    primary.setAttribute('cy', '0');
-    primary.setAttribute('r', '35');
-    primary.setAttribute('fill', COLOR_SCHEME.primary);
-    primary.setAttribute('opacity', '0.15');
-    svg.appendChild(primary);
-    
-    const primaryText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    primaryText.setAttribute('x', '0');
-    primaryText.setAttribute('y', '5');
-    primaryText.setAttribute('text-anchor', 'middle');
-    primaryText.setAttribute('dominant-baseline', 'middle');
-    primaryText.setAttribute('font-size', '12');
-    primaryText.setAttribute('font-weight', '600');
-    primaryText.setAttribute('fill', COLOR_SCHEME.primary);
-    primaryText.textContent = 'Select';
-    svg.appendChild(primaryText);
-    
-    // Secondary nodes (left and right)
-    const secondaryPositions = [
-      { x: -150, y: -80 },
-      { x: -150, y: 80 },
-      { x: 150, y: -80 },
-      { x: 150, y: 80 }
-    ];
-    
-    secondaryPositions.forEach((pos, idx) => {
-      // Connection line
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      const cpX = pos.x / 2;
-      line.setAttribute('d', `M 0 0 Q ${cpX} ${pos.y / 2} ${pos.x} ${pos.y}`);
-      line.setAttribute('stroke', COLOR_SCHEME.secondary);
-      line.setAttribute('stroke-width', '1.5');
-      line.setAttribute('fill', 'none');
-      line.setAttribute('opacity', '0.3');
-      svg.appendChild(line);
-      
-      // Secondary node
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', pos.x);
-      circle.setAttribute('cy', pos.y);
-      circle.setAttribute('r', '28');
-      circle.setAttribute('fill', COLOR_SCHEME.secondary);
-      circle.setAttribute('opacity', '0.15');
-      svg.appendChild(circle);
-    });
-    
-    // Tertiary nodes
-    const tertiaryPositions = [
-      { x: -280, y: -100 },
-      { x: -280, y: 0 },
-      { x: -280, y: 100 },
-      { x: 280, y: -100 },
-      { x: 280, y: 100 }
-    ];
-    
-    tertiaryPositions.forEach((pos) => {
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', pos.x);
-      circle.setAttribute('cy', pos.y);
-      circle.setAttribute('r', '20');
-      circle.setAttribute('fill', COLOR_SCHEME.tertiary);
-      circle.setAttribute('opacity', '0.15');
-      svg.appendChild(circle);
-    });
-  }
-
   // ============================================================================
-  // LAYOUT CALCULATION (Smart positioning)
+  // LAYOUT CALCULATION
   // ============================================================================
   function calculateLayout(root, x = 150, y = 0, verticalGap = 100, horizontalGap = 180) {
     const layout = {};
-    const nodeSize = 60;
 
     function traverse(node, level, x, y, siblingIndex, totalSiblings) {
       const nodeId = node.id;
-      
-      // Calculate position based on level and sibling count
       let posX = x + level * horizontalGap;
       let posY = y + (siblingIndex - totalSiblings / 2) * verticalGap;
 
-      // Adjust radius based on level for visual hierarchy
       const radii = [35, 28, 24, 20, 18];
       const radius = radii[Math.min(level, radii.length - 1)];
 
-      layout[nodeId] = {
-        node,
-        x: posX,
-        y: posY,
-        radius: radius,
-        level,
-        children: []
-      };
+      layout[nodeId] = { node, x: posX, y: posY, radius, level, children: [] };
 
       if (node.expanded && node.children && node.children.length > 0) {
-        const childRadius = (node.children.length - 1) * verticalGap / 2;
-        const childBaseY = posY;
-
         node.children.forEach((child, idx) => {
           const childX = posX + horizontalGap;
-          const childY = childBaseY + (idx - (node.children.length - 1) / 2) * verticalGap;
-          
+          const childY = posY + (idx - (node.children.length - 1) / 2) * verticalGap;
           traverse(child, level + 1, childX, childY, idx, node.children.length);
           layout[nodeId].children.push(child.id);
         });
@@ -506,7 +308,6 @@
         const childItem = layout[childId];
         if (!childItem) return;
 
-        // Draw curved line (quadratic Bezier curve)
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         const x1 = item.x;
         const y1 = item.y;
@@ -514,10 +315,8 @@
         const y2 = childItem.y;
         const cpX = (x1 + x2) / 2;
 
-        const d = `M ${x1} ${y1} Q ${cpX} ${y1} ${x2} ${y2}`;
-        path.setAttribute('d', d);
+        path.setAttribute('d', `M ${x1} ${y1} Q ${cpX} ${y1} ${x2} ${y2}`);
         path.setAttribute('class', 'connection-line');
-
         g.appendChild(path);
       });
     });
@@ -535,17 +334,9 @@
       nodeGroup.setAttribute('data-node-id', nodeId);
       nodeGroup.setAttribute('data-node-level', item.level);
 
-      // Determine color based on level
-      const colors = [
-        COLOR_SCHEME.primary,
-        COLOR_SCHEME.secondary,
-        COLOR_SCHEME.tertiary,
-        COLOR_SCHEME.quaternary,
-        COLOR_SCHEME.quinary
-      ];
+      const colors = [COLOR_SCHEME.primary, COLOR_SCHEME.secondary, COLOR_SCHEME.tertiary, COLOR_SCHEME.quaternary, COLOR_SCHEME.quinary];
       const color = colors[Math.min(item.level, colors.length - 1)];
 
-      // Circle
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       circle.setAttribute('class', 'node-circle');
       circle.setAttribute('cx', item.x);
@@ -553,10 +344,8 @@
       circle.setAttribute('r', item.radius);
       circle.setAttribute('fill', color);
       circle.setAttribute('opacity', '0.9');
-
       nodeGroup.appendChild(circle);
 
-      // Text
       if (item.node.text) {
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('class', 'node-text');
@@ -565,7 +354,6 @@
         text.setAttribute('fill', item.level === 0 ? 'white' : (item.level <= 1 ? 'white' : '#0a0b0d'));
         text.setAttribute('font-size', Math.max(10, 14 - item.level * 1.5));
 
-        // Split text into multiple lines if needed
         const words = item.node.text.split(' ');
         const lines = [];
         let currentLine = '';
@@ -582,8 +370,6 @@
         if (currentLine) lines.push(currentLine);
 
         const lineHeight = 13;
-        const startY = item.y - (lines.length - 1) * lineHeight / 2;
-
         lines.forEach((line, idx) => {
           const tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
           tspan.setAttribute('x', item.x);
@@ -595,7 +381,6 @@
         nodeGroup.appendChild(text);
       }
 
-      // Expand indicator
       if (item.children.length > 0) {
         const indicator = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         indicator.setAttribute('class', 'node-expand-indicator');
@@ -603,7 +388,6 @@
         indicator.setAttribute('y', item.y);
         indicator.setAttribute('fill', COLOR_SCHEME.primary);
         indicator.textContent = '>';
-
         nodeGroup.appendChild(indicator);
       }
 
@@ -631,7 +415,102 @@
   }
 
   // ============================================================================
-  // NODE INTERACTION
+  // CLEAR MINDMAP - SHOW DEFAULT MOCKUP
+  // ============================================================================
+  function clearMindmap() {
+    mindmapPlaceholder.style.display = 'none';
+    mindmapSvg.style.display = 'block';
+    mindmapSvg.innerHTML = '';
+    
+    const svg = mindmapSvg;
+    svg.setAttribute('viewBox', '-100 -150 700 400');
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    
+    // Central primary node
+    const primary = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    primary.setAttribute('cx', '0');
+    primary.setAttribute('cy', '0');
+    primary.setAttribute('r', '40');
+    primary.setAttribute('fill', COLOR_SCHEME.primary);
+    primary.setAttribute('opacity', '0.85');
+    svg.appendChild(primary);
+    
+    const primaryText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    primaryText.setAttribute('x', '0');
+    primaryText.setAttribute('y', '5');
+    primaryText.setAttribute('text-anchor', 'middle');
+    primaryText.setAttribute('dominant-baseline', 'middle');
+    primaryText.setAttribute('font-size', '13');
+    primaryText.setAttribute('font-weight', '600');
+    primaryText.setAttribute('fill', 'white');
+    primaryText.textContent = 'Select';
+    svg.appendChild(primaryText);
+    
+    // Secondary nodes
+    const secondaryPositions = [
+      { x: -180, y: -100 },
+      { x: -180, y: 100 },
+      { x: 180, y: -100 },
+      { x: 180, y: 100 }
+    ];
+    
+    secondaryPositions.forEach((pos, idx) => {
+      // Connection line
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const cpX = pos.x / 2;
+      line.setAttribute('d', `M 0 0 Q ${cpX} ${pos.y / 2} ${pos.x} ${pos.y}`);
+      line.setAttribute('stroke', COLOR_SCHEME.secondary);
+      line.setAttribute('stroke-width', '1.5');
+      line.setAttribute('fill', 'none');
+      line.setAttribute('opacity', '0.4');
+      svg.appendChild(line);
+      
+      // Secondary node
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', pos.x);
+      circle.setAttribute('cy', pos.y);
+      circle.setAttribute('r', '30');
+      circle.setAttribute('fill', COLOR_SCHEME.secondary);
+      circle.setAttribute('opacity', '0.7');
+      svg.appendChild(circle);
+      
+      // Secondary text
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('x', pos.x);
+      text.setAttribute('y', pos.y);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('dominant-baseline', 'middle');
+      text.setAttribute('font-size', '11');
+      text.setAttribute('font-weight', '600');
+      text.setAttribute('fill', 'white');
+      text.textContent = ['Concept', 'Topic', 'Theme', 'Area'][idx];
+      svg.appendChild(text);
+    });
+    
+    // Tertiary nodes
+    const tertiaryPositions = [
+      { x: -320, y: -140 },
+      { x: -320, y: -60 },
+      { x: -320, y: 60 },
+      { x: -320, y: 140 },
+      { x: 320, y: -140 },
+      { x: 320, y: 0 },
+      { x: 320, y: 140 }
+    ];
+    
+    tertiaryPositions.forEach((pos) => {
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', pos.x);
+      circle.setAttribute('cy', pos.y);
+      circle.setAttribute('r', '22');
+      circle.setAttribute('fill', COLOR_SCHEME.tertiary);
+      circle.setAttribute('opacity', '0.55');
+      svg.appendChild(circle);
+    });
+  }
+
+  // ============================================================================
+  // NODE INTERACTIONS
   // ============================================================================
   function attachNodeListeners() {
     document.querySelectorAll('.node-group').forEach(nodeGroup => {
@@ -656,13 +535,6 @@
     if (!node || !node.children || node.children.length === 0) return;
 
     node.expanded = !node.expanded;
-
-    if (node.expanded) {
-      state.expandedNodes.add(nodeId);
-    } else {
-      state.expandedNodes.delete(nodeId);
-    }
-
     renderMindmap();
   }
 
@@ -701,7 +573,6 @@
     mindmapCanvas.style.transform = `translate(${state.pan.x}px, ${state.pan.y}px)`;
   }
 
-  // Mouse wheel zoom
   mindmapCanvas.addEventListener('wheel', (e) => {
     if (e.ctrlKey || e.metaKey) {
       e.preventDefault();
@@ -711,13 +582,12 @@
     }
   });
 
-  // Pan with mouse drag
   let isPanning = false;
   let startX = 0;
   let startY = 0;
 
   mindmapCanvas.addEventListener('mousedown', (e) => {
-    if (e.button !== 2) { // Not right click
+    if (e.button !== 2) {
       isPanning = true;
       startX = e.clientX - state.pan.x;
       startY = e.clientY - state.pan.y;
@@ -738,7 +608,6 @@
     mindmapCanvas.style.cursor = 'default';
   });
 
-  // Touch support for mobile pan and zoom
   let touchStartDistance = 0;
   let touchStartX = 0;
   let touchStartY = 0;
@@ -777,15 +646,11 @@
     isPanning = false;
   });
 
-  // ============================================================================
-  // MOBILE CHAPTERS TOGGLE
-  // ============================================================================
   mobileChaptersToggle.addEventListener('click', () => {
     chaptersSidebar.classList.toggle('active');
     mindmapCanvasWrapper.classList.toggle('active');
   });
 
-  // Close sidebar when clicking outside on mobile
   document.addEventListener('click', (e) => {
     if (window.innerWidth < 896) {
       if (!e.target.closest('.chapters-sidebar') && !e.target.closest('#mobileChaptersToggle')) {
@@ -799,12 +664,15 @@
   // INITIALIZATION
   // ============================================================================
   function init() {
+    console.log('Initializing mindmap...');
     initializeBookSelector();
-    clearMindmap(); // Show default mockup on load
-    document.getElementById('y').textContent = new Date().getFullYear();
+    clearMindmap();
+    if (document.getElementById('y')) {
+      document.getElementById('y').textContent = new Date().getFullYear();
+    }
+    console.log('Mindmap initialized');
   }
 
-  // Call init when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
