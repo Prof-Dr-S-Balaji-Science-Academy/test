@@ -1,0 +1,1241 @@
+{
+  "chapters": [
+    {
+      "id": "c1",
+      "number": 1,
+      "title": "Electrostatics",
+      "data": {
+        "id": "root",
+        "text": "Electrostatics",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Introduction",
+            "kids": [
+              { "id": "t1", "text": "Branch of electricity dealing with charges at rest", "kids": [] },
+              { "id": "t2", "text": "Electromagnetic forces underlie everyday forces: friction, tension, normal force", "kids": [] },
+              { "id": "t3", "text": "Historical background: Thales (amber), Benjamin Franklin (positive/negative)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Basic Properties of Electric Charge",
+            "kids": [
+              { "id": "t4", "text": "Electric charge: intrinsic property of matter; SI unit: Coulomb (C)", "kids": [] },
+              { "id": "t5", "text": "Two types: Positive (+) and Negative (–); like repel, unlike attract", "kids": [] },
+              { "id": "t6", "text": "Conservation of charge: total charge in universe is constant; charge cannot be created or destroyed", "kids": [] },
+              { "id": "t7", "text": "Quantisation of charge: q = ne; e = 1.6 × 10⁻¹⁹ C (Millikan's experiment)", "kids": [] },
+              { "id": "t8", "text": "Triboelectric charging: charging by rubbing (e.g., glass rod with silk)", "kids": [] },
+              { "id": "t9", "text": "Detection: Gold-leaf electroscope", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Coulomb's Law",
+            "kids": [
+              { "id": "t10", "text": "F = kq₁q₂/r²; k = 9 × 10⁹ Nm²C⁻²", "kids": [] },
+              { "id": "t11", "text": "Vector form: F₂₁ = –F₁₂ (Newton's 3rd law)", "kids": [] },
+              { "id": "t12", "text": "Permittivity of free space: ε₀ = 8.85 × 10⁻¹² C²N⁻¹m⁻²", "kids": [] },
+              { "id": "t13", "text": "Superposition Principle: net force = vector sum of individual forces", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Electric Field",
+            "kids": [
+              { "id": "t14", "text": "E = F/q₀ (force per unit positive test charge); unit: NC⁻¹ or Vm⁻¹", "kids": [] },
+              { "id": "t15", "text": "Electric field due to point charge: E = kq/r²", "kids": [] },
+              {
+                "id": "t16",
+                "text": "Electric Field Lines",
+                "kids": [
+                  { "id": "q1", "text": "Start from positive charge; end at negative charge", "kids": [] },
+                  { "id": "q2", "text": "Never cross each other", "kids": [] },
+                  { "id": "q3", "text": "Density of lines ∝ strength of field", "kids": [] },
+                  { "id": "q4", "text": "Cannot form closed loops in electrostatics", "kids": [] }
+                ]
+              },
+              { "id": "t17", "text": "Superposition: E_net = ΣEᵢ (vector sum)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Electric Dipole",
+            "kids": [
+              { "id": "t18", "text": "System of two equal and opposite charges separated by distance 2a", "kids": [] },
+              { "id": "t19", "text": "Dipole moment: p = q × 2a; direction: –q to +q; unit: Cm", "kids": [] },
+              { "id": "t20", "text": "Electric field on axial line: E_axial = (1/4πε₀)(2pr)/(r²–a²)²; direction along p", "kids": [] },
+              { "id": "t21", "text": "Electric field on equatorial plane: E_eq = (1/4πε₀)(p)/(r²+a²)^(3/2); direction opposite to p", "kids": [] },
+              { "id": "t22", "text": "For r >> a: E_axial = 2E_eq; both vary as 1/r³", "kids": [] },
+              { "id": "t23", "text": "Torque on dipole: τ = pE sinθ; in vector form τ = p × E", "kids": [] },
+              { "id": "t24", "text": "Potential energy: U = –pE cosθ = –p·E", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Electrostatic Potential",
+            "kids": [
+              { "id": "t25", "text": "V = W/q (work done per unit charge); scalar quantity; unit: Volt (V)", "kids": [] },
+              { "id": "t26", "text": "Potential due to point charge: V = kq/r", "kids": [] },
+              { "id": "t27", "text": "Relation between E and V: E = –dV/dr (negative gradient of potential)", "kids": [] },
+              {
+                "id": "t28",
+                "text": "Equipotential Surfaces",
+                "kids": [
+                  { "id": "q5", "text": "No work done moving charge along surface", "kids": [] },
+                  { "id": "q6", "text": "Always perpendicular to field lines", "kids": [] },
+                  { "id": "q7", "text": "For point charge: concentric spherical surfaces", "kids": [] }
+                ]
+              },
+              { "id": "t29", "text": "Electrostatic potential energy: U = kq₁q₂/r (for two charges)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Electric Flux and Gauss's Law",
+            "kids": [
+              { "id": "t30", "text": "Electric flux: Φ = E·A = EA cosθ; unit: Nm²C⁻¹", "kids": [] },
+              { "id": "t31", "text": "Gauss's Law: Total flux through closed surface = Q_enclosed/ε₀", "kids": [] },
+              {
+                "id": "t32",
+                "text": "Applications of Gauss's Law",
+                "kids": [
+                  { "id": "q8", "text": "Infinite line charge: E = λ/(2πε₀r)", "kids": [] },
+                  { "id": "q9", "text": "Infinite plane sheet: E = σ/(2ε₀)", "kids": [] },
+                  { "id": "q10", "text": "Uniformly charged sphere: E = kQ/r² (outside), E = 0 (inside)", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s8",
+            "text": "Electrostatic Properties of Conductors",
+            "kids": [
+              { "id": "t33", "text": "Electric field inside conductor = 0 in electrostatic equilibrium", "kids": [] },
+              { "id": "t34", "text": "Charge resides only on outer surface of conductor", "kids": [] },
+              { "id": "t35", "text": "E at surface = σ/ε₀ (perpendicular to surface)", "kids": [] },
+              { "id": "t36", "text": "Potential is constant throughout conductor", "kids": [] },
+              { "id": "t37", "text": "Corona discharge: ionization of air near sharp points due to high E", "kids": [] }
+            ]
+          },
+          {
+            "id": "s9",
+            "text": "Dielectrics and Polarisation",
+            "kids": [
+              { "id": "t38", "text": "Dielectrics: non-conductors; polar (e.g., water) and non-polar (e.g., O₂)", "kids": [] },
+              { "id": "t39", "text": "Polarisation: induced dipole moment per unit volume; P = χₑ·ε₀·E", "kids": [] },
+              { "id": "t40", "text": "Dielectric constant (εᵣ): ratio of field without to with dielectric", "kids": [] }
+            ]
+          },
+          {
+            "id": "s10",
+            "text": "Capacitance and Capacitors",
+            "kids": [
+              { "id": "t41", "text": "Capacitance: C = Q/V; ability to store charge; unit: Farad (F)", "kids": [] },
+              { "id": "t42", "text": "Parallel plate capacitor: C = ε₀A/d (without dielectric)", "kids": [] },
+              { "id": "t43", "text": "With dielectric: C = εᵣε₀A/d = κC₀", "kids": [] },
+              {
+                "id": "t44",
+                "text": "Combination of Capacitors",
+                "kids": [
+                  { "id": "q11", "text": "Series: 1/C = 1/C₁ + 1/C₂ + ... (same charge, different voltages)", "kids": [] },
+                  { "id": "q12", "text": "Parallel: C = C₁ + C₂ + ... (same voltage, different charges)", "kids": [] }
+                ]
+              },
+              { "id": "t45", "text": "Energy stored: U = ½CV² = Q²/2C = ½QV", "kids": [] },
+              { "id": "t46", "text": "Energy density: u = ½ε₀E²", "kids": [] }
+            ]
+          },
+          {
+            "id": "s11",
+            "text": "Van de Graaff Generator",
+            "kids": [
+              { "id": "t47", "text": "Generates very high voltages (millions of volts)", "kids": [] },
+              { "id": "t48", "text": "Working: corona discharge transfers charge to large hollow sphere", "kids": [] },
+              { "id": "t49", "text": "Applications: particle accelerators, nuclear physics research", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c2",
+      "number": 2,
+      "title": "Current Electricity",
+      "data": {
+        "id": "root",
+        "text": "Current Electricity",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Electric Current",
+            "kids": [
+              { "id": "t1", "text": "I = dQ/dt; rate of flow of charge; unit: Ampere (A)", "kids": [] },
+              { "id": "t2", "text": "Conventional current: direction of positive charge flow (opposite to electrons)", "kids": [] },
+              { "id": "t3", "text": "Drift velocity: vd = eEτ/m; average velocity of electrons under E field", "kids": [] },
+              { "id": "t4", "text": "I = nAevd; n is free electron density", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Ohm's Law and Resistance",
+            "kids": [
+              { "id": "t5", "text": "V = IR; voltage is proportional to current for ohmic conductors", "kids": [] },
+              { "id": "t6", "text": "Resistance: R = ρl/A; ρ is resistivity; unit: Ohm (Ω)", "kids": [] },
+              { "id": "t7", "text": "Resistivity: ρ = m/(ne²τ); depends on material and temperature", "kids": [] },
+              { "id": "t8", "text": "V-I characteristics: linear (ohmic) vs non-linear (non-ohmic, e.g., diode)", "kids": [] },
+              { "id": "t9", "text": "Effect of temperature: R = R₀(1 + αΔT); α is temperature coefficient", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Carbon Resistors and Colour Code",
+            "kids": [
+              { "id": "t10", "text": "Four-band colour code: first two bands = digits, third = multiplier, fourth = tolerance", "kids": [] },
+              { "id": "t11", "text": "Colour sequence: BBROYGBVGW (0–9)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Combination of Resistors",
+            "kids": [
+              { "id": "t12", "text": "Series: R_eq = R₁ + R₂ + R₃; same current, voltages add", "kids": [] },
+              { "id": "t13", "text": "Parallel: 1/R_eq = 1/R₁ + 1/R₂ + 1/R₃; same voltage, currents add", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "EMF and Internal Resistance",
+            "kids": [
+              { "id": "t14", "text": "EMF (ε): work done per unit charge by source; unit: Volt", "kids": [] },
+              { "id": "t15", "text": "Terminal voltage: V = ε – Ir (during discharge)", "kids": [] },
+              { "id": "t16", "text": "Cells in series: ε_eq = nε, r_eq = nr", "kids": [] },
+              { "id": "t17", "text": "Cells in parallel: ε_eq = ε, r_eq = r/n", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Kirchhoff's Rules",
+            "kids": [
+              {
+                "id": "t18",
+                "text": "Current Rule (Junction Rule)",
+                "kids": [
+                  { "id": "q1", "text": "ΣI = 0 at any junction (conservation of charge)", "kids": [] },
+                  { "id": "q2", "text": "Current entering = Current leaving", "kids": [] }
+                ]
+              },
+              {
+                "id": "t19",
+                "text": "Voltage Rule (Loop Rule)",
+                "kids": [
+                  { "id": "q3", "text": "ΣV = 0 around any closed loop (conservation of energy)", "kids": [] },
+                  { "id": "q4", "text": "Sum of EMFs = sum of IR drops in a loop", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Wheatstone's Bridge and Applications",
+            "kids": [
+              { "id": "t20", "text": "Balanced condition: P/Q = R/S; galvanometer shows zero deflection", "kids": [] },
+              { "id": "t21", "text": "Metre Bridge: based on Wheatstone's principle; measures unknown resistance", "kids": [] },
+              { "id": "t22", "text": "Potentiometer: measures EMF and internal resistance; no current drawn from source", "kids": [] },
+              { "id": "t23", "text": "Comparison of EMFs using potentiometer: ε₁/ε₂ = l₁/l₂", "kids": [] }
+            ]
+          },
+          {
+            "id": "s8",
+            "text": "Electric Power and Energy",
+            "kids": [
+              { "id": "t24", "text": "Power: P = VI = I²R = V²/R; unit: Watt (W)", "kids": [] },
+              { "id": "t25", "text": "Electrical energy: E = Pt = VIt; unit: Joule (J) or kWh", "kids": [] }
+            ]
+          },
+          {
+            "id": "s9",
+            "text": "Heating Effect – Joule's Law",
+            "kids": [
+              { "id": "t26", "text": "Joule's law: H = I²Rt; heat produced ∝ I², R, and t", "kids": [] },
+              { "id": "t27", "text": "Applications: electric heater, electric iron, fuse wire, incandescent bulb", "kids": [] },
+              { "id": "t28", "text": "Fuse: melts when current exceeds safe limit; protects circuit", "kids": [] }
+            ]
+          },
+          {
+            "id": "s10",
+            "text": "Thermoelectric Effects",
+            "kids": [
+              { "id": "t29", "text": "Seebeck effect: EMF produced at junction of two dissimilar metals due to temperature difference; basis of thermocouple", "kids": [] },
+              { "id": "t30", "text": "Peltier effect: heat absorbed or liberated at junction when current flows; reverse of Seebeck", "kids": [] },
+              { "id": "t31", "text": "Thomson effect: heat absorbed or liberated in a single conductor with temperature gradient and current", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c3",
+      "number": 3,
+      "title": "Magnetism and Magnetic Effects of Electric Current",
+      "data": {
+        "id": "root",
+        "text": "Magnetism and Magnetic Effects of Electric Current",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Introduction to Magnetism",
+            "kids": [
+              { "id": "t1", "text": "Magnets have north and south poles; like poles repel, unlike attract", "kids": [] },
+              { "id": "t2", "text": "Isolated magnetic monopoles do not exist", "kids": [] },
+              { "id": "t3", "text": "Coulomb's law for magnets: F = µ₀/4π × (qm1 × qm2)/r²", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Bar Magnet and Magnetic Dipole",
+            "kids": [
+              { "id": "t4", "text": "Magnetic dipole moment: pm = qm × 2l; direction: S to N; unit: Am²", "kids": [] },
+              { "id": "t5", "text": "Axial field (end-on): B = µ₀/4π × 2pmr/(r²–l²)²", "kids": [] },
+              { "id": "t6", "text": "Equatorial field (broad-side): B = µ₀/4π × pm/(r²+l²)^(3/2); direction opposite to pm", "kids": [] },
+              { "id": "t7", "text": "Torque on dipole: τ = pmB sinθ", "kids": [] },
+              { "id": "t8", "text": "Potential energy: U = –pmB cosθ; minimum at θ = 0° (parallel)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Earth's Magnetism",
+            "kids": [
+              { "id": "t9", "text": "Magnetic declination: angle between geographic and magnetic meridians", "kids": [] },
+              { "id": "t10", "text": "Magnetic dip (inclination): angle made by Earth's field with horizontal", "kids": [] },
+              { "id": "t11", "text": "Horizontal component: BH = B cosδ; Vertical component: BV = B sinδ", "kids": [] },
+              { "id": "t12", "text": "tan δ = BV/BH", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Magnetic Properties of Materials",
+            "kids": [
+              { "id": "t13", "text": "Magnetising field H: applied magnetic field; unit: Am⁻¹", "kids": [] },
+              { "id": "t14", "text": "Magnetic permeability µ: measure of ability to allow field lines; µᵣ = µ/µ₀", "kids": [] },
+              { "id": "t15", "text": "Magnetisation M: net magnetic moment per unit volume", "kids": [] },
+              { "id": "t16", "text": "Magnetic susceptibility χm = M/H; dimensionless", "kids": [] },
+              { "id": "t17", "text": "B = µ₀(H + M); total magnetic induction", "kids": [] },
+              {
+                "id": "t18",
+                "text": "Types of Magnetic Materials",
+                "kids": [
+                  { "id": "q1", "text": "Diamagnetic: χm small negative (e.g., copper, gold, bismuth); weakly repelled", "kids": [] },
+                  { "id": "q2", "text": "Paramagnetic: χm small positive (e.g., aluminium, platinum); weakly attracted", "kids": [] },
+                  { "id": "q3", "text": "Ferromagnetic: χm very large positive (e.g., iron, nickel, cobalt); strongly attracted", "kids": [] }
+                ]
+              },
+              { "id": "t19", "text": "Hysteresis: lag of B behind H in ferromagnets; area of loop = energy loss per cycle", "kids": [] },
+              { "id": "t20", "text": "Retentivity: residual magnetism after removing H; Coercivity: H needed to demagnetize", "kids": [] },
+              { "id": "t21", "text": "Curie's law: χm ∝ 1/T for paramagnets; Curie-Weiss law for ferromagnets", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Magnetic Effects of Electric Current",
+            "kids": [
+              { "id": "t22", "text": "Oersted's experiment: current-carrying wire deflects compass needle", "kids": [] },
+              {
+                "id": "t23",
+                "text": "Biot-Savart Law",
+                "kids": [
+                  { "id": "q4", "text": "dB = µ₀/4π × I dl sinθ/r²; magnetic field due to current element", "kids": [] },
+                  { "id": "q5", "text": "For straight infinite wire: B = µ₀I/2πr", "kids": [] },
+                  { "id": "q6", "text": "For circular loop at centre: B = µ₀I/2R", "kids": [] }
+                ]
+              },
+              {
+                "id": "t24",
+                "text": "Ampère's Circuital Law",
+                "kids": [
+                  { "id": "q7", "text": "∮B·dl = µ₀I_enclosed; line integral of B around closed loop", "kids": [] },
+                  { "id": "q8", "text": "Solenoid: B = µ₀nI (inside); n = N/L turns per unit length", "kids": [] },
+                  { "id": "q9", "text": "Toroid: B = µ₀NI/2πr; zero outside", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Force on a Moving Charge",
+            "kids": [
+              { "id": "t25", "text": "Lorentz force: F = q(E + v × B)", "kids": [] },
+              { "id": "t26", "text": "Magnetic force: F = qvB sinθ; maximum when v ⊥ B", "kids": [] },
+              { "id": "t27", "text": "Circular motion in magnetic field: radius r = mv/qB; time period T = 2πm/qB", "kids": [] },
+              { "id": "t28", "text": "Velocity selector: qE = qvB ⟹ v = E/B", "kids": [] },
+              { "id": "t29", "text": "Cyclotron: particle accelerator using resonance condition; νc = qB/2πm", "kids": [] }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Force on a Current-Carrying Conductor",
+            "kids": [
+              { "id": "t30", "text": "F = BIl sinθ; Fleming's left hand rule gives direction", "kids": [] },
+              { "id": "t31", "text": "Force between parallel wires: F/l = µ₀I₁I₂/2πd; parallel currents attract", "kids": [] },
+              { "id": "t32", "text": "Definition of Ampere: force between two wires carrying equal currents", "kids": [] }
+            ]
+          },
+          {
+            "id": "s8",
+            "text": "Torque on a Current Loop – Galvanometer",
+            "kids": [
+              { "id": "t33", "text": "Torque: τ = NBIA sinθ; N turns, B field, I current, A area", "kids": [] },
+              { "id": "t34", "text": "Magnetic dipole moment of coil: m = NIA", "kids": [] },
+              { "id": "t35", "text": "Moving coil galvanometer: τ = kφ; deflection ∝ current", "kids": [] },
+              { "id": "t36", "text": "Ammeter: galvanometer + low shunt resistance in parallel", "kids": [] },
+              { "id": "t37", "text": "Voltmeter: galvanometer + high resistance in series", "kids": [] }
+            ]
+          },
+          {
+            "id": "s9",
+            "text": "Magnetic Moment and Gyromagnetic Ratio",
+            "kids": [
+              { "id": "t38", "text": "Orbital magnetic moment of electron: µL = –(e/2m)L", "kids": [] },
+              { "id": "t39", "text": "Gyromagnetic ratio: µL/L = e/2m", "kids": [] },
+              { "id": "t40", "text": "Bohr magneton: µB = eh/4πm = 9.27 × 10⁻²⁴ Am²; minimum unit of magnetic moment", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c4",
+      "number": 4,
+      "title": "Electromagnetic Induction and Alternating Current",
+      "data": {
+        "id": "root",
+        "text": "Electromagnetic Induction and Alternating Current",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Electromagnetic Induction",
+            "kids": [
+              { "id": "t1", "text": "Faraday's experiment: changing magnetic flux induces EMF in a coil", "kids": [] },
+              {
+                "id": "t2",
+                "text": "Faraday's Laws",
+                "kids": [
+                  { "id": "q1", "text": "First law: EMF is induced whenever magnetic flux through a circuit changes", "kids": [] },
+                  { "id": "q2", "text": "Second law: induced EMF ε = –dΦB/dt (magnitude ∝ rate of change of flux)", "kids": [] }
+                ]
+              },
+              { "id": "t3", "text": "Magnetic flux: ΦB = B·A = BA cosθ; unit: Weber (Wb)", "kids": [] },
+              {
+                "id": "t4",
+                "text": "Lenz's Law",
+                "kids": [
+                  { "id": "q3", "text": "Induced current opposes the cause producing it", "kids": [] },
+                  { "id": "q4", "text": "Consistent with conservation of energy; prevents perpetual motion", "kids": [] }
+                ]
+              },
+              { "id": "t5", "text": "Fleming's right hand rule: gives direction of induced current in moving conductor", "kids": [] },
+              { "id": "t6", "text": "Motional EMF: ε = Blv (conductor moving in magnetic field)", "kids": [] },
+              { "id": "t7", "text": "Motional EMF from Lorentz force: free electrons experience force, accumulate, create potential", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Eddy Currents",
+            "kids": [
+              { "id": "t8", "text": "Currents induced in bulk conductors by changing magnetic flux", "kids": [] },
+              { "id": "t9", "text": "Applications: electromagnetic braking, induction furnace, speedometer", "kids": [] },
+              { "id": "t10", "text": "Minimised by laminating core with insulating sheets", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Self-Induction",
+            "kids": [
+              { "id": "t11", "text": "EMF induced in a coil due to change in its own current", "kids": [] },
+              { "id": "t12", "text": "Coefficient of self-induction: L = NΦB/I; ε = –L(dI/dt)", "kids": [] },
+              { "id": "t13", "text": "Self-inductance of solenoid: L = µ₀N²A/l", "kids": [] },
+              { "id": "t14", "text": "Energy stored in inductor: U = ½LI²", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Mutual Induction",
+            "kids": [
+              { "id": "t15", "text": "EMF induced in secondary due to change in primary current", "kids": [] },
+              { "id": "t16", "text": "Coefficient of mutual induction: M = NₛΦs/Ip; ε₂ = –M(dI₁/dt)", "kids": [] },
+              { "id": "t17", "text": "For coaxial solenoids: M = µ₀N₁N₂A/l", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "AC Generator (Alternator)",
+            "kids": [
+              { "id": "t18", "text": "Converts mechanical energy to electrical energy using electromagnetic induction", "kids": [] },
+              { "id": "t19", "text": "ε = NBAω sinωt = ε₀ sinωt; where ε₀ = NBAω is peak EMF", "kids": [] },
+              { "id": "t20", "text": "Three-phase AC generator: three coils 120° apart; used for power transmission", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Alternating Current",
+            "kids": [
+              { "id": "t21", "text": "v = Vm sinωt; i = Im sinωt; alternates direction periodically", "kids": [] },
+              { "id": "t22", "text": "RMS values: Vrms = Vm/√2; Irms = Im/√2", "kids": [] },
+              { "id": "t23", "text": "Mean (average) value: Vav = 2Vm/π (over half cycle)", "kids": [] },
+              {
+                "id": "t24",
+                "text": "AC in Different Circuit Elements",
+                "kids": [
+                  { "id": "q5", "text": "Resistive circuit: V and I in phase; P = I²R", "kids": [] },
+                  { "id": "q6", "text": "Inductive circuit: I lags V by π/2; XL = ωL; P = 0 (wattless current)", "kids": [] },
+                  { "id": "q7", "text": "Capacitive circuit: I leads V by π/2; XC = 1/ωC; P = 0 (wattless current)", "kids": [] }
+                ]
+              },
+              {
+                "id": "t25",
+                "text": "Series RLC Circuit",
+                "kids": [
+                  { "id": "q8", "text": "Impedance: Z = √(R² + (XL – XC)²)", "kids": [] },
+                  { "id": "q9", "text": "Phase angle: tan φ = (XL – XC)/R", "kids": [] },
+                  { "id": "q10", "text": "Resonance: XL = XC ⟹ ω₀ = 1/√(LC); Z = R (minimum), I = maximum", "kids": [] },
+                  { "id": "q11", "text": "Q-factor (sharpness): Q = ω₀L/R = 1/ω₀CR", "kids": [] }
+                ]
+              },
+              { "id": "t26", "text": "Power in AC: P = Vrms × Irms × cosφ; cosφ = power factor", "kids": [] },
+              { "id": "t27", "text": "Wattless current: I sinφ component; produces no power", "kids": [] }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Transformer",
+            "kids": [
+              { "id": "t28", "text": "Works on mutual induction; transfers energy between two circuits", "kids": [] },
+              { "id": "t29", "text": "Transformation ratio: Vs/Vp = Ns/Np = Ip/Is", "kids": [] },
+              { "id": "t30", "text": "Step-up: Ns > Np (increases voltage, decreases current)", "kids": [] },
+              { "id": "t31", "text": "Step-down: Ns < Np (decreases voltage, increases current)", "kids": [] },
+              { "id": "t32", "text": "Efficiency: η = (output power/input power) × 100%; losses: copper loss, iron loss, flux leakage", "kids": [] },
+              { "id": "t33", "text": "Used in long-distance power transmission to reduce I²R losses", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c5",
+      "number": 5,
+      "title": "Electromagnetic Waves",
+      "data": {
+        "id": "root",
+        "text": "Electromagnetic Waves",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Displacement Current and Maxwell's Correction",
+            "kids": [
+              { "id": "t1", "text": "Ampere's law inconsistency: B field between capacitor plates not explained by conduction current alone", "kids": [] },
+              { "id": "t2", "text": "Displacement current: id = ε₀ dΦE/dt; produced by changing electric field", "kids": [] },
+              { "id": "t3", "text": "Ampere-Maxwell law: ∮B·dl = µ₀(Ic + id) = µ₀Ic + µ₀ε₀ dΦE/dt", "kids": [] },
+              { "id": "t4", "text": "Symmetry: changing B produces E (Faraday); changing E produces B (Maxwell)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Maxwell's Equations (Integral Form)",
+            "kids": [
+              { "id": "t5", "text": "1st equation (Gauss's law for E): ∮E·dA = Q/ε₀; electric field lines start and end on charges", "kids": [] },
+              { "id": "t6", "text": "2nd equation (Gauss's law for B): ∮B·dA = 0; no magnetic monopoles; field lines closed loops", "kids": [] },
+              { "id": "t7", "text": "3rd equation (Faraday's law): ∮E·dl = –dΦB/dt; changing B induces E", "kids": [] },
+              { "id": "t8", "text": "4th equation (Ampere-Maxwell): ∮B·dl = µ₀(Ic + ε₀dΦE/dt); both currents produce B", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Electromagnetic Waves",
+            "kids": [
+              { "id": "t9", "text": "Produced by oscillating electric charges (accelerating charges)", "kids": [] },
+              { "id": "t10", "text": "Transverse waves: E and B perpendicular to each other and to direction of propagation", "kids": [] },
+              { "id": "t11", "text": "Speed in vacuum: c = 1/√(µ₀ε₀) = 3 × 10⁸ ms⁻¹; E₀/B₀ = c", "kids": [] },
+              { "id": "t12", "text": "In medium: v = c/n = 1/√(µε); n = √(εᵣµᵣ)", "kids": [] },
+              {
+                "id": "t13",
+                "text": "Properties of EM Waves",
+                "kids": [
+                  { "id": "q1", "text": "Not deflected by electric or magnetic field", "kids": [] },
+                  { "id": "q2", "text": "Carry energy, linear momentum and angular momentum", "kids": [] },
+                  { "id": "q3", "text": "Exhibit interference, diffraction and polarization", "kids": [] },
+                  { "id": "q4", "text": "Do not require medium (non-mechanical waves)", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Electromagnetic Spectrum",
+            "kids": [
+              { "id": "t14", "text": "Radio waves: Hz to 10⁹ Hz; communication (TV, radio, cellular)", "kids": [] },
+              { "id": "t15", "text": "Microwaves: 10⁹ to 10¹¹ Hz; radar, satellite communication, microwave oven", "kids": [] },
+              { "id": "t16", "text": "Infrared (IR): 10¹¹ to 4×10¹⁴ Hz; heat, night vision, TV remotes, greenhouse effect", "kids": [] },
+              { "id": "t17", "text": "Visible light: 4×10¹⁴ to 7×10¹⁴ Hz; wavelength 400–700 nm", "kids": [] },
+              { "id": "t18", "text": "Ultraviolet (UV): 7×10¹⁴ to 10¹⁷ Hz; sterilization, causes sunburn, vitamin D production", "kids": [] },
+              { "id": "t19", "text": "X-rays: 10¹⁷ to 10¹⁹ Hz; medical imaging, crystal structure analysis", "kids": [] },
+              { "id": "t20", "text": "Gamma rays: 10¹⁹ Hz+; radioactive decay, cancer treatment, highest energy", "kids": [] },
+              { "id": "t21", "text": "Fraunhofer lines: dark absorption lines in solar spectrum; identify elements in the Sun", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Hertz's Experiment",
+            "kids": [
+              { "id": "t22", "text": "First experimental demonstration of EM waves (1887)", "kids": [] },
+              { "id": "t23", "text": "LC oscillator circuit produces EM waves; detected by ring detector", "kids": [] },
+              { "id": "t24", "text": "Confirmed Maxwell's predictions about EM waves", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c6",
+      "number": 6,
+      "title": "Ray Optics",
+      "data": {
+        "id": "root",
+        "text": "Ray Optics",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Nature of Light and Reflection",
+            "kids": [
+              { "id": "t1", "text": "Ray optics: light represented as rays travelling in straight lines", "kids": [] },
+              { "id": "t2", "text": "Laws of reflection: i = r; incident ray, reflected ray and normal are coplanar", "kids": [] },
+              { "id": "t3", "text": "Angle of deviation in reflection: d = 180° – 2i (or d = 2α, where α is glancing angle)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Plane Mirror",
+            "kids": [
+              { "id": "t4", "text": "Image is virtual, erect, same size as object, laterally inverted", "kids": [] },
+              { "id": "t5", "text": "Image distance = Object distance (behind mirror)", "kids": [] },
+              { "id": "t6", "text": "When mirror tilted by θ, reflected ray rotates by 2θ", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Spherical Mirrors",
+            "kids": [
+              { "id": "t7", "text": "Concave (converging) and convex (diverging) mirrors", "kids": [] },
+              { "id": "t8", "text": "Mirror formula: 1/v + 1/u = 1/f = 2/R (sign convention: distances measured from pole)", "kids": [] },
+              { "id": "t9", "text": "Magnification: m = –v/u; negative for real inverted image", "kids": [] },
+              {
+                "id": "t10",
+                "text": "Image formation by concave mirror",
+                "kids": [
+                  { "id": "q1", "text": "Object at infinity → real image at F (focal point)", "kids": [] },
+                  { "id": "q2", "text": "Object between F and C → real, inverted, magnified image beyond C", "kids": [] },
+                  { "id": "q3", "text": "Object at C → real, inverted, same size image at C", "kids": [] },
+                  { "id": "q4", "text": "Object between P and F → virtual, erect, magnified image behind mirror", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Refraction of Light",
+            "kids": [
+              { "id": "t11", "text": "Bending of light at boundary of two media due to change in speed", "kids": [] },
+              { "id": "t12", "text": "Snell's law: n₁ sinθ₁ = n₂ sinθ₂; refractive index n = c/v", "kids": [] },
+              { "id": "t13", "text": "Total internal reflection: when angle of incidence > critical angle (ic); n₂ sinic = n₁", "kids": [] },
+              { "id": "t14", "text": "Applications of TIR: optical fibre, diamond brilliance, mirage, looming", "kids": [] },
+              { "id": "t15", "text": "Optical fibres: light confined by TIR; used in endoscopy and communication", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Refraction at Spherical Surfaces",
+            "kids": [
+              { "id": "t16", "text": "n₂/v – n₁/u = (n₂–n₁)/R; refraction formula for spherical surface", "kids": [] },
+              { "id": "t17", "text": "Lensmaker's equation: 1/f = (n–1)[1/R₁ – 1/R₂]", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Thin Lenses",
+            "kids": [
+              { "id": "t18", "text": "Convex (converging) and concave (diverging) lenses", "kids": [] },
+              { "id": "t19", "text": "Lens formula: 1/v – 1/u = 1/f", "kids": [] },
+              { "id": "t20", "text": "Magnification: m = v/u = hi/ho", "kids": [] },
+              { "id": "t21", "text": "Power of lens: P = 1/f (in metres); unit: Dioptre (D)", "kids": [] },
+              { "id": "t22", "text": "Combination of lenses in contact: 1/f = 1/f₁ + 1/f₂; P = P₁ + P₂", "kids": [] }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Prism and Dispersion",
+            "kids": [
+              { "id": "t23", "text": "Deviation by prism: d = (i₁ + i₂) – A; A is prism angle", "kids": [] },
+              { "id": "t24", "text": "At minimum deviation: i₁ = i₂; n = sin[(A+D)/2] / sin(A/2)", "kids": [] },
+              { "id": "t25", "text": "Dispersion: splitting of white light into spectrum (VIBGYOR); violet deviates most", "kids": [] },
+              { "id": "t26", "text": "Angular dispersion: δv – δr; dispersive power: ω = (δv – δr)/δy", "kids": [] },
+              { "id": "t27", "text": "Scattering of light: Rayleigh scattering ∝ 1/λ⁴; blue sky, red sunrise/sunset", "kids": [] }
+            ]
+          },
+          {
+            "id": "s8",
+            "text": "Optical Instruments",
+            "kids": [
+              { "id": "t28", "text": "Simple microscope: convex lens; m = 1 + D/f (near point); m = D/f (normal focusing)", "kids": [] },
+              { "id": "t29", "text": "Compound microscope: objective (short focal length) + eyepiece; m = (L/fo)(D/fe)", "kids": [] },
+              { "id": "t30", "text": "Astronomical telescope: objective (long fo) + eyepiece (short fe); m = fo/fe", "kids": [] },
+              { "id": "t31", "text": "Terrestrial telescope: additional erecting lens for upright image", "kids": [] },
+              { "id": "t32", "text": "Reflecting telescope (Cassegrain): uses concave mirror objective; free from chromatic aberration", "kids": [] }
+            ]
+          },
+          {
+            "id": "s9",
+            "text": "Defects of Vision",
+            "kids": [
+              { "id": "t33", "text": "Myopia (nearsightedness): image in front of retina; corrected by concave lens (f = –x)", "kids": [] },
+              { "id": "t34", "text": "Hypermetropia (farsightedness): image behind retina; corrected by convex lens", "kids": [] },
+              { "id": "t35", "text": "Presbyopia: aging-related farsightedness; ciliary muscles weaken", "kids": [] },
+              { "id": "t36", "text": "Astigmatism: different curvatures in different planes of eye lens; corrected by cylindrical lens", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c7",
+      "number": 7,
+      "title": "Wave Optics",
+      "data": {
+        "id": "root",
+        "text": "Wave Optics",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Wave Nature of Light",
+            "kids": [
+              { "id": "t1", "text": "Corpuscular theory (Newton): light as particles; fails to explain interference", "kids": [] },
+              { "id": "t2", "text": "Wave theory (Huygens): light as waves; explains interference and diffraction", "kids": [] },
+              { "id": "t3", "text": "Electromagnetic theory (Maxwell): light is EM wave; c = 1/√(µ₀ε₀)", "kids": [] },
+              { "id": "t4", "text": "Quantum theory (Planck, Einstein): light as photons; explains photoelectric effect", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Huygens' Principle",
+            "kids": [
+              { "id": "t5", "text": "Every point on a wavefront is a source of secondary wavelets", "kids": [] },
+              { "id": "t6", "text": "New wavefront = common tangent to all secondary wavelets", "kids": [] },
+              { "id": "t7", "text": "Point source → spherical wavefront; source at infinity → plane wavefront", "kids": [] },
+              { "id": "t8", "text": "Explains reflection and refraction using wavefront concept", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Interference of Light",
+            "kids": [
+              { "id": "t9", "text": "Superposition of two coherent waves; constructive (bright) or destructive (dark) interference", "kids": [] },
+              { "id": "t10", "text": "Coherent sources: same frequency, same phase or constant phase difference, same waveform", "kids": [] },
+              { "id": "t11", "text": "Methods: wavefront division, intensity division, source and images", "kids": [] },
+              {
+                "id": "t12",
+                "text": "Young's Double Slit Experiment",
+                "kids": [
+                  { "id": "q1", "text": "Bright fringe position: yn = nλD/d", "kids": [] },
+                  { "id": "q2", "text": "Dark fringe position: yn = (2n–1)λD/2d", "kids": [] },
+                  { "id": "q3", "text": "Fringe width: β = λD/d (uniform spacing)", "kids": [] },
+                  { "id": "q4", "text": "With white light: central fringe white; coloured fringes on sides", "kids": [] }
+                ]
+              },
+              { "id": "t13", "text": "Interference in thin films: colours due to path difference 2µd; reflected: 2µd = (2n–1)λ/2", "kids": [] },
+              { "id": "t14", "text": "Imax = (√I₁ + √I₂)²; Imin = (√I₁ – √I₂)²", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Diffraction",
+            "kids": [
+              { "id": "t15", "text": "Bending of waves around sharp edges into geometrically shadowed region", "kids": [] },
+              { "id": "t16", "text": "Prominent when obstacle size ≈ wavelength of light", "kids": [] },
+              {
+                "id": "t17",
+                "text": "Types of Diffraction",
+                "kids": [
+                  { "id": "q5", "text": "Fresnel diffraction: spherical/cylindrical wavefront; source at finite distance", "kids": [] },
+                  { "id": "q6", "text": "Fraunhofer diffraction: plane wavefront; source at infinity (or with lens)", "kids": [] }
+                ]
+              },
+              { "id": "t18", "text": "Single slit diffraction: minima at a sinθ = nλ; central maximum widest and brightest", "kids": [] },
+              { "id": "t19", "text": "Fresnel's distance: zF = a²/λ; beyond this wave optics becomes important", "kids": [] },
+              { "id": "t20", "text": "Diffraction grating: (a+b) sinθ = mλ; used to determine wavelength with spectrometer", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Resolution",
+            "kids": [
+              { "id": "t21", "text": "Rayleigh's criterion: two objects just resolved when central max of one coincides with 1st min of other", "kids": [] },
+              { "id": "t22", "text": "Angular resolution of telescope: θ = 1.22λ/a; a = aperture diameter", "kids": [] },
+              { "id": "t23", "text": "Resolving power of microscope: RP = 2NA/1.22λ; NA = n sinθ (numerical aperture)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Polarisation",
+            "kids": [
+              { "id": "t24", "text": "Restriction of vibrations of light to one direction; transverse nature of light", "kids": [] },
+              { "id": "t25", "text": "Plane polarised, partially polarised, unpolarised light", "kids": [] },
+              { "id": "t26", "text": "Malus' law: I = I₀ cos²θ; intensity after analyser", "kids": [] },
+              { "id": "t27", "text": "Brewster's law: tan iB = n; at Brewster angle, reflected light is fully polarised", "kids": [] },
+              { "id": "t28", "text": "Double refraction: birefringent crystals split light into ordinary and extraordinary rays", "kids": [] },
+              { "id": "t29", "text": "Nicol prism: uses calcite crystal to produce plane polarised light (extraordinary ray)", "kids": [] },
+              { "id": "t30", "text": "Scattering: scattered light perpendicular to incident is plane polarised (e.g., Raman scattering)", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c8",
+      "number": 8,
+      "title": "Dual Nature of Radiation and Matter",
+      "data": {
+        "id": "root",
+        "text": "Dual Nature of Radiation and Matter",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Electron Emission",
+            "kids": [
+              { "id": "t1", "text": "Free electrons in metal cannot escape due to surface barrier (potential barrier)", "kids": [] },
+              { "id": "t2", "text": "Work function (φ₀): minimum energy to liberate an electron; unit: eV", "kids": [] },
+              {
+                "id": "t3",
+                "text": "Types of Electron Emission",
+                "kids": [
+                  { "id": "q1", "text": "Thermionic emission: by heating (e.g., vacuum tubes, CRT)", "kids": [] },
+                  { "id": "q2", "text": "Field emission: by strong electric field", "kids": [] },
+                  { "id": "q3", "text": "Photo electric emission: by electromagnetic radiation of suitable frequency", "kids": [] },
+                  { "id": "q4", "text": "Secondary emission: by bombarding fast electrons", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Photoelectric Effect",
+            "kids": [
+              { "id": "t4", "text": "Hertz (1887): UV light makes spark more vigorous; first observation", "kids": [] },
+              { "id": "t5", "text": "Hallwachs: zinc plate loses charge on UV irradiation", "kids": [] },
+              { "id": "t6", "text": "Lenard: measured charge and velocity of photoelectrons", "kids": [] },
+              {
+                "id": "t7",
+                "text": "Laws of Photoelectric Effect",
+                "kids": [
+                  { "id": "q5", "text": "Emission only when ν ≥ ν₀ (threshold frequency); depends on material", "kids": [] },
+                  { "id": "q6", "text": "Number of photoelectrons ∝ intensity of light", "kids": [] },
+                  { "id": "q7", "text": "Maximum KE independent of intensity; depends on frequency", "kids": [] },
+                  { "id": "q8", "text": "No time lag between incidence and emission (< 10⁻⁹ s)", "kids": [] }
+                ]
+              },
+              { "id": "t8", "text": "Stopping potential V₀: eV₀ = ½mv²max; independent of intensity", "kids": [] },
+              { "id": "t9", "text": "Failure of classical wave theory to explain photoelectric effect", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Einstein's Photoelectric Equation",
+            "kids": [
+              { "id": "t10", "text": "Light consists of photons; each photon has energy E = hν", "kids": [] },
+              { "id": "t11", "text": "Einstein's equation: ½mv²max = hν – φ₀ = h(ν – ν₀)", "kids": [] },
+              { "id": "t12", "text": "Threshold frequency: ν₀ = φ₀/h; threshold wavelength: λ₀ = hc/φ₀", "kids": [] },
+              { "id": "t13", "text": "Planck's constant h = 6.626 × 10⁻³⁴ Js; determined from slope of V₀ vs ν graph", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Particle Nature of Light – Photon",
+            "kids": [
+              { "id": "t14", "text": "Photon: quantum of electromagnetic radiation; travels at speed c", "kids": [] },
+              { "id": "t15", "text": "Energy: E = hν = hc/λ; momentum: p = h/λ = E/c", "kids": [] },
+              { "id": "t16", "text": "Rest mass = 0; no charge", "kids": [] },
+              { "id": "t17", "text": "Compton effect: photon scattering proves particle nature; Δλ = (h/mec)(1–cosφ)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Wave Nature of Matter – de Broglie Hypothesis",
+            "kids": [
+              { "id": "t18", "text": "de Broglie: matter has wave properties; λ = h/p = h/mv", "kids": [] },
+              { "id": "t19", "text": "de Broglie wavelength: λ = h/√(2mK); K is kinetic energy", "kids": [] },
+              { "id": "t20", "text": "For accelerated particle: λ = h/√(2meV)", "kids": [] },
+              { "id": "t21", "text": "Davisson-Germer experiment: electron diffraction by nickel crystal; confirmed wave nature", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Wave-Particle Duality",
+            "kids": [
+              { "id": "t22", "text": "Both radiation and matter exhibit dual nature depending on the experiment", "kids": [] },
+              { "id": "t23", "text": "Heisenberg's Uncertainty Principle: Δx·Δp ≥ h/4π; cannot simultaneously know both exactly", "kids": [] },
+              { "id": "t24", "text": "Electron microscope: uses de Broglie wavelength of electrons (much smaller than visible light) for higher resolution", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c9",
+      "number": 9,
+      "title": "Atomic and Nuclear Physics",
+      "data": {
+        "id": "root",
+        "text": "Atomic and Nuclear Physics",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Atomic Models",
+            "kids": [
+              { "id": "t1", "text": "J.J. Thomson model (plum pudding/watermelon): uniform positive sphere with embedded electrons; failed to explain line spectra", "kids": [] },
+              {
+                "id": "t2",
+                "text": "Rutherford Model (1911)",
+                "kids": [
+                  { "id": "q1", "text": "Alpha particle scattering by gold foil (Geiger-Marsden experiment)", "kids": [] },
+                  { "id": "q2", "text": "Atom mostly empty space; nucleus is small, dense, positively charged", "kids": [] },
+                  { "id": "q3", "text": "Electrons revolve around nucleus", "kids": [] },
+                  { "id": "q4", "text": "Distance of closest approach: r₀ = Ze²/4πε₀Ek", "kids": [] },
+                  { "id": "q5", "text": "Impact parameter: related to scattering angle; larger b → smaller deflection", "kids": [] },
+                  { "id": "q6", "text": "Limitations: cannot explain stability (spiral in) or discrete line spectrum", "kids": [] }
+                ]
+              },
+              {
+                "id": "t3",
+                "text": "Bohr Model of Hydrogen Atom",
+                "kids": [
+                  { "id": "q7", "text": "Postulate 1: electrons revolve in stable circular orbits (stationary orbits) without radiating", "kids": [] },
+                  { "id": "q8", "text": "Postulate 2: angular momentum quantized: mvr = nh/2π", "kids": [] },
+                  { "id": "q9", "text": "Postulate 3: energy emitted/absorbed = hν = E₂ – E₁ when electron jumps orbit", "kids": [] },
+                  { "id": "q10", "text": "Radius of nth orbit: rn = n²a₀/Z; a₀ = 0.529 Å (Bohr radius)", "kids": [] },
+                  { "id": "q11", "text": "Energy of nth orbit: En = –13.6Z²/n² eV; ground state n=1, E₁ = –13.6 eV for H", "kids": [] },
+                  { "id": "q12", "text": "Velocity in nth orbit: vn = (Z/n) × 2.19 × 10⁶ ms⁻¹", "kids": [] },
+                  { "id": "q13", "text": "Limitations: cannot explain multi-electron atoms, fine structure, Zeeman effect", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Hydrogen Spectrum",
+            "kids": [
+              { "id": "t4", "text": "Line emission spectrum: discrete wavelengths emitted when electrons transition between orbits", "kids": [] },
+              { "id": "t5", "text": "Rydberg formula: 1/λ = R[1/n₁² – 1/n₂²]; R = 1.097 × 10⁷ m⁻¹", "kids": [] },
+              {
+                "id": "t6",
+                "text": "Spectral Series",
+                "kids": [
+                  { "id": "q14", "text": "Lyman series: n₁=1; UV region", "kids": [] },
+                  { "id": "q15", "text": "Balmer series: n₁=2; visible region (Hα, Hβ, Hγ, Hδ)", "kids": [] },
+                  { "id": "q16", "text": "Paschen series: n₁=3; near IR region", "kids": [] },
+                  { "id": "q17", "text": "Brackett series: n₁=4; IR region", "kids": [] },
+                  { "id": "q18", "text": "Pfund series: n₁=5; far IR region", "kids": [] }
+                ]
+              },
+              { "id": "t7", "text": "Ionisation energy of hydrogen: 13.6 eV; ionisation potential: 13.6 V", "kids": [] },
+              { "id": "t8", "text": "Excitation energy: energy needed to move electron from ground state to excited state", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Nucleus",
+            "kids": [
+              { "id": "t9", "text": "Nucleus contains protons (Z) and neutrons (N); A = Z + N (mass number)", "kids": [] },
+              { "id": "t10", "text": "Nuclear size: R = R₀A^(1/3); R₀ = 1.2 × 10⁻¹⁵ m; nuclear density ≈ constant for all nuclei", "kids": [] },
+              { "id": "t11", "text": "Isotopes: same Z, different A; Isobars: same A, different Z; Isotones: same N", "kids": [] },
+              { "id": "t12", "text": "Atomic mass unit: 1 u = 1.66 × 10⁻²⁷ kg = 931.5 MeV/c²", "kids": [] },
+              { "id": "t13", "text": "Mass defect: Δm = Zmp + Nmn – M (actual mass always less than sum of parts)", "kids": [] },
+              { "id": "t14", "text": "Binding energy: BE = Δm × c²; energy needed to completely separate nucleons", "kids": [] },
+              { "id": "t15", "text": "Binding energy per nucleon: BE/A; peaks near Fe-56; basis for fusion and fission", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Radioactivity",
+            "kids": [
+              { "id": "t16", "text": "Spontaneous disintegration of unstable nuclei; discovered by Becquerel (1896)", "kids": [] },
+              {
+                "id": "t17",
+                "text": "Types of Radioactive Decay",
+                "kids": [
+                  { "id": "q19", "text": "Alpha decay: emits ⁴₂He nucleus; Z decreases by 2, A by 4", "kids": [] },
+                  { "id": "q20", "text": "Beta decay (β⁻): emits electron + antineutrino; neutron → proton; Z increases by 1", "kids": [] },
+                  { "id": "q21", "text": "Beta+ decay: emits positron + neutrino; proton → neutron; Z decreases by 1", "kids": [] },
+                  { "id": "q22", "text": "Gamma decay: emits high energy photon; no change in Z or A; nucleus de-excites", "kids": [] }
+                ]
+              },
+              { "id": "t18", "text": "Radioactive decay law: N = N₀e^(–λt); λ is decay constant", "kids": [] },
+              { "id": "t19", "text": "Half-life: T½ = 0.693/λ; time for half the atoms to decay", "kids": [] },
+              { "id": "t20", "text": "Mean life: τ = 1/λ = T½/0.693", "kids": [] },
+              { "id": "t21", "text": "Activity: A = λN = A₀e^(–λt); unit: Becquerel (Bq) = 1 decay/s; also Curie (Ci)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Nuclear Reactions",
+            "kids": [
+              {
+                "id": "t22",
+                "text": "Nuclear Fission",
+                "kids": [
+                  { "id": "q23", "text": "Heavy nucleus splits into lighter nuclei; releases huge energy (200 MeV per fission)", "kids": [] },
+                  { "id": "q24", "text": "Example: ²³⁵U + n → ¹⁴¹Ba + ⁹²Kr + 3n + energy", "kids": [] },
+                  { "id": "q25", "text": "Chain reaction: neutrons from fission trigger further fissions; controlled in reactor, uncontrolled in bomb", "kids": [] },
+                  { "id": "q26", "text": "Critical mass: minimum mass needed for sustained chain reaction", "kids": [] }
+                ]
+              },
+              {
+                "id": "t23",
+                "text": "Nuclear Fusion",
+                "kids": [
+                  { "id": "q27", "text": "Light nuclei fuse to form heavier nucleus; releases more energy per unit mass than fission", "kids": [] },
+                  { "id": "q28", "text": "Example: ²H + ³H → ⁴He + n + 17.6 MeV", "kids": [] },
+                  { "id": "q29", "text": "Requires extremely high temperature (10⁷ K); thermonuclear reaction; source of stellar energy", "kids": [] }
+                ]
+              },
+              { "id": "t24", "text": "Nuclear reactor: moderator slows neutrons; control rods absorb neutrons; coolant removes heat", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Elementary Particles",
+            "kids": [
+              { "id": "t25", "text": "Quarks: fundamental building blocks of hadrons; proton = uud, neutron = udd", "kids": [] },
+              { "id": "t26", "text": "Leptons: electrons, neutrinos, muons; not affected by strong force", "kids": [] },
+              { "id": "t27", "text": "Four fundamental forces: gravitational, electromagnetic, strong nuclear, weak nuclear", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c10",
+      "number": 10,
+      "title": "Electronics and Communication",
+      "data": {
+        "id": "root",
+        "text": "Electronics and Communication",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Energy Band Theory",
+            "kids": [
+              { "id": "t1", "text": "Valence band: highest filled energy band at 0 K", "kids": [] },
+              { "id": "t2", "text": "Conduction band: partially filled or empty; electrons here contribute to conductivity", "kids": [] },
+              { "id": "t3", "text": "Band gap (Eg): energy gap between valence and conduction bands", "kids": [] },
+              {
+                "id": "t4",
+                "text": "Classification of Solids by Band Gap",
+                "kids": [
+                  { "id": "q1", "text": "Conductors: overlapping bands or half-filled conduction band; Eg ≈ 0", "kids": [] },
+                  { "id": "q2", "text": "Semiconductors: small Eg (≈ 1 eV); Si (1.1 eV), Ge (0.7 eV)", "kids": [] },
+                  { "id": "q3", "text": "Insulators: large Eg (> 3 eV); electrons cannot cross to conduction band", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Semiconductors",
+            "kids": [
+              { "id": "t5", "text": "Intrinsic semiconductor: pure Si or Ge; ni = pi; conductivity increases with temperature", "kids": [] },
+              {
+                "id": "t6",
+                "text": "Extrinsic Semiconductors (Doping)",
+                "kids": [
+                  { "id": "q4", "text": "n-type: doped with pentavalent (donor) impurity (e.g., As, P); electrons are majority carriers", "kids": [] },
+                  { "id": "q5", "text": "p-type: doped with trivalent (acceptor) impurity (e.g., B, Al); holes are majority carriers", "kids": [] }
+                ]
+              },
+              { "id": "t7", "text": "Conductivity: σ = e(neµe + nhµh); µ = mobility", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "p-n Junction Diode",
+            "kids": [
+              { "id": "t8", "text": "Depletion region: region near junction depleted of mobile charges; creates built-in potential", "kids": [] },
+              { "id": "t9", "text": "Forward bias: p connected to +ve, n to –ve; depletion layer narrows; current flows", "kids": [] },
+              { "id": "t10", "text": "Reverse bias: p connected to –ve, n to +ve; depletion layer widens; only small leakage current", "kids": [] },
+              { "id": "t11", "text": "V-I characteristics: exponential in forward bias; nearly zero in reverse bias until breakdown", "kids": [] },
+              { "id": "t12", "text": "Rectifier: converts AC to DC; half-wave or full-wave (bridge); filter smooths output", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Special Diodes",
+            "kids": [
+              { "id": "t13", "text": "Zener diode: operates in reverse breakdown; used as voltage regulator", "kids": [] },
+              { "id": "t14", "text": "LED (Light Emitting Diode): forward biased; emits photons when electrons recombine with holes; E = hν", "kids": [] },
+              { "id": "t15", "text": "Photodiode: reverse biased; generates current proportional to incident light intensity", "kids": [] },
+              { "id": "t16", "text": "Solar cell: unbiased p-n junction; converts solar energy to electrical energy", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Transistor",
+            "kids": [
+              { "id": "t17", "text": "Three-layer (p-n-p or n-p-n) semiconductor device; emitter, base, collector", "kids": [] },
+              { "id": "t18", "text": "Emitter-base: forward biased; collector-base: reverse biased", "kids": [] },
+              { "id": "t19", "text": "Current relations: IE = IB + IC; α = IC/IE; β = IC/IB; β = α/(1–α)", "kids": [] },
+              { "id": "t20", "text": "Common emitter configuration: voltage gain = β × Rc/Ri; input and output 180° out of phase", "kids": [] },
+              { "id": "t21", "text": "Transistor as switch: saturation (ON) and cut-off (OFF) regions", "kids": [] },
+              { "id": "t22", "text": "Transistor as oscillator: uses positive feedback; sustains oscillations", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Digital Electronics",
+            "kids": [
+              { "id": "t23", "text": "Binary system: two states 0 and 1 (LOW and HIGH voltage)", "kids": [] },
+              { "id": "t24", "text": "Boolean algebra: AND (·), OR (+), NOT (̄); De Morgan's theorems", "kids": [] },
+              {
+                "id": "t25",
+                "text": "Logic Gates",
+                "kids": [
+                  { "id": "q6", "text": "AND gate: output 1 only when all inputs are 1; Y = A·B", "kids": [] },
+                  { "id": "q7", "text": "OR gate: output 1 when any input is 1; Y = A+B", "kids": [] },
+                  { "id": "q8", "text": "NOT gate: output is complement of input; Y = Ā", "kids": [] },
+                  { "id": "q9", "text": "NAND gate: NOT AND; universal gate; Y = ̄(A·B)", "kids": [] },
+                  { "id": "q10", "text": "NOR gate: NOT OR; universal gate; Y = ̄(A+B)", "kids": [] },
+                  { "id": "q11", "text": "XOR gate: output 1 when inputs differ; Y = A⊕B", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Communication Systems",
+            "kids": [
+              { "id": "t26", "text": "Basic elements: transmitter, channel (medium), receiver", "kids": [] },
+              { "id": "t27", "text": "Signal, noise, bandwidth, range: key parameters", "kids": [] },
+              {
+                "id": "t28",
+                "text": "Modulation",
+                "kids": [
+                  { "id": "q12", "text": "AM (Amplitude Modulation): amplitude of carrier varies with signal; µ = Am/Ac; bandwidth = 2fm", "kids": [] },
+                  { "id": "q13", "text": "FM (Frequency Modulation): frequency of carrier varies; less noise; used in FM radio", "kids": [] },
+                  { "id": "q14", "text": "PM (Phase Modulation): phase of carrier varies with signal", "kids": [] }
+                ]
+              },
+              { "id": "t29", "text": "Demodulation: recovery of original signal from modulated carrier", "kids": [] },
+              { "id": "t30", "text": "Ground wave propagation: follows Earth's surface; up to 2 MHz", "kids": [] },
+              { "id": "t31", "text": "Sky wave (ionospheric) propagation: reflected by ionosphere; for HF (3–30 MHz)", "kids": [] },
+              { "id": "t32", "text": "Space wave propagation: line of sight; for VHF and above; TV, satellite", "kids": [] },
+              { "id": "t33", "text": "Satellite communication: uses geostationary satellites at 36,000 km altitude", "kids": [] },
+              { "id": "t34", "text": "Mobile telephony: cellular network, multiple access, SIM cards", "kids": [] },
+              { "id": "t35", "text": "Internet and broadband: optical fibre, WiFi, 4G/5G", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c11",
+      "number": 11,
+      "title": "Recent Developments in Physics",
+      "data": {
+        "id": "root",
+        "text": "Recent Developments in Physics",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Nanotechnology",
+            "kids": [
+              { "id": "t1", "text": "Science and technology of materials at nanoscale (1–100 nm)", "kids": [] },
+              { "id": "t2", "text": "Feynman's vision (1959): 'There's plenty of room at the bottom'", "kids": [] },
+              { "id": "t3", "text": "Properties change drastically at nanoscale (surface area : volume ratio increases)", "kids": [] },
+              { "id": "t4", "text": "Nanoparticles: gold nanoparticles appear red/purple (not gold) due to quantum effects", "kids": [] },
+              {
+                "id": "t5",
+                "text": "Carbon Nanostructures",
+                "kids": [
+                  { "id": "q1", "text": "Carbon nanotubes (CNT): cylindrical rolled graphene; remarkable electrical and mechanical properties", "kids": [] },
+                  { "id": "q2", "text": "Fullerenes (C60): spherical cage molecule (Buckminsterfullerene); like a soccer ball", "kids": [] },
+                  { "id": "q3", "text": "Graphene: single layer of graphite; strongest material; excellent conductor; 2D material", "kids": [] }
+                ]
+              },
+              { "id": "t6", "text": "Tools: STM (Scanning Tunnelling Microscope) – images individual atoms", "kids": [] },
+              {
+                "id": "t7",
+                "text": "Applications of Nanotechnology",
+                "kids": [
+                  { "id": "q4", "text": "Medicine: targeted drug delivery, cancer treatment, nano-robots", "kids": [] },
+                  { "id": "q5", "text": "Electronics: transistors at nano level; denser integrated circuits", "kids": [] },
+                  { "id": "q6", "text": "Energy: solar cells, fuel cells, hydrogen storage", "kids": [] },
+                  { "id": "q7", "text": "Materials: nanocomposites, scratch-resistant coatings, nano-filters", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Robotics",
+            "kids": [
+              { "id": "t8", "text": "Study and application of robots; interdisciplinary: electronics, mechanics, computing", "kids": [] },
+              { "id": "t9", "text": "Components: sensors, actuators, controller, power supply, end-effector", "kids": [] },
+              { "id": "t10", "text": "Types: industrial, medical (surgical robots), space (rovers), domestic", "kids": [] },
+              { "id": "t11", "text": "Degrees of freedom (DOF): number of independent movements possible", "kids": [] },
+              { "id": "t12", "text": "AI and machine learning enable autonomous robots", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Artificial Intelligence (AI)",
+            "kids": [
+              { "id": "t13", "text": "Simulation of human intelligence processes by machines", "kids": [] },
+              { "id": "t14", "text": "Machine Learning: computers learn from data without explicit programming", "kids": [] },
+              { "id": "t15", "text": "Deep Learning: multi-layer neural networks; image recognition, NLP", "kids": [] },
+              { "id": "t16", "text": "Applications: medical diagnosis, weather prediction, autonomous vehicles, language translation", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Gravitational Waves",
+            "kids": [
+              { "id": "t17", "text": "Ripples in space-time caused by accelerating massive objects; predicted by Einstein (1916)", "kids": [] },
+              { "id": "t18", "text": "First detected by LIGO (2015) from merger of two black holes; Nobel Prize 2017", "kids": [] },
+              { "id": "t19", "text": "Travel at speed of light; extremely weak (stretch/compress space by 10⁻²¹ m)", "kids": [] },
+              { "id": "t20", "text": "Sources: merging neutron stars, black holes, supernovae", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Superconductivity",
+            "kids": [
+              { "id": "t21", "text": "Zero electrical resistance below critical temperature (Tc)", "kids": [] },
+              { "id": "t22", "text": "Discovered by Kamerlingh Onnes (1911) in mercury at 4.2 K", "kids": [] },
+              { "id": "t23", "text": "Meissner effect: perfect diamagnetism; expels magnetic field (B = 0 inside)", "kids": [] },
+              { "id": "t24", "text": "BCS theory: Cooper pairs of electrons; phonon-mediated interaction", "kids": [] },
+              { "id": "t25", "text": "High-temperature superconductors: ceramic compounds with Tc above 77 K (liquid nitrogen)", "kids": [] },
+              { "id": "t26", "text": "Applications: MRI machines, maglev trains, SQUID, particle accelerators (LHC)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Big Bang and Cosmology",
+            "kids": [
+              { "id": "t27", "text": "Big Bang theory: universe originated ~13.8 billion years ago from extremely hot, dense singularity", "kids": [] },
+              { "id": "t28", "text": "Hubble's law: v = Hd; galaxies recede with velocity ∝ distance; H₀ ≈ 70 km/s/Mpc", "kids": [] },
+              { "id": "t29", "text": "CMB (Cosmic Microwave Background): relic radiation at 2.7 K; evidence for Big Bang", "kids": [] },
+              { "id": "t30", "text": "Dark matter: 27% of universe; doesn't interact with light; detected via gravitational effects", "kids": [] },
+              { "id": "t31", "text": "Dark energy: 68% of universe; causes accelerated expansion", "kids": [] },
+              { "id": "t32", "text": "Black holes: extremely dense objects; escape velocity exceeds c; event horizon", "kids": [] }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
