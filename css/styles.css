@@ -551,7 +551,7 @@ h3, .h3 {
 }
 @media (min-width: 896px) {
   #home .hero {
-    min-height: calc(100vh - 48px);
+    min-height: calc(100vh - 62px);
     display: flex;
     align-items: center;
   }
