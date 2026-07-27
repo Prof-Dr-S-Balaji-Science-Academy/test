@@ -549,6 +549,13 @@ h3, .h3 {
   padding-top: calc(var(--section-y-phone) + 8px);
   padding-bottom: var(--section-y-phone);
 }
+@media (min-width: 896px) {
+  #home .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+}
 .hero-badge {
   display: inline-flex;
   align-items: center;
