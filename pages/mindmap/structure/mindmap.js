@@ -1,8 +1,10 @@
 (function () {
   "use strict";
 
+  console.log('Mindmap script loading...');
+
   // ============================================================================
-  // DATA STRUCTURE
+  // CONFIGURATION
   // ============================================================================
   const BOOKS = [
     { id: 'cbse10', label: 'CBSE 10\nScience', icon: 'science' },
@@ -12,7 +14,7 @@
     { id: 'sb12-chemistry', label: 'State Board\n12 Chemistry', icon: 'chemistry' }
   ];
 
-  const COLOR_SCHEME = {
+  const COLORS = {
     primary: '#0052ff',
     secondary: '#578bfa',
     tertiary: '#a8c5fc',
@@ -20,15 +22,18 @@
     quinary: '#eef0f3'
   };
 
-  const MOCKUP_CHAPTERS = [
+  // ============================================================================
+  // SAMPLE DATA
+  // ============================================================================
+  const SAMPLE_CHAPTERS = [
     {
       id: 'ch1',
       number: 1,
-      title: 'Introduction to Concepts',
+      title: 'Introduction',
       mindmapData: {
         root: {
           id: 'root',
-          text: 'Chapter One',
+          text: 'Chapter 1',
           level: 0,
           expanded: true,
           children: [
@@ -38,15 +43,12 @@
               level: 1,
               expanded: true,
               children: [
-                { id: 't1', text: 'Core Principles', level: 2, expanded: false, children: [
-                  { id: 'q1', text: 'Definition', level: 3, children: [] },
-                  { id: 'q2', text: 'Applications', level: 3, children: [] }
+                { id: 't1', text: 'Basics', level: 2, expanded: false, children: [
+                  { id: 'q1', text: 'Term 1', level: 3, children: [] },
+                  { id: 'q2', text: 'Term 2', level: 3, children: [] }
                 ]},
-                { id: 't2', text: 'Key Terms', level: 2, expanded: false, children: [
-                  { id: 'q3', text: 'Definitions', level: 3, children: [] },
-                  { id: 'q4', text: 'Examples', level: 3, children: [] }
-                ]},
-                { id: 't3', text: 'Basic Laws', level: 2, children: [] }
+                { id: 't2', text: 'Concepts', level: 2, children: [] },
+                { id: 't3', text: 'Laws', level: 2, children: [] }
               ]
             },
             {
@@ -55,10 +57,7 @@
               level: 1,
               expanded: true,
               children: [
-                { id: 't4', text: 'Physical', level: 2, expanded: false, children: [
-                  { id: 'q5', text: 'Measurement', level: 3, children: [] },
-                  { id: 'q6', text: 'Units', level: 3, children: [] }
-                ]},
+                { id: 't4', text: 'Physical', level: 2, children: [] },
                 { id: 't5', text: 'Chemical', level: 2, children: [] }
               ]
             },
@@ -68,8 +67,8 @@
               level: 1,
               expanded: false,
               children: [
-                { id: 't6', text: 'Real World', level: 2, children: [] },
-                { id: 't7', text: 'Industrial', level: 2, children: [] }
+                { id: 't6', text: 'Example 1', level: 2, children: [] },
+                { id: 't7', text: 'Example 2', level: 2, children: [] }
               ]
             }
           ]
@@ -79,31 +78,21 @@
     {
       id: 'ch2',
       number: 2,
-      title: 'Advanced Topics',
+      title: 'Advanced',
       mindmapData: {
         root: {
           id: 'root',
-          text: 'Chapter Two',
+          text: 'Chapter 2',
           level: 0,
           expanded: true,
           children: [
             {
               id: 's1',
-              text: 'Complex Systems',
+              text: 'Complex',
               level: 1,
               expanded: true,
               children: [
-                { id: 't1', text: 'Analysis', level: 2, children: [] },
-                { id: 't2', text: 'Interactions', level: 2, children: [] }
-              ]
-            },
-            {
-              id: 's2',
-              text: 'Problem Solving',
-              level: 1,
-              expanded: false,
-              children: [
-                { id: 't3', text: 'Methods', level: 2, children: [] }
+                { id: 't1', text: 'Analysis', level: 2, children: [] }
               ]
             }
           ]
@@ -113,16 +102,14 @@
   ];
 
   // ============================================================================
-  // STATE MANAGEMENT
+  // STATE
   // ============================================================================
-  let state = {
+  const state = {
     selectedBook: null,
     selectedChapter: null,
-    chapters: [],
-    mindmapData: null,
     zoom: 1,
     pan: { x: 0, y: 0 },
-    expandedNodes: new Set()
+    chapters: SAMPLE_CHAPTERS
   };
 
   // ============================================================================
@@ -131,87 +118,87 @@
   const bookSelector = document.getElementById('bookSelector');
   const chaptersSidebar = document.getElementById('chaptersSidebar');
   const chaptersList = document.getElementById('chaptersList');
-  const mindmapCanvas = document.getElementById('mindmapCanvas');
   const mindmapSvg = document.getElementById('mindmap-svg');
+  const mindmapCanvas = document.getElementById('mindmapCanvas');
   const mindmapPlaceholder = document.getElementById('mindmapPlaceholder');
-  const mindmapCanvasWrapper = document.getElementById('mindmapCanvasWrapper');
   const zoomIn = document.getElementById('zoomIn');
   const zoomOut = document.getElementById('zoomOut');
   const zoomReset = document.getElementById('zoomReset');
-  const mobileChaptersToggle = document.getElementById('mobileChaptersToggle');
 
   // ============================================================================
-  // SVG ICON GENERATORS
+  // SVG ICON HELPERS
   // ============================================================================
-  function createIcon(type) {
-    const baseAttrs = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="book-icon"';
-    
+  function getIcon(type) {
     const icons = {
-      science: `<svg ${baseAttrs}><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`,
-      physics: `<svg ${baseAttrs}><circle cx="12" cy="12" r="1"></circle><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"></path></svg>`,
-      chemistry: `<svg ${baseAttrs}><path d="M7 4v10a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4"></path><line x1="7" y1="4" x2="13" y2="4"></line><line x1="13" y1="4" x2="19" y2="4"></line></svg>`
+      science: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="book-icon"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>',
+      physics: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="book-icon"><circle cx="12" cy="12" r="1"></circle><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"></path></svg>',
+      chemistry: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="book-icon"><path d="M7 4v10a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4"></path><line x1="7" y1="4" x2="13" y2="4"></line><line x1="13" y1="4" x2="19" y2="4"></line></svg>'
     };
-    
     return icons[type] || icons.science;
   }
 
   // ============================================================================
-  // BOOK SELECTOR INITIALIZATION
+  // RENDER BOOK CARDS
   // ============================================================================
-  function initializeBookSelector() {
+  function renderBookCards() {
+    console.log('Rendering book cards...');
+    
     const html = BOOKS.map(book => `
       <label class="book-card" data-book-id="${book.id}">
         <input type="radio" name="book" value="${book.id}" />
-        ${createIcon(book.icon)}
+        ${getIcon(book.icon)}
         <span class="book-label">${book.label}</span>
       </label>
     `).join('');
     
     bookSelector.innerHTML = html;
+    console.log('Book cards rendered');
 
-    document.querySelectorAll('.book-card input[type="radio"]').forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        if (e.target.checked) {
-          selectBook(e.target.value);
-        }
+    // Add event listeners
+    document.querySelectorAll('.book-card input[type="radio"]').forEach(input => {
+      input.addEventListener('change', (e) => {
+        selectBook(e.target.value);
       });
     });
   }
 
   // ============================================================================
-  // BOOK SELECTION
+  // SELECT BOOK
   // ============================================================================
   function selectBook(bookId) {
+    console.log('Book selected:', bookId);
+    
     state.selectedBook = bookId;
     state.selectedChapter = null;
-    state.expandedNodes.clear();
-    state.zoom = 1;
-    state.pan = { x: 0, y: 0 };
 
+    // Update UI
     document.querySelectorAll('.book-card').forEach(card => {
-      card.classList.toggle('active', card.dataset.bookId === bookId);
+      if (card.dataset.bookId === bookId) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
     });
 
-    state.chapters = MOCKUP_CHAPTERS;
+    // Show chapters
     renderChapters();
-    
-    document.getElementById('chaptersList').style.display = 'block';
-    document.getElementById('noChaptersPlaceholder').style.display = 'none';
-    
-    clearMindmap();
   }
 
   // ============================================================================
-  // CHAPTERS RENDERING
+  // RENDER CHAPTERS
   // ============================================================================
   function renderChapters() {
-    const chaptersList = document.getElementById('chaptersList');
-    chaptersList.innerHTML = state.chapters.map(chapter => `
-      <div class="chapter-item" data-chapter-id="${chapter.id}">
-        <span class="chapter-number">Ch ${chapter.number}</span>
-        <span class="chapter-title">${chapter.title}</span>
+    console.log('Rendering chapters...');
+    
+    const html = state.chapters.map(ch => `
+      <div class="chapter-item" data-chapter-id="${ch.id}">
+        <strong>Ch ${ch.number}</strong>
+        <span>${ch.title}</span>
       </div>
     `).join('');
+
+    chaptersList.innerHTML = html;
+    chaptersList.style.display = 'block';
 
     document.querySelectorAll('.chapter-item').forEach(item => {
       item.addEventListener('click', () => {
@@ -220,74 +207,59 @@
     });
   }
 
+  // ============================================================================
+  // SELECT CHAPTER
+  // ============================================================================
   function selectChapter(chapterId) {
+    console.log('Chapter selected:', chapterId);
+    
     state.selectedChapter = chapterId;
-    state.expandedNodes.clear();
-    state.zoom = 1;
-    state.pan = { x: 0, y: 0 };
 
-    const chapter = state.chapters.find(ch => ch.id === chapterId);
-    if (!chapter) return;
-
-    state.mindmapData = JSON.parse(JSON.stringify(chapter.mindmapData));
-
+    // Update UI
     document.querySelectorAll('.chapter-item').forEach(item => {
-      item.classList.toggle('active', item.dataset.chapterId === chapterId);
+      if (item.dataset.chapterId === chapterId) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
     });
 
-    if (window.innerWidth < 896) {
-      chaptersSidebar.classList.remove('active');
-      mindmapCanvasWrapper.classList.add('active');
+    // Find and render chapter mindmap
+    const chapter = state.chapters.find(ch => ch.id === chapterId);
+    if (chapter) {
+      renderMindmap(chapter.mindmapData);
     }
-
-    renderMindmap();
   }
 
   // ============================================================================
-  // MINDMAP RENDERING
+  // CALCULATE LAYOUT
   // ============================================================================
-  function renderMindmap() {
-    if (!state.mindmapData) {
-      clearMindmap();
-      return;
-    }
-
-    mindmapPlaceholder.style.display = 'none';
-    mindmapSvg.style.display = 'block';
-
-    while (mindmapSvg.firstChild) {
-      mindmapSvg.removeChild(mindmapSvg.firstChild);
-    }
-
-    const layout = calculateLayout(state.mindmapData.root);
-    drawConnections(layout);
-    drawNodes(layout);
-    updateSvgViewBox(layout);
-    attachNodeListeners();
-  }
-
-  // ============================================================================
-  // LAYOUT CALCULATION
-  // ============================================================================
-  function calculateLayout(root, x = 150, y = 0, verticalGap = 100, horizontalGap = 180) {
+  function calculateLayout(root, x = 150, y = 0, vGap = 100, hGap = 180) {
     const layout = {};
 
-    function traverse(node, level, x, y, siblingIndex, totalSiblings) {
-      const nodeId = node.id;
-      let posX = x + level * horizontalGap;
-      let posY = y + (siblingIndex - totalSiblings / 2) * verticalGap;
+    function traverse(node, level, x, y, sibIdx, totalSibs) {
+      const id = node.id;
+      let posX = x + level * hGap;
+      let posY = y + (sibIdx - totalSibs / 2) * vGap;
 
       const radii = [35, 28, 24, 20, 18];
       const radius = radii[Math.min(level, radii.length - 1)];
 
-      layout[nodeId] = { node, x: posX, y: posY, radius, level, children: [] };
+      layout[id] = {
+        node,
+        x: posX,
+        y: posY,
+        radius,
+        level,
+        children: []
+      };
 
       if (node.expanded && node.children && node.children.length > 0) {
         node.children.forEach((child, idx) => {
-          const childX = posX + horizontalGap;
-          const childY = posY + (idx - (node.children.length - 1) / 2) * verticalGap;
+          const childX = posX + hGap;
+          const childY = posY + (idx - (node.children.length - 1) / 2) * vGap;
           traverse(child, level + 1, childX, childY, idx, node.children.length);
-          layout[nodeId].children.push(child.id);
+          layout[id].children.push(child.id);
         });
       }
     }
@@ -297,184 +269,215 @@
   }
 
   // ============================================================================
-  // SVG DRAWING
+  // DRAW SVG
   // ============================================================================
-  function drawConnections(layout) {
-    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.setAttribute('id', 'connections');
+  function drawSvg(layout) {
+    mindmapSvg.innerHTML = '';
+
+    // Draw connections
+    const conns = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    conns.setAttribute('id', 'connections');
 
     Object.values(layout).forEach(item => {
       item.children.forEach(childId => {
-        const childItem = layout[childId];
-        if (!childItem) return;
+        const child = layout[childId];
+        if (!child) return;
 
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        const x1 = item.x;
-        const y1 = item.y;
-        const x2 = childItem.x;
-        const y2 = childItem.y;
-        const cpX = (x1 + x2) / 2;
-
-        path.setAttribute('d', `M ${x1} ${y1} Q ${cpX} ${y1} ${x2} ${y2}`);
-        path.setAttribute('class', 'connection-line');
-        g.appendChild(path);
+        const cpX = (item.x + child.x) / 2;
+        path.setAttribute('d', `M ${item.x} ${item.y} Q ${cpX} ${item.y} ${child.x} ${child.y}`);
+        path.setAttribute('stroke', COLORS.secondary);
+        path.setAttribute('stroke-width', '1.5');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('opacity', '0.4');
+        conns.appendChild(path);
       });
     });
 
-    mindmapSvg.appendChild(g);
-  }
+    mindmapSvg.appendChild(conns);
 
-  function drawNodes(layout) {
-    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.setAttribute('id', 'nodes');
+    // Draw nodes
+    const nodes = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    nodes.setAttribute('id', 'nodes');
 
-    Object.entries(layout).forEach(([nodeId, item]) => {
-      const nodeGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      nodeGroup.setAttribute('class', 'node-group');
-      nodeGroup.setAttribute('data-node-id', nodeId);
-      nodeGroup.setAttribute('data-node-level', item.level);
+    Object.entries(layout).forEach(([id, item]) => {
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('class', 'node-group');
+      g.setAttribute('data-node-id', id);
 
-      const colors = [COLOR_SCHEME.primary, COLOR_SCHEME.secondary, COLOR_SCHEME.tertiary, COLOR_SCHEME.quaternary, COLOR_SCHEME.quinary];
-      const color = colors[Math.min(item.level, colors.length - 1)];
+      const colorMap = [
+        COLORS.primary,
+        COLORS.secondary,
+        COLORS.tertiary,
+        COLORS.quaternary,
+        COLORS.quinary
+      ];
+      const color = colorMap[Math.min(item.level, colorMap.length - 1)];
 
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('class', 'node-circle');
       circle.setAttribute('cx', item.x);
       circle.setAttribute('cy', item.y);
       circle.setAttribute('r', item.radius);
       circle.setAttribute('fill', color);
       circle.setAttribute('opacity', '0.9');
-      nodeGroup.appendChild(circle);
+      g.appendChild(circle);
 
       if (item.node.text) {
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('class', 'node-text');
         text.setAttribute('x', item.x);
         text.setAttribute('y', item.y);
-        text.setAttribute('fill', item.level === 0 ? 'white' : (item.level <= 1 ? 'white' : '#0a0b0d'));
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('dominant-baseline', 'middle');
         text.setAttribute('font-size', Math.max(10, 14 - item.level * 1.5));
+        text.setAttribute('font-weight', '600');
+        text.setAttribute('fill', item.level <= 1 ? 'white' : '#0a0b0d');
 
         const words = item.node.text.split(' ');
         const lines = [];
-        let currentLine = '';
+        let line = '';
 
         words.forEach(word => {
-          const testLine = currentLine ? currentLine + ' ' + word : word;
-          if (testLine.length > 12) {
-            if (currentLine) lines.push(currentLine);
-            currentLine = word;
+          if ((line + word).length > 12) {
+            if (line) lines.push(line);
+            line = word;
           } else {
-            currentLine = testLine;
+            line += (line ? ' ' : '') + word;
           }
         });
-        if (currentLine) lines.push(currentLine);
+        if (line) lines.push(line);
 
-        const lineHeight = 13;
-        lines.forEach((line, idx) => {
+        lines.forEach((l, idx) => {
           const tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
           tspan.setAttribute('x', item.x);
-          tspan.setAttribute('dy', idx === 0 ? 0 : lineHeight);
-          tspan.textContent = line;
+          tspan.setAttribute('dy', idx === 0 ? 0 : 13);
+          tspan.textContent = l;
           text.appendChild(tspan);
         });
 
-        nodeGroup.appendChild(text);
+        g.appendChild(text);
       }
 
-      if (item.children.length > 0) {
-        const indicator = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        indicator.setAttribute('class', 'node-expand-indicator');
-        indicator.setAttribute('x', item.x + item.radius + 8);
-        indicator.setAttribute('y', item.y);
-        indicator.setAttribute('fill', COLOR_SCHEME.primary);
-        indicator.textContent = '>';
-        nodeGroup.appendChild(indicator);
-      }
+      g.addEventListener('click', () => {
+        toggleNode(id);
+      });
 
-      g.appendChild(nodeGroup);
+      nodes.appendChild(g);
     });
 
-    mindmapSvg.appendChild(g);
-  }
+    mindmapSvg.appendChild(nodes);
 
-  function updateSvgViewBox(layout) {
+    // Update viewBox
     const positions = Object.values(layout);
     const xs = positions.map(p => p.x);
     const ys = positions.map(p => p.y);
+    const minX = Math.min(...xs) - 60;
+    const maxX = Math.max(...xs) + 60;
+    const minY = Math.min(...ys) - 60;
+    const maxY = Math.max(...ys) + 60;
 
-    const minX = Math.min(...xs) - 50;
-    const maxX = Math.max(...xs) + 50;
-    const minY = Math.min(...ys) - 50;
-    const maxY = Math.max(...ys) + 50;
-
-    const width = maxX - minX;
-    const height = maxY - minY;
-
-    mindmapSvg.setAttribute('viewBox', `${minX} ${minY} ${width} ${height}`);
+    mindmapSvg.setAttribute('viewBox', `${minX} ${minY} ${maxX - minX} ${maxY - minY}`);
     mindmapSvg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
   }
 
   // ============================================================================
-  // CLEAR MINDMAP - SHOW DEFAULT MOCKUP
+  // TOGGLE NODE
   // ============================================================================
-  function clearMindmap() {
+  function toggleNode(nodeId) {
+    const findNode = (node, id) => {
+      if (node.id === id) return node;
+      if (node.children) {
+        for (let child of node.children) {
+          const found = findNode(child, id);
+          if (found) return found;
+        }
+      }
+      return null;
+    };
+
+    const chapter = state.chapters.find(ch => ch.id === state.selectedChapter);
+    if (!chapter) return;
+
+    const node = findNode(chapter.mindmapData.root, nodeId);
+    if (node && node.children && node.children.length > 0) {
+      node.expanded = !node.expanded;
+      renderMindmap(chapter.mindmapData);
+    }
+  }
+
+  // ============================================================================
+  // RENDER MINDMAP
+  // ============================================================================
+  function renderMindmap(mindmapData) {
+    console.log('Rendering mindmap...');
+    
+    mindmapPlaceholder.style.display = 'none';
+    mindmapSvg.style.display = 'block';
+
+    const layout = calculateLayout(mindmapData.root);
+    drawSvg(layout);
+  }
+
+  // ============================================================================
+  // DRAW DEFAULT MOCKUP
+  // ============================================================================
+  function drawDefaultMockup() {
+    console.log('Drawing default mockup...');
+    
     mindmapPlaceholder.style.display = 'none';
     mindmapSvg.style.display = 'block';
     mindmapSvg.innerHTML = '';
-    
+
+    mindmapSvg.setAttribute('viewBox', '-100 -150 700 400');
+    mindmapSvg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
     const svg = mindmapSvg;
-    svg.setAttribute('viewBox', '-100 -150 700 400');
-    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-    
-    // Central primary node
-    const primary = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    primary.setAttribute('cx', '0');
-    primary.setAttribute('cy', '0');
-    primary.setAttribute('r', '40');
-    primary.setAttribute('fill', COLOR_SCHEME.primary);
-    primary.setAttribute('opacity', '0.85');
-    svg.appendChild(primary);
-    
-    const primaryText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    primaryText.setAttribute('x', '0');
-    primaryText.setAttribute('y', '5');
-    primaryText.setAttribute('text-anchor', 'middle');
-    primaryText.setAttribute('dominant-baseline', 'middle');
-    primaryText.setAttribute('font-size', '13');
-    primaryText.setAttribute('font-weight', '600');
-    primaryText.setAttribute('fill', 'white');
-    primaryText.textContent = 'Select';
-    svg.appendChild(primaryText);
-    
+
+    // Center node
+    const center = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    center.setAttribute('cx', '0');
+    center.setAttribute('cy', '0');
+    center.setAttribute('r', '40');
+    center.setAttribute('fill', COLORS.primary);
+    center.setAttribute('opacity', '0.85');
+    svg.appendChild(center);
+
+    const centerText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    centerText.setAttribute('x', '0');
+    centerText.setAttribute('y', '5');
+    centerText.setAttribute('text-anchor', 'middle');
+    centerText.setAttribute('dominant-baseline', 'middle');
+    centerText.setAttribute('font-size', '13');
+    centerText.setAttribute('font-weight', '600');
+    centerText.setAttribute('fill', 'white');
+    centerText.textContent = 'Select';
+    svg.appendChild(centerText);
+
     // Secondary nodes
     const secondaryPositions = [
-      { x: -180, y: -100 },
-      { x: -180, y: 100 },
-      { x: 180, y: -100 },
-      { x: 180, y: 100 }
+      { x: -180, y: -100, label: 'Concept' },
+      { x: -180, y: 100, label: 'Topic' },
+      { x: 180, y: -100, label: 'Theme' },
+      { x: 180, y: 100, label: 'Area' }
     ];
-    
-    secondaryPositions.forEach((pos, idx) => {
-      // Connection line
+
+    secondaryPositions.forEach(pos => {
       const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       const cpX = pos.x / 2;
       line.setAttribute('d', `M 0 0 Q ${cpX} ${pos.y / 2} ${pos.x} ${pos.y}`);
-      line.setAttribute('stroke', COLOR_SCHEME.secondary);
+      line.setAttribute('stroke', COLORS.secondary);
       line.setAttribute('stroke-width', '1.5');
       line.setAttribute('fill', 'none');
       line.setAttribute('opacity', '0.4');
       svg.appendChild(line);
-      
-      // Secondary node
+
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       circle.setAttribute('cx', pos.x);
       circle.setAttribute('cy', pos.y);
       circle.setAttribute('r', '30');
-      circle.setAttribute('fill', COLOR_SCHEME.secondary);
+      circle.setAttribute('fill', COLORS.secondary);
       circle.setAttribute('opacity', '0.7');
       svg.appendChild(circle);
-      
-      // Secondary text
+
       const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       text.setAttribute('x', pos.x);
       text.setAttribute('y', pos.y);
@@ -483,12 +486,17 @@
       text.setAttribute('font-size', '11');
       text.setAttribute('font-weight', '600');
       text.setAttribute('fill', 'white');
-      text.textContent = ['Concept', 'Topic', 'Theme', 'Area'][idx];
+      text.textContent = pos.label;
       svg.appendChild(text);
     });
-    
+
     // Tertiary nodes
     const tertiaryPositions = [
+      -320, -60, -140,
+      320, -60, 60, 140
+    ];
+
+    [
       { x: -320, y: -140 },
       { x: -320, y: -60 },
       { x: -320, y: 60 },
@@ -496,61 +504,19 @@
       { x: 320, y: -140 },
       { x: 320, y: 0 },
       { x: 320, y: 140 }
-    ];
-    
-    tertiaryPositions.forEach((pos) => {
+    ].forEach(pos => {
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       circle.setAttribute('cx', pos.x);
       circle.setAttribute('cy', pos.y);
       circle.setAttribute('r', '22');
-      circle.setAttribute('fill', COLOR_SCHEME.tertiary);
+      circle.setAttribute('fill', COLORS.tertiary);
       circle.setAttribute('opacity', '0.55');
       svg.appendChild(circle);
     });
   }
 
   // ============================================================================
-  // NODE INTERACTIONS
-  // ============================================================================
-  function attachNodeListeners() {
-    document.querySelectorAll('.node-group').forEach(nodeGroup => {
-      nodeGroup.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const nodeId = nodeGroup.dataset.nodeId;
-        toggleNodeExpansion(nodeId);
-      });
-
-      nodeGroup.addEventListener('mouseenter', () => {
-        nodeGroup.style.opacity = '0.8';
-      });
-
-      nodeGroup.addEventListener('mouseleave', () => {
-        nodeGroup.style.opacity = '1';
-      });
-    });
-  }
-
-  function toggleNodeExpansion(nodeId) {
-    const node = findNodeById(state.mindmapData.root, nodeId);
-    if (!node || !node.children || node.children.length === 0) return;
-
-    node.expanded = !node.expanded;
-    renderMindmap();
-  }
-
-  function findNodeById(root, id) {
-    if (root.id === id) return root;
-    if (!root.children) return null;
-
-    for (let child of root.children) {
-      const found = findNodeById(child, id);
-      if (found) return found;
-    }
-    return null;
-  }
-
-  // ============================================================================
-  // ZOOM & PAN CONTROLS
+  // ZOOM & PAN
   // ============================================================================
   zoomIn.addEventListener('click', () => {
     state.zoom = Math.min(state.zoom + 0.2, 3);
@@ -573,106 +539,28 @@
     mindmapCanvas.style.transform = `translate(${state.pan.x}px, ${state.pan.y}px)`;
   }
 
-  mindmapCanvas.addEventListener('wheel', (e) => {
-    if (e.ctrlKey || e.metaKey) {
-      e.preventDefault();
-      const delta = e.deltaY > 0 ? -0.1 : 0.1;
-      state.zoom = Math.max(0.5, Math.min(3, state.zoom + delta));
-      updateZoom();
-    }
-  });
-
-  let isPanning = false;
-  let startX = 0;
-  let startY = 0;
-
-  mindmapCanvas.addEventListener('mousedown', (e) => {
-    if (e.button !== 2) {
-      isPanning = true;
-      startX = e.clientX - state.pan.x;
-      startY = e.clientY - state.pan.y;
-      mindmapCanvas.style.cursor = 'grabbing';
-    }
-  });
-
-  document.addEventListener('mousemove', (e) => {
-    if (isPanning) {
-      state.pan.x = e.clientX - startX;
-      state.pan.y = e.clientY - startY;
-      updateZoom();
-    }
-  });
-
-  document.addEventListener('mouseup', () => {
-    isPanning = false;
-    mindmapCanvas.style.cursor = 'default';
-  });
-
-  let touchStartDistance = 0;
-  let touchStartX = 0;
-  let touchStartY = 0;
-
-  mindmapCanvas.addEventListener('touchstart', (e) => {
-    if (e.touches.length === 1) {
-      isPanning = true;
-      touchStartX = e.touches[0].clientX - state.pan.x;
-      touchStartY = e.touches[0].clientY - state.pan.y;
-    } else if (e.touches.length === 2) {
-      isPanning = false;
-      const dx = e.touches[0].clientX - e.touches[1].clientX;
-      const dy = e.touches[0].clientY - e.touches[1].clientY;
-      touchStartDistance = Math.sqrt(dx * dx + dy * dy);
-    }
-  });
-
-  mindmapCanvas.addEventListener('touchmove', (e) => {
-    e.preventDefault();
-    if (e.touches.length === 1 && isPanning) {
-      state.pan.x = e.touches[0].clientX - touchStartX;
-      state.pan.y = e.touches[0].clientY - touchStartY;
-      updateZoom();
-    } else if (e.touches.length === 2) {
-      const dx = e.touches[0].clientX - e.touches[1].clientX;
-      const dy = e.touches[0].clientY - e.touches[1].clientY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      const delta = (distance - touchStartDistance) * 0.01;
-      state.zoom = Math.max(0.5, Math.min(3, state.zoom + delta));
-      touchStartDistance = distance;
-      updateZoom();
-    }
-  });
-
-  mindmapCanvas.addEventListener('touchend', () => {
-    isPanning = false;
-  });
-
-  mobileChaptersToggle.addEventListener('click', () => {
-    chaptersSidebar.classList.toggle('active');
-    mindmapCanvasWrapper.classList.toggle('active');
-  });
-
-  document.addEventListener('click', (e) => {
-    if (window.innerWidth < 896) {
-      if (!e.target.closest('.chapters-sidebar') && !e.target.closest('#mobileChaptersToggle')) {
-        chaptersSidebar.classList.remove('active');
-        mindmapCanvasWrapper.classList.add('active');
-      }
-    }
-  });
-
   // ============================================================================
-  // INITIALIZATION
+  // INITIALIZE
   // ============================================================================
   function init() {
-    console.log('Initializing mindmap...');
-    initializeBookSelector();
-    clearMindmap();
-    if (document.getElementById('y')) {
-      document.getElementById('y').textContent = new Date().getFullYear();
+    console.log('Initializing mindmap page...');
+    
+    try {
+      renderBookCards();
+      drawDefaultMockup();
+      console.log('Mindmap initialized successfully');
+    } catch (error) {
+      console.error('Error initializing mindmap:', error);
     }
-    console.log('Mindmap initialized');
+
+    // Set year
+    const yearEl = document.getElementById('y');
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
   }
 
+  // Wait for DOM
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
