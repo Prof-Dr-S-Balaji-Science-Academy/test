@@ -551,9 +551,8 @@ h3, .h3 {
 }
 @media (min-width: 896px) {
   #home .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+    padding-top: calc(52px + 8px);
+    padding-bottom: 52px;
   }
 }
 .hero-badge {
