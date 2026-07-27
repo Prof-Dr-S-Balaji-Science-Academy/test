@@ -1,0 +1,1253 @@
+{
+  "chapters": [
+    {
+      "id": "c1",
+      "number": 1,
+      "title": "Electric Charges and Fields",
+      "data": {
+        "id": "root",
+        "text": "Electric Charges and Fields",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Electrostatics",
+            "kids": [
+              { "id": "s1t1", "text": "Study of forces, fields and potentials from static charges", "kids": [] },
+              { "id": "s1t2", "text": "Static: does not move or change with time", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Electric Charge",
+            "kids": [
+              { "id": "s2t1", "text": "Discovery: Thales of Miletus, 600 BC (amber rubbed with wool)", "kids": [] },
+              { "id": "s2t2", "text": "Two types: Positive and Negative (named by Benjamin Franklin)", "kids": [] },
+              { "id": "s2t3", "text": "Like charges repel; unlike charges attract", "kids": [] },
+              { "id": "s2t4", "text": "Charge by rubbing: electrons transferred, no new charge created", "kids": [] },
+              { "id": "s2t5", "text": "Detection: Gold-leaf electroscope", "kids": [] },
+              {
+                "id": "s2t6",
+                "text": "Basic Properties",
+                "kids": [
+                  { "id": "s2t6a", "text": "Additivity: total charge = algebraic sum of all charges", "kids": [] },
+                  { "id": "s2t6b", "text": "Conservation: total charge of isolated system is constant", "kids": [] },
+                  { "id": "s2t6c", "text": "Quantisation: q = ne, where n is integer, e = 1.6×10⁻¹⁹ C", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Conductors and Insulators",
+            "kids": [
+              { "id": "s3t1", "text": "Conductors: allow charge to flow freely (metals, human body, earth)", "kids": [] },
+              { "id": "s3t2", "text": "Insulators: resist charge flow (glass, plastic, rubber, wood)", "kids": [] },
+              { "id": "s3t3", "text": "Semiconductors: intermediate resistance (third category)", "kids": [] },
+              { "id": "s3t4", "text": "Charge on conductor spreads over entire surface", "kids": [] },
+              { "id": "s3t5", "text": "Charge on insulator stays at the point of application", "kids": [] },
+              {
+                "id": "s3t6",
+                "text": "Methods of Charging",
+                "kids": [
+                  { "id": "s3t6a", "text": "Friction (triboelectric): rubbing transfers electrons", "kids": [] },
+                  { "id": "s3t6b", "text": "Conduction: direct contact with charged body", "kids": [] },
+                  { "id": "s3t6c", "text": "Induction: charged body brought near without contact", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Coulomb's Law",
+            "kids": [
+              { "id": "s4t1", "text": "F = k·q₁q₂ / r²  (force between two point charges)", "kids": [] },
+              { "id": "s4t2", "text": "k = 1/4πε₀ = 9×10⁹ Nm²/C²", "kids": [] },
+              { "id": "s4t3", "text": "ε₀ = 8.854×10⁻¹² C²/Nm² (permittivity of free space)", "kids": [] },
+              { "id": "s4t4", "text": "Vector form: F₂₁ = −F₁₂ (Newton's third law)", "kids": [] },
+              { "id": "s4t5", "text": "Acts along the line joining charges", "kids": [] },
+              { "id": "s4t6", "text": "Valid for point charges at rest", "kids": [] },
+              { "id": "s4t7", "text": "In medium: F = kq₁q₂ / εᵣr²  (εᵣ = relative permittivity)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Forces Between Multiple Charges",
+            "kids": [
+              { "id": "s5t1", "text": "Superposition principle: net force = vector sum of individual forces", "kids": [] },
+              { "id": "s5t2", "text": "F = F₁₂ + F₁₃ + F₁₄ + … (forces are independent)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Electric Field",
+            "kids": [
+              { "id": "s6t1", "text": "E = F/q₀ (force per unit positive test charge)", "kids": [] },
+              { "id": "s6t2", "text": "Unit: N/C or V/m", "kids": [] },
+              { "id": "s6t3", "text": "Vector quantity; direction = direction of force on +ve charge", "kids": [] },
+              { "id": "s6t4", "text": "Due to point charge: E = kq/r²", "kids": [] },
+              {
+                "id": "s6t5",
+                "text": "Electric Field Lines",
+                "kids": [
+                  { "id": "s6t5a", "text": "Start from positive charges; end at negative charges", "kids": [] },
+                  { "id": "s6t5b", "text": "Tangent at any point gives direction of E", "kids": [] },
+                  { "id": "s6t5c", "text": "Closer lines → stronger field", "kids": [] },
+                  { "id": "s6t5d", "text": "Never cross each other", "kids": [] },
+                  { "id": "s6t5e", "text": "Cannot form closed loops in electrostatics", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Electric Flux",
+            "kids": [
+              { "id": "s7t1", "text": "Φ = E · A = EA cosθ", "kids": [] },
+              { "id": "s7t2", "text": "Scalar quantity; unit: Nm²/C", "kids": [] },
+              { "id": "s7t3", "text": "Represents number of field lines crossing a surface", "kids": [] }
+            ]
+          },
+          {
+            "id": "s8",
+            "text": "Electric Dipole",
+            "kids": [
+              { "id": "s8t1", "text": "Two equal and opposite charges (+q, −q) separated by distance 2a", "kids": [] },
+              { "id": "s8t2", "text": "Dipole moment: p = q × 2a (vector, from –q to +q)", "kids": [] },
+              { "id": "s8t3", "text": "Field on axial line: E = 2kp/r³ (along p)", "kids": [] },
+              { "id": "s8t4", "text": "Field on equatorial line: E = kp/r³ (opposite to p)", "kids": [] },
+              { "id": "s8t5", "text": "Torque in uniform field: τ = p × E = pE sinθ", "kids": [] },
+              { "id": "s8t6", "text": "Net force on dipole in uniform field = 0", "kids": [] }
+            ]
+          },
+          {
+            "id": "s9",
+            "text": "Continuous Charge Distribution",
+            "kids": [
+              { "id": "s9t1", "text": "Linear charge density: λ = dq/dl (C/m)", "kids": [] },
+              { "id": "s9t2", "text": "Surface charge density: σ = dq/dA (C/m²)", "kids": [] },
+              { "id": "s9t3", "text": "Volume charge density: ρ = dq/dV (C/m³)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s10",
+            "text": "Gauss's Law",
+            "kids": [
+              { "id": "s10t1", "text": "Φ = q(enclosed) / ε₀ (total flux through closed surface)", "kids": [] },
+              { "id": "s10t2", "text": "Applies to any closed (Gaussian) surface", "kids": [] },
+              { "id": "s10t3", "text": "Simplifies symmetric field problems", "kids": [] },
+              {
+                "id": "s10t4",
+                "text": "Applications",
+                "kids": [
+                  { "id": "s10t4a", "text": "Infinite line charge: E = λ/2πε₀r", "kids": [] },
+                  { "id": "s10t4b", "text": "Infinite plane sheet: E = σ/2ε₀", "kids": [] },
+                  { "id": "s10t4c", "text": "Uniformly charged spherical shell: E = kq/r² (outside); E = 0 (inside)", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c2",
+      "number": 2,
+      "title": "Electrostatic Potential and Capacitance",
+      "data": {
+        "id": "root",
+        "text": "Electrostatic Potential and Capacitance",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Electrostatic Potential",
+            "kids": [
+              { "id": "s1t1", "text": "V = W/q (work done per unit positive charge)", "kids": [] },
+              { "id": "s1t2", "text": "Scalar quantity; unit: Volt (J/C)", "kids": [] },
+              { "id": "s1t3", "text": "Potential due to point charge: V = kq/r", "kids": [] },
+              { "id": "s1t4", "text": "Potential is zero at infinity (reference point)", "kids": [] },
+              { "id": "s1t5", "text": "Potential due to dipole: V = kp cosθ / r²", "kids": [] },
+              { "id": "s1t6", "text": "Potential due to system of charges: V = Σ kqᵢ/rᵢ (superposition)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Equipotential Surfaces",
+            "kids": [
+              { "id": "s2t1", "text": "Surface where V is same at every point", "kids": [] },
+              { "id": "s2t2", "text": "No work done moving a charge along equipotential surface", "kids": [] },
+              { "id": "s2t3", "text": "Always perpendicular to electric field lines", "kids": [] },
+              { "id": "s2t4", "text": "For point charge: concentric spheres", "kids": [] },
+              { "id": "s2t5", "text": "For uniform field: parallel planes", "kids": [] },
+              { "id": "s2t6", "text": "Relation: E = −dV/dr (field is negative potential gradient)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Potential Energy",
+            "kids": [
+              { "id": "s3t1", "text": "U = kq₁q₂/r (two-charge system)", "kids": [] },
+              { "id": "s3t2", "text": "Work done = Change in potential energy", "kids": [] },
+              { "id": "s3t3", "text": "Potential energy of system of charges: U = Σ kqᵢqⱼ/rᵢⱼ (sum over pairs)", "kids": [] },
+              {
+                "id": "s3t4",
+                "text": "Potential Energy in External Field",
+                "kids": [
+                  { "id": "s3t4a", "text": "Single charge: U = qV", "kids": [] },
+                  { "id": "s3t4b", "text": "Two charges in field: U = q₁V(r₁) + q₂V(r₂) + kq₁q₂/r₁₂", "kids": [] },
+                  { "id": "s3t4c", "text": "Dipole in field: U = −p·E = −pE cosθ", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Electrostatics of Conductors",
+            "kids": [
+              { "id": "s4t1", "text": "Electric field inside conductor = 0 (static situation)", "kids": [] },
+              { "id": "s4t2", "text": "Field at surface is perpendicular to the surface", "kids": [] },
+              { "id": "s4t3", "text": "No excess charge inside conductor; all charge resides on surface", "kids": [] },
+              { "id": "s4t4", "text": "Entire conductor (and surface) is at same potential", "kids": [] },
+              { "id": "s4t5", "text": "Field at surface: E = σ/ε₀", "kids": [] },
+              { "id": "s4t6", "text": "Electrostatic shielding: field inside hollow conductor is zero", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Dielectrics and Polarisation",
+            "kids": [
+              { "id": "s5t1", "text": "Dielectrics: insulators that can be polarised by external field", "kids": [] },
+              { "id": "s5t2", "text": "Polar dielectrics: molecules have permanent dipole moment (e.g. water)", "kids": [] },
+              { "id": "s5t3", "text": "Non-polar dielectrics: dipole moment induced by external field", "kids": [] },
+              { "id": "s5t4", "text": "Polarisation P = χₑ ε₀ E (χₑ = electric susceptibility)", "kids": [] },
+              { "id": "s5t5", "text": "Dielectric constant K = ε/ε₀ (reduces effective field inside)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Capacitance",
+            "kids": [
+              { "id": "s6t1", "text": "C = Q/V (charge stored per unit potential)", "kids": [] },
+              { "id": "s6t2", "text": "Unit: Farad (F) = C/V", "kids": [] },
+              { "id": "s6t3", "text": "Parallel plate capacitor: C = ε₀A/d", "kids": [] },
+              { "id": "s6t4", "text": "With dielectric: C = Kε₀A/d (K times greater)", "kids": [] },
+              {
+                "id": "s6t5",
+                "text": "Combination of Capacitors",
+                "kids": [
+                  { "id": "s6t5a", "text": "Series: 1/C = 1/C₁ + 1/C₂ + … (same charge, voltage divides)", "kids": [] },
+                  { "id": "s6t5b", "text": "Parallel: C = C₁ + C₂ + … (same voltage, charge adds)", "kids": [] }
+                ]
+              },
+              {
+                "id": "s6t6",
+                "text": "Energy Stored in Capacitor",
+                "kids": [
+                  { "id": "s6t6a", "text": "U = Q²/2C = ½CV² = ½QV", "kids": [] },
+                  { "id": "s6t6b", "text": "Energy density: u = ½ε₀E²", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c3",
+      "number": 3,
+      "title": "Current Electricity",
+      "data": {
+        "id": "root",
+        "text": "Current Electricity",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Electric Current",
+            "kids": [
+              { "id": "s1t1", "text": "I = dQ/dt (rate of flow of charge)", "kids": [] },
+              { "id": "s1t2", "text": "Unit: Ampere (A); scalar quantity", "kids": [] },
+              { "id": "s1t3", "text": "Conventional current: direction of +ve charge flow", "kids": [] },
+              { "id": "s1t4", "text": "Electron flow opposite to conventional current direction", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Ohm's Law",
+            "kids": [
+              { "id": "s2t1", "text": "V = IR (voltage = current × resistance)", "kids": [] },
+              { "id": "s2t2", "text": "Resistance R = ρl/A (ρ = resistivity, l = length, A = area)", "kids": [] },
+              { "id": "s2t3", "text": "Ohmic materials: linear V-I graph", "kids": [] },
+              { "id": "s2t4", "text": "Current density: j = I/A = σE (σ = conductivity = 1/ρ)", "kids": [] },
+              {
+                "id": "s2t5",
+                "text": "Limitations of Ohm's Law",
+                "kids": [
+                  { "id": "s2t5a", "text": "Non-linear V-I in semiconductors and diodes", "kids": [] },
+                  { "id": "s2t5b", "text": "Asymmetric response for current reversal (e.g. electrolyte)", "kids": [] },
+                  { "id": "s2t5c", "text": "V not single-valued function of I in some devices", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Drift of Electrons and Resistivity",
+            "kids": [
+              { "id": "s3t1", "text": "Thermal velocity of electrons: random, no net direction", "kids": [] },
+              { "id": "s3t2", "text": "Drift velocity vd = eEτ/m (τ = relaxation time)", "kids": [] },
+              { "id": "s3t3", "text": "Resistivity: ρ = m/ne²τ", "kids": [] },
+              { "id": "s3t4", "text": "Mobility: μ = |vd|/E = eτ/m (unit: m²/Vs)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Resistivity of Materials",
+            "kids": [
+              { "id": "s4t1", "text": "Metals: low resistivity (10⁻⁸ to 10⁻⁶ Ωm)", "kids": [] },
+              { "id": "s4t2", "text": "Insulators: high resistivity (10¹⁰ to 10¹⁷ Ωm)", "kids": [] },
+              { "id": "s4t3", "text": "Semiconductors: intermediate, decreases with temperature", "kids": [] },
+              { "id": "s4t4", "text": "Temperature dependence: ρT = ρ₀[1 + α(T − T₀)]", "kids": [] },
+              { "id": "s4t5", "text": "Nichrome/Manganin: very weak temperature dependence (used in standard resistors)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Electrical Energy and Power",
+            "kids": [
+              { "id": "s5t1", "text": "Power: P = VI = I²R = V²/R", "kids": [] },
+              { "id": "s5t2", "text": "Energy dissipated (Joule heating): W = Pt = I²Rt", "kids": [] },
+              { "id": "s5t3", "text": "Power transmission: low current → low loss (P_loss = I²Rc)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Cells, EMF and Internal Resistance",
+            "kids": [
+              { "id": "s6t1", "text": "EMF (ε): potential difference across cell when no current flows", "kids": [] },
+              { "id": "s6t2", "text": "Terminal voltage: V = ε − Ir (during discharge)", "kids": [] },
+              { "id": "s6t3", "text": "Internal resistance r reduces effective voltage", "kids": [] },
+              {
+                "id": "s6t4",
+                "text": "Cells in Combination",
+                "kids": [
+                  { "id": "s6t4a", "text": "Series: ε_total = ε₁+ε₂, r_total = r₁+r₂ (for same EMF)", "kids": [] },
+                  { "id": "s6t4b", "text": "Parallel: same EMF cells; r_eff = r/n; useful for large current", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Kirchhoff's Rules",
+            "kids": [
+              { "id": "s7t1", "text": "Junction Rule (KCL): ΣI = 0 at any junction (charge conservation)", "kids": [] },
+              { "id": "s7t2", "text": "Loop Rule (KVL): ΣV = 0 around any closed loop (energy conservation)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s8",
+            "text": "Wheatstone Bridge",
+            "kids": [
+              { "id": "s8t1", "text": "Balance condition: P/Q = R/S (no current through galvanometer)", "kids": [] },
+              { "id": "s8t2", "text": "Used to measure unknown resistance accurately", "kids": [] },
+              { "id": "s8t3", "text": "Meter Bridge: practical form of Wheatstone bridge", "kids": [] },
+              { "id": "s8t4", "text": "Potentiometer: measures EMF and internal resistance without drawing current", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c4",
+      "number": 4,
+      "title": "Moving Charges and Magnetism",
+      "data": {
+        "id": "root",
+        "text": "Moving Charges and Magnetism",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Magnetic Force",
+            "kids": [
+              { "id": "s1t1", "text": "Lorentz force: F = q(E + v×B)", "kids": [] },
+              { "id": "s1t2", "text": "Magnetic force on moving charge: F = qv×B", "kids": [] },
+              { "id": "s1t3", "text": "Force ⊥ to both v and B; does no work", "kids": [] },
+              { "id": "s1t4", "text": "Force on current-carrying conductor: F = Il×B", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Motion in Magnetic Field",
+            "kids": [
+              { "id": "s2t1", "text": "Circular motion: r = mv/qB (radius of circular path)", "kids": [] },
+              { "id": "s2t2", "text": "Time period: T = 2πm/qB (independent of velocity)", "kids": [] },
+              { "id": "s2t3", "text": "Cyclotron frequency: ν = qB/2πm", "kids": [] },
+              { "id": "s2t4", "text": "Helical path: when v has component along B", "kids": [] },
+              {
+                "id": "s2t5",
+                "text": "Cyclotron",
+                "kids": [
+                  { "id": "s2t5a", "text": "Accelerates charged particles using alternating electric field", "kids": [] },
+                  { "id": "s2t5b", "text": "Uses magnetic field to curve path in D-shaped chambers (dees)", "kids": [] },
+                  { "id": "s2t5c", "text": "Limitation: fails at relativistic speeds", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Biot-Savart Law",
+            "kids": [
+              { "id": "s3t1", "text": "dB = (μ₀/4π) Idl×r̂ / r²", "kids": [] },
+              { "id": "s3t2", "text": "μ₀ = 4π×10⁻⁷ Tm/A (permeability of free space)", "kids": [] },
+              { "id": "s3t3", "text": "Direction: right-hand rule (curl fingers along current, thumb = B)", "kids": [] },
+              { "id": "s3t4", "text": "Field at centre of circular loop: B = μ₀I/2R", "kids": [] },
+              { "id": "s3t5", "text": "Field on axis of circular loop: B = μ₀IR²/2(R²+x²)^(3/2)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Ampere's Circuital Law",
+            "kids": [
+              { "id": "s4t1", "text": "∮B·dl = μ₀I_enclosed", "kids": [] },
+              { "id": "s4t2", "text": "Analogous to Gauss's Law for magnetism", "kids": [] },
+              { "id": "s4t3", "text": "Field inside solenoid: B = μ₀nI (n = turns per unit length)", "kids": [] },
+              { "id": "s4t4", "text": "Field inside toroid: B = μ₀NI/2πr", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Force Between Parallel Currents",
+            "kids": [
+              { "id": "s5t1", "text": "Parallel currents attract; anti-parallel currents repel", "kids": [] },
+              { "id": "s5t2", "text": "Force per unit length: F/l = μ₀I₁I₂/2πd", "kids": [] },
+              { "id": "s5t3", "text": "Definition of Ampere based on this force", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Torque on Current Loop and Magnetic Dipole",
+            "kids": [
+              { "id": "s6t1", "text": "Torque: τ = m×B = NIA sinθ (m = magnetic moment)", "kids": [] },
+              { "id": "s6t2", "text": "Magnetic moment: m = NIA (N=turns, I=current, A=area)", "kids": [] },
+              { "id": "s6t3", "text": "Loop acts like a magnetic dipole", "kids": [] },
+              { "id": "s6t4", "text": "Potential energy: U = −m·B", "kids": [] }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Moving Coil Galvanometer",
+            "kids": [
+              { "id": "s7t1", "text": "Works on torque on current loop in magnetic field", "kids": [] },
+              { "id": "s7t2", "text": "Deflection: θ = NBAk I (k = spring constant)", "kids": [] },
+              { "id": "s7t3", "text": "Converted to Ammeter: add low resistance shunt in parallel", "kids": [] },
+              { "id": "s7t4", "text": "Converted to Voltmeter: add high resistance in series", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c5",
+      "number": 5,
+      "title": "Magnetism and Matter",
+      "data": {
+        "id": "root",
+        "text": "Magnetism and Matter",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Bar Magnet",
+            "kids": [
+              { "id": "s1t1", "text": "Has north and south poles; always exists as dipole", "kids": [] },
+              { "id": "s1t2", "text": "Magnetic field lines: closed loops from N to S outside, S to N inside", "kids": [] },
+              { "id": "s1t3", "text": "Axial field: B = μ₀/4π · 2m/r³", "kids": [] },
+              { "id": "s1t4", "text": "Equatorial field: B = μ₀/4π · m/r³ (opposite to m)", "kids": [] },
+              { "id": "s1t5", "text": "Torque in uniform field: τ = m×B", "kids": [] },
+              { "id": "s1t6", "text": "Potential energy: U = −mB cosθ", "kids": [] },
+              { "id": "s1t7", "text": "Current loop analogy: m = IA (current loop = equivalent bar magnet)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Earth's Magnetism",
+            "kids": [
+              { "id": "s2t1", "text": "Earth behaves like a huge bar magnet (geographic S pole near magnetic N)", "kids": [] },
+              { "id": "s2t2", "text": "Magnetic declination: angle between geographic and magnetic north", "kids": [] },
+              { "id": "s2t3", "text": "Magnetic dip (inclination): angle B makes with horizontal", "kids": [] },
+              { "id": "s2t4", "text": "Horizontal component: BH = B cosδ; Vertical: BV = B sinδ", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Magnetism and Gauss's Law",
+            "kids": [
+              { "id": "s3t1", "text": "∮B·dA = 0 (no magnetic monopoles exist)", "kids": [] },
+              { "id": "s3t2", "text": "Magnetic field lines are always closed loops", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Magnetisation and Magnetic Intensity",
+            "kids": [
+              { "id": "s4t1", "text": "Magnetisation M = net magnetic moment per unit volume", "kids": [] },
+              { "id": "s4t2", "text": "Magnetic intensity H: B = μ₀(H + M)", "kids": [] },
+              { "id": "s4t3", "text": "Susceptibility: χm = M/H", "kids": [] },
+              { "id": "s4t4", "text": "Relative permeability: μr = 1 + χm", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Magnetic Properties of Materials",
+            "kids": [
+              {
+                "id": "s5t1",
+                "text": "Diamagnetic",
+                "kids": [
+                  { "id": "s5t1a", "text": "χm small and negative (e.g. copper, bismuth, water)", "kids": [] },
+                  { "id": "s5t1b", "text": "Weakly repelled by magnets", "kids": [] },
+                  { "id": "s5t1c", "text": "No permanent dipole moment; induced moment opposes field", "kids": [] }
+                ]
+              },
+              {
+                "id": "s5t2",
+                "text": "Paramagnetic",
+                "kids": [
+                  { "id": "s5t2a", "text": "χm small and positive (e.g. aluminium, platinum)", "kids": [] },
+                  { "id": "s5t2b", "text": "Weakly attracted by magnets", "kids": [] },
+                  { "id": "s5t2c", "text": "Curie's Law: χm = C/T", "kids": [] }
+                ]
+              },
+              {
+                "id": "s5t3",
+                "text": "Ferromagnetic",
+                "kids": [
+                  { "id": "s5t3a", "text": "χm large and positive (e.g. iron, nickel, cobalt)", "kids": [] },
+                  { "id": "s5t3b", "text": "Strongly attracted; can be permanently magnetised", "kids": [] },
+                  { "id": "s5t3c", "text": "Domains: regions of aligned magnetic moments", "kids": [] },
+                  { "id": "s5t3d", "text": "Curie temperature: above it, ferromagnetic → paramagnetic", "kids": [] },
+                  { "id": "s5t3e", "text": "Hysteresis: lag between B and H; area = energy lost per cycle", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c6",
+      "number": 6,
+      "title": "Electromagnetic Induction",
+      "data": {
+        "id": "root",
+        "text": "Electromagnetic Induction",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Faraday's and Henry's Experiments",
+            "kids": [
+              { "id": "s1t1", "text": "Changing magnetic flux through a coil induces EMF", "kids": [] },
+              { "id": "s1t2", "text": "EMF induced when magnet moved relative to coil", "kids": [] },
+              { "id": "s1t3", "text": "Changing current in one coil induces EMF in adjacent coil", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Magnetic Flux",
+            "kids": [
+              { "id": "s2t1", "text": "Φ = B·A = BA cosθ", "kids": [] },
+              { "id": "s2t2", "text": "Unit: Weber (Wb); 1 Wb = 1 Vs", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Faraday's Law of Induction",
+            "kids": [
+              { "id": "s3t1", "text": "ε = −dΦ/dt (induced EMF = rate of change of flux)", "kids": [] },
+              { "id": "s3t2", "text": "For N turns: ε = −N dΦ/dt", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Lenz's Law",
+            "kids": [
+              { "id": "s4t1", "text": "Induced current opposes the change in flux causing it", "kids": [] },
+              { "id": "s4t2", "text": "Consequence of conservation of energy", "kids": [] },
+              { "id": "s4t3", "text": "Gives the direction of induced current (negative sign in Faraday's law)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Motional EMF",
+            "kids": [
+              { "id": "s5t1", "text": "ε = Blv (conductor of length l moving with velocity v in field B)", "kids": [] },
+              { "id": "s5t2", "text": "Force on charges due to magnetic field drives current", "kids": [] },
+              { "id": "s5t3", "text": "Eddy currents: induced in solid conductors (used in braking, heating)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Inductance",
+            "kids": [
+              {
+                "id": "s6t1",
+                "text": "Self Inductance",
+                "kids": [
+                  { "id": "s6t1a", "text": "Φ = LI; L = self-inductance (Henry, H)", "kids": [] },
+                  { "id": "s6t1b", "text": "ε = −L dI/dt (back EMF opposes change in current)", "kids": [] },
+                  { "id": "s6t1c", "text": "Solenoid: L = μ₀n²Al", "kids": [] }
+                ]
+              },
+              {
+                "id": "s6t2",
+                "text": "Mutual Inductance",
+                "kids": [
+                  { "id": "s6t2a", "text": "Φ₂₁ = MI₁; M = mutual inductance", "kids": [] },
+                  { "id": "s6t2b", "text": "ε₂ = −M dI₁/dt", "kids": [] },
+                  { "id": "s6t2c", "text": "Two coaxial solenoids: M = μ₀n₁n₂Al", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "AC Generator",
+            "kids": [
+              { "id": "s7t1", "text": "Rotating coil in magnetic field generates sinusoidal EMF", "kids": [] },
+              { "id": "s7t2", "text": "ε = NBAω sinωt = ε₀ sinωt", "kids": [] },
+              { "id": "s7t3", "text": "Parts: armature coil, field magnet, slip rings, brushes", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c7",
+      "number": 7,
+      "title": "Alternating Current",
+      "data": {
+        "id": "root",
+        "text": "Alternating Current",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "AC Basics",
+            "kids": [
+              { "id": "s1t1", "text": "v = V₀ sinωt; i = I₀ sinωt", "kids": [] },
+              { "id": "s1t2", "text": "RMS values: Vrms = V₀/√2; Irms = I₀/√2", "kids": [] },
+              { "id": "s1t3", "text": "Phasor: rotating vector representing sinusoidal quantities", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "AC Circuits",
+            "kids": [
+              {
+                "id": "s2t1",
+                "text": "Pure Resistor",
+                "kids": [
+                  { "id": "s2t1a", "text": "V and I in phase; P = Vrms·Irms", "kids": [] }
+                ]
+              },
+              {
+                "id": "s2t2",
+                "text": "Pure Inductor",
+                "kids": [
+                  { "id": "s2t2a", "text": "I lags V by 90°", "kids": [] },
+                  { "id": "s2t2b", "text": "Inductive reactance: XL = ωL", "kids": [] },
+                  { "id": "s2t2c", "text": "No power consumed (ideal inductor)", "kids": [] }
+                ]
+              },
+              {
+                "id": "s2t3",
+                "text": "Pure Capacitor",
+                "kids": [
+                  { "id": "s2t3a", "text": "I leads V by 90°", "kids": [] },
+                  { "id": "s2t3b", "text": "Capacitive reactance: XC = 1/ωC", "kids": [] },
+                  { "id": "s2t3c", "text": "No power consumed (ideal capacitor)", "kids": [] }
+                ]
+              },
+              {
+                "id": "s2t4",
+                "text": "Series LCR Circuit",
+                "kids": [
+                  { "id": "s2t4a", "text": "Impedance: Z = √(R² + (XL−XC)²)", "kids": [] },
+                  { "id": "s2t4b", "text": "Phase angle: tanφ = (XL−XC)/R", "kids": [] },
+                  { "id": "s2t4c", "text": "Resonance: XL = XC → Z = R (minimum impedance)", "kids": [] },
+                  { "id": "s2t4d", "text": "Resonant frequency: ω₀ = 1/√(LC)", "kids": [] },
+                  { "id": "s2t4e", "text": "Q-factor = ω₀L/R (sharpness of resonance)", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Power in AC Circuit",
+            "kids": [
+              { "id": "s3t1", "text": "P = Vrms·Irms·cosφ (cosφ = power factor)", "kids": [] },
+              { "id": "s3t2", "text": "Resistive circuit: P = I²rms·R (power factor = 1)", "kids": [] },
+              { "id": "s3t3", "text": "Pure L or C: P = 0 (power factor = 0)", "kids": [] },
+              { "id": "s3t4", "text": "Wattless current: component that contributes no power", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Transformers",
+            "kids": [
+              { "id": "s4t1", "text": "Works on mutual induction principle", "kids": [] },
+              { "id": "s4t2", "text": "V₂/V₁ = N₂/N₁ (turns ratio)", "kids": [] },
+              { "id": "s4t3", "text": "Step-up: N₂>N₁ (increases voltage, decreases current)", "kids": [] },
+              { "id": "s4t4", "text": "Step-down: N₂<N₁ (decreases voltage, increases current)", "kids": [] },
+              { "id": "s4t5", "text": "Ideal: P_in = P_out (100% efficiency)", "kids": [] },
+              { "id": "s4t6", "text": "Energy losses: eddy currents, flux leakage, hysteresis, resistance", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c8",
+      "number": 8,
+      "title": "Electromagnetic Waves",
+      "data": {
+        "id": "root",
+        "text": "Electromagnetic Waves",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Displacement Current",
+            "kids": [
+              { "id": "s1t1", "text": "Id = ε₀ dΦE/dt (Maxwell's modification to Ampere's law)", "kids": [] },
+              { "id": "s1t2", "text": "Exists between capacitor plates during charging/discharging", "kids": [] },
+              { "id": "s1t3", "text": "Modified Ampere's Law: ∮B·dl = μ₀(Ic + Id)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Electromagnetic Waves",
+            "kids": [
+              { "id": "s2t1", "text": "Produced by accelerating charges", "kids": [] },
+              { "id": "s2t2", "text": "E and B are mutually perpendicular and ⊥ to direction of propagation", "kids": [] },
+              { "id": "s2t3", "text": "Speed in vacuum: c = 1/√(μ₀ε₀) = 3×10⁸ m/s", "kids": [] },
+              { "id": "s2t4", "text": "E₀/B₀ = c (ratio of field amplitudes)", "kids": [] },
+              { "id": "s2t5", "text": "Transverse waves; carry energy and momentum", "kids": [] },
+              { "id": "s2t6", "text": "Intensity: I = ½ε₀cE₀²", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Maxwell's Equations (Summary)",
+            "kids": [
+              { "id": "s3t1", "text": "∮E·dA = q/ε₀ (Gauss's Law for E)", "kids": [] },
+              { "id": "s3t2", "text": "∮B·dA = 0 (Gauss's Law for B; no monopoles)", "kids": [] },
+              { "id": "s3t3", "text": "∮E·dl = −dΦB/dt (Faraday's Law)", "kids": [] },
+              { "id": "s3t4", "text": "∮B·dl = μ₀Ic + μ₀ε₀ dΦE/dt (Ampere-Maxwell Law)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Electromagnetic Spectrum",
+            "kids": [
+              { "id": "s4t1", "text": "Radio waves: λ > 0.1m; AM/FM radio, TV", "kids": [] },
+              { "id": "s4t2", "text": "Microwaves: 1mm–0.1m; radar, microwave ovens, satellite links", "kids": [] },
+              { "id": "s4t3", "text": "Infrared: 700nm–1mm; heat, remote controls, night vision", "kids": [] },
+              { "id": "s4t4", "text": "Visible light: 400–700 nm; VIBGYOR (human eye detects)", "kids": [] },
+              { "id": "s4t5", "text": "Ultraviolet: 10–400nm; kills bacteria, causes sunburn", "kids": [] },
+              { "id": "s4t6", "text": "X-rays: 0.01–10nm; medical imaging, crystal diffraction", "kids": [] },
+              { "id": "s4t7", "text": "Gamma rays: λ < 0.01nm; from nuclear reactions, most energetic", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c9",
+      "number": 9,
+      "title": "Ray Optics and Optical Instruments",
+      "data": {
+        "id": "root",
+        "text": "Ray Optics and Optical Instruments",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Reflection by Spherical Mirrors",
+            "kids": [
+              { "id": "s1t1", "text": "Laws of reflection: angle of incidence = angle of reflection", "kids": [] },
+              { "id": "s1t2", "text": "Sign convention: distances measured from pole; +ve in direction of incident light", "kids": [] },
+              { "id": "s1t3", "text": "Focal length f = R/2 (R = radius of curvature)", "kids": [] },
+              { "id": "s1t4", "text": "Mirror equation: 1/v + 1/u = 1/f", "kids": [] },
+              { "id": "s1t5", "text": "Magnification: m = −v/u", "kids": [] },
+              { "id": "s1t6", "text": "Concave mirror: converging; used in headlights, solar concentrators", "kids": [] },
+              { "id": "s1t7", "text": "Convex mirror: diverging; wider field of view; used in rear-view mirrors", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Refraction",
+            "kids": [
+              { "id": "s2t1", "text": "Snell's Law: n₁ sinθ₁ = n₂ sinθ₂", "kids": [] },
+              { "id": "s2t2", "text": "Refractive index n = c/v = sin(i)/sin(r)", "kids": [] },
+              { "id": "s2t3", "text": "Light bends towards normal when entering denser medium", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Total Internal Reflection",
+            "kids": [
+              { "id": "s3t1", "text": "Occurs when light travels from denser to rarer medium", "kids": [] },
+              { "id": "s3t2", "text": "Critical angle: sin(c) = n₂/n₁ (for angle ≥ c, all light reflected)", "kids": [] },
+              { "id": "s3t3", "text": "Applications: optical fibre, diamonds, mirage, prism binoculars", "kids": [] },
+              { "id": "s3t4", "text": "Optical fibres: TIR enables lossless light transmission over long distances", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Refraction by Spherical Surfaces and Lenses",
+            "kids": [
+              { "id": "s4t1", "text": "Refraction formula: n₂/v − n₁/u = (n₂−n₁)/R", "kids": [] },
+              { "id": "s4t2", "text": "Lens maker's equation: 1/f = (n−1)[1/R₁ − 1/R₂]", "kids": [] },
+              { "id": "s4t3", "text": "Thin lens formula: 1/v − 1/u = 1/f", "kids": [] },
+              { "id": "s4t4", "text": "Power of lens: P = 1/f (dioptre, D)", "kids": [] },
+              { "id": "s4t5", "text": "Combination of lenses: 1/f = 1/f₁ + 1/f₂; P = P₁ + P₂", "kids": [] },
+              { "id": "s4t6", "text": "Convex (converging): real, inverted image (object beyond F)", "kids": [] },
+              { "id": "s4t7", "text": "Concave (diverging): virtual, erect, diminished image always", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Refraction Through a Prism",
+            "kids": [
+              { "id": "s5t1", "text": "Deviation: δ = (i₁ + i₂) − A", "kids": [] },
+              { "id": "s5t2", "text": "Minimum deviation: i₁ = i₂; ray passes symmetrically", "kids": [] },
+              { "id": "s5t3", "text": "n = sin[(A+Dm)/2] / sin(A/2)", "kids": [] },
+              { "id": "s5t4", "text": "Dispersion: splitting of white light into spectrum (VIBGYOR)", "kids": [] },
+              { "id": "s5t5", "text": "Violet deviates most; red deviates least", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Optical Instruments",
+            "kids": [
+              {
+                "id": "s6t1",
+                "text": "Simple Microscope",
+                "kids": [
+                  { "id": "s6t1a", "text": "Magnifying power m = 1 + D/f (D = 25cm, least distance of distinct vision)", "kids": [] }
+                ]
+              },
+              {
+                "id": "s6t2",
+                "text": "Compound Microscope",
+                "kids": [
+                  { "id": "s6t2a", "text": "Objective: short focal length, forms real magnified image", "kids": [] },
+                  { "id": "s6t2b", "text": "Eyepiece: acts as simple magnifier", "kids": [] },
+                  { "id": "s6t2c", "text": "Total magnification m = m₀ × mₑ", "kids": [] }
+                ]
+              },
+              {
+                "id": "s6t3",
+                "text": "Telescope (Refracting)",
+                "kids": [
+                  { "id": "s6t3a", "text": "Objective: large focal length; eyepiece: short focal length", "kids": [] },
+                  { "id": "s6t3b", "text": "Magnification: m = f₀/fₑ (normal adjustment)", "kids": [] },
+                  { "id": "s6t3c", "text": "Reflecting telescope: uses concave mirror as objective (no chromatic aberration)", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c10",
+      "number": 10,
+      "title": "Wave Optics",
+      "data": {
+        "id": "root",
+        "text": "Wave Optics",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Huygens Principle",
+            "kids": [
+              { "id": "s1t1", "text": "Every point on wavefront is source of secondary wavelets", "kids": [] },
+              { "id": "s1t2", "text": "New wavefront = common tangent to all secondary wavelets", "kids": [] },
+              { "id": "s1t3", "text": "Explains reflection, refraction, and diffraction of waves", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Refraction and Reflection using Huygens Principle",
+            "kids": [
+              { "id": "s2t1", "text": "Refraction: proves Snell's law (n₁sinθ₁ = n₂sinθ₂)", "kids": [] },
+              { "id": "s2t2", "text": "Speed of light in medium: v = c/n", "kids": [] },
+              { "id": "s2t3", "text": "TIR: at critical angle, refracted ray grazes the surface", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Coherence and Superposition",
+            "kids": [
+              { "id": "s3t1", "text": "Coherent sources: same frequency and constant phase difference", "kids": [] },
+              { "id": "s3t2", "text": "Incoherent: random phase difference; no sustained interference", "kids": [] },
+              { "id": "s3t3", "text": "Constructive interference: path difference = nλ", "kids": [] },
+              { "id": "s3t4", "text": "Destructive interference: path difference = (2n+1)λ/2", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Young's Double Slit Experiment",
+            "kids": [
+              { "id": "s4t1", "text": "Two coherent sources from single source via two slits", "kids": [] },
+              { "id": "s4t2", "text": "Fringe width: β = λD/d (D=distance to screen, d=slit separation)", "kids": [] },
+              { "id": "s4t3", "text": "Bright fringe at y = nλD/d; dark fringe at y = (2n+1)λD/2d", "kids": [] },
+              { "id": "s4t4", "text": "Intensity: I = 4I₀ cos²(δ/2) (max = 4I₀, min = 0)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Diffraction",
+            "kids": [
+              { "id": "s5t1", "text": "Bending of light around obstacles/edges", "kids": [] },
+              { "id": "s5t2", "text": "Single slit: central maximum, secondary maxima and minima", "kids": [] },
+              { "id": "s5t3", "text": "Condition for minima: a sinθ = nλ", "kids": [] },
+              { "id": "s5t4", "text": "Width of central maximum: 2λD/a", "kids": [] },
+              { "id": "s5t5", "text": "Limit of resolution: θ = 1.22λ/D (Rayleigh criterion)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Polarisation",
+            "kids": [
+              { "id": "s6t1", "text": "Transverse waves can be polarised; longitudinal cannot", "kids": [] },
+              { "id": "s6t2", "text": "Plane polarised light: E oscillates in one plane only", "kids": [] },
+              { "id": "s6t3", "text": "Polaroids: selectively transmit light of one polarisation", "kids": [] },
+              { "id": "s6t4", "text": "Malus's Law: I = I₀ cos²θ", "kids": [] },
+              { "id": "s6t5", "text": "Brewster's angle: tanθ_B = n (reflected light is plane polarised)", "kids": [] },
+              { "id": "s6t6", "text": "Polarisation by scattering: sky appears blue (Rayleigh scattering)", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c11",
+      "number": 11,
+      "title": "Dual Nature of Radiation and Matter",
+      "data": {
+        "id": "root",
+        "text": "Dual Nature of Radiation and Matter",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Electron Emission",
+            "kids": [
+              { "id": "s1t1", "text": "Work function φ: minimum energy to free electron from metal", "kids": [] },
+              { "id": "s1t2", "text": "Thermionic emission: heating the metal", "kids": [] },
+              { "id": "s1t3", "text": "Field emission: strong electric field applied", "kids": [] },
+              { "id": "s1t4", "text": "Photoelectric emission: light of sufficient frequency", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Photoelectric Effect",
+            "kids": [
+              { "id": "s2t1", "text": "Hertz (1887): UV light causes spark discharge", "kids": [] },
+              { "id": "s2t2", "text": "Hallwachs: UV light on zinc plate causes negative charge loss", "kids": [] },
+              { "id": "s2t3", "text": "Threshold frequency ν₀: minimum frequency for photoelectric effect", "kids": [] },
+              { "id": "s2t4", "text": "Stopping potential Vs: voltage to stop most energetic photoelectrons", "kids": [] },
+              { "id": "s2t5", "text": "Effect is instantaneous; independent of intensity for threshold", "kids": [] },
+              {
+                "id": "s2t6",
+                "text": "Experimental Observations",
+                "kids": [
+                  { "id": "s2t6a", "text": "Photocurrent ∝ intensity of light (for fixed frequency > ν₀)", "kids": [] },
+                  { "id": "s2t6b", "text": "Max KE depends on frequency, not intensity", "kids": [] },
+                  { "id": "s2t6c", "text": "Stopping potential ∝ frequency (Vs = h(ν−ν₀)/e)", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Einstein's Photoelectric Equation",
+            "kids": [
+              { "id": "s3t1", "text": "Light consists of photons, each with energy E = hν", "kids": [] },
+              { "id": "s3t2", "text": "KE_max = hν − φ = hν − hν₀", "kids": [] },
+              { "id": "s3t3", "text": "h = 6.626×10⁻³⁴ Js (Planck's constant)", "kids": [] },
+              { "id": "s3t4", "text": "Wave theory fails to explain PE effect; quantum theory succeeds", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Particle Nature of Light: The Photon",
+            "kids": [
+              { "id": "s4t1", "text": "Photon: quantum of electromagnetic energy", "kids": [] },
+              { "id": "s4t2", "text": "Energy: E = hν = hc/λ", "kids": [] },
+              { "id": "s4t3", "text": "Momentum: p = h/λ = E/c", "kids": [] },
+              { "id": "s4t4", "text": "Rest mass = 0; always travels at speed c", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Wave Nature of Matter (de Broglie)",
+            "kids": [
+              { "id": "s5t1", "text": "de Broglie wavelength: λ = h/p = h/mv", "kids": [] },
+              { "id": "s5t2", "text": "Matter waves: every moving particle has an associated wave", "kids": [] },
+              { "id": "s5t3", "text": "For electron: λ = h/√(2meV) (accelerated through potential V)", "kids": [] },
+              { "id": "s5t4", "text": "Verified by Davisson-Germer experiment (electron diffraction)", "kids": [] },
+              { "id": "s5t5", "text": "Wave-particle duality: light and matter exhibit both properties", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c12",
+      "number": 12,
+      "title": "Atoms",
+      "data": {
+        "id": "root",
+        "text": "Atoms",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Alpha Particle Scattering and Rutherford's Model",
+            "kids": [
+              { "id": "s1t1", "text": "Geiger-Marsden experiment: α-particles bombarded on gold foil", "kids": [] },
+              { "id": "s1t2", "text": "Most α-particles pass through; some deflected; very few bounce back", "kids": [] },
+              { "id": "s1t3", "text": "Rutherford's conclusion: nucleus is tiny, dense, positively charged", "kids": [] },
+              { "id": "s1t4", "text": "Distance of closest approach: d = kZe²/KE_α", "kids": [] },
+              { "id": "s1t5", "text": "Impact parameter: determines angle of scattering", "kids": [] },
+              { "id": "s1t6", "text": "Nuclear radius ~10⁻¹⁵ m; atomic radius ~10⁻¹⁰ m", "kids": [] },
+              { "id": "s1t7", "text": "Limitation: accelerating electrons should radiate and spiral in (unstable)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Atomic Spectra",
+            "kids": [
+              { "id": "s2t1", "text": "Emission spectrum: discrete bright lines on dark background", "kids": [] },
+              { "id": "s2t2", "text": "Absorption spectrum: dark lines on continuous spectrum", "kids": [] },
+              { "id": "s2t3", "text": "Hydrogen series: Lyman (UV), Balmer (visible), Paschen (IR), Brackett, Pfund", "kids": [] },
+              { "id": "s2t4", "text": "Rydberg formula: 1/λ = RH(1/n₁² − 1/n₂²); RH = 1.097×10⁷ m⁻¹", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Bohr's Model of Hydrogen Atom",
+            "kids": [
+              { "id": "s3t1", "text": "Postulate 1: electrons move in certain stable circular orbits without radiation", "kids": [] },
+              { "id": "s3t2", "text": "Postulate 2: angular momentum quantised: mvr = nh/2π", "kids": [] },
+              { "id": "s3t3", "text": "Postulate 3: photon emitted/absorbed when electron jumps between orbits", "kids": [] },
+              { "id": "s3t4", "text": "Radius of nth orbit: rn = n²a₀ (a₀ = 0.529 Å, Bohr radius)", "kids": [] },
+              { "id": "s3t5", "text": "Energy of nth level: En = −13.6/n² eV", "kids": [] },
+              { "id": "s3t6", "text": "Ground state energy = −13.6 eV; ionisation energy = 13.6 eV", "kids": [] },
+              { "id": "s3t7", "text": "Photon energy: hν = En₂ − En₁ (transition energy)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "de Broglie's Explanation of Bohr's Quantisation",
+            "kids": [
+              { "id": "s4t1", "text": "Electron wave in orbit must form standing wave: 2πr = nλ", "kids": [] },
+              { "id": "s4t2", "text": "λ = h/mv → mvr = nh/2π (reproduces Bohr's condition)", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c13",
+      "number": 13,
+      "title": "Nuclei",
+      "data": {
+        "id": "root",
+        "text": "Nuclei",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Atomic Masses and Nuclear Composition",
+            "kids": [
+              { "id": "s1t1", "text": "Nucleus: protons (Z) + neutrons (N); mass number A = Z + N", "kids": [] },
+              { "id": "s1t2", "text": "Isotopes: same Z, different A; isobars: same A, different Z", "kids": [] },
+              { "id": "s1t3", "text": "Atomic mass unit: 1u = 1.66×10⁻²⁷ kg = 931.5 MeV/c²", "kids": [] },
+              { "id": "s1t4", "text": "Proton mass: 1.00727 u; Neutron: 1.00866 u", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Size of Nucleus",
+            "kids": [
+              { "id": "s2t1", "text": "R = R₀A^(1/3); R₀ = 1.2×10⁻¹⁵ m (1.2 fm)", "kids": [] },
+              { "id": "s2t2", "text": "Nuclear density is constant (~2.3×10¹⁷ kg/m³) for all nuclei", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Mass-Energy and Binding Energy",
+            "kids": [
+              { "id": "s3t1", "text": "Einstein: E = mc² (mass-energy equivalence)", "kids": [] },
+              { "id": "s3t2", "text": "Mass defect: Δm = [Zmp + Nmn] − M_nucleus", "kids": [] },
+              { "id": "s3t3", "text": "Binding energy: BE = Δm × c² = Δm × 931.5 MeV", "kids": [] },
+              { "id": "s3t4", "text": "BE per nucleon: peaks around Fe-56 (~8.8 MeV) → most stable", "kids": [] },
+              { "id": "s3t5", "text": "Light nuclei: fusion releases energy; heavy nuclei: fission releases energy", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Nuclear Force",
+            "kids": [
+              { "id": "s4t1", "text": "Strong nuclear force: short range (~few fm), charge-independent", "kids": [] },
+              { "id": "s4t2", "text": "Attractive for r > 0.8 fm; repulsive at very short range", "kids": [] },
+              { "id": "s4t3", "text": "Much stronger than Coulomb force at nuclear distances", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Radioactivity",
+            "kids": [
+              { "id": "s5t1", "text": "Spontaneous disintegration of unstable nuclei", "kids": [] },
+              { "id": "s5t2", "text": "Alpha (α) decay: emits ⁴He nucleus; A−4, Z−2", "kids": [] },
+              { "id": "s5t3", "text": "Beta (β⁻) decay: neutron → proton + electron + antineutrino", "kids": [] },
+              { "id": "s5t4", "text": "Gamma (γ) decay: high energy photon from excited nucleus", "kids": [] },
+              { "id": "s5t5", "text": "Decay law: N = N₀e^(−λt); half-life T½ = 0.693/λ", "kids": [] },
+              { "id": "s5t6", "text": "Activity: A = λN (unit: Becquerel; 1 Bq = 1 decay/s)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Nuclear Energy",
+            "kids": [
+              {
+                "id": "s6t1",
+                "text": "Nuclear Fission",
+                "kids": [
+                  { "id": "s6t1a", "text": "Heavy nucleus splits into smaller nuclei + energy", "kids": [] },
+                  { "id": "s6t1b", "text": "Example: ²³⁵U + n → ⁹²Kr + ¹⁴¹Ba + 3n + ~200 MeV", "kids": [] },
+                  { "id": "s6t1c", "text": "Chain reaction: controlled (reactor) or uncontrolled (bomb)", "kids": [] },
+                  { "id": "s6t1d", "text": "Critical mass: minimum mass for sustained chain reaction", "kids": [] }
+                ]
+              },
+              {
+                "id": "s6t2",
+                "text": "Nuclear Fusion",
+                "kids": [
+                  { "id": "s6t2a", "text": "Light nuclei fuse to form heavier nucleus + energy", "kids": [] },
+                  { "id": "s6t2b", "text": "Energy source of stars: H→He in sun (proton-proton cycle)", "kids": [] },
+                  { "id": "s6t2c", "text": "Requires very high temperature (~10⁷ K): thermonuclear fusion", "kids": [] },
+                  { "id": "s6t2d", "text": "Higher energy release per nucleon than fission", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c14",
+      "number": 14,
+      "title": "Semiconductor Electronics",
+      "data": {
+        "id": "root",
+        "text": "Semiconductor Electronics",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Classification of Solids",
+            "kids": [
+              { "id": "s1t1", "text": "Conductors: overlapping valence and conduction bands", "kids": [] },
+              { "id": "s1t2", "text": "Insulators: large band gap (>3eV); electrons cannot cross", "kids": [] },
+              { "id": "s1t3", "text": "Semiconductors: small band gap (~1eV); e.g. Si (1.1eV), Ge (0.7eV)", "kids": [] },
+              { "id": "s1t4", "text": "Valence band: filled; Conduction band: empty at 0K", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Intrinsic Semiconductor",
+            "kids": [
+              { "id": "s2t1", "text": "Pure semiconductor; no impurity", "kids": [] },
+              { "id": "s2t2", "text": "At room temp: thermal energy breaks covalent bonds → electron-hole pairs", "kids": [] },
+              { "id": "s2t3", "text": "ni = number of electrons = number of holes", "kids": [] },
+              { "id": "s2t4", "text": "Conductivity increases with temperature (unlike metals)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Extrinsic Semiconductor",
+            "kids": [
+              {
+                "id": "s3t1",
+                "text": "n-type",
+                "kids": [
+                  { "id": "s3t1a", "text": "Doped with pentavalent impurity (P, As, Sb)", "kids": [] },
+                  { "id": "s3t1b", "text": "Electrons are majority carriers; holes are minority", "kids": [] },
+                  { "id": "s3t1c", "text": "Donor level just below conduction band", "kids": [] }
+                ]
+              },
+              {
+                "id": "s3t2",
+                "text": "p-type",
+                "kids": [
+                  { "id": "s3t2a", "text": "Doped with trivalent impurity (B, Al, In)", "kids": [] },
+                  { "id": "s3t2b", "text": "Holes are majority carriers; electrons are minority", "kids": [] },
+                  { "id": "s3t2c", "text": "Acceptor level just above valence band", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "p-n Junction",
+            "kids": [
+              { "id": "s4t1", "text": "Formed by joining p-type and n-type semiconductors", "kids": [] },
+              { "id": "s4t2", "text": "Depletion region: immobile ion charges near junction; no free carriers", "kids": [] },
+              { "id": "s4t3", "text": "Built-in potential barrier (contact potential) at junction", "kids": [] },
+              {
+                "id": "s4t4",
+                "text": "Biasing",
+                "kids": [
+                  { "id": "s4t4a", "text": "Forward bias: reduces barrier, large current flows", "kids": [] },
+                  { "id": "s4t4b", "text": "Reverse bias: widens depletion layer, tiny reverse saturation current", "kids": [] }
+                ]
+              },
+              { "id": "s4t5", "text": "I-V characteristics: exponential in forward bias; flat in reverse", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Junction Diode as Rectifier",
+            "kids": [
+              {
+                "id": "s5t1",
+                "text": "Half-Wave Rectifier",
+                "kids": [
+                  { "id": "s5t1a", "text": "One diode; conducts only during positive half cycle", "kids": [] },
+                  { "id": "s5t1b", "text": "Output: pulsating DC; efficiency low", "kids": [] }
+                ]
+              },
+              {
+                "id": "s5t2",
+                "text": "Full-Wave Rectifier",
+                "kids": [
+                  { "id": "s5t2a", "text": "Two diodes + centre-tap transformer; or bridge rectifier (4 diodes)", "kids": [] },
+                  { "id": "s5t2b", "text": "Both half cycles utilised; smoother output", "kids": [] },
+                  { "id": "s5t2c", "text": "Filter (capacitor): smoothens pulsating DC to steady DC", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Special Diodes",
+            "kids": [
+              { "id": "s6t1", "text": "Zener diode: operates in reverse breakdown for voltage regulation", "kids": [] },
+              { "id": "s6t2", "text": "LED: forward-biased diode emits photons (E = hν = Eg)", "kids": [] },
+              { "id": "s6t3", "text": "Photodiode: reverse-biased; photocurrent ∝ light intensity", "kids": [] },
+              { "id": "s6t4", "text": "Solar cell: p-n junction converts solar energy to electrical energy", "kids": [] }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
