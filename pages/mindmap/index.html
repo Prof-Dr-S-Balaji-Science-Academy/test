@@ -321,13 +321,13 @@
   var LINE_COL='rgba(150,165,200,0.5)';
 
   /* ── layout constants ─── */
-  var PH   =[18,15,14,13,12,11];    /* pill HALF-height single-line per level */
-  var FS   =[12,11,10.5,10,9.5,9];  /* font-size px — kept readable at every level */
-  /* Horizontal gap between parent and child level */
-  var HGAP =[230,180,170,160,155];
-  var VPAD =20;                      /* vertical breathing room between siblings */
-  var CHARS=[22,24,26,28,30,32];     /* max chars per line per level */
+  var PH   =[18,15,14,13,12,11];
+  var FS   =[12,11,10.5,10,9.5,9];
+  var HGAP =[260,220,200,185,170];   /* wider gaps = tree spreads horizontally */
+  var VPAD =26;                       /* more vertical breathing prevents L4/L5 overlap */
+  var CHARS=[22,24,26,28,30,32];
   var MAXPW=[215,220,240,255,265,275];
+  var COL_OFFSET = 180;               /* wider alternating offset = more horizontal use */
 
   /* ── state ─── */
   var S={book:null,chapter:null,tree:null,chapters:[],scale:1,tx:0,ty:0};
@@ -414,9 +414,12 @@
     S.chapter=id; S.scale=1; S.tx=0; S.ty=0;
     document.querySelectorAll('.mm-chapter-item').forEach(function(el){el.classList.toggle('active',el.dataset.id===id);});
     var ch=S.chapters.find(function(c){return c.id===id;});
-    if(!ch)return;
+    if(!ch) return;
     S.tree=JSON.parse(JSON.stringify(ch.data));
-    openAll(S.tree,false); /* start all collapsed */
+    /* Root must be open so L1 nodes are immediately visible.
+       Only collapse L1+ children so the tree starts clean. */
+    S.tree.open=true;
+    if(S.tree.kids) S.tree.kids.forEach(function(k){ openAll(k,false); });
     exportBtn.disabled=false;
     renderTree(S.tree,svg,true);
   }
@@ -847,7 +850,7 @@
     lines.push('<circle cx="28" cy="'+(headerH/2)+'" r="16" fill="rgba(255,255,255,0.2)"/>');
     lines.push('<text x="28" cy="'+headerH/2+'" y="'+(headerH/2)+'" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="900" fill="#fff" font-family="Inter,system-ui,sans-serif">B</text>');
     lines.push('<text x="52" y="'+(headerH/2-6)+'" dominant-baseline="middle" font-size="8.5" font-weight="700" fill="rgba(255,255,255,0.9)" font-family="Inter,system-ui,sans-serif" letter-spacing="1">PROF. DR. S. BALAJI SCIENCE ACADEMY</text>');
-    lines.push('<text x="52" y="'+(headerH/2+7)+'" dominant-baseline="middle" font-size="8" fill="rgba(255,255,255,0.6)" font-family="Inter,system-ui,sans-serif">profbalaji.com</text>');
+    lines.push('<text x="52" y="'+(headerH/2+7)+'" dominant-baseline="middle" font-size="8" fill="rgba(255,255,255,0.6)" font-family="Inter,system-ui,sans-serif">profbalaji.in</text>');
     /* Chapter title — centred */
     lines.push('<text x="'+(pw/2)+'" y="'+(headerH/2+1)+'" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="700" fill="#fff" font-family="Inter,system-ui,sans-serif">'+escXml(title)+' — Mind Map</text>');
 
