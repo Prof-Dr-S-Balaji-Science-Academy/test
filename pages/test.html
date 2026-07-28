@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Free mock tests for CBSE Class 10 Science, CBSE Class 12 Physics & Chemistry, and State Board Class 12. Chapter-level MCQs, full-length board exam tests — launching soon." />
+  <title>Free Mock Tests · Coming Soon | Prof. Dr. S. Balaji Science Academy</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/favicon.ico" />
+  <style>
+    :root {
+      --bg:           #ffffff;
+      --surface:      #eef0f3;
+      --surface-warm: var(--surface);
+      --fg:           #0a0b0d;
+      --fg-2:         var(--fg);
+      --muted:        #5b616e;
+      --meta:         var(--muted);
+      --border:       rgba(91, 97, 110, 0.2);
+      --border-soft:  var(--border);
+      --accent:       #0052ff;
+      --accent-on:    #ffffff;
+      --accent-hover: #578bfa;
+      --accent-active: #0667d0;
+      --font-body:    "Inter", system-ui, sans-serif;
+      --radius-pill:  56px;
+      --radius-sm:    8px;
+    }
+    body { font-family: var(--font-body); background-color: var(--bg); color: var(--fg); line-height: 1.5; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; font-weight: 600; text-decoration: none; border-radius: var(--radius-pill); transition: background-color 150ms; cursor: pointer; border: none; font-size: 1rem; font-family: var(--font-body); }
+    .btn-primary { background-color: var(--accent); color: var(--accent-on); }
+    .btn-primary:hover { background-color: var(--accent-hover); }
+    .btn-secondary { background-color: var(--surface); color: var(--fg); }
+    .btn-secondary:hover { background-color: var(--accent-hover); color: var(--accent-on); }
+    .card { border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+
+    /* ── Coming Soon hero additions ── */
+    .cs-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: color-mix(in oklab, var(--accent) 10%, transparent);
+      border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 24px;
+    }
+    .cs-badge .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .5; transform: scale(1.3); }
+    }
+
+    .feature-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 28px 0 32px;
+    }
+    .feature-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--fg);
+    }
+    .feature-chip svg { color: var(--accent); flex-shrink: 0; }
+
+    /* panel for this page */
+    .cs-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .cs-panel h2 { font-size: 1.25rem; font-weight: 700; margin: 0; }
+    .cs-panel p { margin: 0; font-size: 14px; color: var(--muted); }
+
+    .course-chips { display: flex; flex-direction: column; gap: 10px; }
+    .course-chip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .course-chip .grade-badge {
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 3px 8px;
+      flex-shrink: 0;
+    }
+    .course-chip .board-label { color: var(--muted); font-size: 12px; margin-top: 1px; }
+    .course-chip-inner { display: flex; flex-direction: column; }
+
+    .notify-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .notify-form input[type="email"] {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--fg);
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 150ms;
+    }
+    .notify-form input[type="email"]:focus { border-color: var(--accent); }
+    .notify-form input[type="email"]::placeholder { color: var(--muted); }
+    .notify-form .btn { width: 100%; justify-content: center; padding: 13px 24px; }
+
+    .notify-note {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      margin: 0;
+    }
+
+    .coming-soon-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 4px;
+    }
+
+    /* what's coming section */
+    .what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .what-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .what-item strong { font-size: 13px; display: block; margin-bottom: 4px; }
+    .what-item span { font-size: 12px; color: var(--muted); }
+    .what-icon { font-size: 20px; margin-bottom: 8px; display: block; }
+
+    /* notify success state */
+    .notify-success {
+      display: none;
+      text-align: center;
+      padding: 16px;
+      background: color-mix(in oklab, #22c55e 10%, transparent);
+      border: 1px solid color-mix(in oklab, #22c55e 30%, transparent);
+      border-radius: 12px;
+      color: #166534;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* hero sub text */
+    .hero-sub { color: var(--muted); font-size: 15px; margin-bottom: 12px; line-height: 1.65; }
+    .hero-free-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #dcfce7;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+  </style>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body id="home">
+
+  <!-- ═══════════ HEADER (identical to index.html) ═══════════ -->
+  <header class="site-header" data-od-id="site-header">
+    <div class="container header-inner">
+      <div class="brand-container">
+        <a href="../index.html" data-od-id="brand-logo-link" class="brand-logo-link">
+          <img src="../assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+        </a>
+        <a class="brand" href="../index.html" data-od-id="brand">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+      </div>
+      <style>
+        .brand-container {
+          display: flex; align-items: center; gap: 12px;
+          flex-shrink: 0; margin-right: auto;
+        }
+        .brand-logo {
+          height: 40px; width: 40px;
+          border-radius: 50%; object-fit: cover; flex-shrink: 0;
+        }
+        @media (min-width: 480px) { .brand-logo { height: 44px; width: 44px; } }
+        @media (min-width: 896px) { .brand-logo { height: 48px; width: 48px; } }
+        .site-header .brand {
+          font-size: 11px; font-weight: 700;
+          letter-spacing: 0.06em; text-transform: uppercase;
+          line-height: 1.25; color: var(--fg); text-decoration: none;
+          max-width: 160px; word-break: break-word;
+        }
+        @media (min-width: 896px) {
+          .site-header .brand { font-size: 14px; white-space: nowrap; max-width: none; }
+        }
+        .brand-logo-link {
+          display: flex; align-items: center; justify-content: center;
+          text-decoration: none; border-radius: 50%;
+          transition: opacity 150ms ease-standard;
+        }
+        .brand-logo-link:hover { opacity: 0.8; }
+      </style>
+      <div class="header-right">
+        <nav class="nav-desktop" aria-label="Primary" data-od-id="nav-desktop">
+          <a href="../index.html#about">About</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
+            <div class="nav-dropdown-menu">
+              <a href="courses/cbse10.html">CBSE Class 10</a>
+              <a href="courses/cbse12.html">CBSE Class 12</a>
+              <a href="courses/stateboard12.html">State Board Class 12</a>
+            </div>
+          </div>
+          <a href="../index.html#attend">How to attend</a>
+          <a href="../index.html#faq">FAQs</a>
+          <a href="../index.html#blog">Blog</a>
+          <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="btn btn-primary" href="#notify" data-od-id="header-cta">Get Notified</a>
+        </div>
+      </div>
+      <a class="btn btn-primary btn-sm nav-actions-mobile" href="#notify" data-od-id="header-cta-mobile">Get Notified</a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+    <a href="../index.html#about">About</a>
+    <div class="nav-mobile-dropdown">
+      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
+      <div class="nav-mobile-dropdown-menu">
+        <a href="courses/cbse10.html">CBSE Class 10</a>
+        <a href="courses/cbse12.html">CBSE Class 12</a>
+        <a href="courses/stateboard12.html">State Board Class 12</a>
+      </div>
+    </div>
+    <a href="../index.html#attend">How to attend</a>
+    <a href="../index.html#faq">FAQs</a>
+    <a href="../index.html#blog">Blog</a>
+    <a href="../index.html#contact">Contact</a>
+  </nav>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="section hero" data-od-id="hero" style="background-color: var(--bg);">
+      <div class="container hero-grid">
+
+        <!-- LEFT COLUMN -->
+        <div>
+          <div class="cs-badge"><span class="dot" aria-hidden="true"></span> Mock Tests · Launching Soon</div>
+
+          <h1>Practice Like It's the Real Exam</h1>
+
+          <span class="hero-free-pill">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            100% Free · Always
+          </span>
+
+          <p class="hero-sub">Most students read their notes — but never sit a timed test until the real exam. That's the gap. Mock tests fix it.</p>
+          <p class="hero-sub">We're building a free, chapter-level test platform for CBSE and State Board students — MCQ quizzes, custom tests, and full-length board exam simulations. All from the same professor who teaches the course.</p>
+
+          <!-- Feature chips -->
+          <div class="feature-chips">
+            <span class="feature-chip">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Chapter-level MCQ Quizzes
+            </span>
+            <span class="feature-chip">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Chapter-level Tests
+            </span>
+            <span class="feature-chip">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              Pick-your-chapters Tests
+            </span>
+            <span class="feature-chip">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Full-length Board Exam Mocks
+            </span>
+            <span class="feature-chip">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Sign in with Google
+            </span>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#notify">Get Notified at Launch</a>
+            <a class="btn btn-secondary" href="../index.html#courses">See Courses</a>
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <aside class="hero-panel cs-panel" data-od-id="hero-panel" id="notify">
+
+          <div>
+            <p class="coming-soon-label">Coming Soon</p>
+            <h2>Free Mock Tests</h2>
+            <p>Questions are being carefully crafted by Prof. Dr. S. Balaji — board-exam focused, chapter-wise, and completely free.</p>
+          </div>
+
+          <!-- Courses covered -->
+          <div class="course-chips">
+            <div class="course-chip">
+              <span class="grade-badge">10</span>
+              <div class="course-chip-inner">
+                <strong>CBSE · Science</strong>
+                <span class="board-label">Physics, Chemistry &amp; Biology</span>
+              </div>
+            </div>
+            <div class="course-chip">
+              <span class="grade-badge">12</span>
+              <div class="course-chip-inner">
+                <strong>CBSE · Physics &amp; Chemistry</strong>
+                <span class="board-label">Full NCERT syllabus</span>
+              </div>
+            </div>
+            <div class="course-chip">
+              <span class="grade-badge">12</span>
+              <div class="course-chip-inner">
+                <strong>State Board · Physics &amp; Chemistry</strong>
+                <span class="board-label">TN State Board syllabus</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- What's coming breakdown -->
+          <div>
+            <p style="font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin:0 0 10px;">What's inside</p>
+            <div class="what-grid">
+              <div class="what-item">
+                <span class="what-icon">⚡</span>
+                <strong>Quick MCQ Quiz</strong>
+                <span>Chapter-wise, 10–15 questions</span>
+              </div>
+              <div class="what-item">
+                <span class="what-icon">📝</span>
+                <strong>Chapter Tests</strong>
+                <span>Timed, marks-based</span>
+              </div>
+              <div class="what-item">
+                <span class="what-icon">🎯</span>
+                <strong>Custom Tests</strong>
+                <span>Pick chapters, set duration</span>
+              </div>
+              <div class="what-item">
+                <span class="what-icon">🏆</span>
+                <strong>Full Mock Exam</strong>
+                <span>Board-pattern, 3 hours</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notify form -->
+          <div>
+            <p style="font-size:13px; font-weight:600; margin:0 0 10px;">Be the first to know when it launches:</p>
+            <div class="notify-form" id="notify-form">
+              <input type="email" id="notify-email" placeholder="your@email.com" autocomplete="email" />
+              <button class="btn btn-primary" type="button" id="notify-submit">Notify Me at Launch</button>
+            </div>
+            <div class="notify-success" id="notify-success">
+              ✅ You're on the list! We'll email you the moment tests go live.
+            </div>
+            <p class="notify-note" style="margin-top:10px;">No spam. One email when we launch. That's it.</p>
+          </div>
+
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ FOOTER (identical to index.html) ═══════════ -->
+  <footer class="site-footer" data-od-id="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="socials" data-od-id="socials">
+          <a href="tel:+919787692116" aria-label="Call">
+            <img src="../assets/icons/call.svg" alt="Call" />
+          </a>
+          <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business">
+            <img src="../assets/icons/google-business.svg" alt="Google Business" />
+          </a>
+          <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <img src="../assets/icons/linkedin.svg" alt="LinkedIn" />
+          </a>
+          <a href="mailto:prof@example.com" aria-label="Email">
+            <img src="../assets/icons/mail.svg" alt="Email" />
+          </a>
+          <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
+            <img src="../assets/icons/google-scholar.svg" alt="Google Scholar" />
+          </a>
+          <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+            <img src="../assets/icons/substack.png" alt="Substack" />
+          </a>
+          <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <img src="../assets/icons/youtube.svg" alt="YouTube" />
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom" style="justify-content: space-between; flex-direction: column; align-items: center; gap: 8px;">
+        <span style="font-size: 12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy . All Rights Reserved.</span>
+        <style>
+          @media (min-width: 768px) {
+            .footer-bottom { flex-direction: row; justify-content: center; }
+          }
+        </style>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    /* ── Notify form ── */
+    var notifyForm    = document.getElementById("notify-form");
+    var notifyEmail   = document.getElementById("notify-email");
+    var notifySubmit  = document.getElementById("notify-submit");
+    var notifySuccess = document.getElementById("notify-success");
+
+    if (notifySubmit) {
+      notifySubmit.addEventListener("click", function () {
+        var email = notifyEmail ? notifyEmail.value.trim() : "";
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          notifyEmail.focus();
+          notifyEmail.style.borderColor = "#ef4444";
+          setTimeout(function () { notifyEmail.style.borderColor = ""; }, 1500);
+          return;
+        }
+        /* Replace this block with your actual form submission logic */
+        if (notifyForm)    notifyForm.style.display    = "none";
+        if (notifySuccess) notifySuccess.style.display = "block";
+      });
+    }
+  </script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
