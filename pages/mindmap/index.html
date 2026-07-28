@@ -19,16 +19,38 @@
     .mm-info-box strong{font-size:14px;font-weight:700;color:#fff}
     .mm-info-box span{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.4}
     @media(max-width:895px){.mm-info-card{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}.mm-info-card h2{grid-column:1/-1}}
-    .mm-book-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-3);margin-bottom:var(--space-8)}
-    @media(min-width:768px){.mm-book-grid{grid-template-columns:repeat(5,1fr)}}
-    .mm-book-card{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-5) var(--space-4);min-height:130px;border:2px solid var(--border);border-radius:var(--radius-md);background:var(--bg);cursor:pointer;transition:all 150ms cubic-bezier(0.2,0,0,1);user-select:none}
-    .mm-book-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,82,255,0.1);border-color:rgba(0,82,255,0.3)}
+    /* Mobile: single-column pill list */
+    .mm-book-grid{display:flex;flex-direction:column;gap:var(--space-2);margin-bottom:var(--space-8)}
+    @media(min-width:768px){.mm-book-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-3)}}
+
+    /* BASE card — mobile pill row */
+    .mm-book-card{position:relative;display:flex;flex-direction:row;align-items:center;gap:14px;padding:12px 48px 12px 14px;min-height:0;border:2px solid var(--border);border-radius:var(--radius-pill);background:var(--bg);cursor:pointer;transition:all 150ms cubic-bezier(0.2,0,0,1);user-select:none}
+    .mm-book-card:hover{box-shadow:0 4px 16px rgba(0,82,255,0.1);border-color:rgba(0,82,255,0.3)}
     .mm-book-card.selected{border-color:var(--accent);background:color-mix(in oklab,var(--accent),transparent 94%)}
-    .mm-book-card input[type="radio"]{position:absolute;top:10px;right:10px;width:18px;height:18px;accent-color:var(--accent);cursor:pointer}
-    .mm-book-card svg{width:28px;height:28px;stroke:var(--muted);transition:stroke 150ms}
-    .mm-book-card.selected svg{stroke:var(--accent)}
-    .mm-book-label{font-size:12px;font-weight:600;text-align:center;line-height:1.3;color:var(--fg);white-space:pre-line}
-    .mm-book-card.selected .mm-book-label{color:var(--accent)}
+    .mm-book-card input[type="radio"]{position:absolute;top:50%;right:14px;transform:translateY(-50%);width:18px;height:18px;accent-color:var(--accent);cursor:pointer}
+
+    /* icon circle */
+    .mm-book-icon{width:38px;height:38px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 150ms}
+    .mm-book-card.selected .mm-book-icon{background:color-mix(in oklab,var(--accent),transparent 85%)}
+    .mm-book-icon svg{width:20px;height:20px;flex-shrink:0;transition:all 150ms}
+    .mm-book-card.selected .mm-book-icon svg{color:var(--accent) !important;stroke:var(--accent) !important}
+
+    /* label lines */
+    .mm-book-label-top{display:block;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.02em;line-height:1.3}
+    .mm-book-label-sub{display:block;font-size:14px;font-weight:700;color:var(--fg);line-height:1.3}
+    .mm-book-card.selected .mm-book-label-top{color:color-mix(in oklab,var(--accent),transparent 35%)}
+    .mm-book-card.selected .mm-book-label-sub{color:var(--accent)}
+
+    /* Desktop: vertical card */
+    @media(min-width:768px){
+      .mm-book-card{flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:var(--space-5) var(--space-3);min-height:148px;border-radius:var(--radius-md)}
+      .mm-book-card:hover{transform:translateY(-3px)}
+      .mm-book-card input[type="radio"]{top:10px;right:10px;transform:none}
+      .mm-book-icon{width:48px;height:48px}
+      .mm-book-icon svg{width:26px;height:26px}
+      .mm-book-label-top{font-size:10px;text-align:center}
+      .mm-book-label-sub{font-size:12px;text-align:center}
+    }
     .mm-workspace{display:grid;grid-template-columns:210px 1fr;border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;height:640px;max-height:74vh}
     @media(max-width:767px){.mm-workspace{grid-template-columns:1fr;height:auto}}
     .mm-sidebar{background:var(--bg);border-right:1px solid var(--border);overflow-y:auto;padding:var(--space-3);display:flex;flex-direction:column}
@@ -53,7 +75,10 @@
     .mm-zoom-btn{width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid var(--border);color:var(--fg);font-size:15px;font-weight:700;cursor:pointer;display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:all 120ms}
     .mm-zoom-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
     .mm-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(248,249,251,0.8);font-size:13px;color:var(--muted);z-index:20;display:none}
-    @media(max-width:767px){.mm-sidebar{border-right:none;border-bottom:1px solid var(--border);max-height:180px}.mm-canvas-wrap{min-height:400px}}
+    @media(max-width:767px){
+      .mm-sidebar{border-right:none;border-bottom:1px solid var(--border);max-height:540px;min-height:180px}
+      .mm-canvas-wrap{min-height:420px}
+    }
   </style>
 </head>
 <body>
@@ -244,18 +269,39 @@
      }
   ──────────────────────────────────────────────────────────────── */
 
+  /* labelTop = line 1 (board + class), labelSub = line 2 (subject) */
   var BOOKS=[
-    {id:'cbse10',      label:'CBSE 10\nScience',          icon:'science',   jsonPath:'../../assets/mindmap/cbse10.json'},
-    {id:'cbse12-phy',  label:'CBSE 12\nPhysics',          icon:'physics',   jsonPath:'../../assets/mindmap/cbse12-phy.json'},
-    {id:'cbse12-chem', label:'CBSE 12\nChemistry',        icon:'chemistry', jsonPath:'../../assets/mindmap/cbse12-chem.json'},
-    {id:'sb12-phy',    label:'State Board\n12 Physics',    icon:'physics',   jsonPath:'../../assets/mindmap/sb12-phy.json'},
-    {id:'sb12-chem',   label:'State Board\n12 Chemistry',  icon:'chemistry', jsonPath:'../../assets/mindmap/sb12-chem.json'}
+    {id:'cbse10',      labelTop:'CBSE · Class 10',        labelSub:'Science',   icon:'science',   jsonPath:'../../assets/mindmap/cbse10.json'},
+    {id:'cbse12-phy',  labelTop:'CBSE · Class 12',        labelSub:'Physics',   icon:'physics',   jsonPath:'../../assets/mindmap/cbse12-phy.json'},
+    {id:'cbse12-chem', labelTop:'CBSE · Class 12',        labelSub:'Chemistry', icon:'chemistry', jsonPath:'../../assets/mindmap/cbse12-chem.json'},
+    {id:'sb12-phy',    labelTop:'State Board · Class 12', labelSub:'Physics',   icon:'physics',   jsonPath:'../../assets/mindmap/sb12-phy.json'},
+    {id:'sb12-chem',   labelTop:'State Board · Class 12', labelSub:'Chemistry', icon:'chemistry', jsonPath:'../../assets/mindmap/sb12-chem.json'}
   ];
 
+  /* Better relevant icons:
+     science   → microscope (lens + stand)
+     physics   → atom (orbits + nucleus)
+     chemistry → flask / beaker with liquid */
   var ICONS={
-    science:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
-    physics:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"/></svg>',
-    chemistry:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4v10a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4"/><line x1="7" y1="4" x2="13" y2="4"/><line x1="13" y1="4" x2="19" y2="4"/></svg>'
+    science: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:inherit">'+
+      '<circle cx="12" cy="9" r="4"/>'+
+      '<path d="M12 13v8"/>'+
+      '<path d="M8 21h8"/>'+
+      '<path d="M7 5.5A6.95 6.95 0 0 0 5 9a7 7 0 0 0 14 0 6.95 6.95 0 0 0-2-3.5"/>'+
+      '</svg>',
+    physics: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:inherit">'+
+      '<ellipse cx="12" cy="12" rx="10" ry="4"/>'+
+      '<ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>'+
+      '<ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>'+
+      '<circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>'+
+      '</svg>',
+    chemistry: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:inherit">'+
+      '<path d="M9 3h6"/>'+
+      '<path d="M10 3v5l-4 8a2 2 0 0 0 1.8 3h8.4A2 2 0 0 0 18 16l-4-8V3"/>'+
+      '<path d="M8.5 15.5c1 .7 2 1 3.5 1s2.5-.3 3.5-1" stroke-opacity="0.5"/>'+
+      '<circle cx="10.5" cy="13.5" r="0.8" fill="currentColor" stroke="none"/>'+
+      '<circle cx="14" cy="14.5" r="0.6" fill="currentColor" stroke="none"/>'+
+      '</svg>'
   };
 
   /* ── pill visual config per level ─── */
@@ -269,11 +315,14 @@
   var LINE_COL='rgba(180,190,220,0.55)';
 
   /* ── layout constants ─── */
-  var PH   =[18,15,13,11,10];   /* pill half-height per level */
-  var FS   =[11,10,9.5,9,8.5];  /* font-size px per level */
-  var HGAP =[200,185,165,150];   /* horizontal gap between levels */
-  var VPAD =10;                  /* extra vertical padding between siblings */
-  var CHARS=[22,24,26,28];       /* max chars per line per level */
+  var PH   =[18,15,14,13,12];    /* pill HALF-height for single-line per level */
+  var FS   =[11,10,9.5,9,8.5];   /* font-size px per level */
+  var HGAP =[210,195,175,155];    /* horizontal gap between levels */
+  var VPAD =18;                   /* vertical padding between siblings */
+  /* Max chars per line — L2+ wider to handle long descriptions; never truncates */
+  var CHARS=[22,24,28,32,36];     /* L0,L1,L2,L3,L4 */
+  /* Max pill width cap — generous for L2+ so 3-line content fits comfortably */
+  var MAXPW=[210,215,260,290,310];
 
   /* ── state ─── */
   var S={book:null,chapter:null,tree:null,chapters:[],scale:1,tx:0,ty:0};
@@ -294,7 +343,13 @@
   BOOKS.forEach(function(b){
     var lbl=document.createElement('label');
     lbl.className='mm-book-card'; lbl.dataset.id=b.id;
-    lbl.innerHTML='<input type="radio" name="mmbook" value="'+b.id+'"/>'+ICONS[b.icon]+'<span class="mm-book-label">'+b.label+'</span>';
+    lbl.innerHTML=
+      '<input type="radio" name="mmbook" value="'+b.id+'"/>'+
+      '<div class="mm-book-icon">'+ICONS[b.icon]+'</div>'+
+      '<div class="mm-book-label">'+
+        '<span class="mm-book-label-top">'+b.labelTop+'</span>'+
+        '<span class="mm-book-label-sub">'+b.labelSub+'</span>'+
+      '</div>';
     lbl.querySelector('input').addEventListener('change',function(){selectBook(b.id);});
     bookGrid.appendChild(lbl);
   });
@@ -309,8 +364,7 @@
     sidebarEmpty.style.display='none';
     chapterList.style.display='block';
     sidebarFoot.style.display='block';
-    bookLabel.textContent=b?b.label.replace('\n',' '):'';
-    chapterList.querySelectorAll('.mm-chapter-item').forEach(function(el){el.remove();});
+    bookLabel.textContent=b?(b.labelTop+' — '+b.labelSub):'';    chapterList.querySelectorAll('.mm-chapter-item').forEach(function(el){el.remove();});
     exportBtn.disabled=true;
     loadingOvl.style.display='flex';
     drawMockup();
@@ -381,17 +435,31 @@
     return lines;
   }
 
+  /* Width of the pill for given text+level */
   function pillW(text,level){
     var maxCh=CHARS[Math.min(level,CHARS.length-1)];
-    var charW=[7.0,6.4,6.0,5.7,5.4][Math.min(level,4)];
+    var maxPw=MAXPW[Math.min(level,MAXPW.length-1)];
+    var charW=[7.2,6.6,6.2,5.9,5.6][Math.min(level,4)];
     var lines=wrapText(text,maxCh);
     var maxLen=0; lines.forEach(function(l){if(l.length>maxLen)maxLen=l.length;});
-    return Math.max(70,maxLen*charW+28);
+    return Math.min(maxPw, Math.max(70, maxLen*charW+28));
   }
 
-  /* Subtree height: how tall is node+all its open descendants */
+  /* ACTUAL pill half-height accounting for number of lines of text */
+  function pillH(text,level){
+    var maxCh=CHARS[Math.min(level,CHARS.length-1)];
+    var fs=FS[Math.min(level,FS.length-1)];
+    var lh=fs+3.5;                              /* line-height */
+    var lines=wrapText(text,maxCh);
+    var textH=lines.length*lh;
+    var minPH=PH[Math.min(level,PH.length-1)];  /* minimum half-height (1 line) */
+    var PAD=10;                                  /* top + bottom inner padding */
+    return Math.max(minPH, textH/2 + PAD);
+  }
+
+  /* Subtree height using real pill half-heights */
   function subtreeH(node,level){
-    var ph=PH[Math.min(level,PH.length-1)];
+    var ph=pillH(node.text,level);
     var selfH=ph*2;
     if(!node.open||!node.kids||!node.kids.length) return selfH+VPAD;
     var childTotal=0;
@@ -400,12 +468,12 @@
   }
 
   /* ══════════════════════════════════════════════════════
-     LAYOUT — returns flat array of {id,text,level,cx,cy,pw,ph,open,hasKids}
+     LAYOUT — returns flat array of positioned nodes
   ══════════════════════════════════════════════════════ */
   function buildLayout(root){
     var nodes=[];
     function place(node,level,x,y){
-      var ph=PH[Math.min(level,PH.length-1)];
+      var ph=pillH(node.text,level);  /* actual height based on line count */
       var hg=HGAP[Math.min(level,HGAP.length-1)];
       var pw=pillW(node.text,level);
       var visKids=(node.open&&node.kids&&node.kids.length)?node.kids:[];
@@ -428,18 +496,21 @@
   }
 
   /* ══════════════════════════════════════════════════════
-     DRAW PILL
+     DRAW PILL — ph is the actual half-height (dynamic, multiline-aware)
   ══════════════════════════════════════════════════════ */
   function svgEl(tag){return document.createElementNS(NS,tag);}
 
-  function drawPill(parent,cx,cy,text,level,hasKids,isOpen,interactive){
+  function drawPill(parent,cx,cy,text,level,hasKids,isOpen,interactive,phOverride){
     var col=PILL[Math.min(level,PILL.length-1)];
-    var ph=PH[Math.min(level,PH.length-1)];
+    var ph=phOverride!==undefined ? phOverride : pillH(text,level);
     var fs=FS[Math.min(level,FS.length-1)];
     var pw=pillW(text,level);
     var maxCh=CHARS[Math.min(level,CHARS.length-1)];
     var lines=wrapText(text,maxCh);
-    var lh=fs+3;
+    var lh=fs+3.5;                 /* must match pillH */
+    var minPH_base=PH[Math.min(level,PH.length-1)];
+    /* rx: pill ends — cap at single-line half-height so multi-line pills stay stadium-shaped */
+    var rx=Math.min(minPH_base, ph);
 
     var g=svgEl('g');
     g.setAttribute('class','mm-node');
@@ -447,15 +518,16 @@
 
     var rect=svgEl('rect');
     rect.setAttribute('x',cx-pw/2); rect.setAttribute('y',cy-ph);
-    rect.setAttribute('width',pw); rect.setAttribute('height',ph*2);
-    rect.setAttribute('rx',ph); rect.setAttribute('ry',ph);
+    rect.setAttribute('width',pw);  rect.setAttribute('height',ph*2);
+    rect.setAttribute('rx',rx);     rect.setAttribute('ry',rx);
     rect.setAttribute('fill',col.fill);
     rect.setAttribute('stroke',col.stroke);
     rect.setAttribute('stroke-width',level===0?0:1);
     g.appendChild(rect);
 
+    /* text block: centred inside pill */
     var totalTH=lines.length*lh;
-    var startY=cy-totalTH/2+lh*0.45;
+    var startY=cy - totalTH/2 + lh*0.45;
     lines.forEach(function(line,i){
       var t=svgEl('text');
       t.setAttribute('x',cx); t.setAttribute('y',startY+i*lh);
@@ -469,11 +541,14 @@
       g.appendChild(t);
     });
 
+    /* expand indicator anchored to right edge, vertically centred on pill */
     if(hasKids&&interactive){
       var arr=svgEl('text');
       arr.setAttribute('x',cx+pw/2-10); arr.setAttribute('y',cy);
       arr.setAttribute('dominant-baseline','middle');
-      arr.setAttribute('font-size',9); arr.setAttribute('fill',col.text); arr.setAttribute('opacity','0.7');
+      arr.setAttribute('font-size',9);
+      arr.setAttribute('fill',col.text);
+      arr.setAttribute('opacity','0.7');
       arr.textContent=isOpen?'▾':'▸';
       g.appendChild(arr);
     }
@@ -516,7 +591,7 @@
 
     /* pills */
     nodes.forEach(function(n){
-      var g=drawPill(targetSvg,n.cx,n.cy,n.text,n.level,n.hasKids,n.open,interactive);
+      var g=drawPill(targetSvg,n.cx,n.cy,n.text,n.level,n.hasKids,n.open,interactive,n.ph);
       if(interactive&&n.hasKids){
         g.addEventListener('click',function(){
           toggleNode(S.tree,n.id);
@@ -757,9 +832,11 @@
     var fs=FS[Math.min(n.level,FS.length-1)]*fontScale;
     var maxCh=CHARS[Math.min(n.level,CHARS.length-1)];
     var lines=wrapText(n.text,maxCh);
-    var lh=fs+3;
+    var lh=fs+3.5;
+    var minPH_base=PH[Math.min(n.level,PH.length-1)];
+    var rx=Math.min(minPH_base,ph);
     var out='<g>';
-    out+='<rect x="'+(cx-pw/2)+'" y="'+(cy-ph)+'" width="'+pw+'" height="'+(ph*2)+'" rx="'+ph+'" ry="'+ph+'" fill="'+col.fill+'" stroke="'+col.stroke+'" stroke-width="'+(n.level===0?0:1)+'"/>';
+    out+='<rect x="'+(cx-pw/2)+'" y="'+(cy-ph)+'" width="'+pw+'" height="'+(ph*2)+'" rx="'+rx+'" ry="'+rx+'" fill="'+col.fill+'" stroke="'+col.stroke+'" stroke-width="'+(n.level===0?0:1)+'"/>';
     var totalTH=lines.length*lh;
     var startY=cy-totalTH/2+lh*0.45;
     lines.forEach(function(line,i){
