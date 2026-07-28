@@ -53,7 +53,8 @@
     }
     .mm-workspace{display:grid;grid-template-columns:210px 1fr;border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;height:640px;max-height:74vh}
     @media(max-width:767px){.mm-workspace{grid-template-columns:1fr;height:auto}}
-    .mm-sidebar{background:var(--bg);border-right:1px solid var(--border);overflow-y:auto;padding:var(--space-3);display:flex;flex-direction:column}
+    .mm-sidebar{background:var(--bg);border-right:1px solid var(--border);padding:var(--space-3);display:flex;flex-direction:column;overflow:hidden}
+    .mm-sidebar-scroll{flex:1;overflow-y:auto;min-height:0}
     .mm-sidebar-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);padding:var(--space-2);margin-bottom:var(--space-2);display:block}
     .mm-chapter-item{padding:8px 10px;border-radius:var(--radius-sm);border-left:3px solid transparent;cursor:pointer;transition:all 120ms;margin-bottom:2px}
     .mm-chapter-item:hover{background:var(--surface)}
@@ -63,8 +64,9 @@
     .mm-chapter-item.active .mm-ch-title{color:var(--accent)}
     .mm-sidebar-empty{padding:var(--space-6) var(--space-3);text-align:center;color:var(--muted);font-size:13px;line-height:1.5}
     .mm-sidebar-empty svg{width:28px;height:28px;stroke:var(--border);margin:0 auto var(--space-3);display:block}
-    .mm-sidebar-foot{margin-top:auto;padding:var(--space-3) 0 0;border-top:1px solid var(--border)}
-    .mm-export-btn{display:flex;align-items:center;gap:6px;width:100%;padding:8px 10px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);font-size:12px;font-weight:600;color:var(--fg);cursor:pointer;transition:all 120ms;justify-content:center}
+    /* Export button: always visible at bottom — flex-shrink:0 prevents it scrolling away */
+    .mm-sidebar-foot{flex-shrink:0;padding:var(--space-3) 0 0;border-top:1px solid var(--border);background:var(--bg)}
+    .mm-export-btn{display:flex;align-items:center;gap:6px;width:100%;padding:9px 10px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);font-size:12px;font-weight:600;color:var(--fg);cursor:pointer;transition:all 120ms;justify-content:center}
     .mm-export-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
     .mm-export-btn svg{width:14px;height:14px;flex-shrink:0}
     .mm-export-btn:disabled{opacity:0.4;cursor:not-allowed;pointer-events:none}
@@ -76,7 +78,8 @@
     .mm-zoom-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
     .mm-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(248,249,251,0.8);font-size:13px;color:var(--muted);z-index:20;display:none}
     @media(max-width:767px){
-      .mm-sidebar{border-right:none;border-bottom:1px solid var(--border);max-height:540px;min-height:180px}
+      .mm-workspace{height:auto}
+      .mm-sidebar{border-right:none;border-bottom:1px solid var(--border);height:220px;max-height:220px}
       .mm-canvas-wrap{min-height:420px}
     }
   </style>
@@ -178,12 +181,14 @@
         <div class="mm-book-grid" id="bookGrid"></div>
         <div class="mm-workspace">
           <div class="mm-sidebar" id="sidebar">
-            <div class="mm-sidebar-empty" id="sidebarEmpty">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-              Select a book to see its chapters
-            </div>
-            <div id="chapterList" style="display:none;">
-              <span class="mm-sidebar-label" id="bookLabel"></span>
+            <div class="mm-sidebar-scroll">
+              <div class="mm-sidebar-empty" id="sidebarEmpty">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                Select a book to see its chapters
+              </div>
+              <div id="chapterList" style="display:none;">
+                <span class="mm-sidebar-label" id="bookLabel"></span>
+              </div>
             </div>
             <div class="mm-sidebar-foot" id="sidebarFoot" style="display:none;">
               <button class="mm-export-btn" id="exportBtn" disabled>
@@ -473,24 +478,27 @@
   }
 
   /* ══════════════════════════════════════════════════════
-     LAYOUT
-     Key idea: every node at L1 passes a different "base X"
-     to its children so that each secondary node's children
-     land at a DIFFERENT column — staircase-style going right.
-     Children of L1[0] at X=baseX+HGAP[1]
-     Children of L1[1] at X=baseX+HGAP[1]+STAGGER
-     Children of L1[2] at X=baseX+HGAP[1]+STAGGER*2
-     etc.
-     This fans the tree wide (horizontally) rather than tall.
+     LAYOUT — alternating columns for tertiary nodes
+     Each L1 node's children (L2) start at the same X.
+     But each L2 node's children (L3) alternate between
+     two X positions based on whether their L1 ancestor
+     is even-indexed or odd-indexed:
+       even L1 → L3 children at column A (closer)
+       odd  L1 → L3 children at column B (further right)
+     This gives a zigzag/staircase effect at L3 while
+     keeping all L1 and L2 nodes in clean columns.
+     All deeper levels (L4+) inherit their L1 parity.
   ══════════════════════════════════════════════════════ */
-  var STAGGER = 130; /* extra X shift per L1 sibling */
+  var COL_OFFSET = 140; /* extra X for odd-L1 tertiary column */
 
   function buildLayout(root){
-    var nodes=[];
+    var nodes = [];
 
-    /* First, count how many L1 children there are so we can
-       assign a stagger index to each */
-    function place(node, level, x, y, staggerIdx){
+    /* place: x is the ACTUAL x for this node.
+       childBaseX is what x+hg would normally be — we pass it
+       explicitly so alternating offsets work cleanly.
+       parity = 0 (even L1) or 1 (odd L1) */
+    function place(node, level, x, y, parity){
       var ph  = pillH(node.text, level);
       var pw  = pillW(node.text, level);
       var hg  = HGAP[Math.min(level, HGAP.length-1)];
@@ -504,41 +512,30 @@
 
       if(!visKids.length) return;
 
-      /* X for this node's children:
-         - At L0 (root→L1): no stagger — all L1 nodes share same column
-         - At L1 (L1→L2 and deeper): stagger by staggerIdx so each L1's
-           subtree fans out to a different column                        */
-      var childX;
-      if(level === 0){
-        childX = x + hg;
-      } else {
-        /* deeper levels: inherit the stagger already applied, plus normal hg */
-        childX = x + hg + (level === 1 ? staggerIdx * STAGGER : 0);
-      }
+      /* X for children: normal hg, plus COL_OFFSET if odd parity AND this is L1→L2 transition */
+      var childX = x + hg + (level === 1 && parity === 1 ? COL_OFFSET : 0);
 
       var totalH = 0;
       visKids.forEach(function(k){ totalH += subtreeH(k, level+1); });
       var curY = y - totalH/2;
 
-      visKids.forEach(function(k, i){
+      visKids.forEach(function(k){
         var kh = subtreeH(k, level+1);
-        /* pass staggerIdx down so deeper levels know which column family they are in */
-        place(k, level+1, childX, curY + kh/2, staggerIdx);
+        place(k, level+1, childX, curY + kh/2, parity);
         curY += kh;
       });
     }
 
-    /* For L0→L1, assign each L1 child its own staggerIdx */
-    var root0 = root;
-    var ph0   = pillH(root0.text, 0);
-    var pw0   = pillW(root0.text, 0);
-    var hg0   = HGAP[0];
-    var visL1 = (root0.open && root0.kids && root0.kids.length) ? root0.kids : [];
+    /* Handle root (L0) specially — gives each L1 child its parity */
+    var ph0  = pillH(root.text, 0);
+    var pw0  = pillW(root.text, 0);
+    var hg0  = HGAP[0];
+    var visL1 = (root.open && root.kids && root.kids.length) ? root.kids : [];
 
     nodes.push({
-      id:root0.id, text:root0.text, level:0,
+      id:root.id, text:root.text, level:0,
       cx:0, cy:0, pw:pw0, ph:ph0,
-      open:root0.open, hasKids:!!visL1.length
+      open:root.open, hasKids:!!visL1.length
     });
 
     if(visL1.length){
@@ -548,9 +545,8 @@
 
       visL1.forEach(function(k, i){
         var kh = subtreeH(k, 1);
-        /* Each L1 node's X: same column (hg0).
-           But children of L1[i] will be offset by i*STAGGER relative to hg0. */
-        place(k, 1, hg0, curY + kh/2, i);
+        /* parity: 0 for even-index L1, 1 for odd-index L1 */
+        place(k, 1, hg0, curY + kh/2, i % 2);
         curY += kh;
       });
     }
@@ -811,21 +807,21 @@
       '<title>'+title+' — Mind Map</title>'+
       '<style>'+
         '*{margin:0;padding:0;box-sizing:border-box}'+
-        'body{background:#fff;display:flex;align-items:flex-start;justify-content:center}'+
+        'body{background:#fff;display:flex;flex-direction:column;align-items:flex-start}'+
         'svg{display:block;width:100%;height:auto}'+
-        '@media print{'+
-          '@page{size:A3 landscape;margin:0}'+
-          'body{width:420mm;height:297mm;overflow:hidden}'+
-          'svg{width:420mm !important;height:297mm !important}'+
-          '.no-print{display:none}'+
-        '}'+
         '.print-bar{position:fixed;top:16px;right:16px;display:flex;gap:10px;z-index:99}'+
         '.print-bar button{padding:8px 16px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;border:none}'+
         '.btn-print{background:#0052ff;color:#fff}'+
         '.btn-close{background:#eef0f3;color:#0a0b0d}'+
+        '@media print{'+
+          '@page{size:A3 landscape;margin:0}'+
+          'body{width:420mm;height:297mm;overflow:hidden}'+
+          'svg{width:420mm !important;height:297mm !important}'+
+          '.print-bar{display:none !important}'+
+        '}'+
       '</style>'+
       '</head><body>'+
-      '<div class="print-bar no-print">'+
+      '<div class="print-bar">'+
         '<button class="btn-print" onclick="window.print()">🖨 Print / Save PDF</button>'+
         '<button class="btn-close" onclick="window.close()">Close</button>'+
       '</div>'+
@@ -847,8 +843,13 @@
 
     /* title bar */
     lines.push('<rect x="0" y="0" width="'+pw+'" height="'+headerH+'" fill="#0052ff"/>');
-    lines.push('<text x="'+(pw/2)+'" y="'+(headerH/2+1)+'" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700" fill="#fff" font-family="Inter,system-ui,sans-serif">'+escXml(title)+' — Mind Map</text>');
-    lines.push('<text x="'+(pw-16)+'" y="'+(headerH/2+1)+'" text-anchor="end" dominant-baseline="middle" font-size="10" fill="rgba(255,255,255,0.7)" font-family="Inter,system-ui,sans-serif">Prof. Dr. S. Balaji Science Academy</text>');
+    /* Academy name + logo placeholder — top left */
+    lines.push('<circle cx="28" cy="'+(headerH/2)+'" r="16" fill="rgba(255,255,255,0.2)"/>');
+    lines.push('<text x="28" cy="'+headerH/2+'" y="'+(headerH/2)+'" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="900" fill="#fff" font-family="Inter,system-ui,sans-serif">B</text>');
+    lines.push('<text x="52" y="'+(headerH/2-6)+'" dominant-baseline="middle" font-size="8.5" font-weight="700" fill="rgba(255,255,255,0.9)" font-family="Inter,system-ui,sans-serif" letter-spacing="1">PROF. DR. S. BALAJI SCIENCE ACADEMY</text>');
+    lines.push('<text x="52" y="'+(headerH/2+7)+'" dominant-baseline="middle" font-size="8" fill="rgba(255,255,255,0.6)" font-family="Inter,system-ui,sans-serif">profbalaji.com</text>');
+    /* Chapter title — centred */
+    lines.push('<text x="'+(pw/2)+'" y="'+(headerH/2+1)+'" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="700" fill="#fff" font-family="Inter,system-ui,sans-serif">'+escXml(title)+' — Mind Map</text>');
 
     /* transform group: shift map-coords into PDF page coords */
     var tx=(-vx)*scale + (pw - vw*scale)/2;
