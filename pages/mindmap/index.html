@@ -304,25 +304,28 @@
       '</svg>'
   };
 
-  /* ── pill visual config per level ─── */
+  /* ── pill visual config per level — clearly distinct colours ─── */
   var PILL=[
-    {fill:'#0052ff',stroke:'#003ecc',text:'#ffffff'},
-    {fill:'#16181c',stroke:'#16181c',text:'#ffffff'},
-    {fill:'#1e2230',stroke:'#2a2f45',text:'#e0e6ff'},
-    {fill:'#252b3d',stroke:'#323a55',text:'#c8d4f0'},
-    {fill:'#2a3045',stroke:'#3a4260',text:'#b0c0e8'}
+    {fill:'#0052ff',stroke:'#003ecc',text:'#ffffff'},   /* L0 root       – Coinbase Blue          */
+    {fill:'#0f172a',stroke:'#0f172a',text:'#ffffff'},   /* L1 primary    – Near-black              */
+    {fill:'#1e3a5f',stroke:'#1e3a5f',text:'#bfdbfe'},   /* L2 secondary  – Deep navy               */
+    {fill:'#065f46',stroke:'#065f46',text:'#a7f3d0'},   /* L3 tertiary   – Deep teal/green         */
+    {fill:'#4c1d95',stroke:'#4c1d95',text:'#ddd6fe'},   /* L4            – Deep violet             */
+    {fill:'#7c2d12',stroke:'#7c2d12',text:'#fed7aa'}    /* L5            – Deep amber              */
   ];
-  var LINE_COL='rgba(180,190,220,0.55)';
+  var LINE_COL='rgba(150,165,200,0.5)';
 
   /* ── layout constants ─── */
-  var PH   =[18,15,14,13,12];    /* pill HALF-height for single-line per level */
-  var FS   =[11,10,9.5,9,8.5];   /* font-size px per level */
-  var HGAP =[210,195,175,155];    /* horizontal gap between levels */
-  var VPAD =18;                   /* vertical padding between siblings */
-  /* Max chars per line — L2+ wider to handle long descriptions; never truncates */
-  var CHARS=[22,24,28,32,36];     /* L0,L1,L2,L3,L4 */
-  /* Max pill width cap — generous for L2+ so 3-line content fits comfortably */
-  var MAXPW=[210,215,260,290,310];
+  var PH   =[18,15,14,13,12,11];    /* pill HALF-height single-line per level */
+  var FS   =[12,11,10.5,10,9.5,9];  /* font-size px — kept readable at every level */
+  /* Horizontal gap between parent and child level — STAGGERED so deep branches
+     spread right and don't compete vertically with siblings at shallower levels.
+     L0→L1: 220, L1→L2: 200, L2→L3: 210, L3→L4: 220, L4→L5: 220
+     (L2→L3 and beyond step out wider so deep content fans out to the right) */
+  var HGAP =[220,200,210,220,220];
+  var VPAD =22;                      /* vertical breathing room between siblings */
+  var CHARS=[22,24,26,28,30,32];     /* max chars per line per level */
+  var MAXPW=[215,220,240,255,265,275];
 
   /* ── state ─── */
   var S={book:null,chapter:null,tree:null,chapters:[],scale:1,tx:0,ty:0};
@@ -457,14 +460,19 @@
     return Math.max(minPH, textH/2 + PAD);
   }
 
-  /* Subtree height using real pill half-heights */
+  /* subtreeH: total vertical space consumed by this node + ALL its open descendants.
+     The key fix: when a node has children, its own height is irrelevant for spacing —
+     the total height is driven entirely by the sum of children subtree heights.
+     We only use selfH as a floor when there are no children.            */
   function subtreeH(node,level){
     var ph=pillH(node.text,level);
-    var selfH=ph*2;
-    if(!node.open||!node.kids||!node.kids.length) return selfH+VPAD;
+    var selfH=ph*2+VPAD;
+    var visKids=(node.open&&node.kids&&node.kids.length)?node.kids:[];
+    if(!visKids.length) return selfH;
     var childTotal=0;
-    node.kids.forEach(function(k){childTotal+=subtreeH(k,level+1);});
-    return Math.max(selfH+VPAD, childTotal);
+    visKids.forEach(function(k){childTotal+=subtreeH(k,level+1);});
+    /* The parent must be at least as tall as all its children stacked */
+    return Math.max(selfH, childTotal);
   }
 
   /* ══════════════════════════════════════════════════════
@@ -640,9 +648,10 @@
       rect.setAttribute('x',cx-pw/2); rect.setAttribute('y',cy-ph);
       rect.setAttribute('width',pw); rect.setAttribute('height',ph*2);
       rect.setAttribute('rx',ph); rect.setAttribute('ry',ph);
-      rect.setAttribute('fill',isRoot?col.fill:'rgba(0,82,255,0.10)');
-      rect.setAttribute('stroke',isRoot?col.stroke:'rgba(0,82,255,0.28)');
+      rect.setAttribute('fill', col.fill);
+      rect.setAttribute('stroke', col.stroke);
       rect.setAttribute('stroke-width','1');
+      rect.setAttribute('opacity', isRoot ? '1' : '0.22');
       svg.appendChild(rect);
       if(label){
         var t=svgEl('text');
@@ -650,7 +659,8 @@
         t.setAttribute('text-anchor','middle'); t.setAttribute('dominant-baseline','middle');
         t.setAttribute('font-size',isRoot?11:9);
         t.setAttribute('font-weight',isRoot?700:500);
-        t.setAttribute('fill',isRoot?'#fff':'rgba(0,82,255,0.5)');
+        t.setAttribute('fill', isRoot ? '#fff' : col.fill);
+        t.setAttribute('opacity', isRoot ? '1' : '0.55');
         t.setAttribute('font-family',"'Inter',system-ui,sans-serif");
         t.textContent=label; svg.appendChild(t);
       }
@@ -681,15 +691,15 @@
       {py:0,    ys:[-30,0,30]},
       {py:100,  ys:[70,100,130]}
     ];
-    l2groups.forEach(function(g){
-      g.ys.forEach(function(y){
-        gLine(l1x+l1w/2,g.py,l2x-l2w/2,y);
+    l2groups.forEach(function(grp){
+      grp.ys.forEach(function(y){
+        gLine(l1x+l1w/2,grp.py,l2x-l2w/2,y);
         gPill(l2x,y,l2w,l2h,'Secondary',2);
       });
     });
 
     /* L3: only attach to first L2 group's middle node */
-    var l3x=610, l3w=76, l3h=10;
+    var l3x=615, l3w=76, l3h=10;
     [-30,0,30].forEach(function(y){
       gLine(l2x+l2w/2,0,l3x-l3w/2,y);
       gPill(l3x,y,l3w,l3h,'Detail',3);
@@ -715,9 +725,9 @@
     var fullTree=JSON.parse(JSON.stringify(S.tree));
     openAll(fullTree,true);
 
-    /* build layout at normal scale first to get bounds */
-    var nodes=buildLayoutForPdf(fullTree);
-    var pad=50;
+    /* build layout to get real bounds */
+    var nodes=buildLayout(fullTree);
+    var pad=40;
     var xs=nodes.map(function(n){return n.cx-n.pw/2;});
     var xe=nodes.map(function(n){return n.cx+n.pw/2;});
     var ys=nodes.map(function(n){return n.cy-n.ph;});
@@ -725,34 +735,33 @@
     var vx=Math.min.apply(null,xs)-pad, vy=Math.min.apply(null,ys)-pad;
     var vw=Math.max.apply(null,xe)-vx+pad*2, vh=Math.max.apply(null,ye)-vy+pad*2;
 
-    /* A4 landscape in px at 96dpi: 1122 × 794 */
-    var PAGE_W=1122, PAGE_H=794;
-    var HEADER_H=60; /* space for title */
-    var availH=PAGE_H-HEADER_H;
+    /* Use A3 landscape at 96dpi (1587 × 1123) for large complex trees,
+       falls back to fitting within that page */
+    var PAGE_W=1587, PAGE_H=1123;
+    var HEADER_H=56;
+    var availW=PAGE_W, availH=PAGE_H-HEADER_H;
 
-    /* scale to fit */
-    var scaleX=PAGE_W/vw, scaleY=availH/vh;
-    var scale=Math.min(scaleX,scaleY,1); /* never upscale beyond 1 */
+    /* Scale to FILL the page — upscale if tree is small, downscale if large */
+    var scaleX=availW/vw, scaleY=availH/vh;
+    var scale=Math.min(scaleX,scaleY); /* no cap — fill the page */
 
-    /* font scale factor — reduce if very complex tree */
-    var fontScale=Math.max(0.55, Math.min(1, scale));
+    /* Font scale: use layout-native sizes scaled by same factor, floor 0.7 */
+    var fontScale=Math.max(0.7, Math.min(1.4, scale));
 
-    /* build off-screen SVG string */
     var svgStr=buildPdfSvg(fullTree,nodes,vx,vy,vw,vh,PAGE_W,PAGE_H,HEADER_H,scale,fontScale,title);
 
-    /* open print window */
-    var win=window.open('','_blank','width=1200,height=900');
+    var win=window.open('','_blank','width=1400,height=1000');
     win.document.write(
       '<!doctype html><html><head><meta charset="utf-8">'+
       '<title>'+title+' — Mind Map</title>'+
       '<style>'+
         '*{margin:0;padding:0;box-sizing:border-box}'+
-        'body{background:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh}'+
-        'svg{display:block;max-width:100%;height:auto}'+
+        'body{background:#fff;display:flex;align-items:flex-start;justify-content:center}'+
+        'svg{display:block;width:100%;height:auto}'+
         '@media print{'+
-          '@page{size:A4 landscape;margin:0}'+
-          'body{width:297mm;height:210mm;overflow:hidden;align-items:flex-start}'+
-          'svg{width:297mm;height:210mm}'+
+          '@page{size:A3 landscape;margin:0}'+
+          'body{width:420mm;height:297mm;overflow:hidden}'+
+          'svg{width:420mm !important;height:297mm !important}'+
           '.no-print{display:none}'+
         '}'+
         '.print-bar{position:fixed;top:16px;right:16px;display:flex;gap:10px;z-index:99}'+
@@ -770,14 +779,6 @@
     );
     win.document.close();
   });
-
-  /* layout clone for PDF — uses same algorithm but never interactive */
-  function buildLayoutForPdf(root){
-    var savedPH=PH.slice(), savedHGAP=HGAP.slice();
-    /* slightly tighter spacing for PDF */
-    var nodes=buildLayout(root);
-    return nodes;
-  }
 
   function buildPdfSvg(tree,nodes,vx,vy,vw,vh,pw,ph,headerH,scale,fontScale,title){
     var map={};
