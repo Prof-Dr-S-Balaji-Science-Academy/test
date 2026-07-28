@@ -1,0 +1,3381 @@
+{
+  "chapters": [
+    {
+      "id": "c1",
+      "number": 1,
+      "title": "Metallurgy",
+      "data": {
+        "id": "root",
+        "text": "Metallurgy",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Introduction and Terminology",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "Metallurgy: science of extraction of metals from ores in pure form",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Mineral: naturally occurring chemical substance containing metal",
+                "kids": []
+              },
+              {
+                "id": "t3",
+                "text": "Ore: mineral from which metal can be profitably extracted",
+                "kids": []
+              },
+              {
+                "id": "t4",
+                "text": "Gangue: rocky, earthy, siliceous impurities associated with ore",
+                "kids": []
+              },
+              {
+                "id": "t5",
+                "text": "Common ores: Bauxite (Al2O3.nH2O), Haematite (Fe2O3), Galena (PbS), Zinc blende (ZnS), Copper pyrite (CuFeS2)",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Concentration of Ores",
+            "kids": [
+              {
+                "id": "t6",
+                "text": "Removal of gangue to increase metal content; method depends on nature of ore and impurity",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Gravity Separation (Hydraulic Wash)",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "Based on difference in specific gravity; ore heavier than gangue",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "Running water washes away lighter gangue particles",
+                    "kids": []
+                  },
+                  {
+                    "id": "q3",
+                    "text": "Used for native gold, haematite (Fe2O3), cassiterite (SnO2)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t8",
+                "text": "Froth Flotation",
+                "kids": [
+                  {
+                    "id": "q4",
+                    "text": "Used for sulphide ores (galena PbS, zinc blende ZnS)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q5",
+                    "text": "Frothing agent: pine oil; Collector: sodium ethyl xanthate; Depressant: NaCN",
+                    "kids": []
+                  },
+                  {
+                    "id": "q6",
+                    "text": "Ore particles (oil-wetted) rise with froth; gangue settles at bottom",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t9",
+                "text": "Leaching",
+                "kids": [
+                  {
+                    "id": "q7",
+                    "text": "Based on solubility of ore in suitable solvent; gangue remains insoluble",
+                    "kids": []
+                  },
+                  {
+                    "id": "q8",
+                    "text": "Cyanide leaching: gold ore + NaCN (aerated) → [Au(CN)2]- complex; recovered by Zn cementation",
+                    "kids": []
+                  },
+                  {
+                    "id": "q9",
+                    "text": "Alkali leaching: bauxite + NaOH at 470-520 K → soluble NaAlO2 (Bayer's process)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t10",
+                "text": "Magnetic Separation",
+                "kids": [
+                  {
+                    "id": "q10",
+                    "text": "Used when ore or impurity is magnetic; e.g., magnetite Fe3O4 separated from non-magnetic gangue",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Extraction of Metals",
+            "kids": [
+              {
+                "id": "t11",
+                "text": "Calcination: heating ore in limited air; drives off volatile matter (H2O, CO2); e.g., limestone → CaO",
+                "kids": []
+              },
+              {
+                "id": "t12",
+                "text": "Roasting: heating sulphide ore in excess air; converts to oxide; SO2 is by-product",
+                "kids": []
+              },
+              {
+                "id": "t13",
+                "text": "Smelting: heating ore with coke and flux in blast furnace; ore → metal + slag",
+                "kids": []
+              },
+              {
+                "id": "t14",
+                "text": "Flux: substance combining with gangue to form fusible slag; CaO for SiO2 gangue (acidic-basic principle)",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Thermodynamic Principles (Ellingham Diagram)",
+            "kids": [
+              {
+                "id": "t15",
+                "text": "Ellingham diagram: plots Delta-G vs temperature for metal oxide formation; predicts feasibility of reduction",
+                "kids": []
+              },
+              {
+                "id": "t16",
+                "text": "Metal with more negative Delta-G can reduce oxide of metal with less negative Delta-G",
+                "kids": []
+              },
+              {
+                "id": "t17",
+                "text": "Carbon (coke) used as reducing agent above 983 K for most oxides; CO more effective below 983 K",
+                "kids": []
+              },
+              {
+                "id": "t18",
+                "text": "Active metal oxides (Na, Al) not reducible by C; require electrolysis",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Electrochemical Reduction",
+            "kids": [
+              {
+                "id": "t19",
+                "text": "Delta-G = -nFE0; positive E0 means spontaneous reduction",
+                "kids": []
+              },
+              {
+                "id": "t20",
+                "text": "Hall-Heroult process for Al: electrolysis of 20% Al2O3 in molten cryolite (Na3AlF6) at 1270 K",
+                "kids": []
+              },
+              {
+                "id": "t21",
+                "text": "Cathode: pure Al deposited; Anode: carbon (consumed as CO2); cryolite lowers melting point",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Refining Methods",
+            "kids": [
+              {
+                "id": "t22",
+                "text": "Distillation: for volatile metals Zn (bp 1180 K) and Hg (bp 630 K)",
+                "kids": []
+              },
+              {
+                "id": "t23",
+                "text": "Liquation: for low mp metals (Sn, Pb, Bi); crude metal heated on sloping hearth; pure metal flows",
+                "kids": []
+              },
+              {
+                "id": "t24",
+                "text": "Electrolytic refining: crude metal = anode; pure metal = cathode; metal salt solution = electrolyte; anode mud has precious metals",
+                "kids": []
+              },
+              {
+                "id": "t25",
+                "text": "Zone Refining",
+                "kids": [
+                  {
+                    "id": "q11",
+                    "text": "Based on fractional crystallisation; impurities more soluble in melt than solid",
+                    "kids": []
+                  },
+                  {
+                    "id": "q12",
+                    "text": "Induction heater moved along impure rod; impurities sweep to one end; used for Ge, Si, Ga",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t26",
+                "text": "Vapour Phase Refining",
+                "kids": [
+                  {
+                    "id": "q13",
+                    "text": "Mond process (Ni): Ni + 4CO at 330 K → Ni(CO)4; decomposed at 460 K to pure Ni",
+                    "kids": []
+                  },
+                  {
+                    "id": "q14",
+                    "text": "Van Arkel method (Ti, Zr): impure metal + I2 at 550 K → TiI4; decomposed on W filament at 1800 K",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Applications of Metals",
+            "kids": [
+              {
+                "id": "t27",
+                "text": "Aluminium: cooking vessels, aircraft alloys (duralumin), overhead cables, foils, packaging",
+                "kids": []
+              },
+              {
+                "id": "t28",
+                "text": "Zinc: galvanising iron (corrosion protection), die-casting, ZnO in paints and rubber",
+                "kids": []
+              },
+              {
+                "id": "t29",
+                "text": "Iron/Steel: bridges, railways; stainless steel (Fe-Cr-Ni), nickel steel, chrome steel (cutting tools)",
+                "kids": []
+              },
+              {
+                "id": "t30",
+                "text": "Copper: electrical wiring, bronze (Cu-Sn), brass (Cu-Zn), coins",
+                "kids": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c2",
+      "number": 2,
+      "title": "p-Block Elements I (Groups 13 and 14)",
+      "data": {
+        "id": "root",
+        "text": "p-Block Elements I (Groups 13 and 14)",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "General Trends in p-Block Elements",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "General configuration: ns2np1-6; Groups 13-18; includes metals, nonmetals and metalloids",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Inert pair effect: heavier elements show (group OS - 2) stable state due to reluctance of ns2 electrons; e.g., Tl+ more stable than Tl3+",
+                "kids": []
+              },
+              {
+                "id": "t3",
+                "text": "Anomalous behaviour of first element: small size, high IE, high EN, absence of d orbitals; diagonal relationship (B with Si)",
+                "kids": []
+              },
+              {
+                "id": "t4",
+                "text": "Allotropism: many p-block elements exist in multiple forms; e.g., C: diamond, graphite, fullerene",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Group 13 - Boron Family",
+            "kids": [
+              {
+                "id": "t5",
+                "text": "Members: B, Al, Ga, In, Tl; configuration: ns2np1; most common OS: +3; Tl also shows +1 (inert pair)",
+                "kids": []
+              },
+              {
+                "id": "t6",
+                "text": "Boron: metalloid; very high mp; forms covalent compounds; electron-deficient Lewis acid",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Compounds of Boron",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "Borax (Na2B4O7.10H2O): gives bead test with metal oxides; used in glass and pottery glazes",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "Boric acid H3BO3: weak monobasic Lewis acid (accepts OH- from water); obtained from borax + HCl",
+                    "kids": []
+                  },
+                  {
+                    "id": "q3",
+                    "text": "Diborane B2H6: BF3 + LiAlH4 → B2H6; 3c-2e banana bonds; burns in air; hydrolysed by water",
+                    "kids": []
+                  },
+                  {
+                    "id": "q4",
+                    "text": "BF3: strong Lewis acid; forms adducts with Lewis bases (BF3.NH3); used as catalyst in organic reactions",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t8",
+                "text": "Compounds of Aluminium",
+                "kids": [
+                  {
+                    "id": "q5",
+                    "text": "Al2O3: amphoteric oxide; reacts with both acid and base; alpha form (corundum) very hard",
+                    "kids": []
+                  },
+                  {
+                    "id": "q6",
+                    "text": "AlCl3: Lewis acid; catalyst in Friedel-Crafts; exists as dimer Al2Cl6 in vapour/non-aqueous media",
+                    "kids": []
+                  },
+                  {
+                    "id": "q7",
+                    "text": "Alum KAl(SO4)2.12H2O: double salt; water purification, dyeing, tanning, styptic agent",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Group 14 - Carbon Family",
+            "kids": [
+              {
+                "id": "t9",
+                "text": "Members: C, Si, Ge, Sn, Pb; configuration: ns2np2; highest OS: +4; Pb also shows +2 (inert pair)",
+                "kids": []
+              },
+              {
+                "id": "t10",
+                "text": "Catenation: tendency to form chains; C >> Si > Ge >= Sn > Pb; C forms strongest C-C bonds",
+                "kids": []
+              },
+              {
+                "id": "t11",
+                "text": "Allotropes of Carbon",
+                "kids": [
+                  {
+                    "id": "q8",
+                    "text": "Diamond: sp3 hybridised; 3D covalent network; hardest natural substance; non-conductor; used in cutting tools",
+                    "kids": []
+                  },
+                  {
+                    "id": "q9",
+                    "text": "Graphite: sp2 hybridised; layered structure; delocalised pi electrons; good conductor; used as lubricant, electrode",
+                    "kids": []
+                  },
+                  {
+                    "id": "q10",
+                    "text": "Fullerene C60 (Buckminsterfullerene): spherical cage; 20 hexagons + 12 pentagons; soccer ball shape",
+                    "kids": []
+                  },
+                  {
+                    "id": "q11",
+                    "text": "Graphene: single layer of graphite; sp2 C; strongest material; excellent conductor; 2D material",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t12",
+                "text": "Carbon Monoxide (CO)",
+                "kids": [
+                  {
+                    "id": "q12",
+                    "text": "Preparation: incomplete combustion 2C + O2 → 2CO; lab: HCOOH + conc. H2SO4",
+                    "kids": []
+                  },
+                  {
+                    "id": "q13",
+                    "text": "Colourless, odourless, highly poisonous (binds Hb); strong reducing agent; forms metal carbonyls",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t13",
+                "text": "Carbon Dioxide (CO2)",
+                "kids": [
+                  {
+                    "id": "q14",
+                    "text": "Linear molecule O=C=O; sp hybridised carbon; acidic oxide forms H2CO3 with water",
+                    "kids": []
+                  },
+                  {
+                    "id": "q15",
+                    "text": "Lime water test: CO2 + Ca(OH)2 → CaCO3 (white ppt); excess CO2 → soluble Ca(HCO3)2",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t14",
+                "text": "Silicon and its Compounds",
+                "kids": [
+                  {
+                    "id": "q16",
+                    "text": "SiO2 (silica): giant covalent 3D network of SiO4 tetrahedra; mp 1710°C; resists most acids except HF",
+                    "kids": []
+                  },
+                  {
+                    "id": "q17",
+                    "text": "Silicones: synthetic -Si-O-Si- backbone polymers; water-repellent, heat-stable; used in sealants and lubricants",
+                    "kids": []
+                  },
+                  {
+                    "id": "q18",
+                    "text": "Silicates: fundamental unit SiO4(4-) tetrahedron; ortho, pyro, chain, sheet, 3D network silicate structures",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c3",
+      "number": 3,
+      "title": "p-Block Elements II (Groups 15, 16 and 17)",
+      "data": {
+        "id": "root",
+        "text": "p-Block Elements II (Groups 15, 16 and 17)",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Group 15 - Nitrogen Family (Pnictogens)",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "Members: N, P, As, Sb, Bi; configuration: ns2np3; highest OS: +5; also +3 and -3",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Nitrogen: diatomic N2; very inert due to N≡N bond (946 kJ/mol); 78% of atmosphere",
+                "kids": []
+              },
+              {
+                "id": "t3",
+                "text": "Ammonia (NH3)",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "Haber's process: N2 + 3H2 ⇌ 2NH3; Fe catalyst; 750 K, 200 atm; Le Chatelier: high P, moderate T",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "Lab: NH4Cl + Ca(OH)2 on heating; collected by downward displacement of air (lighter than air)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q3",
+                    "text": "Pyramidal shape; sp3 hybridised N; bond angle 107°; highly soluble in water; H-bonding",
+                    "kids": []
+                  },
+                  {
+                    "id": "q4",
+                    "text": "Basic: NH3 + H2O ⇌ NH4+ + OH-; forms ammonium salts with acids",
+                    "kids": []
+                  },
+                  {
+                    "id": "q5",
+                    "text": "Uses: manufacture of HNO3 (Ostwald process), fertilisers (urea, ammonium sulphate), refrigerant",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t4",
+                "text": "Nitric Acid (HNO3)",
+                "kids": [
+                  {
+                    "id": "q6",
+                    "text": "Ostwald's process: NH3 + O2 (Pt, 800°C) → NO → NO2 + H2O → HNO3 (60-68%)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q7",
+                    "text": "Strong oxidising agent; dissolves most metals; forms NO2 with conc., NO with dilute HNO3",
+                    "kids": []
+                  },
+                  {
+                    "id": "q8",
+                    "text": "Dilute HNO3 + Cu → Cu(NO3)2 + NO; conc. HNO3 + Cu → Cu(NO3)2 + NO2",
+                    "kids": []
+                  },
+                  {
+                    "id": "q9",
+                    "text": "Aqua regia: 1 part conc. HNO3 + 3 parts conc. HCl; dissolves Au and Pt",
+                    "kids": []
+                  },
+                  {
+                    "id": "q10",
+                    "text": "Passivation: Fe and Al resist conc. HNO3 due to protective oxide layer",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t5",
+                "text": "Phosphorus and Compounds",
+                "kids": [
+                  {
+                    "id": "q11",
+                    "text": "Allotropes: white P4 (toxic, P4 tetrahedral), red (covalent polymer, less reactive), black (stable, graphite-like)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q12",
+                    "text": "PCl3: trigonal pyramidal; sp3; hydrolysed by water → H3PO3 + 3HCl",
+                    "kids": []
+                  },
+                  {
+                    "id": "q13",
+                    "text": "PCl5: trigonal bipyramidal; sp3d; PCl3 + Cl2 → PCl5; dissociates at high temperature",
+                    "kids": []
+                  },
+                  {
+                    "id": "q14",
+                    "text": "Phosphoric acid H3PO4: tribasic (pKa1=2.1, pKa2=7.2, pKa3=12.4); used in fertilisers and soft drinks",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Group 16 - Oxygen Family (Chalcogens)",
+            "kids": [
+              {
+                "id": "t6",
+                "text": "Members: O, S, Se, Te, Po; configuration: ns2np4; OS: -2, +2, +4, +6",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Oxygen: O2 (paramagnetic, diatomic); O3 (ozone, bent, diamagnetic); most electronegative after F",
+                "kids": []
+              },
+              {
+                "id": "t8",
+                "text": "Ozone: strong oxidising agent; decomposes on warming; used for sterilisation, bleaching; protects UV rays",
+                "kids": []
+              },
+              {
+                "id": "t9",
+                "text": "Allotropes of Sulphur",
+                "kids": [
+                  {
+                    "id": "q15",
+                    "text": "Rhombic sulphur (S8 rings, stable below 96°C, rhombic crystals, yellow) - most stable form",
+                    "kids": []
+                  },
+                  {
+                    "id": "q16",
+                    "text": "Monoclinic sulphur (above 96°C, needle-like crystals); plastic (amorphous, formed by quenching molten S)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t10",
+                "text": "Hydrogen Sulphide (H2S)",
+                "kids": [
+                  {
+                    "id": "q17",
+                    "text": "Preparation: FeS + dil. H2SO4 → H2S; bent molecule; weak dibasic acid",
+                    "kids": []
+                  },
+                  {
+                    "id": "q18",
+                    "text": "Reducing agent; precipitates metal sulphides used in qualitative analysis (group reagent)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t11",
+                "text": "Sulphuric Acid - Contact Process",
+                "kids": [
+                  {
+                    "id": "q19",
+                    "text": "Step 1: S + O2 → SO2; Step 2: 2SO2 + O2 (V2O5, 450-500°C) ⇌ 2SO3 (reversible)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q20",
+                    "text": "Step 3: SO3 + H2SO4 → H2S2O7 (oleum); Step 4: H2S2O7 + H2O → 2H2SO4",
+                    "kids": []
+                  },
+                  {
+                    "id": "q21",
+                    "text": "Properties: strong acid, oxidising agent, dehydrating agent, sulphonating agent",
+                    "kids": []
+                  },
+                  {
+                    "id": "q22",
+                    "text": "Hot conc. H2SO4 + C → CO2 + SO2; dissolves Cu, S, P; chars sugar/organic matter (dehydration)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q23",
+                    "text": "Detection: BaCl2 solution gives white BaSO4 precipitate insoluble in dilute HCl",
+                    "kids": []
+                  },
+                  {
+                    "id": "q24",
+                    "text": "Uses: fertilisers (superphosphate), manufacture of HCl and HNO3, drying agent, explosives",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Group 17 - Halogen Family",
+            "kids": [
+              {
+                "id": "t12",
+                "text": "Members: F, Cl, Br, I, At; configuration: ns2np5; most reactive nonmetals; OS: -1 (F only), +1, +3, +5, +7",
+                "kids": []
+              },
+              {
+                "id": "t13",
+                "text": "Reactivity: F > Cl > Br > I; electronegativity, oxidising power, bond dissociation energy decrease down the group",
+                "kids": []
+              },
+              {
+                "id": "t14",
+                "text": "Chlorine",
+                "kids": [
+                  {
+                    "id": "q25",
+                    "text": "Lab: MnO2 + 4HCl → MnCl2 + Cl2 + 2H2O; greenish-yellow, pungent gas",
+                    "kids": []
+                  },
+                  {
+                    "id": "q26",
+                    "text": "Industrial: electrolysis of brine (Chlor-alkali process); by-products: NaOH and H2",
+                    "kids": []
+                  },
+                  {
+                    "id": "q27",
+                    "text": "Strong oxidising and bleaching agent; bleaching permanent via nascent oxygen from Cl2 + H2O → HClO → [O]",
+                    "kids": []
+                  },
+                  {
+                    "id": "q28",
+                    "text": "Cl2 + cold dilute NaOH → NaCl + NaOCl (bleach); hot conc. NaOH → NaCl + NaClO3",
+                    "kids": []
+                  },
+                  {
+                    "id": "q29",
+                    "text": "Bleaching powder CaOCl2: Cl2 + Ca(OH)2; used in textile bleaching and water treatment",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t15",
+                "text": "Hydrochloric Acid (HCl)",
+                "kids": [
+                  {
+                    "id": "q30",
+                    "text": "Lab: NaCl + conc. H2SO4 on gentle heating → NaHSO4 + HCl; strong monobasic acid",
+                    "kids": []
+                  },
+                  {
+                    "id": "q31",
+                    "text": "Aqua regia: 3 parts HCl + 1 part HNO3; dissolves noble metals Au and Pt by forming complexes",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t16",
+                "text": "Interhalogen Compounds",
+                "kids": [
+                  {
+                    "id": "q32",
+                    "text": "Compounds of two different halogens: XY, XY3, XY5, XY7; more reactive than parent halogens",
+                    "kids": []
+                  },
+                  {
+                    "id": "q33",
+                    "text": "Examples: ClF (linear), BrF3 (T-shaped), IF5 (square pyramidal), IF7 (pentagonal bipyramidal)",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c4",
+      "number": 4,
+      "title": "Transition and Inner Transition Elements",
+      "data": {
+        "id": "root",
+        "text": "Transition and Inner Transition Elements",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Introduction",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "Transition elements: d-block; Groups 3-12; partially filled d orbitals in atom or common ion",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "General configuration: (n-1)d1-10 ns1-2; 3d (Sc-Zn), 4d (Y-Cd), 5d (La, Hf-Hg)",
+                "kids": []
+              },
+              {
+                "id": "t3",
+                "text": "Zn, Cd, Hg excluded from typical TM (d10 in all OS); but included in d-block",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "General Characteristic Properties",
+            "kids": [
+              {
+                "id": "t4",
+                "text": "Variable oxidation states: lose electrons from (n-1)d and ns orbitals; e.g., Mn: +2 to +7",
+                "kids": []
+              },
+              {
+                "id": "t5",
+                "text": "Stability: half-filled (d5, Mn2+) and fully-filled (d10, Zn2+) configurations are extra stable",
+                "kids": []
+              },
+              {
+                "id": "t6",
+                "text": "Metallic properties: high density, high mp/bp, high tensile strength; Cu and Ag are best conductors in 3d series",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Small atomic/ionic radii due to poor shielding by d electrons; lanthanoid contraction: 4d ≈ 5d",
+                "kids": []
+              },
+              {
+                "id": "t8",
+                "text": "Magnetic Properties",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "Paramagnetic: unpaired d electrons; magnetic moment mu = sqrt[n(n+2)] BM",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "Diamagnetic: all d electrons paired (e.g., Zn2+ d10; Sc3+ d0)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q3",
+                    "text": "Ferromagnetic: Fe, Co, Ni; aligned domains; retain magnetism even without external field",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t9",
+                "text": "Colour of Compounds",
+                "kids": [
+                  {
+                    "id": "q4",
+                    "text": "d-d electron transition absorbs visible light; complementary colour observed",
+                    "kids": []
+                  },
+                  {
+                    "id": "q5",
+                    "text": "Cu2+ (blue), Cr3+ (green), Mn2+ (faint pink), Fe3+ (yellow); d0 and d10 are colourless",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t10",
+                "text": "Catalytic activity: variable OS and large surface area; Fe (Haber's), V2O5 (Contact), Ni (hydrogenation), Pt (Ostwald's)",
+                "kids": []
+              },
+              {
+                "id": "t11",
+                "text": "Complex formation: small ionic size, high charge density; form stable coordination compounds with ligands",
+                "kids": []
+              },
+              {
+                "id": "t12",
+                "text": "Alloy formation: similar atomic radii allow substitution; stainless steel, brass, bronze, nichrome",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Important Compounds of d-Block",
+            "kids": [
+              {
+                "id": "t13",
+                "text": "KMnO4: strong oxidising agent in acidic (MnO4- → Mn2+), alkaline (MnO4- → MnO2) and neutral media",
+                "kids": []
+              },
+              {
+                "id": "t14",
+                "text": "K2Cr2O7: orange solid; from chromite ore; powerful oxidising agent in acidic medium",
+                "kids": []
+              },
+              {
+                "id": "t15",
+                "text": "Dichromate-chromate interconversion: Cr2O7(2-) (acidic, orange) ⇌ CrO4(2-) (basic, yellow)",
+                "kids": []
+              },
+              {
+                "id": "t16",
+                "text": "Standard electrode potentials: Cu has positive E0 (M2+/M); does not dissolve in dilute acids; Fe3+/Fe2+ = +0.77 V",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Lanthanoids (4f series)",
+            "kids": [
+              {
+                "id": "t17",
+                "text": "Ce (58) to Lu (71); configuration: [Xe] 4f1-14 5d0-1 6s2; mostly +3; Ce shows +4, Eu/Yb show +2",
+                "kids": []
+              },
+              {
+                "id": "t18",
+                "text": "Lanthanoid contraction: steady decrease in ionic radii due to poor shielding by 4f electrons",
+                "kids": []
+              },
+              {
+                "id": "t19",
+                "text": "Silvery white, reactive metals; react with water and acids; coloured ions; paramagnetic",
+                "kids": []
+              },
+              {
+                "id": "t20",
+                "text": "Misch metal (alloy of La, Ce, Pr, Nd): used in lighter flints, alloy steels, catalytic converters",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Actinoids (5f series)",
+            "kids": [
+              {
+                "id": "t21",
+                "text": "Th (90) to Lr (103); configuration: [Rn] 5f1-14 6d0-1 7s2; all radioactive",
+                "kids": []
+              },
+              {
+                "id": "t22",
+                "text": "Show variable OS (+3 to +7); more reactive than lanthanoids; actinoid contraction similar to lanthanoid",
+                "kids": []
+              },
+              {
+                "id": "t23",
+                "text": "Th and U: naturally occurring; others are synthetic transuranic elements; Pu used in nuclear reactors",
+                "kids": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c5",
+      "number": 5,
+      "title": "Coordination Chemistry",
+      "data": {
+        "id": "root",
+        "text": "Coordination Chemistry",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Introduction and Basic Terms",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "Coordination compound: central metal atom/ion bonded to ligands; Werner's theory (1893)",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Ligand: ion or molecule donating electron pair to central metal; Lewis base",
+                "kids": []
+              },
+              {
+                "id": "t3",
+                "text": "Coordination sphere: complex ion + counter ions; enclosed in square brackets",
+                "kids": []
+              },
+              {
+                "id": "t4",
+                "text": "Coordination number: number of sigma-bonds between ligand donor atoms and central metal",
+                "kids": []
+              },
+              {
+                "id": "t5",
+                "text": "Oxidation state: charge on central metal if all ligands removed with their electron pairs",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Types of Ligands",
+            "kids": [
+              {
+                "id": "t6",
+                "text": "Monodentate: one donor atom; e.g., Cl-, NH3, H2O, CN-, CO, OH-",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Bidentate: two donor atoms; e.g., en (ethylenediamine), oxalate (C2O4(2-))",
+                "kids": []
+              },
+              {
+                "id": "t8",
+                "text": "Polydentate: multiple donor atoms; EDTA is hexadentate (2N + 4O donors)",
+                "kids": []
+              },
+              {
+                "id": "t9",
+                "text": "Ambidentate: can coordinate through more than one atom; NO2- (N or O); SCN- (S or N)",
+                "kids": []
+              },
+              {
+                "id": "t10",
+                "text": "Chelate complex: polydentate ligands form ring with metal; more stable (chelate effect due to entropy)",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "IUPAC Nomenclature",
+            "kids": [
+              {
+                "id": "t11",
+                "text": "Cation named first, then anion; ligands named alphabetically before central metal in complex",
+                "kids": []
+              },
+              {
+                "id": "t12",
+                "text": "Anionic ligands end in 'o' (chlorido, cyanido, hydroxido); neutral: ammine, aqua, carbonyl, nitrosyl",
+                "kids": []
+              },
+              {
+                "id": "t13",
+                "text": "Metal in anionic complex: Latin name + '-ate'; e.g., ferrate, cobaltate, plumbate, stannate",
+                "kids": []
+              },
+              {
+                "id": "t14",
+                "text": "OS of central metal in Roman numerals in parentheses: [Fe(CN)6]4- = hexacyanidoferrate(II)",
+                "kids": []
+              },
+              {
+                "id": "t15",
+                "text": "Multiplying prefixes: di/tri/tetra for simple; bis/tris/tetrakis for complex ligand names",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Isomerism in Coordination Compounds",
+            "kids": [
+              {
+                "id": "t16",
+                "text": "Structural Isomerism",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "Ionisation isomerism: [Co(NH3)5Br]SO4 vs [Co(NH3)5SO4]Br; different anions inside/outside",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "Linkage isomerism: [Co(NH3)5NO2]2+ (N-bonded) vs [Co(NH3)5ONO]2+ (O-bonded); ambidentate ligand",
+                    "kids": []
+                  },
+                  {
+                    "id": "q3",
+                    "text": "Hydrate isomerism: [CrCl3(H2O)3] green vs [CrCl2(H2O)4]Cl blue-green vs [CrCl(H2O)5]Cl2 violet",
+                    "kids": []
+                  },
+                  {
+                    "id": "q4",
+                    "text": "Coordination isomerism: interchange of ligands between cationic and anionic complex",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t17",
+                "text": "Stereoisomerism",
+                "kids": [
+                  {
+                    "id": "q5",
+                    "text": "Geometrical: cis (same) vs trans (opposite); in square planar [MA2B2] and octahedral [MA2B4]",
+                    "kids": []
+                  },
+                  {
+                    "id": "q6",
+                    "text": "Facial (fac) vs meridional (mer) in octahedral [MA3B3]; fac: 3 identical at triangle vertices",
+                    "kids": []
+                  },
+                  {
+                    "id": "q7",
+                    "text": "Optical isomerism: non-superimposable mirror images (enantiomers) in [M(en)3]n+; rotate polarised light",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Bonding Theories",
+            "kids": [
+              {
+                "id": "t18",
+                "text": "Valence Bond Theory (VBT)",
+                "kids": [
+                  {
+                    "id": "q8",
+                    "text": "Ligand lone pairs overlap with vacant hybrid orbitals of metal; coordinate covalent bond",
+                    "kids": []
+                  },
+                  {
+                    "id": "q9",
+                    "text": "Hybridisation and geometry: sp (linear), sp3 (tetrahedral), dsp2 (square planar), sp3d2/d2sp3 (octahedral)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q10",
+                    "text": "Inner orbital (low spin, strong field): d2sp3; e.g., [Co(NH3)6]3+; outer orbital (high spin): sp3d2; e.g., [CoF6]3-",
+                    "kids": []
+                  },
+                  {
+                    "id": "q11",
+                    "text": "Limitations: cannot explain colour, spectrochemical series, or quantitative magnetic moments",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t19",
+                "text": "Crystal Field Theory (CFT)",
+                "kids": [
+                  {
+                    "id": "q12",
+                    "text": "Ligands treated as point charges; electrostatic splitting of d orbitals in crystal field",
+                    "kids": []
+                  },
+                  {
+                    "id": "q13",
+                    "text": "Octahedral field: d orbitals split into t2g (lower: dxy, dyz, dxz) and eg (higher: dx2-y2, dz2); splitting = Delta-o",
+                    "kids": []
+                  },
+                  {
+                    "id": "q14",
+                    "text": "Tetrahedral field: Delta-t = 4/9 Delta-o; t2 above e; no square planar with weak field ligands normally",
+                    "kids": []
+                  },
+                  {
+                    "id": "q15",
+                    "text": "Spectrochemical series: I- < Br- < Cl- < F- < OH- < H2O < NH3 < en < CN- < CO (increasing field)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q16",
+                    "text": "CFSE: Crystal Field Stabilisation Energy; high field → low spin (forced pairing); low field → high spin",
+                    "kids": []
+                  },
+                  {
+                    "id": "q17",
+                    "text": "Colour: d-d transition absorbs specific wavelength; complementary colour observed; [Ti(H2O)6]3+ is violet",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Stability and Applications",
+            "kids": [
+              {
+                "id": "t20",
+                "text": "Stability constant Kstab: higher Kstab → more stable; chelate effect increases stability",
+                "kids": []
+              },
+              {
+                "id": "t21",
+                "text": "Biological complexes: haemoglobin (Fe-porphyrin), chlorophyll (Mg-porphyrin), Vitamin B12 (Co complex), carbonic anhydrase (Zn)",
+                "kids": []
+              },
+              {
+                "id": "t22",
+                "text": "Applications: cis-platin [PtCl2(NH3)2] anticancer drug; EDTA removes heavy metal toxicity; electroplating; photography (AgCl + Na2S2O3)",
+                "kids": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c6",
+      "number": 6,
+      "title": "Solid State",
+      "data": {
+        "id": "root",
+        "text": "Solid State",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Classification of Solids",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "Crystalline solids: long-range order; anisotropic; sharp melting point; true solids; e.g., NaCl, diamond, ice",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Amorphous solids: short-range order; isotropic; no sharp mp; pseudo solids; e.g., glass, rubber, plastics",
+                "kids": []
+              },
+              {
+                "id": "t3",
+                "text": "Types of crystalline solids",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "Ionic (NaCl, KCl): strong electrostatic forces; hard and brittle; high mp; conduct in molten/solution state",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "Covalent/network (diamond, SiO2): covalent 3D network; very hard; high mp; non-conductors generally",
+                    "kids": []
+                  },
+                  {
+                    "id": "q3",
+                    "text": "Molecular (ice, naphthalene): van der Waals/H-bonds; low mp; volatile; non-conductors",
+                    "kids": []
+                  },
+                  {
+                    "id": "q4",
+                    "text": "Metallic (Cu, Fe): metal cations in sea of electrons; good conductors; lustrous; malleable; ductile",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Crystal Lattice and Unit Cell",
+            "kids": [
+              {
+                "id": "t4",
+                "text": "Crystal lattice: 3D regular arrangement of constituent particles; lattice points",
+                "kids": []
+              },
+              {
+                "id": "t5",
+                "text": "Unit cell: smallest repeating unit; parameters: edge lengths (a, b, c) and angles (alpha, beta, gamma)",
+                "kids": []
+              },
+              {
+                "id": "t6",
+                "text": "7 crystal systems; 14 Bravais lattices (primitive, body-centred, face-centred, end-centred variations)",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Cubic Unit Cells",
+            "kids": [
+              {
+                "id": "t7",
+                "text": "Simple Cubic (SC)",
+                "kids": [
+                  {
+                    "id": "q5",
+                    "text": "Atoms at corners only; atoms per cell = 8 x 1/8 = 1; CN = 6; packing efficiency = 52.4%",
+                    "kids": []
+                  },
+                  {
+                    "id": "q6",
+                    "text": "Relation: a = 2r; example: polonium (only element with SC structure)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t8",
+                "text": "Body-Centred Cubic (BCC)",
+                "kids": [
+                  {
+                    "id": "q7",
+                    "text": "Atoms at corners + 1 body centre; atoms per cell = 2; CN = 8; packing efficiency = 68%",
+                    "kids": []
+                  },
+                  {
+                    "id": "q8",
+                    "text": "Relation: 4r = sqrt(3)a; examples: Na, K, W, Cr, Ba, Fe (at RT)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t9",
+                "text": "Face-Centred Cubic (FCC/CCP)",
+                "kids": [
+                  {
+                    "id": "q9",
+                    "text": "Atoms at corners + face centres; atoms per cell = 8x1/8 + 6x1/2 = 4; CN = 12; packing = 74%",
+                    "kids": []
+                  },
+                  {
+                    "id": "q10",
+                    "text": "Relation: 4r = sqrt(2)a; examples: Cu, Ag, Au, Ni, Al; most efficient packing (ABCABC)",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Close Packing and Voids",
+            "kids": [
+              {
+                "id": "t10",
+                "text": "2D: square (less efficient) or hexagonal (more efficient) close packing",
+                "kids": []
+              },
+              {
+                "id": "t11",
+                "text": "3D: ABAB = HCP (hexagonal); ABCABC = CCP/FCC (cubic); both have packing efficiency 74%",
+                "kids": []
+              },
+              {
+                "id": "t12",
+                "text": "Tetrahedral void: CN = 4; number = 2N (for N atoms); smaller void",
+                "kids": []
+              },
+              {
+                "id": "t13",
+                "text": "Octahedral void: CN = 6; number = N (for N atoms); larger void",
+                "kids": []
+              },
+              {
+                "id": "t14",
+                "text": "Radius ratio r+/r-: determines crystal structure; 0.155-0.225 → tetrahedral; 0.414-0.732 → octahedral",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "X-Ray Diffraction and Density",
+            "kids": [
+              {
+                "id": "t15",
+                "text": "Bragg's equation: 2d sin(theta) = n(lambda); determines interplanar spacing from X-ray data",
+                "kids": []
+              },
+              {
+                "id": "t16",
+                "text": "Density: rho = nM/(Na x a^3); relates unit cell edge length to density; n = atoms per unit cell",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Defects in Crystals",
+            "kids": [
+              {
+                "id": "t17",
+                "text": "Stoichiometric Defects",
+                "kids": [
+                  {
+                    "id": "q11",
+                    "text": "Schottky defect: equal cations and anions missing; density decreases; in NaCl, KCl, KBr, CsCl",
+                    "kids": []
+                  },
+                  {
+                    "id": "q12",
+                    "text": "Frenkel defect: cation leaves lattice → interstitial site; density unchanged; in ZnS, AgBr, AgCl, AgI",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t18",
+                "text": "Non-Stoichiometric Defects",
+                "kids": [
+                  {
+                    "id": "q13",
+                    "text": "Metal excess (F-centres): extra metal ions in interstitials; trapped electrons give colour; e.g., NaCl in Na vapour → yellow",
+                    "kids": []
+                  },
+                  {
+                    "id": "q14",
+                    "text": "Metal deficiency: fewer metal cations; e.g., FeO (Fe2+ replaced by Fe3+ to maintain electroneutrality)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t19",
+                "text": "Impurity defects: foreign atom substitutes host; e.g., SrCl2 in NaCl creates cation vacancy; doping in semiconductors",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Electrical Properties",
+            "kids": [
+              {
+                "id": "t20",
+                "text": "Conductors: overlapping bands or partially filled valence band; resistivity 10-6 to 10-8 ohm-m",
+                "kids": []
+              },
+              {
+                "id": "t21",
+                "text": "Semiconductors: small band gap (~1 eV); conductivity increases with T; Si (1.1 eV), Ge (0.7 eV)",
+                "kids": []
+              },
+              {
+                "id": "t22",
+                "text": "n-type: doping with Group 15 (donor) impurity; extra electrons as carriers; e.g., P in Si",
+                "kids": []
+              },
+              {
+                "id": "t23",
+                "text": "p-type: doping with Group 13 (acceptor) impurity; holes as carriers; e.g., B in Si",
+                "kids": []
+              },
+              {
+                "id": "t24",
+                "text": "Insulators: large band gap (>3 eV); no conduction at room temperature; e.g., diamond (5.4 eV)",
+                "kids": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c7",
+      "number": 7,
+      "title": "Chemical Kinetics",
+      "data": {
+        "id": "root",
+        "text": "Chemical Kinetics",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Rate of Reaction",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "Rate: change in concentration per unit time; unit: mol/L/s; decreases with time",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Rate = -(1/a)(d[A]/dt) = (1/b)(d[B]/dt) for aA → bB; stoichiometric coefficients normalise rate",
+                "kids": []
+              },
+              {
+                "id": "t3",
+                "text": "Average rate: over a time interval; Instantaneous rate: tangent slope at a point on [C] vs t graph",
+                "kids": []
+              },
+              {
+                "id": "t4",
+                "text": "Initial rate: at t = 0; used to determine rate law by method of initial rates",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Rate Law and Rate Constant",
+            "kids": [
+              {
+                "id": "t5",
+                "text": "Rate = k[A]^m[B]^n; k is rate constant; m, n determined experimentally (not from stoichiometry)",
+                "kids": []
+              },
+              {
+                "id": "t6",
+                "text": "Overall order = m + n; units of k: (mol/L)^(1-n) s-1 for nth order",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Zero order k: mol/L/s; First order k: s-1; Second order k: L/mol/s; pseudo-first order reactions",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Integrated Rate Laws",
+            "kids": [
+              {
+                "id": "t8",
+                "text": "Zero Order",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "Rate = k; [A] = [A]0 - kt; t1/2 = [A]0/2k; linear [A] vs t graph",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "Examples: photochemical decomposition of HI on gold; many enzyme-catalysed reactions at saturation",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t9",
+                "text": "First Order",
+                "kids": [
+                  {
+                    "id": "q3",
+                    "text": "[A] = [A]0 e^(-kt); ln[A] = ln[A]0 - kt; linear ln[A] vs t graph with slope = -k",
+                    "kids": []
+                  },
+                  {
+                    "id": "q4",
+                    "text": "t1/2 = 0.693/k; independent of initial concentration; all radioactive decays are first order",
+                    "kids": []
+                  },
+                  {
+                    "id": "q5",
+                    "text": "Examples: decomposition of N2O5, H2O2; inversion of cane sugar; hydrogenation of ethylene",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t10",
+                "text": "Second Order",
+                "kids": [
+                  {
+                    "id": "q6",
+                    "text": "1/[A] = 1/[A]0 + kt; linear 1/[A] vs t graph; t1/2 = 1/(k[A]0) depends on initial concentration",
+                    "kids": []
+                  },
+                  {
+                    "id": "q7",
+                    "text": "Examples: decomposition of NO2; saponification of ester in excess base",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Factors Affecting Rate of Reaction",
+            "kids": [
+              {
+                "id": "t11",
+                "text": "Nature of reactant: ionic reactions faster; bond breaking reactions slower; physical state matters",
+                "kids": []
+              },
+              {
+                "id": "t12",
+                "text": "Concentration: rate increases with concentration; more frequent collisions; not for zero order",
+                "kids": []
+              },
+              {
+                "id": "t13",
+                "text": "Temperature: rate roughly doubles per 10°C rise; temperature coefficient Q10 ≈ 2",
+                "kids": []
+              },
+              {
+                "id": "t14",
+                "text": "Surface area: rate increases with surface area of solid reactant (powder vs lumps)",
+                "kids": []
+              },
+              {
+                "id": "t15",
+                "text": "Catalyst: lowers activation energy; increases rate; not consumed; does not change equilibrium constant",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Arrhenius Equation",
+            "kids": [
+              {
+                "id": "t16",
+                "text": "k = A x e^(-Ea/RT); A = frequency/pre-exponential factor; Ea = activation energy",
+                "kids": []
+              },
+              {
+                "id": "t17",
+                "text": "ln k = ln A - Ea/RT; plot ln k vs 1/T is linear; slope = -Ea/R; intercept = ln A",
+                "kids": []
+              },
+              {
+                "id": "t18",
+                "text": "ln(k2/k1) = (Ea/R)(1/T1 - 1/T2); calculate Ea from k at two temperatures",
+                "kids": []
+              },
+              {
+                "id": "t19",
+                "text": "Activation energy: minimum energy required for effective collision; lowered by catalyst",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Collision Theory and Mechanism",
+            "kids": [
+              {
+                "id": "t20",
+                "text": "Effective collision: energy >= Ea AND correct orientation (steric factor p)",
+                "kids": []
+              },
+              {
+                "id": "t21",
+                "text": "Rate = Z x f x p; Z = collision frequency; f = e^(-Ea/RT) = fraction with sufficient energy",
+                "kids": []
+              },
+              {
+                "id": "t22",
+                "text": "Transition state theory: reactants → activated complex (at energy maximum) → products; delta-G‡ determines rate",
+                "kids": []
+              },
+              {
+                "id": "t23",
+                "text": "Rate-determining step: slowest elementary step in a multistep mechanism; governs overall rate",
+                "kids": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c8",
+      "number": 8,
+      "title": "Ionic Equilibrium",
+      "data": {
+        "id": "root",
+        "text": "Ionic Equilibrium",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Theories of Acids and Bases",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "Arrhenius: acid → H+ in water; base → OH- in water; limitation: non-aqueous solvents, NH3",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Bronsted-Lowry: acid = proton donor; base = proton acceptor; conjugate acid-base pairs",
+                "kids": []
+              },
+              {
+                "id": "t3",
+                "text": "Lewis: acid = electron pair acceptor; base = electron pair donor; broader concept; e.g., BF3 (Lewis acid)",
+                "kids": []
+              },
+              {
+                "id": "t4",
+                "text": "Conjugate pairs: HA/A- and H2O/OH- (water as base); differ by one proton",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Ionisation of Water and pH Scale",
+            "kids": [
+              {
+                "id": "t5",
+                "text": "Autoionisation: H2O ⇌ H+ + OH-; Kw = [H+][OH-] = 10-14 at 25°C; increases with temperature",
+                "kids": []
+              },
+              {
+                "id": "t6",
+                "text": "pH = -log[H+]; pOH = -log[OH-]; pH + pOH = 14 at 25°C; pH scale 0-14",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Neutral: pH = 7; acidic: pH < 7; basic: pH > 7; strong acid pH = -log(Ca)",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Weak Acids and Bases",
+            "kids": [
+              {
+                "id": "t8",
+                "text": "Ka = [H+][A-]/[HA]; larger Ka → stronger acid; pKa = -log Ka",
+                "kids": []
+              },
+              {
+                "id": "t9",
+                "text": "Ostwald's dilution law: alpha = sqrt(Ka/C); degree of dissociation increases on dilution",
+                "kids": []
+              },
+              {
+                "id": "t10",
+                "text": "For weak acid: [H+] = sqrt(Ka x C); pH = (1/2)(pKa - log C)",
+                "kids": []
+              },
+              {
+                "id": "t11",
+                "text": "Relative strength: Ka1/Ka2 = (alpha1/alpha2)^2 at same concentration",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Common Ion Effect and Buffer Solutions",
+            "kids": [
+              {
+                "id": "t12",
+                "text": "Common ion effect: adding common ion suppresses dissociation; shifts equilibrium left; reduces ionisation",
+                "kids": []
+              },
+              {
+                "id": "t13",
+                "text": "Buffer: resists pH change on addition of small acid/base; consists of weak acid + its salt (acidic) or weak base + its salt (basic)",
+                "kids": []
+              },
+              {
+                "id": "t14",
+                "text": "Henderson-Hasselbalch: pH = pKa + log([A-]/[HA]); pOH = pKb + log([BH+]/[B])",
+                "kids": []
+              },
+              {
+                "id": "t15",
+                "text": "Buffer capacity: maximum at pH = pKa; most effective when [acid] = [salt] ratio 1:1 to 10:1",
+                "kids": []
+              },
+              {
+                "id": "t16",
+                "text": "Examples: blood (H2CO3/HCO3- buffer, pH ~7.4); acetate buffer (CH3COOH/CH3COONa)",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Salt Hydrolysis",
+            "kids": [
+              {
+                "id": "t17",
+                "text": "Strong acid + strong base (NaCl): no hydrolysis; pH = 7; Kh = Kw/(Ka x Kb)",
+                "kids": []
+              },
+              {
+                "id": "t18",
+                "text": "Weak acid + strong base (CH3COONa): anion hydrolyses; pH > 7; pH = 7 + (1/2)(pKa - pKb)",
+                "kids": []
+              },
+              {
+                "id": "t19",
+                "text": "Strong acid + weak base (NH4Cl): cation hydrolyses; pH < 7; pH = 7 - (1/2)(pKb)",
+                "kids": []
+              },
+              {
+                "id": "t20",
+                "text": "Weak acid + weak base (CH3COONH4): pH = 7 + (1/2)(pKa - pKb)",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Solubility Product (Ksp)",
+            "kids": [
+              {
+                "id": "t21",
+                "text": "Ksp = [Am+]n[Bn-]m for AmBn ⇌ mAn+ + nBm-; derived from solubility (s)",
+                "kids": []
+              },
+              {
+                "id": "t22",
+                "text": "If Q < Ksp: unsaturated; Q = Ksp: saturated; Q > Ksp: precipitate forms",
+                "kids": []
+              },
+              {
+                "id": "t23",
+                "text": "Common ion effect: solubility decreases in presence of common ion; used in qualitative analysis",
+                "kids": []
+              },
+              {
+                "id": "t24",
+                "text": "Selective precipitation: different Ksp values allow separation of ions by group reagents (H2S, NH3)",
+                "kids": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c9",
+      "number": 9,
+      "title": "Electrochemistry",
+      "data": {
+        "id": "root",
+        "text": "Electrochemistry",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Conductance of Electrolytic Solutions",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "Conductance G = 1/R; unit: Siemens (S); specific conductance (kappa) = G x l/A",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Molar conductance Lambda-m = kappa x 1000/M; increases with dilution (more ions)",
+                "kids": []
+              },
+              {
+                "id": "t3",
+                "text": "Kohlrausch's law: Lambda(m,0) = lambda(+,0) + lambda(-,0); limiting molar conductance = sum of ionic conductances",
+                "kids": []
+              },
+              {
+                "id": "t4",
+                "text": "For weak electrolytes: alpha = Lambda-m/Lambda-m(0); Ka = c*alpha^2/(1-alpha); conductance → Ka",
+                "kids": []
+              },
+              {
+                "id": "t5",
+                "text": "Strong electrolytes: Lambda-m = Lambda-m(0) - b*sqrt(C) (Debye-Huckel-Onsager); linear plot",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Galvanic (Voltaic) Cell",
+            "kids": [
+              {
+                "id": "t6",
+                "text": "Converts chemical energy to electrical energy; spontaneous redox reaction; example: Daniel cell",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Daniel cell: Zn|ZnSO4||CuSO4|Cu; E0cell = 1.1 V; Zn = anode (-), Cu = cathode (+)",
+                "kids": []
+              },
+              {
+                "id": "t8",
+                "text": "Salt bridge: KCl or KNO3 in agar; maintains electrical neutrality; prevents mixing",
+                "kids": []
+              },
+              {
+                "id": "t9",
+                "text": "E0cell = E0cathode - E0anode (both in reduction potential); positive E0 means spontaneous",
+                "kids": []
+              },
+              {
+                "id": "t10",
+                "text": "Standard hydrogen electrode (SHE): reference electrode E0 = 0 V; H2 at 1 atm, 1 M H+, 298 K",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Nernst Equation",
+            "kids": [
+              {
+                "id": "t11",
+                "text": "E = E0 - (RT/nF)lnQ = E0 - (0.0591/n)logQ at 298 K; concentration dependence of cell potential",
+                "kids": []
+              },
+              {
+                "id": "t12",
+                "text": "At equilibrium: E = 0 and Q = K; therefore E0 = (RT/nF)lnK; links thermodynamics to electrochemistry",
+                "kids": []
+              },
+              {
+                "id": "t13",
+                "text": "Delta-G = -nFE; Delta-G0 = -nFE0 = -RT lnK; relates free energy to cell potential",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Electrolysis and Faraday's Laws",
+            "kids": [
+              {
+                "id": "t14",
+                "text": "Electrolytic cell: uses electrical energy for non-spontaneous redox; cathode (-), anode (+) - opposite to galvanic",
+                "kids": []
+              },
+              {
+                "id": "t15",
+                "text": "Faraday's First Law: m = ZIt = (M/nF)It; mass deposited proportional to charge passed",
+                "kids": []
+              },
+              {
+                "id": "t16",
+                "text": "Faraday's Second Law: same charge deposits masses proportional to equivalent masses (M/n)",
+                "kids": []
+              },
+              {
+                "id": "t17",
+                "text": "1 Faraday = 96500 C = charge of 1 mole of electrons; moles of electrons = Q/F = It/F",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Batteries and Fuel Cells",
+            "kids": [
+              {
+                "id": "t18",
+                "text": "Primary Batteries (non-rechargeable)",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "Leclanche/dry cell: Zn anode; MnO2/C cathode; NH4Cl/ZnCl2 electrolyte; emf 1.5 V",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "Mercury button cell: Zn(amalgam)/HgO (+KOH); emf 1.35 V; pacemakers, watches, hearing aids",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t19",
+                "text": "Secondary Batteries (rechargeable)",
+                "kids": [
+                  {
+                    "id": "q3",
+                    "text": "Lead storage battery: Pb(-)/H2SO4/PbO2(+); each cell 2V; 6 cells = 12 V; automobiles",
+                    "kids": []
+                  },
+                  {
+                    "id": "q4",
+                    "text": "Li-ion battery: graphite anode/CoO2 cathode/Li salt electrolyte; high energy density; phones, laptops",
+                    "kids": []
+                  },
+                  {
+                    "id": "q5",
+                    "text": "Nickel-cadmium cell: Cd anode/NiO(OH) cathode; 1.25 V per cell; power tools",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t20",
+                "text": "Fuel cells: H2 + O2 → H2O + electricity; highly efficient (>70%); no pollution; used in space shuttles",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Corrosion and Prevention",
+            "kids": [
+              {
+                "id": "t21",
+                "text": "Electrochemical oxidation: Fe (anode) loses e- → Fe2+; O2 + H2O (cathode) → OH-; forms Fe(OH)2 → rust",
+                "kids": []
+              },
+              {
+                "id": "t22",
+                "text": "Prevention: galvanising (Zn coat), painting, anodising (Al), sacrificial protection (Mg block near Fe), alloying",
+                "kids": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c10",
+      "number": 10,
+      "title": "Surface Chemistry",
+      "data": {
+        "id": "root",
+        "text": "Surface Chemistry",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Adsorption",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "Adsorption: accumulation of substance on surface; adsorbent = surface; adsorbate = substance; exothermic",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Types of Adsorption",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "Physisorption: weak van der Waals; delta-H 20-40 kJ/mol; reversible; multilayer; at low temperature",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "Chemisorption: chemical bond; delta-H 80-240 kJ/mol; irreversible; monolayer; at high temperature",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t3",
+                "text": "Freundlich adsorption isotherm: x/m = kP^(1/n) at constant T; log(x/m) vs log P is linear",
+                "kids": []
+              },
+              {
+                "id": "t4",
+                "text": "Factors: nature of adsorbent (surface area, pore structure), nature of adsorbate, temperature, pressure",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Catalysis",
+            "kids": [
+              {
+                "id": "t5",
+                "text": "Catalyst alters rate without permanent change; positive (increases rate) or negative (decreases rate, inhibitor)",
+                "kids": []
+              },
+              {
+                "id": "t6",
+                "text": "Homogeneous catalysis: same phase; e.g., Cl- in H2O2 decomposition; NO in SO2 oxidation (lead chamber)",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Heterogeneous (contact) catalysis: different phases; Fe in Haber's; V2O5 in Contact; Ni in hydrogenation",
+                "kids": []
+              },
+              {
+                "id": "t8",
+                "text": "Enzyme catalysis",
+                "kids": [
+                  {
+                    "id": "q3",
+                    "text": "E + S → [ES complex] → E + P; highly specific (lock and key model); millions of molecules per minute",
+                    "kids": []
+                  },
+                  {
+                    "id": "q4",
+                    "text": "Optimum T ~37°C and optimum pH; denaturation above optimum temperature",
+                    "kids": []
+                  },
+                  {
+                    "id": "q5",
+                    "text": "Examples: zymase (glucose → ethanol + CO2), diastase (starch → maltose), urease (urea → NH3 + CO2)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t9",
+                "text": "Zeolites (shape-selective): microporous aluminosilicates; ZSM-5 used in petroleum refining (cracking)",
+                "kids": []
+              },
+              {
+                "id": "t10",
+                "text": "Promoters: increase catalyst activity; Poisons: block active sites, decrease activity (e.g., As2O3 poisons Pt)",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Colloids",
+            "kids": [
+              {
+                "id": "t11",
+                "text": "Heterogeneous system; dispersed phase (1-1000 nm) in dispersion medium; intermediate between true solution and suspension",
+                "kids": []
+              },
+              {
+                "id": "t12",
+                "text": "Types by phase",
+                "kids": [
+                  {
+                    "id": "q6",
+                    "text": "Sol (solid in liquid): Fe(OH)3 sol, ink, paint; Gel (liquid in solid): gelatin, cheese, butter",
+                    "kids": []
+                  },
+                  {
+                    "id": "q7",
+                    "text": "Emulsion (liquid in liquid): milk (O/W), cream (W/O), mayonnaise; Foam (gas in liquid): soap lather",
+                    "kids": []
+                  },
+                  {
+                    "id": "q8",
+                    "text": "Aerosol (liquid/solid in gas): fog/mist, clouds, smoke, dust",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t13",
+                "text": "Preparation",
+                "kids": [
+                  {
+                    "id": "q9",
+                    "text": "Dispersion: mechanical (grinding), Bredig's arc (metals), peptisation (adding electrolyte to precipitate)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q10",
+                    "text": "Condensation: double decomposition (As2S3 from H3AsO3 + H2S), reduction, oxidation, hydrolysis",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t14",
+                "text": "Properties of Colloids",
+                "kids": [
+                  {
+                    "id": "q11",
+                    "text": "Tyndall effect: scattering of light; beam visible in colloidal solution; absent in true solutions",
+                    "kids": []
+                  },
+                  {
+                    "id": "q12",
+                    "text": "Brownian motion: random zigzag movement of colloidal particles; due to bombardment by solvent molecules",
+                    "kids": []
+                  },
+                  {
+                    "id": "q13",
+                    "text": "Electrophoresis: migration of charged colloidal particles under electric field; determines charge on colloid",
+                    "kids": []
+                  },
+                  {
+                    "id": "q14",
+                    "text": "Coagulation: aggregation and settling; Hardy-Schulze rule: higher valence of oppositely charged ion → more effective coagulation",
+                    "kids": []
+                  },
+                  {
+                    "id": "q15",
+                    "text": "Protective colloid: lyophilic colloid stabilises lyophobic colloid; gold number measures protective power",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t15",
+                "text": "Applications",
+                "kids": [
+                  {
+                    "id": "q16",
+                    "text": "Water purification: alum coagulates negatively charged clay; Cottrell precipitator removes smoke",
+                    "kids": []
+                  },
+                  {
+                    "id": "q17",
+                    "text": "Cleansing action of soaps: micelle formation around grease; hydrophilic tail out, hydrophobic tail in",
+                    "kids": []
+                  },
+                  {
+                    "id": "q18",
+                    "text": "Delta formation: river colloidal particles coagulated by sea water electrolytes; medicines (colloidal drugs)",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c11",
+      "number": 11,
+      "title": "Hydroxy Compounds and Ethers",
+      "data": {
+        "id": "root",
+        "text": "Hydroxy Compounds and Ethers",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Alcohols",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "R-OH; 1° (primary), 2° (secondary), 3° (tertiary) based on carbon bearing -OH group",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Preparation of Alcohols",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "Acid-catalysed hydration of alkenes: Markovnikov addition; oxymercuration-demercuration (anti-Markovnikov via hydroboration)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "Reduction of carbonyl: NaBH4 (mild, RCHO → 1°, RCOR' → 2°); LiAlH4 (also reduces RCOOH → 1°)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q3",
+                    "text": "Grignard: RMgX + HCHO → 1°; RCHO → 2°; RCOR' → 3° alcohol (after hydrolysis)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q4",
+                    "text": "Fermentation: glucose → ethanol + CO2 (zymase enzyme); industrial production",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t3",
+                "text": "Physical Properties",
+                "kids": [
+                  {
+                    "id": "q5",
+                    "text": "H-bonding: higher bp than alkanes/ethers of similar MW; miscibility with water decreases with chain length",
+                    "kids": []
+                  },
+                  {
+                    "id": "q6",
+                    "text": "Acidity: ROH + Na → RONa + H2; order: H2O > 1° > 2° > 3° (alkyl groups are EDG)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t4",
+                "text": "Chemical Properties",
+                "kids": [
+                  {
+                    "id": "q7",
+                    "text": "Lucas test: 3° fastest reaction with ZnCl2/conc. HCl (turbid immediately); 2° (5 min); 1° (no reaction)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q8",
+                    "text": "Victor Meyer test: 1° → red; 2° → blue; 3° → colourless (with conc. H2SO4, KNO2, NH3, beta-naphthol)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q9",
+                    "text": "Dehydration: at 170°C H2SO4 → alkene; at 130°C → ether (intermolecular); follows Saytzeff's rule",
+                    "kids": []
+                  },
+                  {
+                    "id": "q10",
+                    "text": "Oxidation: 1° → aldehyde (PCC) → carboxylic acid (KMnO4); 2° → ketone; 3° → oxidative cleavage",
+                    "kids": []
+                  },
+                  {
+                    "id": "q11",
+                    "text": "Esterification: ROH + RCOOH ⇌ RCOOR' + H2O; acid-catalysed, reversible; Fischer esterification",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Phenols",
+            "kids": [
+              {
+                "id": "t5",
+                "text": "Ar-OH; more acidic than alcohols (pKa ~10) due to resonance stabilisation of phenoxide ion",
+                "kids": []
+              },
+              {
+                "id": "t6",
+                "text": "Preparation: cumene process (commercial); diazonium salt hydrolysis; from chlorobenzene (NaOH, 300 atm)",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Reactions of Phenols",
+                "kids": [
+                  {
+                    "id": "q12",
+                    "text": "EAS: -OH strongly o-/p-directing and activating; bromination (Br2 water → 2,4,6-tribromophenol)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q13",
+                    "text": "Kolbe-Schmitt: Na-phenoxide + CO2 (150°C, 4-7 atm) → salicylic acid (o-hydroxybenzoic acid)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q14",
+                    "text": "Reimer-Tiemann: phenol + CHCl3/NaOH → o-hydroxybenzaldehyde (salicylaldehyde)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q15",
+                    "text": "FeCl3 test: phenol → violet colour (ferric complex); distinguishes phenol from alcohol",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Ethers",
+            "kids": [
+              {
+                "id": "t8",
+                "text": "R-O-R'; IUPAC: shorter alkyl group as alkoxy prefix; e.g., CH3OC2H5 = methoxyethane",
+                "kids": []
+              },
+              {
+                "id": "t9",
+                "text": "Preparation",
+                "kids": [
+                  {
+                    "id": "q16",
+                    "text": "Williamson synthesis: R-ONa + R'X → R-O-R' + NaX; SN2 mechanism; best for unsymmetrical ethers",
+                    "kids": []
+                  },
+                  {
+                    "id": "q17",
+                    "text": "Intermolecular dehydration: ROH + H2SO4 at 413 K → ROR (only symmetrical ethers efficiently)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t10",
+                "text": "Chemical Properties",
+                "kids": [
+                  {
+                    "id": "q18",
+                    "text": "Cleavage with HI (strongest) > HBr > HCl; SN2 on smaller alkyl group",
+                    "kids": []
+                  },
+                  {
+                    "id": "q19",
+                    "text": "Autooxidation in air forms explosive peroxides; store with metal wire/reducing agent",
+                    "kids": []
+                  },
+                  {
+                    "id": "q20",
+                    "text": "Anisole EAS: -OCH3 is o-/p-directing; Friedel-Crafts, nitration, halogenation possible",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t11",
+                "text": "Uses: diethyl ether as anaesthetic and solvent; crown ethers as complexing agents; dioxane as solvent",
+                "kids": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c12",
+      "number": 12,
+      "title": "Carbonyl Compounds and Carboxylic Acids",
+      "data": {
+        "id": "root",
+        "text": "Carbonyl Compounds and Carboxylic Acids",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Aldehydes and Ketones - Introduction",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "Aldehydes (-CHO): R-CHO; ketones: R-CO-R'; carbonyl C is sp2 hybridised; C=O bond polar (C delta+, O delta-)",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "IUPAC: suffix '-al' for aldehyde; '-one' with position for ketone; aldehyde C is always C-1",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Preparation of Aldehydes and Ketones",
+            "kids": [
+              {
+                "id": "t3",
+                "text": "Oxidation of alcohols: 1° alcohol + PCC → aldehyde; 2° alcohol + KMnO4 → ketone",
+                "kids": []
+              },
+              {
+                "id": "t4",
+                "text": "Rosenmund reduction: RCOCl + H2 (Pd-BaSO4, quinoline) → RCHO (selective, stops at aldehyde)",
+                "kids": []
+              },
+              {
+                "id": "t5",
+                "text": "Stephen's reduction: RCN + SnCl2/HCl → imine salt → hydrolysis → RCHO",
+                "kids": []
+              },
+              {
+                "id": "t6",
+                "text": "Etard reaction: ArCH3 + CrO2Cl2 → Etard complex → water → ArCHO (e.g., toluene → benzaldehyde)",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Gattermann-Koch: ArH + CO + HCl (AlCl3, CuCl) → ArCHO (aromatic aldehydes)",
+                "kids": []
+              },
+              {
+                "id": "t8",
+                "text": "Ozonolysis of alkenes: alkene + O3 → ozonide → Zn/H2O → carbonyl compounds",
+                "kids": []
+              },
+              {
+                "id": "t9",
+                "text": "Friedel-Crafts acylation: ArH + RCOCl (AlCl3) → Ar-CO-R (ketone)",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Reactions of Aldehydes and Ketones",
+            "kids": [
+              {
+                "id": "t10",
+                "text": "Nucleophilic addition mechanism: Nu:- attacks electrophilic C of C=O → tetrahedral intermediate → product",
+                "kids": []
+              },
+              {
+                "id": "t11",
+                "text": "With HCN → cyanohydrin (RCHOHCN); with NaHSO3 → bisulphite adduct (crystalline, used for ID and separation)",
+                "kids": []
+              },
+              {
+                "id": "t12",
+                "text": "With alcohols: RCHO + ROH (dry HCl) → hemiacetal → acetal; reversible; ketones form hemiketal → ketal",
+                "kids": []
+              },
+              {
+                "id": "t13",
+                "text": "With NH2 derivatives",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "With NH2OH → oxime; NH2NH2 → hydrazone; NH2NHC6H5 → phenylhydrazone; NH2NHCONH2 → semicarbazone",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "All follow condensation mechanism; loss of H2O; products used for characterisation",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t14",
+                "text": "Reduction: NaBH4/LiAlH4 → alcohol; Clemmensen (Zn-Hg/conc. HCl) → hydrocarbon; Wolff-Kishner (NH2NH2/KOH/heat) → hydrocarbon",
+                "kids": []
+              },
+              {
+                "id": "t15",
+                "text": "Aldol Condensation",
+                "kids": [
+                  {
+                    "id": "q3",
+                    "text": "Carbonyl with alpha-H + dilute NaOH → beta-hydroxy carbonyl compound (aldol product)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q4",
+                    "text": "On heating: dehydration → alpha,beta-unsaturated carbonyl; crossed aldol gives mixed products",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t16",
+                "text": "Cannizzaro Reaction (no alpha-H aldehyde)",
+                "kids": [
+                  {
+                    "id": "q5",
+                    "text": "HCHO/C6H5CHO + conc. NaOH → simultaneous oxidation (acid/salt) and reduction (alcohol)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q6",
+                    "text": "C6H5CHO → C6H5CH2OH + C6H5COONa; HCHO → CH3OH + HCOONa",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t17",
+                "text": "Perkin reaction: ArCHO + (RCO)2O + RCOONa → ArCH=CRCOOH (e.g., benzaldehyde → cinnamic acid)",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Tests for Aldehydes",
+            "kids": [
+              {
+                "id": "t18",
+                "text": "Tollens' reagent (ammoniacal AgNO3): aldehyde → silver mirror; ketones fail; aromatic + aliphatic both react",
+                "kids": []
+              },
+              {
+                "id": "t19",
+                "text": "Fehling's solution: aliphatic aldehydes → red Cu2O precipitate; aromatic aldehydes and ketones fail",
+                "kids": []
+              },
+              {
+                "id": "t20",
+                "text": "Schiff's reagent (rosaniline + SO2): aldehyde → pink/red; ketones fail (except formaldehyde reversal)",
+                "kids": []
+              },
+              {
+                "id": "t21",
+                "text": "Iodoform test (CHI3 yellow ppt): CH3CHO and CH3COR and CH3CH(OH) compounds give positive test",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Carboxylic Acids",
+            "kids": [
+              {
+                "id": "t22",
+                "text": "-COOH group; sp2 C; resonance hybrid; acidic (pKa ~4-5); stronger than phenols and alcohols",
+                "kids": []
+              },
+              {
+                "id": "t23",
+                "text": "Preparation",
+                "kids": [
+                  {
+                    "id": "q7",
+                    "text": "Oxidation: 1° alcohol or aldehyde + KMnO4/K2Cr2O7 → RCOOH; ArCH3 → ArCOOH",
+                    "kids": []
+                  },
+                  {
+                    "id": "q8",
+                    "text": "Hydrolysis of nitriles: RCN + H2O (H+ or OH-) → RCOOH + NH3",
+                    "kids": []
+                  },
+                  {
+                    "id": "q9",
+                    "text": "Grignard: RMgX + CO2 (dry) → RCOOMgX → (H3O+) → RCOOH; carbon chain extended by 1",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t24",
+                "text": "Chemical Properties",
+                "kids": [
+                  {
+                    "id": "q10",
+                    "text": "Acidic nature: RCOOH ⇌ RCOO- + H+; EWG substituents increase acidity; EDG decrease acidity",
+                    "kids": []
+                  },
+                  {
+                    "id": "q11",
+                    "text": "Esterification: RCOOH + R'OH ⇌ RCOOR' + H2O; acid-catalysed; Fischer esterification",
+                    "kids": []
+                  },
+                  {
+                    "id": "q12",
+                    "text": "Reactions: → RCOCl (SOCl2); → (RCO)2O (P2O5); → RCONH2 (NH3 then heat); → RCOOH + Br2 (HVZ reaction for alpha-bromo acid)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q13",
+                    "text": "Decarboxylation: RCOOH + NaOH (CaO) → RH + Na2CO3 (Duma's reaction for lower acids)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t25",
+                "text": "Acidity trends: HCOOH > CH3COOH > C2H5COOH; Cl3CCOOH > Cl2CHCOOH > ClCH2COOH > CH3COOH",
+                "kids": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c13",
+      "number": 13,
+      "title": "Organic Nitrogen Compounds",
+      "data": {
+        "id": "root",
+        "text": "Organic Nitrogen Compounds",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Nitro Compounds",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "R-NO2 (nitroalkanes) and Ar-NO2 (nitroarenes); classified as primary, secondary, tertiary based on carbon type",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Tautomerism: 1° and 2° nitroalkanes show nitro ⇌ aci-nitro equilibrium (involving alpha-H)",
+                "kids": []
+              },
+              {
+                "id": "t3",
+                "text": "Acidic character: NO2 is EWG; alpha-H acidic; dissolve in NaOH; more acidic than aldehydes",
+                "kids": []
+              },
+              {
+                "id": "t4",
+                "text": "Preparation",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "From alkyl halides: R-X + AgNO2 → R-NO2 (major) + R-O-N=O (alkyl nitrite, minor)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "Vapour phase nitration of alkanes: RH + HNO3 (400°C) → mixture of nitroalkanes",
+                    "kids": []
+                  },
+                  {
+                    "id": "q3",
+                    "text": "Nitration of arenes: ArH + conc. HNO3 + H2SO4 → ArNO2; -NO2 is meta-directing for further substitution",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t5",
+                "text": "Reduction of nitrobenzene",
+                "kids": [
+                  {
+                    "id": "q4",
+                    "text": "Strongly acidic (Sn/HCl): C6H5NO2 → aniline (C6H5NH2)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q5",
+                    "text": "Neutral (Zn/NH4Cl): → N-phenylhydroxylamine (C6H5NHOH)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q6",
+                    "text": "Alkaline medium: Zn/NaOH → azoxybenzene; LiAlH4 → azobenzene; Zn/NaOH (excess) → hydrazobenzene",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Amines",
+            "kids": [
+              {
+                "id": "t6",
+                "text": "Organic derivatives of NH3; 1° (RNH2), 2° (R2NH), 3° (R3N); aliphatic and aromatic",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Preparation",
+                "kids": [
+                  {
+                    "id": "q7",
+                    "text": "Gabriel phthalimide synthesis: phthalimide + KOH + RX → N-alkylphthalimide + N2H4 → primary amine only",
+                    "kids": []
+                  },
+                  {
+                    "id": "q8",
+                    "text": "Hoffmann bromamide degradation: RCONH2 + Br2 + KOH → RNH2 (one carbon less); rearrangement",
+                    "kids": []
+                  },
+                  {
+                    "id": "q9",
+                    "text": "Reduction: RCN + LiAlH4 → RCH2NH2; RCONH2 + LiAlH4 → RCH2NH2; RNO2 + H2 (Raney Ni) → RNH2",
+                    "kids": []
+                  },
+                  {
+                    "id": "q10",
+                    "text": "Ammonolysis of alkyl halide: R-X + excess NH3 → RNH2 + R2NH + R3N + R4N+X- (mixture)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t8",
+                "text": "Basicity of Amines",
+                "kids": [
+                  {
+                    "id": "q11",
+                    "text": "Lone pair on N donates to H+; alkyl groups (+I effect) increase electron density on N; base strength increases",
+                    "kids": []
+                  },
+                  {
+                    "id": "q12",
+                    "text": "Aqueous basicity order: 2° > 1° > 3° > NH3 (due to solvation effect of water on ammonium ion)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q13",
+                    "text": "Gas phase basicity: 3° > 2° > 1° > NH3 (inductive effect only; no solvation)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q14",
+                    "text": "Aniline (pKb 9.4) much less basic: lone pair delocalised into benzene ring; not freely available",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t9",
+                "text": "Identification Tests",
+                "kids": [
+                  {
+                    "id": "q15",
+                    "text": "Carbylamine test (isocyanide): 1° amine + CHCl3 + KOH → isocyanide (foul smell); unique to primary amines",
+                    "kids": []
+                  },
+                  {
+                    "id": "q16",
+                    "text": "Hinsberg test: C6H5SO2Cl; 1° → sulphonamide soluble in KOH; 2° → insoluble; 3° → no reaction",
+                    "kids": []
+                  },
+                  {
+                    "id": "q17",
+                    "text": "HNO2 (NaNO2/HCl at 0-5°C): 1° → diazonium salt (stable Ar, unstable aliphatic); 2° → N-nitroso oil; 3° → no reaction",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t10",
+                "text": "Chemical Properties",
+                "kids": [
+                  {
+                    "id": "q18",
+                    "text": "Acetylation: RNH2 + (CH3CO)2O → RNHCOCH3 + CH3COOH; protects -NH2 in organic synthesis",
+                    "kids": []
+                  },
+                  {
+                    "id": "q19",
+                    "text": "EAS on aniline: -NH2 strongly ortho-/para-directing and activating; but in acidic medium -NH3+ is meta-directing",
+                    "kids": []
+                  },
+                  {
+                    "id": "q20",
+                    "text": "Sandmeyer reaction via diazonium: ArNH2 → ArN2+ → ArCl/Br/CN/F/OH depending on reagent",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Diazonium Salts",
+            "kids": [
+              {
+                "id": "t11",
+                "text": "Diazotisation: ArNH2 + NaNO2 + HCl (0-5°C) → ArN2+Cl- (diazonium salt); aromatic more stable than aliphatic",
+                "kids": []
+              },
+              {
+                "id": "t12",
+                "text": "Reactions of Diazonium Salts",
+                "kids": [
+                  {
+                    "id": "q21",
+                    "text": "Sandmeyer: ArN2+ + CuX → ArX + N2 (X = Cl, Br, CN using Cu2Cl2, Cu2Br2, CuCN respectively)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q22",
+                    "text": "Gattermann: ArN2+ + Cu + HX → ArX; Balz-Schiemann: ArN2+BF4- → ArF + N2 + BF3 (to introduce F)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q23",
+                    "text": "Coupling reaction: ArN2+ + phenol/amine (at p position) → azo dye (-N=N- chromophore); EAS on coupling component",
+                    "kids": []
+                  },
+                  {
+                    "id": "q24",
+                    "text": "Gomberg reaction: ArN2+ + NaOH + benzene → biaryl (Ar-Ar'); free radical mechanism",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c14",
+      "number": 14,
+      "title": "Biomolecules",
+      "data": {
+        "id": "root",
+        "text": "Biomolecules",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Carbohydrates",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "Polyhydroxy aldehydes or ketones Cn(H2O)n; photosynthesis: 6CO2 + 6H2O → C6H12O6 + 6O2",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Classification: monosaccharides (cannot hydrolyse); oligosaccharides (2-10 units); polysaccharides (>10 units)",
+                "kids": []
+              },
+              {
+                "id": "t3",
+                "text": "Monosaccharides",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "Glucose (C6H12O6): aldohexose; 5 -OH and 1 -CHO; open chain (Fischer) and ring form (Haworth/glucopyranose)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "Fructose: ketohexose; sweeter than glucose; C2 is ketone carbon; found in fruits and honey",
+                    "kids": []
+                  },
+                  {
+                    "id": "q3",
+                    "text": "D/L configuration: penultimate C -OH position; D = right (natural form); L = left (synthetic)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q4",
+                    "text": "Alpha and beta anomers: differ at anomeric carbon (C1 of aldoses); mutarotation in solution between alpha and beta",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t4",
+                "text": "Disaccharides",
+                "kids": [
+                  {
+                    "id": "q5",
+                    "text": "Sucrose: alpha-D-glucose + beta-D-fructose (alpha1-beta2 glycosidic bond); non-reducing sugar; inversion by sucrase",
+                    "kids": []
+                  },
+                  {
+                    "id": "q6",
+                    "text": "Maltose: two alpha-D-glucose units (alpha1-4 glycosidic bond); reducing sugar; from starch hydrolysis",
+                    "kids": []
+                  },
+                  {
+                    "id": "q7",
+                    "text": "Lactose: galactose + glucose (beta1-4); reducing sugar; in milk; lactose intolerance due to lack of lactase",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t5",
+                "text": "Polysaccharides",
+                "kids": [
+                  {
+                    "id": "q8",
+                    "text": "Starch: amylose (linear alpha1-4 bonds, helix) + amylopectin (branched alpha1-4 and alpha1-6); energy storage in plants",
+                    "kids": []
+                  },
+                  {
+                    "id": "q9",
+                    "text": "Glycogen: animal starch; more branched than amylopectin; stored in liver and muscles",
+                    "kids": []
+                  },
+                  {
+                    "id": "q10",
+                    "text": "Cellulose: beta1-4 glucose; structural (plant cell walls); not hydrolysed by human enzymes; dietary fibre",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t6",
+                "text": "Reducing sugars: free aldehyde or ketone group; reduce Tollens/Fehling; all monosaccharides; sucrose = non-reducing",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Osazones: monosaccharides + phenylhydrazine → yellow crystalline osazones; used for identification and characterisation",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Proteins and Amino Acids",
+            "kids": [
+              {
+                "id": "t8",
+                "text": "Amino acids: -NH2 (at alpha-C) and -COOH; 20 natural L-amino acids; zwitterion form at isoelectric point",
+                "kids": []
+              },
+              {
+                "id": "t9",
+                "text": "Peptide bond: -CO-NH- formed by condensation between -COOH and -NH2; primary structure of protein",
+                "kids": []
+              },
+              {
+                "id": "t10",
+                "text": "Protein Structure Levels",
+                "kids": [
+                  {
+                    "id": "q11",
+                    "text": "Primary: amino acid sequence linked by peptide bonds; determines all higher structures",
+                    "kids": []
+                  },
+                  {
+                    "id": "q12",
+                    "text": "Secondary: alpha-helix (H-bonds within chain, 3.6 residues/turn) or beta-pleated sheet (H-bonds between chains)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q13",
+                    "text": "Tertiary: 3D folding; stabilised by H-bonds, disulphide bridges (-S-S-), hydrophobic interactions, electrostatic forces",
+                    "kids": []
+                  },
+                  {
+                    "id": "q14",
+                    "text": "Quaternary: association of 2+ polypeptide subunits; e.g., haemoglobin (4 subunits: 2 alpha + 2 beta)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t11",
+                "text": "Classification of Proteins",
+                "kids": [
+                  {
+                    "id": "q15",
+                    "text": "Simple proteins: amino acids only; albumin, globulin, keratin (hair/nails), collagen (connective tissue)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q16",
+                    "text": "Conjugated proteins: protein + prosthetic group; glycoprotein, lipoprotein, nucleoprotein, haemoglobin (chromoprotein)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t12",
+                "text": "Denaturation: disruption of 2°/3°/4° structure by heat, pH, organic solvents; protein loses biological activity; 1° intact",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Enzymes",
+            "kids": [
+              {
+                "id": "t13",
+                "text": "Biological catalysts; complex proteins; lock and key model (substrate fits active site); highly specific",
+                "kids": []
+              },
+              {
+                "id": "t14",
+                "text": "E + S → [ES complex] → E + P; rate maximum at optimum pH and temperature; inhibited by poisons",
+                "kids": []
+              },
+              {
+                "id": "t15",
+                "text": "Cofactors: coenzymes (organic: NAD, FAD, coenzyme A) or metal ions (Zn2+ in carbonic anhydrase, Mg2+ in hexokinase)",
+                "kids": []
+              },
+              {
+                "id": "t16",
+                "text": "Examples: amylase (starch → maltose), pepsin (proteins in stomach), lipase (fats → fatty acids), urease (urea → NH3 + CO2)",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Nucleic Acids",
+            "kids": [
+              {
+                "id": "t17",
+                "text": "Polynucleotides; nucleotide = nitrogenous base + pentose sugar + phosphate; linked by 3'-5' phosphodiester bonds",
+                "kids": []
+              },
+              {
+                "id": "t18",
+                "text": "DNA: deoxyribose; A, T, G, C bases; double helix (Watson-Crick, 1953); A-T (2 H-bonds), G-C (3 H-bonds)",
+                "kids": []
+              },
+              {
+                "id": "t19",
+                "text": "RNA: ribose; A, U, G, C bases; single-stranded; mRNA (template), tRNA (anticodon), rRNA (ribosome component)",
+                "kids": []
+              },
+              {
+                "id": "t20",
+                "text": "Central dogma: DNA → RNA (transcription) → protein (translation); DNA replication is semi-conservative",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Vitamins, Lipids and Hormones",
+            "kids": [
+              {
+                "id": "t21",
+                "text": "Fat-soluble vitamins: A (retinol, night blindness), D (calciferol, rickets), E (tocopherol, fertility), K (clotting)",
+                "kids": []
+              },
+              {
+                "id": "t22",
+                "text": "Water-soluble vitamins: B1 (thiamine, beri-beri), B2 (riboflavin), B12 (pernicious anaemia), C (ascorbic acid, scurvy)",
+                "kids": []
+              },
+              {
+                "id": "t23",
+                "text": "Lipids: fats = glycerol + saturated fatty acids (solid); oils = glycerol + unsaturated fatty acids (liquid); energy storage",
+                "kids": []
+              },
+              {
+                "id": "t24",
+                "text": "Hormones: chemical messengers from endocrine glands; insulin (blood glucose), adrenaline (fight/flight), thyroxine (metabolism)",
+                "kids": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c15",
+      "number": 15,
+      "title": "Chemistry in Everyday Life",
+      "data": {
+        "id": "root",
+        "text": "Chemistry in Everyday Life",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Drugs and Medicines",
+            "kids": [
+              {
+                "id": "t1",
+                "text": "Drug: modifies physiological systems; therapeutic index = max tolerated dose / min curative dose; higher = safer",
+                "kids": []
+              },
+              {
+                "id": "t2",
+                "text": "Classification of drugs",
+                "kids": [
+                  {
+                    "id": "q1",
+                    "text": "By chemical structure: penicillins (similar skeleton), opiates, steroids, barbiturates",
+                    "kids": []
+                  },
+                  {
+                    "id": "q2",
+                    "text": "By pharmacological effect: antibiotics, analgesics, antihypertensives, antihistamines",
+                    "kids": []
+                  },
+                  {
+                    "id": "q3",
+                    "text": "By molecular target: enzyme inhibitors, receptor agonists/antagonists, nucleic acid binders",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t3",
+                "text": "Drug-Target Interaction",
+                "kids": [
+                  {
+                    "id": "q4",
+                    "text": "Competitive enzyme inhibitor: same active site as substrate; e.g., sulphanilamide mimics PABA → inhibits DHPS in bacteria",
+                    "kids": []
+                  },
+                  {
+                    "id": "q5",
+                    "text": "Allosteric inhibitor: binds at site other than active site; changes active site geometry; substrate cannot bind",
+                    "kids": []
+                  },
+                  {
+                    "id": "q6",
+                    "text": "Receptor agonist: mimics natural messenger; activates receptor; e.g., morphine (pain relief)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q7",
+                    "text": "Receptor antagonist: blocks receptor without activating it; e.g., caffeine (blocks adenosine receptor → wakefulness)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t4",
+                "text": "Classes of Drugs",
+                "kids": [
+                  {
+                    "id": "q8",
+                    "text": "Tranquilizers: act on CNS; block dopamine; treat anxiety, depression, schizophrenia; e.g., diazepam (Valium), haloperidol, alprazolam",
+                    "kids": []
+                  },
+                  {
+                    "id": "q9",
+                    "text": "Non-narcotic analgesics: aspirin (NSAID, anti-inflammatory, antipyretic, antiplatelet), paracetamol, ibuprofen",
+                    "kids": []
+                  },
+                  {
+                    "id": "q10",
+                    "text": "Narcotic analgesics (opioids): morphine, codeine; severe pain relief; addictive; can cause coma in overdose",
+                    "kids": []
+                  },
+                  {
+                    "id": "q11",
+                    "text": "Antibiotics: amoxicillin, ampicillin, tetracycline, erythromycin; kill or inhibit bacteria; broad/narrow spectrum",
+                    "kids": []
+                  },
+                  {
+                    "id": "q12",
+                    "text": "Sulfa drugs: sulphanilamide; competitive inhibitor of DHPS; bacteriostatic; oldest chemotherapeutic agent",
+                    "kids": []
+                  },
+                  {
+                    "id": "q13",
+                    "text": "Antacids: Mg(OH)2, Al(OH)3 neutralise HCl; cimetidine/ranitidine block H2 receptors (structurally similar to histamine)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q14",
+                    "text": "Antihistamines: brompheniramine, terfenadine; block histamine H1 receptors; treat allergies, hay fever",
+                    "kids": []
+                  },
+                  {
+                    "id": "q15",
+                    "text": "Antiseptics: on living tissue; boric acid (eyes), iodoform, dettol (chloroxylenol + terpineol), phenol (<1%)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q16",
+                    "text": "Disinfectants: on non-living surfaces; phenol (>1%), bleaching powder, SO2, ethylene oxide; more toxic than antiseptics",
+                    "kids": []
+                  },
+                  {
+                    "id": "q17",
+                    "text": "Antifertility drugs: synthetic oestrogen (ethinylestradiol) + progesterone (norethindrone); oral contraceptives",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Food Additives",
+            "kids": [
+              {
+                "id": "t5",
+                "text": "Artificial sweeteners: saccharin (550x), aspartame (100x, unstable above 200°C), sucralose (600x, from sucrose), alitame (2000x)",
+                "kids": []
+              },
+              {
+                "id": "t6",
+                "text": "Food preservatives: sodium benzoate, potassium sorbate, sugar, salt, vinegar (acetic acid); prevent microbial growth",
+                "kids": []
+              },
+              {
+                "id": "t7",
+                "text": "Antioxidants: BHA (butylated hydroxyanisole), BHT (butylated hydroxytoluene); prevent rancidity of fats in food",
+                "kids": []
+              },
+              {
+                "id": "t8",
+                "text": "Nutritional additives: vitamins, minerals, amino acids added to fortify food (e.g., iodised salt, vitamin-fortified milk)",
+                "kids": []
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Cleansing Agents",
+            "kids": [
+              {
+                "id": "t9",
+                "text": "Soaps",
+                "kids": [
+                  {
+                    "id": "q18",
+                    "text": "RCOONa; saponification: fat + NaOH → soap + glycerol; hard soap (NaOH), soft soap (KOH), transparent (alcohol)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q19",
+                    "text": "Cleansing: micelle formation; hydrophobic tail inside (grease), hydrophilic head outside (water)",
+                    "kids": []
+                  },
+                  {
+                    "id": "q20",
+                    "text": "Limitation: precipitate with hard water Ca2+/Mg2+ → scum; ineffective in sea water and acidic water",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t10",
+                "text": "Synthetic Detergents",
+                "kids": [
+                  {
+                    "id": "q21",
+                    "text": "Anionic: sodium lauryl sulphate CH3(CH2)11OSO3Na; sodium dodecylbenzenesulphonate; used in most household detergents",
+                    "kids": []
+                  },
+                  {
+                    "id": "q22",
+                    "text": "Cationic: quaternary ammonium salts (cetyltrimethylammonium bromide); also germicidal; used in disinfectants, fabric softeners",
+                    "kids": []
+                  },
+                  {
+                    "id": "q23",
+                    "text": "Non-ionic: polyethylene glycol esters; non-foaming; effective in hard water; used in dishwashers",
+                    "kids": []
+                  },
+                  {
+                    "id": "q24",
+                    "text": "Advantage over soaps: work in hard, soft and acidic water; biodegradable (linear) vs non-biodegradable (branched)",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Polymers",
+            "kids": [
+              {
+                "id": "t11",
+                "text": "High molecular mass molecules from monomers; degree of polymerisation = n; addition or condensation type",
+                "kids": []
+              },
+              {
+                "id": "t12",
+                "text": "Types of Polymerisation",
+                "kids": [
+                  {
+                    "id": "q25",
+                    "text": "Addition (chain-growth): monomers add to chain; no by-product; needs C=C double bond; free radical, cationic or anionic mechanism",
+                    "kids": []
+                  },
+                  {
+                    "id": "q26",
+                    "text": "Condensation (step-growth): bifunctional monomers react with loss of small molecule (H2O, HCl); builds up gradually",
+                    "kids": []
+                  },
+                  {
+                    "id": "q27",
+                    "text": "Copolymerisation: two or more monomers polymerise together; e.g., Buna-S, ABS (acrylonitrile-butadiene-styrene)",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t13",
+                "text": "Structure Types",
+                "kids": [
+                  {
+                    "id": "q28",
+                    "text": "Linear: long straight chains; high density; strong; e.g., HDPE, nylon-6,6, PET",
+                    "kids": []
+                  },
+                  {
+                    "id": "q29",
+                    "text": "Branched: side chains on main chain; lower density, lower mp; e.g., LDPE, amylopectin",
+                    "kids": []
+                  },
+                  {
+                    "id": "q30",
+                    "text": "Cross-linked (network): 3D covalent network; hard, rigid, thermosetting; e.g., Bakelite, melamine-formaldehyde, vulcanised rubber",
+                    "kids": []
+                  }
+                ]
+              },
+              {
+                "id": "t14",
+                "text": "Important Polymers",
+                "kids": [
+                  {
+                    "id": "q31",
+                    "text": "Nylon-6,6: hexamethylenediamine + adipic acid; strong, elastic; fabrics, ropes, gears, stockings",
+                    "kids": []
+                  },
+                  {
+                    "id": "q32",
+                    "text": "Terylene/Dacron: ethylene glycol + terephthalic acid; polyester; wrinkle-resistant; bottles, fabrics, films",
+                    "kids": []
+                  },
+                  {
+                    "id": "q33",
+                    "text": "Bakelite: phenol + formaldehyde; thermosetting; electrical insulator; switches, handles, billiard balls",
+                    "kids": []
+                  },
+                  {
+                    "id": "q34",
+                    "text": "Natural rubber: cis-1,4-polyisoprene; vulcanisation with S (cross-links) → elastic, strong; tyres, gloves",
+                    "kids": []
+                  },
+                  {
+                    "id": "q35",
+                    "text": "Neoprene: poly(2-chloro-1,3-butadiene); oil-resistant; wetsuits, cables, gaskets",
+                    "kids": []
+                  },
+                  {
+                    "id": "q36",
+                    "text": "Buna-S (SBR): styrene + butadiene; most widely used synthetic rubber; car tyres",
+                    "kids": []
+                  },
+                  {
+                    "id": "q37",
+                    "text": "PHBV: poly(beta-hydroxybutyrate-co-beta-hydroxyvalerate); biodegradable; medical implants, packaging, controlled drug release",
+                    "kids": []
+                  },
+                  {
+                    "id": "q38",
+                    "text": "Teflon (PTFE): tetrafluoroethylene polymer; non-stick cookware, bearings, gaskets; extremely chemically inert",
+                    "kids": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
