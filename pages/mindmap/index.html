@@ -318,12 +318,9 @@
   /* ── layout constants ─── */
   var PH   =[18,15,14,13,12,11];    /* pill HALF-height single-line per level */
   var FS   =[12,11,10.5,10,9.5,9];  /* font-size px — kept readable at every level */
-  /* Horizontal gap between parent and child level — STAGGERED so deep branches
-     spread right and don't compete vertically with siblings at shallower levels.
-     L0→L1: 220, L1→L2: 200, L2→L3: 210, L3→L4: 220, L4→L5: 220
-     (L2→L3 and beyond step out wider so deep content fans out to the right) */
-  var HGAP =[220,200,210,220,220];
-  var VPAD =22;                      /* vertical breathing room between siblings */
+  /* Horizontal gap between parent and child level */
+  var HGAP =[230,180,170,160,155];
+  var VPAD =20;                      /* vertical breathing room between siblings */
   var CHARS=[22,24,26,28,30,32];     /* max chars per line per level */
   var MAXPW=[215,220,240,255,265,275];
 
@@ -476,30 +473,88 @@
   }
 
   /* ══════════════════════════════════════════════════════
-     LAYOUT — returns flat array of positioned nodes
+     LAYOUT
+     Key idea: every node at L1 passes a different "base X"
+     to its children so that each secondary node's children
+     land at a DIFFERENT column — staircase-style going right.
+     Children of L1[0] at X=baseX+HGAP[1]
+     Children of L1[1] at X=baseX+HGAP[1]+STAGGER
+     Children of L1[2] at X=baseX+HGAP[1]+STAGGER*2
+     etc.
+     This fans the tree wide (horizontally) rather than tall.
   ══════════════════════════════════════════════════════ */
+  var STAGGER = 130; /* extra X shift per L1 sibling */
+
   function buildLayout(root){
     var nodes=[];
-    function place(node,level,x,y){
-      var ph=pillH(node.text,level);  /* actual height based on line count */
-      var hg=HGAP[Math.min(level,HGAP.length-1)];
-      var pw=pillW(node.text,level);
-      var visKids=(node.open&&node.kids&&node.kids.length)?node.kids:[];
 
-      nodes.push({id:node.id,text:node.text,level:level,cx:x,cy:y,pw:pw,ph:ph,open:node.open,hasKids:!!(node.kids&&node.kids.length)});
+    /* First, count how many L1 children there are so we can
+       assign a stagger index to each */
+    function place(node, level, x, y, staggerIdx){
+      var ph  = pillH(node.text, level);
+      var pw  = pillW(node.text, level);
+      var hg  = HGAP[Math.min(level, HGAP.length-1)];
+      var visKids = (node.open && node.kids && node.kids.length) ? node.kids : [];
 
-      if(visKids.length){
-        var totalH=0;
-        visKids.forEach(function(k){totalH+=subtreeH(k,level+1);});
-        var curY=y-totalH/2;
-        visKids.forEach(function(k){
-          var kh=subtreeH(k,level+1);
-          place(k,level+1,x+hg,curY+kh/2);
-          curY+=kh;
-        });
+      nodes.push({
+        id:node.id, text:node.text, level:level,
+        cx:x, cy:y, pw:pw, ph:ph,
+        open:node.open, hasKids:!!(node.kids&&node.kids.length)
+      });
+
+      if(!visKids.length) return;
+
+      /* X for this node's children:
+         - At L0 (root→L1): no stagger — all L1 nodes share same column
+         - At L1 (L1→L2 and deeper): stagger by staggerIdx so each L1's
+           subtree fans out to a different column                        */
+      var childX;
+      if(level === 0){
+        childX = x + hg;
+      } else {
+        /* deeper levels: inherit the stagger already applied, plus normal hg */
+        childX = x + hg + (level === 1 ? staggerIdx * STAGGER : 0);
       }
+
+      var totalH = 0;
+      visKids.forEach(function(k){ totalH += subtreeH(k, level+1); });
+      var curY = y - totalH/2;
+
+      visKids.forEach(function(k, i){
+        var kh = subtreeH(k, level+1);
+        /* pass staggerIdx down so deeper levels know which column family they are in */
+        place(k, level+1, childX, curY + kh/2, staggerIdx);
+        curY += kh;
+      });
     }
-    place(root,0,0,0);
+
+    /* For L0→L1, assign each L1 child its own staggerIdx */
+    var root0 = root;
+    var ph0   = pillH(root0.text, 0);
+    var pw0   = pillW(root0.text, 0);
+    var hg0   = HGAP[0];
+    var visL1 = (root0.open && root0.kids && root0.kids.length) ? root0.kids : [];
+
+    nodes.push({
+      id:root0.id, text:root0.text, level:0,
+      cx:0, cy:0, pw:pw0, ph:ph0,
+      open:root0.open, hasKids:!!visL1.length
+    });
+
+    if(visL1.length){
+      var totalH = 0;
+      visL1.forEach(function(k){ totalH += subtreeH(k, 1); });
+      var curY = -totalH/2;
+
+      visL1.forEach(function(k, i){
+        var kh = subtreeH(k, 1);
+        /* Each L1 node's X: same column (hg0).
+           But children of L1[i] will be offset by i*STAGGER relative to hg0. */
+        place(k, 1, hg0, curY + kh/2, i);
+        curY += kh;
+      });
+    }
+
     return nodes;
   }
 
