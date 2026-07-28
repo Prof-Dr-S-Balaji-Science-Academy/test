@@ -1,0 +1,1047 @@
+{
+  "chapters": [
+    {
+      "id": "c1",
+      "number": 1,
+      "title": "Solutions",
+      "data": {
+        "id": "root",
+        "text": "Solutions",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Types of Solutions",
+            "kids": [
+              { "id": "s1t1", "text": "Solid in solid: alloys (brass, bronze, German silver)", "kids": [] },
+              { "id": "s1t2", "text": "Gas in liquid: O₂ in water (aquatic life), CO₂ in soda", "kids": [] },
+              { "id": "s1t3", "text": "Liquid in liquid: ethanol in water", "kids": [] },
+              { "id": "s1t4", "text": "Solute + Solvent = Solution", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Concentration of Solutions",
+            "kids": [
+              { "id": "s2t1", "text": "Mass % = (mass of solute / mass of solution) × 100", "kids": [] },
+              { "id": "s2t2", "text": "Volume % = (volume of solute / volume of solution) × 100", "kids": [] },
+              { "id": "s2t3", "text": "ppm = (parts of component / total parts) × 10⁶", "kids": [] },
+              { "id": "s2t4", "text": "Mole fraction: xA = nA / (nA + nB); sum of all = 1", "kids": [] },
+              { "id": "s2t5", "text": "Molarity (M): moles of solute per litre of solution; temperature-dependent", "kids": [] },
+              { "id": "s2t6", "text": "Molality (m): moles of solute per kg of solvent; temperature-independent", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Solubility",
+            "kids": [
+              { "id": "s3t1", "text": "Like dissolves like: polar solutes in polar solvents", "kids": [] },
+              { "id": "s3t2", "text": "Saturated solution: in dynamic equilibrium (dissolution = crystallisation)", "kids": [] },
+              {
+                "id": "s3t3",
+                "text": "Solubility of Solids in Liquids",
+                "kids": [
+                  { "id": "s3t3a", "text": "Increases with temperature if dissolution is endothermic (Le Chatelier)", "kids": [] },
+                  { "id": "s3t3b", "text": "Decreases with temperature if dissolution is exothermic", "kids": [] },
+                  { "id": "s3t3c", "text": "Pressure has no significant effect", "kids": [] }
+                ]
+              },
+              {
+                "id": "s3t4",
+                "text": "Solubility of Gases in Liquids",
+                "kids": [
+                  { "id": "s3t4a", "text": "Henry's Law: p = KH × x (partial pressure ∝ mole fraction)", "kids": [] },
+                  { "id": "s3t4b", "text": "KH is large → lower solubility at given pressure", "kids": [] },
+                  { "id": "s3t4c", "text": "Solubility decreases with rise in temperature (exothermic dissolution)", "kids": [] },
+                  { "id": "s3t4d", "text": "Applications: soda carbonation, scuba tanks (He + N₂ + O₂), decompression sickness (bends)", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Vapour Pressure and Raoult's Law",
+            "kids": [
+              { "id": "s4t1", "text": "Raoult's Law: partial pressure pA = xA × p°A (volatile components)", "kids": [] },
+              { "id": "s4t2", "text": "For non-volatile solute: p = xsolvent × p°solvent", "kids": [] },
+              { "id": "s4t3", "text": "Henry's law is a special case of Raoult's law (KH replaces p°)", "kids": [] },
+              {
+                "id": "s4t4",
+                "text": "Ideal Solutions",
+                "kids": [
+                  { "id": "s4t4a", "text": "Obey Raoult's law over entire concentration range", "kids": [] },
+                  { "id": "s4t4b", "text": "ΔHmix = 0; ΔVmix = 0 (similar intermolecular forces)", "kids": [] },
+                  { "id": "s4t4c", "text": "Example: benzene–toluene, n-hexane–n-heptane", "kids": [] }
+                ]
+              },
+              {
+                "id": "s4t5",
+                "text": "Non-ideal Solutions",
+                "kids": [
+                  { "id": "s4t5a", "text": "Positive deviation: A-B weaker than A-A/B-B; vapour pressure > Raoult (e.g. ethanol-acetone)", "kids": [] },
+                  { "id": "s4t5b", "text": "Negative deviation: A-B stronger than A-A/B-B; vapour pressure < Raoult (e.g. chloroform-acetone)", "kids": [] }
+                ]
+              },
+              {
+                "id": "s4t6",
+                "text": "Azeotropes",
+                "kids": [
+                  { "id": "s4t6a", "text": "Binary mixture: same composition in liquid and vapour phase; constant boiling point", "kids": [] },
+                  { "id": "s4t6b", "text": "Minimum boiling azeotrope: large positive deviation (e.g. ethanol-water 95%)", "kids": [] },
+                  { "id": "s4t6c", "text": "Maximum boiling azeotrope: large negative deviation (e.g. HNO₃-water 68%)", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Colligative Properties",
+            "kids": [
+              { "id": "s5t0", "text": "Depend on number of solute particles, not their nature", "kids": [] },
+              {
+                "id": "s5t1",
+                "text": "Relative Lowering of Vapour Pressure",
+                "kids": [
+                  { "id": "s5t1a", "text": "(p° − p) / p° = xsolute = n₂/(n₁+n₂)", "kids": [] },
+                  { "id": "s5t1b", "text": "Used to find molar mass of solute", "kids": [] }
+                ]
+              },
+              {
+                "id": "s5t2",
+                "text": "Elevation of Boiling Point",
+                "kids": [
+                  { "id": "s5t2a", "text": "ΔTb = Kb × m (Kb = ebullioscopic/molal elevation constant)", "kids": [] },
+                  { "id": "s5t2b", "text": "M₂ = (Kb × w₂ × 1000) / (ΔTb × w₁)", "kids": [] }
+                ]
+              },
+              {
+                "id": "s5t3",
+                "text": "Depression of Freezing Point",
+                "kids": [
+                  { "id": "s5t3a", "text": "ΔTf = Kf × m (Kf = cryoscopic/molal depression constant)", "kids": [] },
+                  { "id": "s5t3b", "text": "Used in antifreeze solutions and for determining molar mass", "kids": [] }
+                ]
+              },
+              {
+                "id": "s5t4",
+                "text": "Osmotic Pressure",
+                "kids": [
+                  { "id": "s5t4a", "text": "π = CRT = (n₂/V)RT (R = gas constant)", "kids": [] },
+                  { "id": "s5t4b", "text": "Osmosis: flow of solvent from lower to higher concentration through semipermeable membrane", "kids": [] },
+                  { "id": "s5t4c", "text": "Isotonic: same osmotic pressure; hypertonic: higher; hypotonic: lower", "kids": [] },
+                  { "id": "s5t4d", "text": "Reverse osmosis: applied pressure > osmotic pressure (desalination)", "kids": [] },
+                  { "id": "s5t4e", "text": "Best method for large molar mass (polymers, proteins)", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Abnormal Molar Masses",
+            "kids": [
+              { "id": "s6t1", "text": "Van't Hoff factor i = observed / normal colligative property", "kids": [] },
+              { "id": "s6t2", "text": "i > 1: dissociation (e.g. NaCl, KCl in water)", "kids": [] },
+              { "id": "s6t3", "text": "i < 1: association (e.g. acetic acid dimerises in benzene)", "kids": [] },
+              { "id": "s6t4", "text": "Modified: ΔTb = i × Kb × m; ΔTf = i × Kf × m; π = iCRT", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c2",
+      "number": 2,
+      "title": "Electrochemistry",
+      "data": {
+        "id": "root",
+        "text": "Electrochemistry",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Electrochemical Cells",
+            "kids": [
+              { "id": "s1t1", "text": "Galvanic (voltaic) cell: converts chemical energy → electrical energy (spontaneous)", "kids": [] },
+              { "id": "s1t2", "text": "Electrolytic cell: uses electrical energy → chemical energy (non-spontaneous)", "kids": [] },
+              { "id": "s1t3", "text": "Daniell cell: Zn|ZnSO₄||CuSO₄|Cu; EMF = 1.1 V", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Galvanic Cells",
+            "kids": [
+              { "id": "s2t1", "text": "Anode: oxidation (negative electrode); Cathode: reduction (positive electrode)", "kids": [] },
+              { "id": "s2t2", "text": "Salt bridge: maintains electrical neutrality; completes the circuit", "kids": [] },
+              { "id": "s2t3", "text": "Electrode potential: tendency of electrode to gain/lose electrons", "kids": [] },
+              { "id": "s2t4", "text": "Standard Hydrogen Electrode (SHE): reference electrode; E° = 0 V", "kids": [] },
+              { "id": "s2t5", "text": "E°cell = E°cathode − E°anode (SRP values from table)", "kids": [] },
+              { "id": "s2t6", "text": "Higher E° → stronger oxidising agent; lower E° → stronger reducing agent", "kids": [] },
+              { "id": "s2t7", "text": "ΔG° = −nFE°cell (relationship with Gibbs energy)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Nernst Equation",
+            "kids": [
+              { "id": "s3t1", "text": "E = E° − (RT/nF) ln Q", "kids": [] },
+              { "id": "s3t2", "text": "At 298 K: E = E° − (0.0592/n) log Q", "kids": [] },
+              { "id": "s3t3", "text": "At equilibrium: E = 0; log Keq = nE°/0.0592", "kids": [] },
+              { "id": "s3t4", "text": "Used to calculate cell potential at non-standard conditions", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Conductance of Electrolytic Solutions",
+            "kids": [
+              { "id": "s4t1", "text": "Resistance R ∝ l/A; R = ρl/A", "kids": [] },
+              { "id": "s4t2", "text": "Conductance G = 1/R (unit: Siemens, S)", "kids": [] },
+              { "id": "s4t3", "text": "Conductivity κ = G × (l/A) = G × G* (cell constant)", "kids": [] },
+              { "id": "s4t4", "text": "Molar conductivity Λm = (κ × 1000) / M (M = molarity)", "kids": [] },
+              {
+                "id": "s4t5",
+                "text": "Variation with Concentration",
+                "kids": [
+                  { "id": "s4t5a", "text": "Strong electrolytes: Λm = Λ°m − A√c (Debye-Hückel-Onsager equation)", "kids": [] },
+                  { "id": "s4t5b", "text": "Weak electrolytes: Λm increases sharply on dilution; degree of dissociation α = Λm/Λ°m", "kids": [] }
+                ]
+              },
+              { "id": "s4t6", "text": "Kohlrausch's Law: Λ°m = ν₊λ°₊ + ν₋λ°₋ (sum of ionic contributions)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Electrolysis",
+            "kids": [
+              { "id": "s5t1", "text": "Faraday's 1st Law: mass deposited ∝ quantity of electricity (Q = It)", "kids": [] },
+              { "id": "s5t2", "text": "Faraday's 2nd Law: mass ∝ equivalent mass of substance", "kids": [] },
+              { "id": "s5t3", "text": "1 Faraday = 96500 C mol⁻¹ (charge of 1 mol electrons)", "kids": [] },
+              { "id": "s5t4", "text": "Electrolytic refining of copper: impure Cu → anode; pure Cu → cathode", "kids": [] },
+              { "id": "s5t5", "text": "Production of Na, Mg, Al by electrolysis of fused salts/oxides", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Batteries",
+            "kids": [
+              {
+                "id": "s6t1",
+                "text": "Primary Batteries (non-rechargeable)",
+                "kids": [
+                  { "id": "s6t1a", "text": "Dry cell (Leclanche): Zn anode, MnO₂ cathode; 1.5 V", "kids": [] },
+                  { "id": "s6t1b", "text": "Mercury cell: Zn-Hg anode, HgO cathode; constant 1.35 V", "kids": [] }
+                ]
+              },
+              {
+                "id": "s6t2",
+                "text": "Secondary Batteries (rechargeable)",
+                "kids": [
+                  { "id": "s6t2a", "text": "Lead storage battery: Pb anode, PbO₂ cathode, H₂SO₄ electrolyte; 2V/cell", "kids": [] },
+                  { "id": "s6t2b", "text": "Nickel-cadmium cell: longer life; rechargeable", "kids": [] }
+                ]
+              },
+              { "id": "s6t3", "text": "Fuel Cells: H₂-O₂ cell; converts chemical energy to electrical energy continuously (no recharging)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Corrosion",
+            "kids": [
+              { "id": "s7t1", "text": "Electrochemical process: Fe acts as anode (oxidised), water/O₂ at cathode", "kids": [] },
+              { "id": "s7t2", "text": "Rust = Fe₂O₃·xH₂O", "kids": [] },
+              { "id": "s7t3", "text": "Prevention: painting, galvanising (Zn coating), alloying, cathodic protection", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c3",
+      "number": 3,
+      "title": "Chemical Kinetics",
+      "data": {
+        "id": "root",
+        "text": "Chemical Kinetics",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Rate of a Chemical Reaction",
+            "kids": [
+              { "id": "s1t1", "text": "Rate = change in concentration / time: r = −d[R]/dt = +d[P]/dt", "kids": [] },
+              { "id": "s1t2", "text": "Average rate vs Instantaneous rate (tangent to concentration-time curve)", "kids": [] },
+              { "id": "s1t3", "text": "Units: mol L⁻¹ s⁻¹", "kids": [] },
+              { "id": "s1t4", "text": "Rate for 2A → B: r = −(1/2)d[A]/dt = +d[B]/dt", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Factors Affecting Rate of Reaction",
+            "kids": [
+              { "id": "s2t1", "text": "Concentration of reactants", "kids": [] },
+              { "id": "s2t2", "text": "Temperature", "kids": [] },
+              { "id": "s2t3", "text": "Catalyst", "kids": [] },
+              { "id": "s2t4", "text": "Surface area (for heterogeneous reactions)", "kids": [] },
+              { "id": "s2t5", "text": "Light (photochemical reactions)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Rate Law and Rate Constant",
+            "kids": [
+              { "id": "s3t1", "text": "Rate = k[A]^m [B]^n (rate law / rate expression)", "kids": [] },
+              { "id": "s3t2", "text": "k = rate constant (specific reaction rate)", "kids": [] },
+              { "id": "s3t3", "text": "Order = m + n (sum of exponents in rate law; determined experimentally)", "kids": [] },
+              { "id": "s3t4", "text": "Molecularity: number of molecules in elementary step", "kids": [] },
+              { "id": "s3t5", "text": "Order can be zero, fractional, integer; molecularity always positive integer", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Integrated Rate Equations",
+            "kids": [
+              {
+                "id": "s4t1",
+                "text": "Zero Order",
+                "kids": [
+                  { "id": "s4t1a", "text": "[R] = [R]₀ − kt", "kids": [] },
+                  { "id": "s4t1b", "text": "t½ = [R]₀/2k", "kids": [] },
+                  { "id": "s4t1c", "text": "k has units: mol L⁻¹ s⁻¹", "kids": [] }
+                ]
+              },
+              {
+                "id": "s4t2",
+                "text": "First Order",
+                "kids": [
+                  { "id": "s4t2a", "text": "ln[R] = ln[R]₀ − kt; or [R] = [R]₀e^(−kt)", "kids": [] },
+                  { "id": "s4t2b", "text": "t½ = 0.693/k (independent of initial concentration)", "kids": [] },
+                  { "id": "s4t2c", "text": "k has units: s⁻¹; e.g. radioactive decay, decomposition of H₂O₂", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Temperature Dependence: Arrhenius Equation",
+            "kids": [
+              { "id": "s5t1", "text": "k = Ae^(−Ea/RT) (A = pre-exponential/frequency factor; Ea = activation energy)", "kids": [] },
+              { "id": "s5t2", "text": "ln(k₂/k₁) = (Ea/R)[1/T₁ − 1/T₂]", "kids": [] },
+              { "id": "s5t3", "text": "Rate doubles for every 10°C rise (rule of thumb)", "kids": [] },
+              { "id": "s5t4", "text": "Activation energy: minimum energy needed for reaction to occur", "kids": [] },
+              { "id": "s5t5", "text": "Activated complex/transition state: unstable intermediate at energy maximum", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Effect of Catalyst",
+            "kids": [
+              { "id": "s6t1", "text": "Provides alternative pathway with lower activation energy", "kids": [] },
+              { "id": "s6t2", "text": "Does not change ΔH or equilibrium position; not consumed", "kids": [] },
+              { "id": "s6t3", "text": "Increases both forward and backward rate equally", "kids": [] }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Collision Theory",
+            "kids": [
+              { "id": "s7t1", "text": "Reaction occurs when molecules collide with sufficient energy and proper orientation", "kids": [] },
+              { "id": "s7t2", "text": "Threshold energy = activation energy + average kinetic energy", "kids": [] },
+              { "id": "s7t3", "text": "Steric factor p: fraction of collisions with correct orientation", "kids": [] },
+              { "id": "s7t4", "text": "Rate = pZABe^(−Ea/RT) (Z = collision frequency)", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c4",
+      "number": 4,
+      "title": "The d- and f-Block Elements",
+      "data": {
+        "id": "root",
+        "text": "The d- and f-Block Elements",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "The d-Block (Transition Elements)",
+            "kids": [
+              { "id": "s1t1", "text": "Groups 3–12; partially filled d-orbitals in ground or ionic state", "kids": [] },
+              { "id": "s1t2", "text": "Four series: 3d (Sc–Zn), 4d (Y–Cd), 5d (La, Hf–Hg), 6d (incomplete)", "kids": [] },
+              { "id": "s1t3", "text": "General config: (n-1)d¹⁻¹⁰ ns¹⁻²", "kids": [] },
+              { "id": "s1t4", "text": "Exceptions: Cr = [Ar]3d⁵4s¹; Cu = [Ar]3d¹⁰4s¹ (half/fully filled stability)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "General Properties of Transition Elements",
+            "kids": [
+              { "id": "s2t1", "text": "High melting and boiling points (strong metallic bonding via d-electrons)", "kids": [] },
+              { "id": "s2t2", "text": "High densities and hardness", "kids": [] },
+              { "id": "s2t3", "text": "Ionisation enthalpies: higher than s-block; irregular trends across series", "kids": [] },
+              {
+                "id": "s2t4",
+                "text": "Variable Oxidation States",
+                "kids": [
+                  { "id": "s2t4a", "text": "Due to small energy difference between (n-1)d and ns electrons", "kids": [] },
+                  { "id": "s2t4b", "text": "Mn shows maximum OS (+7); most show +2 and higher", "kids": [] }
+                ]
+              },
+              { "id": "s2t5", "text": "Magnetic properties: paramagnetic due to unpaired d-electrons", "kids": [] },
+              { "id": "s2t6", "text": "Catalytic properties: variable OS and ability to adsorb reactants on surface", "kids": [] },
+              { "id": "s2t7", "text": "Formation of coloured compounds/ions: d-d transition absorbs visible light", "kids": [] },
+              { "id": "s2t8", "text": "Tendency to form complex compounds with ligands", "kids": [] },
+              { "id": "s2t9", "text": "Alloy formation: similar atomic sizes, same crystal structure", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Important Compounds of Transition Metals",
+            "kids": [
+              {
+                "id": "s3t1",
+                "text": "Potassium Dichromate (K₂Cr₂O₇)",
+                "kids": [
+                  { "id": "s3t1a", "text": "Cr in +6 oxidation state; orange colour", "kids": [] },
+                  { "id": "s3t1b", "text": "Strong oxidising agent in acidic medium", "kids": [] },
+                  { "id": "s3t1c", "text": "Cr₂O₇²⁻ + 14H⁺ + 6e⁻ → 2Cr³⁺ + 7H₂O", "kids": [] }
+                ]
+              },
+              {
+                "id": "s3t2",
+                "text": "Potassium Permanganate (KMnO₄)",
+                "kids": [
+                  { "id": "s3t2a", "text": "Mn in +7 oxidation state; purple/violet colour", "kids": [] },
+                  { "id": "s3t2b", "text": "Powerful oxidising agent in acidic, neutral, alkaline media", "kids": [] },
+                  { "id": "s3t2c", "text": "Acidic: MnO₄⁻ → Mn²⁺; Neutral: MnO₄⁻ → MnO₂; Alkaline: MnO₄⁻ → MnO₄²⁻", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "The Lanthanoids (f-Block, 4f Series)",
+            "kids": [
+              { "id": "s4t1", "text": "Ce (58) to Lu (71); filling of 4f orbitals", "kids": [] },
+              { "id": "s4t2", "text": "Common OS: +3; some show +2, +4", "kids": [] },
+              { "id": "s4t3", "text": "Lanthanoid contraction: progressive decrease in ionic radii (poor shielding by 4f)", "kids": [] },
+              { "id": "s4t4", "text": "Consequence: 4d and 5d elements have almost same radii; similar chemistry", "kids": [] },
+              { "id": "s4t5", "text": "All paramagnetic; most are pale coloured; used in alloys, magnets, phosphors", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "The Actinoids (f-Block, 5f Series)",
+            "kids": [
+              { "id": "s5t1", "text": "Th (90) to Lr (103); filling of 5f orbitals", "kids": [] },
+              { "id": "s5t2", "text": "Show wider range of OS than lanthanoids (5f, 6d, 7s close in energy)", "kids": [] },
+              { "id": "s5t3", "text": "Most are radioactive; U and Th are naturally occurring", "kids": [] },
+              { "id": "s5t4", "text": "Actinoid contraction similar to lanthanoid contraction", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c5",
+      "number": 5,
+      "title": "Coordination Compounds",
+      "data": {
+        "id": "root",
+        "text": "Coordination Compounds",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Werner's Theory",
+            "kids": [
+              { "id": "s1t1", "text": "Primary valence: ionisable; satisfied by counter ions (oxidation state)", "kids": [] },
+              { "id": "s1t2", "text": "Secondary valence: non-ionisable; satisfied by ligands (coordination number)", "kids": [] },
+              { "id": "s1t3", "text": "Difference from double salts: complex ions retain identity in solution", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Important Terms",
+            "kids": [
+              { "id": "s2t1", "text": "Central metal atom/ion: Lewis acid (electron pair acceptor)", "kids": [] },
+              { "id": "s2t2", "text": "Ligand: Lewis base (electron pair donor); monodentate, bidentate, polydentate", "kids": [] },
+              { "id": "s2t3", "text": "Chelate: complex with polydentate ligand (more stable; chelate effect)", "kids": [] },
+              { "id": "s2t4", "text": "Coordination number: number of donor atoms directly bonded to metal", "kids": [] },
+              { "id": "s2t5", "text": "Coordination sphere: central atom + ligands in square brackets", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Nomenclature",
+            "kids": [
+              { "id": "s3t1", "text": "Cation named first, then anion", "kids": [] },
+              { "id": "s3t2", "text": "Ligands: anionic (-o), neutral (as is), cationic (-ium); listed alphabetically", "kids": [] },
+              { "id": "s3t3", "text": "Metal OS in Roman numerals in parentheses", "kids": [] },
+              { "id": "s3t4", "text": "Anionic complex: metal name + -ate suffix", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Isomerism in Coordination Compounds",
+            "kids": [
+              {
+                "id": "s4t1",
+                "text": "Stereoisomerism",
+                "kids": [
+                  { "id": "s4t1a", "text": "Geometric (cis-trans): different arrangement of ligands; square planar and octahedral", "kids": [] },
+                  { "id": "s4t1b", "text": "Optical (mirror image, non-superimposable): d and l forms; shown by octahedral complexes", "kids": [] }
+                ]
+              },
+              {
+                "id": "s4t2",
+                "text": "Structural Isomerism",
+                "kids": [
+                  { "id": "s4t2a", "text": "Linkage isomerism: ambidentate ligand binds via different atoms (e.g. NO₂ vs ONO)", "kids": [] },
+                  { "id": "s4t2b", "text": "Coordination isomerism: interchange of ligands between cation and anion of complex", "kids": [] },
+                  { "id": "s4t2c", "text": "Ionisation isomerism: different anion in coordination sphere vs outside", "kids": [] },
+                  { "id": "s4t2d", "text": "Solvate isomerism: water inside vs outside coordination sphere", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Bonding Theories",
+            "kids": [
+              {
+                "id": "s5t1",
+                "text": "Valence Bond Theory (VBT)",
+                "kids": [
+                  { "id": "s5t1a", "text": "Ligands donate electron pairs to empty hybrid orbitals of metal", "kids": [] },
+                  { "id": "s5t1b", "text": "Inner orbital complex (low spin): d²sp³, dsp²; outer orbital (high spin): sp³d²", "kids": [] },
+                  { "id": "s5t1c", "text": "Limitation: does not explain colour and magnetic properties quantitatively", "kids": [] }
+                ]
+              },
+              {
+                "id": "s5t2",
+                "text": "Crystal Field Theory (CFT)",
+                "kids": [
+                  { "id": "s5t2a", "text": "Ligands as point charges; d-orbitals split in crystal field", "kids": [] },
+                  { "id": "s5t2b", "text": "Octahedral: d-orbitals split into t₂g (lower) and eg (higher); Δo = crystal field splitting", "kids": [] },
+                  { "id": "s5t2c", "text": "Strong field ligands (CO, CN⁻): large Δo → low spin; weak field (F⁻, Cl⁻): small Δo → high spin", "kids": [] },
+                  { "id": "s5t2d", "text": "Colour: d-d transition; wavelength absorbed complementary to colour seen", "kids": [] },
+                  { "id": "s5t2e", "text": "Spectrochemical series: I⁻ < Br⁻ < Cl⁻ < F⁻ < OH⁻ < H₂O < py < NH₃ < en < CN⁻ < CO", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Metal Carbonyls",
+            "kids": [
+              { "id": "s6t1", "text": "CO as ligand: σ-donor and π-acceptor (synergic bonding)", "kids": [] },
+              { "id": "s6t2", "text": "Ni(CO)₄: tetrahedral; Fe(CO)₅: trigonal bipyramidal; Cr(CO)₆: octahedral", "kids": [] }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Importance of Coordination Compounds",
+            "kids": [
+              { "id": "s7t1", "text": "Haemoglobin: Fe²⁺ complex; oxygen transport in blood", "kids": [] },
+              { "id": "s7t2", "text": "Chlorophyll: Mg²⁺ complex; photosynthesis", "kids": [] },
+              { "id": "s7t3", "text": "Vitamin B₁₂: Co³⁺ complex", "kids": [] },
+              { "id": "s7t4", "text": "Cisplatin [Pt(NH₃)₂Cl₂]: anticancer drug", "kids": [] },
+              { "id": "s7t5", "text": "EDTA: used in chelation therapy; water softening", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c6",
+      "number": 6,
+      "title": "Haloalkanes and Haloarenes",
+      "data": {
+        "id": "root",
+        "text": "Haloalkanes and Haloarenes",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Classification",
+            "kids": [
+              { "id": "s1t1", "text": "Haloalkanes: halogen bonded to sp³ carbon (alkyl halides)", "kids": [] },
+              { "id": "s1t2", "text": "Haloarenes: halogen bonded to sp² carbon of aromatic ring", "kids": [] },
+              { "id": "s1t3", "text": "Types: primary, secondary, tertiary (based on C bearing X)", "kids": [] },
+              { "id": "s1t4", "text": "Allylic (C next to C=C), benzylic (PhCH₂X), vinylic, aryl halides", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Nature of C–X Bond",
+            "kids": [
+              { "id": "s2t1", "text": "C–X bond polar: C is δ+ due to higher electronegativity of X", "kids": [] },
+              { "id": "s2t2", "text": "Bond length increases: C–F < C–Cl < C–Br < C–I", "kids": [] },
+              { "id": "s2t3", "text": "Bond strength decreases: C–F > C–Cl > C–Br > C–I", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Preparation of Haloalkanes",
+            "kids": [
+              { "id": "s3t1", "text": "From alcohols: ROH + HX → RX + H₂O (Lucas test); SOCl₂, PCl₃/PCl₅", "kids": [] },
+              { "id": "s3t2", "text": "Free radical halogenation of alkanes (Cl₂ or Br₂ in light)", "kids": [] },
+              { "id": "s3t3", "text": "Addition of HX to alkenes (Markovnikov rule)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Preparation of Haloarenes",
+            "kids": [
+              { "id": "s4t1", "text": "Electrophilic substitution: X₂/FeBr₃ (benzene + Br₂)", "kids": [] },
+              { "id": "s4t2", "text": "Sandmeyer's reaction: ArN₂⁺ + CuX → ArX + N₂", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Physical Properties",
+            "kids": [
+              { "id": "s5t1", "text": "Boiling points: RI > RBr > RCl > RF; increase with chain length", "kids": [] },
+              { "id": "s5t2", "text": "Density: denser than corresponding alkanes (except RF)", "kids": [] },
+              { "id": "s5t3", "text": "Insoluble in water; soluble in organic solvents", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Chemical Reactions of Haloalkanes",
+            "kids": [
+              {
+                "id": "s6t1",
+                "text": "Nucleophilic Substitution (SN)",
+                "kids": [
+                  { "id": "s6t1a", "text": "SN2: bimolecular; one step; inversion of configuration (Walden inversion); favoured by 1° RX", "kids": [] },
+                  { "id": "s6t1b", "text": "SN1: unimolecular; two steps; carbocation intermediate; racemisation; favoured by 3° RX", "kids": [] },
+                  { "id": "s6t1c", "text": "Nucleophiles: OH⁻, CN⁻, RO⁻, NH₃ replace X", "kids": [] }
+                ]
+              },
+              {
+                "id": "s6t2",
+                "text": "Elimination (E2 / Dehydrohalogenation)",
+                "kids": [
+                  { "id": "s6t2a", "text": "Conc. KOH/alcohol → alkene + HX (β-elimination)", "kids": [] },
+                  { "id": "s6t2b", "text": "Saytzeff rule: more substituted alkene is major product", "kids": [] }
+                ]
+              },
+              { "id": "s6t3", "text": "Reaction with metals: Wurtz reaction (2RX + 2Na → R-R + 2NaX)", "kids": [] },
+              { "id": "s6t4", "text": "Grignard reagent: RX + Mg/dry ether → RMgX (extremely useful in synthesis)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Reactions of Haloarenes",
+            "kids": [
+              { "id": "s7t1", "text": "Nucleophilic substitution difficult (C–X has partial double bond character)", "kids": [] },
+              { "id": "s7t2", "text": "Electrophilic substitution: X is o/p-directing and deactivating", "kids": [] },
+              { "id": "s7t3", "text": "Wurtz-Fittig: ArX + RX + 2Na → Ar-R", "kids": [] },
+              { "id": "s7t4", "text": "Fittig: 2ArX + 2Na → Ar-Ar (biaryl)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s8",
+            "text": "Polyhalogen Compounds",
+            "kids": [
+              { "id": "s8t1", "text": "CHCl₃ (chloroform): anaesthetic; oxidises to COCl₂ (phosgene) in light/air", "kids": [] },
+              { "id": "s8t2", "text": "CCl₄: fire extinguisher; liver damage (toxic)", "kids": [] },
+              { "id": "s8t3", "text": "Freons (CFCs): refrigerants; deplete ozone layer", "kids": [] },
+              { "id": "s8t4", "text": "DDT: first chlorinated organic insecticide; persistent (non-biodegradable)", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c7",
+      "number": 7,
+      "title": "Alcohols, Phenols and Ethers",
+      "data": {
+        "id": "root",
+        "text": "Alcohols, Phenols and Ethers",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Classification",
+            "kids": [
+              { "id": "s1t1", "text": "Monohydric: one –OH; dihydric: two –OH (glycol); trihydric: three –OH (glycerol)", "kids": [] },
+              { "id": "s1t2", "text": "Primary (1°), secondary (2°), tertiary (3°) based on carbon bearing –OH", "kids": [] },
+              { "id": "s1t3", "text": "Phenols: –OH directly on aromatic ring", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Preparation of Alcohols",
+            "kids": [
+              { "id": "s2t1", "text": "Hydration of alkenes: H₂O/H⁺ → Markovnikov addition", "kids": [] },
+              { "id": "s2t2", "text": "Reduction of carbonyl compounds: aldehydes → 1° alcohol; ketones → 2° alcohol (NaBH₄/LiAlH₄)", "kids": [] },
+              { "id": "s2t3", "text": "Grignard reagents: RMgX + carbonyl → alcohol after hydrolysis", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Preparation of Phenols",
+            "kids": [
+              { "id": "s3t1", "text": "From chlorobenzene: Dow process (high T, P, NaOH)", "kids": [] },
+              { "id": "s3t2", "text": "From cumene (isopropylbenzene): industrial method", "kids": [] },
+              { "id": "s3t3", "text": "From diazonium salts (Sandmeyer type)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Physical Properties",
+            "kids": [
+              { "id": "s4t1", "text": "Boiling points: higher than alkanes/ethers due to H-bonding", "kids": [] },
+              { "id": "s4t2", "text": "Lower alcohols miscible with water; solubility decreases with chain length", "kids": [] },
+              { "id": "s4t3", "text": "Phenol slightly soluble in water; acidic (pKa ~10)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Chemical Reactions of Alcohols and Phenols",
+            "kids": [
+              {
+                "id": "s5t1",
+                "text": "Reactions involving O–H bond cleavage",
+                "kids": [
+                  { "id": "s5t1a", "text": "With Na: 2ROH + 2Na → 2RONa + H₂↑ (alkoxide)", "kids": [] },
+                  { "id": "s5t1b", "text": "Esterification: ROH + RCOOH ⇌ RCOOR + H₂O (conc. H₂SO₄)", "kids": [] }
+                ]
+              },
+              {
+                "id": "s5t2",
+                "text": "Reactions involving C–O bond cleavage",
+                "kids": [
+                  { "id": "s5t2a", "text": "With HX: ROH + HX → RX + H₂O (Lucas test: ZnCl₂/HCl; 3°>2°>1°)", "kids": [] },
+                  { "id": "s5t2b", "text": "Dehydration with conc. H₂SO₄: at 443K → alkene; at 413K → ether", "kids": [] }
+                ]
+              },
+              {
+                "id": "s5t3",
+                "text": "Oxidation",
+                "kids": [
+                  { "id": "s5t3a", "text": "1° alcohol → aldehyde → carboxylic acid (with K₂Cr₂O₇/KMnO₄)", "kids": [] },
+                  { "id": "s5t3b", "text": "2° alcohol → ketone", "kids": [] },
+                  { "id": "s5t3c", "text": "3° alcohol: not easily oxidised", "kids": [] }
+                ]
+              },
+              {
+                "id": "s5t4",
+                "text": "Reactions of Phenol",
+                "kids": [
+                  { "id": "s5t4a", "text": "Acidity: PhOH + NaOH → PhONa + H₂O (more acidic than alcohols)", "kids": [] },
+                  { "id": "s5t4b", "text": "Electrophilic aromatic substitution: OH is o/p-director (activating)", "kids": [] },
+                  { "id": "s5t4c", "text": "Kolbe's reaction: PhONa + CO₂/pressure → salicylic acid", "kids": [] },
+                  { "id": "s5t4d", "text": "Reimer-Tiemann: PhOH + CHCl₃/KOH → salicylaldehyde", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Ethers",
+            "kids": [
+              { "id": "s6t1", "text": "General formula: R–O–R'; simple (R=R') or mixed", "kids": [] },
+              { "id": "s6t2", "text": "Preparation: Williamson synthesis (RX + R'ONa → R–O–R' + NaX)", "kids": [] },
+              { "id": "s6t3", "text": "Physical: lower BP than alcohols (no H-bonding); slightly soluble in water", "kids": [] },
+              {
+                "id": "s6t4",
+                "text": "Chemical Reactions",
+                "kids": [
+                  { "id": "s6t4a", "text": "C–O bond cleavage with HI or HBr (conc.): R–O–R' → RX + R'OH", "kids": [] },
+                  { "id": "s6t4b", "text": "Electrophilic substitution on aromatic ethers (o/p-director)", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c8",
+      "number": 8,
+      "title": "Aldehydes, Ketones and Carboxylic Acids",
+      "data": {
+        "id": "root",
+        "text": "Aldehydes, Ketones and Carboxylic Acids",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Aldehydes and Ketones",
+            "kids": [
+              {
+                "id": "s1t1",
+                "text": "Structure and Nomenclature",
+                "kids": [
+                  { "id": "s1t1a", "text": "Carbonyl group C=O; aldehydes have –CHO at chain end; ketones have C=O in middle", "kids": [] },
+                  { "id": "s1t1b", "text": "IUPAC: -al (aldehyde), -one (ketone); common: formaldehyde, acetaldehyde, acetone", "kids": [] }
+                ]
+              },
+              {
+                "id": "s1t2",
+                "text": "Preparation",
+                "kids": [
+                  { "id": "s1t2a", "text": "Oxidation of 1° alcohols (aldehyde) and 2° alcohols (ketone)", "kids": [] },
+                  { "id": "s1t2b", "text": "Ozonolysis of alkenes", "kids": [] },
+                  { "id": "s1t2c", "text": "Aldehydes: Rosenmund reduction (RCOCl + H₂/Pd-BaSO₄); Stephen reduction", "kids": [] },
+                  { "id": "s1t2d", "text": "Ketones: Friedel-Crafts acylation (ArH + RCOCl/AlCl₃)", "kids": [] }
+                ]
+              },
+              {
+                "id": "s1t3",
+                "text": "Physical Properties",
+                "kids": [
+                  { "id": "s1t3a", "text": "Polar C=O; higher BP than alkanes; lower than alcohols (no H-bonding)", "kids": [] },
+                  { "id": "s1t3b", "text": "Lower members soluble in water (H-bonding with water)", "kids": [] }
+                ]
+              },
+              {
+                "id": "s1t4",
+                "text": "Chemical Reactions",
+                "kids": [
+                  { "id": "s1t4a", "text": "Nucleophilic addition: HCN, RMgX, NaHSO₃, H₂O (aldehydes more reactive than ketones)", "kids": [] },
+                  { "id": "s1t4b", "text": "Reduction: H₂/Ni or NaBH₄ → primary/secondary alcohol; Clemmensen → CH₂; Wolff-Kishner → CH₂", "kids": [] },
+                  { "id": "s1t4c", "text": "Oxidation: Tollens' test (Ag mirror); Fehling's test (Cu₂O brick red); only aldehydes", "kids": [] },
+                  { "id": "s1t4d", "text": "Aldol condensation: α-H present → β-hydroxy carbonyl compound → α,β-unsaturated (with base)", "kids": [] },
+                  { "id": "s1t4e", "text": "Cannizzaro reaction: no α-H → disproportionation (HCHO → HCOOH + CH₃OH)", "kids": [] },
+                  { "id": "s1t4f", "text": "Condensation with amines, hydroxylamine, semicarbazide → imine derivatives", "kids": [] }
+                ]
+              },
+              { "id": "s1t5", "text": "Uses: HCHO as formalin (40%), bakelite; acetone as solvent; benzaldehyde in perfumery", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Carboxylic Acids",
+            "kids": [
+              {
+                "id": "s2t1",
+                "text": "Structure and Nomenclature",
+                "kids": [
+                  { "id": "s2t1a", "text": "–COOH group; IUPAC: -oic acid; common: formic, acetic, propionic acids", "kids": [] },
+                  { "id": "s2t1b", "text": "Aromatic: benzoic acid (PhCOOH)", "kids": [] }
+                ]
+              },
+              {
+                "id": "s2t2",
+                "text": "Preparation",
+                "kids": [
+                  { "id": "s2t2a", "text": "Oxidation of primary alcohols, aldehydes, and alkylbenzenes", "kids": [] },
+                  { "id": "s2t2b", "text": "Hydrolysis of nitriles (RCN + H₂O/H⁺), esters, amides", "kids": [] },
+                  { "id": "s2t2c", "text": "Grignard reagent + CO₂ → RCOOH after hydrolysis", "kids": [] }
+                ]
+              },
+              {
+                "id": "s2t3",
+                "text": "Physical Properties",
+                "kids": [
+                  { "id": "s2t3a", "text": "High BP: H-bonding; dimers formed in vapour phase", "kids": [] },
+                  { "id": "s2t3b", "text": "Solubility in water decreases with chain length", "kids": [] }
+                ]
+              },
+              {
+                "id": "s2t4",
+                "text": "Chemical Reactions",
+                "kids": [
+                  { "id": "s2t4a", "text": "Acidity: RCOOH ⇌ RCOO⁻ + H⁺; electron-withdrawing groups increase acidity", "kids": [] },
+                  { "id": "s2t4b", "text": "Esterification: RCOOH + R'OH ⇌ RCOOR' + H₂O (Fischer esterification)", "kids": [] },
+                  { "id": "s2t4c", "text": "Formation of acyl chloride (SOCl₂), anhydride, amide, ester", "kids": [] },
+                  { "id": "s2t4d", "text": "Reduction to 1° alcohol with LiAlH₄", "kids": [] },
+                  { "id": "s2t4e", "text": "Decarboxylation: RCOONa + NaOH/CaO → RH + Na₂CO₃", "kids": [] },
+                  { "id": "s2t4f", "text": "Halogenation at α-position: Hell-Volhard-Zelinsky reaction (Br₂/red P)", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c9",
+      "number": 9,
+      "title": "Amines",
+      "data": {
+        "id": "root",
+        "text": "Amines",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Classification and Nomenclature",
+            "kids": [
+              { "id": "s1t1", "text": "Primary (RNH₂), secondary (R₂NH), tertiary (R₃N) based on N-substitution", "kids": [] },
+              { "id": "s1t2", "text": "Aliphatic and aromatic amines; aniline = aminobenzene", "kids": [] },
+              { "id": "s1t3", "text": "IUPAC: alkan-1-amine; common: methylamine, dimethylamine, aniline", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Preparation of Amines",
+            "kids": [
+              { "id": "s2t1", "text": "Reduction of nitro compounds: RNO₂ + 6[H] → RNH₂ (Fe/HCl or H₂/Ni)", "kids": [] },
+              { "id": "s2t2", "text": "Ammonolysis of alkyl halides: RX + NH₃ → RNH₂ (then 2°, 3°, quaternary salt)", "kids": [] },
+              { "id": "s2t3", "text": "Reduction of nitriles: RCN + 4[H] → RCH₂NH₂ (LiAlH₄)", "kids": [] },
+              { "id": "s2t4", "text": "Reduction of amides: RCONH₂ + 4[H] → RCH₂NH₂ (LiAlH₄)", "kids": [] },
+              { "id": "s2t5", "text": "Gabriel phthalimide synthesis: pure 1° amines; phenylamino phthalimide + RX + hydrolysis", "kids": [] },
+              { "id": "s2t6", "text": "Hofmann bromamide degradation: RCONH₂ + Br₂/NaOH → RNH₂ (loses 1 carbon)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Physical Properties",
+            "kids": [
+              { "id": "s3t1", "text": "Lower amines: gases (fishy smell); higher: liquids/solids", "kids": [] },
+              { "id": "s3t2", "text": "Boiling points: 1°>2°>3° (H-bonding); lower than alcohols of similar mass", "kids": [] },
+              { "id": "s3t3", "text": "Solubility: lower amines soluble in water (H-bonding); decreases with MW", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Chemical Reactions",
+            "kids": [
+              {
+                "id": "s4t1",
+                "text": "Basic Character",
+                "kids": [
+                  { "id": "s4t1a", "text": "Lone pair on N: acts as Lewis base (proton acceptor)", "kids": [] },
+                  { "id": "s4t1b", "text": "Basicity: aliphatic (2°>1°>3°>NH₃); aromatic amines less basic (lone pair delocalised)", "kids": [] },
+                  { "id": "s4t1c", "text": "Electron-donating groups increase basicity; electron-withdrawing decrease", "kids": [] }
+                ]
+              },
+              { "id": "s4t2", "text": "Alkylation: R-NH₂ + RX → 2°, 3°, quaternary ammonium salt", "kids": [] },
+              { "id": "s4t3", "text": "Acylation: R-NH₂ + RCOCl → amide + HCl (conc. NaOH present)", "kids": [] },
+              { "id": "s4t4", "text": "Carbylamine reaction (1° amine only): RNH₂ + CHCl₃ + KOH → RNC (isocyanide, foul smell)", "kids": [] },
+              { "id": "s4t5", "text": "Reaction with HNO₂: 1° aliphatic → unstable diazonium salt (N₂ + alcohol)", "kids": [] },
+              { "id": "s4t6", "text": "Electrophilic aromatic substitution: NH₂ is strong o/p-director (activating)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Diazonium Salts",
+            "kids": [
+              { "id": "s5t1", "text": "Preparation: ArNH₂ + NaNO₂ + HCl (0–5°C) → ArN₂⁺Cl⁻ (diazotisation)", "kids": [] },
+              {
+                "id": "s5t2",
+                "text": "Reactions Replacing N₂",
+                "kids": [
+                  { "id": "s5t2a", "text": "Sandmeyer's reaction: CuX → ArX; CuCN → ArCN; CuOH → ArOH", "kids": [] },
+                  { "id": "s5t2b", "text": "Gattermann reaction: Cu powder + HX → ArX", "kids": [] },
+                  { "id": "s5t2c", "text": "ArN₂⁺ + H₃PO₂ + H₂O → ArH (reduction)", "kids": [] }
+                ]
+              },
+              { "id": "s5t3", "text": "Coupling reaction: ArN₂⁺ + phenol/amine → azo dye (brilliant colours)", "kids": [] },
+              { "id": "s5t4", "text": "Importance: versatile intermediates for diverse aromatic compounds", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c10",
+      "number": 10,
+      "title": "Biomolecules",
+      "data": {
+        "id": "root",
+        "text": "Biomolecules",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Carbohydrates",
+            "kids": [
+              { "id": "s1t1", "text": "General formula: Cx(H₂O)y; produced by photosynthesis", "kids": [] },
+              { "id": "s1t2", "text": "Classified by taste: sugars and non-sugars; by hydrolysis: mono, oligo, polysaccharides", "kids": [] },
+              {
+                "id": "s1t3",
+                "text": "Monosaccharides",
+                "kids": [
+                  { "id": "s1t3a", "text": "Glucose (C₆H₁₂O₆): aldohexose; open chain and cyclic (pyranose) forms", "kids": [] },
+                  { "id": "s1t3b", "text": "Glucose structure: open chain (6C, CHO at C1, OH at C2-C6); cyclic (α and β anomers)", "kids": [] },
+                  { "id": "s1t3c", "text": "Fructose: ketohexose (C2 ketone); sweeter than glucose", "kids": [] },
+                  { "id": "s1t3d", "text": "D and L sugars based on configuration at penultimate C", "kids": [] }
+                ]
+              },
+              {
+                "id": "s1t4",
+                "text": "Disaccharides",
+                "kids": [
+                  { "id": "s1t4a", "text": "Sucrose (cane sugar): glucose + fructose; non-reducing (no free –CHO/–OH)", "kids": [] },
+                  { "id": "s1t4b", "text": "Maltose (malt sugar): glucose + glucose; reducing sugar", "kids": [] },
+                  { "id": "s1t4c", "text": "Lactose (milk sugar): galactose + glucose; reducing sugar", "kids": [] }
+                ]
+              },
+              {
+                "id": "s1t5",
+                "text": "Polysaccharides",
+                "kids": [
+                  { "id": "s1t5a", "text": "Starch: storage in plants; amylose (helical) + amylopectin (branched)", "kids": [] },
+                  { "id": "s1t5b", "text": "Cellulose: structural in plants; β-1,4-glycosidic linkage; not digested by humans", "kids": [] },
+                  { "id": "s1t5c", "text": "Glycogen: storage in animals (liver, muscle); highly branched", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Proteins",
+            "kids": [
+              { "id": "s2t1", "text": "Polymers of α-amino acids; linked by peptide bonds (–CO–NH–)", "kids": [] },
+              { "id": "s2t2", "text": "20 essential amino acids; essential (not synthesised by body): must be taken in diet", "kids": [] },
+              { "id": "s2t3", "text": "Zwitter ion: amino acid with –NH₃⁺ and –COO⁻ at isoelectric point", "kids": [] },
+              {
+                "id": "s2t4",
+                "text": "Structure of Proteins",
+                "kids": [
+                  { "id": "s2t4a", "text": "Primary: amino acid sequence (peptide bonds)", "kids": [] },
+                  { "id": "s2t4b", "text": "Secondary: α-helix or β-pleated sheet (H-bonds within/between chains)", "kids": [] },
+                  { "id": "s2t4c", "text": "Tertiary: 3D folding (disulfide bonds, H-bonds, van der Waals, hydrophobic)", "kids": [] },
+                  { "id": "s2t4d", "text": "Quaternary: multiple polypeptide subunits (e.g. haemoglobin = 4 subunits)", "kids": [] }
+                ]
+              },
+              { "id": "s2t5", "text": "Fibrous proteins: insoluble, structural (e.g. keratin, collagen, myosin)", "kids": [] },
+              { "id": "s2t6", "text": "Globular proteins: soluble, functional (e.g. haemoglobin, enzymes, antibodies)", "kids": [] },
+              { "id": "s2t7", "text": "Denaturation: loss of native structure (not peptide bonds) by heat, acid, etc.", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Enzymes",
+            "kids": [
+              { "id": "s3t1", "text": "Biological catalysts; protein in nature (except ribozymes)", "kids": [] },
+              { "id": "s3t2", "text": "Highly specific (lock and key model; induced fit model)", "kids": [] },
+              { "id": "s3t3", "text": "Active site: specific region that binds substrate", "kids": [] },
+              { "id": "s3t4", "text": "Rate enhanced by 10⁶–10¹² times compared to uncatalysed", "kids": [] },
+              { "id": "s3t5", "text": "Affected by temperature, pH, inhibitors, cofactors", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Vitamins",
+            "kids": [
+              { "id": "s4t1", "text": "Organic compounds needed in small amounts; cannot be synthesised by body", "kids": [] },
+              { "id": "s4t2", "text": "Fat-soluble: A, D, E, K (stored in body; excess causes hypervitaminosis)", "kids": [] },
+              { "id": "s4t3", "text": "Water-soluble: B complex, C (not stored; deficiency causes disease quickly)", "kids": [] },
+              { "id": "s4t4", "text": "Deficiency diseases: A→night blindness; C→scurvy; D→rickets; B₁→beriberi; B₃→pellagra", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Nucleic Acids",
+            "kids": [
+              { "id": "s5t1", "text": "Polynucleotides; store and transfer genetic information", "kids": [] },
+              { "id": "s5t2", "text": "Nucleotide = nitrogenous base + pentose sugar + phosphate group", "kids": [] },
+              { "id": "s5t3", "text": "DNA: deoxyribose; double helix (Watson-Crick); A-T, G-C base pairing", "kids": [] },
+              { "id": "s5t4", "text": "RNA: ribose; single stranded; mRNA, tRNA, rRNA", "kids": [] },
+              { "id": "s5t5", "text": "DNA → RNA (transcription) → Protein (translation)", "kids": [] },
+              { "id": "s5t6", "text": "DNA fingerprinting: identifying individuals from DNA patterns", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Hormones",
+            "kids": [
+              { "id": "s6t1", "text": "Chemical messengers secreted by endocrine glands into blood", "kids": [] },
+              { "id": "s6t2", "text": "Steroids (e.g. estrogen, testosterone): derived from cholesterol", "kids": [] },
+              { "id": "s6t3", "text": "Amino acid derivatives (e.g. adrenaline, thyroxine)", "kids": [] },
+              { "id": "s6t4", "text": "Polypeptides (e.g. insulin, oxytocin): regulate blood glucose, growth, etc.", "kids": [] }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
