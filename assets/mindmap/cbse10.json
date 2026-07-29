@@ -1,0 +1,1087 @@
+{
+  "chapters": [
+    {
+      "id": "c1",
+      "number": 1,
+      "title": "Chemical Reactions and Equations",
+      "data": {
+        "id": "root",
+        "text": "Chemical Reactions and Equations",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Chemical Reactions",
+            "kids": [
+              { "id": "t1", "text": "Indicators of a reaction: change in state, colour, gas evolution, temperature", "kids": [] },
+              { "id": "t2", "text": "Reactants → Products", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Chemical Equations",
+            "kids": [
+              { "id": "t3", "text": "Word equation: describes reaction in words", "kids": [] },
+              { "id": "t4", "text": "Skeletal equation: uses chemical formulae", "kids": [] },
+              {
+                "id": "t5",
+                "text": "Balanced Equations",
+                "kids": [
+                  { "id": "q1", "text": "Law of conservation of mass: atoms neither created nor destroyed", "kids": [] },
+                  { "id": "q2", "text": "Hit-and-trial method for balancing", "kids": [] },
+                  { "id": "q3", "text": "State symbols: (s), (l), (g), (aq)", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Types of Chemical Reactions",
+            "kids": [
+              {
+                "id": "t6",
+                "text": "Combination Reaction",
+                "kids": [
+                  { "id": "q4", "text": "Two or more reactants → single product", "kids": [] },
+                  { "id": "q5", "text": "Example: CaO + H₂O → Ca(OH)₂", "kids": [] },
+                  { "id": "q6", "text": "Often exothermic", "kids": [] }
+                ]
+              },
+              {
+                "id": "t7",
+                "text": "Decomposition Reaction",
+                "kids": [
+                  { "id": "q7", "text": "Single reactant → two or more products", "kids": [] },
+                  { "id": "q8", "text": "Thermal: by heat (e.g. CaCO₃ → CaO + CO₂)", "kids": [] },
+                  { "id": "q9", "text": "Electrolytic: by electricity (e.g. electrolysis of water)", "kids": [] },
+                  { "id": "q10", "text": "Photolytic: by light (e.g. AgCl → Ag + Cl₂)", "kids": [] },
+                  { "id": "q11", "text": "Endothermic: energy is absorbed", "kids": [] }
+                ]
+              },
+              {
+                "id": "t8",
+                "text": "Displacement Reaction",
+                "kids": [
+                  { "id": "q12", "text": "More reactive element displaces less reactive one", "kids": [] },
+                  { "id": "q13", "text": "Example: Fe + CuSO₄ → FeSO₄ + Cu", "kids": [] }
+                ]
+              },
+              {
+                "id": "t9",
+                "text": "Double Displacement Reaction",
+                "kids": [
+                  { "id": "q14", "text": "Exchange of ions between two compounds", "kids": [] },
+                  { "id": "q15", "text": "Produces precipitate (precipitation reaction)", "kids": [] },
+                  { "id": "q16", "text": "Example: Na₂SO₄ + BaCl₂ → BaSO₄↓ + 2NaCl", "kids": [] }
+                ]
+              },
+              {
+                "id": "t10",
+                "text": "Redox Reactions",
+                "kids": [
+                  { "id": "q17", "text": "Oxidation: gain of oxygen or loss of hydrogen", "kids": [] },
+                  { "id": "q18", "text": "Reduction: loss of oxygen or gain of hydrogen", "kids": [] },
+                  { "id": "q19", "text": "Oxidation and reduction occur simultaneously", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Effects of Oxidation in Daily Life",
+            "kids": [
+              {
+                "id": "t11",
+                "text": "Corrosion",
+                "kids": [
+                  { "id": "q20", "text": "Metal attacked by moisture, acids, etc.", "kids": [] },
+                  { "id": "q21", "text": "Rusting of iron: reddish-brown coating", "kids": [] },
+                  { "id": "q22", "text": "Tarnishing of silver; green coating on copper", "kids": [] }
+                ]
+              },
+              {
+                "id": "t12",
+                "text": "Rancidity",
+                "kids": [
+                  { "id": "q23", "text": "Oxidation of fats and oils changes smell/taste", "kids": [] },
+                  { "id": "q24", "text": "Prevention: antioxidants, airtight containers, nitrogen flushing", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c2",
+      "number": 2,
+      "title": "Acids, Bases and Salts",
+      "data": {
+        "id": "root",
+        "text": "Acids, Bases and Salts",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Chemical Properties of Acids and Bases",
+            "kids": [
+              { "id": "t1", "text": "Indicators: litmus, phenolphthalein, methyl orange", "kids": [] },
+              { "id": "t2", "text": "Acids + metals → salt + hydrogen gas", "kids": [] },
+              { "id": "t3", "text": "Metal carbonates/bicarbonates + acids → salt + water + CO₂", "kids": [] },
+              { "id": "t4", "text": "Acid + base (neutralisation) → salt + water", "kids": [] },
+              { "id": "t5", "text": "Metallic oxides are basic; non-metallic oxides are acidic", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Acids and Bases in Water",
+            "kids": [
+              { "id": "t6", "text": "Acids produce H⁺ ions in water", "kids": [] },
+              { "id": "t7", "text": "Bases produce OH⁻ ions in water", "kids": [] },
+              { "id": "t8", "text": "Acids and bases only show properties in aqueous solutions", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "pH Scale",
+            "kids": [
+              { "id": "t9", "text": "Scale from 0 to 14; 7 is neutral", "kids": [] },
+              { "id": "t10", "text": "pH < 7: acidic; pH > 7: basic", "kids": [] },
+              {
+                "id": "t11",
+                "text": "Importance of pH in Daily Life",
+                "kids": [
+                  { "id": "q1", "text": "Human body functions between pH 7.0–7.8", "kids": [] },
+                  { "id": "q2", "text": "Tooth decay: pH below 5.5; treated with toothpaste (base)", "kids": [] },
+                  { "id": "q3", "text": "Soil pH affects crop growth", "kids": [] },
+                  { "id": "q4", "text": "Bee sting: acidic; treated with baking soda", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Salts",
+            "kids": [
+              { "id": "t12", "text": "Families of salts: same acid or same base", "kids": [] },
+              { "id": "t13", "text": "pH of salts depends on relative strength of acid and base", "kids": [] },
+              {
+                "id": "t14",
+                "text": "Chemicals from Common Salt (NaCl)",
+                "kids": [
+                  { "id": "q5", "text": "NaOH: chlor-alkali process", "kids": [] },
+                  { "id": "q6", "text": "Bleaching powder: Cl₂ + Ca(OH)₂", "kids": [] },
+                  { "id": "q7", "text": "Baking soda: NaHCO₃", "kids": [] },
+                  { "id": "q8", "text": "Washing soda: Na₂CO₃·10H₂O", "kids": [] }
+                ]
+              },
+              { "id": "t15", "text": "Water of crystallisation: water molecules in crystal structure", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c3",
+      "number": 3,
+      "title": "Metals and Non-metals",
+      "data": {
+        "id": "root",
+        "text": "Metals and Non-metals",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Physical Properties",
+            "kids": [
+              { "id": "t1", "text": "Metals: lustrous, malleable, ductile, conductors, sonorous", "kids": [] },
+              { "id": "t2", "text": "Non-metals: dull, brittle, poor conductors (except graphite)", "kids": [] },
+              { "id": "t3", "text": "Exceptions: mercury (liquid metal), iodine (lustrous non-metal)", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Chemical Properties of Metals",
+            "kids": [
+              { "id": "t4", "text": "Metals + oxygen → metal oxides (basic)", "kids": [] },
+              { "id": "t5", "text": "Metals + water → metal hydroxide + H₂", "kids": [] },
+              { "id": "t6", "text": "Metals + acids → salt + H₂", "kids": [] },
+              { "id": "t7", "text": "Reactivity series: K > Na > Ca > Mg > Al > Zn > Fe > Cu > Au", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "How Metals and Non-metals React",
+            "kids": [
+              { "id": "t8", "text": "Ionic bond formed: transfer of electrons", "kids": [] },
+              { "id": "t9", "text": "Properties of ionic compounds: high melting point, conduct electricity in solution", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Occurrence and Extraction of Metals",
+            "kids": [
+              { "id": "t10", "text": "Minerals: naturally occurring compounds of metals", "kids": [] },
+              { "id": "t11", "text": "Ores: minerals from which metals are profitably extracted", "kids": [] },
+              { "id": "t12", "text": "Gangue: impurities mixed with ore", "kids": [] },
+              {
+                "id": "t13",
+                "text": "Extraction steps",
+                "kids": [
+                  { "id": "q1", "text": "1. Concentration of ore (enrichment)", "kids": [] },
+                  { "id": "q2", "text": "2. Conversion to metal oxide", "kids": [] },
+                  { "id": "q3", "text": "3. Reduction to metal", "kids": [] },
+                  { "id": "q4", "text": "4. Refining (electrolytic refining)", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Corrosion",
+            "kids": [
+              { "id": "t14", "text": "Rusting: iron + oxygen + water → Fe₂O₃·xH₂O", "kids": [] },
+              { "id": "t15", "text": "Prevention: painting, galvanising, alloying, electroplating", "kids": [] },
+              { "id": "t16", "text": "Alloys: homogeneous mixtures; improve properties (e.g. stainless steel)", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c4",
+      "number": 4,
+      "title": "Carbon and its Compounds",
+      "data": {
+        "id": "root",
+        "text": "Carbon and its Compounds",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Bonding in Carbon – Covalent Bond",
+            "kids": [
+              { "id": "t1", "text": "Carbon has 4 valence electrons; always forms 4 covalent bonds", "kids": [] },
+              { "id": "t2", "text": "Sharing of electrons between atoms", "kids": [] },
+              { "id": "t3", "text": "Tetravalency: forms single, double, triple bonds", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Versatile Nature of Carbon",
+            "kids": [
+              { "id": "t4", "text": "Catenation: carbon chains with itself", "kids": [] },
+              { "id": "t5", "text": "Saturated compounds: alkanes, only single bonds", "kids": [] },
+              { "id": "t6", "text": "Unsaturated compounds: alkenes (C=C), alkynes (C≡C)", "kids": [] },
+              { "id": "t7", "text": "Allotropes: diamond (hard), graphite (conductor), fullerene", "kids": [] },
+              {
+                "id": "t8",
+                "text": "Homologous Series",
+                "kids": [
+                  { "id": "q1", "text": "Series of compounds differing by –CH₂–", "kids": [] },
+                  { "id": "q2", "text": "Same general formula and functional group", "kids": [] },
+                  { "id": "q3", "text": "Gradual variation in physical properties", "kids": [] }
+                ]
+              },
+              {
+                "id": "t9",
+                "text": "Functional Groups",
+                "kids": [
+                  { "id": "q4", "text": "Alcohol: –OH", "kids": [] },
+                  { "id": "q5", "text": "Aldehyde: –CHO", "kids": [] },
+                  { "id": "q6", "text": "Ketone: C=O", "kids": [] },
+                  { "id": "q7", "text": "Carboxylic acid: –COOH", "kids": [] },
+                  { "id": "q8", "text": "Halogen: –X (–Cl, –Br)", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Chemical Properties of Carbon Compounds",
+            "kids": [
+              { "id": "t10", "text": "Combustion: complete (CO₂ + H₂O); incomplete (soot/CO)", "kids": [] },
+              { "id": "t11", "text": "Oxidation: oxidising agents convert alcohols to acids", "kids": [] },
+              { "id": "t12", "text": "Addition reaction: unsaturated → saturated (hydrogenation)", "kids": [] },
+              { "id": "t13", "text": "Substitution reaction: saturated compounds + Cl₂ in sunlight", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Important Carbon Compounds",
+            "kids": [
+              {
+                "id": "t14",
+                "text": "Ethanol (C₂H₅OH)",
+                "kids": [
+                  { "id": "q9", "text": "Reacts with Na → H₂ gas", "kids": [] },
+                  { "id": "q10", "text": "Dehydration with conc. H₂SO₄ at 443 K → ethene", "kids": [] },
+                  { "id": "q11", "text": "Oxidised to ethanoic acid", "kids": [] }
+                ]
+              },
+              {
+                "id": "t15",
+                "text": "Ethanoic Acid (CH₃COOH)",
+                "kids": [
+                  { "id": "q12", "text": "Vinegar: 5–8% ethanoic acid solution", "kids": [] },
+                  { "id": "q13", "text": "Melting point 290 K; called glacial acetic acid when pure", "kids": [] },
+                  { "id": "q14", "text": "Reacts with NaHCO₃ → CO₂ gas (test)", "kids": [] },
+                  { "id": "q15", "text": "Esterification with alcohol → ester + water", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Soaps and Detergents",
+            "kids": [
+              { "id": "t16", "text": "Soap: sodium/potassium salt of fatty acids; saponification", "kids": [] },
+              { "id": "t17", "text": "Micelle: hydrophilic head (water-loving), hydrophobic tail (oil-loving)", "kids": [] },
+              { "id": "t18", "text": "Soaps ineffective in hard water (form scum)", "kids": [] },
+              { "id": "t19", "text": "Detergents: synthetic; work in hard water", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c5",
+      "number": 5,
+      "title": "Life Processes",
+      "data": {
+        "id": "root",
+        "text": "Life Processes",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "What are Life Processes?",
+            "kids": [
+              { "id": "t1", "text": "Maintenance functions necessary for living organisms", "kids": [] },
+              { "id": "t2", "text": "Nutrition, Respiration, Transportation, Excretion", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Nutrition",
+            "kids": [
+              {
+                "id": "t3",
+                "text": "Autotrophic Nutrition",
+                "kids": [
+                  { "id": "q1", "text": "Photosynthesis: 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂", "kids": [] },
+                  { "id": "q2", "text": "Chlorophyll, sunlight, CO₂ and water are needed", "kids": [] },
+                  { "id": "q3", "text": "Stomata regulate gas exchange", "kids": [] }
+                ]
+              },
+              {
+                "id": "t4",
+                "text": "Heterotrophic Nutrition",
+                "kids": [
+                  { "id": "q4", "text": "Holozoic: ingestion, digestion, absorption, assimilation, egestion", "kids": [] },
+                  { "id": "q5", "text": "Saprophytic: decomposition of dead matter (fungi)", "kids": [] },
+                  { "id": "q6", "text": "Parasitic: derive nutrition from host", "kids": [] }
+                ]
+              },
+              {
+                "id": "t5",
+                "text": "Nutrition in Human Beings",
+                "kids": [
+                  { "id": "q7", "text": "Mouth: salivary amylase breaks starch", "kids": [] },
+                  { "id": "q8", "text": "Stomach: HCl and pepsin digest proteins", "kids": [] },
+                  { "id": "q9", "text": "Small intestine: bile (liver), pancreatic juice; villi absorb nutrients", "kids": [] },
+                  { "id": "q10", "text": "Large intestine: water absorption; waste expelled", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Respiration",
+            "kids": [
+              { "id": "t6", "text": "Breakdown of glucose to release energy (ATP)", "kids": [] },
+              { "id": "t7", "text": "Aerobic: glucose + O₂ → CO₂ + H₂O + energy (38 ATP)", "kids": [] },
+              {
+                "id": "t8",
+                "text": "Anaerobic",
+                "kids": [
+                  { "id": "q11", "text": "In yeast: glucose → ethanol + CO₂ (fermentation)", "kids": [] },
+                  { "id": "q12", "text": "In muscles: glucose → lactic acid (during vigorous exercise)", "kids": [] }
+                ]
+              },
+              { "id": "t9", "text": "Human respiratory system: nasal cavity → trachea → bronchi → lungs → alveoli", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Transportation",
+            "kids": [
+              {
+                "id": "t10",
+                "text": "In Human Beings",
+                "kids": [
+                  { "id": "q13", "text": "Heart: double circulation; 4 chambers", "kids": [] },
+                  { "id": "q14", "text": "Blood vessels: arteries, veins, capillaries", "kids": [] },
+                  { "id": "q15", "text": "Blood: RBC (haemoglobin), WBC, platelets, plasma", "kids": [] },
+                  { "id": "q16", "text": "Lymph: carries fats and excess fluid", "kids": [] },
+                  { "id": "q17", "text": "Blood pressure: systolic/diastolic; measured by sphygmomanometer", "kids": [] }
+                ]
+              },
+              {
+                "id": "t11",
+                "text": "In Plants",
+                "kids": [
+                  { "id": "q18", "text": "Xylem: transports water and minerals upward", "kids": [] },
+                  { "id": "q19", "text": "Phloem: transports food (translocation)", "kids": [] },
+                  { "id": "q20", "text": "Transpiration pull drives water upward", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Excretion",
+            "kids": [
+              {
+                "id": "t12",
+                "text": "In Human Beings",
+                "kids": [
+                  { "id": "q21", "text": "Kidneys: filter blood → urine (urea, water, salts)", "kids": [] },
+                  { "id": "q22", "text": "Nephron: functional unit of kidney", "kids": [] },
+                  { "id": "q23", "text": "Artificial kidney: hemodialysis", "kids": [] }
+                ]
+              },
+              {
+                "id": "t13",
+                "text": "In Plants",
+                "kids": [
+                  { "id": "q24", "text": "Gaseous wastes: CO₂ and O₂ via stomata", "kids": [] },
+                  { "id": "q25", "text": "Stored in vacuoles, resins, gums; shed via leaves", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c6",
+      "number": 6,
+      "title": "Control and Coordination",
+      "data": {
+        "id": "root",
+        "text": "Control and Coordination",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Animals – Nervous System",
+            "kids": [
+              { "id": "t1", "text": "Neurons: basic unit; dendrite → cell body → axon", "kids": [] },
+              { "id": "t2", "text": "Nerve impulse: electrical signal transmitted across synapse", "kids": [] },
+              {
+                "id": "t3",
+                "text": "Reflex Actions",
+                "kids": [
+                  { "id": "q1", "text": "Involuntary, rapid response to stimuli", "kids": [] },
+                  { "id": "q2", "text": "Reflex arc: receptor → afferent nerve → spinal cord → efferent nerve → effector", "kids": [] }
+                ]
+              },
+              {
+                "id": "t4",
+                "text": "Human Brain",
+                "kids": [
+                  { "id": "q3", "text": "Forebrain (cerebrum): thinking, memory, voluntary actions", "kids": [] },
+                  { "id": "q4", "text": "Midbrain: relays sensory and motor signals", "kids": [] },
+                  { "id": "q5", "text": "Hindbrain: cerebellum (balance/posture), medulla (involuntary functions)", "kids": [] }
+                ]
+              },
+              { "id": "t5", "text": "Protection: meninges, cerebrospinal fluid, cranium and vertebral column", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Coordination in Plants",
+            "kids": [
+              {
+                "id": "t6",
+                "text": "Immediate Response – Nastic Movements",
+                "kids": [
+                  { "id": "q6", "text": "Touch-me-not (Mimosa): loss of water in cells → drooping", "kids": [] }
+                ]
+              },
+              {
+                "id": "t7",
+                "text": "Tropic Movements (Growth-based)",
+                "kids": [
+                  { "id": "q7", "text": "Phototropism: shoots grow towards light; roots away", "kids": [] },
+                  { "id": "q8", "text": "Geotropism: roots grow towards gravity", "kids": [] },
+                  { "id": "q9", "text": "Hydrotropism: roots grow towards water", "kids": [] },
+                  { "id": "q10", "text": "Chemotropism: pollen tube grows towards ovule", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Hormones in Animals",
+            "kids": [
+              { "id": "t8", "text": "Chemical messengers secreted by endocrine glands directly into blood", "kids": [] },
+              { "id": "t9", "text": "Pituitary: growth hormone; controls other glands", "kids": [] },
+              { "id": "t10", "text": "Thyroid: thyroxine; regulates metabolism", "kids": [] },
+              { "id": "t11", "text": "Pancreas: insulin (lowers blood sugar), glucagon (raises blood sugar)", "kids": [] },
+              { "id": "t12", "text": "Adrenal: adrenaline; fight-or-flight response", "kids": [] },
+              { "id": "t13", "text": "Testes/Ovaries: testosterone/oestrogen; reproductive development", "kids": [] },
+              { "id": "t14", "text": "Iodine deficiency → goitre (swollen thyroid)", "kids": [] },
+              {
+                "id": "t15",
+                "text": "Plant Hormones",
+                "kids": [
+                  { "id": "q11", "text": "Auxin: cell elongation, phototropism", "kids": [] },
+                  { "id": "q12", "text": "Gibberellin: stem elongation, seed germination", "kids": [] },
+                  { "id": "q13", "text": "Cytokinin: cell division", "kids": [] },
+                  { "id": "q14", "text": "Abscisic acid: inhibitor; closes stomata in stress", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c7",
+      "number": 7,
+      "title": "How do Organisms Reproduce?",
+      "data": {
+        "id": "root",
+        "text": "How do Organisms Reproduce?",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Why Reproduce?",
+            "kids": [
+              { "id": "t1", "text": "Continuation of species; not needed for individual survival", "kids": [] },
+              { "id": "t2", "text": "Importance of variation: survival advantage in changing environments", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Asexual Reproduction",
+            "kids": [
+              { "id": "t3", "text": "Fission: binary (Amoeba) and multiple (Plasmodium)", "kids": [] },
+              { "id": "t4", "text": "Fragmentation: Spirogyra breaks into pieces, each grows", "kids": [] },
+              { "id": "t5", "text": "Regeneration: Planaria can regenerate from cut pieces", "kids": [] },
+              { "id": "t6", "text": "Budding: Hydra; outgrowth develops into new organism", "kids": [] },
+              {
+                "id": "t7",
+                "text": "Vegetative Propagation",
+                "kids": [
+                  { "id": "q1", "text": "Natural: runners, rhizomes, bulbs, tubers", "kids": [] },
+                  { "id": "q2", "text": "Artificial: cutting, layering, grafting", "kids": [] },
+                  { "id": "q3", "text": "Tissue culture: cells grown in lab", "kids": [] }
+                ]
+              },
+              { "id": "t8", "text": "Spore formation: Rhizopus; spores dispersed and germinate", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Sexual Reproduction",
+            "kids": [
+              { "id": "t9", "text": "Fusion of male and female gametes → zygote", "kids": [] },
+              { "id": "t10", "text": "Produces variation; greater diversity", "kids": [] },
+              {
+                "id": "t11",
+                "text": "Sexual Reproduction in Flowering Plants",
+                "kids": [
+                  { "id": "q4", "text": "Flower: reproductive organ; stamen (male), pistil (female)", "kids": [] },
+                  { "id": "q5", "text": "Pollination: self or cross pollination by wind/insects", "kids": [] },
+                  { "id": "q6", "text": "Fertilisation: pollen tube → ovule; zygote → seed; ovary → fruit", "kids": [] },
+                  { "id": "q7", "text": "Double fertilisation unique to angiosperms", "kids": [] }
+                ]
+              },
+              {
+                "id": "t12",
+                "text": "Reproduction in Human Beings",
+                "kids": [
+                  { "id": "q8", "text": "Male system: testes (sperm + testosterone), vas deferens, penis", "kids": [] },
+                  { "id": "q9", "text": "Female system: ovaries (egg), fallopian tube, uterus, vagina", "kids": [] },
+                  { "id": "q10", "text": "Menstrual cycle: ~28 days; ovulation around day 14", "kids": [] },
+                  { "id": "q11", "text": "Fertilisation in fallopian tube; implantation in uterus", "kids": [] },
+                  { "id": "q12", "text": "Placenta: exchanges nutrients and wastes between mother and foetus", "kids": [] }
+                ]
+              },
+              {
+                "id": "t13",
+                "text": "Reproductive Health",
+                "kids": [
+                  { "id": "q13", "text": "Contraception: barrier, chemical, IUCD, surgical", "kids": [] },
+                  { "id": "q14", "text": "STDs: gonorrhoea, syphilis, HIV/AIDS; prevention by safe sex", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c8",
+      "number": 8,
+      "title": "Heredity",
+      "data": {
+        "id": "root",
+        "text": "Heredity",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Accumulation of Variation",
+            "kids": [
+              { "id": "t1", "text": "Variations arise during reproduction (DNA copying errors)", "kids": [] },
+              { "id": "t2", "text": "Asexual: very minor variations", "kids": [] },
+              { "id": "t3", "text": "Sexual: greater diversity due to recombination", "kids": [] },
+              { "id": "t4", "text": "Environmental selection of variants → evolutionary process", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Heredity",
+            "kids": [
+              { "id": "t5", "text": "Reliable inheritance of traits from parents to offspring", "kids": [] },
+              {
+                "id": "t6",
+                "text": "Mendel's Experiments",
+                "kids": [
+                  { "id": "q1", "text": "Used pea plants with contrasting visible characters", "kids": [] },
+                  { "id": "q2", "text": "F1 generation: all tall (dominant); no intermediate forms", "kids": [] },
+                  { "id": "q3", "text": "F2 generation: 3 tall : 1 short (3:1 ratio)", "kids": [] },
+                  { "id": "q4", "text": "Dominant trait (T): expressed even with one copy", "kids": [] },
+                  { "id": "q5", "text": "Recessive trait (t): expressed only when both copies are 't'", "kids": [] },
+                  { "id": "q6", "text": "Two copies of each gene per organism (TT, Tt, tt)", "kids": [] },
+                  { "id": "q7", "text": "Dihybrid cross: two traits inherited independently (Law of Independent Assortment)", "kids": [] }
+                ]
+              },
+              {
+                "id": "t7",
+                "text": "How Traits are Expressed",
+                "kids": [
+                  { "id": "q8", "text": "Genes control protein synthesis", "kids": [] },
+                  { "id": "q9", "text": "Proteins (enzymes) control characteristics", "kids": [] },
+                  { "id": "q10", "text": "Each cell has two gene sets (one from each parent)", "kids": [] },
+                  { "id": "q11", "text": "Germ cells carry one gene set via chromosome distribution", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Sex Determination",
+            "kids": [
+              { "id": "t8", "text": "Humans: 22 autosomes + 1 pair sex chromosomes", "kids": [] },
+              { "id": "t9", "text": "Female: XX; Male: XY", "kids": [] },
+              { "id": "t10", "text": "Sex of child determined by father's chromosome (X or Y)", "kids": [] },
+              { "id": "t11", "text": "Some reptiles: sex determined by incubation temperature", "kids": [] },
+              { "id": "t12", "text": "Snails: can change sex (not genetically fixed)", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c9",
+      "number": 9,
+      "title": "Light – Reflection and Refraction",
+      "data": {
+        "id": "root",
+        "text": "Light – Reflection and Refraction",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Reflection of Light",
+            "kids": [
+              { "id": "t1", "text": "Laws of reflection: angle of incidence = angle of reflection", "kids": [] },
+              { "id": "t2", "text": "Normal, incident ray, reflected ray in same plane", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Spherical Mirrors",
+            "kids": [
+              { "id": "t3", "text": "Concave mirror: reflecting surface curves inward; converging", "kids": [] },
+              { "id": "t4", "text": "Convex mirror: reflecting surface curves outward; diverging", "kids": [] },
+              { "id": "t5", "text": "Terms: centre of curvature, pole, focus, radius of curvature, aperture", "kids": [] },
+              { "id": "t6", "text": "Focal length f = R/2", "kids": [] },
+              {
+                "id": "t7",
+                "text": "Image Formation by Concave Mirror",
+                "kids": [
+                  { "id": "q1", "text": "Object at infinity: image at F, real, point-sized", "kids": [] },
+                  { "id": "q2", "text": "Object beyond C: image between F and C, real, inverted, diminished", "kids": [] },
+                  { "id": "q3", "text": "Object at C: image at C, real, inverted, same size", "kids": [] },
+                  { "id": "q4", "text": "Object between F and C: image beyond C, real, inverted, enlarged", "kids": [] },
+                  { "id": "q5", "text": "Object at F: image at infinity", "kids": [] },
+                  { "id": "q6", "text": "Object between P and F: virtual, erect, enlarged (used as shaving mirror)", "kids": [] }
+                ]
+              },
+              { "id": "t8", "text": "Convex mirror: always virtual, erect, diminished (used in rear-view mirrors)", "kids": [] },
+              { "id": "t9", "text": "Mirror formula: 1/v + 1/u = 1/f", "kids": [] },
+              { "id": "t10", "text": "Magnification: m = -v/u = h'/h", "kids": [] },
+              { "id": "t11", "text": "New Cartesian sign convention: distances from pole", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Refraction of Light",
+            "kids": [
+              { "id": "t12", "text": "Bending of light at interface of two media", "kids": [] },
+              { "id": "t13", "text": "Snell's law: n₁ sin θ₁ = n₂ sin θ₂", "kids": [] },
+              { "id": "t14", "text": "Refractive index: n = c/v = sin i / sin r", "kids": [] },
+              { "id": "t15", "text": "Denser medium: light bends towards normal", "kids": [] },
+              {
+                "id": "t16",
+                "text": "Spherical Lenses",
+                "kids": [
+                  { "id": "q7", "text": "Convex (converging): thicker at centre", "kids": [] },
+                  { "id": "q8", "text": "Concave (diverging): thinner at centre", "kids": [] },
+                  { "id": "q9", "text": "Lens formula: 1/v - 1/u = 1/f", "kids": [] },
+                  { "id": "q10", "text": "Magnification: m = v/u", "kids": [] }
+                ]
+              },
+              {
+                "id": "t17",
+                "text": "Power of a Lens",
+                "kids": [
+                  { "id": "q11", "text": "P = 1/f (in metres); unit: dioptre (D)", "kids": [] },
+                  { "id": "q12", "text": "Convex lens: positive power; concave: negative power", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c10",
+      "number": 10,
+      "title": "The Human Eye and the Colourful World",
+      "data": {
+        "id": "root",
+        "text": "The Human Eye and the Colourful World",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "The Human Eye",
+            "kids": [
+              { "id": "t1", "text": "Cornea → pupil → lens → retina", "kids": [] },
+              { "id": "t2", "text": "Iris: controls pupil size (amount of light)", "kids": [] },
+              { "id": "t3", "text": "Retina: rods (low light) and cones (colour)", "kids": [] },
+              { "id": "t4", "text": "Optic nerve transmits image to brain", "kids": [] },
+              {
+                "id": "t5",
+                "text": "Power of Accommodation",
+                "kids": [
+                  { "id": "q1", "text": "Ciliary muscles change lens curvature to focus near/far objects", "kids": [] },
+                  { "id": "q2", "text": "Near point: 25 cm (least distance of distinct vision)", "kids": [] },
+                  { "id": "q3", "text": "Far point: infinity (for normal eye)", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Defects of Vision and Correction",
+            "kids": [
+              {
+                "id": "t6",
+                "text": "Myopia (Short-sightedness)",
+                "kids": [
+                  { "id": "q4", "text": "Cannot see distant objects; image forms before retina", "kids": [] },
+                  { "id": "q5", "text": "Causes: elongated eyeball or curved cornea/lens", "kids": [] },
+                  { "id": "q6", "text": "Correction: concave lens", "kids": [] }
+                ]
+              },
+              {
+                "id": "t7",
+                "text": "Hypermetropia (Long-sightedness)",
+                "kids": [
+                  { "id": "q7", "text": "Cannot see near objects; image forms behind retina", "kids": [] },
+                  { "id": "q8", "text": "Causes: short eyeball or less curved lens", "kids": [] },
+                  { "id": "q9", "text": "Correction: convex lens", "kids": [] }
+                ]
+              },
+              {
+                "id": "t8",
+                "text": "Presbyopia",
+                "kids": [
+                  { "id": "q10", "text": "Age-related: ciliary muscles weaken, lens less flexible", "kids": [] },
+                  { "id": "q11", "text": "Correction: bifocal lenses", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Refraction Through a Prism",
+            "kids": [
+              { "id": "t9", "text": "Light bends at both surfaces of prism", "kids": [] },
+              { "id": "t10", "text": "Net deviation towards base of prism", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Dispersion of White Light",
+            "kids": [
+              { "id": "t11", "text": "White light splits into VIBGYOR (spectrum)", "kids": [] },
+              { "id": "t12", "text": "Violet deviates most; red least", "kids": [] },
+              { "id": "t13", "text": "Rainbow: dispersion + internal reflection in water droplets", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Atmospheric Refraction",
+            "kids": [
+              { "id": "t14", "text": "Twinkling of stars: varying refractive index of atmosphere", "kids": [] },
+              { "id": "t15", "text": "Planets don't twinkle: larger extended source of light", "kids": [] },
+              { "id": "t16", "text": "Advance sunrise and delayed sunset: Sun visible ~2 min before actual rise", "kids": [] }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Scattering of Light",
+            "kids": [
+              { "id": "t17", "text": "Tyndall effect: scattering of light by colloidal particles (blue beam visible)", "kids": [] },
+              { "id": "t18", "text": "Blue sky: shorter wavelengths (blue) scattered more by atmosphere", "kids": [] },
+              { "id": "t19", "text": "Red sky at sunset/sunrise: long path through atmosphere, blue scattered away", "kids": [] },
+              { "id": "t20", "text": "Danger signals are red: least scattered, visible from farthest distance", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c11",
+      "number": 11,
+      "title": "Electricity",
+      "data": {
+        "id": "root",
+        "text": "Electricity",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Electric Current and Circuit",
+            "kids": [
+              { "id": "t1", "text": "Electric current: rate of flow of charge; I = Q/t", "kids": [] },
+              { "id": "t2", "text": "Unit: ampere (A); measured by ammeter", "kids": [] },
+              { "id": "t3", "text": "Conventional current flows from + to –; electrons flow opposite", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Electric Potential and Potential Difference",
+            "kids": [
+              { "id": "t4", "text": "Potential difference V = W/Q; unit: volt (V)", "kids": [] },
+              { "id": "t5", "text": "Measured by voltmeter (in parallel)", "kids": [] },
+              { "id": "t6", "text": "EMF: work done per unit charge by source", "kids": [] }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Ohm's Law",
+            "kids": [
+              { "id": "t7", "text": "V = IR (at constant temperature)", "kids": [] },
+              { "id": "t8", "text": "Resistance R = V/I; unit: ohm (Ω)", "kids": [] },
+              { "id": "t9", "text": "Ohmic conductors follow Ohm's law; V-I graph is linear", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Factors Affecting Resistance",
+            "kids": [
+              { "id": "t10", "text": "R ∝ length of conductor", "kids": [] },
+              { "id": "t11", "text": "R ∝ 1/area of cross-section", "kids": [] },
+              { "id": "t12", "text": "Depends on nature of material (resistivity ρ)", "kids": [] },
+              { "id": "t13", "text": "R = ρl/A", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Resistors in Combination",
+            "kids": [
+              {
+                "id": "t14",
+                "text": "Series",
+                "kids": [
+                  { "id": "q1", "text": "R = R₁ + R₂ + R₃", "kids": [] },
+                  { "id": "q2", "text": "Same current through all; different voltage", "kids": [] }
+                ]
+              },
+              {
+                "id": "t15",
+                "text": "Parallel",
+                "kids": [
+                  { "id": "q3", "text": "1/R = 1/R₁ + 1/R₂ + 1/R₃", "kids": [] },
+                  { "id": "q4", "text": "Same voltage across all; current divides", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s6",
+            "text": "Heating Effect of Electric Current",
+            "kids": [
+              { "id": "t16", "text": "Joule's law: H = I²Rt", "kids": [] },
+              { "id": "t17", "text": "Applications: electric iron, toaster, geyser, bulb, fuse", "kids": [] },
+              { "id": "t18", "text": "Fuse: made of low melting point alloy; protects circuit", "kids": [] }
+            ]
+          },
+          {
+            "id": "s7",
+            "text": "Electric Power",
+            "kids": [
+              { "id": "t19", "text": "P = VI = I²R = V²/R; unit: watt (W)", "kids": [] },
+              { "id": "t20", "text": "Commercial unit: kilowatt-hour (kWh) = 1 unit", "kids": [] },
+              { "id": "t21", "text": "1 kWh = 3.6 × 10⁶ J", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c12",
+      "number": 12,
+      "title": "Magnetic Effects of Electric Current",
+      "data": {
+        "id": "root",
+        "text": "Magnetic Effects of Electric Current",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Magnetic Field and Field Lines",
+            "kids": [
+              { "id": "t1", "text": "Magnetic field: region around magnet where force is experienced", "kids": [] },
+              { "id": "t2", "text": "Field lines: closed curves from N to S outside, S to N inside", "kids": [] },
+              { "id": "t3", "text": "Closer field lines → stronger field; lines never intersect", "kids": [] }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "Magnetic Field due to Current",
+            "kids": [
+              { "id": "t4", "text": "Oersted's discovery: current-carrying conductor produces magnetic field", "kids": [] },
+              {
+                "id": "t5",
+                "text": "Straight Conductor",
+                "kids": [
+                  { "id": "q1", "text": "Concentric circular field lines around wire", "kids": [] },
+                  { "id": "q2", "text": "Right-hand thumb rule: thumb = current direction; fingers = field direction", "kids": [] }
+                ]
+              },
+              {
+                "id": "t6",
+                "text": "Circular Loop",
+                "kids": [
+                  { "id": "q3", "text": "Magnetic field at centre is straight", "kids": [] },
+                  { "id": "q4", "text": "Field strengthens with more turns", "kids": [] }
+                ]
+              },
+              {
+                "id": "t7",
+                "text": "Solenoid",
+                "kids": [
+                  { "id": "q5", "text": "Coil of many circular turns; field resembles a bar magnet", "kids": [] },
+                  { "id": "q6", "text": "Electromagnet: soft iron core inside solenoid", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s3",
+            "text": "Force on Current-Carrying Conductor",
+            "kids": [
+              { "id": "t8", "text": "Fleming's left-hand rule: thumb=force, index=field, middle=current", "kids": [] },
+              { "id": "t9", "text": "Force = BIL (max when current ⊥ field)", "kids": [] },
+              { "id": "t10", "text": "Electric motor: converts electrical energy to mechanical energy", "kids": [] },
+              { "id": "t11", "text": "Commutator reverses current direction every half rotation", "kids": [] }
+            ]
+          },
+          {
+            "id": "s4",
+            "text": "Electromagnetic Induction",
+            "kids": [
+              { "id": "t12", "text": "Faraday: changing magnetic field induces current (EMF)", "kids": [] },
+              { "id": "t13", "text": "Fleming's right-hand rule: for direction of induced current", "kids": [] },
+              { "id": "t14", "text": "AC generator: converts mechanical energy to electrical energy", "kids": [] },
+              { "id": "t15", "text": "DC generator: uses split ring commutator", "kids": [] }
+            ]
+          },
+          {
+            "id": "s5",
+            "text": "Domestic Electric Circuits",
+            "kids": [
+              { "id": "t16", "text": "Live wire (red/brown), neutral wire (black/blue), earth wire (green)", "kids": [] },
+              { "id": "t17", "text": "Appliances connected in parallel; each gets 220 V", "kids": [] },
+              { "id": "t18", "text": "Short circuit: live and neutral touch → heavy current → fuse blows", "kids": [] },
+              { "id": "t19", "text": "Earthing: safety against electric shock in metallic appliances", "kids": [] },
+              { "id": "t20", "text": "MCB (Miniature Circuit Breaker): modern alternative to fuse", "kids": [] }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "c13",
+      "number": 13,
+      "title": "Our Environment",
+      "data": {
+        "id": "root",
+        "text": "Our Environment",
+        "kids": [
+          {
+            "id": "s1",
+            "text": "Ecosystem – Components",
+            "kids": [
+              { "id": "t1", "text": "Abiotic: sunlight, temperature, water, soil, air", "kids": [] },
+              {
+                "id": "t2",
+                "text": "Biotic Components",
+                "kids": [
+                  { "id": "q1", "text": "Producers: autotrophs (plants) – make food via photosynthesis", "kids": [] },
+                  { "id": "q2", "text": "Consumers: herbivores (primary), carnivores (secondary/tertiary)", "kids": [] },
+                  { "id": "q3", "text": "Decomposers: bacteria and fungi break down dead matter", "kids": [] }
+                ]
+              },
+              {
+                "id": "t3",
+                "text": "Food Chains and Webs",
+                "kids": [
+                  { "id": "q4", "text": "Food chain: linear flow of energy (producer → consumer)", "kids": [] },
+                  { "id": "q5", "text": "Food web: interconnected food chains", "kids": [] },
+                  { "id": "q6", "text": "10% energy rule: only 10% energy transferred to next level", "kids": [] },
+                  { "id": "q7", "text": "Biological magnification: concentration of chemicals increases up food chain", "kids": [] }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "s2",
+            "text": "How Human Activities Affect the Environment",
+            "kids": [
+              {
+                "id": "t4",
+                "text": "Ozone Layer Depletion",
+                "kids": [
+                  { "id": "q8", "text": "Ozone (O₃) absorbs harmful UV radiation from sun", "kids": [] },
+                  { "id": "q9", "text": "CFCs (chlorofluorocarbons) break down ozone molecules", "kids": [] },
+                  { "id": "q10", "text": "Montreal Protocol: international effort to reduce CFCs", "kids": [] }
+                ]
+              },
+              {
+                "id": "t5",
+                "text": "Waste Management",
+                "kids": [
+                  { "id": "q11", "text": "Biodegradable: broken down by microorganisms (paper, food waste)", "kids": [] },
+                  { "id": "q12", "text": "Non-biodegradable: persist in environment (plastics, chemicals)", "kids": [] },
+                  { "id": "q13", "text": "Reduce, Reuse, Recycle – 3R approach", "kids": [] },
+                  { "id": "q14", "text": "Garbage disposal: landfill, composting, recycling", "kids": [] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
