@@ -82,111 +82,6 @@
     }
     .feature-chip svg { color: var(--accent); flex-shrink: 0; }
 
-    /* panel for this page */
-    .cs-panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .cs-panel h2 { font-size: 1.25rem; font-weight: 700; margin: 0; }
-    .cs-panel p { margin: 0; font-size: 14px; color: var(--muted); }
-
-    .course-chips { display: flex; flex-direction: column; gap: 10px; }
-    .course-chip {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 16px;
-      font-size: 13px;
-      font-weight: 500;
-    }
-    .course-chip .grade-badge {
-      background: var(--accent);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      border-radius: 6px;
-      padding: 3px 8px;
-      flex-shrink: 0;
-    }
-    .course-chip .board-label { color: var(--muted); font-size: 12px; margin-top: 1px; }
-    .course-chip-inner { display: flex; flex-direction: column; }
-
-    .notify-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .notify-form input[type="email"] {
-      width: 100%;
-      padding: 13px 16px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-pill);
-      font-size: 14px;
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--fg);
-      outline: none;
-      box-sizing: border-box;
-      transition: border-color 150ms;
-    }
-    .notify-form input[type="email"]:focus { border-color: var(--accent); }
-    .notify-form input[type="email"]::placeholder { color: var(--muted); }
-    .notify-form .btn { width: 100%; justify-content: center; padding: 13px 24px; }
-
-    .notify-note {
-      font-size: 11px;
-      color: var(--muted);
-      text-align: center;
-      margin: 0;
-    }
-
-    .coming-soon-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin: 0 0 4px;
-    }
-
-    /* what's coming section */
-    .what-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 8px;
-    }
-    .what-item {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-    }
-    .what-item strong { font-size: 13px; display: block; margin-bottom: 4px; }
-    .what-item span { font-size: 12px; color: var(--muted); }
-    .what-icon { font-size: 20px; margin-bottom: 8px; display: block; }
-
-    /* notify success state */
-    .notify-success {
-      display: none;
-      text-align: center;
-      padding: 16px;
-      background: color-mix(in oklab, #22c55e 10%, transparent);
-      border: 1px solid color-mix(in oklab, #22c55e 30%, transparent);
-      border-radius: 12px;
-      color: #166534;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
     /* hero sub text */
     .hero-sub { color: var(--muted); font-size: 15px; margin-bottom: 12px; line-height: 1.65; }
     .hero-free-pill {
@@ -204,6 +99,50 @@
       margin-bottom: 20px;
       text-transform: uppercase;
     }
+
+    /* ── Dark panel — matches homepage hero-panel exactly ── */
+    .hero-panel h2 { font-size: 1.5rem; }
+    .panel-line { font-size: 14px; margin: 8px 0 20px; }
+
+    .course-rows { display: flex; flex-direction: column; gap: 0; }
+    .course-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .course-row:last-child { border-bottom: none; }
+    .course-row .grade-badge {
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 4px 9px;
+      flex-shrink: 0;
+      min-width: 28px;
+      text-align: center;
+    }
+    .course-row-inner { display: flex; flex-direction: column; }
+    .course-row-inner strong { font-size: 13px; font-weight: 600; }
+    .course-row-inner span { font-size: 12px; opacity: 0.55; margin-top: 1px; }
+
+    /* feature grid — same as homepage */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .feature-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .feature-item svg { margin-bottom: 6px; opacity: 0.85; }
+    .feature-item strong { font-size: 14px; font-weight: 600; }
+    .feature-item span { font-size: 12px; opacity: 0.55; }
   </style>
   <link rel="stylesheet" href="../css/styles.css" />
 </head>
@@ -262,10 +201,10 @@
           <a href="../index.html#contact">Contact</a>
         </nav>
         <div class="nav-actions">
-          <a class="btn btn-primary" href="#notify" data-od-id="header-cta">Get Notified</a>
+          <a class="btn btn-primary" href="../index.html#contact" data-od-id="header-cta">Contact Us</a>
         </div>
       </div>
-      <a class="btn btn-primary btn-sm nav-actions-mobile" href="#notify" data-od-id="header-cta-mobile">Get Notified</a>
+      <a class="btn btn-primary btn-sm nav-actions-mobile" href="../index.html#contact" data-od-id="header-cta-mobile">Contact Us</a>
       <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
         <span></span>
       </button>
@@ -299,7 +238,7 @@
         <div>
           <div class="cs-badge"><span class="dot" aria-hidden="true"></span> Mock Tests · Launching Soon</div>
 
-          <h1>Practice Like It's the Real Exam</h1>
+          <h1>Coming Soon...</h1>
 
           <span class="hero-free-pill">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -334,84 +273,77 @@
           </div>
 
           <div class="hero-cta">
-            <a class="btn btn-primary" href="#notify">Get Notified at Launch</a>
+            <a class="btn btn-primary" href="../index.html#contact" data-wa="general">Contact Us</a>
             <a class="btn btn-secondary" href="../index.html#courses">See Courses</a>
           </div>
         </div>
 
-        <!-- RIGHT PANEL -->
-        <aside class="hero-panel cs-panel" data-od-id="hero-panel" id="notify">
+        <!-- RIGHT PANEL — dark card, matches homepage -->
+        <aside class="hero-panel" data-od-id="hero-panel">
 
-          <div>
-            <p class="coming-soon-label">Coming Soon</p>
-            <h2>Free Mock Tests</h2>
-            <p>Questions are being carefully crafted by Prof. Dr. S. Balaji — board-exam focused, chapter-wise, and completely free.</p>
-          </div>
+          <h2>Free Mock Tests</h2>
+          <p class="panel-line">Questions crafted by Prof. Dr. S. Balaji — board-exam focused, chapter-wise, and completely free.</p>
 
           <!-- Courses covered -->
-          <div class="course-chips">
-            <div class="course-chip">
+          <div class="course-rows">
+            <div class="course-row">
               <span class="grade-badge">10</span>
-              <div class="course-chip-inner">
+              <div class="course-row-inner">
                 <strong>CBSE · Science</strong>
-                <span class="board-label">Physics, Chemistry &amp; Biology</span>
+                <span>Physics, Chemistry &amp; Biology</span>
               </div>
             </div>
-            <div class="course-chip">
+            <div class="course-row">
               <span class="grade-badge">12</span>
-              <div class="course-chip-inner">
+              <div class="course-row-inner">
                 <strong>CBSE · Physics &amp; Chemistry</strong>
-                <span class="board-label">Full NCERT syllabus</span>
+                <span>Full NCERT syllabus</span>
               </div>
             </div>
-            <div class="course-chip">
+            <div class="course-row">
               <span class="grade-badge">12</span>
-              <div class="course-chip-inner">
+              <div class="course-row-inner">
                 <strong>State Board · Physics &amp; Chemistry</strong>
-                <span class="board-label">TN State Board syllabus</span>
+                <span>TN State Board syllabus</span>
               </div>
             </div>
           </div>
 
-          <!-- What's coming breakdown -->
-          <div>
-            <p style="font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin:0 0 10px;">What's inside</p>
-            <div class="what-grid">
-              <div class="what-item">
-                <span class="what-icon">⚡</span>
-                <strong>Quick MCQ Quiz</strong>
-                <span>Chapter-wise, 10–15 questions</span>
-              </div>
-              <div class="what-item">
-                <span class="what-icon">📝</span>
-                <strong>Chapter Tests</strong>
-                <span>Timed, marks-based</span>
-              </div>
-              <div class="what-item">
-                <span class="what-icon">🎯</span>
-                <strong>Custom Tests</strong>
-                <span>Pick chapters, set duration</span>
-              </div>
-              <div class="what-item">
-                <span class="what-icon">🏆</span>
-                <strong>Full Mock Exam</strong>
-                <span>Board-pattern, 3 hours</span>
-              </div>
+          <!-- What's inside grid — SVG icons only -->
+          <div class="feature-grid">
+            <div class="feature-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <strong>Quick MCQ Quiz</strong>
+              <span>Chapter-wise, 10–15 Qs</span>
+            </div>
+            <div class="feature-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+              <strong>Chapter Tests</strong>
+              <span>Timed, marks-based</span>
+            </div>
+            <div class="feature-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+              </svg>
+              <strong>Custom Tests</strong>
+              <span>Pick chapters, set duration</span>
+            </div>
+            <div class="feature-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              <strong>Full Mock Exam</strong>
+              <span>Board-pattern, 3 hours</span>
             </div>
           </div>
 
-          <!-- Notify form -->
-          <div>
-            <p style="font-size:13px; font-weight:600; margin:0 0 10px;">Be the first to know when it launches:</p>
-            <div class="notify-form" id="notify-form">
-              <input type="email" id="notify-email" placeholder="your@email.com" autocomplete="email" />
-              <button class="btn btn-primary" type="button" id="notify-submit">Notify Me at Launch</button>
-            </div>
-            <div class="notify-success" id="notify-success">
-              ✅ You're on the list! We'll email you the moment tests go live.
-            </div>
-            <p class="notify-note" style="margin-top:10px;">No spam. One email when we launch. That's it.</p>
-          </div>
+          <!-- CTAs -->
+          <a class="btn btn-primary" href="../index.html#courses" style="width:100%;justify-content:center;">View Courses</a>
+          <a class="btn btn-secondary" href="../index.html#contact" data-wa="general" style="width:100%;justify-content:center;margin-top:10px;">Contact Prof. Balaji</a>
 
         </aside>
       </div>
@@ -460,27 +392,6 @@
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
-
-    /* ── Notify form ── */
-    var notifyForm    = document.getElementById("notify-form");
-    var notifyEmail   = document.getElementById("notify-email");
-    var notifySubmit  = document.getElementById("notify-submit");
-    var notifySuccess = document.getElementById("notify-success");
-
-    if (notifySubmit) {
-      notifySubmit.addEventListener("click", function () {
-        var email = notifyEmail ? notifyEmail.value.trim() : "";
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          notifyEmail.focus();
-          notifyEmail.style.borderColor = "#ef4444";
-          setTimeout(function () { notifyEmail.style.borderColor = ""; }, 1500);
-          return;
-        }
-        /* Replace this block with your actual form submission logic */
-        if (notifyForm)    notifyForm.style.display    = "none";
-        if (notifySuccess) notifySuccess.style.display = "block";
-      });
-    }
   </script>
   <script src="../js/main.js" defer></script>
 </body>
