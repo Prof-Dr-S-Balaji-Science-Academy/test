@@ -653,8 +653,10 @@
 
     /* pills */
     nodes.forEach(function(n){
-      var g=drawPill(targetSvg,n.cx,n.cy,n.text,n.level,n.hasKids,n.open,interactive,n.ph);
-      if(interactive&&n.hasKids){
+      /* Root never shows expand indicator and is never clickable */
+      var isRoot = (n.id === 'root');
+      var g=drawPill(targetSvg,n.cx,n.cy,n.text,n.level,isRoot?false:n.hasKids,n.open,interactive,n.ph);
+      if(interactive && n.hasKids && !isRoot){
         g.addEventListener('click',function(){
           toggleNode(S.tree,n.id);
           renderTree(S.tree,svg,true);
@@ -681,7 +683,11 @@
   }
   function toggleNode(tree,id){
     var n=findNode(tree,id);
-    if(n&&n.kids&&n.kids.length) n.open=!n.open;
+    /* Root node (level 0 = the chapter title) must always stay open.
+       Only L1 and deeper nodes expand/collapse on click. */
+    if(n && n.kids && n.kids.length && n.id !== 'root'){
+      n.open=!n.open;
+    }
   }
 
   /* ══════════════════════════════════════════════════════
@@ -775,98 +781,114 @@
     var ch=S.chapters.find(function(c){return c.id===S.chapter;});
     var title=ch?ch.title:'Mind Map';
 
-    /* deep clone and open every node */
-    var fullTree=JSON.parse(JSON.stringify(S.tree));
-    openAll(fullTree,true);
+    /* Fetch logo as base64 so it embeds cleanly in the SVG */
+    var logoPath='../../assets/images/logo.jpg';
+    function doExport(logoDataUrl){
+      var fullTree=JSON.parse(JSON.stringify(S.tree));
+      openAll(fullTree,true);
 
-    /* build layout to get real bounds */
-    var nodes=buildLayout(fullTree);
-    var pad=40;
-    var xs=nodes.map(function(n){return n.cx-n.pw/2;});
-    var xe=nodes.map(function(n){return n.cx+n.pw/2;});
-    var ys=nodes.map(function(n){return n.cy-n.ph;});
-    var ye=nodes.map(function(n){return n.cy+n.ph;});
-    var vx=Math.min.apply(null,xs)-pad, vy=Math.min.apply(null,ys)-pad;
-    var vw=Math.max.apply(null,xe)-vx+pad*2, vh=Math.max.apply(null,ye)-vy+pad*2;
+      var nodes=buildLayout(fullTree);
+      var pad=40;
+      var xs=nodes.map(function(n){return n.cx-n.pw/2;});
+      var xe=nodes.map(function(n){return n.cx+n.pw/2;});
+      var ys=nodes.map(function(n){return n.cy-n.ph;});
+      var ye=nodes.map(function(n){return n.cy+n.ph;});
+      var vx=Math.min.apply(null,xs)-pad, vy=Math.min.apply(null,ys)-pad;
+      var vw=Math.max.apply(null,xe)-vx+pad*2, vh=Math.max.apply(null,ye)-vy+pad*2;
 
-    /* Use A3 landscape at 96dpi (1587 × 1123) for large complex trees,
-       falls back to fitting within that page */
-    var PAGE_W=1587, PAGE_H=1123;
-    var HEADER_H=56;
-    var availW=PAGE_W, availH=PAGE_H-HEADER_H;
+      var PAGE_W=1587, PAGE_H=1123, HEADER_H=56;
+      var scaleX=PAGE_W/vw, scaleY=(PAGE_H-HEADER_H)/vh;
+      var scale=Math.min(scaleX,scaleY);
+      var fontScale=Math.max(0.7,Math.min(1.4,scale));
 
-    /* Scale to FILL the page — upscale if tree is small, downscale if large */
-    var scaleX=availW/vw, scaleY=availH/vh;
-    var scale=Math.min(scaleX,scaleY); /* no cap — fill the page */
+      var svgStr=buildPdfSvg(fullTree,nodes,vx,vy,vw,vh,PAGE_W,PAGE_H,HEADER_H,scale,fontScale,title,logoDataUrl);
 
-    /* Font scale: use layout-native sizes scaled by same factor, floor 0.7 */
-    var fontScale=Math.max(0.7, Math.min(1.4, scale));
+      var win=window.open('','_blank','width=1400,height=1000');
+      win.document.write(
+        '<!doctype html><html><head><meta charset="utf-8">'+
+        '<title>'+title+' — Mind Map</title>'+
+        '<style>'+
+          '*{margin:0;padding:0;box-sizing:border-box}'+
+          'body{background:#fff;display:flex;flex-direction:column;align-items:flex-start}'+
+          'svg{display:block;width:100%;height:auto}'+
+          '.print-bar{position:fixed;top:16px;right:16px;display:flex;gap:10px;z-index:99}'+
+          '.print-bar button{padding:8px 16px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;border:none}'+
+          '.btn-print{background:#0052ff;color:#fff}'+
+          '.btn-close{background:#eef0f3;color:#0a0b0d}'+
+          '@media print{'+
+            '@page{size:A3 landscape;margin:0}'+
+            'body{width:420mm;height:297mm;overflow:hidden}'+
+            'svg{width:420mm !important;height:297mm !important}'+
+            '.print-bar{display:none !important}'+
+          '}'+
+        '</style>'+
+        '</head><body>'+
+        '<div class="print-bar">'+
+          '<button class="btn-print" onclick="window.print()">🖨 Print / Save PDF</button>'+
+          '<button class="btn-close" onclick="window.close()">Close</button>'+
+        '</div>'+
+        svgStr+
+        '</body></html>'
+      );
+      win.document.close();
+    }
 
-    var svgStr=buildPdfSvg(fullTree,nodes,vx,vy,vw,vh,PAGE_W,PAGE_H,HEADER_H,scale,fontScale,title);
-
-    var win=window.open('','_blank','width=1400,height=1000');
-    win.document.write(
-      '<!doctype html><html><head><meta charset="utf-8">'+
-      '<title>'+title+' — Mind Map</title>'+
-      '<style>'+
-        '*{margin:0;padding:0;box-sizing:border-box}'+
-        'body{background:#fff;display:flex;flex-direction:column;align-items:flex-start}'+
-        'svg{display:block;width:100%;height:auto}'+
-        '.print-bar{position:fixed;top:16px;right:16px;display:flex;gap:10px;z-index:99}'+
-        '.print-bar button{padding:8px 16px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;border:none}'+
-        '.btn-print{background:#0052ff;color:#fff}'+
-        '.btn-close{background:#eef0f3;color:#0a0b0d}'+
-        '@media print{'+
-          '@page{size:A3 landscape;margin:0}'+
-          'body{width:420mm;height:297mm;overflow:hidden}'+
-          'svg{width:420mm !important;height:297mm !important}'+
-          '.print-bar{display:none !important}'+
-        '}'+
-      '</style>'+
-      '</head><body>'+
-      '<div class="print-bar">'+
-        '<button class="btn-print" onclick="window.print()">🖨 Print / Save PDF</button>'+
-        '<button class="btn-close" onclick="window.close()">Close</button>'+
-      '</div>'+
-      svgStr+
-      '</body></html>'
-    );
-    win.document.close();
+    /* Try to load the logo; fall back to null (uses text B) if it fails */
+    var img=new Image();
+    var canvas=document.createElement('canvas');
+    img.onload=function(){
+      var size=44;
+      canvas.width=size; canvas.height=size;
+      var ctx=canvas.getContext('2d');
+      /* Draw as circle clip */
+      ctx.beginPath();
+      ctx.arc(size/2,size/2,size/2,0,Math.PI*2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(img,0,0,size,size);
+      doExport(canvas.toDataURL('image/jpeg',0.92));
+    };
+    img.onerror=function(){ doExport(null); };
+    img.crossOrigin='anonymous';
+    img.src=logoPath;
   });
 
-  function buildPdfSvg(tree,nodes,vx,vy,vw,vh,pw,ph,headerH,scale,fontScale,title){
+  function buildPdfSvg(tree,nodes,vx,vy,vw,vh,pw,ph,headerH,scale,fontScale,title,logoDataUrl){
     var map={};
     nodes.forEach(function(n){map[n.id]=n;});
 
     var lines=[];
-    lines.push('<svg xmlns="'+NS+'" width="'+pw+'" height="'+ph+'" viewBox="0 0 '+pw+' '+ph+'" style="background:#f8f9fb">');
-
-    /* white background */
+    lines.push('<svg xmlns="'+NS+'" xmlns:xlink="http://www.w3.org/1999/xlink" width="'+pw+'" height="'+ph+'" viewBox="0 0 '+pw+' '+ph+'" style="background:#f8f9fb">');
     lines.push('<rect width="'+pw+'" height="'+ph+'" fill="#f8f9fb"/>');
 
-    /* title bar */
+    /* Header bar */
     lines.push('<rect x="0" y="0" width="'+pw+'" height="'+headerH+'" fill="#0052ff"/>');
-    /* Academy name + logo placeholder — top left */
-    lines.push('<circle cx="28" cy="'+(headerH/2)+'" r="16" fill="rgba(255,255,255,0.2)"/>');
-    lines.push('<text x="28" cy="'+headerH/2+'" y="'+(headerH/2)+'" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="900" fill="#fff" font-family="Inter,system-ui,sans-serif">B</text>');
-    lines.push('<text x="52" y="'+(headerH/2-6)+'" dominant-baseline="middle" font-size="8.5" font-weight="700" fill="rgba(255,255,255,0.9)" font-family="Inter,system-ui,sans-serif" letter-spacing="1">PROF. DR. S. BALAJI SCIENCE ACADEMY</text>');
-    lines.push('<text x="52" y="'+(headerH/2+7)+'" dominant-baseline="middle" font-size="8" fill="rgba(255,255,255,0.6)" font-family="Inter,system-ui,sans-serif">profbalaji.in</text>');
-    /* Chapter title — centred */
+
+    /* Logo: embed as base64 image clipped to circle, or fallback B */
+    var logoSize=38, logoPad=9, logoCX=logoPad+logoSize/2;
+    if(logoDataUrl){
+      /* clipPath for circular logo */
+      lines.push('<defs><clipPath id="logoClip"><circle cx="'+logoCX+'" cy="'+(headerH/2)+'" r="'+(logoSize/2)+'"/></clipPath></defs>');
+      lines.push('<image href="'+logoDataUrl+'" x="'+logoPad+'" y="'+(headerH/2-logoSize/2)+'" width="'+logoSize+'" height="'+logoSize+'" clip-path="url(#logoClip)" preserveAspectRatio="xMidYMid slice"/>');
+    } else {
+      lines.push('<circle cx="'+logoCX+'" cy="'+(headerH/2)+'" r="'+(logoSize/2)+'" fill="rgba(255,255,255,0.2)"/>');
+      lines.push('<text x="'+logoCX+'" y="'+(headerH/2)+'" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="900" fill="#fff" font-family="Inter,system-ui,sans-serif">B</text>');
+    }
+
+    /* Academy name */
+    var textX = logoPad + logoSize + 10;
+    lines.push('<text x="'+textX+'" y="'+(headerH/2-6)+'" dominant-baseline="middle" font-size="9" font-weight="700" fill="rgba(255,255,255,0.95)" font-family="Inter,system-ui,sans-serif" letter-spacing="0.8">PROF. DR. S. BALAJI SCIENCE ACADEMY</text>');
+    lines.push('<text x="'+textX+'" y="'+(headerH/2+7)+'" dominant-baseline="middle" font-size="8" fill="rgba(255,255,255,0.6)" font-family="Inter,system-ui,sans-serif">profbalaji.in</text>');
+
+    /* Chapter title centred */
     lines.push('<text x="'+(pw/2)+'" y="'+(headerH/2+1)+'" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="700" fill="#fff" font-family="Inter,system-ui,sans-serif">'+escXml(title)+' — Mind Map</text>');
 
-    /* transform group: shift map-coords into PDF page coords */
+    /* Map content */
     var tx=(-vx)*scale + (pw - vw*scale)/2;
     var ty=(-vy)*scale + headerH;
     lines.push('<g transform="translate('+tx+','+ty+') scale('+scale+')" >');
-
-    /* connectors */
     lines.push(buildConnectorLines(tree,map));
-
-    /* pills */
-    nodes.forEach(function(n){
-      lines.push(buildPillStr(n,fontScale));
-    });
-
+    nodes.forEach(function(n){ lines.push(buildPillStr(n,fontScale)); });
     lines.push('</g></svg>');
     return lines.join('\n');
   }
