@@ -145,6 +145,13 @@
     .feature-item span { font-size: 12px; opacity: 0.55; }
   </style>
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .hero-panel { min-width: 0 !important; box-sizing: border-box !important; overflow: visible !important; }
+    .hero-panel * { white-space: normal !important; overflow-wrap: break-word !important; word-break: break-word !important; max-width: 100% !important; }
+    .hero-panel h2 { font-size: 1.5rem !important; }
+    .hero-grid { grid-template-columns: 1fr 1fr !important; }
+    .hero-grid > * { min-width: 0 !important; }
+  </style>
 </head>
 <body id="home">
 
@@ -250,10 +257,10 @@
         </div>
 
         <!-- RIGHT PANEL — dark card, matches homepage -->
-        <aside class="hero-panel" data-od-id="hero-panel" style="min-width: 0; max-width: 100%; box-sizing: border-box; overflow-wrap: break-word; word-wrap: break-word;">
+        <aside class="hero-panel" data-od-id="hero-panel" style="min-width:0;width:100%;max-width:100%;box-sizing:border-box;overflow-wrap:break-word;word-wrap:break-word;word-break:break-word;">
 
           <h2>Practice - Mock Tests</h2>
-          <p class="panel-line">Questions crafted by Prof. Dr. S. Balaji — board-exam focused, chapter-wise, and completely free.</p>
+          <p class="panel-line" style="white-space:normal;overflow-wrap:break-word;word-break:break-word;max-width:100%;">Questions crafted by Prof. Dr. S. Balaji — board-exam focused, chapter-wise, and completely free.</p>
 
           <!-- Courses covered -->
           <div class="course-rows">
