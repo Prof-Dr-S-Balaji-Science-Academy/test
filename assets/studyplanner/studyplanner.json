@@ -1,0 +1,119 @@
+{
+  "cbse_10": {
+    "label": "CBSE – Class 10",
+    "subjects": [
+      {
+        "id": "science",
+        "name": "Science",
+        "chapters": [
+          { "ch": 1,  "title": "Chemical Reactions and Equations",        "difficulty": "Medium", "prep": 2.5, "revision": 1.0 },
+          { "ch": 2,  "title": "Acids, Bases and Salts",                  "difficulty": "Medium", "prep": 3.0, "revision": 1.0 },
+          { "ch": 3,  "title": "Metals and Non-metals",                   "difficulty": "Medium", "prep": 3.0, "revision": 1.0 },
+          { "ch": 4,  "title": "Carbon and its Compounds",                "difficulty": "High",   "prep": 4.0, "revision": 1.5 },
+          { "ch": 5,  "title": "Life Processes",                          "difficulty": "High",   "prep": 4.0, "revision": 1.5 },
+          { "ch": 6,  "title": "Control and Coordination",                "difficulty": "Medium", "prep": 2.5, "revision": 1.0 },
+          { "ch": 7,  "title": "How do Organisms Reproduce?",             "difficulty": "Medium", "prep": 2.5, "revision": 1.0 },
+          { "ch": 8,  "title": "Heredity",                                "difficulty": "Medium", "prep": 2.0, "revision": 0.5 },
+          { "ch": 9,  "title": "Light – Reflection and Refraction",       "difficulty": "High",   "prep": 5.0, "revision": 2.0 },
+          { "ch": 10, "title": "The Human Eye and the Colourful World",   "difficulty": "Medium", "prep": 2.0, "revision": 0.5 },
+          { "ch": 11, "title": "Electricity",                             "difficulty": "High",   "prep": 5.0, "revision": 2.0 },
+          { "ch": 12, "title": "Magnetic Effects of Electric Current",    "difficulty": "Medium", "prep": 2.5, "revision": 1.0 },
+          { "ch": 13, "title": "Our Environment",                         "difficulty": "Easy",   "prep": 1.5, "revision": 0.5 }
+        ],
+        "totalPrep": 39.5,
+        "totalRevision": 14.5
+      }
+    ]
+  },
+  "cbse_12": {
+    "label": "CBSE – Class 12",
+    "subjects": [
+      {
+        "id": "physics",
+        "name": "Physics",
+        "chapters": [
+          { "ch": 1,  "unit": "Unit I — Electrostatics",                                    "title": "Electric Charges and Fields",               "difficulty": "Very High", "prep": 6.0, "revision": 2.0 },
+          { "ch": 2,  "unit": "Unit I — Electrostatics",                                    "title": "Electrostatic Potential and Capacitance",   "difficulty": "Very High", "prep": 5.5, "revision": 2.0 },
+          { "ch": 3,  "unit": "Unit II — Current Electricity",                              "title": "Current Electricity",                       "difficulty": "High",      "prep": 4.0, "revision": 1.5 },
+          { "ch": 4,  "unit": "Unit III — Magnetic Effects of Current & Magnetism",         "title": "Moving Charges and Magnetism",              "difficulty": "High",      "prep": 4.5, "revision": 1.5 },
+          { "ch": 5,  "unit": "Unit III — Magnetic Effects of Current & Magnetism",         "title": "Magnetism and Matter",                      "difficulty": "Medium",    "prep": 2.5, "revision": 1.0 },
+          { "ch": 6,  "unit": "Unit IV — Electromagnetic Induction & AC",                  "title": "Electromagnetic Induction",                 "difficulty": "High",      "prep": 3.5, "revision": 1.5 },
+          { "ch": 7,  "unit": "Unit IV — Electromagnetic Induction & AC",                  "title": "Alternating Current",                       "difficulty": "High",      "prep": 4.0, "revision": 1.5 },
+          { "ch": 8,  "unit": "Unit V — Electromagnetic Waves",                            "title": "Electromagnetic Waves",                     "difficulty": "Easy",      "prep": 1.5, "revision": 0.5 },
+          { "ch": 9,  "unit": "Unit VI — Optics",                                          "title": "Ray Optics and Optical Instruments",        "difficulty": "High",      "prep": 5.0, "revision": 2.0 },
+          { "ch": 10, "unit": "Unit VI — Optics",                                          "title": "Wave Optics",                               "difficulty": "High",      "prep": 3.5, "revision": 1.5 },
+          { "ch": 11, "unit": "Unit VII — Dual Nature of Matter & Radiation",              "title": "Dual Nature of Radiation and Matter",       "difficulty": "Medium",    "prep": 2.5, "revision": 1.0 },
+          { "ch": 12, "unit": "Unit VIII — Atoms & Nuclei",                                "title": "Atoms",                                     "difficulty": "Medium",    "prep": 2.0, "revision": 0.5 },
+          { "ch": 13, "unit": "Unit VIII — Atoms & Nuclei",                                "title": "Nuclei",                                    "difficulty": "Medium",    "prep": 2.5, "revision": 1.0 },
+          { "ch": 14, "unit": "Unit IX — Electronic Devices",                              "title": "Semiconductor Electronics",                 "difficulty": "High",      "prep": 3.5, "revision": 1.5 }
+        ],
+        "totalPrep": 54.5,
+        "totalRevision": 19.0
+      },
+      {
+        "id": "chemistry",
+        "name": "Chemistry",
+        "chapters": [
+          { "ch": 1,  "unit": "Part I — Physical & Inorganic Chemistry", "title": "Solutions",                                  "difficulty": "High",      "prep": 4.5, "revision": 1.5 },
+          { "ch": 2,  "unit": "Part I — Physical & Inorganic Chemistry", "title": "Electrochemistry",                           "difficulty": "Very High", "prep": 5.0, "revision": 2.0 },
+          { "ch": 3,  "unit": "Part I — Physical & Inorganic Chemistry", "title": "Chemical Kinetics",                          "difficulty": "High",      "prep": 3.5, "revision": 1.5 },
+          { "ch": 4,  "unit": "Part I — Physical & Inorganic Chemistry", "title": "d- and f-Block Elements",                   "difficulty": "High",      "prep": 4.0, "revision": 1.5 },
+          { "ch": 5,  "unit": "Part I — Physical & Inorganic Chemistry", "title": "Coordination Compounds",                    "difficulty": "Very High", "prep": 4.5, "revision": 2.0 },
+          { "ch": 6,  "unit": "Part II — Organic Chemistry",             "title": "Haloalkanes and Haloarenes",                 "difficulty": "High",      "prep": 4.0, "revision": 1.5 },
+          { "ch": 7,  "unit": "Part II — Organic Chemistry",             "title": "Alcohols, Phenols and Ethers",              "difficulty": "High",      "prep": 3.5, "revision": 1.5 },
+          { "ch": 8,  "unit": "Part II — Organic Chemistry",             "title": "Aldehydes, Ketones and Carboxylic Acids",   "difficulty": "High",      "prep": 4.0, "revision": 1.5 },
+          { "ch": 9,  "unit": "Part II — Organic Chemistry",             "title": "Amines",                                    "difficulty": "Medium",    "prep": 2.5, "revision": 1.0 },
+          { "ch": 10, "unit": "Part II — Organic Chemistry",             "title": "Biomolecules",                              "difficulty": "Medium",    "prep": 2.0, "revision": 0.5 }
+        ],
+        "totalPrep": 37.5,
+        "totalRevision": 14.5
+      }
+    ]
+  },
+  "stateboard_12": {
+    "label": "State Board – Class 12",
+    "subjects": [
+      {
+        "id": "physics",
+        "name": "Physics",
+        "chapters": [
+          { "ch": 1,  "unit": "Volume 1", "title": "Electrostatics",                                          "difficulty": "Very High", "prep": 7.0, "revision": 2.5 },
+          { "ch": 2,  "unit": "Volume 1", "title": "Current Electricity",                                     "difficulty": "High",      "prep": 4.0, "revision": 1.5 },
+          { "ch": 3,  "unit": "Volume 1", "title": "Magnetism and Magnetic Effects of Electric Current",      "difficulty": "Very High", "prep": 6.0, "revision": 2.5 },
+          { "ch": 4,  "unit": "Volume 1", "title": "Electromagnetic Induction and Alternating Current",       "difficulty": "Very High", "prep": 6.5, "revision": 2.5 },
+          { "ch": 5,  "unit": "Volume 1", "title": "Electromagnetic Waves",                                   "difficulty": "Medium",    "prep": 3.0, "revision": 1.0 },
+          { "ch": 6,  "unit": "Volume 2", "title": "Ray Optics",                                              "difficulty": "Very High", "prep": 6.0, "revision": 2.5 },
+          { "ch": 7,  "unit": "Volume 2", "title": "Wave Optics",                                             "difficulty": "High",      "prep": 5.0, "revision": 2.0 },
+          { "ch": 8,  "unit": "Volume 2", "title": "Dual Nature of Radiation and Matter",                     "difficulty": "High",      "prep": 3.5, "revision": 1.5 },
+          { "ch": 9,  "unit": "Volume 2", "title": "Atomic and Nuclear Physics",                              "difficulty": "High",      "prep": 5.0, "revision": 2.0 },
+          { "ch": 10, "unit": "Volume 2", "title": "Electronics and Communication",                           "difficulty": "High",      "prep": 5.0, "revision": 2.0 }
+        ],
+        "totalPrep": 51.0,
+        "totalRevision": 20.0
+      },
+      {
+        "id": "chemistry",
+        "name": "Chemistry",
+        "chapters": [
+          { "ch": 1,  "unit": "Volume 1 — Inorganic & Physical Chemistry", "title": "Metallurgy",                                     "difficulty": "Medium",    "prep": 2.5, "revision": 1.0 },
+          { "ch": 2,  "unit": "Volume 1 — Inorganic & Physical Chemistry", "title": "p-Block Elements – I",                           "difficulty": "High",      "prep": 3.5, "revision": 1.5 },
+          { "ch": 3,  "unit": "Volume 1 — Inorganic & Physical Chemistry", "title": "p-Block Elements – II",                          "difficulty": "High",      "prep": 4.0, "revision": 1.5 },
+          { "ch": 4,  "unit": "Volume 1 — Inorganic & Physical Chemistry", "title": "Transition and Inner Transition Elements",        "difficulty": "High",      "prep": 3.5, "revision": 1.5 },
+          { "ch": 5,  "unit": "Volume 1 — Inorganic & Physical Chemistry", "title": "Coordination Chemistry",                         "difficulty": "Very High", "prep": 5.0, "revision": 2.0 },
+          { "ch": 6,  "unit": "Volume 1 — Inorganic & Physical Chemistry", "title": "Solid State",                                    "difficulty": "Medium",    "prep": 2.5, "revision": 1.0 },
+          { "ch": 7,  "unit": "Volume 1 — Inorganic & Physical Chemistry", "title": "Chemical Kinetics",                              "difficulty": "Very High", "prep": 5.5, "revision": 2.0 },
+          { "ch": 8,  "unit": "Volume 2 — Physical & Organic Chemistry",   "title": "Ionic Equilibrium",                              "difficulty": "High",      "prep": 4.0, "revision": 1.5 },
+          { "ch": 9,  "unit": "Volume 2 — Physical & Organic Chemistry",   "title": "Electrochemistry",                               "difficulty": "Very High", "prep": 5.0, "revision": 2.0 },
+          { "ch": 10, "unit": "Volume 2 — Physical & Organic Chemistry",   "title": "Surface Chemistry",                              "difficulty": "Medium",    "prep": 2.5, "revision": 1.0 },
+          { "ch": 11, "unit": "Volume 2 — Physical & Organic Chemistry",   "title": "Hydroxy Compounds and Ethers",                   "difficulty": "High",      "prep": 3.5, "revision": 1.5 },
+          { "ch": 12, "unit": "Volume 2 — Physical & Organic Chemistry",   "title": "Carbonyl Compounds and Carboxylic Acids",        "difficulty": "High",      "prep": 4.0, "revision": 1.5 },
+          { "ch": 13, "unit": "Volume 2 — Physical & Organic Chemistry",   "title": "Organic Nitrogen Compounds",                     "difficulty": "High",      "prep": 3.5, "revision": 1.5 },
+          { "ch": 14, "unit": "Volume 2 — Physical & Organic Chemistry",   "title": "Biomolecules",                                   "difficulty": "Medium",    "prep": 2.5, "revision": 1.0 },
+          { "ch": 15, "unit": "Volume 2 — Physical & Organic Chemistry",   "title": "Chemistry in Everyday Life",                     "difficulty": "Easy",      "prep": 2.0, "revision": 0.5 }
+        ],
+        "totalPrep": 53.5,
+        "totalRevision": 21.0
+      }
+    ]
+  }
+}
