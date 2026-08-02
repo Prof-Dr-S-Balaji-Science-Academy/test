@@ -193,7 +193,7 @@
           <p class="sp-hero-sub">Build your personalised schedule below — chapter by chapter, subject by subject — and download it to keep with you every day.</p>
           <div style="display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-6);">
             <a class="btn btn-primary" href="../../index.html#courses">Courses</a>
-            <a class="btn btn-secondary" href="../test/index.html">Mock Tests</a>
+            <a class="btn btn-secondary" href="https://test.profbalaji.in/pages/test.html">Mock Tests</a>
           </div>
         </div>
 
@@ -375,7 +375,7 @@ function renderPlanner(key){
     subject.chapters.forEach((ch,i)=>{
       const s=sched[i];
       if(ch.unit&&ch.unit!==prevUnit){
-        rows+=`<tr class="unit-header"><td colspan="5">${ch.unit}</td></tr>`;
+        rows+=`<tr class="unit-header"><td colspan="7">${ch.unit}</td></tr>`;
         prevUnit=ch.unit;
       }
       const dc={'Easy':'diff-easy','Medium':'diff-medium','High':'diff-high','Very High':'diff-very-high'}[ch.difficulty]||'diff-medium';
@@ -385,24 +385,10 @@ function renderPlanner(key){
           <td>${ch.ch}</td>
           <td style="max-width:200px;line-height:1.4;">${ch.title}</td>
           <td><span class="diff ${dc}">${ch.difficulty}</span></td>
-          <td>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <div>
-                <div style="font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:3px;">Preparation</div>
-                ${makeTrigger(sid,'prep',s.prepStart,s.prepEnd)}
-              </div>
-              <div>
-                <div style="font-size:9px;font-weight:700;color:#0667d0;letter-spacing:.04em;text-transform:uppercase;margin-bottom:3px;">Revision</div>
-                ${makeTrigger(sid,'rev',s.revStart,s.revEnd)}
-              </div>
-            </div>
-          </td>
-          <td>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <span class="sp-hours-cell" style="font-size:13px;">${ch.prep}h</span>
-              <span class="sp-hours-cell sp-hours-rev" style="font-size:13px;">${ch.revision}h</span>
-            </div>
-          </td>
+          <td class="sp-hours-cell">${ch.prep}h</td>
+          <td>${makeTrigger(sid,'prep',s.prepStart,s.prepEnd)}</td>
+          <td class="sp-hours-cell sp-hours-rev">${ch.revision}h</td>
+          <td>${makeTrigger(sid,'rev',s.revStart,s.revEnd)}</td>
         </tr>`;
     });
 
@@ -418,7 +404,8 @@ function renderPlanner(key){
         <table class="sp-table">
           <thead><tr>
             <th>Ch.</th><th>Title</th><th>Difficulty</th>
-            <th>Dates</th><th>Hours</th>
+            <th>Prep Hrs</th><th>Preparation Dates</th>
+            <th>Rev Hrs</th><th>Revision Dates</th>
           </tr></thead>
           <tbody>${rows}</tbody>
         </table>
@@ -448,19 +435,22 @@ function makeTrigger(sid,type,from,to){
 }
 
 /* ─────────────────────────────── calendar ───────── */
-let calActiveId=null, calTriggerBtn=null;
+let calActiveId=null;
 let calYear=0, calMonth=0;
-let calSelecting=false, calStart=null, calHover=null;
+// phase: 0=idle (show existing range), 1=awaiting end (start chosen, hovering)
+let calPhase=0, calStart=null, calEnd=null, calHoverDs=null;
 
 function openCal(id,from,to,triggerBtn){
   const cal=document.getElementById('sp-cal-global');
+  // Toggle off if same trigger clicked again
   if(cal.classList.contains('open')&&calActiveId===id){ closeCal(); return; }
-  calActiveId=id; calTriggerBtn=triggerBtn;
-  calStart=from; calHover=to; calSelecting=false;
+  calActiveId=id;
+  // Initialise with the existing saved range so it shows highlighted on open
+  calStart=from; calEnd=to; calHoverDs=null; calPhase=0;
   const d=parseDate(from);
   calYear=d.getFullYear(); calMonth=d.getMonth();
   renderCal();
-  // position below trigger
+  // Position dropdown below the trigger button
   const rect=triggerBtn.getBoundingClientRect();
   const scrollY=window.scrollY||document.documentElement.scrollTop;
   const scrollX=window.scrollX||document.documentElement.scrollLeft;
@@ -474,7 +464,7 @@ function openCal(id,from,to,triggerBtn){
 
 function closeCal(){
   document.getElementById('sp-cal-global').classList.remove('open');
-  calActiveId=null; calTriggerBtn=null; calSelecting=false; calStart=null; calHover=null;
+  calActiveId=null; calPhase=0; calStart=null; calEnd=null; calHoverDs=null;
 }
 
 function calNav(dir){
@@ -486,49 +476,68 @@ function calNav(dir){
 
 function renderCal(){
   document.getElementById('cal-month-label').textContent=`${MONTHS[calMonth]} ${calYear}`;
-  const grid=document.getElementById('cal-grid');
   const today=fmt(new Date());
   const first=new Date(calYear,calMonth,1).getDay();
   const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
   const days=['Su','Mo','Tu','We','Th','Fr','Sa'];
   let html=days.map(d=>`<div class="sp-cal-dayname">${d}</div>`).join('');
   for(let i=0;i<first;i++) html+=`<div class="sp-cal-day empty"></div>`;
+
+  // Determine what range to highlight
+  let lo=null, hi=null;
+  if(calPhase===1 && calStart && calHoverDs){
+    // While user is picking end date — show hover preview
+    lo=calStart<calHoverDs?calStart:calHoverDs;
+    hi=calStart<calHoverDs?calHoverDs:calStart;
+  } else if(calStart && calEnd){
+    // Idle: show the confirmed/existing range
+    lo=calStart<calEnd?calStart:calEnd;
+    hi=calStart<calEnd?calEnd:calStart;
+  } else if(calStart){
+    lo=hi=calStart;
+  }
+
   for(let d=1;d<=daysInMonth;d++){
     const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     let cls='sp-cal-day';
     if(ds===today) cls+=' today';
-    if(calStart&&calHover){
-      const lo=calStart<calHover?calStart:calHover;
-      const hi=calStart<calHover?calHover:calStart;
-      if(ds===lo) cls+=' range-start';
-      if(ds===hi) cls+=' range-end';
-      if(ds>lo&&ds<hi) cls+=' in-range';
-    } else if(calStart&&ds===calStart){
-      cls+=' range-start range-end';
+    if(lo && hi){
+      if(ds===lo && ds===hi) cls+=' range-start range-end';
+      else if(ds===lo) cls+=' range-start';
+      else if(ds===hi) cls+=' range-end';
+      else if(ds>lo && ds<hi) cls+=' in-range';
     }
-    html+=`<div class="${cls}" onmouseenter="calHoverDay('${ds}')" onclick="calClickDay('${ds}')">${d}</div>`;
+    html+=`<div class="${cls}" data-ds="${ds}">${d}</div>`;
   }
+  const grid=document.getElementById('cal-grid');
   grid.innerHTML=html;
+
+  // Attach events after render (avoid inline handlers for hover to work reliably)
+  grid.querySelectorAll('.sp-cal-day:not(.empty)').forEach(el=>{
+    el.addEventListener('mouseenter',()=>calHoverDay(el.dataset.ds));
+    el.addEventListener('click',()=>calClickDay(el.dataset.ds));
+  });
 }
 
 function calHoverDay(ds){
-  if(!calSelecting) return;
-  calHover=ds;
+  if(calPhase!==1) return;  // only preview when awaiting end date
+  calHoverDs=ds;
   renderCal();
 }
 
 function calClickDay(ds){
-  if(!calSelecting){
-    // first click — set start
-    calSelecting=true; calStart=ds; calHover=ds;
+  if(calPhase===0){
+    // First click — start date chosen, now await end date
+    calPhase=1; calStart=ds; calEnd=null; calHoverDs=ds;
     document.getElementById('cal-hint').textContent='Now click an end date';
     renderCal();
   } else {
-    // second click — finalise
-    calSelecting=false;
+    // Second click — end date chosen, save and close
+    calPhase=0;
     let from=calStart, to=ds;
     if(from>to){let t=from;from=to;to=t;}
-    // save
+    calStart=from; calEnd=to; calHoverDs=null;
+    // Persist values
     document.getElementById('val-from-'+calActiveId).value=from;
     document.getElementById('val-to-'+calActiveId).value=to;
     document.getElementById('disp-from-'+calActiveId).textContent=fmtDisplay(from);
@@ -537,7 +546,7 @@ function calClickDay(ds){
   }
 }
 
-// Close on outside click
+// Close on outside click (but not on the calendar or trigger buttons)
 document.addEventListener('click',function(e){
   const cal=document.getElementById('sp-cal-global');
   if(!cal.classList.contains('open')) return;
@@ -570,11 +579,10 @@ function downloadPDF(){
         <td class="pdf-ch">${ch.ch}</td>
         <td class="pdf-title">${ch.title}</td>
         <td><span style="display:inline-block;font-size:8px;font-weight:700;padding:2px 6px;border-radius:999px;background:${dc[0]};color:${dc[1]};">${ch.difficulty}</span></td>
-        <td class="pdf-date-cell">
-          <span class="pdf-label-prep">PREP</span> ${fmtDisplay(from)} → ${fmtDisplay(to)}<br>
-          <span class="pdf-label-rev">REV</span> ${fmtDisplay(rfrom)} → ${fmtDisplay(rto)}
-        </td>
-        <td class="pdf-hrs">${ch.prep}h <span style="color:#6b7280;font-weight:400;font-size:8px;">prep</span><br><span style="color:#0052ff;">${ch.revision}h</span> <span style="color:#6b7280;font-weight:400;font-size:8px;">rev</span></td>
+        <td class="pdf-hrs">${ch.prep}h</td>
+        <td class="pdf-date-cell">${fmtDisplay(from)}<br><span style="color:#9ca3af;font-size:8px;">to ${fmtDisplay(to)}</span></td>
+        <td class="pdf-hrs" style="color:#0052ff;">${ch.revision}h</td>
+        <td class="pdf-date-cell">${fmtDisplay(rfrom)}<br><span style="color:#9ca3af;font-size:8px;">to ${fmtDisplay(rto)}</span></td>
       </tr>`;
     });
 
@@ -585,7 +593,7 @@ function downloadPDF(){
       </div>
       <h1 class="pdf-h1">Study Planner — ${subject.name}</h1>
       <table class="pdf-table">
-        <thead><tr><th>Ch.</th><th>Title</th><th>Difficulty</th><th>Dates</th><th>Hours</th></tr></thead>
+        <thead><tr><th>Ch.</th><th>Title</th><th>Difficulty</th><th>Prep Hrs</th><th>Preparation Dates</th><th>Rev Hrs</th><th>Revision Dates</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
       <div class="pdf-foot">Generated by profbalaji.in · Target: 31 January · Complete all preparation and revision before the exam.</div>
