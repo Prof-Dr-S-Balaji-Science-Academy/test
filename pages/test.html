@@ -102,7 +102,7 @@
 
     /* ── Dark panel — matches homepage hero-panel exactly ── */
     .hero-panel h2 { font-size: 1.5rem; }
-    .panel-line { font-size: 14px; margin: 8px 0 20px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal; }
+    .panel-line { font-size: 14px; margin: 8px 0 20px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal; max-width: 100%; }
 
     .course-rows { display: flex; flex-direction: column; gap: 0; }
     .course-row {
@@ -232,13 +232,13 @@
 
     <!-- HERO -->
     <section class="section hero" data-od-id="hero" style="background-color: var(--bg);">
-      <div class="container hero-grid">
+      <div class="container hero-grid" style="grid-template-columns: 1fr 1fr; align-items: start;">
 
         <!-- LEFT COLUMN -->
-        <div>
-          <div class="cs-badge"><span class="dot" aria-hidden="true"></span> Admissions open · 2026 batch</div>
+        <div style="min-width: 0;">
+          <div class="hero-badge" data-od-id="admissions-badge"><span class="dot" aria-hidden="true"></span> PRACTICE TESTS</div>
 
-          <h1>Mock Test Series Coming Soon...</h1>
+          <h1 style="white-space: normal; overflow-wrap: break-word;">Mock Test Series Coming Soon...</h1>
 
           <p class="hero-sub">Most students read their notes — but never sit a timed test until the real exam. That's the gap. Mock tests fix it.</p>
           <p class="hero-sub">We're building a free, chapter-level test platform for CBSE and State Board students — MCQ quizzes, custom tests, and full-length board exam simulations. All from the same professor who teaches the course.</p>
@@ -250,7 +250,7 @@
         </div>
 
         <!-- RIGHT PANEL — dark card, matches homepage -->
-        <aside class="hero-panel" data-od-id="hero-panel">
+        <aside class="hero-panel" data-od-id="hero-panel" style="min-width: 0; max-width: 100%; overflow: hidden; box-sizing: border-box;">
 
           <h2>Practice - Mock Tests</h2>
           <p class="panel-line">Questions crafted by Prof. Dr. S. Balaji — board-exam focused, chapter-wise, and completely free.</p>
