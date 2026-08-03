@@ -71,36 +71,47 @@
     .diff-high{background:#ffedd5;color:#9a3412}
     .diff-very-high{background:#fee2e2;color:#991b1b}
 
-    /* ── Date range picker ── */
-    .sp-date-range{position:relative;display:inline-block}
-    .sp-date-trigger{display:flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;transition:border-color 120ms;font-size:12px;color:var(--fg);white-space:nowrap;min-width:160px}
-    .sp-date-trigger:hover{border-color:var(--accent)}
-    .sp-date-trigger svg{width:13px;height:13px;color:var(--muted);flex-shrink:0}
-    .sp-date-display{display:flex;flex-direction:column;gap:1px;line-height:1.2}
-    .sp-date-display .d-from{font-weight:600;font-size:12px;color:var(--fg)}
-    .sp-date-display .d-sep{font-size:10px;color:var(--muted)}
-    .sp-date-display .d-to{font-size:11px;color:var(--muted)}
+    /* ── Date range trigger button ── */
+    .sp-date-trigger{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;font-size:12px;color:var(--fg);white-space:nowrap;font-family:var(--font-body);transition:border-color 150ms,box-shadow 150ms;text-align:left;min-width:170px}
+    .sp-date-trigger:hover,.sp-date-trigger:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in oklab,var(--accent),transparent 85%);outline:none}
+    .sp-date-trigger svg{width:14px;height:14px;color:var(--accent);flex-shrink:0}
+    .sp-dt-text{display:flex;flex-direction:column;gap:1px;line-height:1.25}
+    .sp-dt-text .dt-main{font-weight:700;font-size:12px;color:var(--fg)}
+    .sp-dt-text .dt-sub{font-size:10px;color:var(--muted)}
 
-    /* calendar dropdown */
-    .sp-cal-dropdown{position:fixed;z-index:9999;background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;box-shadow:0 8px 32px rgba(0,0,0,0.14);width:280px;display:none}
-    .sp-cal-dropdown.open{display:block}
+    /* ── Calendar overlay ── */
+    #sp-cal-overlay{position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0.25);display:none;align-items:center;justify-content:center}
+    #sp-cal-overlay.open{display:flex}
+    #sp-cal-box{background:#fff;border-radius:16px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.22);width:340px;max-width:calc(100vw - 32px);position:relative}
+    .sp-cal-header-strip{background:var(--dark);border-radius:10px;padding:14px 16px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
+    .sp-cal-header-label{font-size:11px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:2px}
+    .sp-cal-header-dates{font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
+    .sp-cal-header-sep{color:rgba(255,255,255,.4)}
+    #sp-cal-title{font-size:11px;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.04em}
     .sp-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-    .sp-cal-nav button{background:none;border:1px solid var(--border);border-radius:var(--radius-sm);width:28px;height:28px;cursor:pointer;display:grid;place-items:center;transition:all 100ms;color:var(--fg)}
-    .sp-cal-nav button:hover{background:var(--surface)}
-    .sp-cal-month{font-size:13px;font-weight:700;color:var(--fg)}
-    .sp-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-    .sp-cal-dayname{font-size:9px;font-weight:700;color:var(--muted);text-align:center;padding:4px 0;letter-spacing:0.04em;text-transform:uppercase}
-    .sp-cal-day{aspect-ratio:1;display:grid;place-items:center;border-radius:6px;font-size:11px;cursor:pointer;transition:all 100ms;position:relative;font-family:var(--font-body)}
-    .sp-cal-day:hover:not(.empty):not(.disabled){background:color-mix(in oklab,var(--accent),transparent 88%)}
-    .sp-cal-day.in-range{background:color-mix(in oklab,var(--accent),transparent 88%);border-radius:0}
-    .sp-cal-day.range-start,.sp-cal-day.range-end{background:var(--accent)!important;color:#fff!important;border-radius:6px!important;font-weight:700}
-    .sp-cal-day.range-start{border-radius:6px 0 0 6px!important}
-    .sp-cal-day.range-end{border-radius:0 6px 6px 0!important}
-    .sp-cal-day.range-start.range-end{border-radius:6px!important}
-    .sp-cal-day.disabled{opacity:0.3;cursor:default}
-    .sp-cal-day.empty{cursor:default}
-    .sp-cal-day.today{font-weight:700;color:var(--accent)}
-    .sp-cal-hint{font-size:10px;color:var(--muted);text-align:center;margin-top:10px;padding-top:8px;border-top:1px solid var(--border)}
+    .sp-cal-nav-btn{background:none;border:1.5px solid var(--border);border-radius:8px;width:32px;height:32px;cursor:pointer;display:grid;place-items:center;color:var(--fg);transition:all 100ms;flex-shrink:0}
+    .sp-cal-nav-btn:hover{background:var(--surface);border-color:var(--accent)}
+    .sp-cal-month-label{font-size:15px;font-weight:700;color:var(--fg)}
+    .sp-cal-daynames{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:4px}
+    .sp-cal-dayname{font-size:10px;font-weight:700;color:var(--muted);text-align:center;padding:4px 0;letter-spacing:.04em}
+    .sp-cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+    .sp-cal-cell{height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;border-radius:8px;cursor:pointer;position:relative;transition:background 80ms,color 80ms;user-select:none}
+    .sp-cal-cell.empty{cursor:default}
+    .sp-cal-cell.today:not(.sel-start):not(.sel-end){color:var(--accent);font-weight:700}
+    .sp-cal-cell:not(.empty):not(.sel-start):not(.sel-end):hover{background:#f0f4ff}
+    .sp-cal-cell.in-range{background:#dce9ff;border-radius:0}
+    .sp-cal-cell.range-cap-left{border-radius:8px 0 0 8px}
+    .sp-cal-cell.range-cap-right{border-radius:0 8px 8px 0}
+    .sp-cal-cell.sel-start,.sp-cal-cell.sel-end{background:var(--accent)!important;color:#fff!important;font-weight:700;border-radius:8px;z-index:1}
+    .sp-cal-cell.sel-start.has-end{border-radius:8px 0 0 8px}
+    .sp-cal-cell.sel-end.has-start{border-radius:0 8px 8px 0}
+    .sp-cal-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+    .sp-cal-actions{display:flex;gap:8px;margin-top:14px;justify-content:flex-end}
+    .sp-cal-cancel{padding:7px 16px;border:1.5px solid var(--border);border-radius:8px;background:none;font-size:13px;color:var(--muted);cursor:pointer;font-family:var(--font-body)}
+    .sp-cal-cancel:hover{border-color:var(--fg);color:var(--fg)}
+    .sp-cal-confirm{padding:7px 20px;border:none;border-radius:8px;background:var(--accent);font-size:13px;font-weight:700;color:#fff;cursor:pointer;font-family:var(--font-body)}
+    .sp-cal-confirm:hover{opacity:.9}
+    .sp-cal-confirm:disabled{opacity:.4;cursor:not-allowed}
 
     /* hours */
     .sp-hours-cell{font-weight:600;color:var(--fg)}
@@ -281,19 +292,48 @@
 
   <div id="sp-pdf-area"></div>
 
-  <!-- Global calendar dropdown (one shared instance) -->
-  <div class="sp-cal-dropdown" id="sp-cal-global">
-    <div class="sp-cal-nav">
-      <button onclick="calNav(-1)" aria-label="Previous month">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <span class="sp-cal-month" id="cal-month-label"></span>
-      <button onclick="calNav(1)" aria-label="Next month">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
+  <!-- Calendar modal overlay -->
+  <div id="sp-cal-overlay" role="dialog" aria-modal="true" aria-label="Select date range">
+    <div id="sp-cal-box">
+      <!-- Dark header strip showing selected range -->
+      <div class="sp-cal-header-strip">
+        <div>
+          <div class="sp-cal-header-label">Select dates</div>
+          <div class="sp-cal-header-dates">
+            <span id="cal-hdr-from">—</span>
+            <span class="sp-cal-header-sep">—</span>
+            <span id="cal-hdr-to">—</span>
+          </div>
+        </div>
+        <div id="sp-cal-title"></div>
+      </div>
+      <!-- Month navigation -->
+      <div class="sp-cal-nav">
+        <button class="sp-cal-nav-btn" id="cal-prev" aria-label="Previous month">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <span class="sp-cal-month-label" id="cal-month-label"></span>
+        <button class="sp-cal-nav-btn" id="cal-next" aria-label="Next month">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <!-- Day names -->
+      <div class="sp-cal-daynames">
+        <div class="sp-cal-dayname">Su</div><div class="sp-cal-dayname">Mo</div>
+        <div class="sp-cal-dayname">Tu</div><div class="sp-cal-dayname">We</div>
+        <div class="sp-cal-dayname">Th</div><div class="sp-cal-dayname">Fr</div>
+        <div class="sp-cal-dayname">Sa</div>
+      </div>
+      <!-- Day cells -->
+      <div class="sp-cal-days" id="cal-days"></div>
+      <!-- Hint -->
+      <div class="sp-cal-hint" id="cal-hint">Click a start date</div>
+      <!-- Actions -->
+      <div class="sp-cal-actions">
+        <button class="sp-cal-cancel" id="cal-cancel">Cancel</button>
+        <button class="sp-cal-confirm" id="cal-confirm" disabled>Confirm</button>
+      </div>
     </div>
-    <div class="sp-cal-grid" id="cal-grid"></div>
-    <div class="sp-cal-hint" id="cal-hint">Click a start date</div>
   </div>
 
 <script>
@@ -420,140 +460,176 @@ function renderPlanner(key){
 
 function makeTrigger(sid,type,from,to){
   const id=`${sid}_${type}`;
-  return `<div class="sp-date-range" id="range-${id}">
-    <button class="sp-date-trigger" onclick="openCal('${id}','${from}','${to}',this)" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      <div class="sp-date-display">
-        <span class="d-from" id="disp-from-${id}">${fmtDisplay(from)}</span>
-        <span class="d-sep">→</span>
-        <span class="d-to" id="disp-to-${id}">${fmtDisplay(to)}</span>
-      </div>
-    </button>
+  return `<button class="sp-date-trigger" data-calid="${id}" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <div class="sp-dt-text">
+      <span class="dt-main" id="disp-from-${id}">${fmtDisplay(from)}</span>
+      <span class="dt-sub" id="disp-to-${id}">to ${fmtDisplay(to)}</span>
+    </div>
     <input type="hidden" id="val-from-${id}" value="${from}"/>
     <input type="hidden" id="val-to-${id}" value="${to}"/>
-  </div>`;
+  </button>`;
 }
 
-/* ─────────────────────────────── calendar ───────── */
-let calActiveId=null;
-let calYear=0, calMonth=0;
-// phase: 0=idle (show existing range), 1=awaiting end (start chosen, hovering)
-let calPhase=0, calStart=null, calEnd=null, calHoverDs=null;
+/* ─────────────────────────── calendar modal ─────── */
+// State
+var CAL = {
+  activeId: null,
+  year: 0, month: 0,
+  phase: 0,       // 0=pick start, 1=pick end
+  start: null, end: null, hover: null
+};
 
-function openCal(id,from,to,triggerBtn){
-  const cal=document.getElementById('sp-cal-global');
-  // Toggle off if same trigger clicked again
-  if(cal.classList.contains('open')&&calActiveId===id){ closeCal(); return; }
-  calActiveId=id;
-  // Initialise with the existing saved range so it shows highlighted on open
-  calStart=from; calEnd=to; calHoverDs=null; calPhase=0;
-  const d=parseDate(from);
-  calYear=d.getFullYear(); calMonth=d.getMonth();
-  renderCal();
-  // Position dropdown below the trigger button
-  const rect=triggerBtn.getBoundingClientRect();
-  const scrollY=window.scrollY||document.documentElement.scrollTop;
-  const scrollX=window.scrollX||document.documentElement.scrollLeft;
-  cal.style.top=(rect.bottom+scrollY+6)+'px';
-  let left=rect.left+scrollX;
-  if(left+280>window.innerWidth-8) left=window.innerWidth-8-280;
-  cal.style.left=Math.max(8,left)+'px';
-  cal.classList.add('open');
-  document.getElementById('cal-hint').textContent='Click a start date';
+function calOpen(id, from, to) {
+  CAL.activeId = id;
+  CAL.start = from; CAL.end = to; CAL.hover = null; CAL.phase = 0;
+  var d = parseDate(from);
+  CAL.year = d.getFullYear(); CAL.month = d.getMonth();
+  calRender();
+  document.getElementById('sp-cal-overlay').classList.add('open');
+  document.getElementById('cal-hint').textContent = 'Click a start date';
+  document.getElementById('cal-confirm').disabled = true;
+  // Show label (prep or revision)
+  var isPre = id.indexOf('_prep') !== -1;
+  document.getElementById('sp-cal-title').textContent = isPre ? 'PREPARATION' : 'REVISION';
+  calUpdateHeader();
 }
 
-function closeCal(){
-  document.getElementById('sp-cal-global').classList.remove('open');
-  calActiveId=null; calPhase=0; calStart=null; calEnd=null; calHoverDs=null;
+function calClose() {
+  document.getElementById('sp-cal-overlay').classList.remove('open');
+  CAL.activeId = null; CAL.phase = 0; CAL.start = null; CAL.end = null; CAL.hover = null;
 }
 
-function calNav(dir){
-  calMonth+=dir;
-  if(calMonth>11){calMonth=0;calYear++;}
-  if(calMonth<0){calMonth=11;calYear--;}
-  renderCal();
+function calConfirm() {
+  if (!CAL.start || !CAL.end) return;
+  var from = CAL.start, to = CAL.end;
+  if (from > to) { var t=from; from=to; to=t; }
+  document.getElementById('val-from-' + CAL.activeId).value = from;
+  document.getElementById('val-to-'   + CAL.activeId).value = to;
+  document.getElementById('disp-from-'+ CAL.activeId).textContent = fmtDisplay(from);
+  document.getElementById('disp-to-'  + CAL.activeId).textContent = 'to ' + fmtDisplay(to);
+  calClose();
 }
 
-function renderCal(){
-  document.getElementById('cal-month-label').textContent=`${MONTHS[calMonth]} ${calYear}`;
-  const today=fmt(new Date());
-  const first=new Date(calYear,calMonth,1).getDay();
-  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
-  const days=['Su','Mo','Tu','We','Th','Fr','Sa'];
-  let html=days.map(d=>`<div class="sp-cal-dayname">${d}</div>`).join('');
-  for(let i=0;i<first;i++) html+=`<div class="sp-cal-day empty"></div>`;
+function calNavMonth(dir) {
+  CAL.month += dir;
+  if (CAL.month > 11) { CAL.month = 0; CAL.year++; }
+  if (CAL.month < 0)  { CAL.month = 11; CAL.year--; }
+  calRender();
+}
 
-  // Determine what range to highlight
-  let lo=null, hi=null;
-  if(calPhase===1 && calStart && calHoverDs){
-    // While user is picking end date — show hover preview
-    lo=calStart<calHoverDs?calStart:calHoverDs;
-    hi=calStart<calHoverDs?calHoverDs:calStart;
-  } else if(calStart && calEnd){
-    // Idle: show the confirmed/existing range
-    lo=calStart<calEnd?calStart:calEnd;
-    hi=calStart<calEnd?calEnd:calStart;
-  } else if(calStart){
-    lo=hi=calStart;
+function calUpdateHeader() {
+  var from = CAL.phase===0 ? CAL.start : CAL.start;
+  var to   = CAL.hover || CAL.end;
+  document.getElementById('cal-hdr-from').textContent = from ? fmtDisplay(from) : '—';
+  document.getElementById('cal-hdr-to').textContent   = to   ? fmtDisplay(to)   : '—';
+}
+
+function calRender() {
+  document.getElementById('cal-month-label').textContent = MONTHS[CAL.month] + ' ' + CAL.year;
+  var today = fmt(new Date());
+  var first = new Date(CAL.year, CAL.month, 1).getDay();
+  var daysInMonth = new Date(CAL.year, CAL.month+1, 0).getDate();
+
+  // Determine highlight range
+  var lo = null, hi = null;
+  if (CAL.phase === 1 && CAL.start && CAL.hover) {
+    lo = CAL.start < CAL.hover ? CAL.start : CAL.hover;
+    hi = CAL.start < CAL.hover ? CAL.hover : CAL.start;
+  } else if (CAL.start && CAL.end) {
+    lo = CAL.start < CAL.end ? CAL.start : CAL.end;
+    hi = CAL.start < CAL.end ? CAL.end   : CAL.start;
+  } else if (CAL.start) {
+    lo = hi = CAL.start;
   }
 
-  for(let d=1;d<=daysInMonth;d++){
-    const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    let cls='sp-cal-day';
-    if(ds===today) cls+=' today';
-    if(lo && hi){
-      if(ds===lo && ds===hi) cls+=' range-start range-end';
-      else if(ds===lo) cls+=' range-start';
-      else if(ds===hi) cls+=' range-end';
-      else if(ds>lo && ds<hi) cls+=' in-range';
+  var grid = document.getElementById('cal-days');
+  grid.innerHTML = '';
+
+  // Empty cells
+  for (var i = 0; i < first; i++) {
+    var emp = document.createElement('div');
+    emp.className = 'sp-cal-cell empty';
+    grid.appendChild(emp);
+  }
+
+  for (var d = 1; d <= daysInMonth; d++) {
+    var ds = CAL.year + '-' + String(CAL.month+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+    var el = document.createElement('div');
+    el.className = 'sp-cal-cell';
+    el.textContent = d;
+    el.dataset.ds = ds;
+
+    if (ds === today) el.classList.add('today');
+
+    if (lo && hi) {
+      var isStart = ds === lo;
+      var isEnd   = ds === hi;
+      var inRange = ds > lo && ds < hi;
+      var hasRange = lo !== hi;
+      if (isStart) { el.classList.add('sel-start'); if (hasRange) el.classList.add('has-end'); }
+      if (isEnd)   { el.classList.add('sel-end');   if (hasRange) el.classList.add('has-start'); }
+      if (inRange) { el.classList.add('in-range'); }
+      // cap classes for rounded edges on range edges at row boundaries
+      if (inRange && new Date(CAL.year,CAL.month,d).getDay()===0) el.classList.add('range-cap-left');
+      if (inRange && new Date(CAL.year,CAL.month,d).getDay()===6) el.classList.add('range-cap-right');
     }
-    html+=`<div class="${cls}" data-ds="${ds}">${d}</div>`;
-  }
-  const grid=document.getElementById('cal-grid');
-  grid.innerHTML=html;
 
-  // Attach events after render (avoid inline handlers for hover to work reliably)
-  grid.querySelectorAll('.sp-cal-day:not(.empty)').forEach(el=>{
-    el.addEventListener('mouseenter',()=>calHoverDay(el.dataset.ds));
-    el.addEventListener('click',()=>calClickDay(el.dataset.ds));
+    // Events — use closure to capture ds
+    (function(dateStr) {
+      el.addEventListener('mouseenter', function() {
+        if (CAL.phase !== 1) return;
+        CAL.hover = dateStr;
+        calRender();
+        calUpdateHeader();
+      });
+      el.addEventListener('click', function() {
+        if (CAL.phase === 0) {
+          // First click: set start
+          CAL.phase = 1;
+          CAL.start = dateStr; CAL.end = null; CAL.hover = dateStr;
+          document.getElementById('cal-hint').textContent = 'Now click an end date';
+          document.getElementById('cal-confirm').disabled = true;
+          calRender();
+          calUpdateHeader();
+        } else {
+          // Second click: set end
+          CAL.phase = 0;
+          var from = CAL.start, to = dateStr;
+          if (from > to) { var t=from; from=to; to=t; }
+          CAL.start = from; CAL.end = to; CAL.hover = null;
+          document.getElementById('cal-hint').textContent = 'Dates selected — click Confirm to apply';
+          document.getElementById('cal-confirm').disabled = false;
+          calRender();
+          calUpdateHeader();
+        }
+      });
+    })(ds);
+
+    grid.appendChild(el);
+  }
+}
+
+// Wire up buttons after DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('cal-prev').addEventListener('click', function() { calNavMonth(-1); });
+  document.getElementById('cal-next').addEventListener('click', function() { calNavMonth(1); });
+  document.getElementById('cal-cancel').addEventListener('click', calClose);
+  document.getElementById('cal-confirm').addEventListener('click', calConfirm);
+  // Click backdrop to close
+  document.getElementById('sp-cal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) calClose();
   });
-}
-
-function calHoverDay(ds){
-  if(calPhase!==1) return;  // only preview when awaiting end date
-  calHoverDs=ds;
-  renderCal();
-}
-
-function calClickDay(ds){
-  if(calPhase===0){
-    // First click — start date chosen, now await end date
-    calPhase=1; calStart=ds; calEnd=null; calHoverDs=ds;
-    document.getElementById('cal-hint').textContent='Now click an end date';
-    renderCal();
-  } else {
-    // Second click — end date chosen, save and close
-    calPhase=0;
-    let from=calStart, to=ds;
-    if(from>to){let t=from;from=to;to=t;}
-    calStart=from; calEnd=to; calHoverDs=null;
-    // Persist values
-    document.getElementById('val-from-'+calActiveId).value=from;
-    document.getElementById('val-to-'+calActiveId).value=to;
-    document.getElementById('disp-from-'+calActiveId).textContent=fmtDisplay(from);
-    document.getElementById('disp-to-'+calActiveId).textContent=fmtDisplay(to);
-    closeCal();
-  }
-}
-
-// Close on outside click (but not on the calendar or trigger buttons)
-document.addEventListener('click',function(e){
-  const cal=document.getElementById('sp-cal-global');
-  if(!cal.classList.contains('open')) return;
-  if(cal.contains(e.target)) return;
-  if(e.target.closest('.sp-date-trigger')) return;
-  closeCal();
-},{capture:true});
+  // Wire all date trigger buttons via event delegation
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.sp-date-trigger');
+    if (!btn) return;
+    var id   = btn.dataset.calid;
+    var from = document.getElementById('val-from-' + id)?.value || fmt(new Date());
+    var to   = document.getElementById('val-to-'   + id)?.value || fmt(new Date());
+    calOpen(id, from, to);
+  });
+});
 
 /* ─────────────────────────────── PDF ────────────── */
 function downloadPDF(){
