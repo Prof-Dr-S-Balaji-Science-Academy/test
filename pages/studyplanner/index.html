@@ -44,7 +44,12 @@
     /* ── Planner ── */
     .sp-planner{display:none}
     .sp-planner.visible{display:block}
-    .sp-subject-section{margin-bottom:var(--space-14)}
+    .sp-subject-section{
+      margin-bottom: 64px;
+      padding-bottom: 48px;
+      border-bottom: 3px solid var(--border);
+    }
+    .sp-subject-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
     .sp-subject-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-5);padding-bottom:var(--space-4);border-bottom:2px solid var(--border)}
     .sp-subject-title{font-family:var(--font-display);font-size:clamp(20px,2.5vw,26px);font-weight:400;color:var(--fg)}
     .sp-totals{display:flex;gap:var(--space-3);flex-wrap:wrap}
@@ -58,11 +63,21 @@
     .sp-table thead th{background:var(--dark);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:10px 12px;text-align:left;white-space:nowrap}
     .sp-table thead th:first-child{border-radius:8px 0 0 0}
     .sp-table thead th:last-child{border-radius:0 8px 0 0}
+    .sp-table thead th.col-group-prep{background:#1a2a4a;border-left:3px solid rgba(87,139,250,0.5)}
+    .sp-table thead th.col-group-rev{background:#1a2a3a;border-left:3px solid rgba(6,103,208,0.5)}
     .sp-table tbody tr{border-bottom:1px solid var(--border);transition:background 100ms}
     .sp-table tbody tr:hover{background:var(--surface)}
     .sp-table tbody tr.unit-header td{background:color-mix(in oklab,var(--fg),transparent 94%);color:var(--muted);font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:6px 12px}
     .sp-table td{padding:11px 12px;vertical-align:middle}
     .sp-table td:first-child{font-weight:700;color:var(--muted);font-size:12px}
+    .sp-table td.col-group-prep{border-left:3px solid rgba(87,139,250,0.2);background:color-mix(in oklab,var(--accent),transparent 97%)}
+    .sp-table td.col-group-rev{border-left:3px solid rgba(6,103,208,0.2);background:color-mix(in oklab,#0667d0,transparent 97%)}
+    /* Grouped prep/rev cell */
+    .sp-group-cell{display:flex;align-items:center;gap:10px}
+    .sp-group-hrs{font-size:14px;font-weight:800;min-width:32px;flex-shrink:0}
+    .sp-group-hrs.prep-hrs{color:var(--accent)}
+    .sp-group-hrs.rev-hrs{color:#0667d0}
+    .sp-group-divider{width:1px;height:32px;background:var(--border);flex-shrink:0}
 
     /* difficulty */
     .diff{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:var(--radius-pill);white-space:nowrap}
@@ -418,7 +433,7 @@ function renderPlanner(key){
     subject.chapters.forEach((ch,i)=>{
       const s=sched[i];
       if(ch.unit&&ch.unit!==prevUnit){
-        rows+=`<tr class="unit-header"><td colspan="7">${ch.unit}</td></tr>`;
+        rows+=`<tr class="unit-header"><td colspan="5">${ch.unit}</td></tr>`;
         prevUnit=ch.unit;
       }
       const dc={'Easy':'diff-easy','Medium':'diff-medium','High':'diff-high','Very High':'diff-very-high'}[ch.difficulty]||'diff-medium';
@@ -428,10 +443,20 @@ function renderPlanner(key){
           <td>${ch.ch}</td>
           <td style="max-width:200px;line-height:1.4;">${ch.title}</td>
           <td><span class="diff ${dc}">${ch.difficulty}</span></td>
-          <td class="sp-hours-cell">${ch.prep}h</td>
-          <td>${makeTrigger(sid,'prep',s.prepStart,s.prepEnd)}</td>
-          <td class="sp-hours-cell sp-hours-rev">${ch.revision}h</td>
-          <td>${makeTrigger(sid,'rev',s.revStart,s.revEnd)}</td>
+          <td class="col-group-prep">
+            <div class="sp-group-cell">
+              <span class="sp-group-hrs prep-hrs">${ch.prep}h</span>
+              <div class="sp-group-divider"></div>
+              ${makeTrigger(sid,'prep',s.prepStart,s.prepEnd)}
+            </div>
+          </td>
+          <td class="col-group-rev">
+            <div class="sp-group-cell">
+              <span class="sp-group-hrs rev-hrs">${ch.revision}h</span>
+              <div class="sp-group-divider"></div>
+              ${makeTrigger(sid,'rev',s.revStart,s.revEnd)}
+            </div>
+          </td>
         </tr>`;
     });
 
@@ -447,8 +472,8 @@ function renderPlanner(key){
         <table class="sp-table">
           <thead><tr>
             <th>Ch.</th><th>Title</th><th>Difficulty</th>
-            <th>Prep Hrs</th><th>Preparation Dates</th>
-            <th>Rev Hrs</th><th>Revision Dates</th>
+            <th class="col-group-prep">Preparation &nbsp;(hrs · dates)</th>
+            <th class="col-group-rev">Revision &nbsp;(hrs · dates)</th>
           </tr></thead>
           <tbody>${rows}</tbody>
         </table>
@@ -461,84 +486,87 @@ function renderPlanner(key){
   planner.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function makeTrigger(sid,type,from,to){
-  const id=`${sid}_${type}`;
-  return `<button class="sp-date-trigger" data-calid="${id}" type="button">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    <div class="sp-dt-text">
-      <span class="dt-main" id="disp-from-${id}">${fmtDisplay(from)}</span>
-      <span class="dt-sub" id="disp-to-${id}">to ${fmtDisplay(to)}</span>
-    </div>
-    <input type="hidden" id="val-from-${id}" value="${from}"/>
-    <input type="hidden" id="val-to-${id}" value="${to}"/>
-  </button>`;
+function makeTrigger(sid, type, from, to) {
+  var id = sid + '_' + type;
+  return '<button class="sp-date-trigger" data-calid="' + id + '" type="button">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+    + '<div class="sp-dt-text">'
+    + '<span class="dt-main" id="disp-from-' + id + '">' + fmtDisplay(from) + '</span>'
+    + '<span class="dt-sub" id="disp-to-' + id + '">to ' + fmtDisplay(to) + '</span>'
+    + '</div>'
+    + '<input type="hidden" id="val-from-' + id + '" value="' + from + '"/>'
+    + '<input type="hidden" id="val-to-' + id + '" value="' + to + '"/>'
+    + '</button>';
 }
 
-/* ─────────────────────────── calendar modal ─────── */
-// State
-var CAL = {
-  activeId: null,
-  year: 0, month: 0,
-  phase: 0,       // 0=pick start, 1=pick end
-  start: null, end: null, hover: null
-};
+/* ══════════════════════════════════════════════════════
+   CALENDAR — completely self-contained, no timing issues
+   ══════════════════════════════════════════════════════ */
+var CAL = { activeId:null, year:0, month:0, phase:0, start:null, end:null, hover:null };
 
+/* Open the calendar for a given trigger id */
 function calOpen(id, from, to) {
   CAL.activeId = id;
-  CAL.start = from; CAL.end = to; CAL.hover = null; CAL.phase = 0;
+  CAL.start    = from;
+  CAL.end      = to;
+  CAL.hover    = null;
+  CAL.phase    = 0;   // 0 = waiting for start click
   var d = parseDate(from);
-  CAL.year = d.getFullYear(); CAL.month = d.getMonth();
-  calRender();
+  CAL.year  = d.getFullYear();
+  CAL.month = d.getMonth();
   document.getElementById('sp-cal-overlay').classList.add('open');
+  document.getElementById('sp-cal-title').textContent = (id.indexOf('_prep') !== -1) ? 'PREPARATION' : 'REVISION';
   document.getElementById('cal-hint').textContent = 'Click a start date';
   document.getElementById('cal-confirm').disabled = true;
-  // Show label (prep or revision)
-  var isPre = id.indexOf('_prep') !== -1;
-  document.getElementById('sp-cal-title').textContent = isPre ? 'PREPARATION' : 'REVISION';
-  calUpdateHeader();
+  calDraw();
+  calSyncHeader();
 }
 
 function calClose() {
   document.getElementById('sp-cal-overlay').classList.remove('open');
-  CAL.activeId = null; CAL.phase = 0; CAL.start = null; CAL.end = null; CAL.hover = null;
+  CAL.activeId = null; CAL.phase = 0;
+  CAL.start = null; CAL.end = null; CAL.hover = null;
 }
 
 function calConfirm() {
-  if (!CAL.start || !CAL.end) return;
-  var from = CAL.start, to = CAL.end;
-  if (from > to) { var t=from; from=to; to=t; }
-  document.getElementById('val-from-' + CAL.activeId).value = from;
-  document.getElementById('val-to-'   + CAL.activeId).value = to;
-  document.getElementById('disp-from-'+ CAL.activeId).textContent = fmtDisplay(from);
-  document.getElementById('disp-to-'  + CAL.activeId).textContent = 'to ' + fmtDisplay(to);
+  if (!CAL.start || !CAL.end || !CAL.activeId) return;
+  var from = CAL.start < CAL.end ? CAL.start : CAL.end;
+  var to   = CAL.start < CAL.end ? CAL.end   : CAL.start;
+  document.getElementById('val-from-'  + CAL.activeId).value       = from;
+  document.getElementById('val-to-'    + CAL.activeId).value       = to;
+  document.getElementById('disp-from-' + CAL.activeId).textContent = fmtDisplay(from);
+  document.getElementById('disp-to-'   + CAL.activeId).textContent = 'to ' + fmtDisplay(to);
   calClose();
 }
 
-function calNavMonth(dir) {
+function calGo(dir) {
   CAL.month += dir;
   if (CAL.month > 11) { CAL.month = 0; CAL.year++; }
-  if (CAL.month < 0)  { CAL.month = 11; CAL.year--; }
-  calRender();
+  if (CAL.month <  0) { CAL.month = 11; CAL.year--; }
+  calDraw();
 }
 
-function calUpdateHeader() {
-  var from = CAL.phase===0 ? CAL.start : CAL.start;
-  var to   = CAL.hover || CAL.end;
-  document.getElementById('cal-hdr-from').textContent = from ? fmtDisplay(from) : '—';
-  document.getElementById('cal-hdr-to').textContent   = to   ? fmtDisplay(to)   : '—';
+function calSyncHeader() {
+  var dispFrom = CAL.start ? fmtDisplay(CAL.start) : '—';
+  var dispTo   = (CAL.hover || CAL.end) ? fmtDisplay(CAL.hover || CAL.end) : '—';
+  document.getElementById('cal-hdr-from').textContent = dispFrom;
+  document.getElementById('cal-hdr-to').textContent   = dispTo;
 }
 
-function calRender() {
+/* Draw the grid — pure DOM, no innerHTML wipe of the grid's parent */
+function calDraw() {
   document.getElementById('cal-month-label').textContent = MONTHS[CAL.month] + ' ' + CAL.year;
-  var today = fmt(new Date());
-  var first = new Date(CAL.year, CAL.month, 1).getDay();
-  var daysInMonth = new Date(CAL.year, CAL.month+1, 0).getDate();
 
-  // Determine highlight range
+  var today       = fmt(new Date());
+  var firstDay    = new Date(CAL.year, CAL.month, 1).getDay();
+  var totalDays   = new Date(CAL.year, CAL.month + 1, 0).getDate();
+
+  /* Compute range to highlight */
   var lo = null, hi = null;
-  if (CAL.phase === 1 && CAL.start && CAL.hover) {
-    lo = CAL.start < CAL.hover ? CAL.start : CAL.hover;
-    hi = CAL.start < CAL.hover ? CAL.hover : CAL.start;
+  if (CAL.phase === 1 && CAL.start) {
+    var ref = CAL.hover || CAL.start;
+    lo = CAL.start < ref ? CAL.start : ref;
+    hi = CAL.start < ref ? ref : CAL.start;
   } else if (CAL.start && CAL.end) {
     lo = CAL.start < CAL.end ? CAL.start : CAL.end;
     hi = CAL.start < CAL.end ? CAL.end   : CAL.start;
@@ -547,99 +575,115 @@ function calRender() {
   }
 
   var grid = document.getElementById('cal-days');
-  grid.innerHTML = '';
 
-  // Empty cells
-  for (var i = 0; i < first; i++) {
-    var emp = document.createElement('div');
-    emp.className = 'sp-cal-cell empty';
-    grid.appendChild(emp);
+  /* Build expected cell count */
+  var total = firstDay + totalDays;
+  var cells = grid.children;
+
+  /* Resize cell pool */
+  while (cells.length < total) {
+    var c = document.createElement('div');
+    grid.appendChild(c);
+  }
+  while (cells.length > total) {
+    grid.removeChild(grid.lastChild);
   }
 
-  for (var d = 1; d <= daysInMonth; d++) {
-    var ds = CAL.year + '-' + String(CAL.month+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
-    var el = document.createElement('div');
-    el.className = 'sp-cal-cell';
-    el.textContent = d;
-    el.dataset.ds = ds;
+  for (var i = 0; i < total; i++) {
+    var cell = cells[i];
+    cell.className = 'sp-cal-cell';
+    cell.removeAttribute('data-ds');
+    cell.textContent = '';
 
-    if (ds === today) el.classList.add('today');
-
-    if (lo && hi) {
-      var isStart = ds === lo;
-      var isEnd   = ds === hi;
-      var inRange = ds > lo && ds < hi;
-      var hasRange = lo !== hi;
-      if (isStart) { el.classList.add('sel-start'); if (hasRange) el.classList.add('has-end'); }
-      if (isEnd)   { el.classList.add('sel-end');   if (hasRange) el.classList.add('has-start'); }
-      if (inRange) { el.classList.add('in-range'); }
-      if (inRange && new Date(CAL.year,CAL.month,d).getDay()===0) el.classList.add('range-cap-left');
-      if (inRange && new Date(CAL.year,CAL.month,d).getDay()===6) el.classList.add('range-cap-right');
+    if (i < firstDay) {
+      cell.classList.add('empty');
+      continue;
     }
 
-    grid.appendChild(el);
+    var day = i - firstDay + 1;
+    var ds  = CAL.year + '-' + pad2(CAL.month + 1) + '-' + pad2(day);
+    cell.dataset.ds  = ds;
+    cell.textContent = day;
+
+    if (ds === today) cell.classList.add('today');
+
+    if (lo && hi) {
+      if (ds === lo && ds === hi) { cell.classList.add('sel-start', 'sel-end'); }
+      else if (ds === lo)         { cell.classList.add('sel-start'); if (lo !== hi) cell.classList.add('has-end'); }
+      else if (ds === hi)         { cell.classList.add('sel-end');   if (lo !== hi) cell.classList.add('has-start'); }
+      else if (ds > lo && ds < hi) {
+        cell.classList.add('in-range');
+        var dow = new Date(CAL.year, CAL.month, day).getDay();
+        if (dow === 0) cell.classList.add('range-cap-left');
+        if (dow === 6) cell.classList.add('range-cap-right');
+      }
+    }
   }
 }
 
-// Single delegated listeners on the grid — survive re-renders
-(function() {
-  var grid = document.getElementById('cal-days');
+function pad2(n) { return String(n).padStart(2,'0'); }
 
-  grid.addEventListener('mouseover', function(e) {
-    var cell = e.target.closest('.sp-cal-cell');
-    if (!cell || cell.classList.contains('empty') || !cell.dataset.ds) return;
-    if (CAL.phase !== 1) return;
-    CAL.hover = cell.dataset.ds;
-    calRender();
-    calUpdateHeader();
-  });
+/* ── All calendar events wired once, here, inline ── */
+/* Trigger buttons — delegated on document */
+document.addEventListener('click', function(e) {
+  /* Calendar trigger buttons */
+  var btn = e.target.closest('.sp-date-trigger');
+  if (btn && btn.dataset.calid) {
+    var id   = btn.dataset.calid;
+    var from = document.getElementById('val-from-' + id).value;
+    var to   = document.getElementById('val-to-'   + id).value;
+    calOpen(id, from, to);
+    return;
+  }
 
-  grid.addEventListener('click', function(e) {
-    var cell = e.target.closest('.sp-cal-cell');
-    if (!cell || cell.classList.contains('empty') || !cell.dataset.ds) return;
-    var dateStr = cell.dataset.ds;
+  /* Backdrop click — close */
+  if (e.target.id === 'sp-cal-overlay') { calClose(); return; }
 
+  /* Nav buttons */
+  if (e.target.id === 'cal-prev' || e.target.closest('#cal-prev')) { calGo(-1); return; }
+  if (e.target.id === 'cal-next' || e.target.closest('#cal-next')) { calGo(1);  return; }
+
+  /* Cancel / Confirm */
+  if (e.target.id === 'cal-cancel')  { calClose();   return; }
+  if (e.target.id === 'cal-confirm') { calConfirm(); return; }
+
+  /* Day cell clicks */
+  var cell = e.target.closest('.sp-cal-cell');
+  if (cell && cell.dataset.ds && !cell.classList.contains('empty')) {
+    var ds = cell.dataset.ds;
     if (CAL.phase === 0) {
-      // First click: pick start date
-      CAL.phase = 1;
-      CAL.start = dateStr; CAL.end = null; CAL.hover = dateStr;
+      /* First click — pick start */
+      CAL.phase  = 1;
+      CAL.start  = ds;
+      CAL.end    = null;
+      CAL.hover  = ds;
       document.getElementById('cal-hint').textContent = 'Now click an end date';
       document.getElementById('cal-confirm').disabled = true;
-      calRender();
-      calUpdateHeader();
     } else {
-      // Second click: pick end date
-      CAL.phase = 0;
-      var from = CAL.start, to = dateStr;
-      if (from > to) { var t = from; from = to; to = t; }
-      CAL.start = from; CAL.end = to; CAL.hover = null;
+      /* Second click — pick end */
+      CAL.phase  = 0;
+      CAL.end    = ds;
+      CAL.hover  = null;
       document.getElementById('cal-hint').textContent = 'Dates selected — click Confirm to apply';
       document.getElementById('cal-confirm').disabled = false;
-      calRender();
-      calUpdateHeader();
     }
-  });
-})();
+    calDraw();
+    calSyncHeader();
+    return;
+  }
+});
 
-// Wire up buttons after DOM ready
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('cal-prev').addEventListener('click', function() { calNavMonth(-1); });
-  document.getElementById('cal-next').addEventListener('click', function() { calNavMonth(1); });
-  document.getElementById('cal-cancel').addEventListener('click', calClose);
-  document.getElementById('cal-confirm').addEventListener('click', calConfirm);
-  // Click backdrop to close
-  document.getElementById('sp-cal-overlay').addEventListener('click', function(e) {
-    if (e.target === this) calClose();
-  });
-  // Wire all date trigger buttons via event delegation
-  document.addEventListener('click', function(e) {
-    var btn = e.target.closest('.sp-date-trigger');
-    if (!btn) return;
-    var id   = btn.dataset.calid;
-    var from = document.getElementById('val-from-' + id)?.value || fmt(new Date());
-    var to   = document.getElementById('val-to-'   + id)?.value || fmt(new Date());
-    calOpen(id, from, to);
-  });
+/* Hover — mousemove on the grid (avoids losing events during re-draw) */
+document.addEventListener('mouseover', function(e) {
+  if (CAL.phase !== 1) return;
+  var cell = e.target.closest('.sp-cal-cell');
+  if (!cell || !cell.dataset.ds || cell.classList.contains('empty')) return;
+  /* Only act if inside the calendar box */
+  if (!document.getElementById('sp-cal-box').contains(cell)) return;
+  if (CAL.hover === cell.dataset.ds) return; /* no change */
+  CAL.hover = cell.dataset.ds;
+  calDraw();
+  calSyncHeader();
 });
 
 /* ─────────────────────────────── PDF ────────────── */
