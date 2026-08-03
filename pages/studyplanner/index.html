@@ -131,7 +131,7 @@
     /* ── PDF print ── */
     @media print{
       body>*:not(#sp-pdf-area){display:none!important}
-      #sp-pdf-area{display:block!important;position:static!important}
+      #sp-pdf-area{display:block!important;position:static!important;margin:0;padding:0}
     }
     #sp-pdf-area{display:none}
 
@@ -727,9 +727,9 @@ function downloadPDF(){
 
   pdfArea.innerHTML=`<style>
     *{box-sizing:border-box;margin:0;padding:0}
-    @page{size:A4 portrait;margin:12mm 14mm}
+    @page{size:A4 portrait;margin:14mm 16mm}
     body{margin:0;padding:0}
-    .pdf-page{width:100%;font-family:'Inter',system-ui,sans-serif}
+    .pdf-page{width:182mm;font-family:'Inter',system-ui,sans-serif}
     .pdf-page+.pdf-page{page-break-before:always}
     .pdf-hdr{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #0a0b0d;padding-bottom:8px;margin-bottom:12px}
     .pdf-academy{font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#0a0b0d}
@@ -746,7 +746,7 @@ function downloadPDF(){
     .pdf-date-cell{font-size:8.5px;color:#0a0b0d;line-height:1.6}
     .pdf-hrs{font-size:9px;font-weight:700;color:#0a0b0d;white-space:nowrap;text-align:right;line-height:1.7}
     .pdf-foot{margin-top:12px;font-size:7.5px;color:#9ca3af;border-top:1px solid #e5e7eb;padding-top:5px}
-  </style>${pages}`;
+  </style><div style="padding:0 2mm">${pages}</div>`;
 
   pdfArea.style.display='block';
   setTimeout(()=>{ window.print(); pdfArea.style.display='none'; },300);
