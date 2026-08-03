@@ -128,22 +128,16 @@
     .sp-cal-confirm:hover{opacity:.9}
     .sp-cal-confirm:disabled{opacity:.4;cursor:not-allowed}
 
-    /* hours */
-    .sp-hours-cell{font-weight:600;color:var(--fg)}
-    .sp-hours-rev{color:var(--accent)}
+    /* ── PDF print ── */
+    @media print{
+      body>*:not(#sp-pdf-area){display:none!important}
+      #sp-pdf-area{display:block!important;position:static!important}
+    }
+    #sp-pdf-area{display:none}
 
     /* download bar */
     .sp-download-bar{display:flex;align-items:center;justify-content:flex-end;gap:var(--space-3);padding:var(--space-4) 0;border-top:1px solid var(--border);margin-top:var(--space-4)}
     .sp-dl-note{font-size:12px;color:var(--muted)}
-
-    /* ── PDF ── */
-    @media print{
-      body *{visibility:hidden!important}
-      #sp-pdf-area,#sp-pdf-area *{visibility:visible!important}
-      #sp-pdf-area{position:absolute;top:0;left:0;width:210mm;padding:14mm 14mm 12mm;box-sizing:border-box;background:#fff!important}
-      @page{size:A4 portrait;margin:0}
-    }
-    #sp-pdf-area{display:none}
   </style>
 </head>
 <body>
@@ -732,9 +726,11 @@ function downloadPDF(){
   });
 
   pdfArea.innerHTML=`<style>
-    *{box-sizing:border-box}
-    .pdf-page{width:182mm;font-family:'Inter',system-ui,sans-serif;page-break-after:always}
-    .pdf-page:last-child{page-break-after:avoid}
+    *{box-sizing:border-box;margin:0;padding:0}
+    @page{size:A4 portrait;margin:12mm 14mm}
+    body{margin:0;padding:0}
+    .pdf-page{width:100%;font-family:'Inter',system-ui,sans-serif}
+    .pdf-page+.pdf-page{page-break-before:always}
     .pdf-hdr{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #0a0b0d;padding-bottom:8px;margin-bottom:12px}
     .pdf-academy{font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#0a0b0d}
     .pdf-site{font-size:8px;color:#5b616e;margin-top:2px}
@@ -748,8 +744,6 @@ function downloadPDF(){
     .pdf-ch{font-weight:700;color:#5b616e;font-size:9px;white-space:nowrap}
     .pdf-title{color:#0a0b0d;max-width:130px;line-height:1.3}
     .pdf-date-cell{font-size:8.5px;color:#0a0b0d;line-height:1.6}
-    .pdf-label-prep{display:inline-block;font-size:7px;font-weight:700;letter-spacing:.04em;color:#0052ff;text-transform:uppercase;background:#eff3ff;border-radius:3px;padding:1px 4px;margin-right:3px}
-    .pdf-label-rev{display:inline-block;font-size:7px;font-weight:700;letter-spacing:.04em;color:#0667d0;text-transform:uppercase;background:#e0f0ff;border-radius:3px;padding:1px 4px;margin-right:3px}
     .pdf-hrs{font-size:9px;font-weight:700;color:#0a0b0d;white-space:nowrap;text-align:right;line-height:1.7}
     .pdf-foot{margin-top:12px;font-size:7.5px;color:#9ca3af;border-top:1px solid #e5e7eb;padding-top:5px}
   </style>${pages}`;
