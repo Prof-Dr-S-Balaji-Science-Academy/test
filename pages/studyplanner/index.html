@@ -217,8 +217,8 @@
           <h2>Days to Deadline</h2>
           <div class="sp-countdown">
             <div class="sp-count-box"><span class="sp-count-num" id="cd-months">--</span><span class="sp-count-label">Months</span></div>
-            <div class="sp-count-box"><span class="sp-count-num" id="cd-weeks">--</span><span class="sp-count-label">Weeks</span></div>
-            <div class="sp-count-box"><span class="sp-count-num" id="cd-days">--</span><span class="sp-count-label">Days</span></div>
+            <div class="sp-count-box"><span class="sp-count-num" id="cd-weeks">--</span><span class="sp-count-label">or Weeks</span></div>
+            <div class="sp-count-box"><span class="sp-count-num" id="cd-days">--</span><span class="sp-count-label">or Days</span></div>
           </div>
           <p class="sp-card-note">For your best marks, all preparation and revision must be complete by <strong style="color:#fff;">31st January</strong>. The final weeks before the exam are for rest, light review, and confidence — not new learning.</p>
           <div class="sp-info-box">
@@ -360,10 +360,13 @@ function fmtDisplay(s){
   const target=new Date(ty,0,31,23,59,59);
   const diff=target-now;
   if(diff<=0){ set('0'); return; }
-  const td=Math.floor(diff/86400000);
-  document.getElementById('cd-months').textContent=Math.floor(td/30);
-  document.getElementById('cd-weeks').textContent=Math.floor((td%30)/7);
-  document.getElementById('cd-days').textContent=td%7;
+  const totalDays=Math.floor(diff/86400000);
+  // Each unit is independent — same duration expressed three ways
+  const totalMonths=(target.getFullYear()-now.getFullYear())*12+(target.getMonth()-now.getMonth());
+  const totalWeeks=Math.floor(totalDays/7);
+  document.getElementById('cd-months').textContent=totalMonths;
+  document.getElementById('cd-weeks').textContent=totalWeeks;
+  document.getElementById('cd-days').textContent=totalDays;
 })();
 
 /* ─────────────────────────────── data ───────────── */
