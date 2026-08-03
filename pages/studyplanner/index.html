@@ -570,45 +570,53 @@ function calRender() {
       if (isStart) { el.classList.add('sel-start'); if (hasRange) el.classList.add('has-end'); }
       if (isEnd)   { el.classList.add('sel-end');   if (hasRange) el.classList.add('has-start'); }
       if (inRange) { el.classList.add('in-range'); }
-      // cap classes for rounded edges on range edges at row boundaries
       if (inRange && new Date(CAL.year,CAL.month,d).getDay()===0) el.classList.add('range-cap-left');
       if (inRange && new Date(CAL.year,CAL.month,d).getDay()===6) el.classList.add('range-cap-right');
     }
 
-    // Events — use closure to capture ds
-    (function(dateStr) {
-      el.addEventListener('mouseenter', function() {
-        if (CAL.phase !== 1) return;
-        CAL.hover = dateStr;
-        calRender();
-        calUpdateHeader();
-      });
-      el.addEventListener('click', function() {
-        if (CAL.phase === 0) {
-          // First click: set start
-          CAL.phase = 1;
-          CAL.start = dateStr; CAL.end = null; CAL.hover = dateStr;
-          document.getElementById('cal-hint').textContent = 'Now click an end date';
-          document.getElementById('cal-confirm').disabled = true;
-          calRender();
-          calUpdateHeader();
-        } else {
-          // Second click: set end
-          CAL.phase = 0;
-          var from = CAL.start, to = dateStr;
-          if (from > to) { var t=from; from=to; to=t; }
-          CAL.start = from; CAL.end = to; CAL.hover = null;
-          document.getElementById('cal-hint').textContent = 'Dates selected — click Confirm to apply';
-          document.getElementById('cal-confirm').disabled = false;
-          calRender();
-          calUpdateHeader();
-        }
-      });
-    })(ds);
-
     grid.appendChild(el);
   }
 }
+
+// Single delegated listeners on the grid — survive re-renders
+(function() {
+  var grid = document.getElementById('cal-days');
+
+  grid.addEventListener('mouseover', function(e) {
+    var cell = e.target.closest('.sp-cal-cell');
+    if (!cell || cell.classList.contains('empty') || !cell.dataset.ds) return;
+    if (CAL.phase !== 1) return;
+    CAL.hover = cell.dataset.ds;
+    calRender();
+    calUpdateHeader();
+  });
+
+  grid.addEventListener('click', function(e) {
+    var cell = e.target.closest('.sp-cal-cell');
+    if (!cell || cell.classList.contains('empty') || !cell.dataset.ds) return;
+    var dateStr = cell.dataset.ds;
+
+    if (CAL.phase === 0) {
+      // First click: pick start date
+      CAL.phase = 1;
+      CAL.start = dateStr; CAL.end = null; CAL.hover = dateStr;
+      document.getElementById('cal-hint').textContent = 'Now click an end date';
+      document.getElementById('cal-confirm').disabled = true;
+      calRender();
+      calUpdateHeader();
+    } else {
+      // Second click: pick end date
+      CAL.phase = 0;
+      var from = CAL.start, to = dateStr;
+      if (from > to) { var t = from; from = to; to = t; }
+      CAL.start = from; CAL.end = to; CAL.hover = null;
+      document.getElementById('cal-hint').textContent = 'Dates selected — click Confirm to apply';
+      document.getElementById('cal-confirm').disabled = false;
+      calRender();
+      calUpdateHeader();
+    }
+  });
+})();
 
 // Wire up buttons after DOM ready
 document.addEventListener('DOMContentLoaded', function() {
