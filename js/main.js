@@ -27,14 +27,13 @@
     });
   }
 
-  /* Mobile dropdown */
-  var mobileDropdownTrigger = document.querySelector(".nav-mobile-dropdown-trigger");
-  if (mobileDropdownTrigger) {
-    mobileDropdownTrigger.addEventListener("click", function () {
-      var expanded = mobileDropdownTrigger.getAttribute("aria-expanded") === "true";
-      mobileDropdownTrigger.setAttribute("aria-expanded", String(!expanded));
+  /* Mobile dropdown — handles all dropdown triggers (Courses, Resources, etc.) */
+  document.querySelectorAll(".nav-mobile-dropdown-trigger").forEach(function (trigger) {
+    trigger.addEventListener("click", function () {
+      var expanded = trigger.getAttribute("aria-expanded") === "true";
+      trigger.setAttribute("aria-expanded", String(!expanded));
     });
-  }
+  });
 
   /* Desktop dropdown menu */
   var dropdownTrigger = document.querySelector(".nav-dropdown-trigger");
