@@ -1,0 +1,1200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Interactive periodic table of all 118 elements — atomic structure, properties, isotopes, and uses. A free learning resource by Prof. Dr. S. Balaji Science Academy." />
+  <title>Interactive Periodic Table | Prof. Dr. S. Balaji</title>
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <style>
+    /* ============================================================
+       PERIODIC TABLE — page-specific styles
+       Built on top of the shared design tokens in styles.css
+       ============================================================ */
+
+    :root{
+      --pt-cell: 64px;
+      --pt-gap: 4px;
+      --pt-radius: 8px;
+    }
+
+    .pt-page-head{
+      padding-block: var(--space-8) var(--space-5);
+    }
+    .pt-page-head h1{
+      margin-bottom: var(--space-2);
+    }
+    .pt-page-sub{
+      color: var(--muted);
+      font-size: var(--text-base);
+      max-width: 60ch;
+    }
+
+    /* ---------- Legend ---------- */
+    .pt-legend{
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin: var(--space-5) 0 var(--space-6);
+    }
+    .pt-legend-item{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 5px 10px 5px 6px;
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background var(--motion-fast) var(--ease-standard), border-color var(--motion-fast), color var(--motion-fast);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .pt-legend-item .sw{
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .pt-legend-item:hover{
+      border-color: var(--border);
+      color: var(--fg);
+    }
+    .pt-legend-item[aria-pressed="true"]{
+      background: var(--fg);
+      color: var(--bg);
+    }
+    .pt-legend-item[aria-pressed="true"] .sw{
+      box-shadow: 0 0 0 2px var(--bg);
+    }
+
+    /* ---------- Table wrapper ---------- */
+    .pt-wrap{
+      position: relative;
+      margin-bottom: var(--space-8);
+    }
+    .pt-scroll{
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: var(--space-3);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .pt-scroll::-webkit-scrollbar{ height: 8px; }
+    .pt-scroll::-webkit-scrollbar-track{ background: var(--surface); border-radius: 8px; }
+    .pt-scroll::-webkit-scrollbar-thumb{ background: var(--border); border-radius: 8px; }
+
+    .pt-grid{
+      display: grid;
+      grid-template-columns: repeat(18, var(--pt-cell));
+      grid-auto-rows: var(--pt-cell);
+      gap: var(--pt-gap);
+      width: max-content;
+      margin-inline: auto;
+    }
+
+    .pt-fblock-gap{ height: calc(var(--pt-gap) * 3); grid-column: 1 / -1; }
+
+    .pt-cell{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 4px 5px 3px;
+      border-radius: var(--pt-radius);
+      cursor: pointer;
+      border: 1px solid rgba(10,11,13,0.06);
+      transition: transform var(--motion-fast) var(--ease-standard),
+                  box-shadow var(--motion-fast) var(--ease-standard),
+                  outline-color var(--motion-fast);
+      -webkit-tap-highlight-color: transparent;
+      outline: 2px solid transparent;
+      outline-offset: 1px;
+    }
+    .pt-cell:hover{
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 16px color-mix(in oklab, var(--fg), transparent 82%);
+      z-index: 3;
+    }
+    .pt-cell:focus-visible{
+      outline-color: var(--fg);
+    }
+    .pt-cell.is-active{
+      outline-color: var(--fg);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 16px color-mix(in oklab, var(--fg), transparent 78%);
+      z-index: 4;
+    }
+    .pt-cell.is-dimmed{
+      opacity: 0.22;
+    }
+    .pt-cell .z{
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 600;
+      line-height: 1;
+      color: color-mix(in oklab, var(--fg), transparent 35%);
+    }
+    .pt-cell .sym{
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--fg);
+      align-self: center;
+    }
+    .pt-cell .nm{
+      font-size: 8px;
+      font-weight: 600;
+      line-height: 1.1;
+      color: color-mix(in oklab, var(--fg), transparent 30%);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pt-cell .mass{
+      font-family: var(--font-mono);
+      font-size: 7px;
+      color: color-mix(in oklab, var(--fg), transparent 45%);
+    }
+
+    .pt-placeholder{
+      border-radius: var(--pt-radius);
+      background: transparent;
+    }
+    .pt-lacell{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      border-radius: var(--pt-radius);
+      background: var(--surface);
+      border: 1px dashed var(--border);
+    }
+
+    /* Group / period labels */
+    .pt-glabel{
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      height: 16px;
+    }
+    .pt-plabel{
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      padding-right: 4px;
+      width: 16px;
+    }
+
+    /* ---------- Detail panel ---------- */
+    .pt-detail{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+      scroll-margin-top: calc(var(--header-h) + var(--space-4));
+    }
+    .pt-detail-empty{
+      text-align: center;
+      padding: var(--space-8) var(--space-4);
+      color: var(--muted);
+    }
+    .pt-detail-empty svg{
+      width: 40px;
+      height: 40px;
+      margin-bottom: var(--space-3);
+      color: var(--border);
+    }
+    .pt-detail-empty p{
+      font-size: var(--text-base);
+      font-weight: 600;
+    }
+
+    .pt-detail-top{
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-5);
+      align-items: center;
+      margin-bottom: var(--space-5);
+    }
+    .pt-detail-badge{
+      width: 84px;
+      height: 84px;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(10,11,13,0.08);
+    }
+    .pt-detail-badge .z{
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: color-mix(in oklab, var(--fg), transparent 30%);
+    }
+    .pt-detail-badge .sym{
+      font-family: var(--font-display);
+      font-size: 34px;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--fg);
+    }
+    .pt-detail-name-row h2{
+      font-size: clamp(24px, 3vw, 32px);
+      margin-bottom: 2px;
+    }
+    .pt-detail-cat{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .pt-detail-cat .sw{
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+    .pt-detail-close{
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: background var(--motion-fast), color var(--motion-fast);
+    }
+    .pt-detail-close:hover{ background: var(--fg); color: var(--bg); }
+    .pt-detail-close svg{ width: 16px; height: 16px; }
+
+    .pt-quickgrid{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+    .pt-quick{
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3);
+    }
+    .pt-quick .lbl{
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .pt-quick .val{
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .pt-tabs{
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-5);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: var(--space-3);
+    }
+    .pt-tab{
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      color: var(--muted);
+      background: transparent;
+    }
+    .pt-tab[aria-selected="true"]{
+      background: var(--fg);
+      color: var(--bg);
+    }
+    .pt-tab:hover:not([aria-selected="true"]){
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .pt-panel{ display: none; }
+    .pt-panel.is-active{ display: block; animation: pt-fade 180ms var(--ease-standard); }
+    @keyframes pt-fade{ from{ opacity:0; transform: translateY(4px);} to{ opacity:1; transform: translateY(0);} }
+
+    .pt-facts{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-3) var(--space-5);
+    }
+    .pt-fact{
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .pt-fact .k{ color: var(--muted); font-weight: 600; }
+    .pt-fact .v{ color: var(--fg); text-align: right; font-family: var(--font-mono); font-size: 12.5px; }
+
+    .pt-list{
+      display: grid;
+      gap: var(--space-3);
+    }
+    .pt-listcard{
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-4);
+    }
+    .pt-listcard .hd{
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-3);
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+    .pt-listcard .hd strong{
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--fg);
+    }
+    .pt-listcard .hd span{
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .pt-listcard p{
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .pt-prosetext{
+      font-size: var(--text-base);
+      color: var(--muted);
+      max-width: 68ch;
+    }
+    .pt-prosetext + .pt-prosetext{ margin-top: var(--space-3); }
+
+    .pt-usesgrid{
+      display: grid;
+      gap: var(--space-2);
+    }
+    .pt-usesgrid li{
+      position: relative;
+      padding-left: var(--space-5);
+      font-size: 13px;
+      color: var(--fg);
+      line-height: 1.45;
+    }
+    .pt-usesgrid li::before{
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.5em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .pt-subhead{
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: var(--space-5) 0 var(--space-3);
+    }
+    .pt-subhead:first-child{ margin-top: 0; }
+
+    /* ---------- Search + filter row ---------- */
+    .pt-controls{
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-3);
+    }
+    .pt-search{
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+      max-width: 360px;
+    }
+    .pt-search input{
+      width: 100%;
+      height: 44px;
+      padding: 0 var(--space-4) 0 40px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: var(--text-sm);
+      color: var(--fg);
+      font-family: var(--font-body);
+    }
+    .pt-search input:focus-visible{ outline: none; box-shadow: var(--focus-ring); border-color: var(--fg); }
+    .pt-search svg{
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: var(--muted);
+      pointer-events: none;
+    }
+    .pt-hint{
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width: 767px){
+      :root{ --pt-cell: 42px; --pt-gap: 3px; }
+      .pt-cell .sym{ font-size: 13px; }
+      .pt-cell .nm{ display: none; }
+      .pt-cell .mass{ display: none; }
+      .pt-cell .z{ font-size: 7px; }
+      .pt-glabel, .pt-plabel{ font-size: 8px; }
+      .pt-lacell{ font-size: 8px; }
+
+      .pt-detail{ padding: var(--space-5) var(--space-4); }
+      .pt-detail-top{ grid-template-columns: auto 1fr auto; gap: var(--space-3); }
+      .pt-detail-badge{ width: 64px; height: 64px; }
+      .pt-detail-badge .sym{ font-size: 26px; }
+      .pt-detail-name-row h2{ font-size: 22px; }
+      .pt-quickgrid{ grid-template-columns: repeat(2, 1fr); }
+      .pt-facts{ grid-template-columns: 1fr; }
+      .pt-tabs{ overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+      .pt-tab{ flex-shrink: 0; }
+
+      .pt-controls{ flex-direction: column; align-items: stretch; }
+      .pt-search{ max-width: none; }
+    }
+
+    @media (min-width: 896px){
+      :root{ --pt-cell: 68px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" data-od-id="site-header">
+    <div class="container header-inner">
+      <div class="brand-container">
+        <a href="../../index.html" data-od-id="brand-logo-link" class="brand-logo-link">
+          <img src="../../assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+        </a>
+        <a class="brand" href="../../index.html" data-od-id="brand">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+      </div>
+      <style>
+        .brand-container {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          flex-shrink: 0;
+          margin-right: auto;
+        }
+        .brand-logo {
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+          flex-shrink: 0;
+        }
+        @media (min-width: 480px) {
+          .brand-logo { height: 44px; width: 44px; }
+        }
+        @media (min-width: 896px) {
+          .brand-logo { height: 48px; width: 48px; }
+        }
+        .site-header .brand {
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          line-height: 1.25;
+          color: var(--fg);
+          text-decoration: none;
+          max-width: 160px;
+          word-break: break-word;
+        }
+        @media (min-width: 896px) {
+          .site-header .brand {
+            font-size: 14px;
+            white-space: nowrap;
+            max-width: none;
+          }
+        }
+        .brand-logo-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          border-radius: 50%;
+          transition: opacity 150ms ease-standard;
+        }
+        .brand-logo-link:hover {
+          opacity: 0.8;
+        }
+      </style>
+      <div class="header-right">
+        <nav class="nav-desktop" aria-label="Primary" data-od-id="nav-desktop">
+          <a href="../../index.html#about">About</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
+            <div class="nav-dropdown-menu">
+              <a href="../courses/cbse10.html">CBSE Class 10</a>
+              <a href="../courses/cbse12.html">CBSE Class 12</a>
+              <a href="../courses/stateboard12.html">State Board Class 12</a>
+            </div>
+          </div>
+          <a href="../../index.html#attend">How to attend</a>
+          <a href="../../index.html#faq">FAQs</a>
+          <a href="../../index.html#blog">Blog</a>
+          <a href="../../index.html#contact">Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="btn btn-primary" href="../../index.html#contact" data-od-id="header-cta">Sign Up</a>
+        </div>
+      </div>
+      <a class="btn btn-primary btn-sm nav-actions-mobile" href="../../index.html#contact" data-od-id="header-cta-mobile">Sign Up</a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+    <a href="../../index.html#about">About</a>
+    <div class="nav-mobile-dropdown">
+      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
+      <div class="nav-mobile-dropdown-menu">
+        <a href="../courses/cbse10.html">CBSE Class 10</a>
+        <a href="../courses/cbse12.html">CBSE Class 12</a>
+        <a href="../courses/stateboard12.html">State Board Class 12</a>
+      </div>
+    </div>
+    <a href="../../index.html#attend">How to attend</a>
+    <a href="../../index.html#faq">FAQs</a>
+    <a href="../../index.html#blog">Blog</a>
+    <a href="../../index.html#contact">Contact</a>
+  </nav>
+
+  <main id="top">
+    <section class="section pt-page-head" data-od-id="pt-head">
+      <div class="container">
+        <p class="eyebrow">Learning resources</p>
+        <h1 data-od-id="pt-title">Interactive Periodic Table</h1>
+        <p class="pt-page-sub">All 118 elements. Tap or click any element to see its atomic structure, properties, isotopes, and real-world uses.</p>
+
+        <div class="pt-controls">
+          <label class="pt-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+            <input type="text" id="pt-search-input" placeholder="Search by name or symbol…" aria-label="Search elements" autocomplete="off" />
+          </label>
+          <span class="pt-hint" id="pt-hint">118 elements</span>
+        </div>
+
+        <div class="pt-legend" id="pt-legend" role="group" aria-label="Filter by element category"></div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;" data-od-id="pt-table-section">
+      <div class="container">
+        <div class="pt-wrap">
+          <div class="pt-scroll">
+            <div class="pt-grid" id="pt-grid" role="grid" aria-label="Periodic table of elements"></div>
+          </div>
+        </div>
+
+        <div class="pt-detail" id="pt-detail" data-od-id="pt-detail">
+          <div class="pt-detail-empty" id="pt-detail-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>
+            <p>Select an element to explore it</p>
+          </div>
+          <div id="pt-detail-content" style="display:none;"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-od-id="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="socials" data-od-id="socials">
+          <a href="tel:+919787692116" aria-label="Call">
+            <img src="../../assets/icons/call.svg" alt="Call" />
+          </a>
+          <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business">
+            <img src="../../assets/icons/google-business.svg" alt="Google Business" />
+          </a>
+          <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <img src="../../assets/icons/linkedin.svg" alt="LinkedIn" />
+          </a>
+          <a href="mailto:prof@example.com" aria-label="Email">
+            <img src="../../assets/icons/mail.svg" alt="Email" />
+          </a>
+          <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
+            <img src="../../assets/icons/google-scholar.svg" alt="Google Scholar" />
+          </a>
+          <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+            <img src="../../assets/icons/substack.png" alt="Substack" />
+          </a>
+          <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <img src="../../assets/icons/youtube.svg" alt="YouTube" />
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom" style="justify-content: space-between; flex-direction: column; align-items: center; gap: 8px;">
+        <span style="font-size: 12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy . All Rights Reserved.</span>
+        <style>
+          @media (min-width: 768px) {
+            .footer-bottom { flex-direction: row; justify-content: center; }
+          }
+        </style>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+  <script src="../../js/main.js" defer></script>
+
+  <script>
+  (function () {
+    "use strict";
+
+    /* ============================================================
+       STATE
+       ============================================================ */
+    var ELEMENTS = [];
+    var COLOR_LEGEND = {};
+    var activeZ = null;
+    var activeCategories = new Set(); // empty = show all
+    var searchTerm = "";
+
+    var CAT_ORDER = [
+      "Alkali Metal", "Alkaline Earth Metal", "Transition Metal", "Post-Transition Metal",
+      "Metalloid", "Nonmetal", "Halogen", "Noble Gas", "Lanthanide", "Actinide"
+    ];
+
+    /* ============================================================
+       LOAD DATA
+       ============================================================ */
+    fetch("../../assets/periodictable/periodic-table.json")
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        ELEMENTS = data.elements || [];
+        COLOR_LEGEND = data.colorLegend || {};
+        buildLegend();
+        buildGrid();
+      })
+      .catch(function (err) {
+        var grid = document.getElementById("pt-grid");
+        grid.innerHTML = '<p style="grid-column:1/-1;color:var(--muted);padding:24px;">Could not load element data. Please check your connection and reload.</p>';
+        console.error("Periodic table data failed to load:", err);
+      });
+
+    /* ============================================================
+       LEGEND (category filter chips)
+       ============================================================ */
+    function buildLegend() {
+      var wrap = document.getElementById("pt-legend");
+      wrap.innerHTML = "";
+      CAT_ORDER.forEach(function (cat) {
+        if (!COLOR_LEGEND[cat]) return;
+        var chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "pt-legend-item";
+        chip.setAttribute("aria-pressed", "false");
+        chip.setAttribute("data-cat", cat);
+        chip.innerHTML = '<span class="sw" style="background:' + COLOR_LEGEND[cat] + '"></span>' + cat;
+        chip.addEventListener("click", function () {
+          if (activeCategories.has(cat)) {
+            activeCategories.delete(cat);
+            chip.setAttribute("aria-pressed", "false");
+          } else {
+            activeCategories.add(cat);
+            chip.setAttribute("aria-pressed", "true");
+          }
+          applyFilters();
+        });
+        wrap.appendChild(chip);
+      });
+    }
+
+    /* ============================================================
+       GRID LAYOUT
+       Standard 18-column periodic table. Lanthanides (period 6,
+       group 3) and Actinides (period 7, group 3) are pulled out
+       into two detached rows below the main body, as on every
+       standard printed periodic table.
+       ============================================================ */
+    function buildGrid() {
+      var grid = document.getElementById("pt-grid");
+      grid.innerHTML = "";
+
+      var byZ = {};
+      ELEMENTS.forEach(function (e) { byZ[e.atomicNumber] = e; });
+
+      var lanthanides = ELEMENTS.filter(function (e) { return e.identity.category === "Lanthanide"; })
+        .sort(function (a, b) { return a.atomicNumber - b.atomicNumber; });
+      var actinides = ELEMENTS.filter(function (e) { return e.identity.category === "Actinide"; })
+        .sort(function (a, b) { return a.atomicNumber - b.atomicNumber; });
+      var lanZSet = new Set(lanthanides.map(function (e) { return e.atomicNumber; }));
+      var actZSet = new Set(actinides.map(function (e) { return e.atomicNumber; }));
+
+      // Main table cells: period 1-7, group 1-18, excluding the f-block elements
+      // (which get placeholder markers "57-71" / "89-103" in group 3, periods 6 & 7)
+      for (var period = 1; period <= 7; period++) {
+        for (var group = 1; group <= 18; group++) {
+          var cellEl = findMainCell(period, group, byZ, lanZSet, actZSet);
+          var node;
+          if (cellEl === "LA_PLACEHOLDER") {
+            node = makePlaceholder("57–71");
+          } else if (cellEl === "AC_PLACEHOLDER") {
+            node = makePlaceholder("89–103");
+          } else if (cellEl) {
+            node = makeCell(cellEl);
+          } else {
+            node = document.createElement("div");
+            node.className = "pt-placeholder";
+          }
+          node.style.gridColumn = String(group);
+          node.style.gridRow = String(period);
+          grid.appendChild(node);
+        }
+      }
+
+      // Gap row (visual separation before f-block)
+      var gap = document.createElement("div");
+      gap.className = "pt-fblock-gap";
+      gap.style.gridRow = "8";
+      grid.appendChild(gap);
+
+      // Lanthanide row (visual period 9), starting at group 3
+      lanthanides.forEach(function (el, i) {
+        var node = makeCell(el);
+        node.style.gridColumn = String(3 + i);
+        node.style.gridRow = "9";
+        grid.appendChild(node);
+      });
+
+      // Actinide row (visual period 10), starting at group 3
+      actinides.forEach(function (el, i) {
+        var node = makeCell(el);
+        node.style.gridColumn = String(3 + i);
+        node.style.gridRow = "10";
+        grid.appendChild(node);
+      });
+    }
+
+    function findMainCell(period, group, byZ, lanZSet, actZSet) {
+      if (period === 6 && group === 3) return "LA_PLACEHOLDER";
+      if (period === 7 && group === 3) return "AC_PLACEHOLDER";
+      var match = null;
+      Object.keys(byZ).forEach(function (z) {
+        var e = byZ[z];
+        if (lanZSet.has(e.atomicNumber) || actZSet.has(e.atomicNumber)) return;
+        if (e.identity.period === period && e.identity.group === group) match = e;
+      });
+      return match;
+    }
+
+    function makePlaceholder(label) {
+      var d = document.createElement("div");
+      d.className = "pt-lacell";
+      d.textContent = label;
+      d.setAttribute("aria-hidden", "true");
+      return d;
+    }
+
+    function makeCell(el) {
+      var color = el.identity.colorCode || "#CED4DA";
+      var d = document.createElement("button");
+      d.type = "button";
+      d.className = "pt-cell";
+      d.setAttribute("data-z", el.atomicNumber);
+      d.setAttribute("data-cat", el.identity.category);
+      d.setAttribute("data-search", (el.name + " " + el.symbol).toLowerCase());
+      d.setAttribute("role", "gridcell");
+      d.setAttribute("aria-label", el.name + ", atomic number " + el.atomicNumber);
+      d.style.background = color;
+      d.style.borderColor = "color-mix(in oklab, " + color + ", black 15%)";
+
+      var mass = el.atomicStructure && el.atomicStructure.atomicMass;
+      d.innerHTML =
+        '<span class="z">' + el.atomicNumber + '</span>' +
+        '<span class="sym">' + el.symbol + '</span>' +
+        '<span class="nm">' + el.name + '</span>' +
+        '<span class="mass">' + (typeof mass === "number" ? mass.toFixed(2) : (mass || "")) + '</span>';
+
+      d.addEventListener("click", function () { selectElement(el.atomicNumber); });
+      return d;
+    }
+
+    /* ============================================================
+       FILTERING (category chips + search box)
+       ============================================================ */
+    function applyFilters() {
+      var cells = document.querySelectorAll(".pt-cell");
+      var visibleCount = 0;
+      var anyFilterActive = activeCategories.size > 0 || searchTerm.length > 0;
+
+      cells.forEach(function (cell) {
+        var cat = cell.getAttribute("data-cat");
+        var searchable = cell.getAttribute("data-search") || "";
+        var matchesCat = activeCategories.size === 0 || activeCategories.has(cat);
+        var matchesSearch = searchTerm.length === 0 || searchable.indexOf(searchTerm) !== -1;
+        var visible = matchesCat && matchesSearch;
+
+        if (!anyFilterActive) {
+          cell.classList.remove("is-dimmed");
+        } else {
+          cell.classList.toggle("is-dimmed", !visible);
+        }
+        if (visible) visibleCount++;
+      });
+
+      var hint = document.getElementById("pt-hint");
+      if (anyFilterActive) {
+        hint.textContent = visibleCount + " of 118 shown";
+      } else {
+        hint.textContent = "118 elements";
+      }
+    }
+
+    document.getElementById("pt-search-input").addEventListener("input", function (e) {
+      searchTerm = e.target.value.trim().toLowerCase();
+      applyFilters();
+    });
+
+    /* ============================================================
+       SELECT + DETAIL PANEL
+       ============================================================ */
+    function selectElement(z) {
+      activeZ = z;
+      document.querySelectorAll(".pt-cell").forEach(function (c) {
+        c.classList.toggle("is-active", Number(c.getAttribute("data-z")) === z);
+      });
+
+      var el = ELEMENTS.find(function (e) { return e.atomicNumber === z; });
+      if (!el) return;
+
+      document.getElementById("pt-detail-empty").style.display = "none";
+      var content = document.getElementById("pt-detail-content");
+      content.style.display = "block";
+      content.innerHTML = renderDetail(el);
+      bindDetailTabs(content);
+      bindDetailClose(content, el.symbol);
+
+      // Scroll the detail panel into view, but keep the table visible above it
+      var detail = document.getElementById("pt-detail");
+      var rect = detail.getBoundingClientRect();
+      var isMobile = window.innerWidth < 768;
+      if (isMobile || rect.top < 0 || rect.top > window.innerHeight * 0.6) {
+        detail.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function clearSelection() {
+      activeZ = null;
+      document.querySelectorAll(".pt-cell").forEach(function (c) { c.classList.remove("is-active"); });
+      document.getElementById("pt-detail-empty").style.display = "";
+      var content = document.getElementById("pt-detail-content");
+      content.style.display = "none";
+      content.innerHTML = "";
+    }
+
+    function bindDetailClose(scope, symLabel) {
+      var btn = scope.querySelector(".pt-detail-close");
+      if (btn) btn.addEventListener("click", clearSelection);
+    }
+
+    function bindDetailTabs(scope) {
+      var tabs = scope.querySelectorAll(".pt-tab");
+      var panels = scope.querySelectorAll(".pt-panel");
+      tabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          var target = tab.getAttribute("data-tab");
+          tabs.forEach(function (t) { t.setAttribute("aria-selected", String(t === tab)); });
+          panels.forEach(function (p) {
+            p.classList.toggle("is-active", p.getAttribute("data-panel") === target);
+          });
+        });
+      });
+    }
+
+    /* ============================================================
+       DETAIL RENDERING
+       ============================================================ */
+    function fmt(v, suffix) {
+      if (v === null || v === undefined || v === "") return "—";
+      if (typeof v === "number") return v + (suffix || "");
+      return v + (suffix || "");
+    }
+
+    // True only for values worth displaying — filters out null, undefined, and "".
+    // Used everywhere a raw numeric/string field is concatenated directly into
+    // markup, since JS silently stringifies null as the literal text "null".
+    function hasVal(v) {
+      return v !== null && v !== undefined && v !== "";
+    }
+
+    function esc(s) {
+      if (s === null || s === undefined) return "";
+      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    function renderDetail(el) {
+      var color = el.identity.colorCode || "#CED4DA";
+      var ident = el.identity || {};
+      var atomic = el.atomicStructure || {};
+      var phys = el.physicalProperties || {};
+      var chem = el.chemicalProperties || {};
+      var iso = el.isotopes || {};
+      var comp = el.compounds || {};
+      var use = el.practicalUse || {};
+      var hist = el.history || {};
+      var spec = el.spectroscopy || {};
+      var ev = el.electronVisualization || {};
+      var thermo = el.thermodynamic || {};
+      var safety = el.safety || {};
+
+      var meltC = phys.melting && phys.melting.celsius;
+      var boilC = phys.boiling && phys.boiling.celsius;
+      var density = phys.density && phys.density.value;
+      var densityUnit = (phys.density && phys.density.unit) || "";
+
+      var html = "";
+
+      /* ---- top bar ---- */
+      html += '<div class="pt-detail-top">';
+      html += '  <div class="pt-detail-badge" style="background:' + color + '">';
+      html += '    <span class="z">' + el.atomicNumber + '</span>';
+      html += '    <span class="sym">' + esc(el.symbol) + '</span>';
+      html += '  </div>';
+      html += '  <div class="pt-detail-name-row">';
+      html += '    <h2>' + esc(el.name) + '</h2>';
+      html += '    <span class="pt-detail-cat"><span class="sw" style="background:' + color + '"></span>' + esc(ident.category) + ' · ' + esc(ident.iupacGroupName || ("Group " + ident.group)) + '</span>';
+      html += '  </div>';
+      html += '  <button type="button" class="pt-detail-close" aria-label="Close element details"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>';
+      html += '</div>';
+
+      /* ---- quick facts strip ---- */
+      html += '<div class="pt-quickgrid">';
+      html += quickStat("Atomic mass", (typeof atomic.atomicMass === "number" ? atomic.atomicMass.toFixed(3) : fmt(atomic.atomicMass)) + " u");
+      html += quickStat("State", fmt(phys.state));
+      html += quickStat("Melting pt.", hasVal(meltC) ? meltC + " °C" : "—");
+      html += quickStat("Boiling pt.", hasVal(boilC) ? boilC + " °C" : "—");
+      html += '</div>';
+
+      /* ---- tabs ---- */
+      html += '<div class="pt-tabs" role="tablist">';
+      html += tabBtn("overview", "Overview", true);
+      html += tabBtn("atomic", "Atomic Structure", false);
+      html += tabBtn("properties", "Properties", false);
+      html += tabBtn("isotopes", "Isotopes", false);
+      html += tabBtn("uses", "Uses & Compounds", false);
+      html += tabBtn("history", "History", false);
+      html += '</div>';
+
+      /* ---- OVERVIEW panel ---- */
+      html += '<div class="pt-panel is-active" data-panel="overview">';
+      html += '  <p class="pt-subhead">At a glance</p>';
+      html += '  <div class="pt-facts">';
+      html += fact("Symbol", el.symbol);
+      html += fact("Atomic number", el.atomicNumber);
+      html += fact("Category", ident.category);
+      html += fact("Block / Period", esc(ident.block) + "-block · Period " + esc(ident.period));
+      html += fact("Group", ident.iupacGroupName || ident.group);
+      html += fact("Electron config.", atomic.electronConfigurationNobleGas || atomic.electronConfiguration);
+      html += '  </div>';
+      if (use.industrialUses && use.industrialUses.length) {
+        html += '  <p class="pt-subhead">Why it matters</p>';
+        html += '  <ul class="pt-usesgrid">' + use.industrialUses.slice(0, 3).map(function (u) { return '<li>' + esc(u) + '</li>'; }).join("") + '</ul>';
+      }
+      if (hist.historicalSignificance) {
+        html += '  <p class="pt-subhead">Notable fact</p>';
+        html += '  <p class="pt-prosetext">' + esc(hist.historicalSignificance) + '</p>';
+      }
+      html += '</div>';
+
+      /* ---- ATOMIC STRUCTURE panel ---- */
+      html += '<div class="pt-panel" data-panel="atomic">';
+      html += '  <p class="pt-subhead">Electron configuration</p>';
+      html += '  <div class="pt-facts">';
+      html += fact("Full configuration", atomic.electronConfiguration);
+      html += fact("Noble gas shorthand", atomic.electronConfigurationNobleGas);
+      html += fact("Valence electrons", atomic.valenceElectrons);
+      html += fact("Protons", atomic.protons);
+      html += fact("Neutrons (most abundant)", atomic.neutrons);
+      html += fact("Electrons", atomic.electrons);
+      html += '  </div>';
+      if (atomic.orbitalDiagram) {
+        html += '  <p class="pt-subhead">Orbital diagram</p>';
+        html += '  <p class="pt-prosetext" style="font-family:var(--font-mono);font-size:13px;letter-spacing:0.02em;">' + esc(atomic.orbitalDiagram) + '</p>';
+      }
+      if (ev.electronsPerShell && ev.electronsPerShell.length) {
+        html += '  <p class="pt-subhead">Electrons per shell</p>';
+        html += '  <div class="pt-facts">';
+        html += fact("Shell distribution", ev.electronsPerShell.join(", "));
+        html += fact("Unpaired electrons", ev.unpairedElectrons);
+        html += fact("Magnetic behaviour", ev.magneticBehavior);
+        html += '  </div>';
+      }
+      html += '</div>';
+
+      /* ---- PROPERTIES panel ---- */
+      html += '<div class="pt-panel" data-panel="properties">';
+      html += '  <p class="pt-subhead">Physical properties</p>';
+      html += '  <div class="pt-facts">';
+      html += fact("State at room temp.", phys.state);
+      html += fact("Appearance", phys.appearance || phys.color);
+      var meltK = phys.melting && phys.melting.kelvin;
+      var boilK = phys.boiling && phys.boiling.kelvin;
+      html += fact("Melting point", hasVal(meltC) ? meltC + " °C" + (hasVal(meltK) ? " (" + meltK + " K)" : "") : "—");
+      html += fact("Boiling point", hasVal(boilC) ? boilC + " °C" + (hasVal(boilK) ? " (" + boilK + " K)" : "") : "—");
+      html += fact("Density", hasVal(density) ? density + " " + densityUnit : "—");
+      html += fact("Crystal structure", phys.crystalStructure);
+      html += '  </div>';
+      html += '  <p class="pt-subhead">Chemical properties</p>';
+      html += '  <div class="pt-facts">';
+      html += fact("Electronegativity", chem.electronegativity);
+      html += fact("Electron affinity", hasVal(chem.electronAffinity) ? chem.electronAffinity + " kJ/mol" : "—");
+      html += fact("1st ionization energy", hasVal(chem.ionizationEnergies && chem.ionizationEnergies.first) ? chem.ionizationEnergies.first + " kJ/mol" : "—");
+      html += fact("Common oxidation states", chem.commonOxidationStates && chem.commonOxidationStates.join(", "));
+      html += fact("Reactivity", chem.reactivityLevel);
+      html += fact("Valency", chem.valency);
+      html += '  </div>';
+      if (spec.atomicRadius || spec.thermalConductivity) {
+        html += '  <p class="pt-subhead">Atomic radii &amp; thermal</p>';
+        html += '  <div class="pt-facts">';
+        html += fact("Atomic radius", hasVal(spec.atomicRadius && spec.atomicRadius.value) ? spec.atomicRadius.value + " " + spec.atomicRadius.unit : "—");
+        html += fact("Covalent radius", hasVal(spec.covalentRadius && spec.covalentRadius.value) ? spec.covalentRadius.value + " " + spec.covalentRadius.unit : "—");
+        html += fact("Thermal conductivity", hasVal(spec.thermalConductivity && spec.thermalConductivity.value) ? spec.thermalConductivity.value + " " + spec.thermalConductivity.unit : "—");
+        html += fact("Hardness", hasVal(spec.hardness && spec.hardness.value) ? spec.hardness.value + " " + spec.hardness.unit : "—");
+        html += '  </div>';
+      }
+      if (safety.ghsHazards && safety.ghsHazards.length && safety.ghsHazards[0] !== "None (metal)") {
+        html += '  <p class="pt-subhead">Safety</p>';
+        html += '  <ul class="pt-usesgrid">' + safety.ghsHazards.map(function (h) { return '<li>' + esc(h) + '</li>'; }).join("") + '</ul>';
+      }
+      html += '</div>';
+
+      /* ---- ISOTOPES panel ---- */
+      html += '<div class="pt-panel" data-panel="isotopes">';
+      if (iso.mostAbundant) {
+        html += '  <p class="pt-subhead">Most abundant isotope</p>';
+        html += '  <div class="pt-listcard">';
+        html += '    <div class="hd"><strong>' + esc(iso.mostAbundant.symbol || iso.mostAbundant.name) + '</strong><span>' + esc(iso.mostAbundant.halfLife) + '</span></div>';
+        html += '    <p>' + esc(iso.mostAbundant.name) + (hasVal(iso.mostAbundant.abundance) ? " · " + iso.mostAbundant.abundance + (typeof iso.mostAbundant.abundance === "number" ? "% natural abundance" : "") : "") + '</p>';
+        html += '  </div>';
+      }
+      if (iso.knownIsotopes && iso.knownIsotopes.length) {
+        html += '  <p class="pt-subhead">Known isotopes</p>';
+        html += '  <div class="pt-list">';
+        iso.knownIsotopes.forEach(function (i) {
+          html += '  <div class="pt-listcard">';
+          html += '    <div class="hd"><strong>' + esc(i.symbol || i.name) + '</strong><span>' + esc(i.halfLife) + '</span></div>';
+          html += '    <p>' + esc(i.name) + (i.decayMode ? " · decays via " + esc(i.decayMode) : "") + (i.note ? "<br>" + esc(i.note) : "") + '</p>';
+          html += '  </div>';
+        });
+        html += '  </div>';
+      } else {
+        html += '  <p class="pt-prosetext">No detailed isotope records available for this element.</p>';
+      }
+      html += '</div>';
+
+      /* ---- USES & COMPOUNDS panel ---- */
+      html += '<div class="pt-panel" data-panel="uses">';
+      if (use.industrialUses && use.industrialUses.length) {
+        html += '  <p class="pt-subhead">Industrial &amp; everyday uses</p>';
+        html += '  <ul class="pt-usesgrid">' + use.industrialUses.map(function (u) { return '<li>' + esc(u) + '</li>'; }).join("") + '</ul>';
+      }
+      if (comp.common && comp.common.length) {
+        html += '  <p class="pt-subhead">Notable compounds</p>';
+        html += '  <div class="pt-list">';
+        comp.common.forEach(function (c) {
+          html += '  <div class="pt-listcard">';
+          html += '    <div class="hd"><strong>' + esc(c.formula) + '</strong><span>' + esc(c.name) + '</span></div>';
+          html += '    <p>' + esc(c.significance) + '</p>';
+          html += '  </div>';
+        });
+        html += '  </div>';
+      }
+      if (use.biologicalRole && use.biologicalRole !== "No known biological role" && use.biologicalRole !== "Non-essential") {
+        html += '  <p class="pt-subhead">Biological role</p>';
+        html += '  <p class="pt-prosetext">' + esc(use.biologicalRole) + '</p>';
+      }
+      html += '</div>';
+
+      /* ---- HISTORY panel ---- */
+      html += '<div class="pt-panel" data-panel="history">';
+      html += '  <div class="pt-facts">';
+      html += fact("Discovered by", hist.discoveredBy);
+      html += fact("Discovery year", hist.discoveryYear);
+      html += fact("Country", hist.discoveryCountry);
+      html += '  </div>';
+      if (hist.nameOrigin) {
+        html += '  <p class="pt-subhead">Name origin</p>';
+        html += '  <p class="pt-prosetext">' + esc(hist.nameOrigin) + '</p>';
+      }
+      if (hist.historicalSignificance) {
+        html += '  <p class="pt-subhead">Historical significance</p>';
+        html += '  <p class="pt-prosetext">' + esc(hist.historicalSignificance) + '</p>';
+      }
+      if (use.miningMethod) {
+        html += '  <p class="pt-subhead">Where it comes from</p>';
+        html += '  <p class="pt-prosetext">' + esc(use.miningMethod) + '</p>';
+      }
+      html += '</div>';
+
+      return html;
+    }
+
+    function quickStat(label, value) {
+      return '<div class="pt-quick"><div class="lbl">' + esc(label) + '</div><div class="val">' + esc(value) + '</div></div>';
+    }
+    function tabBtn(key, label, selected) {
+      return '<button type="button" class="pt-tab" role="tab" data-tab="' + key + '" aria-selected="' + (selected ? "true" : "false") + '">' + esc(label) + '</button>';
+    }
+    function fact(k, v) {
+      return '<div class="pt-fact"><span class="k">' + esc(k) + '</span><span class="v">' + esc(fmt(v)) + '</span></div>';
+    }
+
+  })();
+  </script>
+</body>
+</html>
