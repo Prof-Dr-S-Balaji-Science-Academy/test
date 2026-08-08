@@ -77,12 +77,17 @@
       position: relative;
       margin-bottom: var(--space-8);
     }
+    /* The scroll container is given generous padding, cancelled by an equal
+       negative margin, so its visible position never shifts — but the hover
+       "pop" (scale + translateY + shadow) on edge cells now has room to
+       breathe before hitting the clip boundary, instead of being cut off. */
     .pt-scroll{
       overflow-x: auto;
       overflow-y: hidden;
-      padding-bottom: var(--space-3);
       -webkit-overflow-scrolling: touch;
       scrollbar-width: thin;
+      padding: 18px 18px 24px;
+      margin: -18px -18px -24px;
     }
     .pt-scroll::-webkit-scrollbar{ height: 8px; }
     .pt-scroll::-webkit-scrollbar-track{ background: var(--surface); border-radius: 8px; }
@@ -101,10 +106,8 @@
 
     .pt-cell{
       position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 4px 5px 3px;
+      aspect-ratio: 1 / 1;
+      padding: 0;
       border-radius: var(--pt-radius);
       cursor: pointer;
       border: 1px solid rgba(10,11,13,0.06);
@@ -132,12 +135,32 @@
     .pt-cell.is-dimmed{
       opacity: 0.22;
     }
+    /* Atomic number sits in its own corner badge, independent of the flex
+       flow below — this is what lets the symbol be truly centered rather
+       than pushed around by however many other lines of text exist. */
     .pt-cell .z{
+      position: absolute;
+      top: 3px;
+      left: 4px;
       font-family: var(--font-mono);
       font-size: 9px;
       font-weight: 600;
       line-height: 1;
       color: color-mix(in oklab, var(--fg), transparent 35%);
+    }
+    /* Fills the cell and centers whatever's inside (symbol alone on
+       mobile; symbol + name + mass on larger screens) both horizontally
+       and vertically, so nothing ever looks bottom- or top-heavy. */
+    .pt-cell-main{
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      padding: 3px;
+      pointer-events: none;
     }
     .pt-cell .sym{
       font-family: var(--font-display);
@@ -145,7 +168,6 @@
       font-weight: 400;
       line-height: 1;
       color: var(--fg);
-      align-self: center;
     }
     .pt-cell .nm{
       font-size: 8px;
@@ -155,6 +177,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      max-width: 100%;
     }
     .pt-cell .mass{
       font-family: var(--font-mono);
@@ -167,6 +190,7 @@
       background: transparent;
     }
     .pt-lacell{
+      aspect-ratio: 1 / 1;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -478,13 +502,13 @@
       white-space: nowrap;
     }
 
-    /* ---------- Mobile ---------- */
+    /* ---------- Mobile: fixed small cells, horizontal scroll ---------- */
     @media (max-width: 767px){
       :root{ --pt-cell: 42px; --pt-gap: 3px; }
       .pt-cell .sym{ font-size: 13px; }
       .pt-cell .nm{ display: none; }
       .pt-cell .mass{ display: none; }
-      .pt-cell .z{ font-size: 7px; }
+      .pt-cell .z{ font-size: 7px; top: 2px; left: 3px; }
       .pt-glabel, .pt-plabel{ font-size: 8px; }
       .pt-lacell{ font-size: 8px; }
 
@@ -502,8 +526,34 @@
       .pt-search{ max-width: none; }
     }
 
-    @media (min-width: 896px){
-      :root{ --pt-cell: 68px; }
+    /* ---------- Tablet & up: fluid grid, no horizontal scroll ----------
+       Columns become 18 equal fractions of the available width instead of
+       a fixed pixel size, so the whole table always fits the screen —
+       aspect-ratio keeps every cell square as that width changes. */
+    @media (min-width: 768px){
+      .pt-grid{
+        grid-template-columns: repeat(18, 1fr);
+        grid-auto-rows: auto;
+        width: 100%;
+      }
+      .pt-scroll{
+        overflow-x: visible;
+      }
+    }
+
+    /* 768–1023px: table is fluid but still fairly compact, so keep name
+       and atomic mass hidden — same treatment as mobile, just wider. */
+    @media (min-width: 768px) and (max-width: 1023px){
+      .pt-cell .sym{ font-size: 15px; }
+      .pt-cell .nm{ display: none; }
+      .pt-cell .mass{ display: none; }
+      .pt-cell .z{ font-size: 8px; }
+    }
+
+    /* ≥1024px: plenty of room — show the full label set. */
+    @media (min-width: 1024px){
+      .pt-cell .nm{ display: block; }
+      .pt-cell .mass{ display: block; }
     }
   </style>
 </head>
@@ -856,9 +906,11 @@
       var mass = el.atomicStructure && el.atomicStructure.atomicMass;
       d.innerHTML =
         '<span class="z">' + el.atomicNumber + '</span>' +
-        '<span class="sym">' + el.symbol + '</span>' +
-        '<span class="nm">' + el.name + '</span>' +
-        '<span class="mass">' + (typeof mass === "number" ? mass.toFixed(2) : (mass || "")) + '</span>';
+        '<span class="pt-cell-main">' +
+        '  <span class="sym">' + el.symbol + '</span>' +
+        '  <span class="nm">' + el.name + '</span>' +
+        '  <span class="mass">' + (typeof mass === "number" ? mass.toFixed(2) : (mass || "")) + '</span>' +
+        '</span>';
 
       d.addEventListener("click", function () { selectElement(el.atomicNumber); });
       return d;
