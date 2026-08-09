@@ -147,7 +147,7 @@
                   <div class="pillar-title">Plan</div>
                   <p>Structured roadmap covering entire TN State Board syllabus systematically</p>
                 </div>
-                <button class="btn btn-outline pillar-cta-mobile" data-od-id="cta-plan-inline">Study Planner</button>
+                <a class="btn btn-outline pillar-cta-mobile" href="/pages/studyplanner/" data-od-id="cta-plan-inline">Study Planner</a>
               </div>
             </div>
             <div class="pillar-item">
@@ -157,7 +157,13 @@
                   <div class="pillar-title">Learn</div>
                   <p>Concept-first teaching building strong fundamentals before problem solving</p>
                 </div>
-                <a class="btn btn-outline pillar-cta-mobile" href="../../pages/mindmap/index.html" data-od-id="cta-resources-inline">Resources</a>
+                <div class="cta-resources-wrap pillar-cta-mobile" data-od-id="cta-resources-inline-wrap">
+                  <button class="btn btn-outline cta-resources-btn" type="button" aria-expanded="false" aria-haspopup="true">Resources</button>
+                  <div class="cta-resources-menu">
+                    <a href="/pages/periodictable/">Periodic Table</a>
+                    <a href="/pages/mindmap/">Mind Map</a>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="pillar-item">
@@ -167,15 +173,21 @@
                   <div class="pillar-title">Practice</div>
                   <p>Weekly tests, PYQ practice, and full-length exams to master board patterns</p>
                 </div>
-                <button class="btn btn-primary-stateboard pillar-cta-mobile" data-od-id="cta-practice-inline">Mock Test</button>
+                <a class="btn btn-primary-stateboard pillar-cta-mobile" href="/pages/test.html" data-od-id="cta-practice-inline">Mock Test</a>
               </div>
             </div>
           </div>
 
           <div class="hero-cta" data-od-id="hero-cta">
-            <button class="btn btn-outline" data-od-id="cta-plan">Study Planner</button>
-            <a class="btn btn-outline" href="../../pages/mindmap/index.html" data-od-id="cta-resources">Resources</a>
-            <button class="btn btn-primary-stateboard" data-od-id="cta-practice">Mock Test</button>
+            <a class="btn btn-outline" href="/pages/studyplanner/" data-od-id="cta-plan">Study Planner</a>
+            <div class="cta-resources-wrap" data-od-id="cta-resources-wrap">
+              <button class="btn btn-outline cta-resources-btn" type="button" aria-expanded="false" aria-haspopup="true">Resources</button>
+              <div class="cta-resources-menu">
+                <a href="/pages/periodictable/">Periodic Table</a>
+                <a href="/pages/mindmap/">Mind Map</a>
+              </div>
+            </div>
+            <a class="btn btn-primary-stateboard" href="/pages/test.html" data-od-id="cta-practice">Mock Test</a>
           </div>
         </div>
 
@@ -518,5 +530,57 @@
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>
   <script src="../../js/main.js" defer></script>
+  <style>
+    /* Resources submenu dropdown */
+    .cta-resources-wrap {
+      position: relative;
+      display: inline-flex;
+    }
+    .cta-resources-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 8px 0;
+      min-width: 160px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      z-index: 200;
+      white-space: nowrap;
+    }
+    .cta-resources-wrap.open .cta-resources-menu { display: block; }
+    .cta-resources-menu a {
+      display: block;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+      text-decoration: none;
+      transition: background 150ms;
+    }
+    .cta-resources-menu a:hover {
+      background: var(--surface);
+      color: var(--accent);
+    }
+  </style>
+  <script>
+    document.querySelectorAll('.cta-resources-wrap').forEach(function(wrap) {
+      var btn = wrap.querySelector('.cta-resources-btn');
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isOpen = wrap.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+    document.addEventListener('click', function() {
+      document.querySelectorAll('.cta-resources-wrap.open').forEach(function(wrap) {
+        wrap.classList.remove('open');
+        wrap.querySelector('.cta-resources-btn').setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
 </body>
 </html>
