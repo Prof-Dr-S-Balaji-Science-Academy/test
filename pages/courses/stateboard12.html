@@ -157,13 +157,15 @@
                   <div class="pillar-title">Learn</div>
                   <p>Concept-first teaching building strong fundamentals before problem solving</p>
                 </div>
-                <div class="cta-resources-wrap pillar-cta-mobile" data-od-id="cta-resources-inline-wrap">
-                  <button class="btn btn-outline cta-resources-btn" type="button" aria-expanded="false" aria-haspopup="true">Resources</button>
-                  <div class="cta-resources-menu">
-                    <a href="/pages/periodictable/">Periodic Table</a>
-                    <a href="/pages/mindmap/">Mind Map</a>
+                <span class="pillar-cta-mobile">
+                  <div class="cta-resources-wrap" data-od-id="cta-resources-inline-wrap">
+                    <button class="btn btn-outline cta-resources-btn" type="button" aria-expanded="false" aria-haspopup="true">Resources</button>
+                    <div class="cta-resources-menu">
+                      <a href="/pages/periodictable/">Periodic Table</a>
+                      <a href="/pages/mindmap/">Mind Map</a>
+                    </div>
                   </div>
-                </div>
+                </span>
               </div>
             </div>
             <div class="pillar-item">
@@ -531,11 +533,7 @@
   </script>
   <script src="../../js/main.js" defer></script>
   <style>
-    /* Resources submenu dropdown */
-    .cta-resources-wrap {
-      position: relative;
-      display: inline-flex;
-    }
+    .cta-resources-wrap { position: relative; display: inline-flex; }
     .cta-resources-menu {
       display: none;
       position: absolute;
@@ -561,10 +559,7 @@
       text-decoration: none;
       transition: background 150ms;
     }
-    .cta-resources-menu a:hover {
-      background: var(--surface);
-      color: var(--accent);
-    }
+    .cta-resources-menu a:hover { background: var(--surface); color: var(--accent); }
   </style>
   <script>
     document.querySelectorAll('.cta-resources-wrap').forEach(function(wrap) {
