@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Mathematical log tables — Logarithm, Antilogarithm, Natural Sines, Cosines, Tangents and Trigonometry Ratios. Prof. Dr. S. Balaji Science Academy." />
+  <title>Log Book | Prof. Dr. S. Balaji Science Academy</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <style>
+    /* ── Page shell ─────────────────────────────────────────── */
+    .lb-page {
+      min-height: 100vh;
+      padding: 48px 0 80px;
+    }
+    .lb-hero {
+      margin-bottom: 40px;
+    }
+    .lb-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .lb-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      margin-bottom: 12px;
+    }
+    .lb-desc {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 56ch;
+      line-height: 1.55;
+    }
+
+    /* ── Controls bar ───────────────────────────────────────── */
+    .lb-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .lb-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      flex: 1;
+    }
+    .lb-pill {
+      display: inline-flex;
+      align-items: center;
+      height: 36px;
+      padding: 0 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--fg);
+      cursor: pointer;
+      transition: background 150ms, color 150ms, border-color 150ms;
+      white-space: nowrap;
+    }
+    .lb-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .lb-pill.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* ── Search + Export row ────────────────────────────────── */
+    .lb-right-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .lb-search-wrap {
+      position: relative;
+    }
+    .lb-search-wrap svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+    .lb-search {
+      height: 36px;
+      padding: 0 12px 0 36px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--fg);
+      width: 200px;
+      transition: border-color 150ms, box-shadow 150ms;
+      outline: none;
+    }
+    .lb-search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0,82,255,0.1);
+    }
+    .lb-search::placeholder { color: var(--muted); }
+    .lb-export-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 36px;
+      padding: 0 16px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--fg);
+      cursor: pointer;
+      transition: background 150ms, color 150ms, border-color 150ms;
+      white-space: nowrap;
+    }
+    .lb-export-btn:hover {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+    .lb-export-btn svg { flex-shrink: 0; }
+
+    /* ── Empty state ────────────────────────────────────────── */
+    .lb-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
+      gap: 12px;
+      text-align: center;
+    }
+    .lb-empty-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--surface);
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+    }
+    .lb-empty h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--fg);
+    }
+    .lb-empty p {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 36ch;
+    }
+
+    /* ── Table wrapper ──────────────────────────────────────── */
+    .lb-table-section { display: none; }
+    .lb-table-section.visible { display: block; }
+
+    .lb-table-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .lb-table-title {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 400;
+      color: var(--fg);
+      margin-bottom: 4px;
+    }
+    .lb-table-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .lb-scroll {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* ── Core table styles ──────────────────────────────────── */
+    .lb-tbl {
+      border-collapse: collapse;
+      font-size: 12px;
+      font-family: var(--font-mono, ui-monospace, 'SF Mono', monospace);
+      width: 100%;
+      min-width: 900px;
+      table-layout: fixed;
+    }
+
+    /* Header rows */
+    .lb-tbl thead tr.hdr-1 th,
+    .lb-tbl thead tr.hdr-2 th {
+      background: var(--fg);
+      color: var(--bg);
+      padding: 8px 6px;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      white-space: nowrap;
+    }
+    .lb-tbl thead tr.hdr-2 th {
+      background: #16181c;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 5px 6px;
+      border-bottom: 2px solid rgba(255,255,255,0.12);
+    }
+    .lb-tbl thead tr.hdr-1 th.row-lbl,
+    .lb-tbl thead tr.hdr-2 th.row-lbl {
+      text-align: left;
+      padding-left: 12px;
+    }
+    .lb-tbl thead th.mean-head {
+      border-left: 2px solid rgba(255,255,255,0.2);
+    }
+    .lb-tbl thead th.subtract-note {
+      font-size: 9px;
+      font-style: italic;
+      opacity: 0.7;
+      font-weight: 400;
+    }
+
+    /* Body cells */
+    .lb-tbl tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: transform 150ms cubic-bezier(0.2,0,0,1),
+                  box-shadow 150ms cubic-bezier(0.2,0,0,1),
+                  background 100ms;
+      position: relative;
+    }
+    .lb-tbl tbody tr:last-child { border-bottom: none; }
+
+    .lb-tbl tbody tr:hover {
+      background: var(--surface);
+      transform: scaleY(1.015);
+      box-shadow: 0 3px 12px rgba(0,82,255,0.07);
+      z-index: 2;
+    }
+    .lb-tbl tbody td {
+      padding: 6px 6px;
+      text-align: center;
+      color: var(--fg);
+      vertical-align: middle;
+      transition: background 80ms;
+      white-space: nowrap;
+    }
+    .lb-tbl tbody td.row-lbl {
+      text-align: left;
+      padding-left: 12px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--fg);
+      background: var(--surface);
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      border-right: 1px solid var(--border);
+      min-width: 58px;
+    }
+    .lb-tbl tbody td.mean-cell {
+      border-left: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .lb-tbl tbody td.mean-cell:first-of-type {
+      border-left: 2px solid var(--border);
+    }
+
+    /* Column highlight via JS-added class on <col> */
+    .lb-tbl tbody td.col-hover {
+      background: rgba(0,82,255,0.06);
+    }
+    .lb-tbl tbody tr:hover td.col-hover {
+      background: rgba(0,82,255,0.13);
+    }
+    /* Intersection: hovered row + hovered col = strong highlight */
+    .lb-tbl tbody tr:hover td.col-hover.intersect {
+      background: rgba(0,82,255,0.18);
+    }
+
+    /* Search highlight */
+    .lb-tbl tbody tr.search-match {
+      background: rgba(0,82,255,0.05);
+    }
+    .lb-tbl tbody tr.search-hidden {
+      display: none;
+    }
+
+    /* No-data note cell */
+    .lb-tbl .note-cell {
+      font-size: 10px;
+      color: var(--muted);
+      font-style: italic;
+      text-align: left;
+      padding-left: 8px;
+    }
+
+    /* ── Trig ratios table special styling ──────────────────── */
+    .trig-wrap {
+      max-width: 680px;
+    }
+    .lb-tbl.trig-tbl {
+      min-width: 0;
+      table-layout: auto;
+    }
+    .lb-tbl.trig-tbl thead tr th {
+      padding: 10px 16px;
+    }
+    .lb-tbl.trig-tbl tbody td {
+      padding: 10px 16px;
+      font-family: var(--font-body);
+      font-size: 14px;
+    }
+    .lb-tbl.trig-tbl tbody td.row-lbl {
+      font-size: 14px;
+      font-weight: 700;
+      min-width: 80px;
+    }
+    .trig-tbl .fraction {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 12px;
+      line-height: 1.1;
+      gap: 1px;
+    }
+    .trig-tbl .fraction .num { border-bottom: 1px solid var(--fg); padding-bottom: 1px; }
+    .trig-tbl .fraction .den { }
+
+    /* ── Search no-results ──────────────────────────────────── */
+    .lb-no-results {
+      display: none;
+      padding: 24px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .lb-no-results.visible { display: block; }
+
+    /* ── Divider between tables in same view ────────────────── */
+    .lb-table-gap { margin-top: 48px; }
+
+    /* ══════════════════════════════════════════════════════════
+       PRINT STYLES
+    ══════════════════════════════════════════════════════════ */
+    @media print {
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      body { background: white; color: black; font-size: 10px; }
+
+      .lb-controls,
+      .lb-hero,
+      .lb-empty,
+      .lb-export-btn,
+      .site-header,
+      .site-footer,
+      .nav-mobile { display: none !important; }
+
+      .lb-page { padding: 0; }
+      .container { padding: 0 16px; max-width: 100%; }
+
+      .lb-table-section { display: block !important; }
+      .lb-table-section:not(.print-include) { display: none !important; }
+
+      /* Page break before each table */
+      .lb-table-section.print-include { page-break-before: always; }
+      .lb-table-section.print-include:first-of-type { page-break-before: avoid; }
+
+      .lb-scroll {
+        border: none;
+        border-radius: 0;
+        overflow: visible;
+      }
+
+      .lb-tbl {
+        font-size: 8px;
+        min-width: 0;
+        width: 100%;
+      }
+      .lb-tbl thead tr.hdr-1 th,
+      .lb-tbl thead tr.hdr-2 th {
+        background: #0a0b0d !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact;
+        position: static;
+        font-size: 8px;
+        padding: 4px 3px;
+      }
+      .lb-tbl thead tr.hdr-2 th {
+        background: #16181c !important;
+        font-size: 7px;
+      }
+      .lb-tbl tbody td { padding: 3px 3px; font-size: 8px; }
+      .lb-tbl tbody td.row-lbl {
+        position: static;
+        background: #eef0f3 !important;
+        font-size: 8px;
+        padding: 3px 4px;
+      }
+      .lb-tbl tbody tr { transform: none !important; box-shadow: none !important; }
+
+      /* Print header per table */
+      .lb-print-header {
+        display: block !important;
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid black;
+      }
+      .lb-print-header .phead-title {
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .lb-print-header .phead-academy {
+        font-size: 9px;
+        color: #555;
+      }
+
+      .lb-table-title,
+      .lb-table-label,
+      .lb-table-subtitle { display: none; }
+
+      /* Tan note */
+      .lb-tan-note { font-size: 8px; margin-top: 4px; }
+    }
+
+    /* Hide print headers on screen */
+    .lb-print-header { display: none; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .lb-right-controls { width: 100%; }
+      .lb-search { width: 100%; flex: 1; }
+      .lb-controls { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="lb-page">
+  <div class="container">
+
+    <!-- Hero -->
+    <div class="lb-hero">
+      <p class="lb-eyebrow">Learning Resources</p>
+      <h1 class="lb-title">Logarithm Book</h1>
+      <p class="lb-desc">Four-figure mathematical tables for board exam use. Select a table below to view logarithms, antilogarithms, natural trigonometric functions, and standard ratios.</p>
+    </div>
+
+    <!-- Controls -->
+    <div class="lb-controls">
+      <div class="lb-filters" role="group" aria-label="Select table">
+        <button class="lb-pill" data-table="log">Logarithm</button>
+        <button class="lb-pill" data-table="antilog">Antilogarithm</button>
+        <button class="lb-pill" data-table="sine">Natural Sines</button>
+        <button class="lb-pill" data-table="cosine">Natural Cosines</button>
+        <button class="lb-pill" data-table="tangent">Natural Tangents</button>
+        <button class="lb-pill" data-table="trig">Trigonometry Ratios</button>
+      </div>
+      <div class="lb-right-controls">
+        <div class="lb-search-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input class="lb-search" id="lb-search" type="text" placeholder="Search rows…" autocomplete="off" aria-label="Search table rows" />
+        </div>
+        <button class="lb-export-btn" id="lb-export" aria-label="Export all tables as PDF">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="lb-empty" id="lb-empty">
+      <div class="lb-empty-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <h3>Select a table to begin</h3>
+      <p>Choose from Logarithm, Antilogarithm, Natural Sines, Cosines, Tangents, or Trigonometry Ratios above.</p>
+    </div>
+
+    <!-- TABLE SECTIONS (generated by JS) -->
+    <div class="lb-table-section" id="sec-log">
+      <div class="lb-print-header"><div class="phead-title">Table of Logarithms</div><div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div></div>
+      <p class="lb-table-label">Table I</p>
+      <h2 class="lb-table-title">Natural Logarithms</h2>
+      <p class="lb-table-subtitle">Four-figure logarithm table (base 10) — rows 10–99, columns 0–9, mean differences 1–9</p>
+      <div class="lb-scroll"><table class="lb-tbl" id="tbl-log"></table></div>
+      <div class="lb-no-results" id="no-log">No rows match your search.</div>
+    </div>
+
+    <div class="lb-table-section" id="sec-antilog">
+      <div class="lb-print-header"><div class="phead-title">Table of Antilogarithms</div><div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div></div>
+      <p class="lb-table-label">Table II</p>
+      <h2 class="lb-table-title">Antilogarithms</h2>
+      <p class="lb-table-subtitle">Four-figure antilogarithm table — rows .00–.99, columns 0–9, mean differences 1–9</p>
+      <div class="lb-scroll"><table class="lb-tbl" id="tbl-antilog"></table></div>
+      <div class="lb-no-results" id="no-antilog">No rows match your search.</div>
+    </div>
+
+    <div class="lb-table-section" id="sec-sine">
+      <div class="lb-print-header"><div class="phead-title">Natural Sines</div><div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div></div>
+      <p class="lb-table-label">Table III</p>
+      <h2 class="lb-table-title">Natural Sines</h2>
+      <p class="lb-table-subtitle">0° – 90°, intervals of 6′ (0°.1), mean differences 1′–5′ (add)</p>
+      <div class="lb-scroll"><table class="lb-tbl" id="tbl-sine"></table></div>
+      <div class="lb-no-results" id="no-sine">No rows match your search.</div>
+    </div>
+
+    <div class="lb-table-section" id="sec-cosine">
+      <div class="lb-print-header"><div class="phead-title">Natural Cosines</div><div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div></div>
+      <p class="lb-table-label">Table IV</p>
+      <h2 class="lb-table-title">Natural Cosines</h2>
+      <p class="lb-table-subtitle">0° – 90°, intervals of 6′ (0°.1), mean differences 1′–5′ <strong>(subtract)</strong></p>
+      <div class="lb-scroll"><table class="lb-tbl" id="tbl-cosine"></table></div>
+      <div class="lb-no-results" id="no-cosine">No rows match your search.</div>
+    </div>
+
+    <div class="lb-table-section" id="sec-tangent">
+      <div class="lb-print-header"><div class="phead-title">Natural Tangents</div><div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div></div>
+      <p class="lb-table-label">Table V</p>
+      <h2 class="lb-table-title">Natural Tangents</h2>
+      <p class="lb-table-subtitle">0° – 89°, intervals of 6′ (0°.1), mean differences 1′–5′ (add); differences cease near 90°</p>
+      <div class="lb-scroll"><table class="lb-tbl" id="tbl-tangent"></table></div>
+      <div class="lb-no-results" id="no-tangent">No rows match your search.</div>
+      <p class="lb-tan-note" style="font-size:12px;color:var(--muted);margin-top:8px;">* Mean differences cease to be sufficiently accurate beyond 77°.</p>
+    </div>
+
+    <div class="lb-table-section" id="sec-trig">
+      <div class="lb-print-header"><div class="phead-title">Trigonometry Ratios — Standard Angles</div><div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div></div>
+      <p class="lb-table-label">Table VI</p>
+      <h2 class="lb-table-title">Trigonometry Ratios</h2>
+      <p class="lb-table-subtitle">Exact values of sin, cos, tan, cot, cosec and sec at standard angles</p>
+      <div class="lb-scroll trig-wrap"><table class="lb-tbl trig-tbl" id="tbl-trig"></table></div>
+    </div>
+
+  </div><!-- /container -->
+</div><!-- /lb-page -->
+
+<script>
+(function () {
+  "use strict";
+
+  /* ═══════════════════════════════════════════════════════════
+     UTILITY
+  ═══════════════════════════════════════════════════════════ */
+  function fmt4(val) {
+    // return 4-digit mantissa string (no decimal point)
+    if (!isFinite(val)) return "——";
+    var s = Math.round(Math.abs(val) * 10000);
+    s = String(s);
+    while (s.length < 4) s = "0" + s;
+    return s.slice(0, 4);
+  }
+
+  function fmtLog(x) {
+    // log10(x) mantissa as 4 digits
+    if (x <= 0) return "——";
+    var v = Math.log10(x);
+    var mantissa = v - Math.floor(v);
+    return fmt4(mantissa);
+  }
+
+  function fmtAntilog(x) {
+    // antilog of x (10^x), 4 sig digits
+    var v = Math.pow(10, x);
+    // display as 4-digit integer portion scaled
+    var s = v.toFixed(6);
+    // extract digits after decimal point of v, which is between 1.000 and 9.999
+    // we want 4 significant figures
+    return Math.round(v * 1000).toString().slice(0, 4);
+  }
+
+  function fmtTrigVal(v, decimals) {
+    decimals = decimals || 4;
+    if (!isFinite(v)) return "——";
+    if (Math.abs(v) > 999) return "——";
+    return v.toFixed(decimals);
+  }
+
+  function toRad(deg) { return deg * Math.PI / 180; }
+
+  /* Build thead HTML — two-row header */
+  function buildTrigHead(label, meanLabel, meanCols, isSubtract) {
+    var md = meanLabel || "Mean";
+    var cols0 = ["0'","6'","12'","18'","24'","30'","36'","42'","48'","54'"];
+    var cols1 = ["0°.0","0°.1","0°.2","0°.3","0°.4","0°.5","0°.6","0°.7","0°.8","0°.9"];
+
+    var h1 = '<tr class="hdr-1">';
+    h1 += '<th class="row-lbl" rowspan="2">' + label + '</th>';
+    for (var i = 0; i < 10; i++) h1 += '<th>' + cols0[i] + '</th>';
+    h1 += '<th class="mean-head" colspan="' + meanCols + '">' + md + '<br><span style="font-weight:400;font-size:9px;">Differences' + (isSubtract ? ' (Subtract)' : '') + '</span></th>';
+    h1 += '</tr>';
+
+    var h2 = '<tr class="hdr-2">';
+    for (var j = 0; j < 10; j++) h2 += '<th>' + cols1[j] + '</th>';
+    for (var k = 1; k <= meanCols; k++) h2 += '<th class="mean-head">' + k + "'" + '</th>';
+    h2 += '</tr>';
+
+    return '<thead>' + h1 + h2 + '</thead>';
+  }
+
+  function buildLogHead(label, isAntilog) {
+    var h1 = '<tr class="hdr-1">';
+    h1 += '<th class="row-lbl" rowspan="2">' + (label || 'No.') + '</th>';
+    for (var i = 0; i < 10; i++) h1 += '<th>' + i + '</th>';
+    h1 += '<th class="mean-head" colspan="9">Mean<br><span style="font-weight:400;font-size:9px;">Differences</span></th>';
+    h1 += '</tr>';
+
+    var h2 = '<tr class="hdr-2">';
+    for (var j = 0; j < 10; j++) h2 += '<th>' + j + '</th>';
+    for (var k = 1; k <= 9; k++) h2 += '<th class="mean-head">' + k + '</th>';
+    h2 += '</tr>';
+
+    return '<thead>' + h1 + h2 + '</thead>';
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     LOG TABLE  (rows 10–99, cols 0–9, MDs 1–9)
+  ═══════════════════════════════════════════════════════════ */
+  function buildLog() {
+    var tbl = document.getElementById("tbl-log");
+    tbl.innerHTML = buildLogHead("No.");
+
+    var tbody = document.createElement("tbody");
+
+    for (var n = 10; n <= 99; n++) {
+      var tr = document.createElement("tr");
+      tr.setAttribute("data-rowlabel", String(n));
+
+      // Row label
+      var tdL = document.createElement("td");
+      tdL.className = "row-lbl";
+      tdL.textContent = n;
+      tr.appendChild(tdL);
+
+      // Columns 0–9: log(n.X) mantissa
+      var base = n / 10; // e.g. n=15 → 1.5
+      for (var c = 0; c < 10; c++) {
+        var x = base + c * 0.01;
+        var td = document.createElement("td");
+        td.setAttribute("data-col", c);
+        td.textContent = fmtLog(x);
+        tr.appendChild(td);
+      }
+
+      // Mean differences 1–9
+      // MD_k = mantissa(n.X + k*0.001) - mantissa(n.X) averaged across row ≈ diff at midpoint
+      var midX = base + 0.05;
+      var logMid = Math.log10(midX);
+      var M = Math.log10(Math.E); // modulus
+      for (var k = 1; k <= 9; k++) {
+        var diff = Math.round(M / midX * k * 0.001 * 10000);
+        var tdM = document.createElement("td");
+        tdM.className = "mean-cell";
+        tdM.setAttribute("data-mean", k);
+        tdM.textContent = diff > 0 ? diff : "—";
+        tr.appendChild(tdM);
+      }
+
+      tbody.appendChild(tr);
+    }
+
+    tbl.appendChild(tbody);
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     ANTILOG TABLE  (rows .00–.99, cols 0–9, MDs 1–9)
+  ═══════════════════════════════════════════════════════════ */
+  function buildAntilog() {
+    var tbl = document.getElementById("tbl-antilog");
+    tbl.innerHTML = buildLogHead("No.");
+
+    var tbody = document.createElement("tbody");
+
+    for (var n = 0; n <= 99; n++) {
+      var base = n / 100; // .00 to .99
+      var label = "." + (n < 10 ? "0" : "") + n;
+
+      var tr = document.createElement("tr");
+      tr.setAttribute("data-rowlabel", label);
+
+      var tdL = document.createElement("td");
+      tdL.className = "row-lbl";
+      tdL.textContent = label;
+      tr.appendChild(tdL);
+
+      // Columns 0–9: antilog(base + c*0.001)
+      for (var c = 0; c < 10; c++) {
+        var x = base + c * 0.001;
+        var v = Math.pow(10, x); // between 1.000 and 9.999
+        var td = document.createElement("td");
+        td.setAttribute("data-col", c);
+        // 4 significant figures of v
+        td.textContent = fmt4Antilog(v);
+        tr.appendChild(td);
+      }
+
+      // Mean differences 1–9
+      var midX = base + 0.005;
+      var vMid = Math.pow(10, midX);
+      for (var k = 1; k <= 9; k++) {
+        var diff = Math.round(vMid * Math.log(10) * k * 0.001 * 10000);
+        var tdM = document.createElement("td");
+        tdM.className = "mean-cell";
+        tdM.setAttribute("data-mean", k);
+        tdM.textContent = diff > 0 ? diff : "—";
+        tr.appendChild(tdM);
+      }
+
+      tbody.appendChild(tr);
+    }
+
+    tbl.appendChild(tbody);
+  }
+
+  function fmt4Antilog(v) {
+    // v is between 1.000 and 9.9999
+    // return 4-digit string e.g. 1.000→1000, 3.162→3162
+    var s = Math.round(v * 1000);
+    return String(s);
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     TRIG TABLE BUILDER (sine / cosine / tangent)
+  ═══════════════════════════════════════════════════════════ */
+  function buildTrigTable(tblId, fn, label, meanCols, isSubtract) {
+    var tbl = document.getElementById(tblId);
+    var mc = meanCols || 5;
+    tbl.innerHTML = buildTrigHead(label, "Mean", mc, isSubtract);
+
+    var tbody = document.createElement("tbody");
+    var isTan = (tblId === "tbl-tangent");
+
+    for (var deg = 0; deg <= 90; deg++) {
+      var tr = document.createElement("tr");
+      tr.setAttribute("data-rowlabel", String(deg));
+
+      var tdL = document.createElement("td");
+      tdL.className = "row-lbl";
+      tdL.textContent = deg + "°";
+      tr.appendChild(tdL);
+
+      // 10 columns: 0' 6' 12' 18' 24' 30' 36' 42' 48' 54'
+      var rowVals = [];
+      for (var m = 0; m < 10; m++) {
+        var minutes = m * 6;
+        var totalDeg = deg + minutes / 60;
+        var rad = toRad(totalDeg);
+        var val = fn(rad);
+        rowVals.push(val);
+      }
+
+      for (var ci = 0; ci < 10; ci++) {
+        var td = document.createElement("td");
+        td.setAttribute("data-col", ci);
+        var v = rowVals[ci];
+        if (!isFinite(v) || Math.abs(v) > 999.9) {
+          td.textContent = "—";
+        } else {
+          // Format: show 4 decimal places; for tan large values show full
+          if (Math.abs(v) >= 10) {
+            td.textContent = v.toFixed(2);
+          } else {
+            // display as 4-digit decimal like the textbook
+            td.textContent = formatTrigCell(v, deg, isTan);
+          }
+        }
+        tr.appendChild(td);
+      }
+
+      // Mean differences
+      // For degrees where MD is not meaningful (tan > 77°), show —
+      var showMD = true;
+      if (isTan && deg >= 78) showMD = false;
+
+      for (var k = 1; k <= mc; k++) {
+        var tdM = document.createElement("td");
+        tdM.className = "mean-cell";
+        tdM.setAttribute("data-mean", k);
+        if (!showMD) {
+          tdM.textContent = "—";
+        } else {
+          // MD = change in value per k minutes at mid-point of row
+          var midDeg = deg + 0.05; // 3 minutes
+          var midRad = toRad(midDeg);
+          var derivative = getDerivative(fn, midRad);
+          var changePerMinute = Math.abs(derivative) * Math.PI / 180 / 60;
+          var md = Math.round(changePerMinute * k * 10000);
+          if (!isFinite(md) || md <= 0 || md > 9999) {
+            tdM.textContent = "—";
+          } else {
+            tdM.textContent = md;
+          }
+        }
+        tr.appendChild(tdM);
+      }
+
+      tbody.appendChild(tr);
+    }
+
+    tbl.appendChild(tbody);
+  }
+
+  function formatTrigCell(v, deg, isTan) {
+    if (!isFinite(v)) return "—";
+    // Standard 4-decimal format for board tables
+    var s = Math.abs(v).toFixed(4);
+    // Remove leading "0" for display like textbook (.7071 not 0.7071)
+    // Keep full value
+    return s;
+  }
+
+  function getDerivative(fn, rad) {
+    var h = 1e-7;
+    return (fn(rad + h) - fn(rad - h)) / (2 * h);
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     TRIG RATIOS TABLE
+  ═══════════════════════════════════════════════════════════ */
+  function buildTrigRatios() {
+    var tbl = document.getElementById("tbl-trig");
+
+    // Header
+    var angles = ["0°", "30°", "45°", "60°", "90°", "180°", "270°", "360°"];
+    var h = '<thead><tr class="hdr-1">';
+    h += '<th class="row-lbl">Function</th>';
+    for (var i = 0; i < angles.length; i++) h += '<th>' + angles[i] + '</th>';
+    h += '</tr>';
+    h += '<tr class="hdr-2"><th class="row-lbl">Radians</th>';
+    var radians = ["0", "π/6", "π/4", "π/3", "π/2", "π", "3π/2", "2π"];
+    for (var ri = 0; ri < radians.length; ri++) h += '<th>' + radians[ri] + '</th>';
+    h += '</tr></thead>';
+    tbl.innerHTML = h;
+
+    // Data rows
+    var rows = [
+      { name: "sin", vals: ["0", "1/2", "1/√2", "√3/2", "1", "0", "−1", "0"] },
+      { name: "cos", vals: ["1", "√3/2", "1/√2", "1/2", "0", "−1", "0", "1"] },
+      { name: "tan", vals: ["0", "1/√3", "1", "√3", "∞", "0", "∞", "0"] },
+      { name: "cot", vals: ["∞", "√3", "1", "1/√3", "0", "∞", "0", "∞"] },
+      { name: "cosec", vals: ["∞", "2", "√2", "2/√3", "1", "∞", "−1", "∞"] },
+      { name: "sec", vals: ["1", "2/√3", "√2", "2", "∞", "−1", "∞", "1"] }
+    ];
+
+    var tbody = document.createElement("tbody");
+    for (var r = 0; r < rows.length; r++) {
+      var row = rows[r];
+      var tr = document.createElement("tr");
+      tr.setAttribute("data-rowlabel", row.name);
+      var tdL = document.createElement("td");
+      tdL.className = "row-lbl";
+      tdL.textContent = row.name;
+      tr.appendChild(tdL);
+      for (var c = 0; c < row.vals.length; c++) {
+        var td = document.createElement("td");
+        td.setAttribute("data-col", c);
+        td.textContent = row.vals[c];
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    }
+    tbl.appendChild(tbody);
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     COLUMN HIGHLIGHT
+  ═══════════════════════════════════════════════════════════ */
+  function attachColHighlight(tbl) {
+    if (!tbl) return;
+    var currentCol = -1;
+
+    tbl.addEventListener("mouseover", function (e) {
+      var td = e.target.closest("td");
+      if (!td) return;
+      var col = td.getAttribute("data-col");
+      var colNum = col !== null ? parseInt(col) : -1;
+
+      if (colNum === currentCol) return;
+      currentCol = colNum;
+
+      // Clear all col-hover
+      var all = tbl.querySelectorAll("td.col-hover");
+      for (var i = 0; i < all.length; i++) all[i].classList.remove("col-hover");
+
+      if (colNum < 0) return;
+
+      // Add col-hover to every td with same data-col
+      var targets = tbl.querySelectorAll("td[data-col='" + colNum + "']");
+      for (var j = 0; j < targets.length; j++) targets[j].classList.add("col-hover");
+    });
+
+    tbl.addEventListener("mouseleave", function () {
+      currentCol = -1;
+      var all = tbl.querySelectorAll("td.col-hover");
+      for (var i = 0; i < all.length; i++) all[i].classList.remove("col-hover");
+    });
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     SEARCH
+  ═══════════════════════════════════════════════════════════ */
+  var searchInput = document.getElementById("lb-search");
+  var activeTable = null; // current table key
+
+  var tableMap = {
+    log:      { sec: "sec-log",     tbl: "tbl-log",     no: "no-log" },
+    antilog:  { sec: "sec-antilog", tbl: "tbl-antilog", no: "no-antilog" },
+    sine:     { sec: "sec-sine",    tbl: "tbl-sine",    no: "no-sine" },
+    cosine:   { sec: "sec-cosine",  tbl: "tbl-cosine",  no: "no-cosine" },
+    tangent:  { sec: "sec-tangent", tbl: "tbl-tangent", no: "no-tangent" },
+    trig:     { sec: "sec-trig",    tbl: "tbl-trig",    no: null }
+  };
+
+  function doSearch(q) {
+    if (!activeTable) return;
+    var info = tableMap[activeTable];
+    var tbl = document.getElementById(info.tbl);
+    if (!tbl) return;
+    var rows = tbl.querySelectorAll("tbody tr");
+    var q2 = q.trim().toLowerCase();
+    var anyVisible = false;
+    for (var i = 0; i < rows.length; i++) {
+      var lbl = (rows[i].getAttribute("data-rowlabel") || "").toLowerCase();
+      if (!q2 || lbl.indexOf(q2) !== -1) {
+        rows[i].classList.remove("search-hidden");
+        anyVisible = true;
+      } else {
+        rows[i].classList.add("search-hidden");
+      }
+    }
+    if (info.no) {
+      var noEl = document.getElementById(info.no);
+      if (noEl) noEl.classList.toggle("visible", !anyVisible && q2.length > 0);
+    }
+  }
+
+  searchInput.addEventListener("input", function () {
+    doSearch(searchInput.value);
+  });
+
+  /* ═══════════════════════════════════════════════════════════
+     PILL FILTER
+  ═══════════════════════════════════════════════════════════ */
+  var pills = document.querySelectorAll(".lb-pill");
+  var emptyEl = document.getElementById("lb-empty");
+
+  pills.forEach(function (pill) {
+    pill.addEventListener("click", function () {
+      var key = pill.getAttribute("data-table");
+
+      // Toggle off if already active
+      if (pill.classList.contains("active")) {
+        pill.classList.remove("active");
+        activeTable = null;
+        Object.keys(tableMap).forEach(function (k) {
+          document.getElementById(tableMap[k].sec).classList.remove("visible");
+        });
+        emptyEl.style.display = "";
+        return;
+      }
+
+      // Activate new
+      pills.forEach(function (p) { p.classList.remove("active"); });
+      pill.classList.add("active");
+      activeTable = key;
+
+      Object.keys(tableMap).forEach(function (k) {
+        var sec = document.getElementById(tableMap[k].sec);
+        sec.classList.toggle("visible", k === key);
+      });
+      emptyEl.style.display = "none";
+
+      // Reset search
+      searchInput.value = "";
+      doSearch("");
+    });
+  });
+
+  /* ═══════════════════════════════════════════════════════════
+     PDF EXPORT
+  ═══════════════════════════════════════════════════════════ */
+  document.getElementById("lb-export").addEventListener("click", function () {
+    // Mark all sections for print
+    Object.keys(tableMap).forEach(function (k) {
+      document.getElementById(tableMap[k].sec).classList.add("print-include");
+    });
+    window.print();
+    // After print dialog, clean up
+    setTimeout(function () {
+      Object.keys(tableMap).forEach(function (k) {
+        document.getElementById(tableMap[k].sec).classList.remove("print-include");
+      });
+    }, 2000);
+  });
+
+  /* ═══════════════════════════════════════════════════════════
+     INIT — build all tables
+  ═══════════════════════════════════════════════════════════ */
+  buildLog();
+  buildAntilog();
+  buildTrigTable("tbl-sine",    Math.sin,  "Deg.", 5, false);
+  buildTrigTable("tbl-cosine",  Math.cos,  "Deg.", 5, true);
+  buildTrigTable("tbl-tangent", Math.tan,  "Deg.", 5, false);
+  buildTrigRatios();
+
+  // Attach column highlight to all tables
+  ["tbl-log","tbl-antilog","tbl-sine","tbl-cosine","tbl-tangent","tbl-trig"].forEach(function (id) {
+    attachColHighlight(document.getElementById(id));
+  });
+
+})();
+</script>
+</body>
+</html>
