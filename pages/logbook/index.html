@@ -7,261 +7,121 @@
   <title>Log Book | Prof. Dr. S. Balaji Science Academy</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/favicon.ico" />
   <link rel="stylesheet" href="/css/styles.css" />
   <style>
     /* ── Page shell ─────────────────────────────────────────── */
-    .lb-page {
-      min-height: 100vh;
-      padding: 48px 0 80px;
-    }
-    .lb-hero {
-      margin-bottom: 40px;
-    }
+    .lb-page { min-height: 100vh; padding: 48px 0 80px; }
+    .lb-hero { margin-bottom: 40px; }
     .lb-eyebrow {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 12px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
     }
     .lb-title {
       font-family: var(--font-display);
       font-size: clamp(32px, 5vw, 56px);
-      font-weight: 400;
-      line-height: 1.0;
-      letter-spacing: -0.01em;
-      color: var(--fg);
-      margin-bottom: 12px;
+      font-weight: 400; line-height: 1.0; letter-spacing: -0.01em;
+      color: var(--fg); margin-bottom: 12px;
     }
-    .lb-desc {
-      font-size: 16px;
-      color: var(--muted);
-      max-width: 56ch;
-      line-height: 1.55;
-    }
+    .lb-desc { font-size: 16px; color: var(--muted); max-width: 56ch; line-height: 1.55; }
 
     /* ── Controls bar ───────────────────────────────────────── */
     .lb-controls {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 32px;
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 12px; margin-bottom: 32px;
     }
-    .lb-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      flex: 1;
-    }
+    .lb-filters { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
     .lb-pill {
-      display: inline-flex;
-      align-items: center;
-      height: 36px;
-      padding: 0 16px;
-      border-radius: 9999px;
-      font-size: 13px;
-      font-weight: 600;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--fg);
-      cursor: pointer;
-      transition: background 150ms, color 150ms, border-color 150ms;
+      display: inline-flex; align-items: center; height: 36px; padding: 0 16px;
+      border-radius: 9999px; font-size: 13px; font-weight: 600;
+      border: 1px solid var(--border); background: var(--bg); color: var(--fg);
+      cursor: pointer; transition: background 150ms, color 150ms, border-color 150ms;
       white-space: nowrap;
     }
-    .lb-pill:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-    .lb-pill.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
+    .lb-pill:hover { border-color: var(--accent); color: var(--accent); }
+    .lb-pill.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
     /* ── Search + Export row ────────────────────────────────── */
-    .lb-right-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-    .lb-search-wrap {
-      position: relative;
-    }
+    .lb-right-controls { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .lb-search-wrap { position: relative; }
     .lb-search-wrap svg {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      pointer-events: none;
+      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+      color: var(--muted); pointer-events: none;
     }
     .lb-search {
-      height: 36px;
-      padding: 0 12px 0 36px;
-      border-radius: 9999px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      font-family: var(--font-body);
-      font-size: 13px;
-      color: var(--fg);
-      width: 200px;
-      transition: border-color 150ms, box-shadow 150ms;
-      outline: none;
+      height: 36px; padding: 0 12px 0 36px; border-radius: 9999px;
+      border: 1px solid var(--border); background: var(--bg);
+      font-family: var(--font-body); font-size: 13px; color: var(--fg);
+      width: 200px; transition: border-color 150ms, box-shadow 150ms; outline: none;
     }
-    .lb-search:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(0,82,255,0.1);
-    }
+    .lb-search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,82,255,0.1); }
     .lb-search::placeholder { color: var(--muted); }
     .lb-export-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 36px;
-      padding: 0 16px;
-      border-radius: 9999px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--fg);
-      cursor: pointer;
-      transition: background 150ms, color 150ms, border-color 150ms;
+      display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 16px;
+      border-radius: 9999px; border: 1px solid var(--border); background: var(--bg);
+      font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--fg);
+      cursor: pointer; transition: background 150ms, color 150ms, border-color 150ms;
       white-space: nowrap;
     }
-    .lb-export-btn:hover {
-      background: var(--fg);
-      color: var(--bg);
-      border-color: var(--fg);
-    }
+    .lb-export-btn:hover { background: var(--fg); color: var(--bg); border-color: var(--fg); }
     .lb-export-btn svg { flex-shrink: 0; }
 
     /* ── Empty state ────────────────────────────────────────── */
     .lb-empty {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 320px;
-      gap: 12px;
-      text-align: center;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; min-height: 320px; gap: 12px; text-align: center;
     }
     .lb-empty-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--surface);
-      display: grid;
-      place-items: center;
-      color: var(--muted);
+      width: 56px; height: 56px; border-radius: 50%; background: var(--surface);
+      display: grid; place-items: center; color: var(--muted);
     }
-    .lb-empty h3 {
-      font-family: var(--font-display);
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--fg);
-    }
-    .lb-empty p {
-      font-size: 14px;
-      color: var(--muted);
-      max-width: 36ch;
-    }
+    .lb-empty h3 { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--fg); }
+    .lb-empty p { font-size: 14px; color: var(--muted); max-width: 36ch; }
 
-    /* ── Table wrapper ──────────────────────────────────────── */
+    /* ── Table sections ─────────────────────────────────────── */
     .lb-table-section { display: none; }
     .lb-table-section.visible { display: block; }
-
-    .lb-table-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
     .lb-table-title {
-      font-family: var(--font-display);
-      font-size: clamp(20px, 3vw, 28px);
-      font-weight: 400;
-      color: var(--fg);
-      margin-bottom: 4px;
+      font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px);
+      font-weight: 400; color: var(--fg); margin-bottom: 4px;
     }
-    .lb-table-subtitle {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 24px;
-    }
+    .lb-table-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
 
     .lb-scroll {
-      width: 100%;
-      overflow-x: auto;
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      width: 100%; overflow-x: auto;
+      border: 1px solid var(--border); border-radius: 12px;
       -webkit-overflow-scrolling: touch;
     }
 
     /* ── Core table styles ──────────────────────────────────── */
     .lb-tbl {
-      border-collapse: collapse;
-      font-size: 12px;
-      font-family: var(--font-mono, ui-monospace, 'SF Mono', monospace);
-      width: 100%;
-      min-width: 900px;
-      table-layout: fixed;
+      border-collapse: collapse; font-size: 12px;
+      font-family: ui-monospace, 'SF Mono', 'JetBrains Mono', monospace;
+      width: 100%; min-width: 900px; table-layout: fixed;
     }
-
-    /* Header rows */
     .lb-tbl thead tr.hdr-1 th,
     .lb-tbl thead tr.hdr-2 th {
-      background: var(--fg);
-      color: var(--bg);
-      padding: 8px 6px;
-      text-align: center;
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      white-space: nowrap;
+      background: var(--fg); color: var(--bg); padding: 8px 6px;
+      text-align: center; font-family: var(--font-body); font-size: 11px;
+      font-weight: 700; letter-spacing: 0.04em;
+      position: sticky; top: 0; z-index: 10; white-space: nowrap;
     }
     .lb-tbl thead tr.hdr-2 th {
-      background: #16181c;
-      font-size: 10px;
-      font-weight: 500;
-      padding: 5px 6px;
-      border-bottom: 2px solid rgba(255,255,255,0.12);
+      background: #16181c; font-size: 10px; font-weight: 500;
+      padding: 5px 6px; border-bottom: 2px solid rgba(255,255,255,0.12);
     }
     .lb-tbl thead tr.hdr-1 th.row-lbl,
-    .lb-tbl thead tr.hdr-2 th.row-lbl {
-      text-align: left;
-      padding-left: 12px;
-    }
-    .lb-tbl thead th.mean-head {
-      border-left: 2px solid rgba(255,255,255,0.2);
-    }
-    .lb-tbl thead th.subtract-note {
-      font-size: 9px;
-      font-style: italic;
-      opacity: 0.7;
-      font-weight: 400;
-    }
+    .lb-tbl thead tr.hdr-2 th.row-lbl { text-align: left; padding-left: 12px; }
+    .lb-tbl thead th.mean-head { border-left: 2px solid rgba(255,255,255,0.2); }
 
-    /* Body cells */
+    /* Body */
     .lb-tbl tbody tr {
       border-bottom: 1px solid var(--border);
       transition: transform 150ms cubic-bezier(0.2,0,0,1),
-                  box-shadow 150ms cubic-bezier(0.2,0,0,1),
-                  background 100ms;
+                  box-shadow 150ms cubic-bezier(0.2,0,0,1), background 100ms;
       position: relative;
     }
     .lb-tbl tbody tr:last-child { border-bottom: none; }
-
     .lb-tbl tbody tr:hover {
       background: var(--surface);
       transform: scaleY(1.015);
@@ -269,196 +129,160 @@
       z-index: 2;
     }
     .lb-tbl tbody td {
-      padding: 6px 6px;
-      text-align: center;
-      color: var(--fg);
-      vertical-align: middle;
-      transition: background 80ms;
-      white-space: nowrap;
+      padding: 6px 6px; text-align: center; color: var(--fg);
+      vertical-align: middle; transition: background 80ms; white-space: nowrap;
     }
     .lb-tbl tbody td.row-lbl {
-      text-align: left;
-      padding-left: 12px;
-      font-family: var(--font-body);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--fg);
-      background: var(--surface);
-      position: sticky;
-      left: 0;
-      z-index: 1;
-      border-right: 1px solid var(--border);
-      min-width: 58px;
+      text-align: left; padding-left: 12px; font-family: var(--font-body);
+      font-size: 12px; font-weight: 700; color: var(--fg);
+      background: var(--surface); position: sticky; left: 0; z-index: 1;
+      border-right: 1px solid var(--border); min-width: 58px;
     }
     .lb-tbl tbody td.mean-cell {
-      border-left: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 11px;
+      border-left: 1px solid var(--border); color: var(--muted); font-size: 11px;
     }
-    .lb-tbl tbody td.mean-cell:first-of-type {
-      border-left: 2px solid var(--border);
-    }
+    .lb-tbl tbody td.mean-cell:first-of-type { border-left: 2px solid var(--border); }
 
-    /* Column highlight via JS-added class on <col> */
-    .lb-tbl tbody td.col-hover {
-      background: rgba(0,82,255,0.06);
-    }
-    .lb-tbl tbody tr:hover td.col-hover {
-      background: rgba(0,82,255,0.13);
-    }
-    /* Intersection: hovered row + hovered col = strong highlight */
-    .lb-tbl tbody tr:hover td.col-hover.intersect {
-      background: rgba(0,82,255,0.18);
-    }
+    /* Column highlight */
+    .lb-tbl tbody td.col-hover { background: rgba(0,82,255,0.06); }
+    .lb-tbl tbody tr:hover td.col-hover { background: rgba(0,82,255,0.13); }
 
-    /* Search highlight */
-    .lb-tbl tbody tr.search-match {
-      background: rgba(0,82,255,0.05);
-    }
-    .lb-tbl tbody tr.search-hidden {
-      display: none;
-    }
-
-    /* No-data note cell */
-    .lb-tbl .note-cell {
-      font-size: 10px;
-      color: var(--muted);
-      font-style: italic;
-      text-align: left;
-      padding-left: 8px;
-    }
-
-    /* ── Trig ratios table special styling ──────────────────── */
-    .trig-wrap {
-      max-width: 680px;
-    }
-    .lb-tbl.trig-tbl {
-      min-width: 0;
-      table-layout: auto;
-    }
-    .lb-tbl.trig-tbl thead tr th {
-      padding: 10px 16px;
-    }
-    .lb-tbl.trig-tbl tbody td {
-      padding: 10px 16px;
-      font-family: var(--font-body);
-      font-size: 14px;
-    }
-    .lb-tbl.trig-tbl tbody td.row-lbl {
-      font-size: 14px;
-      font-weight: 700;
-      min-width: 80px;
-    }
-    .trig-tbl .fraction {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 12px;
-      line-height: 1.1;
-      gap: 1px;
-    }
-    .trig-tbl .fraction .num { border-bottom: 1px solid var(--fg); padding-bottom: 1px; }
-    .trig-tbl .fraction .den { }
-
-    /* ── Search no-results ──────────────────────────────────── */
+    /* Search */
+    .lb-tbl tbody tr.search-hidden { display: none; }
     .lb-no-results {
-      display: none;
-      padding: 24px;
-      text-align: center;
-      font-size: 14px;
-      color: var(--muted);
+      display: none; padding: 24px; text-align: center;
+      font-size: 14px; color: var(--muted);
     }
     .lb-no-results.visible { display: block; }
 
-    /* ── Divider between tables in same view ────────────────── */
-    .lb-table-gap { margin-top: 48px; }
+    /* ── Trig ratios section ────────────────────────────────── */
+    /* Side-by-side: table left, graph right */
+    .trig-section-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .trig-section-inner { grid-template-columns: 1fr; }
+    }
+
+    /* Trig ratios table — NO sticky row-lbl, NO horizontal overflow (it's small) */
+    .trig-scroll {
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+      flex-shrink: 0;
+    }
+    .lb-tbl.trig-tbl {
+      min-width: 0; table-layout: auto;
+    }
+    .lb-tbl.trig-tbl thead tr th { padding: 10px 20px; }
+    .lb-tbl.trig-tbl tbody td {
+      padding: 11px 20px; font-family: var(--font-body); font-size: 14px;
+    }
+    .lb-tbl.trig-tbl tbody td.row-lbl {
+      font-size: 14px; font-weight: 700; min-width: 80px;
+      /* remove sticky so last row doesn't cause scroll issues */
+      position: static; background: var(--surface);
+    }
+    /* disable transform hover for trig table — small table, causes visual glitch */
+    .lb-tbl.trig-tbl tbody tr:hover {
+      transform: none;
+      box-shadow: 0 2px 8px rgba(0,82,255,0.06);
+      background: var(--surface);
+    }
+
+    /* ── Trig Graph ─────────────────────────────────────────── */
+    .trig-graph-panel {
+      position: sticky;
+      top: 88px; /* below header */
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      min-width: 0;
+    }
+    .trig-graph-title {
+      font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 4px;
+    }
+    .trig-graph-subtitle {
+      font-size: 12px; color: var(--muted); margin-bottom: 16px;
+    }
+    #trig-canvas {
+      width: 100%; display: block; border-radius: 8px;
+      background: var(--surface);
+    }
+    .trig-graph-hint {
+      font-size: 11px; color: var(--muted); margin-top: 10px; text-align: center;
+    }
+    .trig-value-display {
+      display: flex; gap: 16px; margin-top: 12px;
+      font-size: 12px; font-family: ui-monospace, monospace;
+    }
+    .trig-val-item { display: flex; flex-direction: column; gap: 2px; }
+    .trig-val-label { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .trig-val-num { font-size: 16px; font-weight: 600; color: var(--fg); }
+
+    /* ── Tan note ───────────────────────────────────────────── */
+    .lb-tan-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
 
     /* ══════════════════════════════════════════════════════════
        PRINT STYLES
     ══════════════════════════════════════════════════════════ */
     @media print {
+      @page { margin: 18mm 14mm; }
       * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body { background: white; color: black; font-size: 9px; }
 
-      body { background: white; color: black; font-size: 10px; }
-
-      .lb-controls,
-      .lb-hero,
-      .lb-empty,
-      .lb-export-btn,
-      .site-header,
-      .site-footer,
-      .nav-mobile { display: none !important; }
+      .lb-controls, .lb-hero, .lb-empty, .lb-export-btn,
+      .site-header, .site-footer, .nav-mobile,
+      .trig-graph-panel, .lb-tan-note { display: none !important; }
 
       .lb-page { padding: 0; }
-      .container { padding: 0 16px; max-width: 100%; }
+      .container { padding: 0; max-width: 100%; }
 
       .lb-table-section { display: block !important; }
       .lb-table-section:not(.print-include) { display: none !important; }
 
-      /* Page break before each table */
-      .lb-table-section.print-include { page-break-before: always; }
-      .lb-table-section.print-include:first-of-type { page-break-before: avoid; }
+      /* Each half-table is a separate div with class .print-page */
+      .print-page { page-break-before: always; }
+      .print-page:first-child { page-break-before: avoid; }
 
-      .lb-scroll {
-        border: none;
-        border-radius: 0;
-        overflow: visible;
+      .lb-scroll, .trig-scroll {
+        border: none; border-radius: 0; overflow: visible;
       }
+      .trig-section-inner { display: block; }
 
       .lb-tbl {
-        font-size: 8px;
-        min-width: 0;
-        width: 100%;
+        font-size: 7.5px; min-width: 0; width: 100%; border-collapse: collapse;
       }
       .lb-tbl thead tr.hdr-1 th,
       .lb-tbl thead tr.hdr-2 th {
-        background: #0a0b0d !important;
-        color: white !important;
-        -webkit-print-color-adjust: exact;
-        position: static;
-        font-size: 8px;
-        padding: 4px 3px;
+        background: #0a0b0d !important; color: white !important;
+        position: static; font-size: 7px; padding: 3px 3px;
       }
-      .lb-tbl thead tr.hdr-2 th {
-        background: #16181c !important;
-        font-size: 7px;
-      }
-      .lb-tbl tbody td { padding: 3px 3px; font-size: 8px; }
+      .lb-tbl thead tr.hdr-2 th { background: #16181c !important; font-size: 6.5px; }
+      .lb-tbl tbody td { padding: 2.5px 3px; font-size: 7.5px; }
       .lb-tbl tbody td.row-lbl {
-        position: static;
-        background: #eef0f3 !important;
-        font-size: 8px;
-        padding: 3px 4px;
+        position: static; background: #eef0f3 !important;
+        font-size: 7.5px; padding: 2.5px 4px;
       }
       .lb-tbl tbody tr { transform: none !important; box-shadow: none !important; }
+      .lb-tbl.trig-tbl tbody td { font-size: 9px; padding: 5px 8px; }
+      .lb-tbl.trig-tbl tbody td.row-lbl { font-size: 9px; }
 
-      /* Print header per table */
+      /* Print header */
       .lb-print-header {
-        display: block !important;
-        margin-bottom: 8px;
-        padding-bottom: 6px;
-        border-bottom: 2px solid black;
+        display: block !important; margin-bottom: 6px;
+        padding-bottom: 5px; border-bottom: 1.5px solid black;
       }
-      .lb-print-header .phead-title {
-        font-size: 14px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-      .lb-print-header .phead-academy {
-        font-size: 9px;
-        color: #555;
-      }
+      .lb-print-header .phead-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+      .lb-print-header .phead-sub { font-size: 8px; color: #444; margin-top: 2px; }
+      .lb-print-header .phead-academy { font-size: 8px; color: #666; }
 
-      .lb-table-title,
-      .lb-table-label,
-      .lb-table-subtitle { display: none; }
-
-      /* Tan note */
-      .lb-tan-note { font-size: 8px; margin-top: 4px; }
+      .lb-table-title, .lb-table-subtitle { display: none; }
+      .lb-no-results { display: none !important; }
     }
 
-    /* Hide print headers on screen */
     .lb-print-header { display: none; }
 
     /* Responsive */
@@ -471,6 +295,87 @@
 </head>
 <body>
 
+<!-- ═══ HEADER (matches main site) ═════════════════════════════════ -->
+<header class="site-header" data-od-id="site-header">
+  <div class="container header-inner">
+    <div class="brand-container">
+      <a href="/index.html" class="brand-logo-link">
+        <img src="/assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+      </a>
+      <a class="brand" href="/index.html">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+    </div>
+    <style>
+      .brand-container { display:flex; align-items:center; gap:12px; flex-shrink:0; margin-right:auto; }
+      .brand-logo { height:40px; width:40px; border-radius:50%; object-fit:cover; flex-shrink:0; }
+      @media(min-width:480px){.brand-logo{height:44px;width:44px;}}
+      @media(min-width:896px){.brand-logo{height:48px;width:48px;}}
+      .site-header .brand { font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; line-height:1.25; color:var(--fg); text-decoration:none; max-width:160px; word-break:break-word; }
+      @media(min-width:896px){.site-header .brand{font-size:14px;white-space:nowrap;max-width:none;}}
+      .brand-logo-link { display:flex; align-items:center; justify-content:center; text-decoration:none; border-radius:50%; transition:opacity 150ms; }
+      .brand-logo-link:hover { opacity:0.8; }
+    </style>
+    <div class="header-right">
+      <nav class="nav-desktop" aria-label="Primary">
+        <a href="/index.html#about">About</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
+          <div class="nav-dropdown-menu">
+            <a href="/pages/courses/cbse10.html">CBSE Class 10</a>
+            <a href="/pages/courses/cbse12.html">CBSE Class 12</a>
+            <a href="/pages/courses/stateboard12.html">State Board Class 12</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
+          <div class="nav-dropdown-menu">
+            <a href="/pages/periodictable/index.html">Periodic Table</a>
+            <a href="/pages/logbook/index.html">Log Book</a>
+            <a href="/pages/mindmap/index.html">Mind Map</a>
+            <a href="/pages/studyplanner/index.html">Study Planner</a>
+          </div>
+        </div>
+        <a href="/index.html#attend">How to attend</a>
+        <a href="/index.html#faq">FAQs</a>
+        <a href="/index.html#blog">Blog</a>
+        <a href="/index.html#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-primary" href="#">Sign Up</a>
+      </div>
+    </div>
+    <a class="btn btn-primary btn-sm nav-actions-mobile" href="#">Sign Up</a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+  <a href="/index.html#about">About</a>
+  <div class="nav-mobile-dropdown">
+    <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
+    <div class="nav-mobile-dropdown-menu">
+      <a href="/pages/courses/cbse10.html">CBSE Class 10</a>
+      <a href="/pages/courses/cbse12.html">CBSE Class 12</a>
+      <a href="/pages/courses/stateboard12.html">State Board Class 12</a>
+    </div>
+  </div>
+  <div class="nav-mobile-dropdown">
+    <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
+    <div class="nav-mobile-dropdown-menu">
+      <a href="/pages/periodictable/index.html">Periodic Table</a>
+      <a href="/pages/logbook/index.html">Log Book</a>
+      <a href="/pages/mindmap/index.html">Mind Map</a>
+      <a href="/pages/studyplanner/index.html">Study Planner</a>
+    </div>
+  </div>
+  <a href="/index.html#attend">How to attend</a>
+  <a href="/index.html#faq">FAQs</a>
+  <a href="/index.html#blog">Blog</a>
+  <a href="/index.html#contact">Contact</a>
+</nav>
+<!-- ═══ END HEADER ══════════════════════════════════════════════════ -->
+
 <div class="lb-page">
   <div class="container">
 
@@ -478,7 +383,7 @@
     <div class="lb-hero">
       <p class="lb-eyebrow">Learning Resources</p>
       <h1 class="lb-title">Logarithm Book</h1>
-      <p class="lb-desc">Four-figure mathematical tables for board exam use. Select a table below to view logarithms, antilogarithms, natural trigonometric functions, and standard ratios.</p>
+      <p class="lb-desc">Four-figure mathematical tables for board exam use. Select a table to view logarithms, antilogarithms, natural trigonometric functions, and standard ratios.</p>
     </div>
 
     <!-- Controls -->
@@ -496,7 +401,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
           <input class="lb-search" id="lb-search" type="text" placeholder="Search rows…" autocomplete="off" aria-label="Search table rows" />
         </div>
-        <button class="lb-export-btn" id="lb-export" aria-label="Export all tables as PDF">
+        <button class="lb-export-btn" id="lb-export">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Export PDF
         </button>
@@ -512,63 +417,184 @@
       <p>Choose from Logarithm, Antilogarithm, Natural Sines, Cosines, Tangents, or Trigonometry Ratios above.</p>
     </div>
 
-    <!-- TABLE SECTIONS (generated by JS) -->
+    <!-- ── LOG ────────────────────────────────────────────────── -->
     <div class="lb-table-section" id="sec-log">
-      <div class="lb-print-header"><div class="phead-title">Table of Logarithms</div><div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div></div>
-      <p class="lb-table-label">Table I</p>
-      <h2 class="lb-table-title">Natural Logarithms</h2>
-      <p class="lb-table-subtitle">Four-figure logarithm table (base 10) — rows 10–99, columns 0–9, mean differences 1–9</p>
-      <div class="lb-scroll"><table class="lb-tbl" id="tbl-log"></table></div>
+      <div class="lb-print-header">
+        <div class="phead-title">Table of Logarithms (log₁₀)</div>
+        <div class="phead-sub">Rows 10–54 &nbsp;·&nbsp; Page 1 of 2</div>
+        <div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div>
+      </div>
+      <h2 class="lb-table-title">Logarithms</h2>
+      <p class="lb-table-subtitle">Four-figure log₁₀ table — rows 10–99, columns 0–9, mean differences 1–9</p>
+      <!-- Split into two halves for print: rows 10-54 and 55-99 -->
+      <div class="print-page" id="log-half-1">
+        <div class="lb-scroll"><table class="lb-tbl" id="tbl-log-1"></table></div>
+      </div>
+      <div class="print-page" id="log-half-2">
+        <div class="lb-print-header" style="display:none" id="log-h2-hdr">
+          <div class="phead-title">Table of Logarithms (log₁₀)</div>
+          <div class="phead-sub">Rows 55–99 &nbsp;·&nbsp; Page 2 of 2</div>
+          <div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div>
+        </div>
+        <div class="lb-scroll"><table class="lb-tbl" id="tbl-log-2"></table></div>
+      </div>
       <div class="lb-no-results" id="no-log">No rows match your search.</div>
     </div>
 
+    <!-- ── ANTILOG ─────────────────────────────────────────────── -->
     <div class="lb-table-section" id="sec-antilog">
-      <div class="lb-print-header"><div class="phead-title">Table of Antilogarithms</div><div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div></div>
-      <p class="lb-table-label">Table II</p>
+      <div class="lb-print-header">
+        <div class="phead-title">Table of Antilogarithms</div>
+        <div class="phead-sub">Rows .00–.49 &nbsp;·&nbsp; Page 1 of 2</div>
+        <div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div>
+      </div>
       <h2 class="lb-table-title">Antilogarithms</h2>
       <p class="lb-table-subtitle">Four-figure antilogarithm table — rows .00–.99, columns 0–9, mean differences 1–9</p>
-      <div class="lb-scroll"><table class="lb-tbl" id="tbl-antilog"></table></div>
+      <div class="print-page" id="antilog-half-1">
+        <div class="lb-scroll"><table class="lb-tbl" id="tbl-antilog-1"></table></div>
+      </div>
+      <div class="print-page" id="antilog-half-2">
+        <div class="lb-print-header" style="display:none" id="antilog-h2-hdr">
+          <div class="phead-title">Table of Antilogarithms</div>
+          <div class="phead-sub">Rows .50–.99 &nbsp;·&nbsp; Page 2 of 2</div>
+          <div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div>
+        </div>
+        <div class="lb-scroll"><table class="lb-tbl" id="tbl-antilog-2"></table></div>
+      </div>
       <div class="lb-no-results" id="no-antilog">No rows match your search.</div>
     </div>
 
+    <!-- ── SINE ────────────────────────────────────────────────── -->
     <div class="lb-table-section" id="sec-sine">
-      <div class="lb-print-header"><div class="phead-title">Natural Sines</div><div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div></div>
-      <p class="lb-table-label">Table III</p>
+      <div class="lb-print-header">
+        <div class="phead-title">Natural Sines</div>
+        <div class="phead-sub">0° – 44° &nbsp;·&nbsp; Page 1 of 2</div>
+        <div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div>
+      </div>
       <h2 class="lb-table-title">Natural Sines</h2>
       <p class="lb-table-subtitle">0° – 90°, intervals of 6′ (0°.1), mean differences 1′–5′ (add)</p>
-      <div class="lb-scroll"><table class="lb-tbl" id="tbl-sine"></table></div>
+      <div class="print-page" id="sine-half-1">
+        <div class="lb-scroll"><table class="lb-tbl" id="tbl-sine-1"></table></div>
+      </div>
+      <div class="print-page" id="sine-half-2">
+        <div class="lb-print-header" style="display:none" id="sine-h2-hdr">
+          <div class="phead-title">Natural Sines</div>
+          <div class="phead-sub">45° – 90° &nbsp;·&nbsp; Page 2 of 2</div>
+          <div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div>
+        </div>
+        <div class="lb-scroll"><table class="lb-tbl" id="tbl-sine-2"></table></div>
+      </div>
       <div class="lb-no-results" id="no-sine">No rows match your search.</div>
     </div>
 
+    <!-- ── COSINE ───────────────────────────────────────────────── -->
     <div class="lb-table-section" id="sec-cosine">
-      <div class="lb-print-header"><div class="phead-title">Natural Cosines</div><div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div></div>
-      <p class="lb-table-label">Table IV</p>
+      <div class="lb-print-header">
+        <div class="phead-title">Natural Cosines (Subtract mean differences)</div>
+        <div class="phead-sub">0° – 44° &nbsp;·&nbsp; Page 1 of 2</div>
+        <div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div>
+      </div>
       <h2 class="lb-table-title">Natural Cosines</h2>
       <p class="lb-table-subtitle">0° – 90°, intervals of 6′ (0°.1), mean differences 1′–5′ <strong>(subtract)</strong></p>
-      <div class="lb-scroll"><table class="lb-tbl" id="tbl-cosine"></table></div>
+      <div class="print-page" id="cosine-half-1">
+        <div class="lb-scroll"><table class="lb-tbl" id="tbl-cosine-1"></table></div>
+      </div>
+      <div class="print-page" id="cosine-half-2">
+        <div class="lb-print-header" style="display:none" id="cosine-h2-hdr">
+          <div class="phead-title">Natural Cosines (Subtract mean differences)</div>
+          <div class="phead-sub">45° – 90° &nbsp;·&nbsp; Page 2 of 2</div>
+          <div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div>
+        </div>
+        <div class="lb-scroll"><table class="lb-tbl" id="tbl-cosine-2"></table></div>
+      </div>
       <div class="lb-no-results" id="no-cosine">No rows match your search.</div>
     </div>
 
+    <!-- ── TANGENT ─────────────────────────────────────────────── -->
     <div class="lb-table-section" id="sec-tangent">
-      <div class="lb-print-header"><div class="phead-title">Natural Tangents</div><div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div></div>
-      <p class="lb-table-label">Table V</p>
+      <div class="lb-print-header">
+        <div class="phead-title">Natural Tangents</div>
+        <div class="phead-sub">0° – 44° &nbsp;·&nbsp; Page 1 of 2</div>
+        <div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div>
+      </div>
       <h2 class="lb-table-title">Natural Tangents</h2>
       <p class="lb-table-subtitle">0° – 89°, intervals of 6′ (0°.1), mean differences 1′–5′ (add); differences cease near 90°</p>
-      <div class="lb-scroll"><table class="lb-tbl" id="tbl-tangent"></table></div>
+      <div class="print-page" id="tangent-half-1">
+        <div class="lb-scroll"><table class="lb-tbl" id="tbl-tangent-1"></table></div>
+      </div>
+      <div class="print-page" id="tangent-half-2">
+        <div class="lb-print-header" style="display:none" id="tangent-h2-hdr">
+          <div class="phead-title">Natural Tangents</div>
+          <div class="phead-sub">45° – 90° &nbsp;·&nbsp; Page 2 of 2 &nbsp;·&nbsp; * Mean differences cease beyond 77°</div>
+          <div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div>
+        </div>
+        <div class="lb-scroll"><table class="lb-tbl" id="tbl-tangent-2"></table></div>
+      </div>
+      <p class="lb-tan-note">* Mean differences cease to be sufficiently accurate beyond 77°.</p>
       <div class="lb-no-results" id="no-tangent">No rows match your search.</div>
-      <p class="lb-tan-note" style="font-size:12px;color:var(--muted);margin-top:8px;">* Mean differences cease to be sufficiently accurate beyond 77°.</p>
     </div>
 
+    <!-- ── TRIG RATIOS ─────────────────────────────────────────── -->
     <div class="lb-table-section" id="sec-trig">
-      <div class="lb-print-header"><div class="phead-title">Trigonometry Ratios — Standard Angles</div><div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div></div>
-      <p class="lb-table-label">Table VI</p>
+      <div class="lb-print-header">
+        <div class="phead-title">Trigonometry Ratios — Standard Angles</div>
+        <div class="phead-academy">Prof. Dr. S. Balaji Science Academy · profbalaji.in</div>
+      </div>
       <h2 class="lb-table-title">Trigonometry Ratios</h2>
-      <p class="lb-table-subtitle">Exact values of sin, cos, tan, cot, cosec and sec at standard angles</p>
-      <div class="lb-scroll trig-wrap"><table class="lb-tbl trig-tbl" id="tbl-trig"></table></div>
+      <p class="lb-table-subtitle">Exact values of sin, cos, tan, cot, cosec and sec at standard angles — hover a row to see its curve</p>
+      <div class="trig-section-inner">
+        <!-- Table -->
+        <div class="trig-scroll">
+          <table class="lb-tbl trig-tbl" id="tbl-trig"></table>
+        </div>
+        <!-- Graph -->
+        <div class="trig-graph-panel">
+          <div class="trig-graph-title" id="graph-title">Select a function</div>
+          <div class="trig-graph-subtitle" id="graph-subtitle">Hover over any row in the table to see its curve</div>
+          <canvas id="trig-canvas" height="220"></canvas>
+          <div class="trig-value-display" id="trig-val-display" style="display:none;">
+            <div class="trig-val-item">
+              <span class="trig-val-label">Angle</span>
+              <span class="trig-val-num" id="val-angle">—</span>
+            </div>
+            <div class="trig-val-item">
+              <span class="trig-val-label" id="val-fn-label">Value</span>
+              <span class="trig-val-num" id="val-result">—</span>
+            </div>
+          </div>
+          <p class="trig-graph-hint" id="graph-hint">Hover over the graph to read values</p>
+        </div>
+      </div>
     </div>
 
   </div><!-- /container -->
 </div><!-- /lb-page -->
+
+<!-- ═══ FOOTER (matches main site) ════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="socials">
+        <a href="tel:+919787692116" aria-label="Call"><img src="/assets/icons/call.svg" alt="Call" /></a>
+        <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business"><img src="/assets/icons/google-business.svg" alt="Google Business" /></a>
+        <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="/assets/icons/linkedin.svg" alt="LinkedIn" /></a>
+        <a href="mailto:prof@example.com" aria-label="Email"><img src="/assets/icons/mail.svg" alt="Email" /></a>
+        <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar"><img src="/assets/icons/google-scholar.svg" alt="Google Scholar" /></a>
+        <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack"><img src="/assets/icons/substack.png" alt="Substack" /></a>
+        <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="/assets/icons/youtube.svg" alt="YouTube" /></a>
+      </div>
+    </div>
+    <div class="footer-bottom" style="justify-content:center;flex-direction:column;align-items:center;gap:8px;">
+      <span style="font-size:12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+<!-- ═══ END FOOTER ══════════════════════════════════════════════════ -->
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+<script src="/js/main.js" defer></script>
 
 <script>
 (function () {
@@ -577,52 +603,36 @@
   /* ═══════════════════════════════════════════════════════════
      UTILITY
   ═══════════════════════════════════════════════════════════ */
-  function fmt4(val) {
-    // return 4-digit mantissa string (no decimal point)
-    if (!isFinite(val)) return "——";
-    var s = Math.round(Math.abs(val) * 10000);
+  function toRad(deg) { return deg * Math.PI / 180; }
+
+  function fmt4(mantissa) {
+    var s = Math.round(Math.abs(mantissa) * 10000);
     s = String(s);
     while (s.length < 4) s = "0" + s;
     return s.slice(0, 4);
   }
 
   function fmtLog(x) {
-    // log10(x) mantissa as 4 digits
-    if (x <= 0) return "——";
     var v = Math.log10(x);
-    var mantissa = v - Math.floor(v);
-    return fmt4(mantissa);
+    return fmt4(v - Math.floor(v));
   }
 
-  function fmtAntilog(x) {
-    // antilog of x (10^x), 4 sig digits
-    var v = Math.pow(10, x);
-    // display as 4-digit integer portion scaled
-    var s = v.toFixed(6);
-    // extract digits after decimal point of v, which is between 1.000 and 9.999
-    // we want 4 significant figures
-    return Math.round(v * 1000).toString().slice(0, 4);
+  function fmt4Antilog(v) {
+    // v is 10^x where x in [0,1) → v in [1, 10)
+    // Return 4-digit string: 1.000→1000, 9.772→9772
+    return String(Math.round(v * 1000));
   }
 
-  function fmtTrigVal(v, decimals) {
-    decimals = decimals || 4;
-    if (!isFinite(v)) return "——";
-    if (Math.abs(v) > 999) return "——";
-    return v.toFixed(decimals);
-  }
-
-  function toRad(deg) { return deg * Math.PI / 180; }
-
-  /* Build thead HTML — two-row header */
-  function buildTrigHead(label, meanLabel, meanCols, isSubtract) {
-    var md = meanLabel || "Mean";
+  /* Build two-row header for trig tables */
+  function buildTrigHead(label, meanCols, isSubtract) {
     var cols0 = ["0'","6'","12'","18'","24'","30'","36'","42'","48'","54'"];
     var cols1 = ["0°.0","0°.1","0°.2","0°.3","0°.4","0°.5","0°.6","0°.7","0°.8","0°.9"];
+    var subNote = isSubtract ? ' <span style="font-weight:400;font-size:9px;opacity:0.75;">(Subtract)</span>' : '';
 
     var h1 = '<tr class="hdr-1">';
     h1 += '<th class="row-lbl" rowspan="2">' + label + '</th>';
     for (var i = 0; i < 10; i++) h1 += '<th>' + cols0[i] + '</th>';
-    h1 += '<th class="mean-head" colspan="' + meanCols + '">' + md + '<br><span style="font-weight:400;font-size:9px;">Differences' + (isSubtract ? ' (Subtract)' : '') + '</span></th>';
+    h1 += '<th class="mean-head" colspan="' + meanCols + '">Mean' + subNote + '<br><span style="font-weight:400;font-size:9px;">Differences</span></th>';
     h1 += '</tr>';
 
     var h2 = '<tr class="hdr-2">';
@@ -633,12 +643,11 @@
     return '<thead>' + h1 + h2 + '</thead>';
   }
 
-  function buildLogHead(label, isAntilog) {
-    var h1 = '<tr class="hdr-1">';
-    h1 += '<th class="row-lbl" rowspan="2">' + (label || 'No.') + '</th>';
+  /* Build two-row header for log/antilog tables */
+  function buildLogHead() {
+    var h1 = '<tr class="hdr-1"><th class="row-lbl" rowspan="2">No.</th>';
     for (var i = 0; i < 10; i++) h1 += '<th>' + i + '</th>';
-    h1 += '<th class="mean-head" colspan="9">Mean<br><span style="font-weight:400;font-size:9px;">Differences</span></th>';
-    h1 += '</tr>';
+    h1 += '<th class="mean-head" colspan="9">Mean<br><span style="font-weight:400;font-size:9px;">Differences</span></th></tr>';
 
     var h2 = '<tr class="hdr-2">';
     for (var j = 0; j < 10; j++) h2 += '<th>' + j + '</th>';
@@ -648,27 +657,28 @@
     return '<thead>' + h1 + h2 + '</thead>';
   }
 
-  /* ═══════════════════════════════════════════════════════════
-     LOG TABLE  (rows 10–99, cols 0–9, MDs 1–9)
-  ═══════════════════════════════════════════════════════════ */
-  function buildLog() {
-    var tbl = document.getElementById("tbl-log");
-    tbl.innerHTML = buildLogHead("No.");
+  function getDerivative(fn, rad) {
+    var h = 1e-7;
+    return (fn(rad + h) - fn(rad - h)) / (2 * h);
+  }
 
+  /* ═══════════════════════════════════════════════════════════
+     BUILD LOG TABLE  (split into two halves)
+  ═══════════════════════════════════════════════════════════ */
+  function buildLogHalf(tblId, nStart, nEnd) {
+    var tbl = document.getElementById(tblId);
+    tbl.innerHTML = buildLogHead();
     var tbody = document.createElement("tbody");
 
-    for (var n = 10; n <= 99; n++) {
+    for (var n = nStart; n <= nEnd; n++) {
       var tr = document.createElement("tr");
       tr.setAttribute("data-rowlabel", String(n));
 
-      // Row label
       var tdL = document.createElement("td");
-      tdL.className = "row-lbl";
-      tdL.textContent = n;
+      tdL.className = "row-lbl"; tdL.textContent = n;
       tr.appendChild(tdL);
 
-      // Columns 0–9: log(n.X) mantissa
-      var base = n / 10; // e.g. n=15 → 1.5
+      var base = n / 10;
       for (var c = 0; c < 10; c++) {
         var x = base + c * 0.01;
         var td = document.createElement("td");
@@ -677,11 +687,8 @@
         tr.appendChild(td);
       }
 
-      // Mean differences 1–9
-      // MD_k = mantissa(n.X + k*0.001) - mantissa(n.X) averaged across row ≈ diff at midpoint
       var midX = base + 0.05;
-      var logMid = Math.log10(midX);
-      var M = Math.log10(Math.E); // modulus
+      var M = Math.log10(Math.E);
       for (var k = 1; k <= 9; k++) {
         var diff = Math.round(M / midX * k * 0.001 * 10000);
         var tdM = document.createElement("td");
@@ -690,211 +697,385 @@
         tdM.textContent = diff > 0 ? diff : "—";
         tr.appendChild(tdM);
       }
-
       tbody.appendChild(tr);
     }
-
     tbl.appendChild(tbody);
   }
 
   /* ═══════════════════════════════════════════════════════════
-     ANTILOG TABLE  (rows .00–.99, cols 0–9, MDs 1–9)
+     BUILD ANTILOG TABLE  (split into two halves)
   ═══════════════════════════════════════════════════════════ */
-  function buildAntilog() {
-    var tbl = document.getElementById("tbl-antilog");
-    tbl.innerHTML = buildLogHead("No.");
-
+  function buildAntilogHalf(tblId, nStart, nEnd) {
+    var tbl = document.getElementById(tblId);
+    tbl.innerHTML = buildLogHead();
     var tbody = document.createElement("tbody");
 
-    for (var n = 0; n <= 99; n++) {
-      var base = n / 100; // .00 to .99
+    for (var n = nStart; n <= nEnd; n++) {
+      var base = n / 100;
       var label = "." + (n < 10 ? "0" : "") + n;
-
       var tr = document.createElement("tr");
       tr.setAttribute("data-rowlabel", label);
 
       var tdL = document.createElement("td");
-      tdL.className = "row-lbl";
-      tdL.textContent = label;
+      tdL.className = "row-lbl"; tdL.textContent = label;
       tr.appendChild(tdL);
 
-      // Columns 0–9: antilog(base + c*0.001)
       for (var c = 0; c < 10; c++) {
         var x = base + c * 0.001;
-        var v = Math.pow(10, x); // between 1.000 and 9.999
+        var v = Math.pow(10, x);
         var td = document.createElement("td");
         td.setAttribute("data-col", c);
-        // 4 significant figures of v
         td.textContent = fmt4Antilog(v);
         tr.appendChild(td);
       }
 
-      // Mean differences 1–9
-      var midX = base + 0.005;
-      var vMid = Math.pow(10, midX);
+      var midX2 = base + 0.005;
+      var vMid = Math.pow(10, midX2);
       for (var k = 1; k <= 9; k++) {
-        var diff = Math.round(vMid * Math.log(10) * k * 0.001 * 10000);
+        var diff2 = Math.round(vMid * Math.log(10) * k * 0.001 * 10000);
         var tdM = document.createElement("td");
         tdM.className = "mean-cell";
         tdM.setAttribute("data-mean", k);
-        tdM.textContent = diff > 0 ? diff : "—";
+        tdM.textContent = diff2 > 0 ? diff2 : "—";
         tr.appendChild(tdM);
       }
-
       tbody.appendChild(tr);
     }
-
     tbl.appendChild(tbody);
   }
 
-  function fmt4Antilog(v) {
-    // v is between 1.000 and 9.9999
-    // return 4-digit string e.g. 1.000→1000, 3.162→3162
-    var s = Math.round(v * 1000);
-    return String(s);
-  }
-
   /* ═══════════════════════════════════════════════════════════
-     TRIG TABLE BUILDER (sine / cosine / tangent)
+     BUILD TRIG TABLE  (split into two halves)
   ═══════════════════════════════════════════════════════════ */
-  function buildTrigTable(tblId, fn, label, meanCols, isSubtract) {
+  function buildTrigHalf(tblId, fn, degStart, degEnd, meanCols, isSubtract, isTan) {
     var tbl = document.getElementById(tblId);
-    var mc = meanCols || 5;
-    tbl.innerHTML = buildTrigHead(label, "Mean", mc, isSubtract);
-
+    tbl.innerHTML = buildTrigHead("Deg.", meanCols, isSubtract);
     var tbody = document.createElement("tbody");
-    var isTan = (tblId === "tbl-tangent");
 
-    for (var deg = 0; deg <= 90; deg++) {
+    for (var deg = degStart; deg <= degEnd; deg++) {
       var tr = document.createElement("tr");
       tr.setAttribute("data-rowlabel", String(deg));
 
       var tdL = document.createElement("td");
-      tdL.className = "row-lbl";
-      tdL.textContent = deg + "°";
+      tdL.className = "row-lbl"; tdL.textContent = deg + "°";
       tr.appendChild(tdL);
 
-      // 10 columns: 0' 6' 12' 18' 24' 30' 36' 42' 48' 54'
-      var rowVals = [];
       for (var m = 0; m < 10; m++) {
-        var minutes = m * 6;
-        var totalDeg = deg + minutes / 60;
+        var totalDeg = deg + m * 6 / 60;
         var rad = toRad(totalDeg);
         var val = fn(rad);
-        rowVals.push(val);
-      }
-
-      for (var ci = 0; ci < 10; ci++) {
         var td = document.createElement("td");
-        td.setAttribute("data-col", ci);
-        var v = rowVals[ci];
-        if (!isFinite(v) || Math.abs(v) > 999.9) {
+        td.setAttribute("data-col", m);
+        if (!isFinite(val) || Math.abs(val) > 999.9) {
           td.textContent = "—";
+        } else if (Math.abs(val) >= 10) {
+          td.textContent = val.toFixed(2);
         } else {
-          // Format: show 4 decimal places; for tan large values show full
-          if (Math.abs(v) >= 10) {
-            td.textContent = v.toFixed(2);
-          } else {
-            // display as 4-digit decimal like the textbook
-            td.textContent = formatTrigCell(v, deg, isTan);
-          }
+          td.textContent = Math.abs(val).toFixed(4);
         }
         tr.appendChild(td);
       }
 
-      // Mean differences
-      // For degrees where MD is not meaningful (tan > 77°), show —
-      var showMD = true;
-      if (isTan && deg >= 78) showMD = false;
-
-      for (var k = 1; k <= mc; k++) {
+      var showMD = !(isTan && deg >= 78);
+      for (var k = 1; k <= meanCols; k++) {
         var tdM = document.createElement("td");
         tdM.className = "mean-cell";
         tdM.setAttribute("data-mean", k);
         if (!showMD) {
           tdM.textContent = "—";
         } else {
-          // MD = change in value per k minutes at mid-point of row
-          var midDeg = deg + 0.05; // 3 minutes
-          var midRad = toRad(midDeg);
-          var derivative = getDerivative(fn, midRad);
-          var changePerMinute = Math.abs(derivative) * Math.PI / 180 / 60;
-          var md = Math.round(changePerMinute * k * 10000);
-          if (!isFinite(md) || md <= 0 || md > 9999) {
-            tdM.textContent = "—";
-          } else {
-            tdM.textContent = md;
-          }
+          var midDeg2 = deg + 0.05;
+          var midRad = toRad(midDeg2);
+          var deriv = getDerivative(fn, midRad);
+          var changePerMin = Math.abs(deriv) * Math.PI / 180 / 60;
+          var md = Math.round(changePerMin * k * 10000);
+          tdM.textContent = (isFinite(md) && md > 0 && md <= 9999) ? md : "—";
         }
         tr.appendChild(tdM);
       }
-
       tbody.appendChild(tr);
     }
-
     tbl.appendChild(tbody);
   }
 
-  function formatTrigCell(v, deg, isTan) {
-    if (!isFinite(v)) return "—";
-    // Standard 4-decimal format for board tables
-    var s = Math.abs(v).toFixed(4);
-    // Remove leading "0" for display like textbook (.7071 not 0.7071)
-    // Keep full value
-    return s;
-  }
-
-  function getDerivative(fn, rad) {
-    var h = 1e-7;
-    return (fn(rad + h) - fn(rad - h)) / (2 * h);
-  }
-
   /* ═══════════════════════════════════════════════════════════
-     TRIG RATIOS TABLE
+     BUILD TRIG RATIOS TABLE
   ═══════════════════════════════════════════════════════════ */
+  var TRIG_ROWS = [
+    { name: "sin",   fn: function(a){return Math.sin(a);},
+      vals: ["0", "1/2", "1/√2", "√3/2", "1", "0", "−1", "0"],
+      color: "#0052ff" },
+    { name: "cos",   fn: function(a){return Math.cos(a);},
+      vals: ["1", "√3/2", "1/√2", "1/2", "0", "−1", "0", "1"],
+      color: "#16a34a" },
+    { name: "tan",   fn: function(a){return Math.tan(a);},
+      vals: ["0", "1/√3", "1", "√3", "∞", "0", "∞", "0"],
+      color: "#dc2626" },
+    { name: "cot",   fn: function(a){return 1/Math.tan(a);},
+      vals: ["∞", "√3", "1", "1/√3", "0", "∞", "0", "∞"],
+      color: "#9333ea" },
+    { name: "cosec", fn: function(a){return 1/Math.sin(a);},
+      vals: ["∞", "2", "√2", "2/√3", "1", "∞", "−1", "∞"],
+      color: "#ea580c" },
+    { name: "sec",   fn: function(a){return 1/Math.cos(a);},
+      vals: ["1", "2/√3", "√2", "2", "∞", "−1", "∞", "1"],
+      color: "#0891b2" }
+  ];
+  var ANGLES_DEG = [0, 30, 45, 60, 90, 180, 270, 360];
+
   function buildTrigRatios() {
     var tbl = document.getElementById("tbl-trig");
+    var angles = ["0°","30°","45°","60°","90°","180°","270°","360°"];
+    var radians = ["0","π/6","π/4","π/3","π/2","π","3π/2","2π"];
 
-    // Header
-    var angles = ["0°", "30°", "45°", "60°", "90°", "180°", "270°", "360°"];
-    var h = '<thead><tr class="hdr-1">';
-    h += '<th class="row-lbl">Function</th>';
+    var h = '<thead><tr class="hdr-1"><th class="row-lbl">Function</th>';
     for (var i = 0; i < angles.length; i++) h += '<th>' + angles[i] + '</th>';
-    h += '</tr>';
-    h += '<tr class="hdr-2"><th class="row-lbl">Radians</th>';
-    var radians = ["0", "π/6", "π/4", "π/3", "π/2", "π", "3π/2", "2π"];
+    h += '</tr><tr class="hdr-2"><th class="row-lbl">Radians</th>';
     for (var ri = 0; ri < radians.length; ri++) h += '<th>' + radians[ri] + '</th>';
     h += '</tr></thead>';
     tbl.innerHTML = h;
 
-    // Data rows
-    var rows = [
-      { name: "sin", vals: ["0", "1/2", "1/√2", "√3/2", "1", "0", "−1", "0"] },
-      { name: "cos", vals: ["1", "√3/2", "1/√2", "1/2", "0", "−1", "0", "1"] },
-      { name: "tan", vals: ["0", "1/√3", "1", "√3", "∞", "0", "∞", "0"] },
-      { name: "cot", vals: ["∞", "√3", "1", "1/√3", "0", "∞", "0", "∞"] },
-      { name: "cosec", vals: ["∞", "2", "√2", "2/√3", "1", "∞", "−1", "∞"] },
-      { name: "sec", vals: ["1", "2/√3", "√2", "2", "∞", "−1", "∞", "1"] }
-    ];
-
     var tbody = document.createElement("tbody");
-    for (var r = 0; r < rows.length; r++) {
-      var row = rows[r];
+    for (var r = 0; r < TRIG_ROWS.length; r++) {
+      var row = TRIG_ROWS[r];
       var tr = document.createElement("tr");
       tr.setAttribute("data-rowlabel", row.name);
+      tr.setAttribute("data-fn-index", r);
+      tr.style.cursor = "default";
+
       var tdL = document.createElement("td");
       tdL.className = "row-lbl";
+      tdL.style.color = row.color;
       tdL.textContent = row.name;
       tr.appendChild(tdL);
+
       for (var c = 0; c < row.vals.length; c++) {
         var td = document.createElement("td");
         td.setAttribute("data-col", c);
+        td.setAttribute("data-angle", ANGLES_DEG[c]);
         td.textContent = row.vals[c];
         tr.appendChild(td);
       }
       tbody.appendChild(tr);
     }
     tbl.appendChild(tbody);
+
+    // Attach graph events
+    attachTrigGraphEvents();
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     TRIG GRAPH
+  ═══════════════════════════════════════════════════════════ */
+  var canvas = document.getElementById("trig-canvas");
+  var ctx = canvas.getContext("2d");
+  var currentFnIndex = -1;
+  var graphMouseX = -1;
+
+  function resizeCanvas() {
+    var panel = canvas.parentElement;
+    var w = panel.clientWidth - 40;
+    canvas.width = Math.max(w, 200);
+    canvas.height = 220;
+    if (currentFnIndex >= 0) drawGraph(currentFnIndex, graphMouseX);
+    else drawGraphEmpty();
+  }
+
+  function drawGraphEmpty() {
+    var W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    // Light background
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--surface').trim() || '#eef0f3';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#a0a0a0';
+    ctx.font = '13px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Hover a row to see the curve', W/2, H/2);
+  }
+
+  function drawGraph(fnIndex, mouseX) {
+    var row = TRIG_ROWS[fnIndex];
+    var W = canvas.width, H = canvas.height;
+    var PAD_L = 36, PAD_R = 12, PAD_T = 12, PAD_B = 28;
+    var plotW = W - PAD_L - PAD_R;
+    var plotH = H - PAD_T - PAD_B;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Background
+    ctx.fillStyle = '#f8f9fb';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(PAD_L, PAD_T, plotW, plotH);
+
+    // Determine Y range: clip to [-2.5, 2.5] for display
+    var YMIN = -2.5, YMAX = 2.5;
+    if (row.name === 'cot' || row.name === 'cosec' || row.name === 'sec') {
+      YMIN = -3; YMAX = 3;
+    }
+    if (row.name === 'tan') { YMIN = -4; YMAX = 4; }
+
+    function toPixX(deg) { return PAD_L + (deg / 360) * plotW; }
+    function toPixY(v) {
+      v = Math.max(YMIN, Math.min(YMAX, v));
+      return PAD_T + plotH - ((v - YMIN) / (YMAX - YMIN)) * plotH;
+    }
+
+    // Grid lines + x-axis labels
+    ctx.strokeStyle = '#e4e7ec';
+    ctx.lineWidth = 1;
+    var xMarks = [0, 90, 180, 270, 360];
+    var xLabels = ['0°','90°','180°','270°','360°'];
+    for (var xi = 0; xi < xMarks.length; xi++) {
+      var px = toPixX(xMarks[xi]);
+      ctx.beginPath(); ctx.moveTo(px, PAD_T); ctx.lineTo(px, PAD_T + plotH); ctx.stroke();
+      ctx.fillStyle = '#888'; ctx.font = '9px system-ui'; ctx.textAlign = 'center';
+      ctx.fillText(xLabels[xi], px, H - 4);
+    }
+    // Y grid
+    var yGridVals = [-2,-1,0,1,2];
+    for (var yi = 0; yi < yGridVals.length; yi++) {
+      var yv = yGridVals[yi];
+      if (yv < YMIN || yv > YMAX) continue;
+      var py = toPixY(yv);
+      ctx.strokeStyle = yv === 0 ? '#bbb' : '#e4e7ec';
+      ctx.lineWidth = yv === 0 ? 1.5 : 1;
+      ctx.beginPath(); ctx.moveTo(PAD_L, py); ctx.lineTo(PAD_L + plotW, py); ctx.stroke();
+      ctx.fillStyle = '#888'; ctx.font = '9px system-ui'; ctx.textAlign = 'right';
+      ctx.fillText(yv, PAD_L - 4, py + 3);
+    }
+
+    // Plot curve
+    ctx.save();
+    ctx.rect(PAD_L, PAD_T, plotW, plotH);
+    ctx.clip();
+    ctx.strokeStyle = row.color;
+    ctx.lineWidth = 2;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+
+    var steps = 720;
+    var prevY = null;
+    ctx.beginPath();
+    for (var s = 0; s <= steps; s++) {
+      var deg = (s / steps) * 360;
+      var rad = toRad(deg);
+      var v = row.fn(rad);
+      if (!isFinite(v) || Math.abs(v) > 20) {
+        prevY = null; ctx.beginPath(); continue;
+      }
+      var px2 = toPixX(deg);
+      var py2 = toPixY(v);
+      // Break line on large jumps (asymptote)
+      if (prevY !== null && Math.abs(py2 - prevY) > plotH * 0.8) {
+        prevY = null; ctx.stroke(); ctx.beginPath(); continue;
+      }
+      if (prevY === null) ctx.moveTo(px2, py2);
+      else ctx.lineTo(px2, py2);
+      prevY = py2;
+    }
+    ctx.stroke();
+    ctx.restore();
+
+    // Mark standard angle dots
+    var dotAngles = [0, 30, 45, 60, 90, 180, 270, 360];
+    for (var di = 0; di < dotAngles.length; di++) {
+      var da = dotAngles[di];
+      var dv = row.fn(toRad(da));
+      if (!isFinite(dv) || Math.abs(dv) > 20) continue;
+      var dpx = toPixX(da);
+      var dpy = toPixY(dv);
+      ctx.beginPath(); ctx.arc(dpx, dpy, 3, 0, Math.PI*2);
+      ctx.fillStyle = row.color; ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
+    }
+
+    // Mouse cursor line + dot
+    if (mouseX >= PAD_L && mouseX <= PAD_L + plotW) {
+      var mouseDeg = ((mouseX - PAD_L) / plotW) * 360;
+      var mouseRad = toRad(mouseDeg);
+      var mouseV = row.fn(mouseRad);
+
+      // Vertical hairline
+      ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(mouseX, PAD_T); ctx.lineTo(mouseX, PAD_T + plotH); ctx.stroke();
+      ctx.setLineDash([]);
+
+      if (isFinite(mouseV) && Math.abs(mouseV) <= 20) {
+        var mpy = toPixY(mouseV);
+        ctx.beginPath(); ctx.arc(mouseX, mpy, 5, 0, Math.PI*2);
+        ctx.fillStyle = row.color; ctx.fill();
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+
+        // Update value display
+        document.getElementById("trig-val-display").style.display = "flex";
+        document.getElementById("val-angle").textContent = mouseDeg.toFixed(1) + "°";
+        document.getElementById("val-fn-label").textContent = row.name;
+        document.getElementById("val-result").textContent = mouseV.toFixed(4);
+        document.getElementById("graph-hint").style.display = "none";
+      }
+    }
+
+    // Border
+    ctx.strokeStyle = '#dee1e6'; ctx.lineWidth = 1;
+    ctx.strokeRect(PAD_L, PAD_T, plotW, plotH);
+  }
+
+  function attachTrigGraphEvents() {
+    var tbl = document.getElementById("tbl-trig");
+    var rows = tbl.querySelectorAll("tbody tr");
+
+    rows.forEach(function(tr) {
+      tr.addEventListener("mouseenter", function() {
+        var idx = parseInt(tr.getAttribute("data-fn-index"));
+        currentFnIndex = idx;
+        graphMouseX = -1;
+        var row = TRIG_ROWS[idx];
+        document.getElementById("graph-title").textContent = row.name + "(θ)";
+        document.getElementById("graph-title").style.color = row.color;
+        document.getElementById("graph-subtitle").textContent = "Showing curve for " + row.name;
+        document.getElementById("trig-val-display").style.display = "none";
+        document.getElementById("graph-hint").style.display = "block";
+        drawGraph(idx, -1);
+
+        // Also highlight the hovered cell's column value on graph when hovering cells
+        var cells = tr.querySelectorAll("td[data-angle]");
+        cells.forEach(function(cell) {
+          cell.addEventListener("mouseenter", function() {
+            var ang = parseFloat(cell.getAttribute("data-angle"));
+            var pixX = 36 + (ang / 360) * (canvas.width - 48);
+            drawGraph(idx, pixX);
+          });
+        });
+      });
+
+      tr.addEventListener("mouseleave", function() {
+        // keep graph visible, just clear mouse line
+        if (currentFnIndex >= 0) {
+          drawGraph(currentFnIndex, -1);
+          document.getElementById("trig-val-display").style.display = "none";
+          document.getElementById("graph-hint").style.display = "block";
+        }
+      });
+    });
+
+    // Canvas mouse move
+    canvas.addEventListener("mousemove", function(e) {
+      if (currentFnIndex < 0) return;
+      var rect = canvas.getBoundingClientRect();
+      var scaleX = canvas.width / rect.width;
+      graphMouseX = (e.clientX - rect.left) * scaleX;
+      drawGraph(currentFnIndex, graphMouseX);
+    });
+    canvas.addEventListener("mouseleave", function() {
+      if (currentFnIndex < 0) return;
+      graphMouseX = -1;
+      drawGraph(currentFnIndex, -1);
+      document.getElementById("trig-val-display").style.display = "none";
+      document.getElementById("graph-hint").style.display = "block";
+    });
   }
 
   /* ═══════════════════════════════════════════════════════════
@@ -903,28 +1084,20 @@
   function attachColHighlight(tbl) {
     if (!tbl) return;
     var currentCol = -1;
-
-    tbl.addEventListener("mouseover", function (e) {
+    tbl.addEventListener("mouseover", function(e) {
       var td = e.target.closest("td");
       if (!td) return;
       var col = td.getAttribute("data-col");
       var colNum = col !== null ? parseInt(col) : -1;
-
       if (colNum === currentCol) return;
       currentCol = colNum;
-
-      // Clear all col-hover
       var all = tbl.querySelectorAll("td.col-hover");
       for (var i = 0; i < all.length; i++) all[i].classList.remove("col-hover");
-
       if (colNum < 0) return;
-
-      // Add col-hover to every td with same data-col
       var targets = tbl.querySelectorAll("td[data-col='" + colNum + "']");
       for (var j = 0; j < targets.length; j++) targets[j].classList.add("col-hover");
     });
-
-    tbl.addEventListener("mouseleave", function () {
+    tbl.addEventListener("mouseleave", function() {
       currentCol = -1;
       var all = tbl.querySelectorAll("td.col-hover");
       for (var i = 0; i < all.length; i++) all[i].classList.remove("col-hover");
@@ -932,35 +1105,37 @@
   }
 
   /* ═══════════════════════════════════════════════════════════
-     SEARCH
+     SEARCH — searches both halves
   ═══════════════════════════════════════════════════════════ */
   var searchInput = document.getElementById("lb-search");
-  var activeTable = null; // current table key
+  var activeTable = null;
 
   var tableMap = {
-    log:      { sec: "sec-log",     tbl: "tbl-log",     no: "no-log" },
-    antilog:  { sec: "sec-antilog", tbl: "tbl-antilog", no: "no-antilog" },
-    sine:     { sec: "sec-sine",    tbl: "tbl-sine",    no: "no-sine" },
-    cosine:   { sec: "sec-cosine",  tbl: "tbl-cosine",  no: "no-cosine" },
-    tangent:  { sec: "sec-tangent", tbl: "tbl-tangent", no: "no-tangent" },
-    trig:     { sec: "sec-trig",    tbl: "tbl-trig",    no: null }
+    log:      { sec: "sec-log",     tbls: ["tbl-log-1","tbl-log-2"],         no: "no-log" },
+    antilog:  { sec: "sec-antilog", tbls: ["tbl-antilog-1","tbl-antilog-2"], no: "no-antilog" },
+    sine:     { sec: "sec-sine",    tbls: ["tbl-sine-1","tbl-sine-2"],       no: "no-sine" },
+    cosine:   { sec: "sec-cosine",  tbls: ["tbl-cosine-1","tbl-cosine-2"],   no: "no-cosine" },
+    tangent:  { sec: "sec-tangent", tbls: ["tbl-tangent-1","tbl-tangent-2"], no: "no-tangent" },
+    trig:     { sec: "sec-trig",    tbls: ["tbl-trig"],                      no: null }
   };
 
   function doSearch(q) {
     if (!activeTable) return;
     var info = tableMap[activeTable];
-    var tbl = document.getElementById(info.tbl);
-    if (!tbl) return;
-    var rows = tbl.querySelectorAll("tbody tr");
     var q2 = q.trim().toLowerCase();
     var anyVisible = false;
-    for (var i = 0; i < rows.length; i++) {
-      var lbl = (rows[i].getAttribute("data-rowlabel") || "").toLowerCase();
-      if (!q2 || lbl.indexOf(q2) !== -1) {
-        rows[i].classList.remove("search-hidden");
-        anyVisible = true;
-      } else {
-        rows[i].classList.add("search-hidden");
+    for (var t = 0; t < info.tbls.length; t++) {
+      var tbl = document.getElementById(info.tbls[t]);
+      if (!tbl) continue;
+      var rows = tbl.querySelectorAll("tbody tr");
+      for (var i = 0; i < rows.length; i++) {
+        var lbl = (rows[i].getAttribute("data-rowlabel") || "").toLowerCase();
+        if (!q2 || lbl.indexOf(q2) !== -1) {
+          rows[i].classList.remove("search-hidden");
+          anyVisible = true;
+        } else {
+          rows[i].classList.add("search-hidden");
+        }
       }
     }
     if (info.no) {
@@ -969,9 +1144,7 @@
     }
   }
 
-  searchInput.addEventListener("input", function () {
-    doSearch(searchInput.value);
-  });
+  searchInput.addEventListener("input", function() { doSearch(searchInput.value); });
 
   /* ═══════════════════════════════════════════════════════════
      PILL FILTER
@@ -979,69 +1152,101 @@
   var pills = document.querySelectorAll(".lb-pill");
   var emptyEl = document.getElementById("lb-empty");
 
-  pills.forEach(function (pill) {
-    pill.addEventListener("click", function () {
+  pills.forEach(function(pill) {
+    pill.addEventListener("click", function() {
       var key = pill.getAttribute("data-table");
-
-      // Toggle off if already active
       if (pill.classList.contains("active")) {
         pill.classList.remove("active");
         activeTable = null;
-        Object.keys(tableMap).forEach(function (k) {
+        Object.keys(tableMap).forEach(function(k) {
           document.getElementById(tableMap[k].sec).classList.remove("visible");
         });
         emptyEl.style.display = "";
         return;
       }
-
-      // Activate new
-      pills.forEach(function (p) { p.classList.remove("active"); });
+      pills.forEach(function(p) { p.classList.remove("active"); });
       pill.classList.add("active");
       activeTable = key;
-
-      Object.keys(tableMap).forEach(function (k) {
-        var sec = document.getElementById(tableMap[k].sec);
-        sec.classList.toggle("visible", k === key);
+      Object.keys(tableMap).forEach(function(k) {
+        document.getElementById(tableMap[k].sec).classList.toggle("visible", k === key);
       });
       emptyEl.style.display = "none";
-
-      // Reset search
       searchInput.value = "";
       doSearch("");
+
+      // Init graph if trig
+      if (key === "trig") {
+        setTimeout(function() { resizeCanvas(); drawGraphEmpty(); }, 50);
+      }
     });
   });
 
   /* ═══════════════════════════════════════════════════════════
-     PDF EXPORT
+     PDF EXPORT — show all print-include + second-half headers
   ═══════════════════════════════════════════════════════════ */
-  document.getElementById("lb-export").addEventListener("click", function () {
-    // Mark all sections for print
-    Object.keys(tableMap).forEach(function (k) {
+  document.getElementById("lb-export").addEventListener("click", function() {
+    Object.keys(tableMap).forEach(function(k) {
       document.getElementById(tableMap[k].sec).classList.add("print-include");
     });
+    // Show second-half print headers
+    var h2Ids = ["log-h2-hdr","antilog-h2-hdr","sine-h2-hdr","cosine-h2-hdr","tangent-h2-hdr"];
+    h2Ids.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = "block";
+    });
     window.print();
-    // After print dialog, clean up
-    setTimeout(function () {
-      Object.keys(tableMap).forEach(function (k) {
+    setTimeout(function() {
+      Object.keys(tableMap).forEach(function(k) {
         document.getElementById(tableMap[k].sec).classList.remove("print-include");
       });
-    }, 2000);
+      h2Ids.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.style.display = "none";
+      });
+    }, 3000);
   });
 
   /* ═══════════════════════════════════════════════════════════
-     INIT — build all tables
+     INIT
   ═══════════════════════════════════════════════════════════ */
-  buildLog();
-  buildAntilog();
-  buildTrigTable("tbl-sine",    Math.sin,  "Deg.", 5, false);
-  buildTrigTable("tbl-cosine",  Math.cos,  "Deg.", 5, true);
-  buildTrigTable("tbl-tangent", Math.tan,  "Deg.", 5, false);
+  // Log: rows 10-54, 55-99
+  buildLogHalf("tbl-log-1", 10, 54);
+  buildLogHalf("tbl-log-2", 55, 99);
+
+  // Antilog: rows 0-49, 50-99
+  buildAntilogHalf("tbl-antilog-1", 0, 49);
+  buildAntilogHalf("tbl-antilog-2", 50, 99);
+
+  // Trig: 0-44, 45-90
+  buildTrigHalf("tbl-sine-1",    Math.sin, 0, 44, 5, false, false);
+  buildTrigHalf("tbl-sine-2",    Math.sin, 45, 90, 5, false, false);
+  buildTrigHalf("tbl-cosine-1",  Math.cos, 0, 44, 5, true,  false);
+  buildTrigHalf("tbl-cosine-2",  Math.cos, 45, 90, 5, true,  false);
+  buildTrigHalf("tbl-tangent-1", Math.tan, 0, 44, 5, false, true);
+  buildTrigHalf("tbl-tangent-2", Math.tan, 45, 90, 5, false, true);
+
   buildTrigRatios();
 
-  // Attach column highlight to all tables
-  ["tbl-log","tbl-antilog","tbl-sine","tbl-cosine","tbl-tangent","tbl-trig"].forEach(function (id) {
+  // Column highlight on all tables
+  ["tbl-log-1","tbl-log-2",
+   "tbl-antilog-1","tbl-antilog-2",
+   "tbl-sine-1","tbl-sine-2",
+   "tbl-cosine-1","tbl-cosine-2",
+   "tbl-tangent-1","tbl-tangent-2",
+   "tbl-trig"].forEach(function(id) {
     attachColHighlight(document.getElementById(id));
   });
+
+  // Canvas sizing
+  window.addEventListener("resize", function() {
+    if (currentFnIndex >= 0) resizeCanvas();
+    else {
+      var panel = canvas.parentElement;
+      canvas.width = Math.max(panel.clientWidth - 40, 200);
+      canvas.height = 220;
+    }
+  });
+  drawGraphEmpty();
 
 })();
 </script>
