@@ -95,7 +95,7 @@
     .print-book { display:none; }
 
     /* ══════════════════════════════════════════════════════════
-       PRINT — A4 portrait, proper header every page, 50/50 split
+       PRINT — A4 portrait, 16mm/14mm margins, 50/50 split
     ══════════════════════════════════════════════════════════ */
     @media print {
       @page { size: A4 portrait; margin: 16mm 14mm; }
@@ -110,95 +110,96 @@
       body { background:white; color:black; margin:0; padding:0; }
       .lb-page { padding:0; }
       .container { padding:0; max-width:100%; width:100%; }
-
-      /* Hide all screen table sections */
       .lb-table-section { display:none !important; }
-
-      /* Show the print book */
       .print-book { display:block !important; }
 
-      /* ── Each sheet = one A4 page ── */
+      /* ── Each sheet: force new page, NO avoid-inside (causes blank pages) ── */
       .print-sheet {
-        display:block;
+        display: block;
+        break-before: page;
         page-break-before: always;
-        page-break-inside: avoid;
         width: 100%;
-        /* Let content fill naturally; no fixed height so nothing clips */
-        padding: 0;
         margin: 0;
+        padding: 0;
       }
-      .print-sheet:first-child { page-break-before: avoid; }
+      .print-sheet:first-child {
+        break-before: avoid;
+        page-break-before: avoid;
+      }
 
-      /* ── Page header on every sheet ── */
+      /* ── Page header ── */
       .lb-print-header {
         display: flex !important;
-        align-items: baseline;
+        align-items: center;
         justify-content: space-between;
         gap: 12px;
-        margin-bottom: 8px;
-        padding-bottom: 5px;
-        border-bottom: 1.5px solid #0a0b0d;
+        margin-bottom: 6px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #0a0b0d;
       }
-      .lb-print-header .phead-left { display:flex; flex-direction:column; gap:1px; }
+      .lb-print-header .phead-left { display:flex; flex-direction:column; gap:0; }
       .lb-print-header .phead-academy {
-        font-size: 9px; font-weight: 700; text-transform: uppercase;
-        letter-spacing: 0.06em; color: #0a0b0d;
+        font-size: 8px; font-weight: 700; text-transform: uppercase;
+        letter-spacing: 0.06em; color: #0a0b0d; font-family: sans-serif;
       }
       .lb-print-header .phead-site {
-        font-size: 8px; color: #555; font-weight: 400;
+        font-size: 7px; color: #666; font-weight: 400; font-family: sans-serif;
       }
-      .lb-print-header .phead-right { display:flex; flex-direction:column; align-items:flex-end; gap:1px; }
+      .lb-print-header .phead-right { display:flex; flex-direction:column; align-items:flex-end; gap:0; }
       .lb-print-header .phead-title {
-        font-size: 9px; font-weight: 700; color: #0a0b0d; text-align:right;
+        font-size: 8px; font-weight: 700; color: #0a0b0d;
+        text-align: right; font-family: sans-serif;
       }
       .lb-print-header .phead-sub {
-        font-size: 8px; color: #666; text-align:right;
+        font-size: 7px; color: #555; text-align: right; font-family: sans-serif;
       }
 
-      /* ── Table wrapper in print ── */
-      .print-tbl-wrap { width:100%; }
+      /* ── Table in print ── */
+      .print-tbl-wrap { width: 100%; }
       .print-tbl-wrap .lb-tbl {
-        font-size: 7.5px;
-        min-width: 0;
-        width: 100%;
+        font-size: 7px;
+        min-width: 0; width: 100%;
         border-collapse: collapse;
         table-layout: fixed;
       }
       .print-tbl-wrap .lb-tbl thead tr.hdr-1 th,
       .print-tbl-wrap .lb-tbl thead tr.hdr-2 th {
         background: #0a0b0d !important; color: white !important;
-        position: static; font-size: 7px; padding: 3px 3px; font-weight:700;
-        letter-spacing: 0.03em;
+        position: static; font-size: 6.5px; padding: 2.5px 2px;
+        font-weight: 700; letter-spacing: 0.02em;
       }
       .print-tbl-wrap .lb-tbl thead tr.hdr-2 th {
-        background: #1a1c20 !important; font-size: 6.5px; font-weight:500;
+        background: #1a1c20 !important; font-size: 6px; font-weight: 500;
       }
       .print-tbl-wrap .lb-tbl tbody td {
-        padding: 2.5px 3px; font-size: 7.5px;
-        border-bottom: 0.5px solid #ddd; text-align:center;
+        padding: 2px 2px; font-size: 7px;
+        border-bottom: 0.4px solid #e0e0e0; text-align: center;
       }
       .print-tbl-wrap .lb-tbl tbody td.row-lbl {
-        position: static; background: #eef0f3 !important;
-        font-size: 7.5px; padding: 2.5px 4px; font-weight: 700;
-        text-align: left;
+        position: static; background: #f2f3f5 !important;
+        font-size: 7px; padding: 2px 3px; font-weight: 700; text-align: left;
       }
-      .print-tbl-wrap .lb-tbl tbody td.mean-cell { font-size:7px; color:#444; }
-      .print-tbl-wrap .lb-tbl tbody tr { transform:none !important; box-shadow:none !important; }
+      .print-tbl-wrap .lb-tbl tbody td.mean-cell { font-size: 6.5px; color: #444; }
+      .print-tbl-wrap .lb-tbl tbody tr { transform: none !important; box-shadow: none !important; }
 
-      /* ── Trig ratios sheet — centered, larger text ── */
-      .print-trig-sheet {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 240mm; /* roughly fill portrait page after margins */
+      /* ── Trig ratios: no min-height, just center the table horizontally ── */
+      .print-trig-sheet .print-tbl-wrap {
+        display: flex; justify-content: center; margin-top: 32px;
       }
-      .print-trig-sheet .print-tbl-wrap { width: auto; }
-      .print-trig-sheet .lb-tbl { font-size:11px; table-layout:auto; min-width:0; width:auto; }
+      .print-trig-sheet .lb-tbl {
+        font-size: 10px; table-layout: auto;
+        min-width: 0; width: auto;
+      }
       .print-trig-sheet .lb-tbl thead tr.hdr-1 th,
-      .print-trig-sheet .lb-tbl thead tr.hdr-2 th { font-size:10px; padding:5px 14px; }
-      .print-trig-sheet .lb-tbl tbody td { font-size:12px; padding:7px 16px; }
-      .print-trig-sheet .lb-tbl tbody td.row-lbl { font-size:12px; padding:7px 14px; font-weight:700; }
+      .print-trig-sheet .lb-tbl thead tr.hdr-2 th {
+        font-size: 9px; padding: 5px 14px;
+      }
+      .print-trig-sheet .lb-tbl tbody td {
+        font-size: 11px; padding: 7px 16px;
+      }
+      .print-trig-sheet .lb-tbl tbody td.row-lbl {
+        font-size: 11px; padding: 7px 14px; font-weight: 700;
+      }
     }
 
     @media(max-width:600px){
@@ -891,7 +892,11 @@ pills.forEach(function(pill){
      RIGHT — Table name  +  page info
    A4 portrait, default margins, 50/50 row split per table.
 ─────────────────────────────────────────────────────────────── */
-function makeHeader(title, sub){
+/* pageNum counter — incremented for each sheet, stamped into header right side */
+var _pageNum = 0;
+
+function makeHeader(title){
+  _pageNum++;
   var hdr=document.createElement("div");
   hdr.className="lb-print-header";
   hdr.innerHTML=
@@ -901,15 +906,15 @@ function makeHeader(title, sub){
     +'</div>'
     +'<div class="phead-right">'
       +'<span class="phead-title">'+title+'</span>'
-      +(sub?'<span class="phead-sub">'+sub+'</span>':'')
+      +'<span class="phead-sub">Page '+_pageNum+'</span>'
     +'</div>';
   return hdr;
 }
 
-function makePrintSheet(title, sub, tableEl){
+function makePrintSheet(title, tableEl){
   var sheet=document.createElement("div");
   sheet.className="print-sheet";
-  sheet.appendChild(makeHeader(title,sub));
+  sheet.appendChild(makeHeader(title));
   var wrap=document.createElement("div");
   wrap.className="print-tbl-wrap";
   wrap.appendChild(tableEl.cloneNode(true));
@@ -920,7 +925,7 @@ function makePrintSheet(title, sub, tableEl){
 function makePrintSheetTrig(tableEl){
   var sheet=document.createElement("div");
   sheet.className="print-sheet print-trig-sheet";
-  sheet.appendChild(makeHeader("Trigonometry Ratios — Standard Angles","Exact values at standard angles"));
+  sheet.appendChild(makeHeader("Trigonometry Ratios — Standard Angles"));
   var wrap=document.createElement("div");
   wrap.className="print-tbl-wrap";
   wrap.appendChild(tableEl.cloneNode(true));
@@ -928,17 +933,18 @@ function makePrintSheetTrig(tableEl){
   return sheet;
 }
 
-// Extract rows rowStart–rowEnd from a full screen table into a new <table>
-function cloneTableRows(srcTbl, rowStart, rowEnd){
+/* Clone rows by index range (0-based position in tbody),
+   NOT by row label value — avoids parseFloat issues with .00/.50 labels */
+function cloneTableRowsByIndex(srcTbl, iStart, iEnd){
   var newTbl=document.createElement("table");
   newTbl.className=srcTbl.className;
   var thead=srcTbl.querySelector("thead");
   if(thead) newTbl.appendChild(thead.cloneNode(true));
   var tbody=document.createElement("tbody");
-  srcTbl.querySelectorAll("tbody tr").forEach(function(tr){
-    var n=parseFloat(tr.getAttribute("data-rowlabel")||"");
-    if(n>=rowStart && n<=rowEnd) tbody.appendChild(tr.cloneNode(true));
-  });
+  var allRows=srcTbl.querySelectorAll("tbody tr");
+  for(var i=iStart; i<=iEnd && i<allRows.length; i++){
+    tbody.appendChild(allRows[i].cloneNode(true));
+  }
   newTbl.appendChild(tbody);
   return newTbl;
 }
@@ -946,37 +952,37 @@ function cloneTableRows(srcTbl, rowStart, rowEnd){
 document.getElementById("lb-export").addEventListener("click",function(){
   var book=document.getElementById("print-book");
   book.innerHTML="";
+  _pageNum=0; // reset counter
 
-  // Logarithms: 10–54 / 55–99
+  // Each full table has these row counts:
+  // Log: 90 rows (10-99), split at index 45 → rows 10-54 / 55-99
+  // Antilog: 100 rows (0-99), split at index 50 → .00-.49 / .50-.99
+  // Sine/Cosine/Tangent: 91 rows (0-90), split at index 45 → 0-44 / 45-90
+
   var logTbl=document.getElementById("tbl-log");
-  book.appendChild(makePrintSheet("Logarithms (log₁₀)","Rows 10–54  ·  Page 1 of 2",cloneTableRows(logTbl,10,54)));
-  book.appendChild(makePrintSheet("Logarithms (log₁₀)","Rows 55–99  ·  Page 2 of 2",cloneTableRows(logTbl,55,99)));
+  book.appendChild(makePrintSheet("Logarithms (log₁₀)", cloneTableRowsByIndex(logTbl,0,44)));
+  book.appendChild(makePrintSheet("Logarithms (log₁₀)", cloneTableRowsByIndex(logTbl,45,89)));
 
-  // Antilogarithms: .00–.49 / .50–.99
   var altTbl=document.getElementById("tbl-antilog");
-  book.appendChild(makePrintSheet("Antilogarithms","Rows .00–.49  ·  Page 1 of 2",cloneTableRows(altTbl,0,49)));
-  book.appendChild(makePrintSheet("Antilogarithms","Rows .50–.99  ·  Page 2 of 2",cloneTableRows(altTbl,50,99)));
+  book.appendChild(makePrintSheet("Antilogarithms", cloneTableRowsByIndex(altTbl,0,49)));
+  book.appendChild(makePrintSheet("Antilogarithms", cloneTableRowsByIndex(altTbl,50,99)));
 
-  // Natural Sines: 0°–44° / 45°–90°
   var sinTbl=document.getElementById("tbl-sine");
-  book.appendChild(makePrintSheet("Natural Sines","0° – 44°  ·  Page 1 of 2",cloneTableRows(sinTbl,0,44)));
-  book.appendChild(makePrintSheet("Natural Sines","45° – 90°  ·  Page 2 of 2",cloneTableRows(sinTbl,45,90)));
+  book.appendChild(makePrintSheet("Natural Sines", cloneTableRowsByIndex(sinTbl,0,44)));
+  book.appendChild(makePrintSheet("Natural Sines", cloneTableRowsByIndex(sinTbl,45,90)));
 
-  // Natural Cosines: 0°–44° / 45°–90°
   var cosTbl=document.getElementById("tbl-cosine");
-  book.appendChild(makePrintSheet("Natural Cosines  (subtract mean differences)","0° – 44°  ·  Page 1 of 2",cloneTableRows(cosTbl,0,44)));
-  book.appendChild(makePrintSheet("Natural Cosines  (subtract mean differences)","45° – 90°  ·  Page 2 of 2",cloneTableRows(cosTbl,45,90)));
+  book.appendChild(makePrintSheet("Natural Cosines (subtract mean differences)", cloneTableRowsByIndex(cosTbl,0,44)));
+  book.appendChild(makePrintSheet("Natural Cosines (subtract mean differences)", cloneTableRowsByIndex(cosTbl,45,90)));
 
-  // Natural Tangents: 0°–44° / 45°–90°
   var tanTbl=document.getElementById("tbl-tangent");
-  book.appendChild(makePrintSheet("Natural Tangents","0° – 44°  ·  Page 1 of 2",cloneTableRows(tanTbl,0,44)));
-  book.appendChild(makePrintSheet("Natural Tangents","45° – 90°  ·  Page 2 of 2  ·  * Mean differences cease beyond 77°",cloneTableRows(tanTbl,45,90)));
+  book.appendChild(makePrintSheet("Natural Tangents", cloneTableRowsByIndex(tanTbl,0,44)));
+  book.appendChild(makePrintSheet("Natural Tangents", cloneTableRowsByIndex(tanTbl,45,90)));
 
-  // Trigonometry Ratios: single centered page
   book.appendChild(makePrintSheetTrig(document.getElementById("tbl-trig")));
 
   window.print();
-  setTimeout(function(){ book.innerHTML=""; },3000);
+  setTimeout(function(){ book.innerHTML=""; _pageNum=0; },3000);
 });
 
 /* ─── INIT ──────────────────────────────────────────────────── */
