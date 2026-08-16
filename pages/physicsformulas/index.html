@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Physics Formula Sheet for CBSE Class 12 and TN State Board Class 12 — chapter-wise formulas, variables, and constants. A free learning resource by Prof. Dr. S. Balaji Science Academy." />
+  <title>Physics Formula Sheet | Prof. Dr. S. Balaji</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <style>
+    /* ============================================================
+       PHYSICS FORMULA SHEET — page-specific styles
+       Built on shared design tokens from styles.css
+       ============================================================ */
+
+    /* ── Board selector pills ── */
+    .pf-board-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+    .pf-board-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      border: 2px solid var(--border);
+      background: var(--bg);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--fg);
+      cursor: pointer;
+      transition: border-color var(--motion-fast) var(--ease-standard),
+                  background var(--motion-fast) var(--ease-standard),
+                  color var(--motion-fast) var(--ease-standard);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .pf-board-btn:hover {
+      border-color: rgba(0, 82, 255, 0.4);
+      background: color-mix(in oklab, var(--accent), transparent 94%);
+    }
+    .pf-board-btn.active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+    }
+    .pf-board-btn .pf-board-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.5;
+      transition: opacity var(--motion-fast);
+    }
+    .pf-board-btn.active .pf-board-dot {
+      opacity: 1;
+      background: #ffffff;
+    }
+
+    /* ── Workspace (sidebar + content) ── */
+    .pf-workspace {
+      display: none;
+      margin-top: var(--space-8);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .pf-workspace.visible {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+    }
+    @media (max-width: 767px) {
+      .pf-workspace.visible {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── Left sidebar ── */
+    .pf-sidebar {
+      background: var(--fg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .pf-sidebar-header {
+      padding: var(--space-4) var(--space-4) var(--space-3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      flex-shrink: 0;
+    }
+    .pf-sidebar-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+    }
+    .pf-sidebar-board-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 3px;
+    }
+    .pf-chapter-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--space-3) 0;
+    }
+    .pf-chapter-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .pf-chapter-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .pf-chapter-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+    .pf-chapter-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: 9px var(--space-4);
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: background var(--motion-fast) var(--ease-standard),
+                  border-color var(--motion-fast) var(--ease-standard);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .pf-chapter-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .pf-chapter-item.active {
+      background: rgba(0, 82, 255, 0.18);
+      border-left-color: var(--accent);
+    }
+    .pf-ch-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.04em;
+      line-height: 1.8;
+      flex-shrink: 0;
+      min-width: 20px;
+    }
+    .pf-ch-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.4;
+    }
+    .pf-chapter-item.active .pf-ch-num {
+      color: var(--accent-hover);
+    }
+    .pf-chapter-item.active .pf-ch-title {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Mobile: sidebar collapses to a horizontal scrollable strip */
+    @media (max-width: 767px) {
+      .pf-sidebar {
+        border-bottom: 1px solid var(--border);
+        max-height: 200px;
+      }
+      .pf-chapter-item {
+        padding: 8px var(--space-3);
+      }
+    }
+
+    /* ── Main formula area ── */
+    .pf-main {
+      background: var(--bg);
+      overflow-y: auto;
+      max-height: 78vh;
+      display: flex;
+      flex-direction: column;
+    }
+    @media (max-width: 767px) {
+      .pf-main {
+        max-height: none;
+        min-height: 60vh;
+      }
+    }
+
+    /* Empty state */
+    .pf-empty {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-12) var(--space-8);
+      text-align: center;
+      color: var(--muted);
+    }
+    .pf-empty svg {
+      width: 40px;
+      height: 40px;
+      color: var(--border);
+      margin-bottom: var(--space-4);
+    }
+    .pf-empty p {
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .pf-empty span {
+      font-size: var(--text-sm);
+      color: color-mix(in oklab, var(--muted), transparent 30%);
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* Chapter content header */
+    .pf-chapter-head {
+      padding: var(--space-6) var(--space-6) var(--space-4);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .pf-chapter-head-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: var(--space-1);
+    }
+    .pf-chapter-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 400;
+      letter-spacing: var(--tracking-display);
+      color: var(--fg);
+      line-height: 1.2;
+    }
+    .pf-chapter-stats {
+      display: flex;
+      gap: var(--space-3);
+      margin-top: var(--space-3);
+      flex-wrap: wrap;
+    }
+    .pf-stat-chip {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+      color: var(--muted);
+    }
+    .pf-stat-chip.accent {
+      background: color-mix(in oklab, var(--accent), transparent 90%);
+      color: var(--accent);
+    }
+
+    /* Formula content area */
+    .pf-content {
+      padding: var(--space-5) var(--space-6);
+      display: grid;
+      gap: var(--space-6);
+    }
+
+    /* Topic group */
+    .pf-topic-group {
+      display: grid;
+      gap: var(--space-4);
+    }
+    .pf-topic-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Formula card */
+    .pf-formula-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color var(--motion-fast) var(--ease-standard),
+                  box-shadow var(--motion-fast) var(--ease-standard);
+    }
+    .pf-formula-card:hover {
+      border-color: color-mix(in oklab, var(--fg), transparent 75%);
+      box-shadow: 0 2px 8px color-mix(in oklab, var(--fg), transparent 93%);
+    }
+
+    /* Formula top: name + expression */
+    .pf-formula-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-4);
+      align-items: start;
+      padding: var(--space-4) var(--space-4) 0;
+    }
+    @media (max-width: 480px) {
+      .pf-formula-top {
+        grid-template-columns: 1fr;
+      }
+    }
+    .pf-formula-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--fg);
+      line-height: 1.3;
+    }
+
+    /* Expression block — monospace, stands out */
+    .pf-expr-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+    @media (max-width: 480px) {
+      .pf-expr-block {
+        align-items: flex-start;
+      }
+    }
+    .pf-expr {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      background: color-mix(in oklab, var(--accent), transparent 93%);
+      padding: 4px 12px;
+      border-radius: var(--radius-sm);
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    /* Variables & constants section */
+    .pf-meta {
+      padding: var(--space-3) var(--space-4) var(--space-4);
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    /* Variables table */
+    .pf-vars-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .pf-vars-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .pf-vars-table td {
+      padding: 5px 8px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.4;
+    }
+    .pf-vars-table tr:last-child td {
+      border-bottom: none;
+    }
+    .pf-vars-table .sym-col {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--fg);
+      white-space: nowrap;
+      width: 44px;
+    }
+    .pf-vars-table .desc-col {
+      color: var(--muted);
+    }
+    .pf-vars-table .unit-col {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: color-mix(in oklab, var(--muted), transparent 20%);
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    /* Constants row */
+    .pf-constants-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+    .pf-const-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: color-mix(in oklab, var(--fg), transparent 94%);
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+    }
+    .pf-const-chip .const-sym {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--fg);
+    }
+    .pf-const-chip .const-val {
+      font-family: var(--font-mono);
+      color: var(--muted);
+    }
+    .pf-const-chip .const-unit {
+      color: color-mix(in oklab, var(--muted), transparent 30%);
+      font-size: 10px;
+    }
+
+    /* Divider between variables and constants */
+    .pf-meta-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Page header section ── */
+    .pf-page-head {
+      padding-block: var(--space-8) var(--space-5);
+    }
+    .pf-page-sub {
+      font-size: var(--text-base);
+      color: var(--muted);
+      max-width: 58ch;
+      margin-top: var(--space-3);
+      line-height: 1.6;
+    }
+
+    /* ── Loading state ── */
+    .pf-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-12);
+      color: var(--muted);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      gap: var(--space-3);
+    }
+    .pf-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: pf-spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pf-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .pf-spinner { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════ HEADER -->
+  <header class="site-header" data-od-id="site-header">
+    <div class="container header-inner">
+      <div class="brand-container">
+        <a href="../../index.html" class="brand-logo-link">
+          <img src="../../assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+        </a>
+        <a class="brand" href="../../index.html">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+      </div>
+      <style>
+        .brand-container { display: flex; align-items: center; gap: 12px; flex-shrink: 0; margin-right: auto; }
+        .brand-logo { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+        @media (min-width: 480px) { .brand-logo { height: 44px; width: 44px; } }
+        @media (min-width: 896px) { .brand-logo { height: 48px; width: 48px; } }
+        .site-header .brand { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.25; color: var(--fg); text-decoration: none; max-width: 160px; word-break: break-word; }
+        @media (min-width: 896px) { .site-header .brand { font-size: 14px; white-space: nowrap; max-width: none; } }
+        .brand-logo-link { display: flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 50%; transition: opacity 150ms; }
+        .brand-logo-link:hover { opacity: .8; }
+      </style>
+      <div class="header-right">
+        <nav class="nav-desktop" aria-label="Primary">
+          <a href="../../index.html#about">About</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
+            <div class="nav-dropdown-menu">
+              <a href="../../pages/courses/cbse10.html">CBSE Class 10</a>
+              <a href="../../pages/courses/cbse12.html">CBSE Class 12</a>
+              <a href="../../pages/courses/stateboard12.html">State Board Class 12</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
+            <div class="nav-dropdown-menu">
+              <a href="/pages/studyplanner/">Study Planner</a>
+              <a href="/pages/periodictable/">Periodic Table</a>
+              <a href="/pages/mindmap/">Mind Map</a>
+              <a href="/pages/physicsformulas/">Physics Formulas</a>
+            </div>
+          </div>
+          <a href="../../index.html#attend">How to attend</a>
+          <a href="../../index.html#faq">FAQs</a>
+          <a href="../../index.html#blog">Blog</a>
+          <a href="../../index.html#contact">Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="btn btn-primary" href="/pages/test.html">Sign Up</a>
+        </div>
+      </div>
+      <a class="btn btn-primary btn-sm nav-actions-mobile" href="/pages/test.html">Sign Up</a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+    <a href="../../index.html#about">About</a>
+    <div class="nav-mobile-dropdown">
+      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
+      <div class="nav-mobile-dropdown-menu">
+        <a href="../../pages/courses/cbse10.html">CBSE Class 10</a>
+        <a href="../../pages/courses/cbse12.html">CBSE Class 12</a>
+        <a href="../../pages/courses/stateboard12.html">State Board Class 12</a>
+      </div>
+    </div>
+    <div class="nav-mobile-dropdown">
+      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
+      <div class="nav-mobile-dropdown-menu">
+        <a href="/pages/studyplanner/">Study Planner</a>
+        <a href="/pages/periodictable/">Periodic Table</a>
+        <a href="/pages/mindmap/">Mind Map</a>
+        <a href="/pages/physicsformulas/">Physics Formulas</a>
+      </div>
+    </div>
+    <a href="../../index.html#attend">How to attend</a>
+    <a href="../../index.html#faq">FAQs</a>
+    <a href="../../index.html#blog">Blog</a>
+    <a href="../../index.html#contact">Contact</a>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════ MAIN -->
+  <main id="top">
+
+    <!-- Page header -->
+    <section class="section pf-page-head">
+      <div class="container">
+        <p class="eyebrow">Learning Resources</p>
+        <h1>Physics Formula Sheet</h1>
+        <p class="pf-page-sub">Chapter-wise formulas for Class 12. Select your board to get started — every formula includes its expression, variables, and physical constants.</p>
+
+        <!-- Board selector -->
+        <div class="pf-board-row" role="group" aria-label="Select board">
+          <button class="pf-board-btn" id="btn-cbse" type="button" aria-pressed="false" data-board="cbse">
+            <span class="pf-board-dot"></span>
+            CBSE Class 12
+          </button>
+          <button class="pf-board-btn" id="btn-sb" type="button" aria-pressed="false" data-board="stateboard">
+            <span class="pf-board-dot"></span>
+            State Board Class 12
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formula workspace -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="pf-workspace" id="pf-workspace">
+
+          <!-- Left sidebar: chapter list -->
+          <aside class="pf-sidebar" id="pf-sidebar">
+            <div class="pf-sidebar-header">
+              <div class="pf-sidebar-label">Chapters</div>
+              <div class="pf-sidebar-board-name" id="pf-sidebar-board-name"></div>
+            </div>
+            <div class="pf-chapter-scroll" id="pf-chapter-scroll">
+              <!-- Chapter items injected by JS -->
+            </div>
+          </aside>
+
+          <!-- Right: formula content -->
+          <div class="pf-main" id="pf-main">
+            <!-- Empty state — shown until a chapter is selected -->
+            <div class="pf-empty" id="pf-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9"/>
+                <path d="M9 3v6h6"/>
+                <path d="M9 3L3 9"/>
+                <line x1="9" y1="13" x2="15" y2="13"/>
+                <line x1="9" y1="17" x2="12" y2="17"/>
+              </svg>
+              <p>Select a chapter</p>
+              <span>Click any chapter on the left to view its formulas</span>
+            </div>
+
+            <!-- Loading state -->
+            <div class="pf-loading" id="pf-loading" style="display: none;">
+              <div class="pf-spinner"></div>
+              Loading formulas…
+            </div>
+
+            <!-- Chapter content — injected by JS -->
+            <div id="pf-chapter-content" style="display: none;"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════ FOOTER -->
+  <footer class="site-footer" data-od-id="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="socials">
+          <a href="tel:+919787692116" aria-label="Call"><img src="../../assets/icons/call.svg" alt="Call" /></a>
+          <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business"><img src="../../assets/icons/google-business.svg" alt="Google Business" /></a>
+          <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="../../assets/icons/linkedin.svg" alt="LinkedIn" /></a>
+          <a href="mailto:prof@example.com" aria-label="Email"><img src="../../assets/icons/mail.svg" alt="Email" /></a>
+          <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar"><img src="../../assets/icons/google-scholar.svg" alt="Google Scholar" /></a>
+          <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack"><img src="../../assets/icons/substack.png" alt="Substack" /></a>
+          <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="../../assets/icons/youtube.svg" alt="YouTube" /></a>
+        </div>
+      </div>
+      <div class="footer-bottom" style="flex-direction: column; align-items: center; gap: 8px;">
+        <span style="font-size: 12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy. All Rights Reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  /* ════════════════════════════════════════════════════════════
+     PHYSICS FORMULA SHEET — JavaScript
+  ════════════════════════════════════════════════════════════ */
+  (function () {
+    "use strict";
+
+    /* ── Footer year ── */
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    /* ── Nav: mobile menu ── */
+    var toggle = document.getElementById("menu-toggle");
+    var mobileNav = document.getElementById("nav-mobile");
+    if (toggle && mobileNav) {
+      toggle.addEventListener("click", function () {
+        var open = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!open));
+        mobileNav.classList.toggle("open", !open);
+        document.body.classList.toggle("nav-open", !open);
+      });
+      mobileNav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          toggle.setAttribute("aria-expanded", "false");
+          mobileNav.classList.remove("open");
+          document.body.classList.remove("nav-open");
+        });
+      });
+    }
+
+    /* Nav mobile dropdowns */
+    document.querySelectorAll(".nav-mobile-dropdown-trigger").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var expanded = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!expanded));
+      });
+    });
+
+    /* Nav desktop dropdowns */
+    document.querySelectorAll(".nav-dropdown").forEach(function (dd) {
+      var trigger = dd.querySelector(".nav-dropdown-trigger");
+      if (!trigger) return;
+      trigger.addEventListener("click", function () {
+        var expanded = trigger.getAttribute("aria-expanded") === "true";
+        trigger.setAttribute("aria-expanded", String(!expanded));
+      });
+      document.addEventListener("click", function (e) {
+        if (!dd.contains(e.target)) {
+          trigger.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+
+    /* ── State ── */
+    var state = {
+      board: null,      /* "cbse" | "stateboard" */
+      data: null,       /* loaded JSON */
+      activeChapter: null  /* chapter_no */
+    };
+
+    /* JSON paths relative to this page */
+    var JSON_PATHS = {
+      cbse: "../../assets/physicsformulas/cbse12-physics-formula.json",
+      stateboard: "../../assets/physicsformulas/sb12-physics-formula.json"
+    };
+
+    var BOARD_LABELS = {
+      cbse: "CBSE Class 12",
+      stateboard: "State Board Class 12"
+    };
+
+    /* ── DOM refs ── */
+    var workspace       = document.getElementById("pf-workspace");
+    var sidebar         = document.getElementById("pf-sidebar");
+    var sidebarBoardName = document.getElementById("pf-sidebar-board-name");
+    var chapterScroll   = document.getElementById("pf-chapter-scroll");
+    var pfMain          = document.getElementById("pf-main");
+    var pfEmpty         = document.getElementById("pf-empty");
+    var pfLoading       = document.getElementById("pf-loading");
+    var pfContent       = document.getElementById("pf-chapter-content");
+    var btnCbse         = document.getElementById("btn-cbse");
+    var btnSb           = document.getElementById("btn-sb");
+
+    /* ── Board selection ── */
+    function selectBoard(board) {
+      if (state.board === board) return;
+      state.board = board;
+      state.data = null;
+      state.activeChapter = null;
+
+      /* Update pill buttons */
+      btnCbse.classList.toggle("active", board === "cbse");
+      btnCbse.setAttribute("aria-pressed", String(board === "cbse"));
+      btnSb.classList.toggle("active", board === "stateboard");
+      btnSb.setAttribute("aria-pressed", String(board === "stateboard"));
+
+      /* Show workspace */
+      workspace.classList.add("visible");
+
+      /* Update sidebar board name */
+      sidebarBoardName.textContent = BOARD_LABELS[board];
+
+      /* Show loading in sidebar area */
+      chapterScroll.innerHTML = '<div style="padding: 16px 12px; font-size: 12px; color: rgba(255,255,255,0.4);">Loading chapters…</div>';
+
+      /* Reset main panel */
+      showEmpty();
+
+      /* Fetch JSON */
+      fetch(JSON_PATHS[board])
+        .then(function (r) {
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.json();
+        })
+        .then(function (data) {
+          state.data = data;
+          buildSidebar(data);
+        })
+        .catch(function (err) {
+          chapterScroll.innerHTML = '<div style="padding: 16px 12px; font-size: 12px; color: rgba(255,100,100,0.8);">Could not load data. Please check your connection and try again.</div>';
+          console.error("Physics formula data failed to load:", err);
+        });
+    }
+
+    btnCbse.addEventListener("click", function () { selectBoard("cbse"); });
+    btnSb.addEventListener("click", function () { selectBoard("stateboard"); });
+
+    /* ── Build sidebar chapter list ── */
+    function buildSidebar(data) {
+      chapterScroll.innerHTML = "";
+      data.chapters.forEach(function (ch) {
+        var item = document.createElement("div");
+        item.className = "pf-chapter-item";
+        item.setAttribute("role", "button");
+        item.setAttribute("tabindex", "0");
+        item.setAttribute("data-chno", ch.chapter_no);
+        item.setAttribute("aria-label", "Chapter " + ch.chapter_no + ": " + ch.chapter_title);
+        item.innerHTML =
+          '<span class="pf-ch-num">' + ch.chapter_no + '</span>' +
+          '<span class="pf-ch-title">' + esc(ch.chapter_title) + '</span>';
+        item.addEventListener("click", function () { selectChapter(ch.chapter_no); });
+        item.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectChapter(ch.chapter_no); }
+        });
+        chapterScroll.appendChild(item);
+      });
+    }
+
+    /* ── Chapter selection ── */
+    function selectChapter(chapterNo) {
+      if (!state.data) return;
+      state.activeChapter = chapterNo;
+
+      /* Update sidebar active state */
+      chapterScroll.querySelectorAll(".pf-chapter-item").forEach(function (item) {
+        item.classList.toggle("active", Number(item.getAttribute("data-chno")) === chapterNo);
+      });
+
+      /* Find chapter */
+      var ch = state.data.chapters.find(function (c) { return c.chapter_no === chapterNo; });
+      if (!ch) return;
+
+      /* Render */
+      renderChapter(ch);
+
+      /* On mobile, scroll main area into view */
+      if (window.innerWidth < 768) {
+        pfMain.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    /* ── Render a chapter ── */
+    function renderChapter(ch) {
+      pfEmpty.style.display = "none";
+      pfLoading.style.display = "none";
+      pfContent.style.display = "block";
+
+      /* Count totals */
+      var totalFormulas = 0;
+      var totalTopics = 0;
+      ch.topics.forEach(function (t) {
+        if (t.formulas && t.formulas.length) {
+          totalTopics++;
+          totalFormulas += t.formulas.length;
+        }
+      });
+
+      var html = "";
+
+      /* Chapter header */
+      html += '<div class="pf-chapter-head">';
+      html += '  <div class="pf-chapter-head-eyebrow">Chapter ' + ch.chapter_no + '</div>';
+      html += '  <h2>' + esc(ch.chapter_title) + '</h2>';
+      html += '  <div class="pf-chapter-stats">';
+      html += '    <span class="pf-stat-chip accent">' + totalFormulas + ' formula' + (totalFormulas !== 1 ? 's' : '') + '</span>';
+      html += '    <span class="pf-stat-chip">' + totalTopics + ' topic' + (totalTopics !== 1 ? 's' : '') + '</span>';
+      html += '  </div>';
+      html += '</div>';
+
+      /* Topics and formulas */
+      html += '<div class="pf-content">';
+
+      ch.topics.forEach(function (topic) {
+        if (!topic.formulas || !topic.formulas.length) return;
+
+        html += '<div class="pf-topic-group">';
+        html += '  <div class="pf-topic-title">' + esc(topic.sub_topic) + '</div>';
+
+        topic.formulas.forEach(function (formula) {
+          html += renderFormula(formula);
+        });
+
+        html += '</div>';
+      });
+
+      html += '</div>'; /* .pf-content */
+
+      pfContent.innerHTML = html;
+
+      /* Scroll main panel back to top */
+      pfMain.scrollTop = 0;
+    }
+
+    /* ── Render a single formula card ── */
+    function renderFormula(formula) {
+      var html = '<div class="pf-formula-card">';
+
+      /* Top row: name + expression(s) */
+      html += '<div class="pf-formula-top">';
+      html += '  <div class="pf-formula-name">' + esc(formula.formula_name) + '</div>';
+
+      var expressions = formula.expressions || [];
+      if (expressions.length) {
+        html += '<div class="pf-expr-block">';
+        expressions.forEach(function (expr) {
+          html += '<span class="pf-expr">' + esc(expr) + '</span>';
+        });
+        html += '</div>';
+      }
+      html += '</div>'; /* .pf-formula-top */
+
+      /* Meta section: variables + constants */
+      var hasVars = formula.variables && formula.variables.length;
+      var hasConsts = formula.constants && formula.constants.length;
+
+      if (hasVars || hasConsts) {
+        html += '<div class="pf-meta">';
+
+        if (hasVars) {
+          html += '<div>';
+          html += '  <div class="pf-vars-label">Variables</div>';
+          html += '  <table class="pf-vars-table">';
+          formula.variables.forEach(function (v) {
+            html += '<tr>';
+            html += '  <td class="sym-col">' + esc(v.symbol) + '</td>';
+            html += '  <td class="desc-col">' + esc(v.description) + '</td>';
+            html += '  <td class="unit-col">' + esc(v.unit || '') + '</td>';
+            html += '</tr>';
+          });
+          html += '  </table>';
+          html += '</div>';
+        }
+
+        if (hasVars && hasConsts) {
+          html += '<hr class="pf-meta-divider" />';
+        }
+
+        if (hasConsts) {
+          html += '<div>';
+          html += '  <div class="pf-vars-label">Constants</div>';
+          html += '  <div class="pf-constants-row">';
+          formula.constants.forEach(function (c) {
+            html += '<span class="pf-const-chip">';
+            html += '  <span class="const-sym">' + esc(c.symbol) + '</span>';
+            html += '  <span class="const-val">= ' + esc(c.value) + '</span>';
+            html += '  <span class="const-unit">' + esc(c.unit || '') + '</span>';
+            html += '</span>';
+          });
+          html += '  </div>';
+          html += '</div>';
+        }
+
+        html += '</div>'; /* .pf-meta */
+      }
+
+      html += '</div>'; /* .pf-formula-card */
+      return html;
+    }
+
+    /* ── Helpers ── */
+    function showEmpty() {
+      pfEmpty.style.display = "";
+      pfLoading.style.display = "none";
+      pfContent.style.display = "none";
+      pfContent.innerHTML = "";
+    }
+
+    function esc(s) {
+      if (s === null || s === undefined) return "";
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+  }());
+  </script>
+
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>
