@@ -1,0 +1,1335 @@
+{
+  "title": "Class 12 Chemistry Equation Bank - CBSE / NCERT (Rationalized Syllabus)",
+  "source_files": [
+    "lech101.md",
+    "lech102.md",
+    "lech103.md",
+    "lech104.md",
+    "lech105.md",
+    "lech201.md",
+    "lech202.md",
+    "lech203.md",
+    "lech204.md",
+    "lech205.md"
+  ],
+  "notation": "Chemical equations use LaTeX with the mhchem package (\\ce{...}); physical-chemistry formulas use standard LaTeX.",
+  "coverage_note": "Only equations physically present in the uploaded source text were extracted; none were reconstructed from memory. Coverage is very uneven between the two parts of the book because of how the original PDF was converted to Markdown: Part I (Units 1-5: Solutions, Electrochemistry, Chemical Kinetics, d-/f-Block Elements, Coordination Compounds) is physical-chemistry-heavy and its equations were mostly typed as inline text, so they survived conversion well and this bank captures them thoroughly (~140 equations). Part II (Units 6-10: Haloalkanes and Haloarenes, Alcohols/Phenols/Ethers, Aldehydes/Ketones/Carboxylic Acids, Amines, Biomolecules) consists almost entirely of organic reaction schemes and structural diagrams that were rendered as images in the original PDF; these images did not survive conversion to Markdown at all, leaving only surrounding prose. As a result, Units 6, 8, and 9 have effectively zero recoverable equations, and Units 7 and 10 have only one each. If you can provide these five files in a format that preserves the reaction schemes (e.g. higher-fidelity OCR, or images of the reaction schemes themselves), I can extract the organic chemistry content properly.",
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "chapter_title": "Solutions",
+      "part": "Part I",
+      "topics": [
+        {
+          "topic": "Concentration terms",
+          "equations": [
+            {
+              "equation_name": "Mass percentage",
+              "latex": "\\text{Mass \\%} = \\dfrac{\\text{Mass of component}}{\\text{Total mass of solution}} \\times 100"
+            },
+            {
+              "equation_name": "Volume percentage",
+              "latex": "\\text{Volume \\%} = \\dfrac{\\text{Volume of component}}{\\text{Total volume of solution}} \\times 100",
+              "note": "Equation (1.2) in the text."
+            },
+            {
+              "equation_name": "Parts per million (ppm)",
+              "latex": "\\text{ppm} = \\dfrac{\\text{Number of parts of the component}}{\\text{Total number of parts of all components}} \\times 10^{6}",
+              "note": "Equation (1.3) in the text; can be expressed as mass/mass, volume/volume, or mass/volume."
+            },
+            {
+              "equation_name": "Mole fraction of a component (binary mixture)",
+              "latex": "x_A = \\dfrac{n_A}{n_A + n_B}",
+              "variables": [
+                {
+                  "symbol": "x_A",
+                  "meaning": "mole fraction of component A"
+                },
+                {
+                  "symbol": "n_A, n_B",
+                  "meaning": "number of moles of A and B respectively"
+                }
+              ]
+            },
+            {
+              "equation_name": "Mole fraction - general form (i components)",
+              "latex": "x_i = \\dfrac{n_i}{\\sum_i n_i}"
+            },
+            {
+              "equation_name": "Sum of mole fractions",
+              "latex": "\\sum_i x_i = 1"
+            },
+            {
+              "equation_name": "Molarity",
+              "latex": "\\text{Molarity} = \\dfrac{\\text{Moles of solute}}{\\text{Volume of solution in litres}}"
+            },
+            {
+              "equation_name": "Molality",
+              "latex": "\\text{Molality}\\ (m) = \\dfrac{\\text{Moles of solute}}{\\text{Mass of solvent in kg}}"
+            }
+          ]
+        },
+        {
+          "topic": "Henry's law",
+          "equations": [
+            {
+              "equation_name": "Henry's law - solubility of gas in liquid",
+              "latex": "p = K_H\\, x",
+              "variables": [
+                {
+                  "symbol": "p",
+                  "meaning": "partial pressure of the gas in vapour phase"
+                },
+                {
+                  "symbol": "K_H",
+                  "meaning": "Henry's law constant (depends on the nature of the gas)"
+                },
+                {
+                  "symbol": "x",
+                  "meaning": "mole fraction of the gas in the solution"
+                }
+              ]
+            },
+            {
+              "equation_name": "Henry's law applied to calculate mole fraction of dissolved gas (worked example)",
+              "latex": "x(\\text{Nitrogen}) = \\dfrac{p(\\text{nitrogen})}{K_H} = \\dfrac{0.987\\ \\text{bar}}{76{,}480\\ \\text{bar}} = 1.29\\times10^{-5}"
+            }
+          ]
+        },
+        {
+          "topic": "Raoult's law - solutions of volatile liquids",
+          "equations": [
+            {
+              "equation_name": "Raoult's law for component 1 (partial pressure)",
+              "latex": "p_1 = x_1 p_1^{0}",
+              "variables": [
+                {
+                  "symbol": "p_1",
+                  "meaning": "partial vapour pressure of component 1 in solution"
+                },
+                {
+                  "symbol": "x_1",
+                  "meaning": "mole fraction of component 1"
+                },
+                {
+                  "symbol": "p_1^{0}",
+                  "meaning": "vapour pressure of pure component 1"
+                }
+              ]
+            },
+            {
+              "equation_name": "Raoult's law for component 2",
+              "latex": "p_2 = x_2 p_2^{0}"
+            },
+            {
+              "equation_name": "Dalton's law of partial pressures - total vapour pressure",
+              "latex": "p_{total} = p_1 + p_2",
+              "note": "Equation (1.14) in the text."
+            },
+            {
+              "equation_name": "Total vapour pressure in terms of mole fraction of one component",
+              "latex": "p_{total} = p_1^{0} + (p_2^{0} - p_1^{0})\\,x_2",
+              "note": "Equation (1.16)/(2.16) in the text; derived by substituting Raoult's law expressions into Dalton's law and using x1 + x2 = 1."
+            },
+            {
+              "equation_name": "Mole fraction of a component in vapour phase (Dalton's law)",
+              "latex": "y_i = \\dfrac{p_i}{p_{total}}"
+            }
+          ]
+        },
+        {
+          "topic": "Raoult's law as a special case of Henry's law",
+          "equations": [
+            {
+              "equation_name": "Raoult's law for a volatile solute (general statement)",
+              "latex": "p_i = x_i p_i^{0}",
+              "note": "For a gas dissolved in liquid, Henry's law (p = KH x) becomes a special case of Raoult's law when KH = p_i^0."
+            }
+          ]
+        },
+        {
+          "topic": "Vapour pressure of solutions of solids in liquids",
+          "equations": [
+            {
+              "equation_name": "Raoult's law for a solution of non-volatile solute in a volatile solvent",
+              "latex": "p_1 = x_1 p_1^{0}",
+              "note": "Equation (1.20); only the solvent (1) contributes to the vapour pressure since the solute (2) is non-volatile."
+            }
+          ]
+        },
+        {
+          "topic": "Ideal solutions",
+          "equations": [
+            {
+              "equation_name": "Conditions for an ideal solution",
+              "latex": "\\Delta_{mix}H = 0, \\qquad \\Delta_{mix}V = 0",
+              "note": "Equation (1.21): no enthalpy change and no volume change on mixing the pure components."
+            }
+          ]
+        },
+        {
+          "topic": "Colligative properties - relative lowering of vapour pressure",
+          "equations": [
+            {
+              "equation_name": "Relative lowering of vapour pressure equals mole fraction of solute",
+              "latex": "\\dfrac{p_1^{0} - p_1}{p_1^{0}} = x_2",
+              "variables": [
+                {
+                  "symbol": "p_1^{0}",
+                  "meaning": "vapour pressure of pure solvent"
+                },
+                {
+                  "symbol": "p_1",
+                  "meaning": "vapour pressure of the solution"
+                },
+                {
+                  "symbol": "x_2",
+                  "meaning": "mole fraction of solute"
+                }
+              ]
+            },
+            {
+              "equation_name": "Relative lowering of vapour pressure in terms of moles",
+              "latex": "\\dfrac{p_1^{0}-p_1}{p_1^{0}} = \\dfrac{n_2}{n_1+n_2}"
+            },
+            {
+              "equation_name": "Relative lowering of vapour pressure for dilute solution (n2 ≪ n1)",
+              "latex": "\\dfrac{p_1^{0}-p_1}{p_1^{0}} = \\dfrac{n_2}{n_1}",
+              "note": "Equation (1.28); further expanded as (p1°−p1)/p1° = (w2 M1)/(M2 w1), allowing calculation of solute molar mass M2."
+            }
+          ]
+        },
+        {
+          "topic": "Colligative properties - elevation of boiling point",
+          "equations": [
+            {
+              "equation_name": "Elevation of boiling point proportional to molality",
+              "latex": "\\Delta T_b = K_b\\, m",
+              "variables": [
+                {
+                  "symbol": "\\Delta T_b",
+                  "meaning": "elevation in boiling point (Tb − Tb°)"
+                },
+                {
+                  "symbol": "K_b",
+                  "meaning": "molal boiling point elevation constant (ebullioscopic constant)"
+                },
+                {
+                  "symbol": "m",
+                  "meaning": "molality of the solution"
+                }
+              ],
+              "note": "Equation (1.30)."
+            },
+            {
+              "equation_name": "Molar mass of solute from boiling point elevation",
+              "latex": "M_2 = \\dfrac{K_b \\times w_2 \\times 1000}{\\Delta T_b \\times w_1}",
+              "variables": [
+                {
+                  "symbol": "w_2",
+                  "meaning": "mass of solute (g)"
+                },
+                {
+                  "symbol": "w_1",
+                  "meaning": "mass of solvent (g)"
+                },
+                {
+                  "symbol": "M_2",
+                  "meaning": "molar mass of solute"
+                }
+              ],
+              "note": "Equation (1.33)."
+            }
+          ]
+        },
+        {
+          "topic": "Colligative properties - depression of freezing point",
+          "equations": [
+            {
+              "equation_name": "Depression of freezing point proportional to molality",
+              "latex": "\\Delta T_f = K_f\\, m",
+              "variables": [
+                {
+                  "symbol": "\\Delta T_f",
+                  "meaning": "depression in freezing point (Tf° − Tf)"
+                },
+                {
+                  "symbol": "K_f",
+                  "meaning": "molal freezing point depression constant (cryoscopic constant)"
+                }
+              ],
+              "note": "Equation (1.34)."
+            },
+            {
+              "equation_name": "Molar mass of solute from freezing point depression",
+              "latex": "M_2 = \\dfrac{K_f \\times w_2 \\times 1000}{\\Delta T_f \\times w_1}",
+              "note": "Equation (1.36)."
+            },
+            {
+              "equation_name": "Relation of Kb and Kf to thermodynamic quantities of the solvent",
+              "latex": "K_b = \\dfrac{RM_1T_b^2}{1000\\,\\Delta_{vap}H} \\qquad K_f = \\dfrac{RM_1T_f^2}{1000\\,\\Delta_{fus}H}",
+              "variables": [
+                {
+                  "symbol": "R",
+                  "meaning": "gas constant"
+                },
+                {
+                  "symbol": "M_1",
+                  "meaning": "molar mass of solvent"
+                },
+                {
+                  "symbol": "T_b, T_f",
+                  "meaning": "boiling point and freezing point of pure solvent (K)"
+                },
+                {
+                  "symbol": "\\Delta_{vap}H, \\Delta_{fus}H",
+                  "meaning": "enthalpy of vaporisation and fusion of the solvent"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Colligative properties - osmotic pressure",
+          "equations": [
+            {
+              "equation_name": "Osmotic pressure proportional to molarity",
+              "latex": "\\Pi = CRT",
+              "variables": [
+                {
+                  "symbol": "\\Pi",
+                  "meaning": "osmotic pressure"
+                },
+                {
+                  "symbol": "C",
+                  "meaning": "molar concentration of solution"
+                },
+                {
+                  "symbol": "R",
+                  "meaning": "gas constant"
+                },
+                {
+                  "symbol": "T",
+                  "meaning": "absolute temperature"
+                }
+              ],
+              "note": "Equation (1.39)."
+            },
+            {
+              "equation_name": "Osmotic pressure in terms of moles and volume",
+              "latex": "\\Pi = \\dfrac{n_2}{V}RT",
+              "note": "Equation (1.40)."
+            },
+            {
+              "equation_name": "Osmotic pressure in terms of mass and molar mass of solute",
+              "latex": "\\Pi V = \\dfrac{w_2}{M_2}RT",
+              "note": "Equation (1.41)."
+            },
+            {
+              "equation_name": "Molar mass of solute from osmotic pressure",
+              "latex": "M_2 = \\dfrac{w_2 RT}{\\Pi V}",
+              "note": "Equation (1.42)."
+            }
+          ]
+        },
+        {
+          "topic": "Van't Hoff factor and abnormal molar mass",
+          "equations": [
+            {
+              "equation_name": "Van't Hoff factor - definition (molar mass form)",
+              "latex": "i = \\dfrac{\\text{Normal molar mass}}{\\text{Abnormal (observed) molar mass}}"
+            },
+            {
+              "equation_name": "Van't Hoff factor - definition (colligative property form)",
+              "latex": "i = \\dfrac{\\text{Observed colligative property}}{\\text{Calculated colligative property}}"
+            },
+            {
+              "equation_name": "Van't Hoff factor - definition (particle number form)",
+              "latex": "i = \\dfrac{\\text{Total number of moles of particles after association/dissociation}}{\\text{Number of moles of particles before association/dissociation}}"
+            },
+            {
+              "equation_name": "Association equilibrium of acetic acid in benzene",
+              "latex": "2\\ce{CH3COOH} \\rightleftharpoons \\ce{(CH3COOH)2}"
+            },
+            {
+              "equation_name": "Association equilibrium of benzoic acid in benzene",
+              "latex": "2\\ce{C6H5COOH} \\rightleftharpoons \\ce{(C6H5COOH)2}"
+            },
+            {
+              "equation_name": "Modified relative lowering of vapour pressure with van't Hoff factor",
+              "latex": "\\dfrac{p_1^{0}-p_1}{p_1^{0}} = i\\,x_2"
+            },
+            {
+              "equation_name": "Modified elevation of boiling point with van't Hoff factor",
+              "latex": "\\Delta T_b = i K_b m"
+            },
+            {
+              "equation_name": "Modified depression of freezing point with van't Hoff factor",
+              "latex": "\\Delta T_f = i K_f m"
+            },
+            {
+              "equation_name": "Modified osmotic pressure with van't Hoff factor",
+              "latex": "\\Pi = \\dfrac{i n_2 RT}{V}"
+            },
+            {
+              "equation_name": "Van't Hoff factor from observed vs calculated freezing point depression (worked example)",
+              "latex": "i = \\dfrac{\\text{Observed freezing point depression}}{\\text{Calculated freezing point depression}} = \\dfrac{0.0205\\ K}{0.0197\\ K} = 1.041"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 2,
+      "chapter_title": "Electrochemistry",
+      "part": "Part I",
+      "topics": [
+        {
+          "topic": "Daniell cell - representative galvanic cell reaction",
+          "equations": [
+            {
+              "equation_name": "Overall Daniell cell reaction",
+              "latex": "\\ce{Zn}(s) + \\ce{Cu^2+}(aq) \\rightarrow \\ce{Zn^2+}(aq) + \\ce{Cu}(s)",
+              "note": "Equation (2.1). Cell potential = 1.1 V at unit concentration."
+            },
+            {
+              "equation_name": "Reduction half reaction (cathode)",
+              "latex": "\\ce{Cu^2+}(aq) + 2e^{-} \\rightarrow \\ce{Cu}(s)",
+              "note": "Equation (2.2)."
+            },
+            {
+              "equation_name": "Oxidation half reaction (anode)",
+              "latex": "\\ce{Zn}(s) \\rightarrow \\ce{Zn^2+}(aq) + 2e^{-}",
+              "note": "Equation (2.3)."
+            }
+          ]
+        },
+        {
+          "topic": "Standard electrode potential",
+          "equations": [
+            {
+              "equation_name": "Standard cell potential from electrode potentials",
+              "latex": "E^{\\circ}_{cell} = E^{\\circ}_{cathode} - E^{\\circ}_{anode}",
+              "variables": [
+                {
+                  "symbol": "E^{\\circ}_{cell}",
+                  "meaning": "standard cell potential/emf"
+                },
+                {
+                  "symbol": "E^{\\circ}_{cathode}",
+                  "meaning": "standard reduction potential of the cathode"
+                },
+                {
+                  "symbol": "E^{\\circ}_{anode}",
+                  "meaning": "standard reduction potential of the anode"
+                }
+              ]
+            },
+            {
+              "equation_name": "Standard hydrogen electrode reduction reaction (reference, E° = 0)",
+              "latex": "2\\ce{H+}(aq) + 2e^{-} \\rightarrow \\ce{H2}(g) \\qquad E^{\\circ} = 0\\ \\text{V}"
+            },
+            {
+              "equation_name": "Representative standard reduction potentials (selected examples)",
+              "latex": "\\ce{F2}(g) + 2e^{-} \\rightarrow 2\\ce{F-} \\qquad E^{\\circ} = 2.87\\ \\text{V}",
+              "variants": [
+                "\\ce{MnO4-} + 8\\ce{H+} + 5e^{-} \\rightarrow \\ce{Mn^2+} + 4\\ce{H2O} \\qquad E^{\\circ} = 1.51\\ \\text{V}",
+                "\\ce{Cl2}(g) + 2e^{-} \\rightarrow 2\\ce{Cl-} \\qquad E^{\\circ} = 1.36\\ \\text{V}",
+                "\\ce{Cr2O7^2-} + 14\\ce{H+} + 6e^{-} \\rightarrow 2\\ce{Cr^3+} + 7\\ce{H2O} \\qquad E^{\\circ} = 1.33\\ \\text{V}",
+                "\\ce{O2}(g) + 4\\ce{H+} + 4e^{-} \\rightarrow 2\\ce{H2O} \\qquad E^{\\circ} = 1.23\\ \\text{V}",
+                "\\ce{Ag+} + e^{-} \\rightarrow \\ce{Ag}(s) \\qquad E^{\\circ} = 0.80\\ \\text{V}",
+                "\\ce{Cu^2+} + 2e^{-} \\rightarrow \\ce{Cu}(s) \\qquad E^{\\circ} = 0.34\\ \\text{V}",
+                "\\ce{Zn^2+} + 2e^{-} \\rightarrow \\ce{Zn}(s) \\qquad E^{\\circ} = -0.76\\ \\text{V}",
+                "\\ce{Na+} + e^{-} \\rightarrow \\ce{Na}(s) \\qquad E^{\\circ} = -2.71\\ \\text{V}",
+                "\\ce{Li+} + e^{-} \\rightarrow \\ce{Li}(s) \\qquad E^{\\circ} = -3.05\\ \\text{V}"
+              ],
+              "note": "From the standard electrode potential table (Table 2.1). A negative E° indicates a stronger reducing agent than the H+/H2 couple; a positive E° indicates a weaker one."
+            }
+          ]
+        },
+        {
+          "topic": "Nernst equation",
+          "equations": [
+            {
+              "equation_name": "Nernst equation - general form (natural log)",
+              "latex": "E_{cell} = E^{\\circ}_{cell} - \\dfrac{RT}{nF}\\ln Q",
+              "variables": [
+                {
+                  "symbol": "Q",
+                  "meaning": "reaction quotient"
+                }
+              ],
+              "note": "Equation (2.11)."
+            },
+            {
+              "equation_name": "Nernst equation at 298 K (base-10 log form)",
+              "latex": "E_{cell} = E^{\\circ}_{cell} - \\dfrac{0.059}{n}\\log_{10} Q",
+              "note": "Obtained by converting to base 10 and substituting R, F, T=298K."
+            },
+            {
+              "equation_name": "Nernst equation applied to Daniell cell",
+              "latex": "E_{cell} = E^{\\circ}_{cell} - \\dfrac{0.059}{2}\\log_{10}\\dfrac{[\\ce{Zn^2+}]}{[\\ce{Cu^2+}]}"
+            },
+            {
+              "equation_name": "Nernst equation - general electrochemical reaction",
+              "latex": "a\\ce{A} + b\\ce{B} \\rightarrow c\\ce{C} + d\\ce{D}, \\qquad E_{cell} = E^{\\circ}_{cell} - \\dfrac{RT}{nF}\\ln\\dfrac{[\\ce{C}]^{c}[\\ce{D}]^{d}}{[\\ce{A}]^{a}[\\ce{B}]^{b}}"
+            },
+            {
+              "equation_name": "Nernst equation worked example - Mg/Ag cell",
+              "latex": "E_{cell} = E^{\\circ}_{cell} - \\dfrac{0.059}{2}\\log_{10}\\dfrac{[\\ce{Mg^2+}]}{[\\ce{Ag+}]^2}",
+              "note": "Worked Example 2.1: Mg(s) + 2Ag+(0.0001M) → Mg2+(0.130M) + 2Ag(s), E°cell = 3.17 V, gives Ecell = 2.96 V."
+            }
+          ]
+        },
+        {
+          "topic": "Equilibrium constant from Nernst equation",
+          "equations": [
+            {
+              "equation_name": "Relation between standard cell potential and equilibrium constant",
+              "latex": "E^{\\circ}_{cell} = \\dfrac{0.059}{n}\\log_{10} K_C",
+              "note": "Equation (2.14); derived by setting Ecell = 0 at equilibrium in the Nernst equation."
+            }
+          ]
+        },
+        {
+          "topic": "Electrochemical cell and Gibbs energy of reaction",
+          "equations": [
+            {
+              "equation_name": "Gibbs energy of cell reaction",
+              "latex": "\\Delta_r G = -nFE_{cell}",
+              "note": "Equation (2.15)."
+            },
+            {
+              "equation_name": "Standard Gibbs energy of cell reaction",
+              "latex": "\\Delta_r G^{\\circ} = -nFE^{\\circ}_{cell}"
+            },
+            {
+              "equation_name": "Relation between standard Gibbs energy and equilibrium constant",
+              "latex": "\\Delta_r G^{\\circ} = -RT\\ln K"
+            }
+          ]
+        },
+        {
+          "topic": "Resistance, resistivity, conductance, conductivity",
+          "equations": [
+            {
+              "equation_name": "Resistance in terms of resistivity",
+              "latex": "R = \\rho\\dfrac{l}{A}",
+              "variables": [
+                {
+                  "symbol": "R",
+                  "meaning": "resistance (ohm)"
+                },
+                {
+                  "symbol": "\\rho",
+                  "meaning": "resistivity/specific resistance (ohm m)"
+                },
+                {
+                  "symbol": "l",
+                  "meaning": "length of the conductor"
+                },
+                {
+                  "symbol": "A",
+                  "meaning": "area of cross-section"
+                }
+              ]
+            },
+            {
+              "equation_name": "Conductance",
+              "latex": "G = \\dfrac{1}{R}",
+              "variables": [
+                {
+                  "symbol": "G",
+                  "meaning": "conductance, unit siemens (S)"
+                }
+              ]
+            },
+            {
+              "equation_name": "Conductivity",
+              "latex": "\\kappa = \\dfrac{1}{\\rho}",
+              "variables": [
+                {
+                  "symbol": "\\kappa",
+                  "meaning": "conductivity/specific conductance"
+                }
+              ]
+            },
+            {
+              "equation_name": "Cell constant",
+              "latex": "G^{*} = \\kappa \\times R",
+              "variables": [
+                {
+                  "symbol": "G^{*}",
+                  "meaning": "cell constant (unit: length⁻¹)"
+                }
+              ],
+              "note": "Determined experimentally using a solution of known conductivity (e.g., standard KCl solution); worked Example 2.4: G* = 1.29 S/m × 100 Ω = 129 m⁻¹."
+            },
+            {
+              "equation_name": "Conductivity of an unknown solution using known cell constant",
+              "latex": "\\kappa = \\dfrac{G^{*}}{R}"
+            }
+          ]
+        },
+        {
+          "topic": "Molar conductivity",
+          "equations": [
+            {
+              "equation_name": "Molar conductivity - definition",
+              "latex": "\\Lambda_m = \\dfrac{\\kappa}{c}",
+              "variables": [
+                {
+                  "symbol": "\\Lambda_m",
+                  "meaning": "molar conductivity"
+                },
+                {
+                  "symbol": "c",
+                  "meaning": "molar concentration"
+                }
+              ]
+            },
+            {
+              "equation_name": "Molar conductivity in terms of concentration in mol/L (unit conversion form)",
+              "latex": "\\Lambda_m = \\dfrac{\\kappa \\times 1000\\ \\text{cm}^3\\text{L}^{-1}}{\\text{molarity (mol L}^{-1}\\text{)}}",
+              "note": "Used when κ is in S cm⁻¹, giving Λm in S cm² mol⁻¹."
+            }
+          ]
+        },
+        {
+          "topic": "Variation of molar conductivity with concentration",
+          "equations": [
+            {
+              "equation_name": "Kohlrausch's empirical relation for strong electrolytes",
+              "latex": "\\Lambda_m = \\Lambda_m^{\\circ} - A\\sqrt{c}",
+              "variables": [
+                {
+                  "symbol": "\\Lambda_m^{\\circ}",
+                  "meaning": "limiting molar conductivity (at infinite dilution)"
+                },
+                {
+                  "symbol": "A",
+                  "meaning": "constant depending on the type of electrolyte"
+                }
+              ]
+            },
+            {
+              "equation_name": "Kohlrausch's law of independent migration of ions (general electrolyte)",
+              "latex": "\\Lambda_m^{\\circ} = \\nu_{+}\\lambda^{\\circ}_{+} + \\nu_{-}\\lambda^{\\circ}_{-}",
+              "variables": [
+                {
+                  "symbol": "\\nu_+, \\nu_-",
+                  "meaning": "number of cations and anions produced per formula unit on dissociation"
+                },
+                {
+                  "symbol": "\\lambda^{\\circ}_+, \\lambda^{\\circ}_-",
+                  "meaning": "limiting molar conductivity of the cation and anion"
+                }
+              ],
+              "note": "Equation (2.25)."
+            },
+            {
+              "equation_name": "Limiting molar conductivity of NaCl from constituent ions",
+              "latex": "\\Lambda_m^{\\circ}(\\ce{NaCl}) = \\lambda^{\\circ}(\\ce{Na+}) + \\lambda^{\\circ}(\\ce{Cl-})"
+            },
+            {
+              "equation_name": "Application - determining Λ°m of a weak electrolyte (e.g. acetic acid) from strong electrolyte data",
+              "latex": "\\Lambda_m^{\\circ}(\\ce{CH3COOH}) = \\Lambda_m^{\\circ}(\\ce{HCl}) + \\Lambda_m^{\\circ}(\\ce{CH3COONa}) - \\Lambda_m^{\\circ}(\\ce{NaCl})",
+              "note": "Worked Example 2.8: uses Kohlrausch's law since weak electrolyte's Λ°m cannot be found by direct extrapolation."
+            }
+          ]
+        },
+        {
+          "topic": "Degree of dissociation and dissociation constant of weak electrolyte from conductivity",
+          "equations": [
+            {
+              "equation_name": "Degree of dissociation from molar conductivity",
+              "latex": "\\alpha = \\dfrac{\\Lambda_m}{\\Lambda_m^{\\circ}}"
+            },
+            {
+              "equation_name": "Ostwald's dilution law - dissociation constant of weak electrolyte from conductance data",
+              "latex": "K_a = \\dfrac{c\\alpha^2}{1-\\alpha} = \\dfrac{c\\Lambda_m^2}{\\Lambda_m^{\\circ}(\\Lambda_m^{\\circ}-\\Lambda_m)}"
+            }
+          ]
+        },
+        {
+          "topic": "Faraday's laws of electrolysis",
+          "equations": [
+            {
+              "equation_name": "Charge passed",
+              "latex": "Q = It",
+              "variables": [
+                {
+                  "symbol": "Q",
+                  "meaning": "charge in coulombs"
+                },
+                {
+                  "symbol": "I",
+                  "meaning": "current in amperes"
+                },
+                {
+                  "symbol": "t",
+                  "meaning": "time in seconds"
+                }
+              ]
+            },
+            {
+              "equation_name": "Faraday constant - charge on one mole of electrons",
+              "latex": "F = N_A \\times e = 6.02\\times10^{23}\\ \\text{mol}^{-1} \\times 1.6021\\times10^{-19}\\ \\text{C} \\approx 96{,}500\\ \\text{C mol}^{-1}",
+              "variables": [
+                {
+                  "symbol": "N_A",
+                  "meaning": "Avogadro constant"
+                },
+                {
+                  "symbol": "e",
+                  "meaning": "charge on one electron"
+                }
+              ]
+            },
+            {
+              "equation_name": "Mass of substance deposited via electrolysis (worked example)",
+              "latex": "\\text{mass deposited} = \\dfrac{M \\times Q}{nF}",
+              "variables": [
+                {
+                  "symbol": "M",
+                  "meaning": "molar mass of the substance"
+                },
+                {
+                  "symbol": "n",
+                  "meaning": "number of electrons transferred per ion"
+                }
+              ],
+              "note": "Example 2.10: Cu2+(aq) + 2e⁻ → Cu(s); mass = (63 g/mol × 900 C)/(2 × 96487 C/mol) = 0.294 g."
+            }
+          ]
+        },
+        {
+          "topic": "Electrolysis of aqueous NaCl - competing electrode reactions",
+          "equations": [
+            {
+              "equation_name": "Cathode reaction (preferred, water reduction over Na+ reduction)",
+              "latex": "\\ce{H2O}(l) + e^{-} \\rightarrow \\tfrac{1}{2}\\ce{H2}(g) + \\ce{OH-}(aq)"
+            },
+            {
+              "equation_name": "Anode reaction (Cl- oxidised in preference to water due to overpotential of O2)",
+              "latex": "\\ce{Cl-}(aq) \\rightarrow \\tfrac{1}{2}\\ce{Cl2}(g) + e^{-}"
+            },
+            {
+              "equation_name": "Net reaction for electrolysis of aqueous NaCl",
+              "latex": "\\ce{NaCl}(aq) + \\ce{H2O}(l) \\rightarrow \\ce{Na+}(aq) + \\ce{OH-}(aq) + \\tfrac{1}{2}\\ce{H2}(g) + \\tfrac{1}{2}\\ce{Cl2}(g)"
+            },
+            {
+              "equation_name": "Electrolysis of concentrated sulphuric acid - competing anode reaction",
+              "latex": "2\\ce{SO4^2-}(aq) \\rightarrow \\ce{S2O8^2-}(aq) + 2e^{-} \\qquad E^{\\circ}=1.96\\ \\text{V}",
+              "note": "Equation (2.39); preferred at higher H2SO4 concentrations over water oxidation."
+            }
+          ]
+        },
+        {
+          "topic": "Primary batteries",
+          "equations": [
+            {
+              "equation_name": "Dry cell (Leclanché cell) - anode reaction",
+              "latex": "\\ce{Zn}(s) \\rightarrow \\ce{Zn^2+} + 2e^{-}"
+            },
+            {
+              "equation_name": "Dry cell - cathode reaction",
+              "latex": "\\ce{MnO2} + \\ce{NH4+} + e^{-} \\rightarrow \\ce{MnO(OH)} + \\ce{NH3}",
+              "note": "Cell potential ≈ 1.5 V; NH3 forms complex [Zn(NH3)4]2+ with Zn2+."
+            },
+            {
+              "equation_name": "Mercury cell - anode reaction",
+              "latex": "\\ce{Zn(Hg)} + 2\\ce{OH-} \\rightarrow \\ce{ZnO}(s) + \\ce{H2O} + 2e^{-}"
+            },
+            {
+              "equation_name": "Mercury cell - cathode reaction",
+              "latex": "\\ce{HgO} + \\ce{H2O} + 2e^{-} \\rightarrow \\ce{Hg}(l) + 2\\ce{OH-}"
+            },
+            {
+              "equation_name": "Mercury cell - overall reaction",
+              "latex": "\\ce{Zn(Hg)} + \\ce{HgO}(s) \\rightarrow \\ce{ZnO}(s) + \\ce{Hg}(l)",
+              "note": "Cell potential ≈ 1.35 V, remains constant through its life since no ion concentration changes."
+            }
+          ]
+        },
+        {
+          "topic": "Secondary batteries",
+          "equations": [
+            {
+              "equation_name": "Lead storage battery - anode reaction (discharge)",
+              "latex": "\\ce{Pb}(s) + \\ce{SO4^2-}(aq) \\rightarrow \\ce{PbSO4}(s) + 2e^{-}"
+            },
+            {
+              "equation_name": "Lead storage battery - cathode reaction (discharge)",
+              "latex": "\\ce{PbO2}(s) + \\ce{SO4^2-}(aq) + 4\\ce{H+}(aq) + 2e^{-} \\rightarrow \\ce{PbSO4}(s) + 2\\ce{H2O}(l)"
+            },
+            {
+              "equation_name": "Lead storage battery - overall discharge reaction",
+              "latex": "\\ce{Pb}(s) + \\ce{PbO2}(s) + 2\\ce{H2SO4}(aq) \\rightarrow 2\\ce{PbSO4}(s) + 2\\ce{H2O}(l)",
+              "note": "On charging, the reaction is reversed: PbSO4 on each electrode converts back to Pb and PbO2 respectively."
+            },
+            {
+              "equation_name": "Nickel-cadmium cell - overall discharge reaction",
+              "latex": "\\ce{Cd}(s) + 2\\ce{Ni(OH)3}(s) \\rightarrow \\ce{CdO}(s) + 2\\ce{Ni(OH)2}(s) + \\ce{H2O}(l)"
+            }
+          ]
+        },
+        {
+          "topic": "Fuel cells",
+          "equations": [
+            {
+              "equation_name": "H2-O2 fuel cell - cathode reaction",
+              "latex": "\\ce{O2}(g) + 2\\ce{H2O}(l) + 4e^{-} \\rightarrow 4\\ce{OH-}(aq)"
+            },
+            {
+              "equation_name": "H2-O2 fuel cell - anode reaction",
+              "latex": "2\\ce{H2}(g) + 4\\ce{OH-}(aq) \\rightarrow 4\\ce{H2O}(l) + 4e^{-}"
+            },
+            {
+              "equation_name": "H2-O2 fuel cell - overall reaction",
+              "latex": "2\\ce{H2}(g) + \\ce{O2}(g) \\rightarrow 2\\ce{H2O}(l)",
+              "note": "Used in the Apollo space programme; ~70% efficient vs ~40% for thermal plants."
+            }
+          ]
+        },
+        {
+          "topic": "Corrosion of iron (rusting)",
+          "equations": [
+            {
+              "equation_name": "Anodic oxidation of iron",
+              "latex": "\\ce{Fe}(s) \\rightarrow \\ce{Fe^2+}(aq) + 2e^{-} \\qquad E^{\\circ}(\\ce{Fe^2+}/\\ce{Fe}) = -0.44\\ \\text{V}"
+            },
+            {
+              "equation_name": "Cathodic reduction of oxygen",
+              "latex": "\\ce{O2}(g) + 4\\ce{H+}(aq) + 4e^{-} \\rightarrow 2\\ce{H2O}(l)"
+            },
+            {
+              "equation_name": "Overall electrochemical reaction of rusting",
+              "latex": "2\\ce{Fe}(s) + \\ce{O2}(g) + 4\\ce{H+}(aq) \\rightarrow 2\\ce{Fe^2+}(aq) + 2\\ce{H2O}(l) \\qquad E^{\\circ}_{cell} = 1.67\\ \\text{V}"
+            },
+            {
+              "equation_name": "Further oxidation of Fe2+ to rust",
+              "latex": "2\\ce{Fe^2+}(aq) + 2\\ce{H2O}(l) + \\tfrac{1}{2}\\ce{O2}(g) \\rightarrow \\ce{Fe2O3}(s) + 4\\ce{H+}(aq)",
+              "note": "Ferrous ions are further oxidised by atmospheric oxygen to give hydrated ferric oxide, Fe2O3.xH2O (rust)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 3,
+      "chapter_title": "Chemical Kinetics",
+      "part": "Part I",
+      "topics": [
+        {
+          "topic": "Rate of a chemical reaction",
+          "equations": [
+            {
+              "equation_name": "Average rate of reaction R → P",
+              "latex": "r_{av} = -\\dfrac{\\Delta[R]}{\\Delta t} = \\dfrac{\\Delta[P]}{\\Delta t}",
+              "variables": [
+                {
+                  "symbol": "\\Delta[R]",
+                  "meaning": "change in concentration of reactant R"
+                },
+                {
+                  "symbol": "\\Delta[P]",
+                  "meaning": "change in concentration of product P"
+                },
+                {
+                  "symbol": "\\Delta t",
+                  "meaning": "time interval"
+                }
+              ],
+              "note": "Equations (3.1)/(3.2). Δ[R] is negative (decreasing), so multiplied by −1 to keep rate positive."
+            },
+            {
+              "equation_name": "Instantaneous rate of reaction",
+              "latex": "r_{inst} = -\\dfrac{d[R]}{dt} = \\dfrac{d[P]}{dt}",
+              "note": "Equation (3.3); obtained as Δt → 0."
+            },
+            {
+              "equation_name": "Rate expression for general reaction with unequal stoichiometric coefficients",
+              "latex": "a\\ce{A} + b\\ce{B} \\rightarrow c\\ce{C} + d\\ce{D}, \\qquad \\text{Rate} = -\\dfrac{1}{a}\\dfrac{d[A]}{dt} = -\\dfrac{1}{b}\\dfrac{d[B]}{dt} = \\dfrac{1}{c}\\dfrac{d[C]}{dt} = \\dfrac{1}{d}\\dfrac{d[D]}{dt}"
+            }
+          ]
+        },
+        {
+          "topic": "Rate law, rate constant and order of reaction",
+          "equations": [
+            {
+              "equation_name": "General rate law",
+              "latex": "\\text{Rate} = k[A]^x[B]^y",
+              "variables": [
+                {
+                  "symbol": "k",
+                  "meaning": "rate constant"
+                },
+                {
+                  "symbol": "x, y",
+                  "meaning": "orders of reaction with respect to A and B; may or may not equal stoichiometric coefficients"
+                }
+              ],
+              "note": "Equation (3.4); overall order = x + y."
+            },
+            {
+              "equation_name": "Experimentally determined rate law for 2NO(g) + O2(g) → 2NO2(g)",
+              "latex": "\\text{Rate} = k[\\ce{NO}]^2[\\ce{O2}]"
+            },
+            {
+              "equation_name": "Experimentally determined rate law examples with fractional/zero orders",
+              "latex": "\\ce{CHCl3} + \\ce{Cl2} \\rightarrow \\ce{CCl4} + \\ce{HCl}, \\qquad \\text{Rate} = k[\\ce{CHCl3}][\\ce{Cl2}]^{1/2}",
+              "variants": [
+                "\\ce{CH3COOC2H5} + \\ce{H2O} \\rightarrow \\ce{CH3COOH} + \\ce{C2H5OH}, \\qquad \\text{Rate} = k[\\ce{CH3COOC2H5}]^1[\\ce{H2O}]^0"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Integrated rate law - zero order reaction",
+          "equations": [
+            {
+              "equation_name": "Zero order integrated rate law",
+              "latex": "[R] = -kt + [R]_0",
+              "variables": [
+                {
+                  "symbol": "[R]_0",
+                  "meaning": "initial concentration of R at t=0"
+                },
+                {
+                  "symbol": "[R]",
+                  "meaning": "concentration at time t"
+                }
+              ],
+              "note": "Equation (3.6); straight line plot of [R] vs t has slope −k, intercept [R]0."
+            },
+            {
+              "equation_name": "Zero order rate constant",
+              "latex": "k = \\dfrac{[R]_0 - [R]}{t}",
+              "note": "Equation (3.7)."
+            },
+            {
+              "equation_name": "Zero order half-life",
+              "latex": "t_{1/2} = \\dfrac{[R]_0}{2k}"
+            }
+          ]
+        },
+        {
+          "topic": "Integrated rate law - first order reaction",
+          "equations": [
+            {
+              "equation_name": "First order integrated rate law (exponential form)",
+              "latex": "[R] = [R]_0 e^{-kt}"
+            },
+            {
+              "equation_name": "First order integrated rate law (natural log form)",
+              "latex": "\\ln\\dfrac{[R]_0}{[R]} = kt",
+              "note": "Equation (3.9)/(3.10)."
+            },
+            {
+              "equation_name": "First order rate constant in terms of concentrations at two time points",
+              "latex": "\\ln\\dfrac{[R]_1}{[R]_2} = k(t_2-t_1)",
+              "note": "Equations (3.11)-(3.13); [R]1, [R]2 concentrations at times t1, t2."
+            },
+            {
+              "equation_name": "First order rate constant (base-10 log form)",
+              "latex": "k = \\dfrac{2.303}{t}\\log_{10}\\dfrac{[R]_0}{[R]}"
+            },
+            {
+              "equation_name": "First order gas-phase reaction A(g) → B(g) + C(g) - rate constant from total pressure",
+              "latex": "k = \\dfrac{2.303}{t}\\log\\dfrac{p_i}{p_A}",
+              "variables": [
+                {
+                  "symbol": "p_i",
+                  "meaning": "initial pressure of A"
+                },
+                {
+                  "symbol": "p_A",
+                  "meaning": "partial pressure of A at time t, = 2p_i − p_t"
+                }
+              ],
+              "note": "Equation (3.16); derived from pt = pA+pB+pC using stoichiometry."
+            },
+            {
+              "equation_name": "First order half-life",
+              "latex": "t_{1/2} = \\dfrac{0.693}{k}",
+              "note": "Independent of initial concentration, unlike zero order."
+            },
+            {
+              "equation_name": "Time for 99.9% completion of a first order reaction (worked relation)",
+              "latex": "t_{99.9\\%} = \\dfrac{6.909}{k} = 10\\, t_{1/2}"
+            }
+          ]
+        },
+        {
+          "topic": "Pseudo first order reactions",
+          "equations": [
+            {
+              "equation_name": "Hydrolysis of ethyl acetate - true second order rate law reduces to pseudo first order",
+              "latex": "\\ce{CH3COOC2H5} + \\ce{H2O} \\xrightarrow{\\ce{H+}} \\ce{CH3COOH} + \\ce{C2H5OH}",
+              "note": "Rate law is truly second order but since water is in large excess, [H2O] stays effectively constant and the reaction follows first-order kinetics."
+            }
+          ]
+        },
+        {
+          "topic": "Temperature dependence of rate - Arrhenius equation",
+          "equations": [
+            {
+              "equation_name": "Arrhenius equation",
+              "latex": "k = A\\, e^{-E_a/RT}",
+              "variables": [
+                {
+                  "symbol": "k",
+                  "meaning": "rate constant"
+                },
+                {
+                  "symbol": "A",
+                  "meaning": "Arrhenius/frequency/pre-exponential factor"
+                },
+                {
+                  "symbol": "E_a",
+                  "meaning": "activation energy (J mol⁻¹)"
+                },
+                {
+                  "symbol": "R",
+                  "meaning": "gas constant"
+                },
+                {
+                  "symbol": "T",
+                  "meaning": "absolute temperature"
+                }
+              ],
+              "note": "Equation (3.18)."
+            },
+            {
+              "equation_name": "Linearised (logarithmic) form of Arrhenius equation",
+              "latex": "\\ln k = \\ln A - \\dfrac{E_a}{RT}",
+              "note": "Equation (3.19); a plot of ln k vs 1/T gives a straight line with slope −Ea/R and intercept ln A."
+            },
+            {
+              "equation_name": "Two-temperature form of Arrhenius equation",
+              "latex": "\\log\\dfrac{k_2}{k_1} = \\dfrac{E_a}{2.303R}\\left(\\dfrac{1}{T_1}-\\dfrac{1}{T_2}\\right)",
+              "variables": [
+                {
+                  "symbol": "k_1, k_2",
+                  "meaning": "rate constants at temperatures T_1 and T_2 respectively"
+                }
+              ],
+              "note": "Equations (3.20)-(3.21) combined."
+            }
+          ]
+        },
+        {
+          "topic": "Collision theory",
+          "equations": [
+            {
+              "equation_name": "Rate of a bimolecular elementary reaction from collision theory",
+              "latex": "\\text{Rate} = Z_{AB}\\, e^{-E_a/RT}",
+              "variables": [
+                {
+                  "symbol": "Z_{AB}",
+                  "meaning": "collision frequency of reactants A and B"
+                },
+                {
+                  "symbol": "e^{-E_a/RT}",
+                  "meaning": "fraction of molecules with energy ≥ Ea"
+                }
+              ],
+              "note": "Equation (3.23); for A + B → Products."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 4,
+      "chapter_title": "The d- and f-Block Elements",
+      "part": "Part I",
+      "topics": [
+        {
+          "topic": "Magnetic properties",
+          "equations": [
+            {
+              "equation_name": "Spin-only formula for magnetic moment",
+              "latex": "\\mu = \\sqrt{n(n+2)}\\ \\text{BM}",
+              "variables": [
+                {
+                  "symbol": "\\mu",
+                  "meaning": "magnetic moment in Bohr Magnetons (BM)"
+                },
+                {
+                  "symbol": "n",
+                  "meaning": "number of unpaired electrons"
+                }
+              ],
+              "note": "A single unpaired electron gives μ = 1.73 BM. Worked Example 4.8: Mn2+ (d5, 5 unpaired e−) gives μ = √(5×7) = 5.92 BM."
+            }
+          ]
+        },
+        {
+          "topic": "Comparative oxidising power of highest oxidation state oxo-species",
+          "equations": [
+            {
+              "equation_name": "Increasing oxidising power order (Example 4.5)",
+              "latex": "\\ce{VO2+} < \\ce{Cr2O7^2-} < \\ce{MnO4-}",
+              "note": "Attributed to increasing stability of the lower oxidation state species to which each is reduced."
+            }
+          ]
+        },
+        {
+          "topic": "Potassium dichromate - preparation",
+          "equations": [
+            {
+              "equation_name": "Acidification of sodium chromate to sodium dichromate",
+              "latex": "2\\ce{Na2CrO4} + 2\\ce{H+} \\rightarrow \\ce{Na2Cr2O7} + 2\\ce{Na+} + \\ce{H2O}"
+            },
+            {
+              "equation_name": "Conversion of sodium dichromate to potassium dichromate",
+              "latex": "\\ce{Na2Cr2O7} + 2\\ce{KCl} \\rightarrow \\ce{K2Cr2O7} + 2\\ce{NaCl}"
+            },
+            {
+              "equation_name": "Chromate-dichromate equilibrium (pH dependent)",
+              "latex": "2\\ce{CrO4^2-} + 2\\ce{H+} \\rightleftharpoons \\ce{Cr2O7^2-} + \\ce{H2O}",
+              "variants": [
+                "\\ce{Cr2O7^2-} + 2\\ce{OH-} \\rightarrow 2\\ce{CrO4^2-} + \\ce{H2O}"
+              ],
+              "note": "Chromate ion (CrO4^2-) is tetrahedral; dichromate ion (Cr2O7^2-) consists of two tetrahedra sharing a corner, Cr-O-Cr angle 126°."
+            }
+          ]
+        },
+        {
+          "topic": "Potassium dichromate - oxidising reactions",
+          "equations": [
+            {
+              "equation_name": "Reduction half-reaction of dichromate in acidic medium",
+              "latex": "\\ce{Cr2O7^2-} + 14\\ce{H+} + 6e^{-} \\rightarrow 2\\ce{Cr^3+} + 7\\ce{H2O} \\qquad E^{\\circ} = 1.33\\ \\text{V}"
+            },
+            {
+              "equation_name": "Oxidation of Fe2+ by dichromate (full ionic equation)",
+              "latex": "\\ce{Cr2O7^2-} + 14\\ce{H+} + 6\\ce{Fe^2+} \\rightarrow 2\\ce{Cr^3+} + 6\\ce{Fe^3+} + 7\\ce{H2O}"
+            }
+          ]
+        },
+        {
+          "topic": "Potassium permanganate - preparation",
+          "equations": [
+            {
+              "equation_name": "Fusion of MnO2 with KOH and an oxidant (KNO3)",
+              "latex": "2\\ce{MnO2} + 4\\ce{KOH} + \\ce{O2} \\rightarrow 2\\ce{K2MnO4} + 2\\ce{H2O}"
+            },
+            {
+              "equation_name": "Disproportionation of manganate to permanganate (acidic/neutral medium)",
+              "latex": "3\\ce{MnO4^2-} + 4\\ce{H+} \\rightarrow 2\\ce{MnO4-} + \\ce{MnO2} + 2\\ce{H2O}"
+            },
+            {
+              "equation_name": "Commercial preparation - electrolytic/chemical oxidation of manganate",
+              "latex": "2\\ce{MnO4^2-} + \\ce{Cl2} \\rightarrow 2\\ce{MnO4-} + 2\\ce{Cl-}",
+              "note": "Alternative laboratory oxidant: 2Mn2+ + 5S2O8^2- + 8H2O → 2MnO4- + 10SO4^2- + 16H+"
+            },
+            {
+              "equation_name": "Thermal decomposition of KMnO4",
+              "latex": "2\\ce{KMnO4} \\rightarrow \\ce{K2MnO4} + \\ce{MnO2} + \\ce{O2}",
+              "note": "Decomposes on heating at 513 K."
+            }
+          ]
+        },
+        {
+          "topic": "Potassium permanganate - reduction half reactions",
+          "equations": [
+            {
+              "equation_name": "Reduction of MnO4- to MnO4^2- (mild alkaline)",
+              "latex": "\\ce{MnO4-} + e^{-} \\rightarrow \\ce{MnO4^2-} \\qquad E^{\\circ} = +0.56\\ \\text{V}"
+            },
+            {
+              "equation_name": "Reduction of MnO4- to MnO2 (neutral/faintly alkaline)",
+              "latex": "\\ce{MnO4-} + 4\\ce{H+} + 3e^{-} \\rightarrow \\ce{MnO2} + 2\\ce{H2O} \\qquad E^{\\circ} = +1.69\\ \\text{V}"
+            },
+            {
+              "equation_name": "Reduction of MnO4- to Mn2+ (acidic medium)",
+              "latex": "\\ce{MnO4-} + 8\\ce{H+} + 5e^{-} \\rightarrow \\ce{Mn^2+} + 4\\ce{H2O} \\qquad E^{\\circ} = +1.52\\ \\text{V}"
+            }
+          ]
+        },
+        {
+          "topic": "Potassium permanganate - oxidising reactions in acidic solution",
+          "equations": [
+            {
+              "equation_name": "Oxidation of iodide to iodine",
+              "latex": "10\\ce{I-} + 2\\ce{MnO4-} + 16\\ce{H+} \\rightarrow 2\\ce{Mn^2+} + 8\\ce{H2O} + 5\\ce{I2}"
+            },
+            {
+              "equation_name": "Oxidation of Fe2+ to Fe3+",
+              "latex": "5\\ce{Fe^2+} + \\ce{MnO4-} + 8\\ce{H+} \\rightarrow \\ce{Mn^2+} + 4\\ce{H2O} + 5\\ce{Fe^3+}"
+            },
+            {
+              "equation_name": "Oxidation of oxalate ion/oxalic acid (at 333 K)",
+              "latex": "5\\ce{C2O4^2-} + 2\\ce{MnO4-} + 16\\ce{H+} \\rightarrow 2\\ce{Mn^2+} + 8\\ce{H2O} + 10\\ce{CO2}"
+            },
+            {
+              "equation_name": "Oxidation of sulphite to sulphate",
+              "latex": "5\\ce{SO3^2-} + 2\\ce{MnO4-} + 6\\ce{H+} \\rightarrow 2\\ce{Mn^2+} + 3\\ce{H2O} + 5\\ce{SO4^2-}"
+            },
+            {
+              "equation_name": "Oxidation of nitrite to nitrate",
+              "latex": "5\\ce{NO2-} + 2\\ce{MnO4-} + 6\\ce{H+} \\rightarrow 2\\ce{Mn^2+} + 5\\ce{NO3-} + 3\\ce{H2O}"
+            }
+          ]
+        },
+        {
+          "topic": "Potassium permanganate - oxidising reactions in neutral/faintly alkaline solution",
+          "equations": [
+            {
+              "equation_name": "Oxidation of iodide to iodate",
+              "latex": "2\\ce{MnO4-} + \\ce{H2O} + \\ce{I-} \\rightarrow 2\\ce{MnO2} + 2\\ce{OH-} + \\ce{IO3-}"
+            },
+            {
+              "equation_name": "Oxidation of thiosulphate to sulphate",
+              "latex": "8\\ce{MnO4-} + 3\\ce{S2O3^2-} + \\ce{H2O} \\rightarrow 8\\ce{MnO2} + 6\\ce{SO4^2-} + 2\\ce{OH-}"
+            },
+            {
+              "equation_name": "Oxidation of Mn2+ by permanganate (comproportionation)",
+              "latex": "2\\ce{MnO4-} + 3\\ce{Mn^2+} + 2\\ce{H2O} \\rightarrow 5\\ce{MnO2} + 4\\ce{H+}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 5,
+      "chapter_title": "Coordination Compounds",
+      "part": "Part I",
+      "topics": [
+        {
+          "topic": "Crystal Field Theory - octahedral splitting",
+          "equations": [
+            {
+              "equation_name": "Energy of eg orbitals (raised) in octahedral field",
+              "latex": "E(e_g) = +\\tfrac{3}{5}\\Delta_o"
+            },
+            {
+              "equation_name": "Energy of t2g orbitals (lowered) in octahedral field",
+              "latex": "E(t_{2g}) = -\\tfrac{2}{5}\\Delta_o",
+              "variables": [
+                {
+                  "symbol": "\\Delta_o",
+                  "meaning": "crystal field splitting energy (octahedral field)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Crystal Field Theory - tetrahedral splitting",
+          "equations": [
+            {
+              "equation_name": "Relation between tetrahedral and octahedral crystal field splitting",
+              "latex": "\\Delta_t = \\tfrac{4}{9}\\Delta_o",
+              "variables": [
+                {
+                  "symbol": "\\Delta_t",
+                  "meaning": "crystal field splitting energy (tetrahedral field)"
+                }
+              ],
+              "note": "Tetrahedral splitting is inverted (e set lower, t2 set higher) and smaller in magnitude than octahedral splitting for the same metal, ligands and metal-ligand distance."
+            }
+          ]
+        },
+        {
+          "topic": "High spin / low spin configurations (d4 case)",
+          "equations": [
+            {
+              "equation_name": "Weak field ligand condition - high spin complex",
+              "latex": "\\Delta_o < P \\Rightarrow t_{2g}^{3}e_g^{1}",
+              "variables": [
+                {
+                  "symbol": "P",
+                  "meaning": "pairing energy - energy required for electron pairing in a single orbital"
+                }
+              ]
+            },
+            {
+              "equation_name": "Strong field ligand condition - low spin complex",
+              "latex": "\\Delta_o > P \\Rightarrow t_{2g}^{4}e_g^{0}"
+            }
+          ]
+        },
+        {
+          "topic": "Colour in coordination compounds - d-d transition",
+          "equations": [
+            {
+              "equation_name": "Electronic transition responsible for colour of [Ti(H2O)6]3+",
+              "latex": "t_{2g}^{1}e_g^{0} \\rightarrow t_{2g}^{0}e_g^{1}",
+              "note": "Ti3+ is a 3d1 system; absorption of blue-green light excites the electron from t2g to eg, giving the complex its observed violet colour."
+            }
+          ]
+        },
+        {
+          "topic": "Effect of ligand substitution on colour - stepwise complex formation with ethane-1,2-diamine",
+          "equations": [
+            {
+              "equation_name": "Stepwise substitution of water by en in [Ni(H2O)6]2+",
+              "latex": "\\ce{[Ni(H2O)6]^2+}(aq) + \\ce{en}(aq) \\rightleftharpoons \\ce{[Ni(H2O)4(en)]^2+}(aq) + 2\\ce{H2O}",
+              "variants": [
+                "\\ce{[Ni(H2O)4(en)]^2+}(aq) + \\ce{en}(aq) \\rightleftharpoons \\ce{[Ni(H2O)2(en)2]^2+}(aq) + 2\\ce{H2O}",
+                "\\ce{[Ni(H2O)2(en)2]^2+}(aq) + \\ce{en}(aq) \\rightleftharpoons \\ce{[Ni(en)3]^2+}(aq) + 2\\ce{H2O}"
+              ],
+              "note": "Colour progression: green → pale blue → blue/purple → violet, as water ligands are progressively replaced by the stronger-field didentate ligand en."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 6,
+      "chapter_title": "Haloalkanes and Haloarenes",
+      "part": "Part II",
+      "topics": []
+    },
+    {
+      "chapter_number": 7,
+      "chapter_title": "Alcohols, Phenols and Ethers",
+      "part": "Part II",
+      "topics": [
+        {
+          "topic": "Reactions of alcohols - cleavage of C-O bond",
+          "equations": [
+            {
+              "equation_name": "Reaction of alcohols with hydrogen halides to form alkyl halides",
+              "latex": "\\ce{R-OH} + \\ce{HX} \\rightarrow \\ce{R-X} + \\ce{H2O}",
+              "note": "Relative reactivity of alcohols with HCl (Lucas test, using conc. HCl + ZnCl2) distinguishes 1°, 2°, 3° alcohols: 3° > 2° > 1°."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 8,
+      "chapter_title": "Aldehydes, Ketones and Carboxylic Acids",
+      "part": "Part II",
+      "topics": []
+    },
+    {
+      "chapter_number": 9,
+      "chapter_title": "Amines",
+      "part": "Part II",
+      "topics": []
+    },
+    {
+      "chapter_number": 10,
+      "chapter_title": "Biomolecules",
+      "part": "Part II",
+      "topics": [
+        {
+          "topic": "Carbohydrates - general formula",
+          "equations": [
+            {
+              "equation_name": "General formula of carbohydrates",
+              "latex": "\\ce{C_x(H2O)_y}",
+              "note": "Historical basis for the name 'carbohydrate' (hydrate of carbon). Not all compounds fitting this formula are carbohydrates (e.g. acetic acid, CH3COOH, fits C2(H2O)2 but is not one); conversely some carbohydrates (e.g. rhamnose, C6H12O5) do not fit it exactly."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

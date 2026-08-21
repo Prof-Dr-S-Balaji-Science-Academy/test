@@ -1,0 +1,1940 @@
+{
+  "title": "Class 12 Chemistry Equation Bank - Tamil Nadu State Board",
+  "source_files": [
+    "Chemistry_Vol_1.md",
+    "Chemistry_Vol_2.md"
+  ],
+  "notation": "Chemical equations use LaTeX with the mhchem package (\\ce{...}); physical-chemistry formulas use standard LaTeX.",
+  "coverage_note": "Only equations physically present in the uploaded source text were extracted. During PDF-to-Markdown conversion, a substantial number of equations in the original textbook (especially in Chapter 1 Metallurgy and Chapter 2 p-Block Elements-I, and scattered elsewhere) were rendered as images/equation-objects and were dropped, leaving blank gaps in the source files where an equation is referenced in the surrounding text but not recoverable. These gaps were intentionally skipped rather than reconstructed, per instruction. Chapters 6-10 (Solid State, Kinetics, Ionic Equilibrium, Electrochemistry, Surface Chemistry) retained their core formulas well; Chapters 1, 2, 11-15 have more gaps because more content was lost in conversion.",
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "chapter_title": "Metallurgy",
+      "volume": "Volume 1",
+      "topics": [
+        {
+          "topic": "Concentration of ores - Leaching",
+          "equations": [
+            {
+              "equation_name": "Alkali leaching of bauxite - neutralisation of sodium aluminate",
+              "latex": "2\\ce{Na[Al(OH)4]}(aq) + 2\\ce{CO2}(g) \\rightarrow \\ce{Al2O3.3H2O}(s) + 2\\ce{NaHCO3}(aq)",
+              "variables": [
+                {
+                  "symbol": "Na[Al(OH)4]",
+                  "meaning": "sodium meta-aluminate (soluble complex formed during alkali leaching of bauxite)"
+                },
+                {
+                  "symbol": "Al2O3.3H2O",
+                  "meaning": "hydrated alumina precipitate"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Reduction of metal oxides - Reduction by metal (Aluminothermite/Goldschmidt process)",
+          "equations": [
+            {
+              "equation_name": "Ignition mixture reaction (initiates aluminothermic reduction)",
+              "latex": "\\ce{BaO2} + \\ce{Mg} \\rightarrow \\ce{BaO} + \\ce{MgO}",
+              "variables": [
+                {
+                  "symbol": "BaO2",
+                  "meaning": "barium peroxide (part of ignition mixture)"
+                },
+                {
+                  "symbol": "Mg",
+                  "meaning": "magnesium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Thermodynamic principle of metallurgy",
+          "equations": [
+            {
+              "equation_name": "Gibbs free energy equation (basis of Ellingham diagram)",
+              "latex": "\\Delta G = \\Delta H - T\\Delta S",
+              "variables": [
+                {
+                  "symbol": "\\Delta G",
+                  "meaning": "change in Gibbs free energy"
+                },
+                {
+                  "symbol": "\\Delta H",
+                  "meaning": "enthalpy change"
+                },
+                {
+                  "symbol": "T",
+                  "meaning": "temperature in kelvin"
+                },
+                {
+                  "symbol": "\\Delta S",
+                  "meaning": "entropy change"
+                }
+              ]
+            },
+            {
+              "equation_name": "Coupled reaction - reduction of FeO by carbon at 1500 K (Ellingham diagram application)",
+              "latex": "2\\ce{FeO}(s) + 2\\ce{C} \\rightarrow 2\\ce{Fe}(l,s) + 2\\ce{CO}(g) \\qquad \\Delta G_3 = -130\\ \\text{kJ mol}^{-1}",
+              "variables": [
+                {
+                  "symbol": "\\Delta G_3",
+                  "meaning": "standard free energy change for the coupled reaction (equation 4 in the text)"
+                }
+              ],
+              "note": "Standard free energy change for reduction of one mole of FeO, ΔG₃/2 = −65 kJ mol⁻¹"
+            }
+          ]
+        },
+        {
+          "topic": "Refining process - Electrolytic refining",
+          "equations": [
+            {
+              "equation_name": "Anode reaction in electrolytic refining of silver",
+              "latex": "\\ce{Ag}(s) \\rightarrow \\ce{Ag+}(aq) + e^{-}",
+              "variables": [
+                {
+                  "symbol": "Ag(s)",
+                  "meaning": "impure silver anode"
+                },
+                {
+                  "symbol": "Ag+(aq)",
+                  "meaning": "silver ion entering the electrolyte"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Evaluation exercises - Roasting/Calcination/Redox (MCQ equations)",
+          "equations": [
+            {
+              "equation_name": "Roasting of zinc sulphide (MCQ)",
+              "latex": "2\\ce{Zn} + \\ce{O2} \\rightarrow 2\\ce{ZnO}"
+            },
+            {
+              "equation_name": "Roasting of zinc blende (MCQ)",
+              "latex": "2\\ce{ZnS} + 3\\ce{O2} \\rightarrow 2\\ce{ZnO} + 2\\ce{SO2}"
+            },
+            {
+              "equation_name": "Calcination of magnesium carbonate (MCQ)",
+              "latex": "\\ce{MgCO3} \\rightarrow \\ce{MgO} + \\ce{CO2}"
+            },
+            {
+              "equation_name": "Displacement/redox reactions between metals and their salts (MCQ)",
+              "latex": "\\ce{Zn}(s) + \\ce{Cu^2+}(aq) \\rightarrow \\ce{Cu}(s) + \\ce{Zn^2+}(aq)",
+              "variants": [
+                "\\ce{Cu}(s) + \\ce{Zn^2+}(aq) \\rightarrow \\ce{Zn}(s) + \\ce{Cu^2+}(aq)",
+                "\\ce{Cu}(s) + 2\\ce{Ag+}(aq) \\rightarrow 2\\ce{Ag}(s) + \\ce{Cu^2+}(aq)",
+                "\\ce{Fe}(s) + \\ce{Cu^2+}(aq) \\rightarrow \\ce{Cu}(s) + \\ce{Fe^2+}(aq)"
+              ],
+              "note": "These illustrate the electrochemical principle: a more reactive metal displaces a less reactive metal ion from solution."
+            },
+            {
+              "equation_name": "Van Arkel refining of zirconium (MCQ)",
+              "latex": "\\ce{Zr}(\\text{impure}) + 2\\ce{I2} \\xrightarrow{523\\,K} \\ce{ZrI4} \\xrightarrow{1800\\,K} \\ce{Zr}(\\text{pure}) + 2\\ce{I2}"
+            }
+          ]
+        },
+        {
+          "topic": "Extraction of crude metal - Reduction to oxides",
+          "equations": [
+            {
+              "equation_name": "Roasting/Calcination and reduction examples in evaluation exercises",
+              "latex": "\\ce{NaCl} + \\ce{MnO2} + \\ce{H2SO4} \\rightarrow \\; ?",
+              "note": "Incomplete 'balance the equation' exercise from the textbook evaluation section; product not supplied in source."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 2,
+      "chapter_title": "p-Block Elements - I",
+      "volume": "Volume 1",
+      "topics": [
+        {
+          "topic": "Carbon monoxide - preparation and reactions",
+          "equations": [
+            {
+              "equation_name": "Preparation of CO by limited oxidation of carbon",
+              "latex": "2\\ce{C} + \\ce{O2} \\rightarrow 2\\ce{CO}"
+            },
+            {
+              "equation_name": "Oxo process - hydroformylation of ethene",
+              "latex": "\\ce{CO} + \\ce{C2H4} + \\ce{H2} \\rightarrow \\ce{CH3CH2CHO}",
+              "variables": [
+                {
+                  "symbol": "CH3CH2CHO",
+                  "meaning": "propanal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 3,
+      "chapter_title": "p-Block Elements - II",
+      "volume": "Volume 1",
+      "topics": [
+        {
+          "topic": "Ammonia - reactions",
+          "equations": [
+            {
+              "equation_name": "Reaction of ammonia with lead(II) oxide",
+              "latex": "3\\ce{PbO} + 2\\ce{NH3} \\rightarrow 3\\ce{Pb} + \\ce{N2} + 3\\ce{H2O}"
+            },
+            {
+              "equation_name": "Reaction of ammonia with reactive metals",
+              "latex": "2\\ce{Na} + 2\\ce{NH3} \\rightarrow 2\\ce{NaNH2} + \\ce{H2}",
+              "variants": [
+                "3\\ce{Mg} + 2\\ce{NH3} \\rightarrow \\ce{Mg3N2} + 3\\ce{H2}"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Nitric acid - preparation and reactions",
+          "equations": [
+            {
+              "equation_name": "Laboratory preparation of nitric acid",
+              "latex": "\\ce{KNO3} + \\ce{H2SO4} \\rightarrow \\ce{KHSO4} + \\ce{HNO3}"
+            },
+            {
+              "equation_name": "Ostwald's process step - oxidation of NO to nitric acid (disproportionation of NO2 in water)",
+              "latex": "3\\ce{NO2} + \\ce{H2O} \\rightarrow 2\\ce{HNO3} + \\ce{NO}"
+            },
+            {
+              "equation_name": "Nitric acid as oxidising agent - reaction with H2S",
+              "latex": "3\\ce{H2S} + 2\\ce{HNO3} \\rightarrow 3\\ce{S} + 2\\ce{NO} + 4\\ce{H2O}"
+            },
+            {
+              "equation_name": "Nitration of benzene",
+              "latex": "\\ce{C6H6} + \\ce{HNO3} \\xrightarrow{\\ce{H2SO4}} \\ce{C6H5NO2} + \\ce{H2O}",
+              "variables": [
+                {
+                  "symbol": "C6H5NO2",
+                  "meaning": "nitrobenzene"
+                }
+              ]
+            },
+            {
+              "equation_name": "Nitric acid acting as a base with H2SO4 (formation of nitronium ion)",
+              "latex": "\\ce{HNO3} + \\ce{H2SO4} \\rightarrow \\ce{NO2+} + \\ce{H2O} + \\ce{HSO4-}",
+              "variables": [
+                {
+                  "symbol": "NO2+",
+                  "meaning": "nitronium ion"
+                }
+              ]
+            },
+            {
+              "equation_name": "Decomposition of nitrous acid",
+              "latex": "3\\ce{HNO2} \\rightarrow \\ce{HNO3} + 2\\ce{NO} + \\ce{H2O}",
+              "variants": [
+                "2\\ce{HNO2} \\rightarrow \\ce{N2O3} + \\ce{H2O}",
+                "\\ce{H2N2O2} \\rightarrow \\ce{N2O} + \\ce{H2O}"
+              ],
+              "note": "Nitrous acid → Nitric acid + Nitric oxide; Nitrous acid → Dinitrogen trioxide; Hyponitrous acid → Nitrous oxide"
+            },
+            {
+              "equation_name": "Dilute nitric acid with copper",
+              "latex": "3\\ce{Cu} + 8\\ce{HNO3} \\rightarrow 3\\ce{Cu(NO3)2} + 2\\ce{NO} + 4\\ce{H2O}"
+            },
+            {
+              "equation_name": "Concentrated nitric acid with magnesium",
+              "latex": "4\\ce{Mg} + 10\\ce{HNO3} \\rightarrow 4\\ce{Mg(NO3)2} + \\ce{NH4NO3} + 3\\ce{H2O}"
+            },
+            {
+              "equation_name": "Reaction of AgNO3 with PH3",
+              "latex": "3\\ce{AgNO3} + \\ce{PH3} \\rightarrow \\ce{Ag3P} + 3\\ce{HNO3}"
+            }
+          ]
+        },
+        {
+          "topic": "Oxoacids of phosphorus - preparation",
+          "equations": [
+            {
+              "equation_name": "Preparation of hypophosphorous acid",
+              "latex": "\\ce{P4} + 6\\ce{H2O} \\rightarrow 3\\ce{H3PO2} + \\ce{PH3}",
+              "variables": [
+                {
+                  "symbol": "H3PO2",
+                  "meaning": "hypophosphorous acid, P oxidation state +1"
+                }
+              ]
+            },
+            {
+              "equation_name": "Preparation of orthophosphorous acid",
+              "latex": "\\ce{P4O6} + 6\\ce{H2O} \\rightarrow 4\\ce{H3PO3}",
+              "variables": [
+                {
+                  "symbol": "H3PO3",
+                  "meaning": "orthophosphorous acid, P oxidation state +3"
+                }
+              ]
+            },
+            {
+              "equation_name": "Preparation of hypophosphoric acid",
+              "latex": "2\\ce{P2} + \\ce{O2} + 2\\ce{H2O} \\rightarrow \\ce{H4P2O6}",
+              "variables": [
+                {
+                  "symbol": "H4P2O6",
+                  "meaning": "hypophosphoric acid, P oxidation state +4"
+                }
+              ]
+            },
+            {
+              "equation_name": "Preparation of orthophosphoric acid",
+              "latex": "\\ce{P4O10} + 6\\ce{H2O} \\rightarrow 4\\ce{H3PO4}",
+              "variables": [
+                {
+                  "symbol": "H3PO4",
+                  "meaning": "orthophosphoric acid, P oxidation state +5"
+                }
+              ]
+            },
+            {
+              "equation_name": "Preparation of pyrophosphoric acid",
+              "latex": "2\\ce{H3PO4} \\rightarrow \\ce{H4P2O7} + \\ce{H2O}",
+              "variables": [
+                {
+                  "symbol": "H4P2O7",
+                  "meaning": "pyrophosphoric acid, P oxidation state +5"
+                }
+              ]
+            },
+            {
+              "equation_name": "Reaction of AgNO3 with PH3 (phosphine)",
+              "latex": "3\\ce{AgNO3} + \\ce{PH3} \\rightarrow \\ce{Ag3P} + 3\\ce{HNO3}"
+            },
+            {
+              "equation_name": "Reaction of BCl3 with PH3 (coordinate/adduct formation)",
+              "latex": "\\ce{BCl3} + \\ce{PH3} \\rightarrow \\ce{Cl3B\\bond{->}PH3}",
+              "note": "Coordinate compound formed by donation of the phosphorus lone pair to boron."
+            },
+            {
+              "equation_name": "Hydrolysis of phosphorus trichloride",
+              "latex": "\\ce{PCl3} + 3\\ce{H2O} \\rightarrow \\ce{H3PO3} + 3\\ce{HCl}"
+            }
+          ]
+        },
+        {
+          "topic": "Sulphuric acid - precipitation reactions",
+          "equations": [
+            {
+              "equation_name": "Test for sulphate ion using barium chloride",
+              "latex": "\\ce{BaCl2} + \\ce{H2SO4} \\rightarrow \\ce{BaSO4}\\downarrow + 2\\ce{HCl}",
+              "note": "Barium sulphate is a white precipitate."
+            },
+            {
+              "equation_name": "Test for sulphate ion using lead acetate",
+              "latex": "\\ce{(CH3COO)2Pb} + \\ce{H2SO4} \\rightarrow \\ce{PbSO4}\\downarrow + 2\\ce{CH3COOH}",
+              "note": "Lead sulphate is a white precipitate."
+            }
+          ]
+        },
+        {
+          "topic": "Chlorine - manufacture and reactions",
+          "equations": [
+            {
+              "equation_name": "Deacon's process / laboratory preparation of chlorine from NaCl, MnO2 and H2SO4",
+              "latex": "4\\ce{NaCl} + \\ce{MnO2} + 4\\ce{H2SO4} \\rightarrow \\ce{Cl2} + \\ce{MnCl2} + 4\\ce{NaHSO4} + 2\\ce{H2O}"
+            },
+            {
+              "equation_name": "Electrolysis of brine (chlor-alkali process)",
+              "latex": "\\ce{NaCl} \\rightarrow \\ce{Na+} + \\ce{Cl-}",
+              "note": "At cathode: 2H2O + 2e⁻ → H2 + 2OH⁻ (or 2H⁺ + 2e⁻ → H2); at anode: 2Cl⁻ → Cl2 + 2e⁻; net: 2NaCl + 2H2O → 2NaOH + H2 + Cl2"
+            },
+            {
+              "equation_name": "Deacon's process - catalytic oxidation of HCl",
+              "latex": "4\\ce{HCl} + \\ce{O2} \\xrightarrow{400^\\circ C, \\ce{CuCl2}} 2\\ce{H2O} + 2\\ce{Cl2}"
+            },
+            {
+              "equation_name": "Chlorination of decane (substitution)",
+              "latex": "\\ce{C10H16} + 8\\ce{Cl2} \\rightarrow 10\\ce{C} + 16\\ce{HCl}"
+            },
+            {
+              "equation_name": "Reaction of chlorine with cold water (disproportionation)",
+              "latex": "2\\ce{Cl2} + 2\\ce{H2O} \\rightarrow 4\\ce{HCl} + \\ce{O2}"
+            },
+            {
+              "equation_name": "Bleaching action of chlorine",
+              "latex": "\\ce{Cl2} + \\ce{H2O} \\rightarrow 2\\ce{HCl} + [\\ce{O}]",
+              "note": "Nascent oxygen produced oxidises the colouring matter to a colourless product."
+            }
+          ]
+        },
+        {
+          "topic": "Hydrogen halides - acid strength and reducing property",
+          "equations": [
+            {
+              "equation_name": "General ionisation of hydrogen halides in water",
+              "latex": "\\ce{HX} + \\ce{H2O} \\rightarrow \\ce{H3O+} + \\ce{X-}"
+            },
+            {
+              "equation_name": "Reducing action of HBr on hot concentrated H2SO4",
+              "latex": "2\\ce{HBr} + \\ce{H2SO4} \\rightarrow 2\\ce{H2O} + \\ce{Br2} + \\ce{SO2}"
+            },
+            {
+              "equation_name": "Reducing action of HI on hot concentrated H2SO4",
+              "latex": "8\\ce{HI} + \\ce{H2SO4} \\rightarrow 4\\ce{H2O} + 4\\ce{I2} + \\ce{H2S}",
+              "note": "Illustrates the relative reducing strength order: HI > HBr > HCl > HF."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 4,
+      "chapter_title": "Transition and Inner Transition Elements",
+      "volume": "Volume 1",
+      "topics": [
+        {
+          "topic": "Magnetic properties",
+          "equations": [
+            {
+              "equation_name": "Spin-only magnetic moment",
+              "latex": "\\mu_s = \\sqrt{n(n+2)}\\ \\text{BM}",
+              "variables": [
+                {
+                  "symbol": "\\mu_s",
+                  "meaning": "spin-only magnetic moment in Bohr Magneton (BM)"
+                },
+                {
+                  "symbol": "n",
+                  "meaning": "number of unpaired electrons"
+                }
+              ],
+              "note": "Derived from μ = g√[S(S+1)] μB with S = n/2 and g = 2 for spin-only contribution."
+            }
+          ]
+        },
+        {
+          "topic": "Standard electrode potentials (M2+/M) - redox couples of first row transition metals",
+          "equations": [
+            {
+              "equation_name": "General half-reaction for M2+/M electrode potential",
+              "latex": "\\ce{M^2+}(aq) + 2e^{-} \\rightarrow \\ce{M}(s)",
+              "note": "Tabulated for Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn to construct the E° vs 3d-series plot (Fig 4.7a)."
+            },
+            {
+              "equation_name": "General half-reaction for M3+/M2+ electrode potential",
+              "latex": "\\ce{M^3+}(aq) + e^{-} \\rightarrow \\ce{M^2+}(aq)",
+              "note": "Tabulated for Ti, V, Cr, Mn, Fe, Co to construct the E° vs 3d-series plot (Fig 4.7b)."
+            }
+          ]
+        },
+        {
+          "topic": "Potassium dichromate - oxidising reactions in acidic medium",
+          "equations": [
+            {
+              "equation_name": "Oxidation of Fe2+ by dichromate",
+              "latex": "\\ce{Cr2O7^2-} + 6\\ce{Fe^2+} + 14\\ce{H+} \\rightarrow 2\\ce{Cr^3+} + 6\\ce{Fe^3+} + 7\\ce{H2O}"
+            },
+            {
+              "equation_name": "Oxidation of iodide by dichromate",
+              "latex": "\\ce{Cr2O7^2-} + 6\\ce{I-} + 14\\ce{H+} \\rightarrow 2\\ce{Cr^3+} + 3\\ce{I2} + 7\\ce{H2O}"
+            },
+            {
+              "equation_name": "Oxidation of sulphide by dichromate",
+              "latex": "\\ce{Cr2O7^2-} + 3\\ce{S^2-} + 14\\ce{H+} \\rightarrow 2\\ce{Cr^3+} + 3\\ce{S} + 7\\ce{H2O}"
+            },
+            {
+              "equation_name": "Oxidation of sulphite by dichromate",
+              "latex": "\\ce{Cr2O7^2-} + 3\\ce{SO3^2-} + 8\\ce{H+} \\rightarrow 2\\ce{Cr^3+} + 3\\ce{SO4^2-} + 4\\ce{H2O}"
+            }
+          ]
+        },
+        {
+          "topic": "Potassium permanganate - preparation and reactions",
+          "equations": [
+            {
+              "equation_name": "Oxidation of manganate to permanganate (aeration)",
+              "latex": "2\\ce{MnO4^2-} + \\ce{O2} + \\ce{H2O} \\rightarrow 2\\ce{MnO4-} + 2\\ce{OH-}",
+              "note": "Alternative oxidant: 2MnO4²⁻ + Cl2 → 2MnO4⁻ + 2Cl⁻"
+            },
+            {
+              "equation_name": "Thermal decomposition of KMnO4",
+              "latex": "2\\ce{KMnO4} \\rightarrow \\ce{K2MnO4} + \\ce{MnO2} + \\ce{O2}"
+            },
+            {
+              "equation_name": "Decomposition of KMnO4 with hot conc. H2SO4",
+              "latex": "4\\ce{KMnO4} + 6\\ce{H2SO4} \\rightarrow 4\\ce{MnSO4} + 2\\ce{K2SO4} + 6\\ce{H2O} + 5\\ce{O2}"
+            },
+            {
+              "equation_name": "Reduction half-reaction of MnO4- in neutral/faintly alkaline medium",
+              "latex": "\\ce{MnO4-} + 2\\ce{H2O} + 3e^{-} \\rightarrow \\ce{MnO2} + 4\\ce{OH-}"
+            },
+            {
+              "equation_name": "Reduction half-reaction of MnO4- in strongly alkaline medium",
+              "latex": "\\ce{MnO4-} + e^{-} \\rightarrow \\ce{MnO4^2-}"
+            },
+            {
+              "equation_name": "Reduction half-reaction of MnO4- in acidic medium",
+              "latex": "\\ce{MnO4-} + 8\\ce{H+} + 5e^{-} \\rightarrow \\ce{Mn^2+} + 4\\ce{H2O}"
+            },
+            {
+              "equation_name": "Oxidation of ethanol by acidified KMnO4",
+              "latex": "2\\ce{KMnO4} + 3\\ce{H2SO4} + 5\\ce{CH3CH2OH} \\rightarrow \\ce{K2SO4} + 2\\ce{MnSO4} + 5\\ce{CH3CHO} + 8\\ce{H2O}"
+            },
+            {
+              "equation_name": "Oxidation of chloride by permanganate in acidic medium",
+              "latex": "2\\ce{MnO4-} + 10\\ce{Cl-} + 16\\ce{H+} \\rightarrow 2\\ce{Mn^2+} + 5\\ce{Cl2} + 8\\ce{H2O}"
+            },
+            {
+              "equation_name": "Redox titration - permanganate with oxalate (answer key)",
+              "latex": "5\\ce{C2O4^2-} + 2\\ce{MnO4-} + 16\\ce{H+} \\rightarrow 2\\ce{Mn^2+} + 10\\ce{CO2}\\uparrow + 8\\ce{H2O}"
+            }
+          ]
+        },
+        {
+          "topic": "Comparative oxidising power (answer key)",
+          "equations": [
+            {
+              "equation_name": "Order of oxidising power of highest oxidation state oxoanions",
+              "latex": "\\ce{VO2+} < \\ce{Cr2O7^2-} < \\ce{MnO4-}",
+              "note": "Reflects increasing oxidation state (+5, +6, +7); greater the oxidation state, higher the oxidising power."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 5,
+      "chapter_title": "Coordination Chemistry",
+      "volume": "Volume 1",
+      "topics": [
+        {
+          "topic": "Formation of coordination entity",
+          "equations": [
+            {
+              "equation_name": "Formation of hexaaquachromium(III) ion",
+              "latex": "\\ce{Cr^3+} + 6\\ce{H2O} \\rightarrow \\ce{[Cr(H2O)6]^3+}"
+            }
+          ]
+        },
+        {
+          "topic": "Oxidation number of the central metal atom/ion",
+          "equations": [
+            {
+              "equation_name": "Relation between net charge, oxidation state and ligand charges",
+              "latex": "\\text{Net charge} = (\\text{oxidation state of central metal}) + \\sum(\\text{no. of ligands} \\times \\text{charge on ligand})",
+              "note": "Example: In [Fe(CN)6]^4-, -4 = x + 6(-1) ⇒ x = +2. In [Co(NH3)5Cl]^2+, +2 = x + 5(0) + 1(-1) ⇒ x = +3."
+            }
+          ]
+        },
+        {
+          "topic": "Crystal Field Theory - octahedral and tetrahedral splitting",
+          "equations": [
+            {
+              "equation_name": "Energy raise of eg orbitals in octahedral field",
+              "latex": "E(e_g) = +\\tfrac{3}{5}\\Delta_o"
+            },
+            {
+              "equation_name": "Energy lowering of t2g orbitals in octahedral field",
+              "latex": "E(t_{2g}) = -\\tfrac{2}{5}\\Delta_o",
+              "variables": [
+                {
+                  "symbol": "\\Delta_o",
+                  "meaning": "crystal field splitting energy in octahedral field"
+                }
+              ]
+            },
+            {
+              "equation_name": "Energy raise of t2 orbitals in tetrahedral field",
+              "latex": "E(t_2) = +\\tfrac{2}{5}\\Delta_t"
+            },
+            {
+              "equation_name": "Energy lowering of e orbitals in tetrahedral field",
+              "latex": "E(e) = -\\tfrac{3}{5}\\Delta_t",
+              "variables": [
+                {
+                  "symbol": "\\Delta_t",
+                  "meaning": "crystal field splitting energy in tetrahedral field"
+                }
+              ]
+            },
+            {
+              "equation_name": "Relation between tetrahedral and octahedral crystal field splitting energy",
+              "latex": "\\Delta_t = \\tfrac{4}{9}\\Delta_o"
+            },
+            {
+              "equation_name": "Crystal field splitting energy from absorption spectral data",
+              "latex": "\\Delta = hc\\bar{\\nu}",
+              "variables": [
+                {
+                  "symbol": "h",
+                  "meaning": "Planck's constant"
+                },
+                {
+                  "symbol": "c",
+                  "meaning": "speed of light"
+                },
+                {
+                  "symbol": "\\bar{\\nu}",
+                  "meaning": "wavenumber of light absorbed (cm⁻¹), corresponding to the d–d transition"
+                }
+              ],
+              "note": "Used to calculate Δo for [TiF6]3-, [TiBr6]3-, [Ti(H2O)6]3+ from their absorption wavenumbers."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 6,
+      "chapter_title": "Solid State",
+      "volume": "Volume 1",
+      "topics": [
+        {
+          "topic": "X-ray diffraction - Bragg's equation",
+          "equations": [
+            {
+              "equation_name": "Bragg's equation",
+              "latex": "2d\\sin\\theta = n\\lambda",
+              "variables": [
+                {
+                  "symbol": "d",
+                  "meaning": "interplanar distance between successive crystal planes"
+                },
+                {
+                  "symbol": "\\theta",
+                  "meaning": "glancing angle of incidence of X-rays"
+                },
+                {
+                  "symbol": "n",
+                  "meaning": "order of diffraction (integer)"
+                },
+                {
+                  "symbol": "\\lambda",
+                  "meaning": "wavelength of the X-rays used"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Density of a unit cell",
+          "equations": [
+            {
+              "equation_name": "Density from unit cell dimensions",
+              "latex": "\\rho = \\dfrac{n \\times M}{a^3 \\times N_A}",
+              "variables": [
+                {
+                  "symbol": "\\rho",
+                  "meaning": "density of the unit cell/crystal"
+                },
+                {
+                  "symbol": "n",
+                  "meaning": "number of atoms per unit cell"
+                },
+                {
+                  "symbol": "M",
+                  "meaning": "molar mass (g mol⁻¹)"
+                },
+                {
+                  "symbol": "a",
+                  "meaning": "edge length of the cubic unit cell"
+                },
+                {
+                  "symbol": "N_A",
+                  "meaning": "Avogadro number (mol⁻¹)"
+                }
+              ],
+              "note": "Built up from the stated relations: ρ = (mass of unit cell)/(volume of unit cell); mass of unit cell = n × (mass of one atom); mass of one atom = M/N_A; volume of a cubic unit cell = a³."
+            }
+          ]
+        },
+        {
+          "topic": "Number of atoms per unit cell (packing types)",
+          "equations": [
+            {
+              "equation_name": "Contribution of atoms in different unit cell positions",
+              "latex": "n = n_{\\text{corner}}\\times\\tfrac{1}{8} + n_{\\text{face}}\\times\\tfrac{1}{2} + n_{\\text{body}} + n_{\\text{edge}}\\times\\tfrac{1}{4}",
+              "variables": [
+                {
+                  "symbol": "n_{\\text{corner}}",
+                  "meaning": "number of atoms at corners (each contributes 1/8)"
+                },
+                {
+                  "symbol": "n_{\\text{face}}",
+                  "meaning": "number of atoms at face centres (each contributes 1/2)"
+                },
+                {
+                  "symbol": "n_{\\text{body}}",
+                  "meaning": "atoms at body centre (contributes fully, 1)"
+                },
+                {
+                  "symbol": "n_{\\text{edge}}",
+                  "meaning": "atoms at edge centres (each contributes 1/4)"
+                }
+              ],
+              "note": "Standard packing-fraction bookkeeping used for simple cubic (n=1), BCC (n=2), and FCC (n=4) unit cells as described in the text."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 7,
+      "chapter_title": "Chemical Kinetics",
+      "volume": "Volume 1",
+      "topics": [
+        {
+          "topic": "Rate of reaction",
+          "equations": [
+            {
+              "equation_name": "Average/instantaneous rate for A → B",
+              "latex": "\\text{Rate} = -\\dfrac{d[A]}{dt} = \\dfrac{d[B]}{dt}"
+            },
+            {
+              "equation_name": "Rate expression for a general reaction with stoichiometric coefficients",
+              "latex": "\\text{Rate} = -\\dfrac{1}{a}\\dfrac{d[A]}{dt} = -\\dfrac{1}{b}\\dfrac{d[B]}{dt} = \\dfrac{1}{c}\\dfrac{d[C]}{dt} = \\dfrac{1}{d}\\dfrac{d[D]}{dt}",
+              "note": "For a general reaction aA + bB → cC + dD; used in worked example for 2NO(g) + O2(g) → 2NO2(g)."
+            }
+          ]
+        },
+        {
+          "topic": "Rate law and order of reaction",
+          "equations": [
+            {
+              "equation_name": "General rate law",
+              "latex": "\\text{Rate} = k[A]^x",
+              "variables": [
+                {
+                  "symbol": "k",
+                  "meaning": "rate constant"
+                },
+                {
+                  "symbol": "x",
+                  "meaning": "order of the reaction with respect to A"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Integrated rate law - first order reaction",
+          "equations": [
+            {
+              "equation_name": "Rate law (first order)",
+              "latex": "\\text{Rate} = k[A]^1"
+            },
+            {
+              "equation_name": "Integrated first-order rate equation (natural log form)",
+              "latex": "\\ln[A_0] - \\ln[A] = kt",
+              "variables": [
+                {
+                  "symbol": "[A_0]",
+                  "meaning": "initial concentration of reactant A at t = 0"
+                },
+                {
+                  "symbol": "[A]",
+                  "meaning": "concentration of A at time t"
+                },
+                {
+                  "symbol": "k",
+                  "meaning": "first-order rate constant"
+                }
+              ]
+            },
+            {
+              "equation_name": "Integrated first-order rate equation (base-10 log form)",
+              "latex": "k = \\dfrac{2.303}{t}\\log_{10}\\dfrac{[A_0]}{[A]}"
+            },
+            {
+              "equation_name": "Straight-line form for first order kinetics",
+              "latex": "\\ln[A] = \\ln[A_0] - kt",
+              "note": "Of the form y = c + mx; a plot of ln[A] vs t gives a straight line of slope −k."
+            }
+          ]
+        },
+        {
+          "topic": "Pseudo first order reaction",
+          "equations": [
+            {
+              "equation_name": "Acid hydrolysis of an ester (rate law)",
+              "latex": "\\text{Rate} = k[\\ce{CH3COOCH3}][\\ce{H2O}]"
+            },
+            {
+              "equation_name": "Pseudo first order rate law (water in large excess)",
+              "latex": "\\text{Rate} = k'[\\ce{CH3COOCH3}]",
+              "variables": [
+                {
+                  "symbol": "k'",
+                  "meaning": "k' = k[H2O], pseudo first-order rate constant"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Integrated rate law - zero order reaction",
+          "equations": [
+            {
+              "equation_name": "Rate law (zero order)",
+              "latex": "\\text{Rate} = k[A]^0"
+            },
+            {
+              "equation_name": "Integrated zero-order rate equation",
+              "latex": "[A] = [A_0] - kt",
+              "variables": [
+                {
+                  "symbol": "[A_0]",
+                  "meaning": "initial concentration"
+                },
+                {
+                  "symbol": "[A]",
+                  "meaning": "concentration at time t"
+                },
+                {
+                  "symbol": "k",
+                  "meaning": "zero-order rate constant"
+                }
+              ],
+              "note": "Straight-line form y = mx + c: a plot of [A] vs t gives slope −k and y-intercept [A0]."
+            }
+          ]
+        },
+        {
+          "topic": "Integrated rate law - nth order reaction (n ≠ 1)",
+          "equations": [
+            {
+              "equation_name": "General nth order integrated rate law",
+              "latex": "\\dfrac{1}{[A]^{n-1}} - \\dfrac{1}{[A_0]^{n-1}} = (n-1)kt",
+              "variables": [
+                {
+                  "symbol": "n",
+                  "meaning": "order of reaction (n ≠ 1)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Half-life period of a reaction",
+          "equations": [
+            {
+              "equation_name": "Half-life of a zero order reaction",
+              "latex": "t_{1/2} = \\dfrac{[A_0]}{2k}",
+              "variables": [
+                {
+                  "symbol": "t_{1/2}",
+                  "meaning": "half-life period"
+                },
+                {
+                  "symbol": "[A_0]",
+                  "meaning": "initial concentration"
+                },
+                {
+                  "symbol": "k",
+                  "meaning": "zero-order rate constant"
+                }
+              ]
+            },
+            {
+              "equation_name": "Half-life for an nth order reaction (n ≠ 1)",
+              "latex": "t_{1/2} = \\dfrac{2^{n-1}-1}{(n-1)k[A_0]^{n-1}}"
+            }
+          ]
+        },
+        {
+          "topic": "Collision theory",
+          "equations": [
+            {
+              "equation_name": "Rate proportional to collision frequency",
+              "latex": "\\text{Rate} = Z_{AB}",
+              "variables": [
+                {
+                  "symbol": "Z_{AB}",
+                  "meaning": "collision frequency (number of collisions per litre per second) between A and B"
+                }
+              ]
+            },
+            {
+              "equation_name": "Fraction of effective collisions (Boltzmann factor)",
+              "latex": "f = e^{-E_a/RT}",
+              "variables": [
+                {
+                  "symbol": "f",
+                  "meaning": "fraction of collisions possessing energy equal to or greater than activation energy"
+                },
+                {
+                  "symbol": "E_a",
+                  "meaning": "activation energy"
+                },
+                {
+                  "symbol": "R",
+                  "meaning": "universal gas constant"
+                },
+                {
+                  "symbol": "T",
+                  "meaning": "absolute temperature"
+                }
+              ]
+            },
+            {
+              "equation_name": "Rate including steric (orientation) factor",
+              "latex": "\\text{Rate} = p \\times f \\times \\text{collision rate}",
+              "variables": [
+                {
+                  "symbol": "p",
+                  "meaning": "steric (probability/orientation) factor"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 8,
+      "chapter_title": "Ionic Equilibrium",
+      "volume": "Volume 2",
+      "topics": [
+        {
+          "topic": "Ionisation constant of a weak acid/base",
+          "equations": [
+            {
+              "equation_name": "Ionisation of a weak acid HA and its equilibrium expression",
+              "latex": "\\ce{HA} + \\ce{H2O} \\rightleftharpoons \\ce{H3O+} + \\ce{A-} \\qquad K_a = \\dfrac{[\\ce{H3O+}][\\ce{A-}]}{[\\ce{HA}]}",
+              "variables": [
+                {
+                  "symbol": "K_a",
+                  "meaning": "acid dissociation (ionisation) constant"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Ionisation of water",
+          "equations": [
+            {
+              "equation_name": "Auto-ionisation of water and ionic product",
+              "latex": "2\\ce{H2O} \\rightleftharpoons \\ce{H3O+} + \\ce{OH-} \\qquad K_w = [\\ce{H3O+}][\\ce{OH-}]",
+              "variables": [
+                {
+                  "symbol": "K_w",
+                  "meaning": "ionic product of water (= 1×10⁻¹⁴ at 25°C)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "pH scale",
+          "equations": [
+            {
+              "equation_name": "Definition of pH",
+              "latex": "\\text{pH} = -\\log_{10}[\\ce{H3O+}]"
+            },
+            {
+              "equation_name": "Definition of pOH",
+              "latex": "\\text{pOH} = -\\log_{10}[\\ce{OH-}]"
+            },
+            {
+              "equation_name": "Relation between pH and pOH",
+              "latex": "\\text{pH} + \\text{pOH} = 14",
+              "note": "Derived by adding the pH and pOH definitions and using Kw = [H3O+][OH-] = 10⁻¹⁴ at 25°C, so pKw = 14."
+            }
+          ]
+        },
+        {
+          "topic": "Ostwald's dilution law",
+          "equations": [
+            {
+              "equation_name": "Dissociation constant of a weak acid in terms of degree of dissociation",
+              "latex": "K_a = \\dfrac{\\alpha^2 C}{1-\\alpha}",
+              "variables": [
+                {
+                  "symbol": "K_a",
+                  "meaning": "dissociation constant"
+                },
+                {
+                  "symbol": "\\alpha",
+                  "meaning": "degree of dissociation"
+                },
+                {
+                  "symbol": "C",
+                  "meaning": "initial concentration"
+                }
+              ]
+            },
+            {
+              "equation_name": "Ostwald's dilution law (approximate form, α ≪ 1)",
+              "latex": "\\alpha = \\sqrt{\\dfrac{K_a}{C}}"
+            },
+            {
+              "equation_name": "Concentration of H+ from Ka",
+              "latex": "[\\ce{H+}] = \\sqrt{K_a \\times C}"
+            },
+            {
+              "equation_name": "Analogous expression for a weak base",
+              "latex": "K_b = \\alpha^2 C \\qquad [\\ce{OH-}] = \\sqrt{K_b C}",
+              "variables": [
+                {
+                  "symbol": "K_b",
+                  "meaning": "base dissociation constant"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Buffer solutions",
+          "equations": [
+            {
+              "equation_name": "Buffer index (buffer capacity)",
+              "latex": "\\beta = \\dfrac{dB}{d(\\text{pH})}",
+              "variables": [
+                {
+                  "symbol": "\\beta",
+                  "meaning": "buffer index"
+                },
+                {
+                  "symbol": "dB",
+                  "meaning": "number of gram equivalents of acid/base added to 1 L of buffer"
+                },
+                {
+                  "symbol": "d(\\text{pH})",
+                  "meaning": "resulting change in pH"
+                }
+              ]
+            },
+            {
+              "equation_name": "Henderson–Hasselbalch equation",
+              "latex": "\\text{pH} = pK_a + \\log_{10}\\dfrac{[\\text{salt}]}{[\\text{acid}]}",
+              "variables": [
+                {
+                  "symbol": "pK_a",
+                  "meaning": "= −log₁₀Ka"
+                },
+                {
+                  "symbol": "[\\text{salt}]",
+                  "meaning": "initial concentration of the conjugate base/salt"
+                },
+                {
+                  "symbol": "[\\text{acid}]",
+                  "meaning": "initial concentration of the weak acid"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Salt hydrolysis",
+          "equations": [
+            {
+              "equation_name": "Relation between hydrolysis constant, Ka (or Kb) and Kw",
+              "latex": "K_h \\cdot K_a = K_w",
+              "variables": [
+                {
+                  "symbol": "K_h",
+                  "meaning": "hydrolysis constant"
+                },
+                {
+                  "symbol": "K_a",
+                  "meaning": "dissociation constant of the conjugate weak acid"
+                },
+                {
+                  "symbol": "K_w",
+                  "meaning": "ionic product of water"
+                }
+              ],
+              "note": "For salt of weak acid + strong base. Analogous relation Kh·Kb = Kw holds for salt of strong acid + weak base."
+            },
+            {
+              "equation_name": "Hydrolysis constant in terms of degree of hydrolysis",
+              "latex": "K_h = h^2 C \\qquad [\\ce{OH-}] = \\sqrt{K_h \\cdot C}",
+              "variables": [
+                {
+                  "symbol": "h",
+                  "meaning": "degree of hydrolysis"
+                },
+                {
+                  "symbol": "C",
+                  "meaning": "concentration of the salt"
+                }
+              ]
+            },
+            {
+              "equation_name": "Relation between Ka, Kb and Kh for salt of weak acid and weak base",
+              "latex": "K_h = \\dfrac{K_w}{K_a \\cdot K_b}"
+            },
+            {
+              "equation_name": "pH of a salt solution (strong base + weak acid) in terms of Ka and concentration",
+              "latex": "\\text{pH} = 14 - \\tfrac{1}{2}\\log K_h - \\tfrac{1}{2}\\log C",
+              "note": "Obtained from pH = 14 + log[OH⁻] combined with [OH⁻] = √(KhC)."
+            }
+          ]
+        },
+        {
+          "topic": "Solubility product",
+          "equations": [
+            {
+              "equation_name": "Solubility product of a general salt XmYn",
+              "latex": "\\ce{X_mY_n}(s) \\rightleftharpoons m\\ce{X^{n+}}(aq) + n\\ce{Y^{m-}}(aq) \\qquad K_{sp} = [\\ce{X^{n+}}]^m[\\ce{Y^{m-}}]^n",
+              "variables": [
+                {
+                  "symbol": "K_{sp}",
+                  "meaning": "solubility product constant"
+                }
+              ]
+            },
+            {
+              "equation_name": "Solubility product in terms of molar solubility s",
+              "latex": "K_{sp} = (m)^m (n)^n (s)^{m+n}",
+              "variables": [
+                {
+                  "symbol": "s",
+                  "meaning": "molar solubility of the salt"
+                }
+              ],
+              "variants": [
+                "\\ce{BaSO4}(s) \\rightleftharpoons \\ce{Ba^2+}(aq) + \\ce{SO4^2-}(aq),\\quad K_{sp} = s^2",
+                "\\ce{Ag2CrO4}(s) \\rightleftharpoons 2\\ce{Ag+}(aq) + \\ce{CrO4^2-}(aq),\\quad K_{sp} = 4s^3"
+              ]
+            },
+            {
+              "equation_name": "Precipitation criterion",
+              "latex": "\\text{Ionic product} > K_{sp} \\Rightarrow \\text{precipitation occurs (supersaturated)}",
+              "variants": [
+                "\\text{Ionic product} < K_{sp} \\Rightarrow \\text{no precipitation (unsaturated)}",
+                "\\text{Ionic product} = K_{sp} \\Rightarrow \\text{equilibrium (saturated)}"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Lewis concept of acids and bases",
+          "equations": [
+            {
+              "equation_name": "Lewis acid-base reaction - hydration of Cr3+",
+              "latex": "\\ce{Cr^3+} + 6\\ce{H2O} \\rightarrow \\ce{[Cr(H2O)6]^3+}",
+              "note": "Cr3+ (Lewis acid) accepts electron pairs from 6 H2O molecules (Lewis base)."
+            },
+            {
+              "equation_name": "Lewis acid-base reaction - formation of calcium carbonate",
+              "latex": "\\ce{CaO} + \\ce{CO2} \\rightarrow \\ce{CaCO3}",
+              "note": "CaO acts as a Lewis base (electron pair donor via O2-), CO2 as a Lewis acid (electron pair acceptor)."
+            },
+            {
+              "equation_name": "Lewis acid behaviour of boric acid",
+              "latex": "\\ce{H3BO3}(aq) + \\ce{H2O}(l) \\rightleftharpoons \\ce{B(OH)4-} + \\ce{H+}",
+              "note": "Boric acid accepts a hydroxide ion from water (Lewis acid), rather than donating a proton directly."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 9,
+      "chapter_title": "Electro Chemistry",
+      "volume": "Volume 2",
+      "topics": [
+        {
+          "topic": "Conductivity of electrolytic solutions",
+          "equations": [
+            {
+              "equation_name": "Ohm's law for electrolytic conduction",
+              "latex": "V = IR",
+              "variables": [
+                {
+                  "symbol": "V",
+                  "meaning": "voltage across the cell"
+                },
+                {
+                  "symbol": "I",
+                  "meaning": "current"
+                },
+                {
+                  "symbol": "R",
+                  "meaning": "resistance of the solution"
+                }
+              ]
+            },
+            {
+              "equation_name": "Resistivity (specific resistance)",
+              "latex": "R = \\rho\\dfrac{l}{A}",
+              "variables": [
+                {
+                  "symbol": "\\rho",
+                  "meaning": "resistivity/specific resistance"
+                },
+                {
+                  "symbol": "l",
+                  "meaning": "distance between electrodes"
+                },
+                {
+                  "symbol": "A",
+                  "meaning": "cross-sectional area of electrodes"
+                }
+              ]
+            },
+            {
+              "equation_name": "Conductance",
+              "latex": "G = \\dfrac{1}{R}",
+              "variables": [
+                {
+                  "symbol": "G",
+                  "meaning": "conductance (unit: Siemens, S)"
+                }
+              ]
+            },
+            {
+              "equation_name": "Conductivity (specific conductance)",
+              "latex": "\\kappa = \\dfrac{1}{\\rho}",
+              "variables": [
+                {
+                  "symbol": "\\kappa",
+                  "meaning": "conductivity/specific conductance (unit: S m⁻¹)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Molar and equivalent conductivity",
+          "equations": [
+            {
+              "equation_name": "Molar conductivity",
+              "latex": "\\Lambda_m = \\dfrac{\\kappa}{C}",
+              "variables": [
+                {
+                  "symbol": "\\Lambda_m",
+                  "meaning": "molar conductivity"
+                },
+                {
+                  "symbol": "\\kappa",
+                  "meaning": "specific conductance"
+                },
+                {
+                  "symbol": "C",
+                  "meaning": "molar concentration of the electrolyte"
+                }
+              ]
+            },
+            {
+              "equation_name": "Equivalent conductivity",
+              "latex": "\\Lambda = \\dfrac{\\kappa}{N}",
+              "variables": [
+                {
+                  "symbol": "\\Lambda",
+                  "meaning": "equivalent conductivity"
+                },
+                {
+                  "symbol": "N",
+                  "meaning": "concentration of the electrolyte in normality"
+                }
+              ]
+            },
+            {
+              "equation_name": "Wheatstone bridge balance condition (for measuring cell resistance)",
+              "latex": "\\dfrac{P}{Q} = \\dfrac{R}{S}",
+              "variables": [
+                {
+                  "symbol": "P, Q",
+                  "meaning": "known resistances"
+                },
+                {
+                  "symbol": "R",
+                  "meaning": "resistance of the electrolytic solution"
+                },
+                {
+                  "symbol": "S",
+                  "meaning": "variable resistance"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Variation of molar conductivity with concentration",
+          "equations": [
+            {
+              "equation_name": "Kohlrausch's empirical relationship (strong electrolytes)",
+              "latex": "\\Lambda_m = \\Lambda_m^{0} - k\\sqrt{C}",
+              "variables": [
+                {
+                  "symbol": "\\Lambda_m^{0}",
+                  "meaning": "limiting molar conductivity (at infinite dilution)"
+                },
+                {
+                  "symbol": "k",
+                  "meaning": "constant"
+                },
+                {
+                  "symbol": "C",
+                  "meaning": "concentration"
+                }
+              ]
+            },
+            {
+              "equation_name": "Debye–Hückel–Onsager equation (uni-univalent electrolyte)",
+              "latex": "\\Lambda_m = \\Lambda_m^{0} - (A + B\\Lambda_m^{0})\\sqrt{C}",
+              "variables": [
+                {
+                  "symbol": "A, B",
+                  "meaning": "constants depending on the nature of the solvent and temperature"
+                }
+              ]
+            },
+            {
+              "equation_name": "Kohlrausch's law of independent migration of ions (uni-univalent electrolyte, e.g. NaCl)",
+              "latex": "\\Lambda_m^{0} = \\lambda_m^{0}(\\ce{Na+}) + \\lambda_m^{0}(\\ce{Cl-})"
+            },
+            {
+              "equation_name": "Kohlrausch's law - general electrolyte AxBy",
+              "latex": "\\Lambda_m^{0}(\\ce{A_xB_y}) = x\\lambda_m^{0}(\\ce{A}) + y\\lambda_m^{0}(\\ce{B})",
+              "variables": [
+                {
+                  "symbol": "\\lambda_m^{0}",
+                  "meaning": "limiting molar ionic conductivity of the respective ion"
+                }
+              ]
+            },
+            {
+              "equation_name": "Degree of dissociation of a weak electrolyte from conductivity",
+              "latex": "\\alpha = \\dfrac{\\Lambda_m}{\\Lambda_m^{0}}"
+            }
+          ]
+        },
+        {
+          "topic": "Thermodynamics of cell reactions",
+          "equations": [
+            {
+              "equation_name": "Electrical energy produced by a galvanic cell",
+              "latex": "\\text{Electrical energy} = nFE_{cell}",
+              "variables": [
+                {
+                  "symbol": "n",
+                  "meaning": "number of moles of electrons transferred"
+                },
+                {
+                  "symbol": "F",
+                  "meaning": "Faraday constant (≈96500 C mol⁻¹)"
+                },
+                {
+                  "symbol": "E_{cell}",
+                  "meaning": "emf of the cell"
+                }
+              ]
+            },
+            {
+              "equation_name": "Maximum electrical work obtainable from a cell",
+              "latex": "W_{max} = -nFE_{cell}"
+            },
+            {
+              "equation_name": "Relation between Gibbs free energy and cell emf",
+              "latex": "\\Delta G = -nFE_{cell}"
+            },
+            {
+              "equation_name": "Relation between standard Gibbs free energy and standard cell emf",
+              "latex": "\\Delta G^{\\circ} = -nFE^{\\circ}_{cell}"
+            },
+            {
+              "equation_name": "Relation between standard free energy and equilibrium constant",
+              "latex": "\\Delta G^{\\circ} = -RT\\ln K_c",
+              "variables": [
+                {
+                  "symbol": "R",
+                  "meaning": "universal gas constant"
+                },
+                {
+                  "symbol": "T",
+                  "meaning": "absolute temperature"
+                },
+                {
+                  "symbol": "K_c",
+                  "meaning": "equilibrium constant"
+                }
+              ]
+            },
+            {
+              "equation_name": "Combined relation - standard cell emf and equilibrium constant",
+              "latex": "E^{\\circ}_{cell} = \\dfrac{RT}{nF}\\ln K_c"
+            }
+          ]
+        },
+        {
+          "topic": "Nernst equation",
+          "equations": [
+            {
+              "equation_name": "Nernst equation (general form)",
+              "latex": "E_{cell} = E^{\\circ}_{cell} - \\dfrac{RT}{nF}\\ln Q",
+              "variables": [
+                {
+                  "symbol": "Q",
+                  "meaning": "reaction quotient of the cell reaction"
+                },
+                {
+                  "symbol": "E^{\\circ}_{cell}",
+                  "meaning": "standard cell emf"
+                }
+              ]
+            },
+            {
+              "equation_name": "Nernst equation at 298 K (base-10 log form)",
+              "latex": "E_{cell} = E^{\\circ}_{cell} - \\dfrac{0.0591}{n}\\log_{10} Q"
+            },
+            {
+              "equation_name": "Nernst equation applied to a single electrode (reduction potential)",
+              "latex": "E = E^{\\circ} - \\dfrac{0.0591}{n}\\log_{10}\\dfrac{1}{[\\ce{M^{n+}}]}",
+              "note": "Applied, e.g., for Cu2+/Cu: Ecell = E° − (0.0591/n) log(1/[Cu2+])."
+            }
+          ]
+        },
+        {
+          "topic": "Faraday's laws of electrolysis",
+          "equations": [
+            {
+              "equation_name": "Faraday's first law",
+              "latex": "m = Zit",
+              "variables": [
+                {
+                  "symbol": "m",
+                  "meaning": "mass of substance liberated at electrode"
+                },
+                {
+                  "symbol": "Z",
+                  "meaning": "electrochemical equivalent"
+                },
+                {
+                  "symbol": "i",
+                  "meaning": "current"
+                },
+                {
+                  "symbol": "t",
+                  "meaning": "time"
+                }
+              ]
+            },
+            {
+              "equation_name": "Relation between electrochemical equivalent and molar mass",
+              "latex": "Z = \\dfrac{M}{nF}",
+              "variables": [
+                {
+                  "symbol": "M",
+                  "meaning": "molar mass of the substance"
+                },
+                {
+                  "symbol": "n",
+                  "meaning": "number of electrons involved per ion"
+                },
+                {
+                  "symbol": "F",
+                  "meaning": "Faraday constant"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Standard electrode reactions - Standard Hydrogen Electrode (SHE)",
+          "equations": [
+            {
+              "equation_name": "SHE as cathode (reduction, reference electrode)",
+              "latex": "2\\ce{H+}(aq, 1M) + 2e^{-} \\rightarrow \\ce{H2}(g, 1\\ \\text{atm}) \\qquad E^{\\circ}=0\\ \\text{V}"
+            },
+            {
+              "equation_name": "SHE as anode (oxidation)",
+              "latex": "\\ce{H2}(g, 1\\ \\text{atm}) \\rightarrow 2\\ce{H+}(aq, 1M) + 2e^{-} \\qquad E^{\\circ}=0\\ \\text{V}"
+            }
+          ]
+        },
+        {
+          "topic": "Galvanic cells - representative electrode and overall reactions",
+          "equations": [
+            {
+              "equation_name": "Daniell cell overall reaction",
+              "latex": "\\ce{Zn}(s) + \\ce{Cu^2+}(aq) \\rightarrow \\ce{Zn^2+}(aq) + \\ce{Cu}(s)"
+            },
+            {
+              "equation_name": "Cu–Fe3+ galvanic cell overall reaction",
+              "latex": "\\ce{Cu}(s) + 2\\ce{Fe^3+}(aq) \\rightarrow \\ce{Cu^2+}(aq) + 2\\ce{Fe^2+}(aq)"
+            }
+          ]
+        },
+        {
+          "topic": "Primary batteries",
+          "equations": [
+            {
+              "equation_name": "Dry cell (Leclanché cell) - anode reaction",
+              "latex": "\\ce{Zn}(s) \\rightarrow \\ce{Zn^2+}(aq) + 2e^{-}"
+            },
+            {
+              "equation_name": "Dry cell - cathode reaction",
+              "latex": "2\\ce{NH4+}(aq) + 2e^{-} \\rightarrow 2\\ce{NH3}(aq) + \\ce{H2}(g)"
+            },
+            {
+              "equation_name": "Dry cell - oxidation of H2 by MnO2 at cathode",
+              "latex": "\\ce{H2}(g) + 2\\ce{MnO2}(s) \\rightarrow \\ce{Mn2O3}(s) + \\ce{H2O}(l)"
+            },
+            {
+              "equation_name": "Dry cell - overall cell reaction",
+              "latex": "\\ce{Zn}(s) + 2\\ce{NH4+}(aq) + 2\\ce{MnO2}(s) \\rightarrow \\ce{Zn^2+}(aq) + \\ce{Mn2O3}(s) + \\ce{H2O}(l) + 2\\ce{NH3}(aq)"
+            },
+            {
+              "equation_name": "Mercury button cell - anode reaction",
+              "latex": "\\ce{Zn}(s) + 2\\ce{OH-}(aq) \\rightarrow \\ce{ZnO}(s) + \\ce{H2O}(l) + 2e^{-}"
+            },
+            {
+              "equation_name": "Mercury button cell - cathode reaction",
+              "latex": "\\ce{HgO}(s) + \\ce{H2O}(l) + 2e^{-} \\rightarrow \\ce{Hg}(l) + 2\\ce{OH-}(aq)"
+            },
+            {
+              "equation_name": "Mercury button cell - overall reaction",
+              "latex": "\\ce{Zn}(s) + \\ce{HgO}(s) \\rightarrow \\ce{ZnO}(s) + \\ce{Hg}(l)",
+              "note": "Cell emf about 1.35 V."
+            }
+          ]
+        },
+        {
+          "topic": "Secondary batteries",
+          "equations": [
+            {
+              "equation_name": "Lead storage battery - discharge, anode reaction",
+              "latex": "\\ce{Pb}(s) + \\ce{SO4^2-}(aq) \\rightarrow \\ce{PbSO4}(s) + 2e^{-}"
+            },
+            {
+              "equation_name": "Lead storage battery - discharge, cathode reaction",
+              "latex": "\\ce{PbO2}(s) + 4\\ce{H+}(aq) + 2e^{-} \\rightarrow \\ce{Pb^2+}(aq) + 2\\ce{H2O}(l)",
+              "note": "Pb2+ combines with SO4²⁻ to form PbSO4 precipitate: Pb²⁺(aq) + SO4²⁻(aq) → PbSO4(s)"
+            },
+            {
+              "equation_name": "Lead storage battery - overall discharge reaction",
+              "latex": "\\ce{Pb}(s) + \\ce{PbO2}(s) + 4\\ce{H+}(aq) + 2\\ce{SO4^2-}(aq) \\rightarrow 2\\ce{PbSO4}(s) + 2\\ce{H2O}(l)"
+            },
+            {
+              "equation_name": "Lead storage battery - overall charging (recharge) reaction",
+              "latex": "2\\ce{PbSO4}(s) + 2\\ce{H2O}(l) \\rightarrow \\ce{Pb}(s) + \\ce{PbO2}(s) + 4\\ce{H+}(aq) + 2\\ce{SO4^2-}(aq)"
+            },
+            {
+              "equation_name": "Lithium-ion battery - anode reaction",
+              "latex": "\\ce{Li}(s) \\rightarrow \\ce{Li+}(aq) + e^{-}"
+            },
+            {
+              "equation_name": "Lithium-ion battery - cathode reaction",
+              "latex": "\\ce{Li+} + \\ce{CoO2}(s) + e^{-} \\rightarrow \\ce{LiCoO2}(s)"
+            },
+            {
+              "equation_name": "Lithium-ion battery - overall reaction",
+              "latex": "\\ce{Li}(s) + \\ce{CoO2} \\rightarrow \\ce{LiCoO2}(s)"
+            }
+          ]
+        },
+        {
+          "topic": "Fuel cells",
+          "equations": [
+            {
+              "equation_name": "H2–O2 fuel cell - anode (oxidation) reaction",
+              "latex": "2\\ce{H2}(g) + 4\\ce{OH-}(aq) \\rightarrow 4\\ce{H2O}(l) + 4e^{-}"
+            },
+            {
+              "equation_name": "H2–O2 fuel cell - cathode (reduction) reaction",
+              "latex": "\\ce{O2}(g) + 2\\ce{H2O}(l) + 4e^{-} \\rightarrow 4\\ce{OH-}(aq)"
+            },
+            {
+              "equation_name": "H2–O2 fuel cell - overall reaction",
+              "latex": "2\\ce{H2}(g) + \\ce{O2}(g) \\rightarrow 2\\ce{H2O}(l)"
+            }
+          ]
+        },
+        {
+          "topic": "Corrosion",
+          "equations": [
+            {
+              "equation_name": "Rusting of iron - anodic reaction",
+              "latex": "\\ce{Fe}(s) \\rightarrow \\ce{Fe^2+}(aq) + 2e^{-}"
+            },
+            {
+              "equation_name": "Rusting of iron - cathodic reaction (reduction of oxygen)",
+              "latex": "\\ce{O2}(g) + 4\\ce{H+}(aq) + 4e^{-} \\rightarrow 2\\ce{H2O}(l) \\qquad E^{\\circ}=1.23\\ \\text{V}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 10,
+      "chapter_title": "Surface Chemistry",
+      "volume": "Volume 2",
+      "topics": [
+        {
+          "topic": "Adsorption isotherms",
+          "equations": [
+            {
+              "equation_name": "Freundlich adsorption isotherm (gas on solid)",
+              "latex": "\\dfrac{x}{m} = K p^{1/n}",
+              "variables": [
+                {
+                  "symbol": "x",
+                  "meaning": "mass of adsorbate adsorbed"
+                },
+                {
+                  "symbol": "m",
+                  "meaning": "mass of adsorbent"
+                },
+                {
+                  "symbol": "p",
+                  "meaning": "pressure of adsorbate gas at equilibrium"
+                },
+                {
+                  "symbol": "K, n",
+                  "meaning": "Freundlich constants (n > 1, i.e. 1/n < 1)"
+                }
+              ]
+            },
+            {
+              "equation_name": "Freundlich adsorption isotherm (solute from solution)",
+              "latex": "\\dfrac{x}{m} = K c^{1/n}",
+              "variables": [
+                {
+                  "symbol": "c",
+                  "meaning": "equilibrium concentration of the adsorbate in solution"
+                }
+              ]
+            },
+            {
+              "equation_name": "Linearised (logarithmic) form of Freundlich isotherm",
+              "latex": "\\log\\dfrac{x}{m} = \\log K + \\dfrac{1}{n}\\log p",
+              "note": "A plot of log(x/m) vs log p is a straight line; intercept = log K, slope = 1/n."
+            }
+          ]
+        },
+        {
+          "topic": "Applications of adsorption - ion exchange",
+          "equations": [
+            {
+              "equation_name": "Regeneration of permutit (softening of hard water)",
+              "latex": "\\ce{Na2Al2Si4O12} + \\ce{CaCl2} \\rightarrow \\ce{CaAl2Si4O12} + 2\\ce{NaCl}"
+            },
+            {
+              "equation_name": "Regeneration of exhausted permutit with brine",
+              "latex": "\\ce{CaAl2Si4O12} + 2\\ce{NaCl} \\rightarrow \\ce{Na2Al2Si4O12} + \\ce{CaCl2}"
+            },
+            {
+              "equation_name": "Cation exchange resin softening reaction",
+              "latex": "2\\ce{RSO3H} + \\ce{Ca^2+}(\\text{or}\\ \\ce{Mg^2+}) \\rightarrow \\ce{(RSO3)2Ca(Mg)} + 2\\ce{H+}",
+              "note": "R = resin matrix; the resin exchanges H+ for hardness-causing cations from water."
+            }
+          ]
+        },
+        {
+          "topic": "Heterogeneous catalysis - representative industrial reactions",
+          "equations": [
+            {
+              "equation_name": "Haber's process (Fe catalyst, Mo promoter)",
+              "latex": "4\\ce{NH3}(g) + 5\\ce{O2}(g) \\rightarrow 4\\ce{NO}(g) + 6\\ce{H2O}(g)",
+              "note": "Text refers to the general ammonia-synthesis catalysis; the reaction shown is the catalytic oxidation step referenced alongside it."
+            },
+            {
+              "equation_name": "Contact process step - catalytic oxidation of SO2 (Pt catalyst)",
+              "latex": "2\\ce{SO2} + \\ce{O2} \\xrightarrow{\\ce{Pt}} 2\\ce{SO3}",
+              "note": "As2O3 acts as a catalyst poison for the Pt catalyst in this reaction."
+            },
+            {
+              "equation_name": "Catalytic hydrogenation of vegetable oil (Ni catalyst)",
+              "latex": "\\text{Vegetable oil} + \\ce{H2} \\xrightarrow[473\\,K]{\\ce{Ni}} \\text{Vanaspati}"
+            },
+            {
+              "equation_name": "Catalytic combustion of hydrogen (finely divided Pt/Cu)",
+              "latex": "2\\ce{H2} + \\ce{O2} \\rightarrow 2\\ce{H2O}"
+            },
+            {
+              "equation_name": "Catalytic decomposition of potassium chlorate (MnO2 catalyst) - reaction mechanism steps",
+              "latex": "2\\ce{KClO3} \\xrightarrow{\\ce{MnO2}} 2\\ce{KCl} + 3\\ce{O2}",
+              "note": "Intermediate-complex mechanism: 2KClO3 + 6MnO2 → 6MnO3 + 2KCl, followed by decomposition of the intermediate to release O2 and regenerate MnO2."
+            },
+            {
+              "equation_name": "Intermediate compound formation mechanism (general)",
+              "latex": "\\ce{A} + \\ce{C} \\rightarrow \\ce{AC} \\qquad (\\text{intermediate})",
+              "variants": [
+                "\\ce{AC} + \\ce{B} \\rightarrow \\ce{AB} + \\ce{C}"
+              ],
+              "note": "C is the catalyst; overall A + B → AB."
+            }
+          ]
+        },
+        {
+          "topic": "Enzyme catalysis",
+          "equations": [
+            {
+              "equation_name": "General mechanism of enzyme catalysis",
+              "latex": "\\ce{E} + \\ce{S} \\rightleftharpoons \\ce{ES} \\rightarrow \\ce{P} + \\ce{E}",
+              "variables": [
+                {
+                  "symbol": "E",
+                  "meaning": "enzyme"
+                },
+                {
+                  "symbol": "S",
+                  "meaning": "substrate (reactant)"
+                },
+                {
+                  "symbol": "ES",
+                  "meaning": "enzyme–substrate activated complex"
+                },
+                {
+                  "symbol": "P",
+                  "meaning": "product"
+                }
+              ]
+            },
+            {
+              "equation_name": "Hydrolysis of starch by diastase",
+              "latex": "2(\\ce{C6H10O5})_n + n\\ce{H2O} \\rightarrow n\\ce{C12H22O11}"
+            },
+            {
+              "equation_name": "Fermentation of glucose by zymase",
+              "latex": "\\ce{C6H12O6} \\rightarrow 2\\ce{C2H5OH} + 2\\ce{CO2}"
+            },
+            {
+              "equation_name": "Oxidation of ethanol to acetic acid (Mycoderma aceti)",
+              "latex": "\\ce{C2H5OH} + \\ce{O2} \\rightarrow \\ce{CH3COOH} + \\ce{H2O}"
+            },
+            {
+              "equation_name": "Hydrolysis of urea by urease",
+              "latex": "\\ce{NH2CONH2} + \\ce{H2O} \\rightarrow 2\\ce{NH3} + \\ce{CO2}",
+              "note": "Urease is highly specific: it does not catalyse hydrolysis of methylurea, NH2CONHCH3 + H2O → no reaction."
+            },
+            {
+              "equation_name": "Decomposition of hydrogen peroxide (catalysed)",
+              "latex": "2\\ce{H2O2} \\rightarrow 2\\ce{H2O} + \\ce{O2}",
+              "note": "Activation energy: ~18 kcal/mol uncatalysed; 11.7 kcal/mol with colloidal Pt; <2 kcal/mol with the enzyme catalase."
+            }
+          ]
+        },
+        {
+          "topic": "Colloids - preparation by oxidation, reduction, hydrolysis, double decomposition",
+          "equations": [
+            {
+              "equation_name": "Preparation of iodine sol by oxidation (HI + HIO3)",
+              "latex": "\\ce{HIO3} + 5\\ce{HI} \\rightarrow 3\\ce{H2O} + 3\\ce{I2}(\\text{sol})"
+            },
+            {
+              "equation_name": "Preparation of selenium sol by oxidation",
+              "latex": "2\\ce{H2Se} + \\ce{O2} \\rightarrow 2\\ce{H2O} + 2\\ce{Se}(\\text{sol})"
+            },
+            {
+              "equation_name": "Preparation of gold sol by reduction (formaldehyde)",
+              "latex": "2\\ce{AuCl3} + 3\\ce{HCHO} + 3\\ce{H2O} \\rightarrow 2\\ce{Au}(\\text{sol}) + 6\\ce{HCl} + 3\\ce{HCOOH}"
+            },
+            {
+              "equation_name": "Preparation of ferric hydroxide sol by hydrolysis",
+              "latex": "\\ce{FeCl3} + 3\\ce{H2O} \\rightarrow \\ce{Fe(OH)3}(\\text{sol}) + 3\\ce{HCl}"
+            },
+            {
+              "equation_name": "Preparation of arsenious sulphide sol by double decomposition",
+              "latex": "\\ce{As2O3} + 3\\ce{H2S} \\rightarrow \\ce{As2S3}(\\text{sol}) + 3\\ce{H2O}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 11,
+      "chapter_title": "Hydroxy Compounds and Ethers",
+      "volume": "Volume 2",
+      "topics": [
+        {
+          "topic": "Preparation of alcohols",
+          "equations": [
+            {
+              "equation_name": "From alkyl halides (hydrolysis with aq. NaOH)",
+              "latex": "\\ce{R-X} + \\ce{NaOH}(aq) \\xrightarrow{\\Delta} \\ce{R-OH} + \\ce{NaX}"
+            },
+            {
+              "equation_name": "From alkenes - acid catalysed hydration (Markownikoff addition)",
+              "latex": "\\ce{CH3-CH=CH2} + \\ce{H2O} \\xrightarrow{\\text{conc. } \\ce{H2SO4}} \\ce{CH3-CH(OH)-CH3}",
+              "note": "Propylene → propan-2-ol"
+            },
+            {
+              "equation_name": "From carbonyl compounds - LiAlH4 reduction",
+              "latex": "\\ce{RCHO} \\xrightarrow[\\text{ii) } \\ce{H2O}]{\\text{i) } \\ce{LiAlH4}} \\ce{RCH2OH}",
+              "variants": [
+                "\\ce{C6H5COOH} \\xrightarrow[\\text{ii) } \\ce{H2O}]{\\text{i) } \\ce{LiAlH4}} \\ce{C6H5CH2OH}",
+                "\\ce{CH3COOC2H5} \\xrightarrow[\\text{ii) } \\ce{H2O}]{\\text{i) } \\ce{LiAlH4}} 2\\ce{CH3CH2OH}",
+                "\\ce{CH3-CH=CH-CHO} \\xrightarrow[\\text{ii) } \\ce{H2O}]{\\text{i) } \\ce{LiAlH4}} \\ce{CH3-CH=CH-CH2OH}"
+              ],
+              "note": "LiAlH4 does not reduce C=C double bonds, so unsaturated aldehydes give unsaturated alcohols. Benzoic acid → benzyl alcohol; ethyl acetate → 2 ethanol; crotonaldehyde → crotyl alcohol."
+            },
+            {
+              "equation_name": "Selective reduction of keto-acid with NaBH4",
+              "latex": "\\ce{RCOCH2CH2COOH} \\xrightarrow[\\ce{H3O+}]{\\ce{NaBH4}} \\ce{RCHOH-CH2CH2COOH}",
+              "note": "NaBH4 selectively reduces the ketone carbonyl in preference to the carboxylic acid group."
+            }
+          ]
+        },
+        {
+          "topic": "Preparation of glycol and glycerol",
+          "equations": [
+            {
+              "equation_name": "Hydroxylation of ethene with cold alkaline KMnO4 (Baeyer's reagent)",
+              "latex": "\\ce{CH2=CH2} + \\ce{H2O} + [\\ce{O}] \\xrightarrow{\\text{cold alk. } \\ce{KMnO4}} \\ce{CH2(OH)-CH2(OH)}",
+              "note": "Ethene → ethane-1,2-diol (ethylene glycol)"
+            }
+          ]
+        },
+        {
+          "topic": "Reactions of alcohols",
+          "equations": [
+            {
+              "equation_name": "Reaction of ethanol with sodium metal",
+              "latex": "2\\ce{C2H5OH} + 2\\ce{Na} \\rightarrow 2\\ce{C2H5ONa} + \\ce{H2}\\uparrow"
+            },
+            {
+              "equation_name": "Reaction of ethanol with excess HBr",
+              "latex": "\\ce{CH3CH2OH} + \\ce{HBr}(\\text{excess}) \\rightarrow \\ce{CH3CH2Br} + \\ce{H2O}"
+            }
+          ]
+        },
+        {
+          "topic": "Williamson ether synthesis",
+          "equations": [
+            {
+              "equation_name": "General Williamson synthesis",
+              "latex": "\\ce{R-ONa} + \\ce{R'-X} \\rightarrow \\ce{R-O-R'} + \\ce{NaX}",
+              "note": "SN2 nucleophilic substitution of sodium alkoxide on a primary alkyl halide."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 12,
+      "chapter_title": "Carbonyl Compounds and Carboxylic Acids",
+      "volume": "Volume 2",
+      "topics": [
+        {
+          "topic": "Grignard reactions of carbonyl/ester compounds",
+          "equations": [
+            {
+              "equation_name": "Reaction of Grignard reagent with an ester, followed by oxidation",
+              "latex": "\\ce{CH3COCH2CH2COOC2H5} \\xrightarrow{\\ce{CH3MgBr}} \\ce{X} \\xrightarrow{\\ce{H3O+}} \\ce{Y}",
+              "note": "Illustrative Grignard-addition/hydrolysis sequence from the textbook exercises."
+            }
+          ]
+        },
+        {
+          "topic": "Test/characteristic reactions of carboxylic acids",
+          "equations": [
+            {
+              "equation_name": "Reaction of carboxylic acid with sodium bicarbonate (test for -COOH)",
+              "latex": "\\ce{R-COOH} + \\ce{NaHCO3} \\rightarrow \\ce{R-COONa} + \\ce{CO2}\\uparrow + \\ce{H2O}"
+            },
+            {
+              "equation_name": "Neutralisation of oxalic acid with NaOH",
+              "latex": "2\\ce{NaOH} + \\ce{(COOH)2} \\rightarrow \\ce{(COONa)2} + 2\\ce{H2O}",
+              "note": "Oxalic acid → sodium oxalate"
+            }
+          ]
+        },
+        {
+          "topic": "Reduction of carboxylic acid derivatives",
+          "equations": [
+            {
+              "equation_name": "Reduction of an acid chloride/Grignard sequence (benzoic acid to alcohol via Friedel-Crafts and Grignard)",
+              "latex": "\\ce{C6H5COOH} \\xrightarrow{\\ce{PCl5}} \\ce{X} \\xrightarrow[\\ce{AlCl3}]{\\ce{C6H6}} \\ce{Y} \\xrightarrow[\\text{ii) }\\ce{H3O+}]{\\text{i) }\\ce{CH3MgBr}} \\ce{Z}",
+              "note": "Multi-step exercise sequence: acid chloride formation, Friedel-Crafts acylation, then Grignard addition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 13,
+      "chapter_title": "Organic Nitrogen Compounds",
+      "volume": "Volume 2",
+      "topics": [
+        {
+          "topic": "Diazonium salts and related reactions",
+          "equations": [
+            {
+              "equation_name": "Preparation and reactions of benzene diazonium chloride (multi-step sequence)",
+              "latex": "\\ce{C6H5NO2} \\xrightarrow{\\ce{Fe/HCl}} \\ce{C6H5NH2} \\xrightarrow{\\ce{NaNO2/HCl}} \\ce{C6H5-N2+Cl-} \\xrightarrow{\\ce{H2O}} \\ce{C6H5-OH} + \\ce{N2} + \\ce{HCl}",
+              "note": "Reduction of nitrobenzene to aniline, diazotisation, then hydrolysis of the diazonium salt to phenol."
+            }
+          ]
+        },
+        {
+          "topic": "Reactions of aromatic amines",
+          "equations": [
+            {
+              "equation_name": "Reaction of aniline with benzoyl chloride (Schotten–Baumann / benzoylation)",
+              "latex": "\\ce{C6H5NH2} + \\ce{C6H5COCl} \\xrightarrow{\\ce{NaOH}} \\ce{C6H5-NH-COC6H5}"
+            }
+          ]
+        },
+        {
+          "topic": "Cyanide/isocyanide reactions",
+          "equations": [
+            {
+              "equation_name": "Formation and hydrolysis sequence from alkyl halide via cyanide",
+              "latex": "\\ce{CH3Br} \\xrightarrow{\\ce{KCN}} \\ce{(A)} \\xrightarrow{\\ce{H3O+}} \\ce{(B)} \\xrightarrow{\\ce{PCl5}} \\ce{(C)}",
+              "note": "Illustrative sequence: alkyl cyanide → carboxylic acid → acid chloride."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 14,
+      "chapter_title": "Biomolecules",
+      "volume": "Volume 2",
+      "topics": [
+        {
+          "topic": "Carbohydrates - formation and hydrolysis",
+          "equations": [
+            {
+              "equation_name": "Photosynthesis - formation of glucose",
+              "latex": "6\\ce{CO2} + 6\\ce{H2O} \\xrightarrow{\\text{sunlight}} \\ce{C6H12O6} + 6\\ce{O2}"
+            },
+            {
+              "equation_name": "Hydrolysis of sucrose by invertase",
+              "latex": "\\ce{Sucrose} \\xrightarrow{\\ce{Invertase}} \\ce{Glucose} + \\ce{Fructose}"
+            },
+            {
+              "equation_name": "General formula of carbohydrates",
+              "latex": "\\ce{C_n(H2O)_n}",
+              "note": "Carbohydrates are defined as polyhydroxy aldehydes or ketones with this general formula (hydrates of carbon)."
+            },
+            {
+              "equation_name": "Number of optical isomers from chiral carbons",
+              "latex": "\\text{Number of optical isomers} = 2^n",
+              "variables": [
+                {
+                  "symbol": "n",
+                  "meaning": "total number of chiral carbons in the molecule"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_number": 15,
+      "chapter_title": "Chemistry in Everyday Life",
+      "volume": "Volume 2",
+      "topics": [
+        {
+          "topic": "Cleansing agents",
+          "equations": [
+            {
+              "equation_name": "Total fatty matter (TFM) - quality parameter of soap",
+              "latex": "\\text{TFM} = \\dfrac{\\text{mass of fatty matter separated on splitting with mineral acid}}{\\text{mass of soap sample}} \\times 100\\%",
+              "note": "Higher TFM indicates better soap quality; Grade-1 soaps require minimum 76% TFM as per BIS standards."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
