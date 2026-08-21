@@ -1,0 +1,5180 @@
+{
+  "book": "NCERT / CBSE - Class 12 Physics (Part I & Part II)",
+  "subject": "Physics",
+  "class": "12",
+  "total_chapters": 14,
+  "chapters": [
+    {
+      "chapter_no": 1,
+      "chapter_title": "Electric Charges and Fields",
+      "topics": [
+        {
+          "sub_topic": "Quantisation of Charge",
+          "formulas": [
+            {
+              "formula_name": "Quantisation of Charge",
+              "expressions": [
+                "q = ne"
+              ],
+              "variables": [
+                {
+                  "symbol": "q",
+                  "description": "Total charge on a body",
+                  "unit": "C (coulomb)"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Any integer (0, ±1, ±2, ±3, …)",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "e",
+                  "description": "Basic quantum of charge (charge of a proton/electron)",
+                  "unit": "C"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "e",
+                  "value": "1.6 × 10⁻¹⁹",
+                  "unit": "C"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Coulomb's Law",
+          "formulas": [
+            {
+              "formula_name": "Coulomb's Law (Vector Form)",
+              "expressions": [
+                "F_{21} = k\\dfrac{q_{1}q_{2}}{r^{2}} \\hat{r}_{21},  k = \\dfrac{1}{4\\pi\\varepsilon_{0}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "F₂₁",
+                  "description": "Force on charge q₂ due to charge q₁",
+                  "unit": "N"
+                },
+                {
+                  "symbol": "q₁, q₂",
+                  "description": "Magnitudes of the two point charges",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "r",
+                  "description": "Distance between the two charges",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "r̂₂₁",
+                  "description": "Unit vector from q₁ to q₂",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "k",
+                  "description": "Coulomb's constant, k = 1/4πε₀",
+                  "unit": "N m² C⁻²"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "k",
+                  "value": "9 × 10⁹",
+                  "unit": "N m² C⁻²"
+                },
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Ratio of Electric Force to Gravitational Force (Proton-Electron)",
+              "expressions": [
+                "\\dfrac{ke^{2}}{G m_{e} m_{p}} \\approx 2.4 \\times 10^{39}"
+              ],
+              "variables": [
+                {
+                  "symbol": "k",
+                  "description": "Coulomb's constant",
+                  "unit": "N m² C⁻²"
+                },
+                {
+                  "symbol": "e",
+                  "description": "Elementary charge",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "G",
+                  "description": "Universal gravitational constant",
+                  "unit": "N m² kg⁻²"
+                },
+                {
+                  "symbol": "m_e",
+                  "description": "Mass of electron",
+                  "unit": "kg"
+                },
+                {
+                  "symbol": "m_p",
+                  "description": "Mass of proton",
+                  "unit": "kg"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "G",
+                  "value": "6.67 × 10⁻¹¹",
+                  "unit": "N m² kg⁻²"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Electric Field",
+          "formulas": [
+            {
+              "formula_name": "Electric Field due to a Point Charge",
+              "expressions": [
+                "E = \\dfrac{1}{4\\pi\\varepsilon_{0}}\\dfrac{q}{r^{2}} \\hat{r}"
+              ],
+              "variables": [
+                {
+                  "symbol": "E",
+                  "description": "Electric field at a point due to charge q (radially outward if q positive, inward if negative)",
+                  "unit": "N C⁻¹ (or V m⁻¹)"
+                },
+                {
+                  "symbol": "q",
+                  "description": "Source point charge",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "r",
+                  "description": "Distance from the charge to the point",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "r̂",
+                  "description": "Unit vector from the charge to the point",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Force on a Test Charge",
+              "expressions": [
+                "E = \\dfrac{F}{q}"
+              ],
+              "variables": [
+                {
+                  "symbol": "E",
+                  "description": "Electric field at the location of the test charge",
+                  "unit": "N C⁻¹"
+                },
+                {
+                  "symbol": "F",
+                  "description": "Force experienced by the small test charge",
+                  "unit": "N"
+                },
+                {
+                  "symbol": "q",
+                  "description": "Magnitude of the test charge",
+                  "unit": "C"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Electric Flux",
+          "formulas": [
+            {
+              "formula_name": "Electric Flux through an Area Element",
+              "expressions": [
+                "\\Delta\\Phi = E  \\cdot  \\Delta{}S",
+                "\\Delta{}S = \\Delta{}S \\hat{n}"
+              ],
+              "variables": [
+                {
+                  "symbol": "ΔΦ",
+                  "description": "Electric flux through the small area element",
+                  "unit": "N m² C⁻¹ (or V m)"
+                },
+                {
+                  "symbol": "E",
+                  "description": "Electric field",
+                  "unit": "N C⁻¹"
+                },
+                {
+                  "symbol": "ΔS",
+                  "description": "Vector area element (magnitude ΔS, direction along outward normal n̂)",
+                  "unit": "m²"
+                },
+                {
+                  "symbol": "n̂",
+                  "description": "Unit normal vector to the area element",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Electric Dipole",
+          "formulas": [
+            {
+              "formula_name": "Electric Dipole Moment",
+              "expressions": [
+                "p = q(2a),  \\quad\\text{directed from }\\;-q\\;\\text{to}\\;+q"
+              ],
+              "variables": [
+                {
+                  "symbol": "p",
+                  "description": "Electric dipole moment",
+                  "unit": "C m"
+                },
+                {
+                  "symbol": "q",
+                  "description": "Magnitude of each charge of the dipole",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "2a",
+                  "description": "Separation between the two charges",
+                  "unit": "m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Electric Field of a Dipole on the Equatorial Line",
+              "expressions": [
+                "E = -\\dfrac{p}{4\\pi\\varepsilon_{0}(a^{2} + r^{2})^{3/2}}",
+                "E  \\approx  -\\dfrac{p}{4\\pi\\varepsilon_{0}r^{3}}  \\quad\\text{for }\\;r  \\gg  a"
+              ],
+              "variables": [
+                {
+                  "symbol": "E",
+                  "description": "Electric field at a point on the equatorial plane (direction anti-parallel to p)",
+                  "unit": "N C⁻¹"
+                },
+                {
+                  "symbol": "p",
+                  "description": "Electric dipole moment",
+                  "unit": "C m"
+                },
+                {
+                  "symbol": "r",
+                  "description": "Distance of the point from the centre of the dipole",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "a",
+                  "description": "Half the distance between the two charges of the dipole",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Electric Field of a Dipole on the Axial Line",
+              "expressions": [
+                "E = \\dfrac{2pr}{4\\pi\\varepsilon_{0}(r^{2} - a^{2})^{2}}",
+                "E  \\approx  \\dfrac{2p}{4\\pi\\varepsilon_{0}r^{3}}  \\quad\\text{for }\\;r  \\gg  a"
+              ],
+              "variables": [
+                {
+                  "symbol": "E",
+                  "description": "Electric field at a point on the axial line of the dipole",
+                  "unit": "N C⁻¹"
+                },
+                {
+                  "symbol": "p",
+                  "description": "Electric dipole moment",
+                  "unit": "C m"
+                },
+                {
+                  "symbol": "r",
+                  "description": "Distance of the point from the centre of the dipole",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "a",
+                  "description": "Half the distance between the two charges",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Torque on a Dipole in a Uniform Electric Field",
+              "expressions": [
+                "\\tau = p  \\times  E"
+              ],
+              "variables": [
+                {
+                  "symbol": "τ",
+                  "description": "Torque on the dipole (no net force in a uniform field)",
+                  "unit": "N m"
+                },
+                {
+                  "symbol": "p",
+                  "description": "Electric dipole moment",
+                  "unit": "C m"
+                },
+                {
+                  "symbol": "E",
+                  "description": "Uniform external electric field",
+                  "unit": "N C⁻¹"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Gauss's Law and its Applications",
+          "formulas": [
+            {
+              "formula_name": "Gauss's Law",
+              "expressions": [
+                "\\Phi = \\oint  E \\cdot dS = \\dfrac{Q_{enclosed}}{\\varepsilon_{0}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "Φ",
+                  "description": "Total electric flux through a closed surface S",
+                  "unit": "N m² C⁻¹"
+                },
+                {
+                  "symbol": "Q_enclosed",
+                  "description": "Total charge enclosed by the closed surface",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "ε₀",
+                  "description": "Permittivity of free space",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Field due to an Infinitely Long Straight Charged Wire",
+              "expressions": [
+                "E = \\dfrac{\\lambda}{2\\pi\\varepsilon_{0}r} \\hat{n}"
+              ],
+              "variables": [
+                {
+                  "symbol": "E",
+                  "description": "Electric field at perpendicular distance r from the wire",
+                  "unit": "N C⁻¹"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Linear charge density of the wire",
+                  "unit": "C m⁻¹"
+                },
+                {
+                  "symbol": "r",
+                  "description": "Perpendicular distance of the point from the wire",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "n̂",
+                  "description": "Radial unit vector in the plane normal to the wire",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Field due to an Infinite Thin Plane Sheet of Charge",
+              "expressions": [
+                "E = \\dfrac{\\sigma}{2\\varepsilon_{0}} \\hat{n}"
+              ],
+              "variables": [
+                {
+                  "symbol": "E",
+                  "description": "Electric field due to the infinite charged sheet",
+                  "unit": "N C⁻¹"
+                },
+                {
+                  "symbol": "σ",
+                  "description": "Surface charge density of the sheet",
+                  "unit": "C m⁻²"
+                },
+                {
+                  "symbol": "n̂",
+                  "description": "Unit vector normal to the plane, outward on either side",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Field due to a Thin Spherical Shell of Charge",
+              "expressions": [
+                "E = \\dfrac{1}{4\\pi\\varepsilon_{0}}\\dfrac{q}{r^{2}} \\hat{r}  \\quad\\text{for }\\;r  \\geq  R",
+                "E = 0  \\quad\\text{for }\\;r < R",
+                "q = 4\\pi{}R^{2}\\sigma"
+              ],
+              "variables": [
+                {
+                  "symbol": "E",
+                  "description": "Electric field at distance r from the centre of the shell",
+                  "unit": "N C⁻¹"
+                },
+                {
+                  "symbol": "q",
+                  "description": "Total charge on the spherical shell",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "r",
+                  "description": "Distance of the point from the centre of the shell",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Radius of the spherical shell",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "σ",
+                  "description": "Surface charge density of the shell",
+                  "unit": "C m⁻²"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 2,
+      "chapter_title": "Electrostatic Potential and Capacitance",
+      "topics": [
+        {
+          "sub_topic": "Electrostatic Potential",
+          "formulas": [
+            {
+              "formula_name": "Electrostatic Potential (Work Definition)",
+              "expressions": [
+                "V(r) = \\dfrac{W_{\\infty P}}{q}"
+              ],
+              "variables": [
+                {
+                  "symbol": "V(r)",
+                  "description": "Electrostatic potential at a point with position vector r",
+                  "unit": "V (volt)"
+                },
+                {
+                  "symbol": "W_∞P",
+                  "description": "Work done in bringing a unit positive test charge from infinity to the point",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "q",
+                  "description": "Test charge",
+                  "unit": "C"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Potential due to a Point Charge",
+              "expressions": [
+                "V(r) = \\dfrac{1}{4\\pi\\varepsilon_{0}}\\dfrac{Q}{r}"
+              ],
+              "variables": [
+                {
+                  "symbol": "V(r)",
+                  "description": "Electric potential at distance r due to charge Q",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "Q",
+                  "description": "Source point charge (at the origin)",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "r",
+                  "description": "Distance from the charge to the point",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Potential due to an Electric Dipole",
+              "expressions": [
+                "V(r) = \\dfrac{1}{4\\pi\\varepsilon_{0}}  \\cdot  \\dfrac{p \\cdot \\hat{r}}{r^{2}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "V(r)",
+                  "description": "Electrostatic potential at position vector r due to a point dipole",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "p",
+                  "description": "Electric dipole moment",
+                  "unit": "C m"
+                },
+                {
+                  "symbol": "r",
+                  "description": "Distance from the dipole to the point",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "r̂",
+                  "description": "Unit vector along the position vector r",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Potential due to a System of Charges",
+              "expressions": [
+                "V = \\dfrac{1}{4\\pi\\varepsilon_{0}} \\Sigma_{i} \\dfrac{q_{i}}{r_{iP}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "V",
+                  "description": "Potential at point P due to n charges",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "qᵢ",
+                  "description": "i-th point charge",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "r_iP",
+                  "description": "Distance between the i-th charge and point P",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Relation between Field and Potential",
+          "formulas": [
+            {
+              "formula_name": "Electric Field as Negative Gradient of Potential",
+              "expressions": [
+                "E = -\\dfrac{dV}{dr}"
+              ],
+              "variables": [
+                {
+                  "symbol": "E",
+                  "description": "Electric field (in the direction of steepest decrease of potential)",
+                  "unit": "N C⁻¹ (or V m⁻¹)"
+                },
+                {
+                  "symbol": "dV/dr",
+                  "description": "Rate of change of potential with distance",
+                  "unit": "V m⁻¹"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Electrostatic Potential Energy",
+          "formulas": [
+            {
+              "formula_name": "Work Done Moving a Charge between Two Points",
+              "expressions": [
+                "W = q(V_{P} - V_{R})"
+              ],
+              "variables": [
+                {
+                  "symbol": "W",
+                  "description": "Work done by an external force in bringing charge q from R to P",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "q",
+                  "description": "Charge being moved",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "V_P, V_R",
+                  "description": "Potentials at points P and R respectively",
+                  "unit": "V"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Potential Energy of a System of Two Charges",
+              "expressions": [
+                "U = \\dfrac{1}{4\\pi\\varepsilon_{0}}\\dfrac{q_{1}q_{2}}{r_{12}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "U",
+                  "description": "Electrostatic potential energy of the two-charge system",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "q₁, q₂",
+                  "description": "The two point charges",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "r₁₂",
+                  "description": "Distance between the two charges",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Potential Energy of a Single Charge in an External Field",
+              "expressions": [
+                "U = qV(r)"
+              ],
+              "variables": [
+                {
+                  "symbol": "U",
+                  "description": "Potential energy of the charge q at position r in the external field",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "q",
+                  "description": "Charge placed in the external field",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "V(r)",
+                  "description": "External potential at point r",
+                  "unit": "V"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Potential Energy of a System of Two Charges in an External Field",
+              "expressions": [
+                "U = q_{1}V(r_{1}) + q_{2}V(r_{2}) + \\dfrac{1}{4\\pi\\varepsilon_{0}}\\dfrac{q_{1}q_{2}}{r_{12}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "U",
+                  "description": "Total potential energy of the two-charge system in the external field",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "q₁, q₂",
+                  "description": "The two charges",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "V(r₁), V(r₂)",
+                  "description": "External potential at the locations of q₁ and q₂",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "r₁₂",
+                  "description": "Distance between q₁ and q₂",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Potential Energy of a Dipole in an External Field",
+              "expressions": [
+                "U = -p \\cdot E = -pE \\cos\\theta"
+              ],
+              "variables": [
+                {
+                  "symbol": "U",
+                  "description": "Potential energy of the dipole in the external field",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "p",
+                  "description": "Electric dipole moment",
+                  "unit": "C m"
+                },
+                {
+                  "symbol": "E",
+                  "description": "Uniform external electric field",
+                  "unit": "N C⁻¹"
+                },
+                {
+                  "symbol": "θ",
+                  "description": "Angle between dipole moment and electric field",
+                  "unit": "degree or radian"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Electrostatics of Conductors",
+          "formulas": [
+            {
+              "formula_name": "Electric Field at the Surface of a Charged Conductor",
+              "expressions": [
+                "E = \\dfrac{\\sigma}{\\varepsilon_{0}} \\hat{n}"
+              ],
+              "variables": [
+                {
+                  "symbol": "E",
+                  "description": "Electric field just outside the surface of the conductor",
+                  "unit": "N C⁻¹"
+                },
+                {
+                  "symbol": "σ",
+                  "description": "Surface charge density at that point",
+                  "unit": "C m⁻²"
+                },
+                {
+                  "symbol": "n̂",
+                  "description": "Unit vector along the outward normal to the surface",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Capacitance",
+          "formulas": [
+            {
+              "formula_name": "Capacitance",
+              "expressions": [
+                "C = \\dfrac{Q}{V}"
+              ],
+              "variables": [
+                {
+                  "symbol": "C",
+                  "description": "Capacitance of the capacitor",
+                  "unit": "F (farad) = C V⁻¹"
+                },
+                {
+                  "symbol": "Q",
+                  "description": "Charge on the conductor/capacitor plate",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "V",
+                  "description": "Potential difference between the two conductors/plates",
+                  "unit": "V"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Capacitance of a Parallel Plate Capacitor (Vacuum)",
+              "expressions": [
+                "C = \\dfrac{\\varepsilon_{0}A}{d}"
+              ],
+              "variables": [
+                {
+                  "symbol": "C",
+                  "description": "Capacitance of the parallel plate capacitor",
+                  "unit": "F"
+                },
+                {
+                  "symbol": "A",
+                  "description": "Area of each plate",
+                  "unit": "m²"
+                },
+                {
+                  "symbol": "d",
+                  "description": "Separation between the plates",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Effect of Dielectric on Capacitance",
+              "expressions": [
+                "C = KC_{0}"
+              ],
+              "variables": [
+                {
+                  "symbol": "C",
+                  "description": "Capacitance with dielectric medium filled between the plates",
+                  "unit": "F"
+                },
+                {
+                  "symbol": "K",
+                  "description": "Dielectric constant of the insulating substance",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "C₀",
+                  "description": "Capacitance with vacuum between the plates",
+                  "unit": "F"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Capacitors in Series",
+              "expressions": [
+                "\\dfrac{1}{C} = \\dfrac{1}{C_{1}} + \\dfrac{1}{C_{2}} + \\dfrac{1}{C_{3}} + \\ldots"
+              ],
+              "variables": [
+                {
+                  "symbol": "C",
+                  "description": "Equivalent (total) capacitance of capacitors in series",
+                  "unit": "F"
+                },
+                {
+                  "symbol": "C₁, C₂, C₃",
+                  "description": "Individual capacitances connected in series",
+                  "unit": "F"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Capacitors in Parallel",
+              "expressions": [
+                "C = C_{1} + C_{2} + C_{3} + \\ldots"
+              ],
+              "variables": [
+                {
+                  "symbol": "C",
+                  "description": "Equivalent (total) capacitance of capacitors in parallel",
+                  "unit": "F"
+                },
+                {
+                  "symbol": "C₁, C₂, C₃",
+                  "description": "Individual capacitances connected in parallel",
+                  "unit": "F"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Energy Stored in a Capacitor",
+          "formulas": [
+            {
+              "formula_name": "Energy Stored in a Charged Capacitor",
+              "expressions": [
+                "U = \\dfrac{1}{2}QV",
+                "U = \\dfrac{1}{2}CV^{2}",
+                "U = \\dfrac{Q^{2}}{2C}"
+              ],
+              "variables": [
+                {
+                  "symbol": "U",
+                  "description": "Electrostatic energy stored in the capacitor",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "Q",
+                  "description": "Charge on the capacitor",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "V",
+                  "description": "Potential difference across the capacitor",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "C",
+                  "description": "Capacitance",
+                  "unit": "F"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Electron Volt",
+          "formulas": [
+            {
+              "formula_name": "Electron Volt - Energy Unit",
+              "expressions": [
+                "1 eV = 1.6  \\times  10^{-19} J"
+              ],
+              "variables": [
+                {
+                  "symbol": "1 eV",
+                  "description": "Energy gained by an electron accelerated through a potential difference of 1 volt",
+                  "unit": "J"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "1 eV",
+                  "value": "1.6 × 10⁻¹⁹",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "1 keV",
+                  "value": "1.6 × 10⁻¹⁶",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "1 MeV",
+                  "value": "1.6 × 10⁻¹³",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "1 GeV",
+                  "value": "1.6 × 10⁻¹⁰",
+                  "unit": "J"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 3,
+      "chapter_title": "Current Electricity",
+      "topics": [
+        {
+          "sub_topic": "Electric Current and Drift Velocity",
+          "formulas": [
+            {
+              "formula_name": "Electric Current",
+              "expressions": [
+                "I = \\dfrac{\\Delta{}Q}{\\Delta{}t}"
+              ],
+              "variables": [
+                {
+                  "symbol": "I",
+                  "description": "Electric current (net charge passing per unit time)",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "ΔQ",
+                  "description": "Charge passing through the area",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "Δt",
+                  "description": "Time interval",
+                  "unit": "s"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Current Density",
+              "expressions": [
+                "j = nqv_{d}"
+              ],
+              "variables": [
+                {
+                  "symbol": "j",
+                  "description": "Current density (charge flowing per second per unit area normal to flow)",
+                  "unit": "A m⁻²"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Number density of charge carriers",
+                  "unit": "m⁻³"
+                },
+                {
+                  "symbol": "q",
+                  "description": "Charge of each carrier (q = −e for electrons)",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "v_d",
+                  "description": "Drift velocity of the charge carriers",
+                  "unit": "m s⁻¹"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Current in terms of Drift Velocity",
+              "expressions": [
+                "I = nev_{dA}"
+              ],
+              "variables": [
+                {
+                  "symbol": "I",
+                  "description": "Current through the conductor",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Number density of electrons",
+                  "unit": "m⁻³"
+                },
+                {
+                  "symbol": "e",
+                  "description": "Charge of the electron",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "v_d",
+                  "description": "Drift velocity of electrons",
+                  "unit": "m s⁻¹"
+                },
+                {
+                  "symbol": "A",
+                  "description": "Cross-sectional area of the conductor",
+                  "unit": "m²"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "e",
+                  "value": "1.6 × 10⁻¹⁹",
+                  "unit": "C"
+                }
+              ]
+            },
+            {
+              "formula_name": "Drift Velocity (Relaxation Time Model)",
+              "expressions": [
+                "v_{d} = a\\tau = \\dfrac{eE}{m}\\tau"
+              ],
+              "variables": [
+                {
+                  "symbol": "v_d",
+                  "description": "Drift velocity of electrons",
+                  "unit": "m s⁻¹"
+                },
+                {
+                  "symbol": "a",
+                  "description": "Acceleration of electron due to the field",
+                  "unit": "m s⁻²"
+                },
+                {
+                  "symbol": "e",
+                  "description": "Charge of the electron",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "E",
+                  "description": "Applied electric field",
+                  "unit": "V m⁻¹"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Mass of the electron",
+                  "unit": "kg"
+                },
+                {
+                  "symbol": "τ",
+                  "description": "Average relaxation time (average collision interval)",
+                  "unit": "s"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "e",
+                  "value": "1.6 × 10⁻¹⁹",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "m (electron mass)",
+                  "value": "9.1 × 10⁻³¹",
+                  "unit": "kg"
+                }
+              ]
+            },
+            {
+              "formula_name": "Current as Dot Product of Current Density and Area",
+              "expressions": [
+                "I = j  \\cdot  \\Delta{}S"
+              ],
+              "variables": [
+                {
+                  "symbol": "I",
+                  "description": "Current through the area element",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "j",
+                  "description": "Current density vector",
+                  "unit": "A m⁻²"
+                },
+                {
+                  "symbol": "ΔS",
+                  "description": "Area vector element",
+                  "unit": "m²"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Ohm's Law and Resistivity",
+          "formulas": [
+            {
+              "formula_name": "Ohm's Law",
+              "expressions": [
+                "V = RI",
+                "I = \\dfrac{V}{R}",
+                "R = \\dfrac{V}{I}"
+              ],
+              "variables": [
+                {
+                  "symbol": "V",
+                  "description": "Voltage across the conductor",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current through the conductor",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Resistance of the conductor",
+                  "unit": "Ω"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Resistance in terms of Resistivity",
+              "expressions": [
+                "R = \\dfrac{\\rho{}l}{A}"
+              ],
+              "variables": [
+                {
+                  "symbol": "R",
+                  "description": "Resistance of the conductor",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "ρ",
+                  "description": "Resistivity of the material",
+                  "unit": "Ω m"
+                },
+                {
+                  "symbol": "l",
+                  "description": "Length of the conductor",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "A",
+                  "description": "Cross-sectional area of the conductor",
+                  "unit": "m²"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Microscopic Origin of Resistivity",
+              "expressions": [
+                "\\dfrac{eE}{m} = ne^{2}\\rho \\dfrac{v_{d}}{m}",
+                "\\rho = \\dfrac{m}{ne^{2}\\tau}"
+              ],
+              "variables": [
+                {
+                  "symbol": "ρ",
+                  "description": "Resistivity of the material",
+                  "unit": "Ω m"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Mass of the electron",
+                  "unit": "kg"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Number density of electrons",
+                  "unit": "m⁻³"
+                },
+                {
+                  "symbol": "e",
+                  "description": "Charge of the electron",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "τ",
+                  "description": "Average relaxation time",
+                  "unit": "s"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "e",
+                  "value": "1.6 × 10⁻¹⁹",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "m (electron mass)",
+                  "value": "9.1 × 10⁻³¹",
+                  "unit": "kg"
+                }
+              ]
+            },
+            {
+              "formula_name": "Conductivity",
+              "expressions": [
+                "\\sigma = \\dfrac{1}{\\rho}"
+              ],
+              "variables": [
+                {
+                  "symbol": "σ",
+                  "description": "Electrical conductivity",
+                  "unit": "S m⁻¹"
+                },
+                {
+                  "symbol": "ρ",
+                  "description": "Resistivity",
+                  "unit": "Ω m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Mobility",
+              "expressions": [
+                "\\mu = \\dfrac{v_{d}}{E}",
+                "\\mu = \\dfrac{e\\tau}{m}"
+              ],
+              "variables": [
+                {
+                  "symbol": "μ",
+                  "description": "Mobility of the charge carrier (magnitude of drift velocity per unit electric field)",
+                  "unit": "m² V⁻¹ s⁻¹"
+                },
+                {
+                  "symbol": "v_d",
+                  "description": "Drift velocity",
+                  "unit": "m s⁻¹"
+                },
+                {
+                  "symbol": "E",
+                  "description": "Applied electric field",
+                  "unit": "V m⁻¹"
+                },
+                {
+                  "symbol": "e",
+                  "description": "Charge of the electron",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "τ",
+                  "description": "Average relaxation time",
+                  "unit": "s"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Mass of the electron",
+                  "unit": "kg"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Electrical Energy and Power",
+          "formulas": [
+            {
+              "formula_name": "Electrical Power",
+              "expressions": [
+                "P = VI",
+                "P = I^{2}R",
+                "P = \\dfrac{V^{2}}{R}"
+              ],
+              "variables": [
+                {
+                  "symbol": "P",
+                  "description": "Electrical power dissipated (ohmic loss) in the conductor",
+                  "unit": "W"
+                },
+                {
+                  "symbol": "V",
+                  "description": "Voltage across the conductor",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current through the conductor",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Resistance of the conductor",
+                  "unit": "Ω"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Temperature Dependence of Resistivity",
+          "formulas": [
+            {
+              "formula_name": "Temperature Coefficient of Resistivity",
+              "expressions": [
+                "\\alpha = \\dfrac{\\rho_{T} - \\rho_{0}}{\\rho_{0}\\Delta{}T}",
+                "\\rho_{T} = \\rho_{0}[1 + \\alpha(T-T_{0})]"
+              ],
+              "variables": [
+                {
+                  "symbol": "α",
+                  "description": "Temperature coefficient of resistivity",
+                  "unit": "°C⁻¹ or K⁻¹"
+                },
+                {
+                  "symbol": "ρ_T",
+                  "description": "Resistivity at temperature T",
+                  "unit": "Ω m"
+                },
+                {
+                  "symbol": "ρ₀",
+                  "description": "Resistivity at reference temperature T₀",
+                  "unit": "Ω m"
+                },
+                {
+                  "symbol": "ΔT",
+                  "description": "Change in temperature (T − T₀)",
+                  "unit": "°C or K"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "EMF, Internal Resistance and Terminal Voltage",
+          "formulas": [
+            {
+              "formula_name": "Terminal Voltage across External Resistance",
+              "expressions": [
+                "V_{ext} = IR = \\dfrac{\\varepsilon{}R}{R+r}"
+              ],
+              "variables": [
+                {
+                  "symbol": "V_ext",
+                  "description": "Terminal voltage across the external resistance R",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current in the circuit",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "R",
+                  "description": "External resistance",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "ε",
+                  "description": "EMF of the source",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "r",
+                  "description": "Internal resistance of the source",
+                  "unit": "Ω"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Kirchhoff's Rules and Wheatstone Bridge",
+          "formulas": [
+            {
+              "formula_name": "Kirchhoff's Junction Rule",
+              "expressions": [
+                "\\Sigma I_{in} = \\Sigma I_{out}"
+              ],
+              "variables": [
+                {
+                  "symbol": "I_in",
+                  "description": "Currents entering the junction",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "I_out",
+                  "description": "Currents leaving the junction",
+                  "unit": "A"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Kirchhoff's Loop Rule",
+              "expressions": [
+                "\\Sigma \\Delta{}V = 0"
+              ],
+              "variables": [
+                {
+                  "symbol": "ΔV",
+                  "description": "Change in potential across each circuit element in the loop",
+                  "unit": "V"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Wheatstone Bridge Balance Condition",
+              "expressions": [
+                "\\dfrac{R_{1}}{R_{2}} = \\dfrac{R_{3}}{R_{4}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "R₁, R₂, R₃, R₄",
+                  "description": "The four resistances forming the arms of the Wheatstone bridge",
+                  "unit": "Ω"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 4,
+      "chapter_title": "Moving Charges and Magnetism",
+      "topics": [
+        {
+          "sub_topic": "Lorentz Force and Motion of Charged Particles",
+          "formulas": [
+            {
+              "formula_name": "Lorentz Force",
+              "expressions": [
+                "F = q(v  \\times  B + E)"
+              ],
+              "variables": [
+                {
+                  "symbol": "F",
+                  "description": "Total force on the charge due to electric and magnetic fields",
+                  "unit": "N"
+                },
+                {
+                  "symbol": "q",
+                  "description": "Magnitude of the moving charge",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "v",
+                  "description": "Velocity of the charge",
+                  "unit": "m s⁻¹"
+                },
+                {
+                  "symbol": "B",
+                  "description": "Magnetic field",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "E",
+                  "description": "Electric field",
+                  "unit": "N C⁻¹"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Radius of Circular Path in a Magnetic Field",
+              "expressions": [
+                "r = \\dfrac{mv}{qB}"
+              ],
+              "variables": [
+                {
+                  "symbol": "r",
+                  "description": "Radius of the circular path of the charged particle",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Mass of the particle",
+                  "unit": "kg"
+                },
+                {
+                  "symbol": "v",
+                  "description": "Speed of the particle",
+                  "unit": "m s⁻¹"
+                },
+                {
+                  "symbol": "q",
+                  "description": "Charge of the particle",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "B",
+                  "description": "Magnetic field",
+                  "unit": "T"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Cyclotron Frequency",
+              "expressions": [
+                "\\nu_{c} = \\dfrac{qB}{2\\pi{}m}"
+              ],
+              "variables": [
+                {
+                  "symbol": "ν_c",
+                  "description": "Cyclotron frequency (independent of speed and radius)",
+                  "unit": "Hz"
+                },
+                {
+                  "symbol": "q",
+                  "description": "Charge of the particle",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "B",
+                  "description": "Magnetic field",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Mass of the particle",
+                  "unit": "kg"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Force on Current-Carrying Conductors",
+          "formulas": [
+            {
+              "formula_name": "Force on a Current-Carrying Conductor in a Magnetic Field",
+              "expressions": [
+                "F = I l  \\times  B"
+              ],
+              "variables": [
+                {
+                  "symbol": "F",
+                  "description": "Force on the conductor",
+                  "unit": "N"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current through the conductor",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "l",
+                  "description": "Length vector of the conductor (magnitude l, direction of current flow)",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "B",
+                  "description": "Uniform external magnetic field",
+                  "unit": "T"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Force between Two Long Parallel Current-Carrying Wires",
+              "expressions": [
+                "\\dfrac{F}{l} = \\dfrac{\\mu_{0} I_{a} I_{b}}{2\\pi d}"
+              ],
+              "variables": [
+                {
+                  "symbol": "F/l",
+                  "description": "Force per unit length between the two wires (parallel currents attract, anti-parallel currents repel)",
+                  "unit": "N m⁻¹"
+                },
+                {
+                  "symbol": "I_a, I_b",
+                  "description": "Currents in the two wires",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "d",
+                  "description": "Distance between the two wires",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "μ₀",
+                  "description": "Permeability of free space",
+                  "unit": "T m A⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "μ₀",
+                  "value": "4π × 10⁻⁷",
+                  "unit": "T m A⁻¹"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Biot-Savart Law",
+          "formulas": [
+            {
+              "formula_name": "Biot-Savart Law",
+              "expressions": [
+                "dB = \\dfrac{\\mu_{0}}{4\\pi}  \\cdot  \\dfrac{I dl  \\times  \\hat{r}}{r^{2}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "dB",
+                  "description": "Magnetic field due to a small current element",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current in the conductor",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "dl",
+                  "description": "Length of the current element",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "r",
+                  "description": "Distance from the current element to the field point",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "r̂",
+                  "description": "Unit vector from the current element to the field point",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "μ₀",
+                  "description": "Permeability of free space",
+                  "unit": "T m A⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "μ₀",
+                  "value": "4π × 10⁻⁷",
+                  "unit": "T m A⁻¹"
+                }
+              ]
+            },
+            {
+              "formula_name": "Magnetic Field due to a Circular Coil (on Axis and at Centre)",
+              "expressions": [
+                "B = \\dfrac{\\mu_{0}IR^{2}}{2(x^{2} + R^{2})^{3/2}}",
+                "B = \\dfrac{\\mu_{0}I}{2R}"
+              ],
+              "variables": [
+                {
+                  "symbol": "B",
+                  "description": "Magnetic field on the axis of the circular coil",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current in the coil",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Radius of the coil",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "x",
+                  "description": "Distance of the point from the centre, along the axis",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "μ₀",
+                  "value": "4π × 10⁻⁷",
+                  "unit": "T m A⁻¹"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Ampere's Circuital Law",
+          "formulas": [
+            {
+              "formula_name": "Ampere's Circuital Law",
+              "expressions": [
+                "\\oint  B \\cdot dl = \\mu_{0}I",
+                "BL = \\mu_{0}I_{e}"
+              ],
+              "variables": [
+                {
+                  "symbol": "B",
+                  "description": "Magnetic field along the closed loop",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "dl",
+                  "description": "Small length element along the loop",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current passing through the surface bounded by the loop",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "L",
+                  "description": "Perimeter of the closed curve",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "I_e",
+                  "description": "Net current enclosed by the closed circuit",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "μ₀",
+                  "description": "Permeability of free space",
+                  "unit": "T m A⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "μ₀",
+                  "value": "4π × 10⁻⁷",
+                  "unit": "T m A⁻¹"
+                }
+              ]
+            },
+            {
+              "formula_name": "Magnetic Field due to a Long Straight Current-Carrying Wire",
+              "expressions": [
+                "B = \\dfrac{\\mu_{0}I}{2\\pi{}R}"
+              ],
+              "variables": [
+                {
+                  "symbol": "B",
+                  "description": "Magnetic field at distance R from the wire",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current in the wire",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Perpendicular distance from the wire",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "μ₀",
+                  "value": "4π × 10⁻⁷",
+                  "unit": "T m A⁻¹"
+                }
+              ]
+            },
+            {
+              "formula_name": "Magnetic Field Inside a Long Solenoid",
+              "expressions": [
+                "B = \\mu_{0}nI"
+              ],
+              "variables": [
+                {
+                  "symbol": "B",
+                  "description": "Magnetic field inside the solenoid",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Number of turns per unit length",
+                  "unit": "m⁻¹"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current through the solenoid",
+                  "unit": "A"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "μ₀",
+                  "value": "4π × 10⁻⁷",
+                  "unit": "T m A⁻¹"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Magnetic Moment and Torque on a Current Loop",
+          "formulas": [
+            {
+              "formula_name": "Magnetic Moment of a Current Loop",
+              "expressions": [
+                "m = NIA"
+              ],
+              "variables": [
+                {
+                  "symbol": "m",
+                  "description": "Magnetic moment of the current loop (direction by right-hand thumb rule)",
+                  "unit": "A m²"
+                },
+                {
+                  "symbol": "N",
+                  "description": "Number of closely wound turns",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current in the loop",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "A",
+                  "description": "Area of the loop",
+                  "unit": "m²"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Torque on a Current Loop in a Uniform Magnetic Field",
+              "expressions": [
+                "\\tau = m  \\times  B",
+                "F = 0"
+              ],
+              "variables": [
+                {
+                  "symbol": "τ",
+                  "description": "Torque on the current loop",
+                  "unit": "N m"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Magnetic moment of the loop",
+                  "unit": "A m²"
+                },
+                {
+                  "symbol": "B",
+                  "description": "Uniform magnetic field",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "F",
+                  "description": "Net force on the loop (zero in uniform field)",
+                  "unit": "N"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Moving Coil Galvanometer",
+          "formulas": [
+            {
+              "formula_name": "Equilibrium Deflection of Galvanometer",
+              "expressions": [
+                "k\\phi = NIAB",
+                "I = \\dfrac{k}{NAB}\\phi"
+              ],
+              "variables": [
+                {
+                  "symbol": "k",
+                  "description": "Torsion constant of the spring",
+                  "unit": "N m rad⁻¹"
+                },
+                {
+                  "symbol": "φ",
+                  "description": "Equilibrium deflection of the coil",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "N",
+                  "description": "Number of turns of the coil",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current through the galvanometer",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "A",
+                  "description": "Area of the coil",
+                  "unit": "m²"
+                },
+                {
+                  "symbol": "B",
+                  "description": "Magnetic field in the radial field region",
+                  "unit": "T"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Current Sensitivity of Galvanometer",
+              "expressions": [
+                "I_{s} = \\dfrac{\\phi}{I} = \\dfrac{NAB}{k}"
+              ],
+              "variables": [
+                {
+                  "symbol": "I_s",
+                  "description": "Current sensitivity (deflection per unit current)",
+                  "unit": "div A⁻¹ (or rad A⁻¹)"
+                },
+                {
+                  "symbol": "φ",
+                  "description": "Deflection",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current through galvanometer",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "N, A, B, k",
+                  "description": "Number of turns, area, field, torsion constant",
+                  "unit": "as defined above"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Voltage Sensitivity of Galvanometer",
+              "expressions": [
+                "V_{s} = \\dfrac{\\phi}{V} = \\dfrac{NAB}{kR}"
+              ],
+              "variables": [
+                {
+                  "symbol": "V_s",
+                  "description": "Voltage sensitivity (deflection per unit voltage)",
+                  "unit": "div V⁻¹"
+                },
+                {
+                  "symbol": "φ",
+                  "description": "Deflection",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "V",
+                  "description": "Voltage applied across the galvanometer",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Resistance of the galvanometer coil",
+                  "unit": "Ω"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 5,
+      "chapter_title": "Magnetism and Matter",
+      "topics": [
+        {
+          "sub_topic": "Bar Magnet in a Uniform Magnetic Field",
+          "formulas": [
+            {
+              "formula_name": "Torque on a Bar Magnet",
+              "expressions": [
+                "\\tau = m  \\times  B"
+              ],
+              "variables": [
+                {
+                  "symbol": "τ",
+                  "description": "Torque on the bar magnet (force on it is zero)",
+                  "unit": "N m"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Magnetic dipole moment of the bar magnet",
+                  "unit": "A m² (or J T⁻¹)"
+                },
+                {
+                  "symbol": "B",
+                  "description": "Uniform external magnetic field",
+                  "unit": "T"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Potential Energy of a Bar Magnet in a Magnetic Field",
+              "expressions": [
+                "U = -m \\cdot B",
+                "U = -mB \\cos\\theta"
+              ],
+              "variables": [
+                {
+                  "symbol": "U",
+                  "description": "Potential energy of the bar magnet (zero of energy chosen when m ⊥ B)",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Magnetic dipole moment",
+                  "unit": "A m²"
+                },
+                {
+                  "symbol": "B",
+                  "description": "Uniform external magnetic field",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "θ",
+                  "description": "Angle between m and B",
+                  "unit": "degree or radian"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Magnetic Field due to a Bar Magnet",
+          "formulas": [
+            {
+              "formula_name": "Magnetic Field due to a Bar Magnet (Axial and Equatorial, r >> l)",
+              "expressions": [
+                "B = \\dfrac{\\mu_{0}}{2\\pi}\\dfrac{m}{r^{3}}",
+                "B = -\\dfrac{\\mu_{0}}{4\\pi}\\dfrac{m}{r^{3}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "B",
+                  "description": "Magnetic field at distance r from the mid-point of the bar magnet",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Magnetic moment of the bar magnet",
+                  "unit": "A m²"
+                },
+                {
+                  "symbol": "r",
+                  "description": "Distance from the mid-point of the magnet (r >> l, size of magnet)",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "μ₀",
+                  "description": "Permeability of free space",
+                  "unit": "T m A⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "μ₀",
+                  "value": "4π × 10⁻⁷",
+                  "unit": "T m A⁻¹"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Gauss's Law for Magnetism",
+          "formulas": [
+            {
+              "formula_name": "Gauss's Law for Magnetism",
+              "expressions": [
+                "\\oint  B \\cdot dS = 0"
+              ],
+              "variables": [
+                {
+                  "symbol": "B",
+                  "description": "Magnetic field",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "dS",
+                  "description": "Area element of the closed surface",
+                  "unit": "m²"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Magnetisation and Magnetic Intensity",
+          "formulas": [
+            {
+              "formula_name": "Magnetic Intensity",
+              "expressions": [
+                "H = \\dfrac{B_{0}}{\\mu_{0}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "H",
+                  "description": "Magnetic intensity due to the external field",
+                  "unit": "A m⁻¹"
+                },
+                {
+                  "symbol": "B₀",
+                  "description": "External magnetic field",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "μ₀",
+                  "description": "Permeability of free space",
+                  "unit": "T m A⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "μ₀",
+                  "value": "4π × 10⁻⁷",
+                  "unit": "T m A⁻¹"
+                }
+              ]
+            },
+            {
+              "formula_name": "Magnetic Field in the Material",
+              "expressions": [
+                "B = \\mu_{0}(H + M)"
+              ],
+              "variables": [
+                {
+                  "symbol": "B",
+                  "description": "Magnetic field in the material",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "H",
+                  "description": "Magnetic intensity",
+                  "unit": "A m⁻¹"
+                },
+                {
+                  "symbol": "M",
+                  "description": "Magnetisation (dipole moment per unit volume) of the material",
+                  "unit": "A m⁻¹"
+                },
+                {
+                  "symbol": "μ₀",
+                  "description": "Permeability of free space",
+                  "unit": "T m A⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "μ₀",
+                  "value": "4π × 10⁻⁷",
+                  "unit": "T m A⁻¹"
+                }
+              ]
+            },
+            {
+              "formula_name": "Magnetic Susceptibility (Linear Material)",
+              "expressions": [
+                "M = \\chi{}H",
+                "B = \\mu{}H"
+              ],
+              "variables": [
+                {
+                  "symbol": "M",
+                  "description": "Magnetisation of the material",
+                  "unit": "A m⁻¹"
+                },
+                {
+                  "symbol": "χ",
+                  "description": "Magnetic susceptibility of the material",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "H",
+                  "description": "Magnetic intensity",
+                  "unit": "A m⁻¹"
+                },
+                {
+                  "symbol": "B",
+                  "description": "Magnetic field",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "μ",
+                  "description": "Magnetic permeability of the material",
+                  "unit": "T m A⁻¹"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Relation between Permeability, Relative Permeability and Susceptibility",
+              "expressions": [
+                "\\mu = \\mu_{0}\\mu_{r}",
+                "\\mu_{r} = 1 + \\chi"
+              ],
+              "variables": [
+                {
+                  "symbol": "μ",
+                  "description": "Magnetic permeability of the material",
+                  "unit": "T m A⁻¹"
+                },
+                {
+                  "symbol": "μ₀",
+                  "description": "Permeability of free space",
+                  "unit": "T m A⁻¹"
+                },
+                {
+                  "symbol": "μ_r",
+                  "description": "Relative magnetic permeability",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "χ",
+                  "description": "Magnetic susceptibility",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "μ₀",
+                  "value": "4π × 10⁻⁷",
+                  "unit": "T m A⁻¹"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Solenoid as a Magnetic Dipole",
+          "formulas": [
+            {
+              "formula_name": "Magnetic Moment of a Current-Carrying Solenoid",
+              "expressions": [
+                "m = NIA"
+              ],
+              "variables": [
+                {
+                  "symbol": "m",
+                  "description": "Magnetic moment associated with the solenoid",
+                  "unit": "A m²"
+                },
+                {
+                  "symbol": "N",
+                  "description": "Number of turns of the solenoid",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current through the solenoid",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "A",
+                  "description": "Area of cross section of the solenoid",
+                  "unit": "m²"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 6,
+      "chapter_title": "Electromagnetic Induction",
+      "topics": [
+        {
+          "sub_topic": "Magnetic Flux",
+          "formulas": [
+            {
+              "formula_name": "Magnetic Flux",
+              "expressions": [
+                "\\Phi_{B} = B \\cdot A = BA \\cos\\theta"
+              ],
+              "variables": [
+                {
+                  "symbol": "Φ_B",
+                  "description": "Magnetic flux through a surface of area A",
+                  "unit": "Wb (weber)"
+                },
+                {
+                  "symbol": "B",
+                  "description": "Uniform magnetic field",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "A",
+                  "description": "Area of the surface",
+                  "unit": "m²"
+                },
+                {
+                  "symbol": "θ",
+                  "description": "Angle between B and A (normal to the area)",
+                  "unit": "degree or radian"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Faraday's Law and Lenz's Law",
+          "formulas": [
+            {
+              "formula_name": "Faraday's Law of Electromagnetic Induction",
+              "expressions": [
+                "\\varepsilon = -N\\dfrac{d\\Phi_{B}}{dt}"
+              ],
+              "variables": [
+                {
+                  "symbol": "ε",
+                  "description": "Induced EMF in the coil (negative sign indicates Lenz's law)",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "N",
+                  "description": "Number of turns in the coil",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "Φ_B",
+                  "description": "Magnetic flux linked with one turn of the coil",
+                  "unit": "Wb"
+                },
+                {
+                  "symbol": "dΦ_B/dt",
+                  "description": "Rate of change of magnetic flux",
+                  "unit": "Wb s⁻¹"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Induced Current",
+              "expressions": [
+                "I = \\dfrac{\\varepsilon}{R}"
+              ],
+              "variables": [
+                {
+                  "symbol": "I",
+                  "description": "Induced current in the closed circuit",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "ε",
+                  "description": "Induced EMF",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Resistance of the circuit",
+                  "unit": "Ω"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Motional EMF",
+              "expressions": [
+                "\\varepsilon = Blv"
+              ],
+              "variables": [
+                {
+                  "symbol": "ε",
+                  "description": "Motional EMF induced across the ends of the rod",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "B",
+                  "description": "Uniform magnetic field, normal to the rod",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "l",
+                  "description": "Length of the rod",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "v",
+                  "description": "Velocity of the rod, perpendicular to the field",
+                  "unit": "m s⁻¹"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Self and Mutual Inductance",
+          "formulas": [
+            {
+              "formula_name": "Inductance (Flux-Linkage Definition)",
+              "expressions": [
+                "L = \\dfrac{N\\Phi}{I}"
+              ],
+              "variables": [
+                {
+                  "symbol": "L",
+                  "description": "Inductance (ratio of flux-linkage to current)",
+                  "unit": "H (henry)"
+                },
+                {
+                  "symbol": "N",
+                  "description": "Number of turns",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "Φ",
+                  "description": "Magnetic flux linked per turn",
+                  "unit": "Wb"
+                },
+                {
+                  "symbol": "I",
+                  "description": "Current producing the flux",
+                  "unit": "A"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Mutual Inductance",
+              "expressions": [
+                "\\varepsilon_{1} = -M_{12}\\dfrac{dI_{2}}{dt}",
+                "M_{12} = M_{21}"
+              ],
+              "variables": [
+                {
+                  "symbol": "ε₁",
+                  "description": "EMF induced in coil 1 due to changing current in coil 2",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "M₁₂",
+                  "description": "Mutual inductance of coil 1 with respect to coil 2",
+                  "unit": "H"
+                },
+                {
+                  "symbol": "dI₂/dt",
+                  "description": "Rate of change of current in coil 2",
+                  "unit": "A s⁻¹"
+                },
+                {
+                  "symbol": "M₂₁",
+                  "description": "Mutual inductance of coil 2 with respect to coil 1 (equal to M₁₂)",
+                  "unit": "H"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Self-Inductance",
+              "expressions": [
+                "\\varepsilon = -L\\dfrac{dI}{dt}"
+              ],
+              "variables": [
+                {
+                  "symbol": "ε",
+                  "description": "Self-induced (back) EMF in the coil",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "L",
+                  "description": "Self-inductance of the coil",
+                  "unit": "H"
+                },
+                {
+                  "symbol": "dI/dt",
+                  "description": "Rate of change of current in the coil",
+                  "unit": "A s⁻¹"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Self-Inductance of a Long Solenoid (with Magnetic Core)",
+              "expressions": [
+                "L = \\mu_{r}\\mu_{0}n^{2}Al"
+              ],
+              "variables": [
+                {
+                  "symbol": "L",
+                  "description": "Self-inductance of the solenoid",
+                  "unit": "H"
+                },
+                {
+                  "symbol": "μ_r",
+                  "description": "Relative permeability of the core material",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "μ₀",
+                  "description": "Permeability of free space",
+                  "unit": "T m A⁻¹"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Number of turns per unit length",
+                  "unit": "m⁻¹"
+                },
+                {
+                  "symbol": "A",
+                  "description": "Area of cross section of the solenoid",
+                  "unit": "m²"
+                },
+                {
+                  "symbol": "l",
+                  "description": "Length of the solenoid",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "μ₀",
+                  "value": "4π × 10⁻⁷",
+                  "unit": "T m A⁻¹"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "AC Generator",
+          "formulas": [
+            {
+              "formula_name": "Motional EMF Produced by an AC Generator",
+              "expressions": [
+                "\\varepsilon = NBA(2\\pi\\nu) \\sin(2\\pi\\nu{}t)"
+              ],
+              "variables": [
+                {
+                  "symbol": "ε",
+                  "description": "Instantaneous EMF produced (coil perpendicular to field at t = 0)",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "N",
+                  "description": "Number of turns of the coil",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "B",
+                  "description": "Uniform magnetic field",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "A",
+                  "description": "Area of the coil",
+                  "unit": "m²"
+                },
+                {
+                  "symbol": "ν",
+                  "description": "Frequency of rotation of the coil (revolutions per second)",
+                  "unit": "Hz (rev s⁻¹)"
+                },
+                {
+                  "symbol": "t",
+                  "description": "Time",
+                  "unit": "s"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 7,
+      "chapter_title": "Alternating Current",
+      "topics": [
+        {
+          "sub_topic": "AC through a Resistor",
+          "formulas": [
+            {
+              "formula_name": "Current through a Resistor with AC Source",
+              "expressions": [
+                "v = v_{m} \\sin(\\omega{}t)",
+                "i = i_{m} \\sin(\\omega{}t),  i_{m} = \\dfrac{v_{m}}{R}"
+              ],
+              "variables": [
+                {
+                  "symbol": "v",
+                  "description": "Instantaneous alternating voltage applied",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "v_m",
+                  "description": "Peak (amplitude) voltage",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "i",
+                  "description": "Instantaneous current in the resistor (in phase with voltage)",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "i_m",
+                  "description": "Peak current",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Resistance",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "ω",
+                  "description": "Angular frequency of the AC source",
+                  "unit": "rad s⁻¹"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "RMS Values and Average Power",
+          "formulas": [
+            {
+              "formula_name": "RMS Current and RMS Voltage",
+              "expressions": [
+                "I = \\dfrac{i_{m}}{\\sqrt{2}} = 0.707 i_{m}",
+                "V = \\dfrac{v_{m}}{\\sqrt{2}} = 0.707 v_{m}"
+              ],
+              "variables": [
+                {
+                  "symbol": "I",
+                  "description": "RMS (root mean square) value of current",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "V",
+                  "description": "RMS value of voltage",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "i_m",
+                  "description": "Peak value of current",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "v_m",
+                  "description": "Peak value of voltage",
+                  "unit": "V"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Average Power Dissipated (Resistor)",
+              "expressions": [
+                "P = \\dfrac{1}{2}i_{m}^{2}R",
+                "P = I^{2}R = IV"
+              ],
+              "variables": [
+                {
+                  "symbol": "P",
+                  "description": "Average power loss (over a cycle) due to Joule heating",
+                  "unit": "W"
+                },
+                {
+                  "symbol": "i_m",
+                  "description": "Peak current",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Resistance",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "I",
+                  "description": "RMS current",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "V",
+                  "description": "RMS voltage",
+                  "unit": "V"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "AC through Inductor and Capacitor",
+          "formulas": [
+            {
+              "formula_name": "Current through a Pure Inductor",
+              "expressions": [
+                "i = i_{m} \\sin(\\omega{}t - \\dfrac{\\pi}{2}),  i_{m} = \\dfrac{v_{m}}{X_{L}}",
+                "X_{L} = \\omega{}L"
+              ],
+              "variables": [
+                {
+                  "symbol": "i",
+                  "description": "Instantaneous current (lags voltage by π/2)",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "i_m",
+                  "description": "Peak current",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "v_m",
+                  "description": "Peak voltage",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "X_L",
+                  "description": "Inductive reactance",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "ω",
+                  "description": "Angular frequency",
+                  "unit": "rad s⁻¹"
+                },
+                {
+                  "symbol": "L",
+                  "description": "Inductance",
+                  "unit": "H"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Current through a Pure Capacitor",
+              "expressions": [
+                "i = i_{m} \\sin(\\omega{}t + \\dfrac{\\pi}{2}),  i_{m} = \\dfrac{v_{m}}{X_{C}}",
+                "X_{C} = \\dfrac{1}{\\omega{}C}"
+              ],
+              "variables": [
+                {
+                  "symbol": "i",
+                  "description": "Instantaneous current (leads voltage by π/2)",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "i_m",
+                  "description": "Peak current",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "v_m",
+                  "description": "Peak voltage",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "X_C",
+                  "description": "Capacitive reactance",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "ω",
+                  "description": "Angular frequency",
+                  "unit": "rad s⁻¹"
+                },
+                {
+                  "symbol": "C",
+                  "description": "Capacitance",
+                  "unit": "F"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Series RLC Circuit",
+          "formulas": [
+            {
+              "formula_name": "Amplitude of Voltages across R, L, C",
+              "expressions": [
+                "v_{Rm} = i_{mR}",
+                "v_{Cm} = i_{m} X_{C}",
+                "v_{Lm} = i_{m} X_{L}"
+              ],
+              "variables": [
+                {
+                  "symbol": "v_Rm, v_Cm, v_Lm",
+                  "description": "Peak voltages across resistor, capacitor, and inductor respectively",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "i_m",
+                  "description": "Peak current in the circuit",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Resistance",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "X_C, X_L",
+                  "description": "Capacitive and inductive reactance",
+                  "unit": "Ω"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Impedance of Series RLC Circuit",
+              "expressions": [
+                "Z = \\sqrt{R^{2} + (X_{C} - X_{L})^{2}}",
+                "i_{m} = \\dfrac{v_{m}}{Z}"
+              ],
+              "variables": [
+                {
+                  "symbol": "Z",
+                  "description": "Impedance of the series RLC circuit",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Resistance",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "X_C, X_L",
+                  "description": "Capacitive and inductive reactance",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "i_m",
+                  "description": "Peak current",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "v_m",
+                  "description": "Peak source voltage",
+                  "unit": "V"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Phase Angle in Series RLC Circuit",
+              "expressions": [
+                "\\tan\\phi = \\dfrac{X_{C} - X_{L}}{R}"
+              ],
+              "variables": [
+                {
+                  "symbol": "φ",
+                  "description": "Phase difference between source voltage and current (positive if X_C > X_L, circuit predominantly capacitive; negative if X_C < X_L, circuit predominantly inductive)",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "X_C, X_L",
+                  "description": "Capacitive and inductive reactance",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Resistance",
+                  "unit": "Ω"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Resonant Frequency of Series RLC Circuit",
+              "expressions": [
+                "\\omega_{0} = \\dfrac{1}{\\sqrt{LC}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "ω₀",
+                  "description": "Resonant angular frequency (where X_L = X_C)",
+                  "unit": "rad s⁻¹"
+                },
+                {
+                  "symbol": "L",
+                  "description": "Inductance",
+                  "unit": "H"
+                },
+                {
+                  "symbol": "C",
+                  "description": "Capacitance",
+                  "unit": "F"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Current Amplitude at Resonance",
+              "expressions": [
+                "i_{m} = \\dfrac{v_{m}}{R}"
+              ],
+              "variables": [
+                {
+                  "symbol": "i_m",
+                  "description": "Maximum current amplitude at resonant frequency",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "v_m",
+                  "description": "Peak source voltage",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Resistance",
+                  "unit": "Ω"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Quality Factor of Series RLC Circuit",
+              "expressions": [
+                "Q = \\dfrac{\\omega_{0}L}{R} = \\dfrac{1}{\\omega_{0}CR}"
+              ],
+              "variables": [
+                {
+                  "symbol": "Q",
+                  "description": "Quality factor of the series RLC circuit",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "ω₀",
+                  "description": "Resonant angular frequency",
+                  "unit": "rad s⁻¹"
+                },
+                {
+                  "symbol": "L",
+                  "description": "Inductance",
+                  "unit": "H"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Resistance",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "C",
+                  "description": "Capacitance",
+                  "unit": "F"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Power in AC Circuits",
+          "formulas": [
+            {
+              "formula_name": "Average Power in an AC Circuit",
+              "expressions": [
+                "P = VI \\cos\\phi"
+              ],
+              "variables": [
+                {
+                  "symbol": "P",
+                  "description": "Average power loss over a complete cycle",
+                  "unit": "W"
+                },
+                {
+                  "symbol": "V",
+                  "description": "RMS voltage",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "I",
+                  "description": "RMS current",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "cosφ",
+                  "description": "Power factor (φ is phase difference between voltage and current)",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Power Dissipated at Resonance",
+              "expressions": [
+                "P = I^{2}Z = I^{2}R"
+              ],
+              "variables": [
+                {
+                  "symbol": "P",
+                  "description": "Power dissipated at resonance (maximum power dissipation)",
+                  "unit": "W"
+                },
+                {
+                  "symbol": "I",
+                  "description": "RMS current at resonance",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "Z",
+                  "description": "Impedance (equals R at resonance)",
+                  "unit": "Ω"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Resistance",
+                  "unit": "Ω"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Transformer",
+          "formulas": [
+            {
+              "formula_name": "Transformer Voltage and Current Relations",
+              "expressions": [
+                "\\dfrac{V_{s}}{V_{p}} = \\dfrac{N_{s}}{N_{p}}",
+                "\\dfrac{I_{p}}{I_{s}} = \\dfrac{N_{s}}{N_{p}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "V_s, V_p",
+                  "description": "Secondary and primary voltages",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "N_s, N_p",
+                  "description": "Number of turns in secondary and primary coils",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "I_s, I_p",
+                  "description": "Secondary and primary currents",
+                  "unit": "A"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 8,
+      "chapter_title": "Electromagnetic Waves",
+      "topics": [
+        {
+          "sub_topic": "Displacement Current",
+          "formulas": [
+            {
+              "formula_name": "Displacement Current",
+              "expressions": [
+                "i_{d} = \\varepsilon_{0}\\dfrac{d\\Phi_{E}}{dt}"
+              ],
+              "variables": [
+                {
+                  "symbol": "i_d",
+                  "description": "Displacement current, arising due to time-varying electric field (acts as source of B like conduction current)",
+                  "unit": "A"
+                },
+                {
+                  "symbol": "ε₀",
+                  "description": "Permittivity of free space",
+                  "unit": "C² N⁻¹ m⁻²"
+                },
+                {
+                  "symbol": "Φ_E",
+                  "description": "Electric flux",
+                  "unit": "N m² C⁻¹"
+                },
+                {
+                  "symbol": "dΦ_E/dt",
+                  "description": "Rate of change of electric flux",
+                  "unit": "N m² C⁻¹ s⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Electromagnetic Wave Equations",
+          "formulas": [
+            {
+              "formula_name": "Sinusoidal Electromagnetic Wave (Electric Field Component)",
+              "expressions": [
+                "E = E_{x}(t) = E_{0} \\sin(kz - \\omega{}t)"
+              ],
+              "variables": [
+                {
+                  "symbol": "E",
+                  "description": "Electric field component of the electromagnetic wave (perpendicular to B and to direction of propagation)",
+                  "unit": "N C⁻¹"
+                },
+                {
+                  "symbol": "E₀",
+                  "description": "Amplitude of the electric field",
+                  "unit": "N C⁻¹"
+                },
+                {
+                  "symbol": "k",
+                  "description": "Wave number (k = 2π/λ)",
+                  "unit": "rad m⁻¹"
+                },
+                {
+                  "symbol": "z",
+                  "description": "Position along the direction of propagation",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "ω",
+                  "description": "Angular frequency of the wave",
+                  "unit": "rad s⁻¹"
+                },
+                {
+                  "symbol": "t",
+                  "description": "Time",
+                  "unit": "s"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Relation between Electric and Magnetic Field Amplitudes",
+              "expressions": [
+                "E_{0} = B_{0}c"
+              ],
+              "variables": [
+                {
+                  "symbol": "E₀",
+                  "description": "Amplitude of the electric field",
+                  "unit": "N C⁻¹"
+                },
+                {
+                  "symbol": "B₀",
+                  "description": "Amplitude of the magnetic field",
+                  "unit": "T"
+                },
+                {
+                  "symbol": "c",
+                  "description": "Speed of light in vacuum",
+                  "unit": "m s⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "c",
+                  "value": "3 × 10⁸",
+                  "unit": "m s⁻¹"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Speed of Electromagnetic Waves",
+          "formulas": [
+            {
+              "formula_name": "Speed of Electromagnetic Waves in Vacuum",
+              "expressions": [
+                "c = \\dfrac{1}{\\sqrt{\\mu_{0}\\varepsilon_{0}}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "c",
+                  "description": "Speed of electromagnetic waves (= speed of light) in vacuum",
+                  "unit": "m s⁻¹"
+                },
+                {
+                  "symbol": "μ₀",
+                  "description": "Permeability of free space",
+                  "unit": "T m A⁻¹"
+                },
+                {
+                  "symbol": "ε₀",
+                  "description": "Permittivity of free space",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "c",
+                  "value": "3 × 10⁸",
+                  "unit": "m s⁻¹"
+                },
+                {
+                  "symbol": "μ₀",
+                  "value": "4π × 10⁻⁷",
+                  "unit": "T m A⁻¹"
+                },
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            },
+            {
+              "formula_name": "Speed of Electromagnetic Waves in a Material Medium",
+              "expressions": [
+                "v = \\dfrac{1}{\\sqrt{\\mu\\varepsilon}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "v",
+                  "description": "Speed of the electromagnetic wave (or light) in the medium",
+                  "unit": "m s⁻¹"
+                },
+                {
+                  "symbol": "μ",
+                  "description": "Permeability of the medium",
+                  "unit": "T m A⁻¹"
+                },
+                {
+                  "symbol": "ε",
+                  "description": "Permittivity of the medium",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 9,
+      "chapter_title": "Ray Optics and Optical Instruments",
+      "topics": [
+        {
+          "sub_topic": "Reflection and Refraction Laws",
+          "formulas": [
+            {
+              "formula_name": "Law of Reflection",
+              "expressions": [
+                "\\angle i = \\angle r'"
+              ],
+              "variables": [
+                {
+                  "symbol": "∠i",
+                  "description": "Angle of incidence",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "∠r′",
+                  "description": "Angle of reflection",
+                  "unit": "degree or radian"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Snell's Law of Refraction",
+              "expressions": [
+                "\\dfrac{\\sin i}{\\sin r} = n"
+              ],
+              "variables": [
+                {
+                  "symbol": "i",
+                  "description": "Angle of incidence",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "r",
+                  "description": "Angle of refraction",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Refractive index of the second medium relative to the first",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Critical Angle for Total Internal Reflection",
+              "expressions": [
+                "\\sin i_{c} = \\dfrac{1}{n}"
+              ],
+              "variables": [
+                {
+                  "symbol": "i_c",
+                  "description": "Critical angle of incidence (angle for which angle of refraction is 90°)",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Refractive index of the denser medium relative to the rarer medium",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Spherical Mirrors",
+          "formulas": [
+            {
+              "formula_name": "Mirror Equation",
+              "expressions": [
+                "\\dfrac{1}{v} + \\dfrac{1}{u} = \\dfrac{1}{f}"
+              ],
+              "variables": [
+                {
+                  "symbol": "v",
+                  "description": "Image distance from the pole of the mirror",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "u",
+                  "description": "Object distance from the pole of the mirror",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "f",
+                  "description": "Focal length of the mirror (negative for concave, positive for convex, per Cartesian sign convention)",
+                  "unit": "cm or m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Linear Magnification (Mirror)",
+              "expressions": [
+                "m = \\dfrac{h'}{h} = -\\dfrac{v}{u}"
+              ],
+              "variables": [
+                {
+                  "symbol": "m",
+                  "description": "Linear magnification produced by the mirror",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "h′",
+                  "description": "Height of the image",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "h",
+                  "description": "Height of the object",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "v",
+                  "description": "Image distance",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "u",
+                  "description": "Object distance",
+                  "unit": "cm or m"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Refraction at Spherical Surfaces and Lenses",
+          "formulas": [
+            {
+              "formula_name": "Refraction through a Spherical Interface",
+              "expressions": [
+                "\\dfrac{n_{2}}{v} - \\dfrac{n_{1}}{u} = \\dfrac{n_{2} - n_{1}}{R}"
+              ],
+              "variables": [
+                {
+                  "symbol": "n₁, n₂",
+                  "description": "Refractive indices of the first (object side) and second (image side) media",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "v",
+                  "description": "Image distance from the pole",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "u",
+                  "description": "Object distance from the pole",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Radius of curvature of the spherical surface",
+                  "unit": "cm or m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Lens Maker's Formula",
+              "expressions": [
+                "\\dfrac{1}{f} = (n_{21} - 1)(\\dfrac{1}{R_{1}} - \\dfrac{1}{R_{2}})"
+              ],
+              "variables": [
+                {
+                  "symbol": "f",
+                  "description": "Focal length of the lens (positive for converging, negative for diverging)",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "n₂₁",
+                  "description": "Refractive index of the lens material relative to the surrounding medium",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "R₁, R₂",
+                  "description": "Radii of curvature of the two surfaces of the lens",
+                  "unit": "cm or m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Thin Lens Equation",
+              "expressions": [
+                "\\dfrac{1}{v} - \\dfrac{1}{u} = \\dfrac{1}{f}"
+              ],
+              "variables": [
+                {
+                  "symbol": "v",
+                  "description": "Image distance from the optic centre",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "u",
+                  "description": "Object distance from the optic centre",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "f",
+                  "description": "Focal length of the lens",
+                  "unit": "cm or m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Linear Magnification (Lens)",
+              "expressions": [
+                "m = \\dfrac{h'}{h} = \\dfrac{v}{u}"
+              ],
+              "variables": [
+                {
+                  "symbol": "m",
+                  "description": "Linear magnification produced by the lens",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "h′",
+                  "description": "Height of the image",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "h",
+                  "description": "Height of the object",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "v",
+                  "description": "Image distance",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "u",
+                  "description": "Object distance",
+                  "unit": "cm or m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Power of a Lens",
+              "expressions": [
+                "P = \\dfrac{1}{f}"
+              ],
+              "variables": [
+                {
+                  "symbol": "P",
+                  "description": "Power of the lens",
+                  "unit": "D (dioptre) = m⁻¹"
+                },
+                {
+                  "symbol": "f",
+                  "description": "Focal length of the lens",
+                  "unit": "m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Focal Length and Power of Lenses in Contact",
+              "expressions": [
+                "\\dfrac{1}{f} = \\dfrac{1}{f_{1}} + \\dfrac{1}{f_{2}} + \\dfrac{1}{f_{3}} + \\ldots",
+                "P = P_{1} + P_{2} + P_{3} + \\ldots"
+              ],
+              "variables": [
+                {
+                  "symbol": "f",
+                  "description": "Effective focal length of the lens combination",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "f₁, f₂, f₃",
+                  "description": "Focal lengths of the individual thin lenses in contact",
+                  "unit": "cm or m"
+                },
+                {
+                  "symbol": "P",
+                  "description": "Total power of the combination",
+                  "unit": "D"
+                },
+                {
+                  "symbol": "P₁, P₂, P₃",
+                  "description": "Powers of the individual lenses",
+                  "unit": "D"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Total Magnification of Lens Combination",
+              "expressions": [
+                "m = m_{1}  \\times  m_{2}  \\times  m_{3}  \\times  \\ldots"
+              ],
+              "variables": [
+                {
+                  "symbol": "m",
+                  "description": "Total magnification of the lens combination",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "m₁, m₂, m₃",
+                  "description": "Magnifications produced by the individual lenses",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Refraction through a Prism",
+          "formulas": [
+            {
+              "formula_name": "Refractive Index of Prism Material (at Minimum Deviation)",
+              "expressions": [
+                "n_{21} = \\dfrac{\\sin\\left(\\dfrac{A+D_{m}}{2}\\right)}{\\sin\\left(\\dfrac{A}{2}\\right)}"
+              ],
+              "variables": [
+                {
+                  "symbol": "n₂₁",
+                  "description": "Refractive index of the prism material relative to the surrounding medium",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "A",
+                  "description": "Angle of the prism",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "D_m",
+                  "description": "Angle of minimum deviation",
+                  "unit": "degree or radian"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Simple Microscope",
+          "formulas": [
+            {
+              "formula_name": "Magnifying Power of a Simple Microscope (Image at Near Point)",
+              "expressions": [
+                "m = 1 + \\dfrac{D}{f}"
+              ],
+              "variables": [
+                {
+                  "symbol": "m",
+                  "description": "Magnifying power with image formed at the near point",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "D",
+                  "description": "Least distance of distinct vision",
+                  "unit": "cm"
+                },
+                {
+                  "symbol": "f",
+                  "description": "Focal length of the convex lens",
+                  "unit": "cm"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "D",
+                  "value": "25",
+                  "unit": "cm"
+                }
+              ]
+            },
+            {
+              "formula_name": "Magnifying Power of a Simple Microscope (Image at Infinity)",
+              "expressions": [
+                "m = \\dfrac{D}{f}"
+              ],
+              "variables": [
+                {
+                  "symbol": "m",
+                  "description": "Magnifying power with image formed at infinity",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "D",
+                  "description": "Least distance of distinct vision",
+                  "unit": "cm"
+                },
+                {
+                  "symbol": "f",
+                  "description": "Focal length of the lens",
+                  "unit": "cm"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "D",
+                  "value": "25",
+                  "unit": "cm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Compound Microscope",
+          "formulas": [
+            {
+              "formula_name": "Magnifying Power of a Compound Microscope",
+              "expressions": [
+                "m = m_{e}  \\times  m_{o}",
+                "m_{e} = 1 + \\dfrac{D}{f_{e}}",
+                "m  \\approx  \\dfrac{L}{f_{o}}  \\times  \\dfrac{D}{f_{e}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "m",
+                  "description": "Total magnifying power of the compound microscope",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "m_e",
+                  "description": "Magnification due to the eyepiece",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "m_o",
+                  "description": "Magnification produced by the objective",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "L",
+                  "description": "Distance between the focal points of the objective and eyepiece (tube length)",
+                  "unit": "cm"
+                },
+                {
+                  "symbol": "f_o, f_e",
+                  "description": "Focal lengths of the objective and eyepiece",
+                  "unit": "cm"
+                },
+                {
+                  "symbol": "D",
+                  "description": "Least distance of distinct vision",
+                  "unit": "cm"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "D",
+                  "value": "25",
+                  "unit": "cm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Telescope",
+          "formulas": [
+            {
+              "formula_name": "Magnifying Power of a Telescope",
+              "expressions": [
+                "m = \\dfrac{\\beta}{\\alpha} = \\dfrac{f_{o}}{f_{e}}"
+              ],
+              "variables": [
+                {
+                  "symbol": "m",
+                  "description": "Magnifying power (ratio of angle subtended by image to angle subtended by object)",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "β",
+                  "description": "Angle subtended at the eye by the image",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "α",
+                  "description": "Angle subtended at the eye by the object",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "f_o",
+                  "description": "Focal length of the objective",
+                  "unit": "cm"
+                },
+                {
+                  "symbol": "f_e",
+                  "description": "Focal length of the eyepiece",
+                  "unit": "cm"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 10,
+      "chapter_title": "Wave Optics",
+      "topics": [
+        {
+          "sub_topic": "Superposition and Interference of Waves",
+          "formulas": [
+            {
+              "formula_name": "Condition for Constructive Interference (Path Difference)",
+              "expressions": [
+                "S_{1}P - S_{2}P = n\\lambda,  n = 0, 1, 2, 3, \\ldots"
+              ],
+              "variables": [
+                {
+                  "symbol": "S₁P, S₂P",
+                  "description": "Path lengths from the two coherent sources S₁ and S₂ to point P",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Order of the fringe (integer)",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Wavelength of light",
+                  "unit": "m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Condition for Destructive Interference (Path Difference)",
+              "expressions": [
+                "S_{1}P - S_{2}P = (n + \\dfrac{1}{2})\\lambda,  n = 0, 1, 2, 3, \\ldots"
+              ],
+              "variables": [
+                {
+                  "symbol": "S₁P, S₂P",
+                  "description": "Path lengths from the two coherent sources to point P",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Order (integer)",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Wavelength of light",
+                  "unit": "m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Resultant Intensity due to Superposition of Two Coherent Waves",
+              "expressions": [
+                "I = 4I_{0} \\cos^{2}\\dfrac{\\phi}{2}"
+              ],
+              "variables": [
+                {
+                  "symbol": "I",
+                  "description": "Resultant intensity at the point",
+                  "unit": "W m⁻²"
+                },
+                {
+                  "symbol": "I₀",
+                  "description": "Intensity due to each individual wave",
+                  "unit": "W m⁻²"
+                },
+                {
+                  "symbol": "φ",
+                  "description": "Phase difference between the two waves at that point",
+                  "unit": "degree or radian"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Average Intensity for Incoherent Sources",
+              "expressions": [
+                "I = 2I_{0}"
+              ],
+              "variables": [
+                {
+                  "symbol": "I",
+                  "description": "Time-averaged resultant intensity for incoherent sources",
+                  "unit": "W m⁻²"
+                },
+                {
+                  "symbol": "I₀",
+                  "description": "Intensity due to each individual source",
+                  "unit": "W m⁻²"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Young's Double Slit Experiment",
+          "formulas": [
+            {
+              "formula_name": "Position of Bright Fringes",
+              "expressions": [
+                "x_{n} = \\dfrac{n\\lambda{}D}{d},  n = 0, 1, 2, \\ldots"
+              ],
+              "variables": [
+                {
+                  "symbol": "x_n",
+                  "description": "Distance of the n-th bright fringe from the centre",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Order of the bright fringe",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Wavelength of light",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "D",
+                  "description": "Distance between the double slit and the screen",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "d",
+                  "description": "Separation between the two slits",
+                  "unit": "m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Position of Dark Fringes",
+              "expressions": [
+                "x_{n} = \\dfrac{(n + \\dfrac{1}{2})\\lambda{}D}{d},  n = 0, 1, 2, \\ldots"
+              ],
+              "variables": [
+                {
+                  "symbol": "x_n",
+                  "description": "Distance of the n-th dark fringe from the centre",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Order (integer)",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Wavelength of light",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "D",
+                  "description": "Distance between the double slit and screen",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "d",
+                  "description": "Separation between the slits",
+                  "unit": "m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Fringe Width",
+              "expressions": [
+                "\\beta = \\dfrac{\\lambda{}D}{d}"
+              ],
+              "variables": [
+                {
+                  "symbol": "β",
+                  "description": "Fringe width (spacing between consecutive bright or dark fringes)",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Wavelength of light",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "D",
+                  "description": "Distance between the slit and screen",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "d",
+                  "description": "Slit separation",
+                  "unit": "m"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Diffraction (Single Slit)",
+          "formulas": [
+            {
+              "formula_name": "Condition for Minima in Single Slit Diffraction",
+              "expressions": [
+                "a \\sin\\theta = n\\lambda,  n = \\pm 1, \\pm 2, \\ldots"
+              ],
+              "variables": [
+                {
+                  "symbol": "a",
+                  "description": "Width of the single slit",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "θ",
+                  "description": "Angle of diffraction",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Order of the minimum",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Wavelength of light",
+                  "unit": "m"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Angular Half-Width of Central Maximum",
+              "expressions": [
+                "\\theta  \\approx  \\dfrac{\\lambda}{a}"
+              ],
+              "variables": [
+                {
+                  "symbol": "θ",
+                  "description": "Angular position of the first minimum from the centre",
+                  "unit": "degree or radian"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Wavelength of light",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "a",
+                  "description": "Width of the single slit",
+                  "unit": "m"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Polarisation",
+          "formulas": [
+            {
+              "formula_name": "Malus' Law",
+              "expressions": [
+                "I = I_{0} \\cos^{2}\\theta"
+              ],
+              "variables": [
+                {
+                  "symbol": "I",
+                  "description": "Intensity of light transmitted through the analyser (second polaroid)",
+                  "unit": "W m⁻²"
+                },
+                {
+                  "symbol": "I₀",
+                  "description": "Intensity of the polarised light incident on the analyser",
+                  "unit": "W m⁻²"
+                },
+                {
+                  "symbol": "θ",
+                  "description": "Angle between the pass-axes of the polariser and the analyser",
+                  "unit": "degree or radian"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 11,
+      "chapter_title": "Dual Nature of Radiation and Matter",
+      "topics": [
+        {
+          "sub_topic": "Photoelectric Effect - Stopping Potential",
+          "formulas": [
+            {
+              "formula_name": "Stopping Potential and Maximum Kinetic Energy",
+              "expressions": [
+                "eV_{0} = \\dfrac{1}{2}mv^{2}_{max} = K_{max}"
+              ],
+              "variables": [
+                {
+                  "symbol": "e",
+                  "description": "Charge of the electron",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "V₀",
+                  "description": "Stopping potential (depends on frequency of incident light and nature of emitter, independent of intensity)",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Mass of the electron",
+                  "unit": "kg"
+                },
+                {
+                  "symbol": "v_max",
+                  "description": "Maximum speed of the emitted photoelectron",
+                  "unit": "m s⁻¹"
+                },
+                {
+                  "symbol": "K_max",
+                  "description": "Maximum kinetic energy of the emitted photoelectrons",
+                  "unit": "J"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "e",
+                  "value": "1.6 × 10⁻¹⁹",
+                  "unit": "C"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Photon Energy and Momentum",
+          "formulas": [
+            {
+              "formula_name": "Energy of a Photon",
+              "expressions": [
+                "E = h\\nu"
+              ],
+              "variables": [
+                {
+                  "symbol": "E",
+                  "description": "Energy of a photon",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "h",
+                  "description": "Planck's constant",
+                  "unit": "J s"
+                },
+                {
+                  "symbol": "ν",
+                  "description": "Frequency of the incident light",
+                  "unit": "Hz"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "h",
+                  "value": "6.63 × 10⁻³⁴",
+                  "unit": "J s"
+                }
+              ]
+            },
+            {
+              "formula_name": "Momentum of a Photon",
+              "expressions": [
+                "p = \\dfrac{h}{\\lambda}"
+              ],
+              "variables": [
+                {
+                  "symbol": "p",
+                  "description": "Momentum of a photon",
+                  "unit": "kg m s⁻¹"
+                },
+                {
+                  "symbol": "h",
+                  "description": "Planck's constant",
+                  "unit": "J s"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Wavelength of the light",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "h",
+                  "value": "6.63 × 10⁻³⁴",
+                  "unit": "J s"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Einstein's Photoelectric Equation",
+          "formulas": [
+            {
+              "formula_name": "Einstein's Photoelectric Equation",
+              "expressions": [
+                "\\dfrac{1}{2}mv^{2}_{max} = eV_{0} = h\\nu - \\phi_{0}",
+                "\\dfrac{1}{2}mv^{2}_{max} = h(\\nu - \\nu_{0})"
+              ],
+              "variables": [
+                {
+                  "symbol": "m",
+                  "description": "Mass of the electron",
+                  "unit": "kg"
+                },
+                {
+                  "symbol": "v_max",
+                  "description": "Maximum speed of the emitted photoelectron",
+                  "unit": "m s⁻¹"
+                },
+                {
+                  "symbol": "e",
+                  "description": "Charge of the electron",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "V₀",
+                  "description": "Stopping potential",
+                  "unit": "V"
+                },
+                {
+                  "symbol": "h",
+                  "description": "Planck's constant",
+                  "unit": "J s"
+                },
+                {
+                  "symbol": "ν",
+                  "description": "Frequency of incident light",
+                  "unit": "Hz"
+                },
+                {
+                  "symbol": "φ₀",
+                  "description": "Work function of the metal (minimum energy needed for electron emission)",
+                  "unit": "J (or eV)"
+                },
+                {
+                  "symbol": "ν₀",
+                  "description": "Threshold frequency of the metal",
+                  "unit": "Hz"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "h",
+                  "value": "6.63 × 10⁻³⁴",
+                  "unit": "J s"
+                },
+                {
+                  "symbol": "e",
+                  "value": "1.6 × 10⁻¹⁹",
+                  "unit": "C"
+                }
+              ]
+            },
+            {
+              "formula_name": "Threshold Frequency - Work Function Relation",
+              "expressions": [
+                "\\nu_{0} = \\dfrac{\\phi_{0}}{h}"
+              ],
+              "variables": [
+                {
+                  "symbol": "ν₀",
+                  "description": "Threshold frequency of the metal",
+                  "unit": "Hz"
+                },
+                {
+                  "symbol": "φ₀",
+                  "description": "Work function of the metal",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "h",
+                  "description": "Planck's constant",
+                  "unit": "J s"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "h",
+                  "value": "6.63 × 10⁻³⁴",
+                  "unit": "J s"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "de Broglie Wave (Wave Nature of Matter)",
+          "formulas": [
+            {
+              "formula_name": "de Broglie Wavelength",
+              "expressions": [
+                "\\lambda = \\dfrac{h}{p}"
+              ],
+              "variables": [
+                {
+                  "symbol": "λ",
+                  "description": "de Broglie wavelength associated with the moving particle (independent of the charge and nature of the particle)",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "h",
+                  "description": "Planck's constant",
+                  "unit": "J s"
+                },
+                {
+                  "symbol": "p",
+                  "description": "Momentum of the particle",
+                  "unit": "kg m s⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "h",
+                  "value": "6.63 × 10⁻³⁴",
+                  "unit": "J s"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 12,
+      "chapter_title": "Atoms",
+      "topics": [
+        {
+          "sub_topic": "Rutherford's Alpha-Particle Scattering",
+          "formulas": [
+            {
+              "formula_name": "Distance of Closest Approach",
+              "expressions": [
+                "d = \\dfrac{1}{4\\pi\\varepsilon_{0}}  \\cdot  \\dfrac{2Ze^{2}}{K}"
+              ],
+              "variables": [
+                {
+                  "symbol": "d",
+                  "description": "Distance of closest approach of the alpha particle to the nucleus",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "Z",
+                  "description": "Atomic number of the target nucleus",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "e",
+                  "description": "Elementary charge",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "K",
+                  "description": "Kinetic energy of the alpha particle (far from the nucleus)",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "ε₀",
+                  "description": "Permittivity of free space",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                },
+                {
+                  "symbol": "e",
+                  "value": "1.6 × 10⁻¹⁹",
+                  "unit": "C"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Bohr Model of the Hydrogen Atom",
+          "formulas": [
+            {
+              "formula_name": "Bohr's Quantisation Condition (Angular Momentum)",
+              "expressions": [
+                "L = \\dfrac{nh}{2\\pi},  n = 1, 2, 3, \\ldots"
+              ],
+              "variables": [
+                {
+                  "symbol": "L",
+                  "description": "Angular momentum of the orbiting electron",
+                  "unit": "kg m² s⁻¹"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Principal quantum number",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "h",
+                  "description": "Planck's constant",
+                  "unit": "J s"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "h",
+                  "value": "6.63 × 10⁻³⁴",
+                  "unit": "J s"
+                }
+              ]
+            },
+            {
+              "formula_name": "Frequency of Emitted/Absorbed Photon (Transition between Energy States)",
+              "expressions": [
+                "h\\nu = E_{i} - E_{f}",
+                "E_{i} + h\\nu = E_{f}"
+              ],
+              "variables": [
+                {
+                  "symbol": "h",
+                  "description": "Planck's constant",
+                  "unit": "J s"
+                },
+                {
+                  "symbol": "ν",
+                  "description": "Frequency of the photon emitted or absorbed",
+                  "unit": "Hz"
+                },
+                {
+                  "symbol": "E_i",
+                  "description": "Energy of the initial state",
+                  "unit": "J (or eV)"
+                },
+                {
+                  "symbol": "E_f",
+                  "description": "Energy of the final state",
+                  "unit": "J (or eV)"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "h",
+                  "value": "6.63 × 10⁻³⁴",
+                  "unit": "J s"
+                }
+              ]
+            },
+            {
+              "formula_name": "Radius of the n-th Orbit (Bohr Model)",
+              "expressions": [
+                "r_{n} = \\dfrac{n^{2}h^{2}\\varepsilon_{0}}{\\pi{}me^{2}}",
+                "r_{n} = n^{2}a_{0},  a_{0} = 5.3  \\times  10^{-11} m"
+              ],
+              "variables": [
+                {
+                  "symbol": "r_n",
+                  "description": "Radius of the n-th orbit of the electron",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Principal quantum number",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "h",
+                  "description": "Planck's constant",
+                  "unit": "J s"
+                },
+                {
+                  "symbol": "ε₀",
+                  "description": "Permittivity of free space",
+                  "unit": "C² N⁻¹ m⁻²"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Mass of the electron",
+                  "unit": "kg"
+                },
+                {
+                  "symbol": "e",
+                  "description": "Charge of the electron",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "a₀",
+                  "description": "Bohr radius (radius of the innermost orbit)",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "a₀ (Bohr radius)",
+                  "value": "5.3 × 10⁻¹¹",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "h",
+                  "value": "6.63 × 10⁻³⁴",
+                  "unit": "J s"
+                },
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                },
+                {
+                  "symbol": "e",
+                  "value": "1.6 × 10⁻¹⁹",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "m (electron mass)",
+                  "value": "9.1 × 10⁻³¹",
+                  "unit": "kg"
+                }
+              ]
+            },
+            {
+              "formula_name": "Total Energy of Electron in the n-th Orbit",
+              "expressions": [
+                "E_{n} = -\\dfrac{me^{4}}{8\\varepsilon_{0}^{2}n^{2}h^{2}}",
+                "E_{n} = -\\dfrac{13.6}{n^{2}}  eV"
+              ],
+              "variables": [
+                {
+                  "symbol": "E_n",
+                  "description": "Total energy of the electron in the n-th stationary state (ground state E₁ = −13.6 eV)",
+                  "unit": "J (or eV)"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Mass of the electron",
+                  "unit": "kg"
+                },
+                {
+                  "symbol": "e",
+                  "description": "Charge of the electron",
+                  "unit": "C"
+                },
+                {
+                  "symbol": "ε₀",
+                  "description": "Permittivity of free space",
+                  "unit": "C² N⁻¹ m⁻²"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Principal quantum number",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "h",
+                  "description": "Planck's constant",
+                  "unit": "J s"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "E₁ (ground state)",
+                  "value": "−13.6",
+                  "unit": "eV"
+                },
+                {
+                  "symbol": "h",
+                  "value": "6.63 × 10⁻³⁴",
+                  "unit": "J s"
+                },
+                {
+                  "symbol": "ε₀",
+                  "value": "8.854 × 10⁻¹²",
+                  "unit": "C² N⁻¹ m⁻²"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "de Broglie's Explanation of Bohr's Quantisation",
+          "formulas": [
+            {
+              "formula_name": "de Broglie Wavelength of Electron in Orbit",
+              "expressions": [
+                "\\lambda = \\dfrac{h}{mv}"
+              ],
+              "variables": [
+                {
+                  "symbol": "λ",
+                  "description": "de Broglie wavelength of the electron",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "h",
+                  "description": "Planck's constant",
+                  "unit": "J s"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Mass of the electron",
+                  "unit": "kg"
+                },
+                {
+                  "symbol": "v",
+                  "description": "Speed of the electron in orbit",
+                  "unit": "m s⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "h",
+                  "value": "6.63 × 10⁻³⁴",
+                  "unit": "J s"
+                }
+              ]
+            },
+            {
+              "formula_name": "Condition for Stationary Orbits (Standing Wave Condition)",
+              "expressions": [
+                "2\\pi{}r_{n} = n\\lambda,  n = 1, 2, 3, \\ldots"
+              ],
+              "variables": [
+                {
+                  "symbol": "r_n",
+                  "description": "Radius of the n-th orbit (circumference equals a whole number of de Broglie wavelengths)",
+                  "unit": "m"
+                },
+                {
+                  "symbol": "n",
+                  "description": "Principal quantum number",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "de Broglie wavelength of the electron",
+                  "unit": "m"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 13,
+      "chapter_title": "Nuclei",
+      "topics": [
+        {
+          "sub_topic": "Atomic Masses and Composition of Nucleus",
+          "formulas": [
+            {
+              "formula_name": "Mass Number",
+              "expressions": [
+                "A = Z + N"
+              ],
+              "variables": [
+                {
+                  "symbol": "A",
+                  "description": "Mass number (total number of protons and neutrons)",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "Z",
+                  "description": "Atomic number (number of protons)",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "N",
+                  "description": "Neutron number (number of neutrons)",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Atomic Mass Unit",
+              "expressions": [
+                "1 u = \\dfrac{1}{12}"
+              ],
+              "variables": [
+                {
+                  "symbol": "1 u",
+                  "description": "Atomic mass unit, used for expressing atomic/nuclear masses",
+                  "unit": "kg"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "1 u",
+                  "value": "1.660563 × 10⁻²⁷",
+                  "unit": "kg"
+                },
+                {
+                  "symbol": "1 u equivalent energy",
+                  "value": "931.5",
+                  "unit": "MeV"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Size of the Nucleus",
+          "formulas": [
+            {
+              "formula_name": "Nuclear Radius - Mass Number Relation",
+              "expressions": [
+                "R = R_{0}A^{1/3}"
+              ],
+              "variables": [
+                {
+                  "symbol": "R",
+                  "description": "Radius of the nucleus",
+                  "unit": "m (or fm)"
+                },
+                {
+                  "symbol": "R₀",
+                  "description": "Empirical constant",
+                  "unit": "fm (10⁻¹⁵ m)"
+                },
+                {
+                  "symbol": "A",
+                  "description": "Mass number of the nucleus",
+                  "unit": "dimensionless"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "R₀",
+                  "value": "1.2",
+                  "unit": "fm"
+                }
+              ]
+            },
+            {
+              "formula_name": "Nuclear Density",
+              "expressions": [
+                "\\rho = \\dfrac{M}{V} = \\dfrac{\\text{mass number} \\times u}{\\left(\\dfrac{4}{3}\\right)\\pi R^{3}}",
+                "\\rho \\approx \\text{constant, order}  10^{17} kg m^{-3}"
+              ],
+              "variables": [
+                {
+                  "symbol": "ρ",
+                  "description": "Density of nuclear matter (essentially constant for all nuclei)",
+                  "unit": "kg m⁻³"
+                },
+                {
+                  "symbol": "M",
+                  "description": "Mass of the nucleus",
+                  "unit": "kg"
+                },
+                {
+                  "symbol": "V",
+                  "description": "Volume of the nucleus",
+                  "unit": "m³"
+                },
+                {
+                  "symbol": "R",
+                  "description": "Nuclear radius",
+                  "unit": "m"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ρ (nuclear density)",
+                  "value": "~10¹⁷",
+                  "unit": "kg m⁻³"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Mass-Energy Equivalence and Binding Energy",
+          "formulas": [
+            {
+              "formula_name": "Einstein's Mass-Energy Relation",
+              "expressions": [
+                "E = mc^{2}"
+              ],
+              "variables": [
+                {
+                  "symbol": "E",
+                  "description": "Energy equivalent of mass m",
+                  "unit": "J"
+                },
+                {
+                  "symbol": "m",
+                  "description": "Mass",
+                  "unit": "kg"
+                },
+                {
+                  "symbol": "c",
+                  "description": "Speed of light in vacuum",
+                  "unit": "m s⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "c",
+                  "value": "3 × 10⁸",
+                  "unit": "m s⁻¹"
+                }
+              ]
+            },
+            {
+              "formula_name": "Mass Defect",
+              "expressions": [
+                "\\Delta{}M = [Zm_{p} + (A-Z)m_{n}] - M"
+              ],
+              "variables": [
+                {
+                  "symbol": "ΔM",
+                  "description": "Mass defect (difference between mass of constituents and actual nuclear mass)",
+                  "unit": "kg (or u)"
+                },
+                {
+                  "symbol": "Z",
+                  "description": "Number of protons",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "m_p",
+                  "description": "Mass of a proton",
+                  "unit": "kg (or u)"
+                },
+                {
+                  "symbol": "A",
+                  "description": "Mass number",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "m_n",
+                  "description": "Mass of a neutron",
+                  "unit": "kg (or u)"
+                },
+                {
+                  "symbol": "M",
+                  "description": "Actual mass of the nucleus",
+                  "unit": "kg (or u)"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Binding Energy",
+              "expressions": [
+                "\\Delta{}E_{b} = \\Delta{}Mc^{2}"
+              ],
+              "variables": [
+                {
+                  "symbol": "ΔE_b",
+                  "description": "Binding energy of the nucleus (average ~8 MeV/nucleon for A = 30 to 170)",
+                  "unit": "J (or MeV)"
+                },
+                {
+                  "symbol": "ΔM",
+                  "description": "Mass defect",
+                  "unit": "kg (or u)"
+                },
+                {
+                  "symbol": "c",
+                  "description": "Speed of light",
+                  "unit": "m s⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "Average BE/nucleon (A=30–170)",
+                  "value": "~8",
+                  "unit": "MeV"
+                },
+                {
+                  "symbol": "1 u equivalent energy",
+                  "value": "931.5",
+                  "unit": "MeV"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Q-value of Nuclear Processes",
+          "formulas": [
+            {
+              "formula_name": "Q-value of a Nuclear Process",
+              "expressions": [
+                "Q = KE_{final} - KE_{initial}",
+                "Q = (\\text{sum of initial masses} - \\text{sum of final masses})c^{2}"
+              ],
+              "variables": [
+                {
+                  "symbol": "Q",
+                  "description": "Q-value of the nuclear process (positive for exothermic, negative for endothermic reactions)",
+                  "unit": "J (or MeV)"
+                },
+                {
+                  "symbol": "c",
+                  "description": "Speed of light",
+                  "unit": "m s⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "c",
+                  "value": "3 × 10⁸",
+                  "unit": "m s⁻¹"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sub_topic": "Radioactivity - Decay Law",
+          "formulas": [
+            {
+              "formula_name": "Law of Radioactive Decay",
+              "expressions": [
+                "\\dfrac{dN}{dt} = -\\lambda{}N",
+                "N(t) = N_{0}e^{-\\lambda{}t}"
+              ],
+              "variables": [
+                {
+                  "symbol": "N(t)",
+                  "description": "Number of undecayed nuclei at time t",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "N₀",
+                  "description": "Initial number of nuclei at t = 0",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Decay (disintegration) constant of the radioactive substance",
+                  "unit": "s⁻¹"
+                },
+                {
+                  "symbol": "t",
+                  "description": "Time elapsed",
+                  "unit": "s"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Activity of a Radioactive Sample",
+              "expressions": [
+                "R = \\lambda{}N",
+                "R = R_{0}e^{-\\lambda{}t}"
+              ],
+              "variables": [
+                {
+                  "symbol": "R",
+                  "description": "Activity of the radioactive sample (measure of the rate of decay)",
+                  "unit": "Bq (becquerel) = s⁻¹"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Decay constant",
+                  "unit": "s⁻¹"
+                },
+                {
+                  "symbol": "N",
+                  "description": "Number of undecayed nuclei at that instant",
+                  "unit": "dimensionless"
+                },
+                {
+                  "symbol": "R₀",
+                  "description": "Initial activity at t = 0",
+                  "unit": "Bq"
+                }
+              ],
+              "constants": []
+            },
+            {
+              "formula_name": "Half-Life",
+              "expressions": [
+                "T_{1/2} = \\dfrac{0.693}{\\lambda}"
+              ],
+              "variables": [
+                {
+                  "symbol": "T_1/2",
+                  "description": "Half-life (time taken for one-half of the initial nuclei to decay)",
+                  "unit": "s"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Decay constant",
+                  "unit": "s⁻¹"
+                }
+              ],
+              "constants": [
+                {
+                  "symbol": "ln 2",
+                  "value": "0.693",
+                  "unit": "dimensionless"
+                }
+              ]
+            },
+            {
+              "formula_name": "Mean Life",
+              "expressions": [
+                "\\tau = \\dfrac{1}{\\lambda}"
+              ],
+              "variables": [
+                {
+                  "symbol": "τ",
+                  "description": "Mean life (time at which the number of nuclei has reduced to e⁻¹ of its initial value)",
+                  "unit": "s"
+                },
+                {
+                  "symbol": "λ",
+                  "description": "Decay constant",
+                  "unit": "s⁻¹"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_no": 14,
+      "chapter_title": "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+      "topics": [
+        {
+          "sub_topic": "Intrinsic Semiconductors",
+          "formulas": [
+            {
+              "formula_name": "Law of Mass Action (Charge Carrier Concentration)",
+              "expressions": [
+                "n_{e} n_{h} = n_{i}^{2}"
+              ],
+              "variables": [
+                {
+                  "symbol": "n_e",
+                  "description": "Number density (concentration) of electrons in the semiconductor",
+                  "unit": "m⁻³"
+                },
+                {
+                  "symbol": "n_h",
+                  "description": "Number density (concentration) of holes in the semiconductor",
+                  "unit": "m⁻³"
+                },
+                {
+                  "symbol": "n_i",
+                  "description": "Intrinsic carrier concentration (n_e = n_h = n_i in an intrinsic/pure semiconductor)",
+                  "unit": "m⁻³"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Energy Bands",
+          "formulas": [
+            {
+              "formula_name": "Energy Band Gap Classification",
+              "expressions": [
+                "E_{g} > 3 eV",
+                "0.2 eV < E_{g} < 3 eV",
+                "E_{g}  \\approx  0 eV"
+              ],
+              "variables": [
+                {
+                  "symbol": "E_g",
+                  "description": "Energy band gap between the top of the valence band and the bottom of the conduction band",
+                  "unit": "eV"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        },
+        {
+          "sub_topic": "Rectification (Frequency Relation)",
+          "formulas": [
+            {
+              "formula_name": "Output Frequency of Half-Wave and Full-Wave Rectifiers",
+              "expressions": [
+                "f_{out} = f_{in}",
+                "f_{out} = 2f_{in}"
+              ],
+              "variables": [
+                {
+                  "symbol": "f_out",
+                  "description": "Frequency of the rectified (pulsating DC) output",
+                  "unit": "Hz"
+                },
+                {
+                  "symbol": "f_in",
+                  "description": "Frequency of the input AC signal",
+                  "unit": "Hz"
+                }
+              ],
+              "constants": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
