@@ -39,123 +39,91 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body id="home">
-  <header class="site-header" data-od-id="site-header">
-    <div class="container header-inner">
-      <div class="brand-container">
-        <a href="#top" data-od-id="brand-logo-link" class="brand-logo-link">
-          <img src="assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
-        </a>
-        <a class="brand" href="#top" data-od-id="brand">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       STATIC FALLBACK HEADER
+       Shown immediately on load. header-footer-loader.js replaces
+       this with the fully-built shared header once JS runs.
+       If JS fails, this fallback remains and the site still works.
+       ═══════════════════════════════════════════════════════════════ -->
+  <div id="site-header-slot">
+    <header class="site-header" data-od-id="site-header">
+      <div class="container header-inner">
+        <div class="brand-container">
+          <a href="#top" class="brand-logo-link" data-od-id="brand-logo-link">
+            <img src="assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+          </a>
+          <a class="brand" href="#top" data-od-id="brand">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+        </div>
+        <style>
+          .brand-container { display: flex; align-items: center; gap: 12px; flex-shrink: 0; margin-right: auto; }
+          .brand-logo { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+          @media (min-width: 480px) { .brand-logo { height: 44px; width: 44px; } }
+          @media (min-width: 896px) { .brand-logo { height: 48px; width: 48px; } }
+          .site-header .brand { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.25; color: var(--fg); text-decoration: none; max-width: 160px; word-break: break-word; }
+          @media (min-width: 896px) { .site-header .brand { font-size: 14px; white-space: nowrap; max-width: none; } }
+          .brand-logo-link { display: flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 50%; transition: opacity 150ms; }
+          .brand-logo-link:hover { opacity: 0.8; }
+        </style>
+        <div class="header-right">
+          <nav class="nav-desktop" aria-label="Primary" data-od-id="nav-desktop">
+            <a href="#about">About</a>
+            <div class="nav-dropdown">
+              <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
+              <div class="nav-dropdown-menu">
+                <a href="pages/courses/cbse10.html">CBSE Class 10</a>
+                <a href="pages/courses/cbse12.html">CBSE Class 12</a>
+                <a href="pages/courses/stateboard12.html">State Board Class 12</a>
+              </div>
+            </div>
+            <div class="nav-dropdown">
+              <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
+              <div class="nav-dropdown-menu">
+                <a href="pages/studyplanner/">Study Planner</a>
+                <a href="pages/periodictable/">Periodic Table</a>
+                <a href="pages/mindmap/">Mind Map</a>
+              </div>
+            </div>
+            <a href="#attend">How to attend</a>
+            <a href="#faq">FAQs</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <div class="nav-actions">
+            <a class="btn btn-primary" href="#" data-od-id="header-cta">Sign Up</a>
+          </div>
+        </div>
+        <a class="btn btn-primary btn-sm nav-actions-mobile" href="#" data-od-id="header-cta-mobile">Sign Up</a>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
+          <span></span>
+        </button>
       </div>
-      <style>
-        .brand-container {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          flex-shrink: 0;
-          margin-right: auto;
-        }
-        .brand-logo {
-          height: 40px;
-          width: 40px;
-          border-radius: 50%;
-          object-fit: cover;
-          flex-shrink: 0;
-        }
-        @media (min-width: 480px) {
-          .brand-logo { height: 44px; width: 44px; }
-        }
-        @media (min-width: 896px) {
-          .brand-logo { height: 48px; width: 48px; }
-        }
-        .site-header .brand {
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          line-height: 1.25;
-          color: var(--fg);
-          text-decoration: none;
-          max-width: 160px;
-          word-break: break-word;
-        }
-        @media (min-width: 896px) {
-          .site-header .brand {
-            font-size: 14px;
-            white-space: nowrap;
-            max-width: none;
-          }
-        }
-        .brand-logo-link {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-decoration: none;
-          border-radius: 50%;
-          transition: opacity 150ms ease-standard;
-        }
-        .brand-logo-link:hover {
-          opacity: 0.8;
-        }
-      </style>
-      <div class="header-right">
-        <nav class="nav-desktop" aria-label="Primary" data-od-id="nav-desktop">
-          <a href="#about">About</a>
-          <div class="nav-dropdown">
-            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
-            <div class="nav-dropdown-menu">
-              <a href="/pages/courses/cbse10.html">CBSE Class 10</a>
-              <a href="/pages/courses/cbse12.html">CBSE Class 12</a>
-              <a href="/pages/courses/stateboard12.html">State Board Class 12</a>
-            </div>
-          </div>
-          <div class="nav-dropdown">
-            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
-            <div class="nav-dropdown-menu">
-              <a href="/pages/studyplanner/">Study Planner</a>
-              <a href="/pages/periodictable/">Periodic Table</a>
-              <a href="/pages/mindmap/">Mind Map</a>
-            </div>
-          </div>
-          <a href="#attend">How to attend</a>
-          <a href="#faq">FAQs</a>
-          <a href="#blog">Blog</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <div class="nav-actions">
-          <a class="btn btn-primary" href="/pages/test.html" data-od-id="header-cta">Sign Up</a>
+    </header>
+    <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+      <a href="#about">About</a>
+      <div class="nav-mobile-dropdown">
+        <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
+        <div class="nav-mobile-dropdown-menu">
+          <a href="pages/courses/cbse10.html">CBSE Class 10</a>
+          <a href="pages/courses/cbse12.html">CBSE Class 12</a>
+          <a href="pages/courses/stateboard12.html">State Board Class 12</a>
         </div>
       </div>
-      <a class="btn btn-primary btn-sm nav-actions-mobile" href="/pages/test.html" data-od-id="header-cta-mobile">Sign Up</a>
-      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
-        <span></span>
-      </button>
-    </div>
-  </header>
-
-  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
-    <a href="#about">About</a>
-    <div class="nav-mobile-dropdown">
-      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
-      <div class="nav-mobile-dropdown-menu">
-        <a href="/pages/courses/cbse10.html">CBSE Class 10</a>
-        <a href="/pages/courses/cbse12.html">CBSE Class 12</a>
-        <a href="/pages/courses/stateboard12.html">State Board Class 12</a>
+      <div class="nav-mobile-dropdown">
+        <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
+        <div class="nav-mobile-dropdown-menu">
+          <a href="pages/studyplanner/">Study Planner</a>
+          <a href="pages/periodictable/">Periodic Table</a>
+          <a href="pages/mindmap/">Mind Map</a>
+        </div>
       </div>
-    </div>
-    <div class="nav-mobile-dropdown">
-      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
-      <div class="nav-mobile-dropdown-menu">
-        <a href="/pages/studyplanner/">Study Planner</a>
-        <a href="/pages/periodictable/">Periodic Table</a>
-        <a href="/pages/mindmap/">Mind Map</a>
-      </div>
-    </div>
-    <a href="#attend">How to attend</a>
-    <a href="#faq">FAQs</a>
-    <a href="#blog">Blog</a>
-    <a href="#contact">Contact</a>
-  </nav>
+      <a href="#attend">How to attend</a>
+      <a href="#faq">FAQs</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+  <!-- ═══ END STATIC FALLBACK HEADER ═══ -->
 
   <main id="top">
     <!-- HERO -->
@@ -193,12 +161,12 @@
         <aside class="hero-panel" data-od-id="hero-panel">
           <h2>Physics &amp; Chemistry</h2>
           <p class="panel-line" data-od-id="panel-line"><span class="panel-muted">Classes </span> <strong class="panel-accent">Started</strong> <span class="panel-muted">for</span> <strong class="panel-accent">2027 Board Exams</strong></p>
-            <div class="feature-grid">
-              <div class="feature-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><strong>Weekly Tests</strong><span>Regular Assessment</span></div>
-              <div class="feature-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><strong>Doubt Sessions</strong><span>Personalized Support</span></div>
-              <div class="feature-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><strong>PYQ Practice</strong><span>Previous Year Papers</span></div>
-              <div class="feature-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><strong>Better Concepts</strong><span>Better Results</span></div>
-            </div>
+          <div class="feature-grid">
+            <div class="feature-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><strong>Weekly Tests</strong><span>Regular Assessment</span></div>
+            <div class="feature-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><strong>Doubt Sessions</strong><span>Personalized Support</span></div>
+            <div class="feature-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><strong>PYQ Practice</strong><span>Previous Year Papers</span></div>
+            <div class="feature-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><strong>Better Concepts</strong><span>Better Results</span></div>
+          </div>
           <a class="btn btn-primary" data-wa="batch" href="https://wa.me/919787692116" target="_blank" rel="noopener noreferrer" data-od-id="cta-batch">Join 2026 Batch</a>
         </aside>
       </div>
@@ -559,47 +527,55 @@
     </section>
   </main>
 
-  <footer class="site-footer" data-od-id="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="socials" data-od-id="socials">
-          <a href="tel:+919787692116" aria-label="Call">
-            <img src="assets/icons/call.svg" alt="Call" />
-          </a>
-          <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business">
-            <img src="assets/icons/google-business.svg" alt="Google Business" />
-          </a>
-          <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <img src="assets/icons/linkedin.svg" alt="LinkedIn" />
-          </a>
-          <a href="mailto:prof@example.com" aria-label="Email">
-            <img src="assets/icons/mail.svg" alt="Email" />
-          </a>
-          <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
-            <img src="assets/icons/google-scholar.svg" alt="Google Scholar" />
-          </a>
-          <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack">
-            <img src="assets/icons/substack.png" alt="Substack" />
-          </a>
-          <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-            <img src="assets/icons/youtube.svg" alt="YouTube" />
-          </a>
+  <!-- ═══════════════════════════════════════════════════════════════
+       STATIC FALLBACK FOOTER
+       Shown immediately on load. header-footer-loader.js replaces
+       this with the fully-built shared footer once JS runs.
+       If JS fails, this fallback remains and the site still works.
+       ═══════════════════════════════════════════════════════════════ -->
+  <div id="site-footer-slot">
+    <footer class="site-footer" data-od-id="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="socials" data-od-id="socials">
+            <a href="tel:+919787692116" aria-label="Call">
+              <img src="assets/icons/call.svg" alt="Call" />
+            </a>
+            <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business">
+              <img src="assets/icons/google-business.svg" alt="Google Business" />
+            </a>
+            <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <img src="assets/icons/linkedin.svg" alt="LinkedIn" />
+            </a>
+            <a href="mailto:prof@example.com" aria-label="Email">
+              <img src="assets/icons/mail.svg" alt="Email" />
+            </a>
+            <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
+              <img src="assets/icons/google-scholar.svg" alt="Google Scholar" />
+            </a>
+            <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+              <img src="assets/icons/substack.png" alt="Substack" />
+            </a>
+            <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <img src="assets/icons/youtube.svg" alt="YouTube" />
+            </a>
+          </div>
+        </div>
+        <div class="footer-bottom" style="justify-content: space-between; flex-direction: column; align-items: center; gap: 8px;">
+          <span style="font-size: 12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy . All Rights Reserved.</span>
+          <style>
+            @media (min-width: 768px) {
+              .footer-bottom { flex-direction: row; justify-content: center; }
+            }
+          </style>
         </div>
       </div>
-      <div class="footer-bottom" style="justify-content: space-between; flex-direction: column; align-items: center; gap: 8px;">
-        <span style="font-size: 12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy . All Rights Reserved.</span>
-        <style>
-          @media (min-width: 768px) {
-            .footer-bottom { flex-direction: row; justify-content: center; }
-          }
-        </style>
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
+  <!-- ═══ END STATIC FALLBACK FOOTER ═══ -->
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+  <!-- Load shared header/footer (replaces slot divs above) then page logic -->
+  <script src="js/header-footer-loader.js"></script>
   <script src="js/main.js" defer></script>
 </body>
 </html>
