@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Chemistry Equations Bank for CBSE Class 12 and TN State Board Class 12 — chapter-wise chemical equations with variables and notes. A free learning resource by Prof. Dr. S. Balaji Science Academy." />
+  <title>Chemistry Equations Bank | Prof. Dr. S. Balaji</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+
+  <!--
+    MathJax with mhchem loaded as an extension.
+    mhchem is REQUIRED for \ce{...} — all chemical equations use it.
+    We also need ams for \rightleftharpoons, \xrightarrow, \tfrac etc.
+  -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath:  [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        packages: { '[+]': ['mhchem', 'ams'] },
+        tags: 'none'
+      },
+      loader: {
+        load: ['[tex]/mhchem', '[tex]/ams']
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre'],
+        processHtmlClass: 'ce-mathjax'
+      },
+      startup: {
+        typeset: false   /* we call typesetPromise() manually after each chapter renders */
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+          id="MathJax-script" async></script>
+
+  <style>
+    /* ============================================================
+       CHEMISTRY EQUATIONS BANK — page-specific styles
+       All tokens come from the shared styles.css design system.
+       ============================================================ */
+
+    /* ── Board selector ── */
+    .ce-board-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+    .ce-board-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      border: 2px solid var(--border);
+      background: var(--bg);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--fg);
+      cursor: pointer;
+      transition: border-color var(--motion-fast) var(--ease-standard),
+                  background   var(--motion-fast) var(--ease-standard),
+                  color        var(--motion-fast) var(--ease-standard);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .ce-board-btn:hover {
+      border-color: rgba(0,82,255,0.4);
+      background: color-mix(in oklab, var(--accent), transparent 94%);
+    }
+    .ce-board-btn.active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+    }
+    .ce-board-btn .ce-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.5;
+      transition: opacity var(--motion-fast);
+    }
+    .ce-board-btn.active .ce-dot { opacity: 1; background: #ffffff; }
+
+    /* ── Workspace ── */
+    .ce-workspace {
+      display: none;
+      margin-top: var(--space-8);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .ce-workspace.visible {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+    }
+    @media (max-width: 767px) {
+      .ce-workspace.visible { grid-template-columns: 1fr; }
+    }
+
+    /* ── Sidebar ── */
+    .ce-sidebar {
+      background: var(--fg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .ce-sidebar-header {
+      padding: var(--space-4) var(--space-4) var(--space-3);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .ce-sidebar-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .ce-sidebar-board-name {
+      font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      margin-top: 3px;
+    }
+    .ce-chapter-scroll {
+      flex: 1; overflow-y: auto; padding: var(--space-3) 0;
+    }
+    .ce-chapter-scroll::-webkit-scrollbar { width: 4px; }
+    .ce-chapter-scroll::-webkit-scrollbar-track { background: transparent; }
+    .ce-chapter-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.15); border-radius: 4px;
+    }
+    .ce-chapter-item {
+      display: flex; align-items: flex-start;
+      gap: var(--space-3);
+      padding: 9px var(--space-4);
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: background var(--motion-fast) var(--ease-standard),
+                  border-color var(--motion-fast) var(--ease-standard);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .ce-chapter-item:hover { background: rgba(255,255,255,0.06); }
+    .ce-chapter-item.active {
+      background: rgba(0,82,255,0.18);
+      border-left-color: var(--accent);
+    }
+    .ce-ch-num {
+      font-size: 10px; font-weight: 700;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.04em; line-height: 1.8;
+      flex-shrink: 0; min-width: 20px;
+    }
+    .ce-ch-title {
+      font-size: 12px; font-weight: 500;
+      color: rgba(255,255,255,0.65); line-height: 1.4;
+    }
+    .ce-chapter-item.active .ce-ch-num  { color: var(--accent-hover); }
+    .ce-chapter-item.active .ce-ch-title { color: #fff; font-weight: 600; }
+
+    /* Sidebar grouping label for Part / Volume */
+    .ce-sidebar-group {
+      padding: var(--space-3) var(--space-4) var(--space-1);
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+
+    @media (max-width: 767px) {
+      .ce-sidebar { border-bottom: 1px solid var(--border); max-height: 200px; }
+      .ce-chapter-item { padding: 8px var(--space-3); }
+    }
+
+    /* ── Main panel ── */
+    .ce-main {
+      background: var(--bg);
+      overflow-y: auto;
+      max-height: 78vh;
+      display: flex;
+      flex-direction: column;
+    }
+    @media (max-width: 767px) {
+      .ce-main { max-height: none; min-height: 60vh; }
+    }
+
+    /* Empty state */
+    .ce-empty {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: var(--space-12) var(--space-8);
+      text-align: center;
+    }
+    .ce-empty svg {
+      width: 40px; height: 40px;
+      color: var(--border); margin-bottom: var(--space-4);
+    }
+    .ce-empty p { font-size: var(--text-base); font-weight: 600; color: var(--muted); }
+    .ce-empty span {
+      font-size: var(--text-sm);
+      color: color-mix(in oklab, var(--muted), transparent 30%);
+      margin-top: 4px; display: block;
+    }
+
+    /* Loading */
+    .ce-loading {
+      display: flex; align-items: center; justify-content: center;
+      padding: var(--space-12);
+      color: var(--muted); font-size: var(--text-sm); font-weight: 600;
+      gap: var(--space-3);
+    }
+    .ce-spinner {
+      width: 18px; height: 18px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: ce-spin 0.7s linear infinite;
+    }
+    @keyframes ce-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .ce-spinner { animation: none; } }
+
+    /* Chapter header */
+    .ce-chapter-head {
+      padding: var(--space-6) var(--space-6) var(--space-4);
+      border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    .ce-chapter-head-eyebrow {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: var(--space-1);
+    }
+    .ce-chapter-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 400;
+      letter-spacing: var(--tracking-display);
+      color: var(--fg); line-height: 1.2;
+    }
+    .ce-chapter-stats {
+      display: flex; gap: var(--space-3);
+      margin-top: var(--space-3); flex-wrap: wrap;
+    }
+    .ce-stat-chip {
+      font-size: 12px; font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--surface); color: var(--muted);
+    }
+    .ce-stat-chip.accent {
+      background: color-mix(in oklab, var(--accent), transparent 90%);
+      color: var(--accent);
+    }
+
+    /* Content area */
+    .ce-content { padding: var(--space-5) var(--space-6); display: grid; gap: var(--space-7); }
+
+    /* Topic group */
+    .ce-topic-group { display: grid; gap: var(--space-4); }
+    .ce-topic-title {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--muted);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Equation card */
+    .ce-eq-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color var(--motion-fast) var(--ease-standard),
+                  box-shadow   var(--motion-fast) var(--ease-standard);
+    }
+    .ce-eq-card:hover {
+      border-color: color-mix(in oklab, var(--fg), transparent 75%);
+      box-shadow: 0 2px 8px color-mix(in oklab, var(--fg), transparent 93%);
+    }
+
+    /* Equation name bar */
+    .ce-eq-name-bar {
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .ce-eq-name {
+      font-size: 12px; font-weight: 700;
+      color: var(--fg); line-height: 1.3;
+    }
+
+    /* ── Equation display area ── */
+    /*
+      Chemistry equations can be very wide (multi-step reactions with
+      xrightarrow, conditions above/below arrows, long organic chains).
+      Each equation block is horizontally scrollable so nothing overflows.
+    */
+    .ce-eq-area {
+      padding: var(--space-4) var(--space-2) var(--space-3);
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in oklab, #16a34a, transparent 97%);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Main equation block */
+    .ce-eq-block {
+      display: block;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: var(--space-3) var(--space-4);
+      text-align: center;
+    }
+    .ce-eq-block::-webkit-scrollbar { height: 4px; }
+    .ce-eq-block::-webkit-scrollbar-thumb {
+      background: color-mix(in oklab, #16a34a, transparent 60%);
+      border-radius: 4px;
+    }
+
+    /* Variant equations (additional examples) — slightly subdued */
+    .ce-variant-block {
+      display: block;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: var(--space-2) var(--space-4);
+      text-align: center;
+      border-top: 1px dashed var(--border);
+      background: color-mix(in oklab, #16a34a, transparent 98%);
+    }
+    .ce-variant-block::-webkit-scrollbar { height: 4px; }
+    .ce-variant-block::-webkit-scrollbar-thumb {
+      background: color-mix(in oklab, #16a34a, transparent 70%);
+      border-radius: 4px;
+    }
+    .ce-variant-label {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: color-mix(in oklab, #16a34a, transparent 20%);
+      padding: var(--space-2) var(--space-4) 0;
+      border-top: 1px dashed var(--border);
+      display: block;
+    }
+
+    /* MathJax output inside equation blocks — let it breathe */
+    .ce-eq-block mjx-container,
+    .ce-variant-block mjx-container {
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    /* Note banner */
+    .ce-note {
+      display: flex;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+      background: color-mix(in oklab, var(--warn), transparent 90%);
+      border-top: 1px solid color-mix(in oklab, var(--warn), transparent 70%);
+      font-size: 12px;
+      color: color-mix(in oklab, #78350f, transparent 5%);
+      line-height: 1.5;
+    }
+    .ce-note-icon {
+      flex-shrink: 0; margin-top: 1px;
+      width: 14px; height: 14px;
+      opacity: 0.7;
+    }
+
+    /* Variables table */
+    .ce-meta {
+      padding: var(--space-3) var(--space-4) var(--space-4);
+      display: grid; gap: var(--space-3);
+    }
+    .ce-vars-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 6px;
+    }
+    .ce-vars-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .ce-vars-table td {
+      padding: 5px 8px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle; line-height: 1.4;
+    }
+    .ce-vars-table tr:last-child td { border-bottom: none; }
+    .ce-vars-table .sym-col {
+      white-space: nowrap;
+      width: 60px;
+      vertical-align: middle;
+    }
+    /* MathJax inside symbol cell: keep inline, don't blow up sizing */
+    .ce-vars-table .sym-col mjx-container {
+      display: inline !important;
+      margin: 0 !important;
+      font-size: 0.95em !important;
+    }
+    .ce-vars-table .desc-col { color: var(--muted); }
+
+    /* Page header */
+    .ce-page-head { padding-block: var(--space-8) var(--space-5); }
+    .ce-page-sub {
+      font-size: var(--text-base); color: var(--muted);
+      max-width: 58ch; margin-top: var(--space-3); line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+  <header class="site-header" data-od-id="site-header">
+    <div class="container header-inner">
+      <div class="brand-container">
+        <a href="../../index.html" class="brand-logo-link">
+          <img src="../../assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+        </a>
+        <a class="brand" href="../../index.html">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+      </div>
+      <style>
+        .brand-container{display:flex;align-items:center;gap:12px;flex-shrink:0;margin-right:auto}
+        .brand-logo{height:40px;width:40px;border-radius:50%;object-fit:cover;flex-shrink:0}
+        @media(min-width:480px){.brand-logo{height:44px;width:44px}}
+        @media(min-width:896px){.brand-logo{height:48px;width:48px}}
+        .site-header .brand{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1.25;color:var(--fg);text-decoration:none;max-width:160px;word-break:break-word}
+        @media(min-width:896px){.site-header .brand{font-size:14px;white-space:nowrap;max-width:none}}
+        .brand-logo-link{display:flex;align-items:center;justify-content:center;text-decoration:none;border-radius:50%;transition:opacity 150ms}
+        .brand-logo-link:hover{opacity:.8}
+      </style>
+      <div class="header-right">
+        <nav class="nav-desktop" aria-label="Primary">
+          <a href="../../index.html#about">About</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
+            <div class="nav-dropdown-menu">
+              <a href="../../pages/courses/cbse10.html">CBSE Class 10</a>
+              <a href="../../pages/courses/cbse12.html">CBSE Class 12</a>
+              <a href="../../pages/courses/stateboard12.html">State Board Class 12</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
+            <div class="nav-dropdown-menu">
+              <a href="/pages/studyplanner/">Study Planner</a>
+              <a href="/pages/periodictable/">Periodic Table</a>
+              <a href="/pages/mindmap/">Mind Map</a>
+              <a href="/pages/physicsformulas/">Physics Formulas</a>
+              <a href="/pages/chemistryequations/">Chemistry Equations</a>
+            </div>
+          </div>
+          <a href="../../index.html#attend">How to attend</a>
+          <a href="../../index.html#faq">FAQs</a>
+          <a href="../../index.html#blog">Blog</a>
+          <a href="../../index.html#contact">Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="btn btn-primary" href="/pages/test.html">Sign Up</a>
+        </div>
+      </div>
+      <a class="btn btn-primary btn-sm nav-actions-mobile" href="/pages/test.html">Sign Up</a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu"
+              aria-expanded="false" aria-controls="nav-mobile"><span></span></button>
+    </div>
+  </header>
+
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+    <a href="../../index.html#about">About</a>
+    <div class="nav-mobile-dropdown">
+      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
+      <div class="nav-mobile-dropdown-menu">
+        <a href="../../pages/courses/cbse10.html">CBSE Class 10</a>
+        <a href="../../pages/courses/cbse12.html">CBSE Class 12</a>
+        <a href="../../pages/courses/stateboard12.html">State Board Class 12</a>
+      </div>
+    </div>
+    <div class="nav-mobile-dropdown">
+      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
+      <div class="nav-mobile-dropdown-menu">
+        <a href="/pages/studyplanner/">Study Planner</a>
+        <a href="/pages/periodictable/">Periodic Table</a>
+        <a href="/pages/mindmap/">Mind Map</a>
+        <a href="/pages/physicsformulas/">Physics Formulas</a>
+        <a href="/pages/chemistryequations/">Chemistry Equations</a>
+      </div>
+    </div>
+    <a href="../../index.html#attend">How to attend</a>
+    <a href="../../index.html#faq">FAQs</a>
+    <a href="../../index.html#blog">Blog</a>
+    <a href="../../index.html#contact">Contact</a>
+  </nav>
+
+  <!-- ═══════════════════════════════ MAIN ═══════════════════════════════ -->
+  <main id="top">
+
+    <section class="section ce-page-head">
+      <div class="container">
+        <p class="eyebrow">Learning Resources</p>
+        <h1>Chemistry Equations Bank</h1>
+        <p class="ce-page-sub">Chapter-wise chemical equations for Class 12. Select your board to get started — every equation is rendered with full chemical notation including reaction conditions, state symbols, and equilibrium arrows.</p>
+
+        <div class="ce-board-row" role="group" aria-label="Select board">
+          <button class="ce-board-btn" id="btn-cbse" type="button" aria-pressed="false">
+            <span class="ce-dot"></span>CBSE Class 12
+          </button>
+          <button class="ce-board-btn" id="btn-sb" type="button" aria-pressed="false">
+            <span class="ce-dot"></span>State Board Class 12
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="ce-workspace" id="ce-workspace">
+
+          <!-- Sidebar -->
+          <aside class="ce-sidebar">
+            <div class="ce-sidebar-header">
+              <div class="ce-sidebar-label">Chapters</div>
+              <div class="ce-sidebar-board-name" id="ce-sidebar-board-name"></div>
+            </div>
+            <div class="ce-chapter-scroll" id="ce-chapter-scroll"></div>
+          </aside>
+
+          <!-- Main panel -->
+          <div class="ce-main" id="ce-main">
+            <div class="ce-empty" id="ce-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9"/>
+                <polyline points="9 3 9 9 15 9"/>
+                <line x1="9" y1="13" x2="15" y2="13"/>
+                <line x1="9" y1="17" x2="12" y2="17"/>
+              </svg>
+              <p>Select a chapter</p>
+              <span>Click any chapter on the left to view its equations</span>
+            </div>
+            <div class="ce-loading" id="ce-loading" style="display:none;">
+              <div class="ce-spinner"></div>Loading equations…
+            </div>
+            <div id="ce-chapter-content" style="display:none;"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="site-footer" data-od-id="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="socials">
+          <a href="tel:+919787692116" aria-label="Call"><img src="../../assets/icons/call.svg" alt="Call"/></a>
+          <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business"><img src="../../assets/icons/google-business.svg" alt="Google Business"/></a>
+          <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="../../assets/icons/linkedin.svg" alt="LinkedIn"/></a>
+          <a href="mailto:prof@example.com" aria-label="Email"><img src="../../assets/icons/mail.svg" alt="Email"/></a>
+          <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar"><img src="../../assets/icons/google-scholar.svg" alt="Google Scholar"/></a>
+          <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack"><img src="../../assets/icons/substack.png" alt="Substack"/></a>
+          <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="../../assets/icons/youtube.svg" alt="YouTube"/></a>
+        </div>
+      </div>
+      <div class="footer-bottom" style="flex-direction:column;align-items:center;gap:8px;">
+        <span style="font-size:12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy. All Rights Reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════ JAVASCRIPT ═══════════════════════════════ -->
+  <script>
+  (function () {
+    "use strict";
+
+    /* ── Footer year ── */
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    /* ── Nav ── */
+    var toggle    = document.getElementById("menu-toggle");
+    var mobileNav = document.getElementById("nav-mobile");
+    if (toggle && mobileNav) {
+      toggle.addEventListener("click", function () {
+        var open = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!open));
+        mobileNav.classList.toggle("open", !open);
+        document.body.classList.toggle("nav-open", !open);
+      });
+      mobileNav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          toggle.setAttribute("aria-expanded", "false");
+          mobileNav.classList.remove("open");
+          document.body.classList.remove("nav-open");
+        });
+      });
+    }
+    document.querySelectorAll(".nav-mobile-dropdown-trigger").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        btn.setAttribute("aria-expanded", String(btn.getAttribute("aria-expanded") !== "true"));
+      });
+    });
+    document.querySelectorAll(".nav-dropdown").forEach(function (dd) {
+      var trigger = dd.querySelector(".nav-dropdown-trigger");
+      if (!trigger) return;
+      trigger.addEventListener("click", function () {
+        trigger.setAttribute("aria-expanded", String(trigger.getAttribute("aria-expanded") !== "true"));
+      });
+      document.addEventListener("click", function (e) {
+        if (!dd.contains(e.target)) trigger.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    /* ── State ── */
+    var state = { board: null, data: null, activeChapter: null };
+
+    var JSON_PATHS = {
+      cbse:       "../../assets/chemistryequations/cbse12-chemistry-equations.json",
+      stateboard: "../../assets/chemistryequations/sb12-chemistry-equations.json"
+    };
+    var BOARD_LABELS = {
+      cbse:       "CBSE Class 12",
+      stateboard: "State Board Class 12"
+    };
+
+    /* ── DOM refs ── */
+    var workspace        = document.getElementById("ce-workspace");
+    var sidebarBoardName = document.getElementById("ce-sidebar-board-name");
+    var chapterScroll    = document.getElementById("ce-chapter-scroll");
+    var ceMain           = document.getElementById("ce-main");
+    var ceEmpty          = document.getElementById("ce-empty");
+    var ceLoading        = document.getElementById("ce-loading");
+    var ceContent        = document.getElementById("ce-chapter-content");
+    var btnCbse          = document.getElementById("btn-cbse");
+    var btnSb            = document.getElementById("btn-sb");
+
+    /* ── Board selection ── */
+    function selectBoard(board) {
+      if (state.board === board) return;
+      state.board = board;
+      state.data  = null;
+      state.activeChapter = null;
+
+      btnCbse.classList.toggle("active", board === "cbse");
+      btnCbse.setAttribute("aria-pressed", String(board === "cbse"));
+      btnSb.classList.toggle("active",   board === "stateboard");
+      btnSb.setAttribute("aria-pressed", String(board === "stateboard"));
+
+      workspace.classList.add("visible");
+      sidebarBoardName.textContent = BOARD_LABELS[board];
+      chapterScroll.innerHTML =
+        '<div style="padding:16px 12px;font-size:12px;color:rgba(255,255,255,0.4);">Loading chapters…</div>';
+      showEmpty();
+
+      fetch(JSON_PATHS[board])
+        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(function (data) { state.data = data; buildSidebar(data, board); })
+        .catch(function (err) {
+          chapterScroll.innerHTML =
+            '<div style="padding:16px 12px;font-size:12px;color:rgba(255,100,100,0.8);">Could not load data. Check your connection.</div>';
+          console.error("Chemistry equation data error:", err);
+        });
+    }
+
+    btnCbse.addEventListener("click", function () { selectBoard("cbse"); });
+    btnSb.addEventListener("click",   function () { selectBoard("stateboard"); });
+
+    /* ── Build sidebar ──
+       CBSE chapters have a "part" field; SB chapters have a "volume" field.
+       Group chapters by their part/volume and show a group label when it changes.
+    */
+    function buildSidebar(data, board) {
+      chapterScroll.innerHTML = "";
+      var lastGroup = null;
+
+      data.chapters.forEach(function (ch) {
+        /* Determine group label — "part" for CBSE, "volume" for SB */
+        var groupLabel = ch.part || ch.volume || null;
+
+        if (groupLabel && groupLabel !== lastGroup) {
+          var g = document.createElement("div");
+          g.className = "ce-sidebar-group";
+          g.textContent = groupLabel;
+          chapterScroll.appendChild(g);
+          lastGroup = groupLabel;
+        }
+
+        var item = document.createElement("div");
+        item.className = "ce-chapter-item";
+        item.setAttribute("role", "button");
+        item.setAttribute("tabindex", "0");
+        item.setAttribute("data-chno", ch.chapter_number);
+        item.innerHTML =
+          '<span class="ce-ch-num">' + ch.chapter_number + '</span>' +
+          '<span class="ce-ch-title">' + esc(ch.chapter_title) + '</span>';
+        item.addEventListener("click", function () { selectChapter(ch.chapter_number); });
+        item.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectChapter(ch.chapter_number); }
+        });
+        chapterScroll.appendChild(item);
+      });
+    }
+
+    /* ── Chapter selection ── */
+    function selectChapter(chapterNo) {
+      if (!state.data) return;
+      state.activeChapter = chapterNo;
+
+      chapterScroll.querySelectorAll(".ce-chapter-item").forEach(function (item) {
+        item.classList.toggle("active", Number(item.getAttribute("data-chno")) === chapterNo);
+      });
+
+      var ch = state.data.chapters.find(function (c) { return c.chapter_number === chapterNo; });
+      if (!ch) return;
+      renderChapter(ch);
+
+      if (window.innerWidth < 768) {
+        ceMain.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    /* ── Render chapter ── */
+    function renderChapter(ch) {
+      ceEmpty.style.display   = "none";
+      ceLoading.style.display = "none";
+      ceContent.style.display = "block";
+
+      var totalEqs    = 0;
+      var totalTopics = 0;
+      ch.topics.forEach(function (t) {
+        if (t.equations && t.equations.length) {
+          totalTopics++;
+          totalEqs += t.equations.length;
+          /* Count variant equations too */
+          t.equations.forEach(function (eq) {
+            if (eq.variants) totalEqs += eq.variants.length;
+          });
+        }
+      });
+
+      var html = "";
+
+      /* Chapter header */
+      var groupLabel = ch.part || ch.volume || "";
+      html += '<div class="ce-chapter-head">';
+      html += '<div class="ce-chapter-head-eyebrow">Chapter ' + ch.chapter_number
+              + (groupLabel ? ' &nbsp;·&nbsp; ' + esc(groupLabel) : '') + '</div>';
+      html += '<h2>' + esc(ch.chapter_title) + '</h2>';
+      html += '<div class="ce-chapter-stats">';
+      html += '<span class="ce-stat-chip accent">' + totalEqs + ' equation' + (totalEqs !== 1 ? 's' : '') + '</span>';
+      html += '<span class="ce-stat-chip">' + totalTopics + ' topic' + (totalTopics !== 1 ? 's' : '') + '</span>';
+      html += '</div></div>';
+
+      /* Topics + equations */
+      html += '<div class="ce-content">';
+
+      if (!ch.topics || !ch.topics.length) {
+        html += '<div style="padding:var(--space-8) var(--space-6);color:var(--muted);font-size:var(--text-base);">'
+              + 'No equations available for this chapter.</div>';
+      } else {
+        ch.topics.forEach(function (topic) {
+          if (!topic.equations || !topic.equations.length) return;
+          html += '<div class="ce-topic-group">';
+          html += '<div class="ce-topic-title">' + esc(topic.topic) + '</div>';
+          topic.equations.forEach(function (eq) {
+            html += renderEquation(eq);
+          });
+          html += '</div>';
+        });
+      }
+
+      html += '</div>'; /* .ce-content */
+
+      ceContent.innerHTML = html;
+      ceMain.scrollTop = 0;
+
+      /*
+        Typeset all MathJax content in the newly-rendered chapter.
+        We scope to ceContent only — avoids re-processing the entire page.
+        MathJax.typesetPromise() is safe to call repeatedly.
+      */
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([ceContent]).catch(function (err) {
+          console.error("MathJax typeset error:", err);
+        });
+      }
+    }
+
+    /* ── Render one equation card ── */
+    function renderEquation(eq) {
+      var html = '<div class="ce-eq-card">';
+
+      /* Name bar */
+      html += '<div class="ce-eq-name-bar">';
+      html += '<div class="ce-eq-name">' + esc(eq.equation_name) + '</div>';
+      html += '</div>';
+
+      /* Equation display area */
+      html += '<div class="ce-eq-area">';
+
+      /*
+        Main equation — display math \[ ... \].
+        The LaTeX string is inserted RAW (not escaped) so MathJax receives it intact.
+        \ce{} requires the mhchem package which is loaded above.
+      */
+      html += '<div class="ce-eq-block ce-mathjax">\\[' + eq.latex + '\\]</div>';
+
+      /* Variant equations (additional examples under the same equation name) */
+      if (eq.variants && eq.variants.length) {
+        html += '<span class="ce-variant-label">Also see</span>';
+        eq.variants.forEach(function (vLatex) {
+          html += '<div class="ce-variant-block ce-mathjax">\\[' + vLatex + '\\]</div>';
+        });
+      }
+
+      html += '</div>'; /* .ce-eq-area */
+
+      /* Note banner (appears between equation and variables) */
+      if (eq.note) {
+        html += '<div class="ce-note">';
+        html += '<svg class="ce-note-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">'
+              + '<circle cx="8" cy="8" r="7"/>'
+              + '<line x1="8" y1="5" x2="8" y2="5.5" stroke-width="2" stroke-linecap="round"/>'
+              + '<line x1="8" y1="7.5" x2="8" y2="11" stroke-linecap="round"/>'
+              + '</svg>';
+        html += esc(eq.note);
+        html += '</div>';
+      }
+
+      /* Variables table */
+      var hasVars = eq.variables && eq.variables.length;
+      if (hasVars) {
+        html += '<div class="ce-meta">';
+        html += '<div class="ce-vars-label">Symbols</div>';
+        html += '<table class="ce-vars-table">';
+        eq.variables.forEach(function (v) {
+          /*
+            Symbol field: may be plain text (e.g. "Na[Al(OH)4]"), LaTeX
+            (e.g. "\\Delta G"), or a mix. We always run it through MathJax
+            inline math \( ... \) — MathJax handles plain identifiers fine,
+            and LaTeX symbols render correctly.
+            The symbol is inserted RAW (not escaped).
+          */
+          html += '<tr>';
+          html += '<td class="sym-col ce-mathjax">\\(' + v.symbol + '\\)</td>';
+          html += '<td class="desc-col">' + esc(v.meaning) + '</td>';
+          html += '</tr>';
+        });
+        html += '</table>';
+        html += '</div>'; /* .ce-meta */
+      }
+
+      html += '</div>'; /* .ce-eq-card */
+      return html;
+    }
+
+    /* ── Helpers ── */
+    function showEmpty() {
+      ceEmpty.style.display   = "";
+      ceLoading.style.display = "none";
+      ceContent.style.display = "none";
+      ceContent.innerHTML     = "";
+    }
+
+    /*
+      esc() is used ONLY for plain-text fields (equation_name, topic, note, meaning).
+      LaTeX strings (eq.latex, variant strings, v.symbol) are inserted raw —
+      escaping them would corrupt the LaTeX before MathJax processes it.
+    */
+    function esc(s) {
+      if (s === null || s === undefined) return "";
+      return String(s)
+        .replace(/&/g,  "&amp;")
+        .replace(/</g,  "&lt;")
+        .replace(/>/g,  "&gt;")
+        .replace(/"/g,  "&quot;");
+    }
+
+  }());
+  </script>
+
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>
