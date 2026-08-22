@@ -8,48 +8,11 @@
     return "https://wa.me/" + WA_NUMBER + "?text=" + text;
   }
 
-  /* Mobile nav */
-  var toggle = document.getElementById("menu-toggle");
-  var mobileNav = document.getElementById("nav-mobile");
-  if (toggle && mobileNav) {
-    toggle.addEventListener("click", function () {
-      var open = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!open));
-      mobileNav.classList.toggle("open", !open);
-      document.body.classList.toggle("nav-open", !open);
-    });
-    mobileNav.querySelectorAll("a:not([aria-haspopup])").forEach(function (link) {
-      link.addEventListener("click", function () {
-        toggle.setAttribute("aria-expanded", "false");
-        mobileNav.classList.remove("open");
-        document.body.classList.remove("nav-open");
-      });
-    });
-  }
-
-  /* Mobile dropdown — handles all dropdown triggers (Courses, Resources, etc.) */
-  document.querySelectorAll(".nav-mobile-dropdown-trigger").forEach(function (trigger) {
-    trigger.addEventListener("click", function () {
-      var expanded = trigger.getAttribute("aria-expanded") === "true";
-      trigger.setAttribute("aria-expanded", String(!expanded));
-    });
-  });
-
-  /* Desktop dropdown menu */
-  var dropdownTrigger = document.querySelector(".nav-dropdown-trigger");
-  var dropdownMenu = document.querySelector(".nav-dropdown-menu");
-  if (dropdownTrigger) {
-    dropdownTrigger.addEventListener("click", function () {
-      var expanded = dropdownTrigger.getAttribute("aria-expanded") === "true";
-      dropdownTrigger.setAttribute("aria-expanded", String(!expanded));
-    });
-    document.addEventListener("click", function (e) {
-      var dropdown = document.querySelector(".nav-dropdown");
-      if (dropdown && !dropdown.contains(e.target)) {
-        dropdownTrigger.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
+  /* ─────────────────────────────────────────────────────────────────
+   * NOTE: Mobile nav, mobile dropdown, and desktop dropdown listeners
+   * are now handled by header-footer-loader.js so they work correctly
+   * on every page after the shared header is injected.
+   * ───────────────────────────────────────────────────────────────── */
 
   /* About read more */
   var aboutBio = document.getElementById("about-bio");
@@ -230,4 +193,5 @@
       }
     });
   });
+
 })();
