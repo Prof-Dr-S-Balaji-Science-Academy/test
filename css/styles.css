@@ -953,6 +953,7 @@ h3, .h3 {
     flex-direction: column;
     width: 100%;
     text-align: left;
+    border-radius: inherit;
   }
   .mode-img {
     aspect-ratio: 2 / 1;
@@ -972,6 +973,7 @@ h3, .h3 {
     background: white;
     border-top: 1px solid var(--border);
     flex-direction: column;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
   }
   .mode-body h3 {
     margin-bottom: var(--space-3);
