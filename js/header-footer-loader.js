@@ -61,11 +61,23 @@
     var brandHref = home ? "#top" : prefix + "index.html";
 
     return [
+      '<style id="hfl-styles">',
+      '  .brand-container { display:flex; flex-direction:row; align-items:center; gap:10px; flex-shrink:0; margin-right:auto; }',
+      '  .brand-logo-link { display:flex; align-items:center; justify-content:center; text-decoration:none; border-radius:50%; flex-shrink:0; transition:opacity 150ms; }',
+      '  .brand-logo-link:hover { opacity:0.8; }',
+      '  .brand-logo { width:40px; height:40px; border-radius:50%; object-fit:cover; flex-shrink:0; display:block; }',
+      '  @media (min-width:480px) { .brand-logo { width:44px; height:44px; } }',
+      '  @media (min-width:896px) { .brand-logo { width:48px; height:48px; } }',
+      '  #brand-text { font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--fg); text-decoration:none; line-height:1.25; flex-shrink:1; }',
+      '  #brand-text:hover { color:var(--fg); }',
+      '  @media (min-width:896px) { #brand-text br { display:none; } #brand-text { white-space:nowrap; font-size:13px; } }',
+      '</style>',
+
       '<header class="site-header" data-od-id="site-header">',
       '  <div class="container header-inner">',
       '    <div class="brand-container">',
       '      <a href="' + brandHref + '" class="brand-logo-link" data-od-id="brand-logo-link">',
-      '        <img src="' + prefix + 'assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;display:block;" />',
+      '        <img src="' + prefix + 'assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />',
       '      </a>',
       '      <a class="brand" href="' + brandHref + '" data-od-id="brand" id="brand-text">PROF. DR. S. BALAJI<br>SCIENCE ACADEMY</a>',
       '    </div>',
@@ -226,7 +238,46 @@
     if (el) el.textContent = new Date().getFullYear();
   }
 
-  /* ── 8. Inject into the DOM ──────────────────────────────────── */
+  /* ── 8. Brand text scroll-fade ────────────────────────────────
+   * Opacity is set directly on every scroll frame — no CSS transition —
+   * so it tracks finger/wheel speed physically.
+   *
+   * Fade window: 0 → FADE_OVER px of scrollY.
+   * At 0px  → opacity 1 (fully visible)
+   * At FADE_OVER → opacity 0 (fully gone)
+   *
+   * The header is position:sticky so it never moves, but scrollY still
+   * increases. We simply drive #brand-text opacity from scrollY.
+   * ─────────────────────────────────────────────────────────────── */
+  function attachBrandFade() {
+    /* Look up after injection — outerHTML swap creates new DOM nodes */
+    var brandEl = document.getElementById("brand-text");
+    if (!brandEl) return;
+
+    /* Fade completes over the first 72px of scroll (= header height) */
+    var FADE_OVER = 72;
+    var ticking = false;
+
+    function applyFade() {
+      var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var opacity = Math.max(0, Math.min(1, 1 - scrollY / FADE_OVER));
+      brandEl.style.opacity = String(opacity);
+      brandEl.setAttribute("aria-hidden", opacity === 0 ? "true" : "false");
+      ticking = false;
+    }
+
+    window.addEventListener("scroll", function () {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(applyFade);
+      }
+    }, { passive: true });
+
+    /* Apply immediately so restored-scroll-position pages start correct */
+    applyFade();
+  }
+
+  /* ── 9. Inject into the DOM ──────────────────────────────────── */
   function inject() {
     var prefix = getPrefix();
 
@@ -244,6 +295,7 @@
 
     attachNavListeners();
     setCopyrightYear();
+    attachBrandFade();
   }
 
   /* Run after DOM is ready */
