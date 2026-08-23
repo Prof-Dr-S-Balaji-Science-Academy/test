@@ -872,7 +872,6 @@ h3, .h3 {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: transform var(--motion-base) var(--ease-standard),
@@ -884,6 +883,8 @@ h3, .h3 {
   background: var(--surface);
   position: relative;
   overflow: hidden;
+  margin: var(--space-3);
+  border-radius: var(--radius-sm);
 }
 .mode-img img {
   width: 100%;
@@ -940,7 +941,6 @@ h3, .h3 {
     background: white;
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    overflow: hidden;
     display: flex;
     flex-direction: column;
   }
@@ -955,8 +955,9 @@ h3, .h3 {
     text-align: left;
   }
   .mode-img {
-    border-radius: 0;
     aspect-ratio: 2 / 1;
+    margin: var(--space-3);
+    border-radius: var(--radius-sm);
   }
   .mode-card-title {
     padding: var(--space-4);
