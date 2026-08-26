@@ -936,6 +936,7 @@ h3, .h3 {
   border-radius: 50%;
   background: var(--accent);
 }
+.mode-card-chev { display: none; }
 @media (max-width: 767px) {
   .mode-card {
     background: white;
@@ -963,9 +964,30 @@ h3, .h3 {
   .mode-card-title {
     padding: var(--space-4);
     background: white;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
   }
   .mode-card-title h3 {
     margin: 0;
+  }
+  .mode-card-chev {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--surface);
+    display: grid;
+    place-items: center;
+    transition: transform var(--motion-base) var(--ease-standard), background var(--motion-fast);
+  }
+  .mode-card-chev svg { width: 12px; height: 12px; }
+  .mode-card.expanded .mode-card-chev {
+    transform: rotate(180deg);
+    background: var(--accent);
+    color: var(--accent-on);
   }
   .mode-body {
     display: none;
