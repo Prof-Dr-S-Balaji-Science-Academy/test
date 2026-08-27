@@ -79,7 +79,7 @@
       '      <a href="' + brandHref + '" class="brand-logo-link" data-od-id="brand-logo-link">',
       '        <img src="' + prefix + 'assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />',
       '      </a>',
-      '      <a class="brand" href="' + brandHref + '" data-od-id="brand" id="brand-text">PROF. DR. S. BALAJI<br>SCIENCE ACADEMY</a>',
+      '      <a class="brand" href="' + brandHref + '" data-od-id="brand" id="brand-text">PROF. DR. S. BALAJI <br>SCIENCE ACADEMY</a>',
       '    </div>',
 
       '    <div class="header-right">',
@@ -175,7 +175,7 @@
       '      </div>',
       '    </div>',
       '    <div class="footer-bottom" style="justify-content:space-between;flex-direction:column;align-items:center;gap:8px;">',
-      '      <span style="font-size:12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy . All Rights Reserved.</span>',
+      '      <span style="font-size:11px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy | All Rights Reserved.</span>',
       '    </div>',
       '  </div>',
       '</footer>'
