@@ -7,8 +7,11 @@
   <title>Free Mock Tests · Coming Soon | Prof. Dr. S. Balaji Science Academy</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0052ff" />
   <style>
+    /* Coinbase design system tokens */
     :root {
       --bg:           #ffffff;
       --surface:      #eef0f3;
@@ -28,7 +31,7 @@
       --radius-sm:    8px;
     }
     body { font-family: var(--font-body); background-color: var(--bg); color: var(--fg); line-height: 1.5; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; font-weight: 600; text-decoration: none; border-radius: var(--radius-pill); transition: background-color 150ms; cursor: pointer; border: none; font-size: 1rem; font-family: var(--font-body); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; font-weight: 600; text-decoration: none; border-radius: var(--radius-pill); transition: background-color 150ms; }
     .btn-primary { background-color: var(--accent); color: var(--accent-on); }
     .btn-primary:hover { background-color: var(--accent-hover); }
     .btn-secondary { background-color: var(--surface); color: var(--fg); }
@@ -155,100 +158,90 @@
 </head>
 <body id="home">
 
-  <!-- ═══════════ HEADER (identical to index.html) ═══════════ -->
-  <header class="site-header" data-od-id="site-header">
-    <div class="container header-inner">
-      <div class="brand-container">
-        <a href="../index.html" data-od-id="brand-logo-link" class="brand-logo-link">
-          <img src="../assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
-        </a>
-        <a class="brand" href="../index.html" data-od-id="brand">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+  <!-- ═══════════════════════════════════════════════════════════════
+       STATIC FALLBACK HEADER
+       Shown immediately on load. header-footer-loader.js replaces
+       this with the fully-built shared header once JS runs.
+       If JS fails, this fallback remains and the site still works.
+       ═══════════════════════════════════════════════════════════════ -->
+  <div id="site-header-slot">
+    <header class="site-header" data-od-id="site-header">
+      <div class="container header-inner">
+        <div class="brand-container">
+          <a href="../index.html" class="brand-logo-link" data-od-id="brand-logo-link">
+            <img src="../assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+          </a>
+          <a class="brand" href="../index.html" data-od-id="brand">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+        </div>
+        <style>
+          .brand-container { display: flex; align-items: center; gap: 12px; flex-shrink: 0; margin-right: auto; }
+          .brand-logo { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+          @media (min-width: 480px) { .brand-logo { height: 44px; width: 44px; } }
+          @media (min-width: 896px) { .brand-logo { height: 48px; width: 48px; } }
+          .site-header .brand { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.25; color: var(--fg); text-decoration: none; max-width: 160px; word-break: break-word; }
+          @media (min-width: 896px) { .site-header .brand { font-size: 14px; white-space: nowrap; max-width: none; } }
+          .brand-logo-link { display: flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 50%; transition: opacity 150ms; }
+          .brand-logo-link:hover { opacity: 0.8; }
+        </style>
+        <div class="header-right">
+          <nav class="nav-desktop" aria-label="Primary" data-od-id="nav-desktop">
+            <a href="../index.html#about">About</a>
+            <div class="nav-dropdown">
+              <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
+              <div class="nav-dropdown-menu">
+                <a href="../pages/courses/cbse10.html">CBSE Class 10</a>
+                <a href="../pages/courses/cbse12.html">CBSE Class 12</a>
+                <a href="../pages/courses/stateboard12.html">State Board Class 12</a>
+              </div>
+            </div>
+            <div class="nav-dropdown">
+              <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
+              <div class="nav-dropdown-menu">
+                <a href="../pages/studyplanner/">Study Planner</a>
+                <a href="../pages/periodictable/">Periodic Table</a>
+                <a href="../pages/mindmap/">Mind Map</a>
+              </div>
+            </div>
+            <a href="../index.html#attend">How to attend</a>
+            <a href="../index.html#faq">FAQs</a>
+            <a href="../index.html#blog">Blog</a>
+            <a href="../index.html#contact">Contact</a>
+          </nav>
+          <div class="nav-actions">
+            <a class="btn btn-primary" href="#" data-od-id="header-cta">Sign Up</a>
+          </div>
+        </div>
+        <a class="btn btn-primary btn-sm nav-actions-mobile" href="#" data-od-id="header-cta-mobile">Sign Up</a>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
+          <span></span>
+        </button>
       </div>
-      <style>
-        .brand-container {
-          display: flex; align-items: center; gap: 12px;
-          flex-shrink: 0; margin-right: auto;
-        }
-        .brand-logo {
-          height: 40px; width: 40px;
-          border-radius: 50%; object-fit: cover; flex-shrink: 0;
-        }
-        @media (min-width: 480px) { .brand-logo { height: 44px; width: 44px; } }
-        @media (min-width: 896px) { .brand-logo { height: 48px; width: 48px; } }
-        .site-header .brand {
-          font-size: 11px; font-weight: 700;
-          letter-spacing: 0.06em; text-transform: uppercase;
-          line-height: 1.25; color: var(--fg); text-decoration: none;
-          max-width: 160px; word-break: break-word;
-        }
-        @media (min-width: 896px) {
-          .site-header .brand { font-size: 14px; white-space: nowrap; max-width: none; }
-        }
-        .brand-logo-link {
-          display: flex; align-items: center; justify-content: center;
-          text-decoration: none; border-radius: 50%;
-          transition: opacity 150ms ease-standard;
-        }
-        .brand-logo-link:hover { opacity: 0.8; }
-      </style>
-      <div class="header-right">
-        <nav class="nav-desktop" aria-label="Primary" data-od-id="nav-desktop">
-          <a href="../index.html#about">About</a>
-          <div class="nav-dropdown">
-            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
-            <div class="nav-dropdown-menu">
-              <a href="courses/cbse10.html">CBSE Class 10</a>
-              <a href="courses/cbse12.html">CBSE Class 12</a>
-              <a href="courses/stateboard12.html">State Board Class 12</a>
-            </div>
-          </div>
-          <div class="nav-dropdown">
-            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
-            <div class="nav-dropdown-menu">
-              <a href="/pages/studyplanner/">Study Planner</a>
-              <a href="/pages/periodictable/">Periodic Table</a>
-              <a href="/pages/mindmap/">Mind Map</a>
-            </div>
-          </div>
-          <a href="../index.html#attend">How to attend</a>
-          <a href="../index.html#faq">FAQs</a>
-          <a href="../index.html#blog">Blog</a>
-          <a href="../index.html#contact">Contact</a>
-        </nav>
-        <div class="nav-actions">
-          <a class="btn btn-primary" href="/pages/test.html" data-od-id="header-cta">Sign Up</a>
+    </header>
+    <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+      <a href="../index.html#about">About</a>
+      <div class="nav-mobile-dropdown">
+        <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
+        <div class="nav-mobile-dropdown-menu">
+          <a href="../pages/courses/cbse10.html">CBSE Class 10</a>
+          <a href="../pages/courses/cbse12.html">CBSE Class 12</a>
+          <a href="../pages/courses/stateboard12.html">State Board Class 12</a>
         </div>
       </div>
-      <a class="btn btn-primary btn-sm nav-actions-mobile" href="/pages/test.html" data-od-id="header-cta-mobile">Sign Up</a>
-      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
-        <span></span>
-      </button>
-    </div>
-  </header>
-
-  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
-    <a href="../index.html#about">About</a>
-    <div class="nav-mobile-dropdown">
-      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
-      <div class="nav-mobile-dropdown-menu">
-        <a href="courses/cbse10.html">CBSE Class 10</a>
-        <a href="courses/cbse12.html">CBSE Class 12</a>
-        <a href="courses/stateboard12.html">State Board Class 12</a>
+      <div class="nav-mobile-dropdown">
+        <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
+        <div class="nav-mobile-dropdown-menu">
+          <a href="../pages/studyplanner/">Study Planner</a>
+          <a href="../pages/periodictable/">Periodic Table</a>
+          <a href="../pages/mindmap/">Mind Map</a>
+        </div>
       </div>
-    </div>
-    <div class="nav-mobile-dropdown">
-      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
-      <div class="nav-mobile-dropdown-menu">
-        <a href="/pages/studyplanner/">Study Planner</a>
-        <a href="/pages/periodictable/">Periodic Table</a>
-        <a href="/pages/mindmap/">Mind Map</a>
-      </div>
-    </div>
-    <a href="../index.html#attend">How to attend</a>
-    <a href="../index.html#faq">FAQs</a>
-    <a href="../index.html#blog">Blog</a>
-    <a href="../index.html#contact">Contact</a>
-  </nav>
+      <a href="../index.html#attend">How to attend</a>
+      <a href="../index.html#faq">FAQs</a>
+      <a href="../index.html#blog">Blog</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+  <!-- ═══ END STATIC FALLBACK HEADER ═══ -->
 
   <!-- ═══════════ MAIN ═══════════ -->
   <main id="top">
@@ -347,48 +340,50 @@
 
   </main>
 
-  <!-- ═══════════ FOOTER (identical to index.html) ═══════════ -->
-  <footer class="site-footer" data-od-id="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="socials" data-od-id="socials">
-          <a href="tel:+919787692116" aria-label="Call">
-            <img src="../assets/icons/call.svg" alt="Call" />
-          </a>
-          <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business">
-            <img src="../assets/icons/google-business.svg" alt="Google Business" />
-          </a>
-          <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <img src="../assets/icons/linkedin.svg" alt="LinkedIn" />
-          </a>
-          <a href="mailto:prof@example.com" aria-label="Email">
-            <img src="../assets/icons/mail.svg" alt="Email" />
-          </a>
-          <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
-            <img src="../assets/icons/google-scholar.svg" alt="Google Scholar" />
-          </a>
-          <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack">
-            <img src="../assets/icons/substack.png" alt="Substack" />
-          </a>
-          <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-            <img src="../assets/icons/youtube.svg" alt="YouTube" />
-          </a>
+  <!-- ═══════════════════════════════════════════════════════════════
+       STATIC FALLBACK FOOTER
+       Shown immediately on load. header-footer-loader.js replaces
+       this with the fully-built shared footer once JS runs.
+       If JS fails, this fallback remains and the site still works.
+       ═══════════════════════════════════════════════════════════════ -->
+  <div id="site-footer-slot">
+    <footer class="site-footer" data-od-id="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="socials" data-od-id="socials">
+            <a href="tel:+919787692116" aria-label="Call">
+              <img src="../assets/icons/call.svg" alt="Call" />
+            </a>
+            <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business">
+              <img src="../assets/icons/google-business.svg" alt="Google Business" />
+            </a>
+            <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <img src="../assets/icons/linkedin.svg" alt="LinkedIn" />
+            </a>
+            <a href="mailto:prof@example.com" aria-label="Email">
+              <img src="../assets/icons/mail.svg" alt="Email" />
+            </a>
+            <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
+              <img src="../assets/icons/google-scholar.svg" alt="Google Scholar" />
+            </a>
+            <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+              <img src="../assets/icons/substack.png" alt="Substack" />
+            </a>
+            <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <img src="../assets/icons/youtube.svg" alt="YouTube" />
+            </a>
+          </div>
+        </div>
+        <div class="footer-bottom" style="justify-content: space-between; flex-direction: column; align-items: center; gap: 8px;">
+          <span style="font-size: 12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy . All Rights Reserved.</span>
         </div>
       </div>
-      <div class="footer-bottom" style="justify-content: space-between; flex-direction: column; align-items: center; gap: 8px;">
-        <span style="font-size: 12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy . All Rights Reserved.</span>
-        <style>
-          @media (min-width: 768px) {
-            .footer-bottom { flex-direction: row; justify-content: center; }
-          }
-        </style>
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
+  <!-- ═══ END STATIC FALLBACK FOOTER ═══ -->
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+  <!-- Load shared header/footer (replaces slot divs above) then page logic -->
+  <script src="../js/header-footer-loader.js"></script>
   <script src="../js/main.js" defer></script>
 </body>
 </html>
