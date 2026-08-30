@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sign in to Prof. Dr. S. Balaji Science Academy student portal." />
+  <title>Sign In | Prof. Dr. S. Balaji Science Academy</title>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png" />
+  <link rel="manifest" href="../manifest.json" />
+  <meta name="theme-color" content="#0052ff" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* ── Auth page layout ── */
+    .auth-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .auth-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-8) var(--space-4);
+    }
+
+    /* ── Card shell (shared by all three states) ── */
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      text-align: center;
+    }
+
+    /* ── Logo inside card ── */
+    .auth-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto var(--space-5);
+      display: block;
+    }
+
+    /* ── Sign-in state ── */
+    .auth-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 4vw, 28px);
+      font-weight: 400;
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-display);
+      color: var(--fg);
+      margin-bottom: var(--space-3);
+    }
+
+    .auth-subtitle {
+      font-size: var(--text-sm);
+      color: var(--muted);
+      margin-bottom: var(--space-8);
+      line-height: 1.5;
+    }
+
+    /* ── Google button ── */
+    .btn-google {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 24px;
+      background: var(--bg);
+      color: var(--fg);
+      border: 1px solid var(--border);
+      border-radius: var(--btn-radius);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--motion-fast) var(--ease-standard),
+                  border-color var(--motion-fast) var(--ease-standard),
+                  box-shadow var(--motion-fast) var(--ease-standard);
+      text-decoration: none;
+    }
+    .btn-google:hover {
+      background: var(--surface);
+      border-color: rgba(91, 97, 110, 0.4);
+      box-shadow: 0 2px 8px color-mix(in oklab, var(--fg), transparent 92%);
+    }
+    .btn-google:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+    .btn-google svg {
+      flex-shrink: 0;
+    }
+
+    /* ── Status / loading state ── */
+    #auth-status {
+      margin-top: var(--space-5);
+      font-size: var(--text-sm);
+      color: var(--muted);
+      min-height: 20px;
+    }
+
+    .auth-error {
+      color: var(--danger) !important;
+    }
+
+    /* ── Spinner ── */
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: var(--space-2);
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── Onboarding state ── */
+    .onboard-title {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3.5vw, 26px);
+      font-weight: 400;
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-display);
+      color: var(--fg);
+      margin-bottom: var(--space-3);
+    }
+
+    .onboard-subtitle {
+      font-size: var(--text-sm);
+      color: var(--muted);
+      margin-bottom: var(--space-6);
+    }
+
+    /* ── Program selection cards ── */
+    .program-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+      text-align: left;
+    }
+
+    .program-option {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      padding: var(--space-5);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: border-color var(--motion-fast) var(--ease-standard),
+                  background var(--motion-fast) var(--ease-standard);
+      /* hide native radio */
+    }
+    .program-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .program-option:hover {
+      border-color: var(--accent);
+      background: color-mix(in oklab, var(--accent), transparent 96%);
+    }
+    .program-option:has(input:checked) {
+      border-color: var(--accent);
+      background: color-mix(in oklab, var(--accent), transparent 94%);
+    }
+    .program-option:focus-within {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    /* Custom radio dot */
+    .program-radio-dot {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      transition: border-color var(--motion-fast) var(--ease-standard);
+    }
+    .program-radio-dot::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity var(--motion-fast) var(--ease-standard);
+    }
+    .program-option:has(input:checked) .program-radio-dot {
+      border-color: var(--accent);
+    }
+    .program-option:has(input:checked) .program-radio-dot::after {
+      opacity: 1;
+    }
+
+    .program-info {
+      flex: 1;
+    }
+    .program-label {
+      display: block;
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 2px;
+    }
+    .program-desc {
+      display: block;
+      font-size: var(--text-sm);
+      color: var(--muted);
+    }
+
+    /* ── Confirm button ── */
+    .btn-confirm {
+      width: 100%;
+    }
+    .btn-confirm:disabled {
+      background: var(--surface) !important;
+      color: var(--muted) !important;
+      border-color: var(--surface) !important;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* ── Returning / loading full-page state ── */
+    .auth-loading-wrap {
+      text-align: center;
+    }
+    .auth-loading-wrap .spinner {
+      width: 28px;
+      height: 28px;
+      border-width: 3px;
+      margin: 0 auto var(--space-4);
+      display: block;
+    }
+    .auth-loading-wrap p {
+      font-size: var(--text-base);
+      color: var(--muted);
+    }
+
+    /* ── State visibility ── */
+    [data-auth-state] { display: none; }
+    [data-auth-state].active { display: block; }
+
+    /* ── Legal note ── */
+    .auth-legal {
+      margin-top: var(--space-6);
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── Back to home link ── */
+    .auth-back {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: var(--space-6);
+      transition: color var(--motion-fast);
+    }
+    .auth-back:hover { color: var(--fg); }
+    .auth-back svg { flex-shrink: 0; }
+  </style>
+</head>
+<body class="auth-page">
+
+  <!-- Shared header injected here by header-footer-loader.js -->
+  <div id="site-header-slot">
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand-container">
+          <a href="../index.html" class="brand-logo-link">
+            <img src="../assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+          </a>
+          <a class="brand" href="../index.html" id="brand-text">PROF. DR. S. BALAJI<br>SCIENCE ACADEMY</a>
+        </div>
+        <style>
+          .brand-container { display:flex; align-items:center; gap:12px; flex-shrink:0; margin-right:auto; }
+          .brand-logo { height:40px; width:40px; border-radius:50%; object-fit:cover; flex-shrink:0; }
+          .brand-logo-link { display:flex; align-items:center; text-decoration:none; border-radius:50%; transition:opacity 150ms; }
+          .brand-logo-link:hover { opacity:0.8; }
+        </style>
+        <div class="header-right">
+          <div class="nav-actions">
+            <a class="btn btn-primary" href="../index.html">Home</a>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <main class="auth-main">
+    <div class="auth-card">
+
+      <img src="../assets/images/logo.jpg" alt="" class="auth-logo" aria-hidden="true" />
+
+      <!-- ── STATE 1: Sign in ── -->
+      <div data-auth-state="signin" class="active">
+        <h1 class="auth-title">Student Sign In</h1>
+        <p class="auth-subtitle">
+          Access mock tests and resources for<br>
+          Prof. Dr. S. Balaji Science Academy students.
+        </p>
+        <button class="btn-google" id="btn-google-signin" type="button">
+          <!-- Google G icon -->
+          <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            <path fill="none" d="M0 0h48v48H0z"/>
+          </svg>
+          Continue with Google
+        </button>
+        <p id="auth-status" aria-live="polite"></p>
+        <p class="auth-legal">
+          By signing in you agree to our terms of use.<br>
+          Only Google accounts are supported.
+        </p>
+      </div>
+
+      <!-- ── STATE 2: Program onboarding (new user) ── -->
+      <div data-auth-state="onboarding">
+        <h2 class="onboard-title">Choose your Program</h2>
+        <p class="onboard-subtitle">Select the course you are enrolled in. This cannot be changed later.</p>
+
+        <div class="program-list" role="radiogroup" aria-label="Program selection">
+          <label class="program-option">
+            <input type="radio" name="program" value="CBSE_10" />
+            <span class="program-radio-dot" aria-hidden="true"></span>
+            <span class="program-info">
+              <span class="program-label">CBSE Class 10 — Science</span>
+              <span class="program-desc">Physics, Chemistry &amp; Biology</span>
+            </span>
+          </label>
+          <label class="program-option">
+            <input type="radio" name="program" value="CBSE_12" />
+            <span class="program-radio-dot" aria-hidden="true"></span>
+            <span class="program-info">
+              <span class="program-label">CBSE Class 12 — Physics &amp; Chemistry</span>
+              <span class="program-desc">Full board exam preparation</span>
+            </span>
+          </label>
+          <label class="program-option">
+            <input type="radio" name="program" value="STATE_12" />
+            <span class="program-radio-dot" aria-hidden="true"></span>
+            <span class="program-info">
+              <span class="program-label">TN State Board Class 12 — Physics &amp; Chemistry</span>
+              <span class="program-desc">Full board exam preparation</span>
+            </span>
+          </label>
+        </div>
+
+        <button class="btn btn-primary btn-confirm" id="btn-confirm-program" type="button" disabled>
+          Confirm &amp; Continue
+        </button>
+        <p id="onboard-status" aria-live="polite" style="margin-top:var(--space-4);font-size:var(--text-sm);color:var(--muted);min-height:20px;"></p>
+      </div>
+
+      <!-- ── STATE 3: Returning user / checking session ── -->
+      <div data-auth-state="loading">
+        <div class="auth-loading-wrap">
+          <span class="spinner" aria-hidden="true"></span>
+          <p id="loading-message">Checking your session…</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared footer injected here by header-footer-loader.js -->
+  <div id="site-footer-slot">
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-bottom" style="justify-content:center;flex-direction:column;align-items:center;gap:8px;">
+          <span style="font-size:12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy. All Rights Reserved.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Firebase SDK (module) -->
+  <script type="module">
+    import { initializeApp }        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut }
+                                    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, serverTimestamp }
+                                    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    /* ── Firebase config — replace ALL values with yours ── */
+    const firebaseConfig = {
+  	apiKey: "AIzaSyAqWmrcKRG1IPlV5uImoVQnZJWOd961HMY",
+  	authDomain: "profbalaji-12116.firebaseapp.com",
+  	projectId: "profbalaji-12116",
+  	storageBucket: "profbalaji-12116.firebasestorage.app",
+  	messagingSenderId: "225920272835",
+  	appId: "1:225920272835:web:9fa9af30451c855511d576",
+  	measurementId: "G-Y7PKHJQCN9"
+    };
+
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db   = getFirestore(app);
+
+    /* ── Helpers ── */
+    function setState(name) {
+      document.querySelectorAll("[data-auth-state]").forEach(function (el) {
+        el.classList.toggle("active", el.getAttribute("data-auth-state") === name);
+      });
+    }
+
+    function setStatus(id, msg, isError) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = msg;
+      el.className = isError ? "auth-error" : "";
+    }
+
+    /* ── Watch auth state ── */
+    setState("loading");
+
+    onAuthStateChanged(auth, async function (user) {
+      if (!user) {
+        /* Not signed in — show sign-in card */
+        setState("signin");
+        return;
+      }
+
+      /* Signed in — check Firestore for existing profile */
+      try {
+        var ref    = doc(db, "users", user.uid);
+        var snap   = await getDoc(ref);
+
+        if (snap.exists()) {
+          /* Returning user — redirect home */
+          document.getElementById("loading-message").textContent = "Welcome back! Redirecting…";
+          window.location.href = "../index.html";
+        } else {
+          /* New user — show program selection */
+          setState("onboarding");
+        }
+      } catch (err) {
+        console.error("Firestore read error:", err);
+        setStatus("auth-status", "Something went wrong. Please try again.", true);
+        setState("signin");
+      }
+    });
+
+    /* ── Google sign-in button ── */
+    var provider = new GoogleAuthProvider();
+
+    document.getElementById("btn-google-signin").addEventListener("click", async function () {
+      setStatus("auth-status", "", false);
+      var btn = this;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner" aria-hidden="true"></span> Signing in…';
+
+      try {
+        await signInWithPopup(auth, provider);
+        /* onAuthStateChanged fires automatically after this */
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = [
+          '<svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">',
+          '<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>',
+          '<path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>',
+          '<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>',
+          '<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>',
+          '</svg>',
+          'Continue with Google'
+        ].join("");
+
+        if (err.code === "auth/popup-closed-by-user" || err.code === "auth/cancelled-popup-request") {
+          /* User closed popup — no message needed */
+          return;
+        }
+        setStatus("auth-status", "Sign-in failed. Please try again.", true);
+        console.error("Sign-in error:", err);
+      }
+    });
+
+    /* ── Program selection ── */
+    var radios     = document.querySelectorAll('input[name="program"]');
+    var confirmBtn = document.getElementById("btn-confirm-program");
+
+    radios.forEach(function (radio) {
+      radio.addEventListener("change", function () {
+        confirmBtn.disabled = false;
+      });
+    });
+
+    confirmBtn.addEventListener("click", async function () {
+      var selected = document.querySelector('input[name="program"]:checked');
+      if (!selected) return;
+
+      var user = auth.currentUser;
+      if (!user) {
+        setStatus("onboard-status", "Session expired. Please sign in again.", true);
+        setState("signin");
+        return;
+      }
+
+      confirmBtn.disabled = true;
+      confirmBtn.textContent = "Saving…";
+      setStatus("onboard-status", "", false);
+
+      try {
+        var ref = doc(db, "users", user.uid);
+        await setDoc(ref, {
+          uid:         user.uid,
+          email:       user.email,
+          displayName: user.displayName || "",
+          program:     selected.value,
+          enrolledAt:  serverTimestamp(),
+          createdAt:   serverTimestamp()
+        });
+
+        /* Profile saved — redirect home */
+        window.location.href = "../index.html";
+
+      } catch (err) {
+        console.error("Firestore write error:", err);
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = "Confirm & Continue";
+        setStatus("onboard-status", "Could not save your profile. Please try again.", true);
+      }
+    });
+  </script>
+
+  <!-- Shared header/footer loader -->
+  <script src="../js/header-footer-loader.js"></script>
+</body>
+</html>
