@@ -27,11 +27,27 @@
    *
    * AUTH BUTTON
    * -----------
-   * The Sign Up / Sign Out button is rendered with id="header-auth-btn"
-   * and id="header-auth-btn-mobile" so that auth.js (loaded as a
-   * <script type="module"> on each page) can update the button text,
-   * href, and click behaviour after checking Firebase auth state.
+   * After injecting the header, this loader uses dynamic import() to
+   * load Firebase Auth from the CDN and checks the auth state once.
+   * If the user is signed in, the Sign Up button is swapped to Sign Out
+   * in place — no per-page Firebase code needed anywhere.
+   * The auth page (auth/index.html) suppresses the button entirely.
+   *
+   * FIREBASE CONFIG
+   * ---------------
+   * The firebaseConfig object is defined once here. Replace all
+   * YOUR_* placeholder values with your real Firebase project values.
    * ───────────────────────────────────────────────────────────────── */
+
+  /* ── Firebase config — replace ALL values with yours ── */
+  var FIREBASE_CONFIG = {
+    apiKey:            "YOUR_API_KEY",
+    authDomain:        "YOUR_AUTH_DOMAIN",
+    projectId:         "YOUR_PROJECT_ID",
+    storageBucket:     "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId:             "YOUR_APP_ID"
+  };
 
   /* ── 1. Compute path prefix ───────────────────────────────────── */
   function getPrefix() {
@@ -303,7 +319,56 @@
     applyFade();
   }
 
-  /* ── 10. Inject into the DOM ─────────────────────────────────── */
+  /* ── 10. Auth button — dynamic Firebase import ───────────────── *
+   * Skipped entirely on the auth page (button is not rendered there).
+   * Uses dynamic import() so this classic script can consume the
+   * Firebase ES module CDN without requiring a build step.
+   * ─────────────────────────────────────────────────────────────── */
+  function attachAuthButton() {
+    if (isAuthPage()) return;
+
+    var FIREBASE_APP_URL  = "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    var FIREBASE_AUTH_URL = "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    Promise.all([
+      import(FIREBASE_APP_URL),
+      import(FIREBASE_AUTH_URL)
+    ]).then(function (modules) {
+      var firebaseApp  = modules[0];
+      var firebaseAuth = modules[1];
+
+      var app  = firebaseApp.initializeApp(FIREBASE_CONFIG, "hfl-auth");
+      var auth = firebaseAuth.getAuth(app);
+
+      firebaseAuth.onAuthStateChanged(auth, function (user) {
+        var btn       = document.getElementById("header-auth-btn");
+        var btnMobile = document.getElementById("header-auth-btn-mobile");
+
+        if (!btn && !btnMobile) return;
+
+        if (user) {
+          /* Signed in — swap to Sign Out */
+          [btn, btnMobile].forEach(function (el) {
+            if (!el) return;
+            el.textContent = "Sign Out";
+            el.removeAttribute("href");
+            el.style.cursor = "pointer";
+            el.addEventListener("click", function (e) {
+              e.preventDefault();
+              firebaseAuth.signOut(auth).then(function () {
+                window.location.reload();
+              });
+            });
+          });
+        }
+        /* Not signed in — button already reads "Sign Up" linking to auth/index.html */
+      });
+    }).catch(function (err) {
+      console.warn("Firebase auth load failed:", err);
+    });
+  }
+
+  /* ── 11. Inject into the DOM ─────────────────────────────────── */
   function inject() {
     var prefix = getPrefix();
 
@@ -322,6 +387,7 @@
     attachNavListeners();
     setCopyrightYear();
     attachBrandFade();
+    attachAuthButton();
   }
 
   /* Run after DOM is ready */
