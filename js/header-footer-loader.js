@@ -319,53 +319,44 @@
     applyFade();
   }
 
-  /* ── 10. Auth button — dynamic Firebase import ───────────────── *
+  /* ── 10. Auth button — injected module script ────────────────── *
    * Skipped entirely on the auth page (button is not rendered there).
-   * Uses dynamic import() so this classic script can consume the
-   * Firebase ES module CDN without requiring a build step.
+   * We inject a <script type="module"> tag into the document so that
+   * Firebase ES modules load correctly from CDN on every page without
+   * needing dynamic import() inside a classic script context.
    * ─────────────────────────────────────────────────────────────── */
   function attachAuthButton() {
     if (isAuthPage()) return;
 
-    var FIREBASE_APP_URL  = "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    var FIREBASE_AUTH_URL = "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    var cfg = FIREBASE_CONFIG;
+    var code = [
+      'import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";',
+      'import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";',
+      'var cfg = ' + JSON.stringify(cfg) + ';',
+      'var existing = getApps().find(function(a){ return a.name === "hfl-auth"; });',
+      'var app  = existing || initializeApp(cfg, "hfl-auth");',
+      'var auth = getAuth(app);',
+      'onAuthStateChanged(auth, function(user) {',
+      '  var btn = document.getElementById("header-auth-btn");',
+      '  var mob = document.getElementById("header-auth-btn-mobile");',
+      '  if (!user) return;',
+      '  [btn, mob].forEach(function(el) {',
+      '    if (!el) return;',
+      '    el.textContent = "Sign Out";',
+      '    el.removeAttribute("href");',
+      '    el.style.cursor = "pointer";',
+      '    el.addEventListener("click", function(e) {',
+      '      e.preventDefault();',
+      '      signOut(auth).then(function() { window.location.reload(); });',
+      '    });',
+      '  });',
+      '});'
+    ].join("\n");
 
-    Promise.all([
-      import(FIREBASE_APP_URL),
-      import(FIREBASE_AUTH_URL)
-    ]).then(function (modules) {
-      var firebaseApp  = modules[0];
-      var firebaseAuth = modules[1];
-
-      var app  = firebaseApp.initializeApp(FIREBASE_CONFIG, "hfl-auth");
-      var auth = firebaseAuth.getAuth(app);
-
-      firebaseAuth.onAuthStateChanged(auth, function (user) {
-        var btn       = document.getElementById("header-auth-btn");
-        var btnMobile = document.getElementById("header-auth-btn-mobile");
-
-        if (!btn && !btnMobile) return;
-
-        if (user) {
-          /* Signed in — swap to Sign Out */
-          [btn, btnMobile].forEach(function (el) {
-            if (!el) return;
-            el.textContent = "Sign Out";
-            el.removeAttribute("href");
-            el.style.cursor = "pointer";
-            el.addEventListener("click", function (e) {
-              e.preventDefault();
-              firebaseAuth.signOut(auth).then(function () {
-                window.location.reload();
-              });
-            });
-          });
-        }
-        /* Not signed in — button already reads "Sign Up" linking to auth/index.html */
-      });
-    }).catch(function (err) {
-      console.warn("Firebase auth load failed:", err);
-    });
+    var script = document.createElement("script");
+    script.type = "module";
+    script.textContent = code;
+    document.head.appendChild(script);
   }
 
   /* ── 11. Inject into the DOM ─────────────────────────────────── */
