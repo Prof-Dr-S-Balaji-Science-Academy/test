@@ -580,58 +580,8 @@
   <!-- ═══ END STATIC FALLBACK FOOTER ═══ -->
 
   <!-- Load shared header/footer (replaces slot divs above) then page logic -->
+  <!-- Firebase auth state check is handled inside header-footer-loader.js -->
   <script src="js/header-footer-loader.js"></script>
   <script src="js/main.js" defer></script>
-
-  <!-- Firebase auth: updates Sign Up ↔ Sign Out button in header -->
-  <script type="module">
-    import { initializeApp }   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut }
-                               from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-    /* ── Replace ALL values with your real Firebase config ── */
-    const firebaseConfig = {
-  	apiKey: "AIzaSyAqWmrcKRG1IPlV5uImoVQnZJWOd961HMY",
-  	authDomain: "profbalaji-12116.firebaseapp.com",
-  	projectId: "profbalaji-12116",
-  	storageBucket: "profbalaji-12116.firebasestorage.app",
-  	messagingSenderId: "225920272835",
-  	appId: "1:225920272835:web:9fa9af30451c855511d576",
-  	measurementId: "G-Y7PKHJQCN9"
-     };
-
-    const app  = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    function updateAuthButton(user) {
-      var btn       = document.getElementById("header-auth-btn");
-      var btnMobile = document.getElementById("header-auth-btn-mobile");
-
-      if (user) {
-        /* Signed in — swap to Sign Out */
-        if (btn) {
-          btn.textContent = "Sign Out";
-          btn.removeAttribute("href");
-          btn.style.cursor = "pointer";
-          btn.addEventListener("click", function (e) {
-            e.preventDefault();
-            signOut(auth).then(function () { window.location.reload(); });
-          });
-        }
-        if (btnMobile) {
-          btnMobile.textContent = "Sign Out";
-          btnMobile.removeAttribute("href");
-          btnMobile.style.cursor = "pointer";
-          btnMobile.addEventListener("click", function (e) {
-            e.preventDefault();
-            signOut(auth).then(function () { window.location.reload(); });
-          });
-        }
-      }
-      /* Not signed in — button already reads "Sign Up" and links to auth/index.html */
-    }
-
-    onAuthStateChanged(auth, updateAuthButton);
-  </script>
 </body>
 </html>
