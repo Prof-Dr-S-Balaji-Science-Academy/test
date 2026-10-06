@@ -1,0 +1,49 @@
+/* portal.css: sign-in, onboarding, student dashboard and admin entry pages.
+ * Uses the shared Coinbase tokens from styles.css. No new colours. */
+[hidden] { display: none !important; }
+
+.portal { padding-block: 40px 96px; min-height: calc(100vh - var(--header-h)); }
+@media (min-width: 768px) { .portal { padding-block: 64px 96px; } }
+.portal-narrow { max-width: 480px; margin-inline: auto; }
+.portal-wide { max-width: 760px; margin-inline: auto; }
+
+.portal-card { background: var(--bg); border: 1px solid var(--border); border-radius: 24px; padding: 24px; }
+@media (min-width: 640px) { .portal-card { padding: 32px; } }
+
+.portal-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 6vw, 44px); line-height: 1.09; letter-spacing: -1px; color: var(--fg); margin: 0 0 12px; }
+.portal-sub { font-size: 16px; color: var(--muted); margin: 0 0 24px; }
+.portal-loading { text-align: center; color: var(--muted); font-size: 16px; padding-block: 48px; }
+
+/* Forms */
+.field { display: flex; flex-direction: column; gap: 8px; margin: 0 0 24px; border: 0; min-width: 0; }
+.field-label { font-size: 14px; font-weight: 600; color: var(--fg); padding: 0; }
+.input { width: 100%; min-height: 48px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; }
+.input:focus { outline: none; box-shadow: none; border: 2px solid var(--accent); padding: 13px 15px; }
+.input[readonly] { background: var(--surface); color: var(--muted); }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.choice { position: relative; display: inline-flex; }
+.choice input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.choice span { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 20px; border-radius: 9999px; background: var(--surface); color: var(--fg); font-size: 15px; font-weight: 600; transition: background var(--motion-fast) var(--ease-standard), color var(--motion-fast) var(--ease-standard); }
+.choice input:checked + span { background: var(--accent); color: var(--accent-on); }
+.choice input:focus-visible + span { box-shadow: var(--focus-ring); }
+.field-hint { font-size: 13px; color: var(--muted); margin: 0; }
+
+.portal-error { margin: 0 0 16px; padding: 12px 16px; border: 1px solid var(--danger); border-radius: 12px; color: var(--danger); font-size: 14px; }
+.portal-note { margin: 16px 0 0; font-size: 13px; color: var(--muted); text-align: center; }
+.link-btn { background: none; border: 0; padding: 0; font: inherit; color: var(--accent); cursor: pointer; text-decoration: underline; }
+.btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+
+/* Dashboard */
+.status-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 24px; }
+.badge { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 9999px; background: var(--surface); color: var(--fg); font-size: 12px; font-weight: 600; }
+.message-box { display: flex; gap: 12px; align-items: flex-start; padding: 16px 20px; border-radius: 16px; background: var(--surface); color: var(--fg); font-size: 16px; line-height: 1.5; margin-bottom: 24px; }
+.message-box svg { flex-shrink: 0; margin-top: 2px; }
+.summary-list { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 0 0 16px; }
+@media (min-width: 640px) { .summary-list { grid-template-columns: repeat(3, 1fr); } }
+.summary-list dt { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+.summary-list dd { margin: 0; font-size: 16px; font-weight: 600; overflow-wrap: anywhere; }
+.locked-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
+@media (min-width: 640px) { .locked-grid { grid-template-columns: 1fr 1fr; } }
+.locked-tile { display: flex; flex-direction: column; gap: 8px; padding: 24px; border: 1px solid var(--border); border-radius: 24px; background: var(--surface); color: var(--muted); }
+.locked-tile h3 { font-size: 18px; font-weight: 600; color: var(--fg); margin: 0; }
+.locked-tile p { font-size: 14px; margin: 0; }

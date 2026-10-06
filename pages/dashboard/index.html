@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Your student dashboard." />
+  <title>Student Dashboard | Prof. Dr. S. Balaji Science Academy</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0052ff" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <link rel="stylesheet" href="../../css/portal.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+       STATIC FALLBACK HEADER
+       header-footer-loader.js replaces this once JS runs.
+       ═══════════════════════════════════════════════════════════════ -->
+  <div id="site-header-slot">
+    <header class="site-header" data-od-id="site-header">
+      <div class="container header-inner">
+        <div class="brand-container">
+          <a href="../../index.html" class="brand-logo-link" data-od-id="brand-logo-link">
+            <img src="../../assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+          </a>
+          <a class="brand" href="../../index.html" data-od-id="brand">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+        </div>
+        <div class="header-right">
+          <nav class="nav-desktop" aria-label="Primary" data-od-id="nav-desktop">
+            <a href="../../index.html#about">About</a>
+            <div class="nav-dropdown">
+              <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
+              <div class="nav-dropdown-menu">
+                <a href="../courses/cbse10.html">CBSE Class 10</a>
+                <a href="../courses/cbse12.html">CBSE Class 12</a>
+                <a href="../courses/stateboard12.html">State Board Class 12</a>
+              </div>
+            </div>
+            <div class="nav-dropdown">
+              <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
+              <div class="nav-dropdown-menu">
+                <a href="/pages/studyplanner/">Study Planner</a>
+                <a href="/pages/periodictable/">Periodic Table</a>
+                <a href="/pages/mindmap/">Mind Map</a>
+              </div>
+            </div>
+            <a href="../../index.html#attend">How to attend</a>
+            <a href="../../index.html#faq">FAQs</a>
+            <a href="../../index.html#blog">Blog</a>
+            <a href="../../index.html#contact">Contact</a>
+          </nav>
+          <div class="nav-actions">
+            <a class="btn btn-primary" href="../../auth/" data-od-id="header-cta">Sign In</a>
+          </div>
+        </div>
+        <a class="btn btn-primary btn-sm nav-actions-mobile" href="../../auth/" data-od-id="header-cta-mobile">Sign In</a>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
+          <span></span>
+        </button>
+      </div>
+    </header>
+    <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+      <a href="../../index.html#about">About</a>
+      <div class="nav-mobile-dropdown">
+        <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
+        <div class="nav-mobile-dropdown-menu">
+          <a href="../courses/cbse10.html">CBSE Class 10</a>
+          <a href="../courses/cbse12.html">CBSE Class 12</a>
+          <a href="../courses/stateboard12.html">State Board Class 12</a>
+        </div>
+      </div>
+      <div class="nav-mobile-dropdown">
+        <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
+        <div class="nav-mobile-dropdown-menu">
+          <a href="/pages/studyplanner/">Study Planner</a>
+          <a href="/pages/periodictable/">Periodic Table</a>
+          <a href="/pages/mindmap/">Mind Map</a>
+        </div>
+      </div>
+      <a href="../../index.html#attend">How to attend</a>
+      <a href="../../index.html#faq">FAQs</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#contact">Contact</a>
+    </nav>
+  </div>
+  <!-- ═══ END STATIC FALLBACK HEADER ═══ -->
+
+  <main class="portal">
+    <div class="container">
+      <div class="portal-wide">
+        <noscript><div class="portal-card"><p class="portal-sub" style="margin:0">The dashboard needs JavaScript. Please enable it in your browser and reload this page.</p></div></noscript>
+        <div id="d-loading" class="portal-loading" role="status">Loading&hellip;</div>
+
+        <div id="d-content" hidden>
+          <h1 class="portal-title" id="d-title">Welcome</h1>
+          <div class="status-row">
+            <span class="badge" id="d-badge">Pending Approval</span>
+          </div>
+
+          <div class="message-box" id="d-message" role="status">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span id="d-message-text"></span>
+          </div>
+
+          <section class="portal-card" aria-labelledby="d-summary-h">
+            <h2 id="d-summary-h" style="font-size:18px;font-weight:600;margin:0 0 16px">Your application</h2>
+            <dl class="summary-list">
+              <div><dt>Class</dt><dd id="d-course"></dd></div>
+              <div><dt>Subjects</dt><dd id="d-subjects"></dd></div>
+              <div><dt>Access level</dt><dd id="d-level"></dd></div>
+            </dl>
+            <p class="field-hint">Class and subjects can be changed only by the academy.</p>
+          </section>
+
+          <div class="locked-grid" id="d-locked">
+            <div class="locked-tile"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><h3>Practice questions</h3><p>Locked until your access is approved.</p></div>
+            <div class="locked-tile"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><h3>Mock tests</h3><p>Locked until your access is approved.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+<!-- ═══════════════════════════════════════════════════════════════
+       STATIC FALLBACK FOOTER
+       header-footer-loader.js replaces this once JS runs.
+       ═══════════════════════════════════════════════════════════════ -->
+  <div id="site-footer-slot">
+    <footer class="site-footer" data-od-id="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="socials" data-od-id="socials">
+            <a href="tel:+919787692116" aria-label="Call">
+              <img src="../../assets/icons/call.svg" alt="Call" />
+            </a>
+            <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business">
+              <img src="../../assets/icons/google-business.svg" alt="Google Business" />
+            </a>
+            <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <img src="../../assets/icons/linkedin.svg" alt="LinkedIn" />
+            </a>
+            <a href="mailto:prof@example.com" aria-label="Email">
+              <img src="../../assets/icons/mail.svg" alt="Email" />
+            </a>
+            <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
+              <img src="../../assets/icons/google-scholar.svg" alt="Google Scholar" />
+            </a>
+            <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+              <img src="../../assets/icons/substack.png" alt="Substack" />
+            </a>
+            <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <img src="../../assets/icons/youtube.svg" alt="YouTube" />
+            </a>
+          </div>
+        </div>
+        <div class="footer-bottom" style="flex-direction:column;align-items:center;gap:8px;">
+          <span style="font-size:12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy . All Rights Reserved.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <!-- ═══ END STATIC FALLBACK FOOTER ═══ -->
+
+  <script src="../../js/header-footer-loader.js"></script>
+  <script type="module">
+    import { ROUTES, watchAuth, loadAccount, isComplete, describeRequest } from "../../js/auth-core.js";
+
+    const $ = (id) => document.getElementById(id);
+
+    const MESSAGES = {
+      pending: { badge: "Pending Approval", text: "Your access is Pending Approval. Once approved you will be able to access all the mock test modules." },
+      approved: { badge: "Approved", text: "Your access is approved. The mock test modules will appear here as they are released." },
+      rejected: { badge: "Not approved", text: "Your application was not approved. Please contact the academy if you think this is a mistake." },
+      suspended: { badge: "Suspended", text: "Your access is currently suspended. Please contact the academy." }
+    };
+
+    /* Everything on this page is locked unless the server says "approved".
+       The real lock is Firestore Security Rules; this is only the display. */
+    watchAuth(async (user) => {
+      if (!user) { location.replace(ROUTES.login); return; }
+      try {
+        const account = await loadAccount(user);
+        if (account.isAdmin) { location.replace(ROUTES.admin); return; }
+        if (!isComplete(account.profile)) { location.replace(ROUTES.login); return; }
+        render(account.profile);
+      } catch (err) {
+        console.error(err);
+        $("d-loading").textContent = "We could not load your dashboard. Please refresh the page.";
+      }
+    });
+
+    function render(p) {
+      const key = MESSAGES[p.status] ? p.status : "pending";
+      const m = MESSAGES[key];
+      const first = (p.name || "").trim().split(/\s+/)[0];
+      $("d-title").textContent = first ? "Welcome, " + first : "Welcome";
+      $("d-badge").textContent = m.badge;
+      let text = m.text;
+      if (key === "rejected" && p.rejectionReason) {
+        text = "Your application was not approved. Reason: " + p.rejectionReason;
+      }
+      $("d-message-text").textContent = text;
+      const req = describeRequest(p);
+      $("d-course").textContent = req.course;
+      $("d-subjects").textContent = req.subjects;
+      $("d-level").textContent = (key === "approved" && p.accessLevel) ? p.accessLevel : "Awaiting approval";
+      $("d-locked").hidden = (key === "approved");
+      $("d-loading").hidden = true;
+      $("d-content").hidden = false;
+    }
+  </script>
+</body>
+</html>

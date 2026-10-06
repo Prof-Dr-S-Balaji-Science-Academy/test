@@ -24,30 +24,7 @@
    * From any other page we link to the root + anchor instead.
    * We detect "are we on the homepage" by checking if pathname is
    * exactly "/" or ends with "/index.html".
-   *
-   * AUTH BUTTON
-   * -----------
-   * After injecting the header, this loader uses dynamic import() to
-   * load Firebase Auth from the CDN and checks the auth state once.
-   * If the user is signed in, the Sign Up button is swapped to Sign Out
-   * in place — no per-page Firebase code needed anywhere.
-   * The auth page (auth/index.html) suppresses the button entirely.
-   *
-   * FIREBASE CONFIG
-   * ---------------
-   * The firebaseConfig object is defined once here. Replace all
-   * YOUR_* placeholder values with your real Firebase project values.
    * ───────────────────────────────────────────────────────────────── */
-
-  /* ── Firebase config — replace ALL values with yours ── */
-  var FIREBASE_CONFIG = {
-    apiKey:            "YOUR_API_KEY",
-    authDomain:        "YOUR_AUTH_DOMAIN",
-    projectId:         "YOUR_PROJECT_ID",
-    storageBucket:     "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId:             "YOUR_APP_ID"
-  };
 
   /* ── 1. Compute path prefix ───────────────────────────────────── */
   function getPrefix() {
@@ -69,40 +46,19 @@
     return p === "/" || p === "/index.html" || p.endsWith("/index.html");
   }
 
-  /* ── 3. Detect auth page ──────────────────────────────────────── */
-  function isAuthPage() {
-    var p = window.location.pathname;
-    return p.indexOf("/auth/") !== -1;
-  }
-
-  /* ── 4. Build anchor link ─────────────────────────────────────── */
+  /* ── 3. Build anchor link ─────────────────────────────────────── */
   // On homepage: bare anchor. From any other page: root + anchor.
   function homeLink(anchor, prefix) {
     if (isHomepage()) return anchor;          // e.g. "#about"
     return prefix + "index.html" + anchor;   // e.g. "../../index.html#about"
   }
 
-  /* ── 5. Render header HTML ────────────────────────────────────── */
+  /* ── 4. Render header HTML ────────────────────────────────────── */
   function buildHeader(prefix) {
     var home = isHomepage();
 
     // Logo / brand link: on homepage scroll to #top; elsewhere go home
     var brandHref = home ? "#top" : prefix + "index.html";
-
-    // Auth button points to auth/index.html by default.
-    // auth.js (module) will swap it to a Sign Out button if user is signed in.
-    // On the auth page itself we suppress the button entirely (no infinite loop).
-    var authBtnHtml = isAuthPage()
-      ? ""
-      : [
-          '      <div class="nav-actions">',
-          '        <a class="btn btn-primary" href="' + prefix + 'auth/index.html" id="header-auth-btn" data-od-id="header-cta">Sign Up</a>',
-          '      </div>'
-        ].join("\n");
-
-    var authBtnMobileHtml = isAuthPage()
-      ? ""
-      : '    <a class="btn btn-primary btn-sm nav-actions-mobile" href="' + prefix + 'auth/index.html" id="header-auth-btn-mobile" data-od-id="header-cta-mobile">Sign Up</a>';
 
     return [
       '<style id="hfl-styles">',
@@ -115,6 +71,19 @@
       '  #brand-text { font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--fg); text-decoration:none; line-height:1.25; flex-shrink:1; }',
       '  #brand-text:hover { color:var(--fg); }',
       '  @media (min-width:896px) { #brand-text br { display:none; } #brand-text { white-space:nowrap; font-size:13px; } }',
+      '  .user-menu { position:relative; }',
+      '  .user-menu-btn { display:inline-flex; align-items:center; gap:8px; min-height:40px; padding:4px 14px 4px 4px; border-radius:9999px; background:var(--surface); color:var(--fg); font-family:var(--font-body); font-size:14px; font-weight:600; border:1px solid transparent; cursor:pointer; transition:background 150ms; }',
+      '  .user-menu-btn:hover { background:color-mix(in oklab, var(--surface), var(--fg) 6%); }',
+      '  .user-avatar { width:32px; height:32px; border-radius:50%; background:var(--accent); color:var(--accent-on); display:grid; place-items:center; font-size:14px; font-weight:600; flex-shrink:0; }',
+      '  .user-name { max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }',
+      '  .user-menu-panel { display:none; position:absolute; right:0; top:calc(100% + 8px); min-width:224px; background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:8px; box-shadow:0 4px 12px rgba(0,0,0,0.04); z-index:120; }',
+      '  .user-menu-btn[aria-expanded="true"] + .user-menu-panel { display:block; }',
+      '  .user-menu-id { display:flex; flex-direction:column; gap:2px; padding:8px 12px 12px; margin-bottom:4px; border-bottom:1px solid var(--border); font-size:14px; }',
+      '  .user-menu-id strong { font-weight:600; overflow-wrap:anywhere; }',
+      '  .user-menu-id span { color:var(--muted); font-size:12px; overflow-wrap:anywhere; }',
+      '  .user-menu-panel a, .user-menu-panel button { display:block; width:100%; text-align:left; padding:10px 12px; border-radius:8px; font-family:var(--font-body); font-size:14px; font-weight:500; color:var(--fg); text-decoration:none; background:none; border:0; cursor:pointer; }',
+      '  .user-menu-panel a:hover, .user-menu-panel button:hover { background:var(--surface); }',
+      '  @media (max-width:895px) { .user-name { display:none; } .user-menu-btn { width:40px; padding:4px; justify-content:center; } }',
       '</style>',
 
       '<header class="site-header" data-od-id="site-header">',
@@ -123,7 +92,7 @@
       '      <a href="' + brandHref + '" class="brand-logo-link" data-od-id="brand-logo-link">',
       '        <img src="' + prefix + 'assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />',
       '      </a>',
-      '      <a class="brand" href="' + brandHref + '" data-od-id="brand" id="brand-text">PROF. DR. S. BALAJI<br>SCIENCE ACADEMY</a>',
+      '      <a class="brand" href="' + brandHref + '" data-od-id="brand" id="brand-text">PROF. DR. S. BALAJI <br>SCIENCE ACADEMY</a>',
       '    </div>',
 
       '    <div class="header-right">',
@@ -150,10 +119,12 @@
       '        <a href="' + homeLink("#blog", prefix) + '">Blog</a>',
       '        <a href="' + homeLink("#contact", prefix) + '">Contact</a>',
       '      </nav>',
-      authBtnHtml,
+      '      <div class="nav-actions">',
+      '        <a class="btn btn-primary" href="' + prefix + 'auth/" data-od-id="header-cta">Sign In</a>',
+      '      </div>',
       '    </div>',
 
-      authBtnMobileHtml,
+      '    <a class="btn btn-primary btn-sm nav-actions-mobile" href="' + prefix + 'auth/" data-od-id="header-cta-mobile">Sign In</a>',
       '    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">',
       '      <span></span>',
       '    </button>',
@@ -186,7 +157,7 @@
     ].join("\n");
   }
 
-  /* ── 6. Render footer HTML ────────────────────────────────────── */
+  /* ── 5. Render footer HTML ────────────────────────────────────── */
   function buildFooter(prefix) {
     return [
       '<footer class="site-footer" data-od-id="footer">',
@@ -217,14 +188,14 @@
       '      </div>',
       '    </div>',
       '    <div class="footer-bottom" style="justify-content:space-between;flex-direction:column;align-items:center;gap:8px;">',
-      '      <span style="font-size:12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy . All Rights Reserved.</span>',
+      '      <span style="font-size:11px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy | All Rights Reserved.</span>',
       '    </div>',
       '  </div>',
       '</footer>'
     ].join("\n");
   }
 
-  /* ── 7. Attach nav event listeners ───────────────────────────── */
+  /* ── 6. Attach nav event listeners ───────────────────────────── */
   function attachNavListeners() {
 
     /* Hamburger toggle */
@@ -274,13 +245,13 @@
     });
   }
 
-  /* ── 8. Set copyright year in footer ─────────────────────────── */
+  /* ── 7. Set copyright year in footer ─────────────────────────── */
   function setCopyrightYear() {
     var el = document.getElementById("y");
     if (el) el.textContent = new Date().getFullYear();
   }
 
-  /* ── 9. Brand text scroll-fade ────────────────────────────────
+  /* ── 8. Brand text scroll-fade ────────────────────────────────
    * Opacity is set directly on every scroll frame — no CSS transition —
    * so it tracks finger/wheel speed physically.
    *
@@ -319,47 +290,103 @@
     applyFade();
   }
 
-  /* ── 10. Auth button — injected module script ────────────────── *
-   * Skipped entirely on the auth page (button is not rendered there).
-   * We inject a <script type="module"> tag into the document so that
-   * Firebase ES modules load correctly from CDN on every page without
-   * needing dynamic import() inside a classic script context.
+  /* ── 8b. Sign-in state in the header ─────────────────────────
+   * Header shows "Sign In" until Firebase reports a signed-in user, then
+   * swaps to a user menu (Dashboard, Sign Out). Header needs no database
+   * reads: the Dashboard link routes students/admins to the right place.
+   * A tiny localStorage hint avoids a "Sign In" flash for returning users.
    * ─────────────────────────────────────────────────────────────── */
-  function attachAuthButton() {
-    if (isAuthPage()) return;
+  var loginHref = "";
+  var dashHref = "";
 
-    var cfg = FIREBASE_CONFIG;
-    var code = [
-      'import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";',
-      'import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";',
-      'var cfg = ' + JSON.stringify(cfg) + ';',
-      'var existing = getApps().find(function(a){ return a.name === "hfl-auth"; });',
-      'var app  = existing || initializeApp(cfg, "hfl-auth");',
-      'var auth = getAuth(app);',
-      'onAuthStateChanged(auth, function(user) {',
-      '  var btn = document.getElementById("header-auth-btn");',
-      '  var mob = document.getElementById("header-auth-btn-mobile");',
-      '  if (!user) return;',
-      '  [btn, mob].forEach(function(el) {',
-      '    if (!el) return;',
-      '    el.textContent = "Sign Out";',
-      '    el.removeAttribute("href");',
-      '    el.style.cursor = "pointer";',
-      '    el.addEventListener("click", function(e) {',
-      '      e.preventDefault();',
-      '      signOut(auth).then(function() { window.location.reload(); });',
-      '    });',
-      '  });',
-      '});'
-    ].join("\n");
-
-    var script = document.createElement("script");
-    script.type = "module";
-    script.textContent = code;
-    document.head.appendChild(script);
+  function esc(t) {
+    return String(t).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
   }
 
-  /* ── 11. Inject into the DOM ─────────────────────────────────── */
+  function userMenuHTML(u) {
+    var label = u.name || (u.email ? u.email.split("@")[0] : "Account");
+    var initial = esc(label.charAt(0).toUpperCase());
+    return [
+      '<div class="user-menu" data-user-menu>',
+      '  <button class="user-menu-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Account menu">',
+      '    <span class="user-avatar" aria-hidden="true">' + initial + '</span>',
+      '    <span class="user-name">' + esc(label) + '</span>',
+      '  </button>',
+      '  <div class="user-menu-panel">',
+      '    <div class="user-menu-id"><strong>' + esc(label) + '</strong><span>' + esc(u.email || "") + '</span></div>',
+      '    <a href="' + dashHref + '">Dashboard</a>',
+      '    <button type="button" data-signout>Sign Out</button>',
+      '  </div>',
+      '</div>'
+    ].join("");
+  }
+
+  function applyAuth(user) {
+    var desktop = document.querySelector(".nav-actions");
+    var mobile = document.querySelector('[data-od-id="header-cta-mobile"]');
+    if (!desktop || !mobile) return;
+    if (user) {
+      desktop.innerHTML = userMenuHTML(user);
+      mobile.outerHTML = '<div class="nav-actions-mobile" data-od-id="header-cta-mobile">' + userMenuHTML(user) + '</div>';
+    } else {
+      desktop.innerHTML = '<a class="btn btn-primary" href="' + loginHref + '" data-od-id="header-cta">Sign In</a>';
+      mobile.outerHTML = '<a class="btn btn-primary btn-sm nav-actions-mobile" href="' + loginHref + '" data-od-id="header-cta-mobile">Sign In</a>';
+    }
+  }
+
+  function readHint() {
+    try {
+      var h = JSON.parse(localStorage.getItem("pb_user_hint") || "null");
+      return h && (h.name || h.email) ? h : null;
+    } catch (e) { return null; }
+  }
+
+  function initAuthHeader(prefix) {
+    loginHref = prefix + "auth/";
+    dashHref = prefix + "pages/dashboard/";
+
+    /* One delegated handler covers both the desktop and mobile menus */
+    document.addEventListener("click", function (e) {
+      var btn = e.target.closest ? e.target.closest(".user-menu-btn") : null;
+      document.querySelectorAll(".user-menu-btn").forEach(function (b) {
+        if (b === btn) {
+          b.setAttribute("aria-expanded", String(b.getAttribute("aria-expanded") !== "true"));
+        } else {
+          b.setAttribute("aria-expanded", "false");
+        }
+      });
+      if (e.target.closest && e.target.closest("[data-signout]")) {
+        if (window.PB_AUTH && window.PB_AUTH.signOut) window.PB_AUTH.signOut();
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        document.querySelectorAll(".user-menu-btn").forEach(function (b) {
+          b.setAttribute("aria-expanded", "false");
+        });
+      }
+    });
+
+    window.addEventListener("pb-auth", function (e) { applyAuth(e.detail.user); });
+
+    if (window.PB_AUTH && window.PB_AUTH.ready) {
+      applyAuth(window.PB_AUTH.user);
+    } else {
+      var hint = readHint();
+      if (hint) applyAuth(hint);
+    }
+
+    /* Firebase must come from an injected module script (a dynamic import()
+     * inside this classic script fails silently for the CDN modules). */
+    var m = document.createElement("script");
+    m.type = "module";
+    m.src = prefix + "js/auth-core.js";
+    document.head.appendChild(m);
+  }
+
+  /* ── 9. Inject into the DOM ──────────────────────────────────── */
   function inject() {
     var prefix = getPrefix();
 
@@ -378,7 +405,7 @@
     attachNavListeners();
     setCopyrightYear();
     attachBrandFade();
-    attachAuthButton();
+    initAuthHeader(prefix);
   }
 
   /* Run after DOM is ready */

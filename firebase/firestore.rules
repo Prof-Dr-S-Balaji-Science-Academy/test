@@ -1,0 +1,86 @@
+rules_version = '2';
+
+// Rules v1: users and admins collections only.
+// Everything not listed here stays closed (default deny).
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function myEmail() {
+      return request.auth.token.email.lower();
+    }
+
+    // ProfAdmin = a document exists at admins/<gmail in lowercase>.
+    // That collection is edited only in the Firebase console.
+    function isAdmin() {
+      return signedIn()
+        && request.auth.token.email_verified == true
+        && exists(/databases/$(database)/documents/admins/$(myEmail()));
+    }
+
+    // The board / class / subjects / level combination must be one of the seven.
+    function levelMatches(d) {
+      return (d.requestedLevel == 'C10SciStudents'
+              && d.requestedBoard == 'CBSE' && d.requestedClass == '10'
+              && d.requestedSubjects == ['Science'])
+          || (d.requestedLevel == 'C12PhyStudents'
+              && d.requestedBoard == 'CBSE' && d.requestedClass == '12'
+              && d.requestedSubjects == ['Physics'])
+          || (d.requestedLevel == 'C12ChemStudents'
+              && d.requestedBoard == 'CBSE' && d.requestedClass == '12'
+              && d.requestedSubjects == ['Chemistry'])
+          || (d.requestedLevel == 'C12PhyChemStudents'
+              && d.requestedBoard == 'CBSE' && d.requestedClass == '12'
+              && d.requestedSubjects == ['Physics', 'Chemistry'])
+          || (d.requestedLevel == 'S12PhyStudents'
+              && d.requestedBoard == 'State Board' && d.requestedClass == '12'
+              && d.requestedSubjects == ['Physics'])
+          || (d.requestedLevel == 'S12ChemStudents'
+              && d.requestedBoard == 'State Board' && d.requestedClass == '12'
+              && d.requestedSubjects == ['Chemistry'])
+          || (d.requestedLevel == 'S12PhyChemStudents'
+              && d.requestedBoard == 'State Board' && d.requestedClass == '12'
+              && d.requestedSubjects == ['Physics', 'Chemistry']);
+    }
+
+    // A signed-in user may check only their own admin entry. No listing,
+    // and nobody can write from the website.
+    match /admins/{adminEmail} {
+      allow get: if signedIn() && myEmail() == adminEmail;
+      allow list, create, update, delete: if false;
+    }
+
+    match /users/{uid} {
+      // Own record, or any record for a ProfAdmin.
+      allow get: if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow list: if isAdmin();
+
+      // A student can create only their own record, as pending with no access
+      // level. Students cannot update or delete it afterwards (admin writes
+      // arrive in Rules v2).
+      allow create: if signedIn()
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly([
+             'name', 'email', 'photoURL', 'requestedBoard', 'requestedClass',
+             'requestedSubjects', 'requestedLevel', 'status', 'accessLevel', 'createdAt'])
+        && request.resource.data.keys().hasAll([
+             'name', 'email', 'photoURL', 'requestedBoard', 'requestedClass',
+             'requestedSubjects', 'requestedLevel', 'status', 'accessLevel', 'createdAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 80
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.photoURL is string
+        && request.resource.data.photoURL.size() <= 500
+        && request.resource.data.status == 'pending'
+        && request.resource.data.accessLevel == ''
+        && request.resource.data.createdAt == request.time
+        && levelMatches(request.resource.data);
+
+      allow update, delete: if false;
+    }
+  }
+}
