@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="ProfAdmin entry point." />
+  <meta name="description" content="ProfAdmin console." />
   <title>ProfAdmin | Prof. Dr. S. Balaji Science Academy</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -12,6 +12,7 @@
   <meta name="theme-color" content="#0052ff" />
   <link rel="stylesheet" href="../../css/styles.css" />
   <link rel="stylesheet" href="../../css/portal.css" />
+  <link rel="stylesheet" href="../../css/admin.css" />
 </head>
 <body>
 
@@ -90,19 +91,104 @@
 
   <main class="portal">
     <div class="container">
-      <div class="portal-wide">
+      <div class="admin-wrap">
         <noscript><div class="portal-card"><p class="portal-sub" style="margin:0">This page needs JavaScript. Please enable it in your browser and reload this page.</p></div></noscript>
         <div id="a-loading" class="portal-loading" role="status">Loading&hellip;</div>
+
         <div id="a-content" hidden>
-          <h1 class="portal-title">ProfAdmin</h1>
+          <h1 class="portal-title" style="margin-bottom:4px">ProfAdmin</h1>
           <p class="portal-sub">Signed in as <span id="a-email"></span>.</p>
-          <div class="message-box">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            <span>The admin console arrives in the next phase: the approval queue and student management will appear here.</span>
-          </div>
+
+          <ul class="admin-nav" role="tablist" aria-label="ProfAdmin sections">
+            <li><button class="admin-tab" id="tab-approvals" role="tab" aria-selected="true" type="button">Approvals <span class="tab-count" id="tab-approvals-count" hidden>0</span></button></li>
+            <li><button class="admin-tab" id="tab-students" role="tab" aria-selected="false" type="button">Students</button></li>
+            <li><button class="admin-tab" role="tab" aria-selected="false" aria-disabled="true" type="button" title="Available in a later phase">Questions <span class="tab-soon">Soon</span></button></li>
+            <li><button class="admin-tab" role="tab" aria-selected="false" aria-disabled="true" type="button" title="Available in a later phase">Papers <span class="tab-soon">Soon</span></button></li>
+            <li><button class="admin-tab" role="tab" aria-selected="false" aria-disabled="true" type="button" title="Available in a later phase">Analytics <span class="tab-soon">Soon</span></button></li>
+          </ul>
+
+          <div id="a-notice" class="admin-notice" role="status" hidden></div>
+
+          <!-- Approval Queue -->
+          <section id="v-approvals" aria-labelledby="ap-h">
+            <div class="admin-head">
+              <div><h2 id="ap-h">Approval Queue</h2><p id="ap-sub"></p></div>
+              <button class="btn btn-outline btn-sm" id="ap-refresh" type="button">Refresh</button>
+            </div>
+            <div class="bulk-bar">
+              <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input class="check" type="checkbox" id="ap-all" /> Select all shown</label>
+              <span id="ap-selcount">0 selected</span>
+              <span class="spacer"></span>
+              <button class="btn btn-primary btn-sm" id="ap-bulk" type="button" disabled>Approve selected</button>
+            </div>
+            <div class="a-list" id="ap-list"></div>
+            <div class="a-more"><button class="btn btn-outline" id="ap-more" type="button" hidden>Load more</button></div>
+          </section>
+
+          <!-- Students -->
+          <section id="v-students" aria-labelledby="st-h" hidden>
+            <div class="admin-head">
+              <div><h2 id="st-h">Students</h2><p id="st-sub"></p></div>
+              <button class="btn btn-outline btn-sm" id="st-refresh" type="button">Refresh</button>
+            </div>
+            <div class="toolbar">
+              <input class="input" id="st-q" type="search" placeholder="Search name or email" aria-label="Search students" />
+              <button class="btn btn-outline btn-sm" id="st-search" type="button">Search</button>
+              <select class="input" id="st-status" aria-label="Filter by status">
+                <option value="all">All statuses</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+                <option value="suspended">Suspended</option>
+              </select>
+              <select class="input" id="st-level" aria-label="Filter by access level"></select>
+            </div>
+            <p class="field-hint" style="margin:-4px 0 16px">Search and filters apply to the students loaded below. Typing a full email address and pressing Search also looks it up directly.</p>
+            <div class="bulk-bar">
+              <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input class="check" type="checkbox" id="st-all" /> Select all shown</label>
+              <span id="st-selcount">0 selected</span>
+              <span class="spacer"></span>
+              <button class="btn btn-danger btn-sm" id="st-bulk-delete" type="button" disabled>Delete selected</button>
+            </div>
+            <div class="a-list" id="st-list"></div>
+            <div class="a-more"><button class="btn btn-outline" id="st-more" type="button" hidden>Load more</button></div>
+          </section>
         </div>
       </div>
     </div>
+
+    <dialog class="a-dialog" id="dlg-manage" aria-labelledby="m-title">
+      <h3 id="m-title">Student</h3>
+      <dl>
+        <div><dt>Email</dt><dd id="m-email"></dd></div>
+        <div><dt>Applied for</dt><dd id="m-applied"></dd></div>
+        <div><dt>Status</dt><dd id="m-status"></dd></div>
+      </dl>
+      <div class="field" id="m-level-wrap">
+        <label class="field-label" for="m-level" id="m-level-label">Access level</label>
+        <select class="input" id="m-level"></select>
+      </div>
+      <div class="field" id="m-reason-wrap" hidden>
+        <label class="field-label" for="m-reason">Rejection reason (optional)</label>
+        <input class="input" id="m-reason" type="text" maxlength="300" autocomplete="off" />
+      </div>
+      <div class="portal-error" id="m-error" role="alert" hidden></div>
+      <div class="a-actions" id="m-actions"></div>
+    </dialog>
+
+    <dialog class="a-dialog" id="dlg-confirm" aria-labelledby="c-title">
+      <h3 id="c-title"></h3>
+      <p id="c-text"></p>
+      <div class="field" id="c-type-wrap" hidden>
+        <label class="field-label" for="c-type">Type DELETE to confirm</label>
+        <input class="input" id="c-type" type="text" autocomplete="off" />
+      </div>
+      <div class="a-actions">
+        <button class="btn btn-outline" id="c-cancel" type="button">Cancel</button>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" id="c-ok" type="button">Confirm</button>
+      </div>
+    </dialog>
   </main>
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -147,25 +233,471 @@
 
   <script src="../../js/header-footer-loader.js"></script>
   <script type="module">
-    import { ROUTES, watchAuth, loadAccount } from "../../js/auth-core.js";
+    import { ROUTES, watchAuth, loadAccount, describeRequest } from "../../js/auth-core.js";
+    import * as A from "../../js/admin-core.js";
 
     const $ = (id) => document.getElementById(id);
+    let adminEmail = "";
 
-    /* Only accounts listed in the Firestore admins collection stay here.
-       Everyone else is sent away; Security Rules enforce the real limit. */
+    const S = {
+      pending: { rows: [], cursor: null, done: false, loaded: false, sel: new Set() },
+      students: { rows: [], cursor: null, done: false, loaded: false, sel: new Set(), q: "", status: "all", level: "all" }
+    };
+    let view = "approvals";
+
+    /* ---------- Guard: only accounts in `admins` stay here ---------- */
     watchAuth(async (user) => {
       if (!user) { location.replace(ROUTES.login); return; }
       try {
         const account = await loadAccount(user);
         if (!account.isAdmin) { location.replace(ROUTES.dashboard); return; }
+        adminEmail = (user.email || "").toLowerCase();
         $("a-email").textContent = user.email || "";
         $("a-loading").hidden = true;
         $("a-content").hidden = false;
+        init();
       } catch (err) {
         console.error(err);
         $("a-loading").textContent = "We could not load this page. Please refresh.";
       }
     });
+
+    /* ---------- Helpers ---------- */
+    function notice(text, isError) {
+      const n = $("a-notice");
+      n.textContent = text || "";
+      n.classList.toggle("is-error", !!isError);
+      n.hidden = !text;
+    }
+    function failText(err) {
+      return err && err.code === "permission-denied"
+        ? "Permission denied. Check that the latest Firestore rules (v2) are published."
+        : "Something went wrong. Please check your connection and try again.";
+    }
+    const ms = (ts) => (ts && ts.toMillis ? ts.toMillis() : 0);
+    const fmtDate = (ts) => (ts && ts.toDate
+      ? ts.toDate().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "");
+    const effLevel = (u) => u.accessLevel || u.requestedLevel || "";
+    const STATUS_TEXT = { pending: "Pending", approved: "Approved", rejected: "Rejected", suspended: "Suspended" };
+    const statusText = (s) => STATUS_TEXT[s] || "Pending";
+    const el = (tag, cls, text) => {
+      const e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text != null) e.textContent = text;
+      return e;
+    };
+
+    function confirmDialog({ title, text, ok, danger, typed }) {
+      return new Promise((resolve) => {
+        const d = $("dlg-confirm"), okb = $("c-ok"), can = $("c-cancel"), inp = $("c-type");
+        $("c-title").textContent = title;
+        $("c-text").textContent = text;
+        okb.className = "btn " + (danger ? "btn-danger" : "btn-primary");
+        okb.textContent = ok;
+        $("c-type-wrap").hidden = !typed;
+        inp.value = "";
+        okb.disabled = !!typed;
+        const cleanup = () => { okb.onclick = null; can.onclick = null; inp.oninput = null; d.onclose = null; };
+        inp.oninput = () => { okb.disabled = inp.value.trim() !== typed; };
+        okb.onclick = () => { cleanup(); d.close(); resolve(true); };
+        can.onclick = () => { cleanup(); d.close(); resolve(false); };
+        d.onclose = () => { cleanup(); resolve(false); };
+        d.showModal();
+      });
+    }
+
+    /* ---------- Local state after a write (saves re-reading) ---------- */
+    function patchRow(uid, fields) {
+      [S.pending, S.students].forEach((list) => {
+        const r = list.rows.find((x) => x.uid === uid);
+        if (r) Object.assign(r, fields);
+      });
+      S.pending.rows = S.pending.rows.filter((x) => x.status === "pending");
+      S.pending.sel.forEach((id) => { if (!S.pending.rows.some((x) => x.uid === id)) S.pending.sel.delete(id); });
+    }
+    function removeRows(uids) {
+      const gone = new Set(uids);
+      [S.pending, S.students].forEach((list) => {
+        list.rows = list.rows.filter((x) => !gone.has(x.uid));
+        gone.forEach((id) => list.sel.delete(id));
+      });
+    }
+    function renderAll() { renderPending(); renderStudents(); refreshCount(); }
+
+    async function refreshCount() {
+      try {
+        const n = await A.countPending();
+        const c = $("tab-approvals-count");
+        c.textContent = n;
+        c.hidden = n === 0;
+      } catch (e) { /* the badge is optional */ }
+    }
+
+    /* ---------- Row builder ---------- */
+    function rowEl(u, kind) {
+      const list = S[kind];
+      const row = el("div", "a-row");
+
+      const cb = el("input", "check");
+      cb.type = "checkbox";
+      cb.checked = list.sel.has(u.uid);
+      cb.setAttribute("aria-label", "Select " + (u.name || u.email));
+      cb.addEventListener("change", () => {
+        if (cb.checked) list.sel.add(u.uid); else list.sel.delete(u.uid);
+        updateBulk(kind);
+      });
+
+      const who = el("div");
+      who.append(el("div", "a-name", u.name || "(no name)"), el("div", "a-sub", u.email || ""));
+
+      const req = describeRequest(u);
+      const cls = el("div", "a-cell");
+      cls.append(el("div", "a-name", req.course), el("div", "a-sub", req.subjects));
+
+      const lvl = el("div", "a-cell");
+      if (kind === "students") {
+        const b = el("span", "badge" + (u.status === "approved" ? " is-approved" : (u.status === "pending" ? "" : " is-" + u.status)), statusText(u.status));
+        lvl.append(b, el("div", "a-sub", A.levelLabel(effLevel(u))));
+      } else {
+        lvl.append(el("div", "a-sub", "Requested"), el("div", "a-name", A.levelLabel(u.requestedLevel)));
+      }
+
+      const date = el("div", "a-cell");
+      date.append(el("span", "a-label", "Applied"), document.createTextNode(fmtDate(u.createdAt)));
+
+      const act = el("button", "btn btn-outline btn-sm", kind === "pending" ? "Review" : "Manage");
+      act.type = "button";
+      act.addEventListener("click", () => openManage(u));
+
+      row.append(cb, who, cls, lvl, date, act);
+      return row;
+    }
+
+    function headRow(thirdLabel) {
+      const h = el("div", "a-row a-head");
+      ["", "Student", "Class and subjects", thirdLabel, "Applied", ""].forEach((t) => h.append(el("div", null, t)));
+      return h;
+    }
+
+    function updateBulk(kind) {
+      const list = S[kind];
+      const n = list.sel.size;
+      if (kind === "pending") {
+        $("ap-selcount").textContent = n + " selected";
+        $("ap-bulk").disabled = n === 0;
+        $("ap-bulk").textContent = n ? "Approve selected (" + n + ")" : "Approve selected";
+        const shown = S.pending.rows.length;
+        $("ap-all").checked = shown > 0 && n === shown;
+      } else {
+        const shown = visibleStudents();
+        $("st-selcount").textContent = n + " selected";
+        $("st-bulk-delete").disabled = n === 0;
+        $("st-bulk-delete").textContent = n ? "Delete selected (" + n + ")" : "Delete selected";
+        $("st-all").checked = shown.length > 0 && shown.every((u) => list.sel.has(u.uid));
+      }
+    }
+
+    /* ---------- Approvals ---------- */
+    function renderPending() {
+      const p = S.pending;
+      const box = $("ap-list");
+      box.textContent = "";
+      const rows = p.rows.slice().sort((a, b) => ms(a.createdAt) - ms(b.createdAt));
+      if (!rows.length) {
+        box.append(el("div", "a-empty", p.loaded ? "No pending applications." : "Loading\u2026"));
+      } else {
+        box.append(headRow("Requested level"));
+        rows.forEach((u) => box.append(rowEl(u, "pending")));
+      }
+      $("ap-sub").textContent = rows.length ? rows.length + " shown, oldest first." : "";
+      $("ap-more").hidden = p.done || !p.loaded;
+      updateBulk("pending");
+    }
+
+    async function loadPending(reset) {
+      const p = S.pending;
+      if (reset) { p.rows = []; p.cursor = null; p.done = false; p.sel.clear(); p.loaded = false; renderPending(); }
+      try {
+        const r = await A.fetchPending(p.cursor);
+        r.rows.forEach((u) => { if (!p.rows.some((x) => x.uid === u.uid)) p.rows.push(u); });
+        p.cursor = r.cursor || p.cursor;
+        p.done = r.done;
+        p.loaded = true;
+        renderPending();
+      } catch (err) {
+        console.error(err);
+        p.loaded = true;
+        renderPending();
+        notice("Could not load applications. " + failText(err), true);
+      }
+    }
+
+    $("ap-refresh").addEventListener("click", () => { notice(""); loadPending(true); refreshCount(); });
+    $("ap-more").addEventListener("click", () => loadPending(false));
+    $("ap-all").addEventListener("change", (e) => {
+      S.pending.sel.clear();
+      if (e.target.checked) S.pending.rows.forEach((u) => S.pending.sel.add(u.uid));
+      renderPending();
+    });
+    $("ap-bulk").addEventListener("click", async () => {
+      const chosen = S.pending.rows.filter((u) => S.pending.sel.has(u.uid));
+      if (!chosen.length) return;
+      const ok = await confirmDialog({
+        title: "Approve " + chosen.length + " student" + (chosen.length === 1 ? "" : "s") + "?",
+        text: "Each student is approved for the class, subjects and access level they applied for. To change a level, approve that student individually with Review.",
+        ok: "Approve"
+      });
+      if (!ok) return;
+      $("ap-bulk").disabled = true;
+      try {
+        const n = await A.approveMany(chosen.map((u) => ({ uid: u.uid, level: u.requestedLevel })), adminEmail);
+        chosen.forEach((u) => patchRow(u.uid, { status: "approved", accessLevel: u.requestedLevel, rejectionReason: "" }));
+        renderAll();
+        notice("Approved " + n + " student" + (n === 1 ? "" : "s") + ".");
+      } catch (err) {
+        console.error(err);
+        notice("Bulk approval failed. " + failText(err), true);
+        updateBulk("pending");
+      }
+    });
+
+    /* ---------- Students ---------- */
+    function visibleStudents() {
+      const s = S.students;
+      const q = s.q.trim().toLowerCase();
+      return s.rows.filter((u) => {
+        if (s.status !== "all" && (u.status || "pending") !== s.status) return false;
+        if (s.level !== "all" && effLevel(u) !== s.level) return false;
+        if (q && !((u.name || "").toLowerCase().includes(q) || (u.email || "").toLowerCase().includes(q))) return false;
+        return true;
+      });
+    }
+
+    function renderStudents() {
+      const s = S.students;
+      const box = $("st-list");
+      box.textContent = "";
+      const rows = visibleStudents();
+      if (!rows.length) {
+        box.append(el("div", "a-empty", s.loaded ? (s.rows.length ? "No students match the search and filters." : "No students yet.") : "Loading\u2026"));
+      } else {
+        box.append(headRow("Status and level"));
+        rows.forEach((u) => box.append(rowEl(u, "students")));
+      }
+      $("st-sub").textContent = s.rows.length ? rows.length + " of " + s.rows.length + " loaded shown, newest first." : "";
+      $("st-more").hidden = s.done || !s.loaded;
+      updateBulk("students");
+    }
+
+    async function loadStudents(reset) {
+      const s = S.students;
+      if (reset) { s.rows = []; s.cursor = null; s.done = false; s.sel.clear(); s.loaded = false; renderStudents(); }
+      try {
+        const r = await A.fetchStudents(s.cursor);
+        r.rows.forEach((u) => { if (!s.rows.some((x) => x.uid === u.uid)) s.rows.push(u); });
+        s.cursor = r.cursor || s.cursor;
+        s.done = r.done;
+        s.loaded = true;
+        renderStudents();
+      } catch (err) {
+        console.error(err);
+        s.loaded = true;
+        renderStudents();
+        notice("Could not load students. " + failText(err), true);
+      }
+    }
+
+    function filtersChanged() { S.students.sel.clear(); renderStudents(); }
+
+    $("st-refresh").addEventListener("click", () => { notice(""); loadStudents(true); });
+    $("st-more").addEventListener("click", () => loadStudents(false));
+    $("st-q").addEventListener("input", (e) => { S.students.q = e.target.value; filtersChanged(); });
+    $("st-status").addEventListener("change", (e) => { S.students.status = e.target.value; filtersChanged(); });
+    $("st-level").addEventListener("change", (e) => { S.students.level = e.target.value; filtersChanged(); });
+    $("st-all").addEventListener("change", (e) => {
+      const s = S.students;
+      s.sel.clear();
+      if (e.target.checked) visibleStudents().forEach((u) => s.sel.add(u.uid));
+      renderStudents();
+    });
+
+    async function runSearch() {
+      const q = $("st-q").value.trim();
+      S.students.q = q;
+      S.students.sel.clear();
+      if (q.includes("@")) {
+        try {
+          const found = await A.lookupByEmail(q.toLowerCase());
+          found.forEach((u) => {
+            if (!S.students.rows.some((x) => x.uid === u.uid)) S.students.rows.unshift(u);
+          });
+          notice(found.length ? "" : "No student found with that email address.");
+        } catch (err) {
+          console.error(err);
+          notice("Lookup failed. " + failText(err), true);
+        }
+      }
+      renderStudents();
+    }
+    $("st-search").addEventListener("click", runSearch);
+    $("st-q").addEventListener("keydown", (e) => { if (e.key === "Enter") runSearch(); });
+
+    $("st-bulk-delete").addEventListener("click", async () => {
+      const chosen = S.students.rows.filter((u) => S.students.sel.has(u.uid));
+      if (!chosen.length) return;
+      const ok = await confirmDialog({
+        title: "Permanently delete " + chosen.length + " student record" + (chosen.length === 1 ? "" : "s") + "?",
+        text: "This cannot be undone. Their sign-in identity stays in Firebase Authentication; a deleted student who signs in again starts as a new applicant.",
+        ok: "Delete permanently", danger: true, typed: "DELETE"
+      });
+      if (!ok) return;
+      $("st-bulk-delete").disabled = true;
+      try {
+        const n = await A.deleteMany(chosen.map((u) => u.uid));
+        removeRows(chosen.map((u) => u.uid));
+        renderAll();
+        notice("Deleted " + n + " student record" + (n === 1 ? "" : "s") + ".");
+      } catch (err) {
+        console.error(err);
+        notice("Bulk delete failed. " + failText(err), true);
+        updateBulk("students");
+      }
+    });
+
+    /* ---------- Manage one student ---------- */
+    function openManage(u) {
+      const d = $("dlg-manage");
+      const st = u.status || "pending";
+      const req = describeRequest(u);
+      $("m-title").textContent = u.name || "Student";
+      $("m-email").textContent = u.email || "";
+      $("m-applied").textContent = req.course + " \u00b7 " + req.subjects + " (" + A.levelLabel(u.requestedLevel) + ")";
+      $("m-status").textContent = statusText(st) + (u.accessLevel ? " \u00b7 " + A.levelLabel(u.accessLevel) : "")
+        + (st === "rejected" && u.rejectionReason ? " \u00b7 Reason: " + u.rejectionReason : "");
+      const sel = $("m-level");
+      sel.textContent = "";
+      A.LEVELS.forEach((l) => {
+        const o = el("option", null, l.label);
+        o.value = l.value;
+        sel.append(o);
+      });
+      sel.value = u.accessLevel || u.requestedLevel;
+      $("m-level-label").textContent = (st === "approved" || st === "suspended") ? "Access level" : "Access level to grant";
+      $("m-reason").value = "";
+      $("m-reason-wrap").hidden = st !== "pending";
+      $("m-error").hidden = true;
+
+      const actions = $("m-actions");
+      actions.textContent = "";
+      const btn = (label, cls, handler) => {
+        const b = el("button", "btn btn-sm " + cls, label);
+        b.type = "button";
+        b.addEventListener("click", handler);
+        actions.append(b);
+        return b;
+      };
+
+      const run = async (fn, after, message) => {
+        actions.querySelectorAll("button").forEach((b) => { b.disabled = true; });
+        $("m-error").hidden = true;
+        try {
+          await fn();
+          after();
+          d.close();
+          renderAll();
+          notice(message);
+        } catch (err) {
+          console.error(err);
+          $("m-error").textContent = "Could not save. " + failText(err);
+          $("m-error").hidden = false;
+          actions.querySelectorAll("button").forEach((b) => { b.disabled = false; });
+        }
+      };
+
+      const approve = () => run(
+        () => A.approveOne(u.uid, sel.value, adminEmail),
+        () => patchRow(u.uid, { status: "approved", accessLevel: sel.value, rejectionReason: "" }),
+        (u.name || "Student") + " approved.");
+
+      if (st === "pending") {
+        btn("Approve", "btn-primary", approve);
+        btn("Reject", "btn-outline", () => {
+          const reason = $("m-reason").value.trim();
+          run(() => A.rejectOne(u.uid, reason),
+              () => patchRow(u.uid, { status: "rejected", accessLevel: "", rejectionReason: reason }),
+              (u.name || "Student") + " rejected.");
+        });
+      } else if (st === "rejected") {
+        btn("Approve", "btn-primary", approve);
+      } else if (st === "approved") {
+        btn("Save level", "btn-primary", () => run(
+          () => A.changeLevel(u.uid, sel.value),
+          () => patchRow(u.uid, { accessLevel: sel.value }),
+          "Access level updated."));
+        btn("Suspend", "btn-outline", () => run(
+          () => A.setStatus(u.uid, "suspended"),
+          () => patchRow(u.uid, { status: "suspended" }),
+          (u.name || "Student") + " suspended."));
+      } else if (st === "suspended") {
+        btn("Reactivate", "btn-primary", () => run(
+          () => (u.accessLevel ? A.setStatus(u.uid, "approved") : A.approveOne(u.uid, sel.value, adminEmail)),
+          () => patchRow(u.uid, u.accessLevel ? { status: "approved" } : { status: "approved", accessLevel: sel.value }),
+          (u.name || "Student") + " reactivated."));
+        btn("Save level", "btn-outline", () => run(
+          () => A.changeLevel(u.uid, sel.value),
+          () => patchRow(u.uid, { accessLevel: sel.value }),
+          "Access level updated."));
+      }
+
+      actions.append(el("span", "spacer"));
+      btn("Delete", "btn-danger", async () => {
+        d.close();
+        const ok = await confirmDialog({
+          title: "Permanently delete this student record?",
+          text: (u.name || "This student") + " (" + (u.email || "") + "). This cannot be undone. Their sign-in identity stays in Firebase Authentication; if they sign in again they start as a new applicant.",
+          ok: "Delete permanently", danger: true
+        });
+        if (!ok) { d.showModal(); return; }
+        try {
+          await A.deleteOne(u.uid);
+          removeRows([u.uid]);
+          renderAll();
+          notice("Student record deleted.");
+        } catch (err) {
+          console.error(err);
+          notice("Delete failed. " + failText(err), true);
+        }
+      });
+      btn("Close", "btn-outline", () => d.close());
+
+      d.showModal();
+    }
+
+    /* ---------- Tabs and start ---------- */
+    function setView(v) {
+      view = v;
+      $("tab-approvals").setAttribute("aria-selected", String(v === "approvals"));
+      $("tab-students").setAttribute("aria-selected", String(v === "students"));
+      $("v-approvals").hidden = v !== "approvals";
+      $("v-students").hidden = v !== "students";
+      notice("");
+      if (v === "students" && !S.students.loaded) loadStudents(true);
+    }
+    document.querySelectorAll('.admin-tab[aria-disabled="true"]').forEach((b) => {
+      b.addEventListener("click", (e) => e.preventDefault());
+    });
+    $("tab-approvals").addEventListener("click", () => setView("approvals"));
+    $("tab-students").addEventListener("click", () => setView("students"));
+
+    function init() {
+      const lv = $("st-level");
+      const all = el("option", null, "All access levels");
+      all.value = "all";
+      lv.append(all);
+      A.LEVELS.forEach((l) => { const o = el("option", null, l.label); o.value = l.value; lv.append(o); });
+      loadPending(true);
+      refreshCount();
+    }
   </script>
 </body>
 </html>
