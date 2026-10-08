@@ -10,6 +10,9 @@
  * Images (Phase 4): the stem image (imageUrl, imageFileId) lives on the
  * question; the explanation image (explanationImageUrl, explanationImageFileId)
  * lives on the answer key, so it stays hidden until the answer is released.
+ * Grouping (Phase 5): an optional label on the question. Questions of one
+ * chapter that carry the same label are variations of each other, so an
+ * auto-generated paper takes at most one of them. Groups never cross chapters.
  * ───────────────────────────────────────────────────────────────────── */
 import {
   collection, query, where, limit, startAfter, getDocs, getDoc, getCountFromServer,
@@ -68,17 +71,18 @@ export const AR_OPTIONS = [
   "A is false but R is true."
 ];
 
-/* Image fields: null means "no image". On create they are left out; on edit
- * they are removed from the stored document. */
-const IMAGE_FIELDS = ["imageUrl", "imageFileId"];
+/* Image fields (and the optional Grouping label): null or empty means "not
+ * set". On create they are left out; on edit they are removed from the
+ * stored document. */
+const IMAGE_FIELDS = ["imageUrl", "imageFileId", "grouping"];
 function forCreate(fields) {
   const out = { ...fields };
-  IMAGE_FIELDS.forEach((k) => { if (out[k] == null) delete out[k]; });
+  IMAGE_FIELDS.forEach((k) => { if (out[k] == null || out[k] === "") delete out[k]; });
   return out;
 }
 function forUpdate(fields) {
   const out = { ...fields };
-  IMAGE_FIELDS.forEach((k) => { if (k in out && out[k] == null) out[k] = deleteField(); });
+  IMAGE_FIELDS.forEach((k) => { if (k in out && (out[k] == null || out[k] === "")) out[k] = deleteField(); });
   return out;
 }
 function cleanKeys(keys) {
@@ -197,4 +201,60 @@ export async function deleteQuestion(id) {
   batch.delete(doc(db, "questions", id));
   batch.delete(doc(db, "questionKeys", id));
   await batch.commit();
+}
+
+/* ── Bulk import (Phase 5) ── */
+
+/* Every question of one chapter (used to find duplicates before an import).
+ * Reads one document per question, so it is called only for the chapters an
+ * uploaded file actually refers to. */
+export async function fetchAllQuestions(chapterId) {
+  const out = [];
+  let cursor = null;
+  for (;;) {
+    const parts = [...chapterRange(chapterId), limit(500)];
+    if (cursor) parts.splice(2, 0, startAfter(cursor));
+    const snap = await getDocs(query(questions(), ...parts));
+    snap.docs.forEach((d) => out.push({ id: d.id, ...d.data() }));
+    if (snap.size < 500) break;
+    cursor = snap.docs[snap.docs.length - 1];
+  }
+  return out;
+}
+
+/* Saves several new questions of ONE chapter (at most 50 per call). The serial
+ * numbers are reserved in one transaction on the chapter counter, then the
+ * questions and their answer keys are written in one batch, so the batch is
+ * saved completely or not at all. entries: [{ fields, keys }]. */
+export async function createQuestionsBulk(chapterId, adminEmail, entries) {
+  if (!entries.length) return [];
+  if (entries.length > 50) throw new Error("At most 50 questions can be saved in one step.");
+  const chRef = doc(db, "taxonomy", chapterId);
+  const base = await runTransaction(db, async (tx) => {
+    const cs = await tx.get(chRef);
+    if (!cs.exists()) throw new Error("Chapter no longer exists");
+    const c = cs.data();
+    const first = c.nextSerial || 1;
+    tx.update(chRef, { nextSerial: first + entries.length, updatedAt: serverTimestamp() });
+    return { first: first, c: c };
+  });
+  const c = base.c;
+  const levels = levelsFor(c.board, c.cls, c.subject);
+  const batch = writeBatch(db);
+  const out = [];
+  entries.forEach((e, i) => {
+    const serial = base.first + i;
+    const id = chapterId + "_" + pad(serial, 4);
+    const displayId = BOARD_CODE[c.board] + c.cls + "-" + SUBJECT_CODE[c.subject] + "-C" + pad(c.chapterNumber, 2) + "-" + pad(serial, 4);
+    batch.set(doc(db, "questions", id), {
+      ...forCreate(e.fields),
+      displayId: displayId, serial: serial, chapterId: chapterId,
+      board: c.board, cls: c.cls, subject: c.subject, levels: levels,
+      createdBy: adminEmail, createdAt: serverTimestamp(), updatedAt: serverTimestamp()
+    });
+    batch.set(doc(db, "questionKeys", id), cleanKeys(e.keys));
+    out.push({ id: id, displayId: displayId, serial: serial });
+  });
+  await batch.commit();
+  return out;
 }

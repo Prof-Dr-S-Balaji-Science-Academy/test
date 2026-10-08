@@ -1,8 +1,9 @@
 rules_version = '2';
 
-// Rules v4: users and admins (v2), the question bank collections taxonomy,
-// questions and questionKeys (v3), plus optional ImageKit image fields on
-// questions (stem image) and questionKeys (explanation image). All
+// Rules v5: users and admins (v2), the question bank collections taxonomy,
+// questions and questionKeys (v3), optional ImageKit image fields on
+// questions (stem image) and questionKeys (explanation image) (v4), and the
+// optional Grouping label on questions (v5, Phase 5 bulk upload). All
 // ProfAdmin-only for now.
 // Students cannot read drafts, other levels' questions or any answer key;
 // student-facing question reads arrive with Phase 6.
@@ -101,7 +102,7 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // ───────────── Question bank (Phase 3, images Phase 4, ProfAdmin only) ─────────────
+    // ───────────── Question bank (Phase 3, images Phase 4, grouping Phase 5, ProfAdmin only) ─────────────
 
     function chapterOk(d) {
       return d.board in ['CBSE', 'State Board']
@@ -143,6 +144,7 @@ service cloud.firestore {
         && (!('matchLeft' in d) || (d.matchLeft is list && d.matchLeft.size() <= 8))
         && (!('matchRight' in d) || (d.matchRight is list && d.matchRight.size() <= 8))
         && (!('subQuestions' in d) || (d.subQuestions is list && d.subQuestions.size() <= 6))
+        && (!('grouping' in d) || (d.grouping is string && d.grouping.size() >= 1 && d.grouping.size() <= 60))
         && imagePairOk(d, 'imageUrl', 'imageFileId');
     }
 
@@ -189,7 +191,7 @@ service cloud.firestore {
       allow create: if isAdmin()
         && request.resource.data.keys().hasOnly(['displayId', 'serial', 'chapterId', 'board', 'cls', 'subject',
              'levels', 'type', 'difficulty', 'marks', 'status', 'questionLatex', 'assertionLatex', 'reasonLatex',
-             'options', 'matchLeft', 'matchRight', 'subQuestions', 'imageUrl', 'imageFileId',
+             'options', 'matchLeft', 'matchRight', 'subQuestions', 'imageUrl', 'imageFileId', 'grouping',
              'createdBy', 'createdAt', 'updatedAt'])
         && request.resource.data.keys().hasAll(['displayId', 'serial', 'chapterId', 'board', 'cls', 'subject',
              'levels', 'type', 'difficulty', 'marks', 'status', 'questionLatex', 'createdBy', 'createdAt', 'updatedAt'])
@@ -201,7 +203,7 @@ service cloud.firestore {
       allow update: if isAdmin()
         && request.resource.data.diff(resource.data).affectedKeys()
              .hasOnly(['difficulty', 'marks', 'status', 'questionLatex', 'assertionLatex', 'reasonLatex',
-                       'options', 'matchLeft', 'matchRight', 'subQuestions', 'imageUrl', 'imageFileId', 'updatedAt'])
+                       'options', 'matchLeft', 'matchRight', 'subQuestions', 'imageUrl', 'imageFileId', 'grouping', 'updatedAt'])
         && questionOk(request.resource.data)
         && request.resource.data.updatedAt == request.time;
       allow delete: if isAdmin();

@@ -2,10 +2,11 @@
  * question-manager.js  (ES module, ProfAdmin "Questions" section)
  * Folder-style browsing (Board → Class → Subject → Chapter), chapter
  * management, the question list, and the LaTeX-aware question editor.
- * Everything here is cosmetic; the real lock is Firestore Rules v4.
+ * Everything here is cosmetic; the real lock is Firestore Rules v5.
  * ───────────────────────────────────────────────────────────────────── */
 import * as Q from "./question-core.js";
 import * as IU from "./image-upload.js";
+import { renderBulkUpload } from "./bulk-upload.js";
 import { cleanPasted, validateLatex, insertSnippet, SYMBOL_GROUPS } from "./latex-tools.js";
 
 export function initQuestions(host, api) {
@@ -18,7 +19,7 @@ export function initQuestions(host, api) {
     board: null, cls: null, subject: null, chapter: null,
     chapters: [], chaptersLoaded: false,
     q: { rows: [], cursor: null, done: false, loaded: false, search: "", status: "all", diff: "all", type: "all" },
-    edit: null
+    edit: null, importing: false
   };
 
   /* ── MathJax (loaded by the page; typesetting is queued one at a time) ── */
@@ -91,18 +92,22 @@ export function initQuestions(host, api) {
       } else nav.append(el("span", "q-crumb is-current", label));
     };
     const deep = !!(S.board);
-    add("Questions", deep ? () => goTo(0) : null);
-    if (S.board) add(S.board, S.cls ? () => goTo(1) : null);
-    if (S.cls) add("Class " + S.cls, S.subject ? () => goTo(2) : null);
-    if (S.subject) add(S.subject, S.chapter ? () => goTo(3) : null);
-    if (S.chapter) add("Chapter " + S.chapter.chapterNumber, S.edit ? () => closeEditor() : null);
+    const imp = S.importing;
+    const stay = () => closeBulk(false);   // leave Bulk upload, back to the folder it was opened from
+    add("Questions", (deep || imp) ? () => goTo(0) : null);
+    if (S.board) add(S.board, S.cls ? () => goTo(1) : (imp ? stay : null));
+    if (S.cls) add("Class " + S.cls, S.subject ? () => goTo(2) : (imp ? stay : null));
+    if (S.subject) add(S.subject, S.chapter ? () => goTo(3) : (imp ? stay : null));
+    if (S.chapter) add("Chapter " + S.chapter.chapterNumber, S.edit ? () => closeEditor() : (imp ? stay : null));
     if (S.edit) add(S.edit.existing ? "Edit question" : "New question", null);
+    if (imp) add("Bulk upload", null);
     return nav;
   }
 
   /* level: 0 root, 1 board, 2 class, 3 subject (chapter list) */
   function goTo(level) {
     api.notice("");
+    if (S.importing) { S.importing = false; if (host._bulkRelease) host._bulkRelease(); }
     S.edit = null;
     S.chapter = null;
     if (level <= 2) { S.subject = null; S.chapters = []; S.chaptersLoaded = false; }
@@ -116,12 +121,35 @@ export function initQuestions(host, api) {
     clearMath(host);
     host.textContent = "";
     host.append(crumbs());
+    if (S.importing) return renderBulk();
     if (S.edit) return renderEditor();
     if (S.chapter) return renderQuestionList();
     if (S.subject) return renderChapters();
     if (S.cls) return renderSubjects();
     if (S.board) return renderClasses();
     return renderBoards();
+  }
+
+  /* ───────────────────────── Bulk upload (Phase 5) ───────────────────────── */
+  function bulkBtn() {
+    const b = el("button", "btn btn-outline btn-sm", "Bulk upload");
+    b.type = "button";
+    b.addEventListener("click", () => { api.notice(""); S.importing = true; render(); window.scrollTo(0, 0); });
+    return b;
+  }
+  function renderBulk() {
+    renderBulkUpload(host, { el: el, api: api, head: head, onClose: closeBulk });
+  }
+  function closeBulk(changed) {
+    if (host._bulkRelease) host._bulkRelease();
+    S.importing = false;
+    api.notice("");
+    if (changed) {
+      S.chapters = []; S.chaptersLoaded = false;   // counts are read again
+      if (S.chapter) { loadQuestions(true); render(); return; }
+      if (S.subject) { render(); loadChapters(); return; }
+    }
+    render();
   }
 
   function head(title, sub) {
@@ -150,7 +178,9 @@ export function initQuestions(host, api) {
   }
 
   function renderBoards() {
-    host.append(head("Question bank", "Choose a board to open its folders."));
+    const bh = head("Question bank", "Choose a board to open its folders.");
+    bh.append(bulkBtn());
+    host.append(bh);
     const boards = [];
     Q.FOLDERS.forEach((f) => { if (boards.indexOf(f.board) === -1) boards.push(f.board); });
     host.append(folderGrid(boards.map((b) => ({
@@ -178,7 +208,7 @@ export function initQuestions(host, api) {
   /* ───────────────────────── Chapters ───────────────────────── */
   async function loadChapters() {
     S.chaptersLoaded = false;
-    render();
+    if (!S.importing) render();
     try {
       const rows = await Q.fetchChapters(S.board, S.cls, S.subject);
       const counts = await Promise.all(rows.map((r) => Q.countQuestions(r.id).catch(() => null)));
@@ -190,7 +220,7 @@ export function initQuestions(host, api) {
       api.notice("Could not load chapters. " + api.failText(err), true);
     }
     S.chaptersLoaded = true;
-    render();
+    if (!S.importing) render();
   }
 
   function renderChapters() {
@@ -198,7 +228,9 @@ export function initQuestions(host, api) {
     const add = el("button", "btn btn-primary btn-sm", "Add chapter");
     add.type = "button";
     add.addEventListener("click", () => openChapterDialog(null));
-    h.append(add);
+    const chb = el("div", "q-headbtns");
+    chb.append(bulkBtn(), add);
+    h.append(chb);
     host.append(h);
 
     const box = el("div", "a-list");
@@ -326,7 +358,7 @@ export function initQuestions(host, api) {
       q.loaded = true;
       api.notice("Could not load questions. " + api.failText(err), true);
     }
-    if (!S.edit && S.chapter) { render(); }
+    if (!S.edit && !S.importing && S.chapter) { render(); }
   }
 
   const visibleQuestions = () => {
@@ -335,7 +367,7 @@ export function initQuestions(host, api) {
       if (q.status !== "all" && r.status !== q.status) return false;
       if (q.diff !== "all" && r.difficulty !== q.diff) return false;
       if (q.type !== "all" && r.type !== q.type) return false;
-      if (s && !((r.displayId || "").toLowerCase().includes(s) || stemText(r).toLowerCase().includes(s))) return false;
+      if (s && !((r.displayId || "").toLowerCase().includes(s) || (r.grouping || "").toLowerCase().includes(s) || stemText(r).toLowerCase().includes(s))) return false;
       return true;
     }).sort((a, b) => a.serial - b.serial);
   };
@@ -352,13 +384,13 @@ export function initQuestions(host, api) {
     ref.type = "button";
     ref.addEventListener("click", () => { api.notice(""); loadQuestions(true); render(); });
     const hb = el("div", "q-headbtns");
-    hb.append(ref, addBtn);
+    hb.append(ref, bulkBtn(), addBtn);
     h.append(hb);
     host.append(h);
 
     const tb = el("div", "toolbar");
     const search = el("input", "input");
-    search.type = "search"; search.placeholder = "Search ID or question text"; search.value = S.q.search;
+    search.type = "search"; search.placeholder = "Search ID, grouping or question text"; search.value = S.q.search;
     search.setAttribute("aria-label", "Search questions");
     const sel = (label, key, opts) => {
       const s = el("select", "input");
@@ -412,7 +444,9 @@ export function initQuestions(host, api) {
   function qRow(r) {
     const row = el("div", "q-qrow");
     const top = el("div", "q-qtop");
-    top.append(tag(r.displayId || r.id, "q-id"), tag(Q.typeLabel(r.type)), tag(r.difficulty), tag(marksText(r.marks)),
+    top.append(tag(r.displayId || r.id, "q-id"), tag(Q.typeLabel(r.type)), tag(r.difficulty), tag(marksText(r.marks)));
+    if (r.grouping) top.append(tag("Group: " + r.grouping));
+    top.append(
       el("span", "badge" + (r.status === "published" ? " is-approved" : ""), r.status === "published" ? "Published" : "Draft"));
     const stem = el("div", "q-stem");
     stem.textContent = excerpt(stemText(r));
@@ -457,7 +491,7 @@ export function initQuestions(host, api) {
       const hadImages = !!(r.imageUrl || key.explanationImageUrl);
       delete key.explanationImageUrl; delete key.explanationImageFileId; // images are not copied
       const fields = {};
-      ["type", "difficulty", "marks", "questionLatex", "assertionLatex", "reasonLatex", "options", "matchLeft", "matchRight", "subQuestions"]
+      ["type", "difficulty", "marks", "questionLatex", "assertionLatex", "reasonLatex", "options", "matchLeft", "matchRight", "subQuestions", "grouping"]
         .forEach((k) => { if (r[k] !== undefined) fields[k] = r[k]; });
       fields.status = "draft";
       const res = await Q.createQuestion(S.chapter, api.adminEmail(), fields, key);
@@ -1193,6 +1227,19 @@ export function initQuestions(host, api) {
     const meta = el("div", "q-meta");
     meta.append(diffWrap, marksWrap);
 
+    /* Grouping (Phase 5): variations of one question share a label within the chapter */
+    const grpWrap = el("div", "field");
+    const grpLabel = el("label", "field-label", "Grouping (optional)");
+    const grpInput = el("input", "input q-grouping-input");
+    grpInput.id = "q-grouping";
+    grpLabel.htmlFor = "q-grouping";
+    grpInput.type = "text"; grpInput.maxLength = 60; grpInput.autocomplete = "off";
+    grpInput.placeholder = "For example newton-2nd-law";
+    grpInput.value = existing && existing.grouping ? existing.grouping : "";
+    grpWrap.append(grpLabel,
+      el("p", "field-hint", "Type any word, phrase or number. Questions of this chapter with the same grouping are variations of each other, so an auto-generated paper takes at most one of them. Leave empty if the question stands alone."),
+      grpInput);
+
     const bodyHost = el("div");
     let body = null;
     let bodyType = null;
@@ -1219,7 +1266,7 @@ export function initQuestions(host, api) {
       label: "Question image (optional)", hint: IMG_HINT + " Shown with the question.",
       current: existing ? { url: existing.imageUrl, fileId: existing.imageFileId } : null
     });
-    form.append(typeWrap, meta, stemImg.root, bodyHost);
+    form.append(typeWrap, meta, grpWrap, stemImg.root, bodyHost);
     const expl = latexField("Explanation (optional)", key.explanationLatex, {
       rows: 4, hint: "Shown to students together with the answer after they attempt the question."
     });
@@ -1262,7 +1309,9 @@ export function initQuestions(host, api) {
         marks = parseMarks(marksInput.value);
         if (isNaN(marks)) errors.push("Marks must be a positive number in steps of 0.5 (up to 100).");
       }
-      const fields = { ...part.q, type: bodyType, difficulty: diff ? diff.value : "", marks: marks };
+      const grouping = grpInput.value.replace(/\s+/g, " ").trim();
+      if (grouping.length > 60) errors.push("Grouping can be at most 60 characters.");
+      const fields = { ...part.q, type: bodyType, difficulty: diff ? diff.value : "", marks: marks, grouping: grouping };
       const keys = { ...part.k, explanationLatex: expl.get() };
       /* LaTeX problems across every field in the editor */
       const latexErrors = [];
