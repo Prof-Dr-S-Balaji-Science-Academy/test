@@ -13,6 +13,22 @@
   <link rel="stylesheet" href="../../css/styles.css" />
   <link rel="stylesheet" href="../../css/portal.css" />
   <link rel="stylesheet" href="../../css/admin.css" />
+  <link rel="stylesheet" href="../../css/questions.css" />
+
+  <!-- MathJax 3 with mhchem for the question preview (same setup as the formula pages) -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath:  [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        packages: { '[+]': ['mhchem', 'ams'] },
+        tags: 'none'
+      },
+      loader: { load: ['[tex]/mhchem', '[tex]/ams'] },
+      startup: { typeset: false }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
 </head>
 <body>
 
@@ -102,7 +118,7 @@
           <ul class="admin-nav" role="tablist" aria-label="ProfAdmin sections">
             <li><button class="admin-tab" id="tab-approvals" role="tab" aria-selected="true" type="button">Approvals <span class="tab-count" id="tab-approvals-count" hidden>0</span></button></li>
             <li><button class="admin-tab" id="tab-students" role="tab" aria-selected="false" type="button">Students</button></li>
-            <li><button class="admin-tab" role="tab" aria-selected="false" aria-disabled="true" type="button" title="Available in a later phase">Questions <span class="tab-soon">Soon</span></button></li>
+            <li><button class="admin-tab" id="tab-questions" role="tab" aria-selected="false" type="button">Questions</button></li>
             <li><button class="admin-tab" role="tab" aria-selected="false" aria-disabled="true" type="button" title="Available in a later phase">Papers <span class="tab-soon">Soon</span></button></li>
             <li><button class="admin-tab" role="tab" aria-selected="false" aria-disabled="true" type="button" title="Available in a later phase">Analytics <span class="tab-soon">Soon</span></button></li>
           </ul>
@@ -153,6 +169,9 @@
             <div class="a-list" id="st-list"></div>
             <div class="a-more"><button class="btn btn-outline" id="st-more" type="button" hidden>Load more</button></div>
           </section>
+
+          <!-- Questions (taxonomy, question manager, LaTeX editor) -->
+          <section id="v-questions" aria-label="Question bank" hidden></section>
         </div>
       </div>
     </div>
@@ -235,6 +254,7 @@
   <script type="module">
     import { ROUTES, watchAuth, loadAccount, describeRequest } from "../../js/auth-core.js";
     import * as A from "../../js/admin-core.js";
+    import { initQuestions } from "../../js/question-manager.js";
 
     const $ = (id) => document.getElementById(id);
     let adminEmail = "";
@@ -244,6 +264,7 @@
       students: { rows: [], cursor: null, done: false, loaded: false, sel: new Set(), q: "", status: "all", level: "all" }
     };
     let view = "approvals";
+    let questionsUI = null;
 
     /* ---------- Guard: only accounts in `admins` stay here ---------- */
     watchAuth(async (user) => {
@@ -271,7 +292,7 @@
     }
     function failText(err) {
       return err && err.code === "permission-denied"
-        ? "Permission denied. Check that the latest Firestore rules (v2) are published."
+        ? "Permission denied. Check that the latest Firestore rules (v3) are published."
         : "Something went wrong. Please check your connection and try again.";
     }
     const ms = (ts) => (ts && ts.toMillis ? ts.toMillis() : 0);
@@ -678,16 +699,24 @@
       view = v;
       $("tab-approvals").setAttribute("aria-selected", String(v === "approvals"));
       $("tab-students").setAttribute("aria-selected", String(v === "students"));
+      $("tab-questions").setAttribute("aria-selected", String(v === "questions"));
       $("v-approvals").hidden = v !== "approvals";
       $("v-students").hidden = v !== "students";
+      $("v-questions").hidden = v !== "questions";
       notice("");
       if (v === "students" && !S.students.loaded) loadStudents(true);
+      if (v === "questions" && !questionsUI) {
+        questionsUI = initQuestions($("v-questions"), {
+          el: el, notice: notice, failText: failText, confirmDialog: confirmDialog, adminEmail: () => adminEmail
+        });
+      }
     }
     document.querySelectorAll('.admin-tab[aria-disabled="true"]').forEach((b) => {
       b.addEventListener("click", (e) => e.preventDefault());
     });
     $("tab-approvals").addEventListener("click", () => setView("approvals"));
     $("tab-students").addEventListener("click", () => setView("students"));
+    $("tab-questions").addEventListener("click", () => setView("questions"));
 
     function init() {
       const lv = $("st-level");

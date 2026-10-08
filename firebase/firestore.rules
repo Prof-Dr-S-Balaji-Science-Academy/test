@@ -1,7 +1,9 @@
 rules_version = '2';
 
-// Rules v2: users and admins collections only (adds ProfAdmin approval,
-// status/level changes and deletion of student records).
+// Rules v3: users and admins (v2) plus the question bank collections
+// taxonomy, questions and questionKeys, all ProfAdmin-only for now.
+// Students cannot read drafts, other levels' questions or any answer key;
+// student-facing question reads arrive with Phase 6.
 // Everything not listed here stays closed (default deny).
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -94,6 +96,105 @@ service cloud.firestore {
         && levelMatches(request.resource.data);
 
       allow update: if isAdmin() && adminUserUpdateOk();
+      allow delete: if isAdmin();
+    }
+
+    // ───────────── Question bank (Phase 3, ProfAdmin only) ─────────────
+
+    function chapterOk(d) {
+      return d.board in ['CBSE', 'State Board']
+        && d.cls in ['10', '12']
+        && d.subject in ['Physics', 'Chemistry', 'Science']
+        && d.chapterNumber is int && d.chapterNumber >= 1 && d.chapterNumber <= 99
+        && d.chapterName is string && d.chapterName.size() >= 1 && d.chapterName.size() <= 120
+        && d.edition is string && d.edition.size() <= 40
+        && d.nextSerial is int && d.nextSerial >= 1;
+    }
+
+    function questionOk(d) {
+      return d.board in ['CBSE', 'State Board']
+        && d.cls in ['10', '12']
+        && d.subject in ['Physics', 'Chemistry', 'Science']
+        && d.type in ['mcq_single', 'mcq_multi', 'true_false', 'fill_blank', 'numerical', 'assertion_reason',
+                      'match', 'case_based', 'very_short', 'short', 'long']
+        && d.difficulty in ['Easy', 'Medium', 'Hard']
+        && d.marks is number && d.marks > 0 && d.marks <= 100
+        && d.status in ['draft', 'published']
+        && d.displayId is string && d.displayId.size() <= 40
+        && d.chapterId is string && d.chapterId.size() > 0
+        && d.serial is int && d.serial >= 1
+        && d.levels is list && d.levels.size() >= 1 && d.levels.size() <= 2
+        && d.questionLatex is string && d.questionLatex.size() <= 20000
+        && (!('assertionLatex' in d) || (d.assertionLatex is string && d.assertionLatex.size() <= 20000))
+        && (!('reasonLatex' in d) || (d.reasonLatex is string && d.reasonLatex.size() <= 20000))
+        && (!('options' in d) || (d.options is list && d.options.size() <= 6))
+        && (!('matchLeft' in d) || (d.matchLeft is list && d.matchLeft.size() <= 8))
+        && (!('matchRight' in d) || (d.matchRight is list && d.matchRight.size() <= 8))
+        && (!('subQuestions' in d) || (d.subQuestions is list && d.subQuestions.size() <= 6));
+    }
+
+    function keyOk(d) {
+      return d.keys().hasOnly(['correct', 'acceptedAnswers', 'numericAnswer', 'tolerance', 'matchMap',
+                               'modelAnswerLatex', 'explanationLatex', 'subKeys'])
+        && (!('correct' in d) || (d.correct is list && d.correct.size() <= 6))
+        && (!('acceptedAnswers' in d) || (d.acceptedAnswers is list && d.acceptedAnswers.size() <= 8))
+        && (!('numericAnswer' in d) || d.numericAnswer is number)
+        && (!('tolerance' in d) || (d.tolerance is number && d.tolerance >= 0))
+        && (!('matchMap' in d) || (d.matchMap is list && d.matchMap.size() <= 8))
+        && (!('modelAnswerLatex' in d) || (d.modelAnswerLatex is string && d.modelAnswerLatex.size() <= 20000))
+        && (!('explanationLatex' in d) || (d.explanationLatex is string && d.explanationLatex.size() <= 20000))
+        && (!('subKeys' in d) || (d.subKeys is list && d.subKeys.size() <= 6));
+    }
+
+    // One document per chapter. The internal document ID never changes, so
+    // renaming or renumbering a chapter does not orphan its questions.
+    match /taxonomy/{chapterId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin()
+        && request.resource.data.keys().hasOnly(['board', 'cls', 'subject', 'chapterNumber', 'chapterName',
+                                                 'edition', 'nextSerial', 'createdAt', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['board', 'cls', 'subject', 'chapterNumber', 'chapterName',
+                                                'edition', 'nextSerial', 'createdAt', 'updatedAt'])
+        && chapterOk(request.resource.data)
+        && request.resource.data.nextSerial == 1
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['chapterNumber', 'chapterName', 'edition', 'nextSerial', 'updatedAt'])
+        && chapterOk(request.resource.data)
+        && request.resource.data.nextSerial >= resource.data.nextSerial
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if isAdmin();
+    }
+
+    // The question as a student will eventually see it (no answers here).
+    match /questions/{questionId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin()
+        && request.resource.data.keys().hasOnly(['displayId', 'serial', 'chapterId', 'board', 'cls', 'subject',
+             'levels', 'type', 'difficulty', 'marks', 'status', 'questionLatex', 'assertionLatex', 'reasonLatex',
+             'options', 'matchLeft', 'matchRight', 'subQuestions', 'createdBy', 'createdAt', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['displayId', 'serial', 'chapterId', 'board', 'cls', 'subject',
+             'levels', 'type', 'difficulty', 'marks', 'status', 'questionLatex', 'createdBy', 'createdAt', 'updatedAt'])
+        && questionOk(request.resource.data)
+        && request.resource.data.createdBy == myEmail()
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      // Identity fields (ID, chapter, type, levels, creator) can never change.
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['difficulty', 'marks', 'status', 'questionLatex', 'assertionLatex', 'reasonLatex',
+                       'options', 'matchLeft', 'matchRight', 'subQuestions', 'updatedAt'])
+        && questionOk(request.resource.data)
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if isAdmin();
+    }
+
+    // Correct answers, model answers and explanations. Never readable by students.
+    match /questionKeys/{questionId} {
+      allow read: if isAdmin();
+      allow create, update: if isAdmin() && keyOk(request.resource.data);
       allow delete: if isAdmin();
     }
   }
