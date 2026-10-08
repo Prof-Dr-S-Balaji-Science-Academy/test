@@ -292,7 +292,7 @@
     }
     function failText(err) {
       return err && err.code === "permission-denied"
-        ? "Permission denied. Check that the latest Firestore rules (v3) are published."
+        ? "Permission denied. Check that the latest Firestore rules (v4) are published."
         : "Something went wrong. Please check your connection and try again.";
     }
     const ms = (ts) => (ts && ts.toMillis ? ts.toMillis() : 0);

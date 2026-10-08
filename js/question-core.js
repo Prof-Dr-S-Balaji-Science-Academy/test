@@ -7,10 +7,13 @@
  * Board, class and subject folders are fixed (derived from the seven access
  * levels); only chapters are stored. Questions link to the chapter's internal
  * ID, so renaming or renumbering a chapter never orphans a question (D-19).
+ * Images (Phase 4): the stem image (imageUrl, imageFileId) lives on the
+ * question; the explanation image (explanationImageUrl, explanationImageFileId)
+ * lives on the answer key, so it stays hidden until the answer is released.
  * ───────────────────────────────────────────────────────────────────── */
 import {
   collection, query, where, limit, startAfter, getDocs, getDoc, getCountFromServer,
-  doc, documentId, runTransaction, writeBatch, setDoc, updateDoc, serverTimestamp
+  doc, documentId, runTransaction, writeBatch, setDoc, updateDoc, serverTimestamp, deleteField
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { db, COURSES } from "./auth-core.js";
 
@@ -64,6 +67,25 @@ export const AR_OPTIONS = [
   "A is true but R is false.",
   "A is false but R is true."
 ];
+
+/* Image fields: null means "no image". On create they are left out; on edit
+ * they are removed from the stored document. */
+const IMAGE_FIELDS = ["imageUrl", "imageFileId"];
+function forCreate(fields) {
+  const out = { ...fields };
+  IMAGE_FIELDS.forEach((k) => { if (out[k] == null) delete out[k]; });
+  return out;
+}
+function forUpdate(fields) {
+  const out = { ...fields };
+  IMAGE_FIELDS.forEach((k) => { if (k in out && out[k] == null) out[k] = deleteField(); });
+  return out;
+}
+function cleanKeys(keys) {
+  const out = { ...keys };
+  ["explanationImageUrl", "explanationImageFileId"].forEach((k) => { if (out[k] == null) delete out[k]; });
+  return out;
+}
 
 const pad = (n, w) => String(n).padStart(w, "0");
 const chapters = () => collection(db, "taxonomy");
@@ -144,13 +166,13 @@ export async function createQuestion(chapter, adminEmail, fields, keys) {
     const id = chapter.id + "_" + pad(serial, 4);
     const displayId = BOARD_CODE[c.board] + c.cls + "-" + SUBJECT_CODE[c.subject] + "-C" + pad(c.chapterNumber, 2) + "-" + pad(serial, 4);
     tx.set(doc(db, "questions", id), {
-      ...fields,
+      ...forCreate(fields),
       displayId: displayId, serial: serial, chapterId: chapter.id,
       board: c.board, cls: c.cls, subject: c.subject,
       levels: levelsFor(c.board, c.cls, c.subject),
       createdBy: adminEmail, createdAt: serverTimestamp(), updatedAt: serverTimestamp()
     });
-    tx.set(doc(db, "questionKeys", id), keys);
+    tx.set(doc(db, "questionKeys", id), cleanKeys(keys));
     tx.update(chRef, { nextSerial: serial + 1, updatedAt: serverTimestamp() });
     return { id: id, displayId: displayId, serial: serial };
   });
@@ -160,8 +182,8 @@ export async function createQuestion(chapter, adminEmail, fields, keys) {
  * and creator are never touched. The answer key is replaced as a whole. */
 export async function saveQuestion(existing, fields, keys) {
   const batch = writeBatch(db);
-  batch.update(doc(db, "questions", existing.id), { ...fields, updatedAt: serverTimestamp() });
-  batch.set(doc(db, "questionKeys", existing.id), keys);
+  batch.update(doc(db, "questions", existing.id), { ...forUpdate(fields), updatedAt: serverTimestamp() });
+  batch.set(doc(db, "questionKeys", existing.id), cleanKeys(keys));
   await batch.commit();
 }
 

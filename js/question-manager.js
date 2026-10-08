@@ -2,9 +2,10 @@
  * question-manager.js  (ES module, ProfAdmin "Questions" section)
  * Folder-style browsing (Board → Class → Subject → Chapter), chapter
  * management, the question list, and the LaTeX-aware question editor.
- * Everything here is cosmetic; the real lock is Firestore Rules v3.
+ * Everything here is cosmetic; the real lock is Firestore Rules v4.
  * ───────────────────────────────────────────────────────────────────── */
 import * as Q from "./question-core.js";
+import * as IU from "./image-upload.js";
 import { cleanPasted, validateLatex, insertSnippet, SYMBOL_GROUPS } from "./latex-tools.js";
 
 export function initQuestions(host, api) {
@@ -415,6 +416,13 @@ export function initQuestions(host, api) {
       el("span", "badge" + (r.status === "published" ? " is-approved" : ""), r.status === "published" ? "Published" : "Draft"));
     const stem = el("div", "q-stem");
     stem.textContent = excerpt(stemText(r));
+    let thumb = null;
+    if (r.imageUrl) {
+      thumb = el("img", "q-thumb");
+      thumb.alt = "Question image";
+      thumb.loading = "lazy";
+      thumb.src = IU.displayUrl(r.imageUrl, 320);
+    }
     const acts = el("div", "q-qacts");
     const mk = (label, cls, fn) => {
       const b = el("button", "btn btn-sm " + cls, label);
@@ -426,7 +434,7 @@ export function initQuestions(host, api) {
     mk("Duplicate", "btn-outline", (b) => duplicateQuestion(r, b));
     mk(r.status === "published" ? "Unpublish" : "Publish", "btn-outline", (b) => toggleStatus(r, b));
     mk("Delete", "btn-danger", () => deleteQuestionFlow(r));
-    row.append(top, stem, acts);
+    if (thumb) row.append(top, stem, thumb, acts); else row.append(top, stem, acts);
     return row;
   }
 
@@ -446,6 +454,8 @@ export function initQuestions(host, api) {
     btn.disabled = true;
     try {
       const key = await Q.getKey(r.id);
+      const hadImages = !!(r.imageUrl || key.explanationImageUrl);
+      delete key.explanationImageUrl; delete key.explanationImageFileId; // images are not copied
       const fields = {};
       ["type", "difficulty", "marks", "questionLatex", "assertionLatex", "reasonLatex", "options", "matchLeft", "matchRight", "subQuestions"]
         .forEach((k) => { if (r[k] !== undefined) fields[k] = r[k]; });
@@ -454,7 +464,7 @@ export function initQuestions(host, api) {
       S.q.rows.push({ ...fields, id: res.id, displayId: res.displayId, serial: res.serial, chapterId: S.chapter.id,
         board: r.board, cls: r.cls, subject: r.subject, levels: r.levels, createdBy: api.adminEmail() });
       fillList();
-      api.notice("Duplicated as a draft: " + res.displayId + ".");
+      api.notice("Duplicated as a draft: " + res.displayId + "." + (hadImages ? " Images are not copied; add them again in the editor." : ""));
     } catch (err) {
       console.error(err);
       api.notice("Duplicate failed. " + api.failText(err), true);
@@ -491,15 +501,20 @@ export function initQuestions(host, api) {
   async function deleteQuestionFlow(r) {
     const ok = await api.confirmDialog({
       title: "Permanently delete this question?",
-      text: (r.displayId || "This question") + " and its answer key will be removed. This cannot be undone.",
+      text: (r.displayId || "This question") + ", its answer key and any attached images will be removed. This cannot be undone.",
       ok: "Delete permanently", danger: true
     });
     if (!ok) return;
     try {
+      const key = await Q.getKey(r.id);  // needed to find the explanation image
       await Q.deleteQuestion(r.id);
       S.q.rows = S.q.rows.filter((x) => x.id !== r.id);
       fillList();
-      api.notice("Question deleted.");
+      const ids = [r.imageFileId, key.explanationImageFileId].filter(Boolean);
+      const failed = ids.length ? await IU.deleteImages(ids) : 0;
+      api.notice("Question deleted." + (failed
+        ? " " + failed + " image" + (failed === 1 ? "" : "s") + " could not be removed from ImageKit; delete " + (failed === 1 ? "it" : "them") + " from the ImageKit media library."
+        : ""), !!failed);
     } catch (err) {
       console.error(err);
       api.notice("Delete failed. " + api.failText(err), true);
@@ -571,6 +586,132 @@ export function initQuestions(host, api) {
     wrap.append(ta, note, msg, prev);
     if (ta.value) refresh(0);
     return { root: wrap, ta: ta, get: () => ta.value.trim() };
+  }
+
+  /* ───────────────────────── Image control (Phase 4) ───────────────────────── */
+  /* Pasting an image works when its box is focused (click it, then Ctrl+V). */
+  document.addEventListener("paste", (e) => {
+    const a = document.activeElement;
+    const zone = a && a.closest ? a.closest(".q-imgzone") : null;
+    if (!zone || !zone._ctl) return;
+    const items = (e.clipboardData && e.clipboardData.items) || [];
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].kind === "file" && items[i].type.indexOf("image/") === 0) {
+        const f = items[i].getAsFile();
+        if (f) { e.preventDefault(); zone._ctl.pickFile(f); return; }
+      }
+    }
+  });
+
+  function imageText(err) {
+    if (err && err.name === "TypeError") return "Could not reach the image service. Check your connection, and that the Worker is deployed and allows this site address.";
+    return "Image service: " + (err && err.message ? err.message : "something went wrong.");
+  }
+
+  /* One optional image. Nothing is uploaded until the question is saved. */
+  function imageControl(cfg) {
+    let cur = cfg.current && cfg.current.url && cfg.current.fileId ? cfg.current : null; // already saved
+    let pend = null;      // { blob, objUrl } chosen but not yet uploaded
+    let removed = false;  // the saved image is to be removed
+
+    const wrap = el("div", "q-field");
+    wrap.append(el("div", "field-label", cfg.label));
+    wrap.append(el("p", "field-hint", cfg.hint));
+    const zone = el("div", "q-imgzone");
+    zone.tabIndex = 0;
+    zone.setAttribute("role", "group");
+    zone.setAttribute("aria-label", cfg.label + ". Click here and press Ctrl+V to paste an image, or drop a file.");
+    const stage = el("div", "q-imgstage");
+    const img = el("img", "q-imgprev");
+    img.alt = cfg.label + " preview";
+    img.hidden = true;
+    const empty = el("div", "q-imgempty", "No image. Choose a file, drop one here, or click here and press Ctrl+V to paste.");
+    stage.append(img, empty);
+
+    const file = el("input");
+    file.type = "file"; file.accept = IU.ACCEPT; file.hidden = true;
+    const bar = el("div", "q-imgbtns");
+    const mk = (label, cls) => { const b = el("button", "btn btn-sm " + cls, label); b.type = "button"; bar.append(b); return b; };
+    const chooseBtn = mk("Choose image", "btn-outline");
+    const pasteBtn = mk("Paste image", "btn-outline");
+    const removeBtn = mk("Remove", "btn-outline");
+    const msg = el("div", "q-msg"); msg.hidden = true;
+    zone.append(stage, bar, file);
+    wrap.append(zone, msg);
+    zone._ctl = null;
+
+    function say(text, isError) {
+      msg.textContent = text || "";
+      msg.hidden = !text;
+      msg.classList.toggle("is-error-text", !!isError);
+    }
+    function draw() {
+      let src = "";
+      if (pend) src = pend.objUrl;
+      else if (cur && !removed) src = IU.displayUrl(cur.url, 900);
+      img.hidden = !src;
+      empty.hidden = !!src;
+      if (src) img.src = src; else img.removeAttribute("src");
+      chooseBtn.textContent = src ? "Replace image" : "Choose image";
+      removeBtn.hidden = !src;
+    }
+    async function pickFile(f) {
+      say("");
+      try {
+        const r = await IU.prepareImage(f);
+        if (pend) URL.revokeObjectURL(pend.objUrl);
+        pend = { blob: r.blob, objUrl: URL.createObjectURL(r.blob) };
+        draw();
+        say(r.shrunk ? "The image was larger than 2 MB, so it was shrunk to " + (r.blob.size / 1048576).toFixed(1) + " MB. It uploads when you save the question."
+                     : "It uploads when you save the question.");
+      } catch (err) {
+        say(err.message, true);
+      }
+    }
+    chooseBtn.addEventListener("click", () => file.click());
+    file.addEventListener("change", () => { if (file.files[0]) pickFile(file.files[0]); file.value = ""; });
+    pasteBtn.addEventListener("click", async () => {
+      zone.focus();
+      if (!navigator.clipboard || !navigator.clipboard.read) { say("Your browser does not allow this button. Click the box and press Ctrl+V instead.", true); return; }
+      try {
+        const items = await navigator.clipboard.read();
+        for (const it of items) {
+          const t = it.types.find((x) => x.indexOf("image/") === 0);
+          if (t) { const b = await it.getType(t); await pickFile(new File([b], "pasted-image", { type: t })); return; }
+        }
+        say("There is no image on the clipboard.", true);
+      } catch (err) {
+        say("Could not read the clipboard. Click the box and press Ctrl+V instead.", true);
+      }
+    });
+    removeBtn.addEventListener("click", () => {
+      if (pend) { URL.revokeObjectURL(pend.objUrl); pend = null; }
+      if (cur) removed = true;
+      say("");
+      draw();
+    });
+    ["dragenter", "dragover"].forEach((n) => zone.addEventListener(n, (e) => { e.preventDefault(); zone.classList.add("is-drag"); }));
+    ["dragleave", "drop"].forEach((n) => zone.addEventListener(n, (e) => { e.preventDefault(); zone.classList.remove("is-drag"); }));
+    zone.addEventListener("drop", (e) => {
+      const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if (f) pickFile(f);
+    });
+
+    const ctl = {
+      root: wrap,
+      /* Uploads a newly chosen image (if any) and says what changed. */
+      commit: async (folder, baseName) => {
+        if (pend) {
+          const up = await IU.uploadImage(pend.blob, folder, baseName);
+          return { value: up, uploadedId: up.fileId, obsolete: cur ? [cur.fileId] : [] };
+        }
+        if (removed && cur) return { value: null, uploadedId: null, obsolete: [cur.fileId] };
+        return { value: cur, uploadedId: null, obsolete: [] };
+      }
+    };
+    zone._ctl = ctl;
+    draw();
+    return ctl;
   }
 
   /* ───────────────────────── List editor (options, answers ...) ───────────────────────── */
@@ -1073,11 +1214,20 @@ export function initQuestions(host, api) {
     buildFor(typeSel.value, true);
     typeSel.addEventListener("change", () => buildFor(typeSel.value, false));
 
-    form.append(typeWrap, meta, bodyHost);
+    const IMG_HINT = "One image. JPG, PNG or WebP; larger files are shrunk to under 2 MB automatically.";
+    const stemImg = imageControl({
+      label: "Question image (optional)", hint: IMG_HINT + " Shown with the question.",
+      current: existing ? { url: existing.imageUrl, fileId: existing.imageFileId } : null
+    });
+    form.append(typeWrap, meta, stemImg.root, bodyHost);
     const expl = latexField("Explanation (optional)", key.explanationLatex, {
       rows: 4, hint: "Shown to students together with the answer after they attempt the question."
     });
-    form.append(expl.root);
+    const explImg = imageControl({
+      label: "Explanation image (optional)", hint: IMG_HINT + " Shown with the explanation, after the answer is released.",
+      current: { url: key.explanationImageUrl, fileId: key.explanationImageFileId }
+    });
+    form.append(expl.root, explImg.root);
     host.append(form);
 
     /* Errors and buttons */
@@ -1131,8 +1281,21 @@ export function initQuestions(host, api) {
       }
       showErrors([]);
       [draftBtn, pubBtn, cancelBtn].forEach((b) => { b.disabled = true; });
+      const uploaded = [];   // images uploaded in this save (removed again if the save fails)
+      let stage = "images";  // "images" while uploading, "save" once writing to the database
+      let obsolete = [];     // replaced or removed images (deleted once the save succeeds)
       try {
-        const fields = { ...g.fields, status: status };
+        const folder = IU.folderFor(chapter);
+        const stemRes = await stemImg.commit(folder, "question");
+        if (stemRes.uploadedId) uploaded.push(stemRes.uploadedId);
+        const explRes = await explImg.commit(folder, "explanation");
+        if (explRes.uploadedId) uploaded.push(explRes.uploadedId);
+        obsolete = stemRes.obsolete.concat(explRes.obsolete);
+        g.keys.explanationImageUrl = explRes.value ? explRes.value.url : null;
+        g.keys.explanationImageFileId = explRes.value ? explRes.value.fileId : null;
+        const fields = { ...g.fields, status: status,
+          imageUrl: stemRes.value ? stemRes.value.url : null, imageFileId: stemRes.value ? stemRes.value.fileId : null };
+        stage = "save";
         let rowId;
         if (existing) {
           await Q.saveQuestion(existing, fields, g.keys);
@@ -1148,13 +1311,18 @@ export function initQuestions(host, api) {
         }
         S.edit = null;
         render();
+        const failedDeletes = obsolete.length ? await IU.deleteImages(obsolete) : 0;
         const row = S.q.rows.find((x) => x.id === rowId);
         api.notice((row ? row.displayId : "Question") + (status === "published" ? " saved and published." : " saved as a draft.")
-          + (status === "draft" && g.latexErrors.length ? " Some LaTeX problems remain; fix them before publishing." : ""));
+          + (status === "draft" && g.latexErrors.length ? " Some LaTeX problems remain; fix them before publishing." : "")
+          + (failedDeletes ? " The question was saved, but " + failedDeletes + " old image" + (failedDeletes === 1 ? "" : "s")
+            + " could not be removed from ImageKit; delete " + (failedDeletes === 1 ? "it" : "them") + " from the ImageKit media library." : ""),
+          !!failedDeletes);
         window.scrollTo(0, 0);
       } catch (err) {
         console.error(err);
-        showErrors(["Could not save. " + api.failText(err)]);
+        if (uploaded.length) await IU.deleteImages(uploaded);   // undo uploads made for this failed save
+        showErrors([stage === "images" ? imageText(err) : "Could not save. " + api.failText(err)]);
         [draftBtn, pubBtn, cancelBtn].forEach((b) => { b.disabled = false; });
       }
     }

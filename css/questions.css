@@ -93,3 +93,14 @@
 .q-sym:hover { background: var(--surface); }
 .q-symhint { margin-top: 8px; font-size: 12px; color: var(--muted); }
 .q-clean { flex-shrink: 0; }
+
+/* Images (Phase 4) */
+.q-imgzone { display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px dashed var(--border); border-radius: 16px; background: var(--surface); outline: none; }
+.q-imgzone:focus-visible { box-shadow: var(--focus-ring); }
+.q-imgzone.is-drag { background: var(--bg); border-color: var(--accent); }
+.q-imgstage { display: flex; align-items: center; justify-content: center; min-height: 72px; }
+.q-imgempty { font-size: 14px; color: var(--muted); text-align: center; }
+.q-imgprev { display: block; max-width: 100%; max-height: 320px; height: auto; border-radius: 12px; background: var(--bg); object-fit: contain; }
+.q-imgbtns { display: flex; flex-wrap: wrap; gap: 8px; }
+.q-msg.is-error-text { color: var(--danger); }
+.q-thumb { display: block; width: auto; max-width: 160px; max-height: 120px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); object-fit: contain; }
