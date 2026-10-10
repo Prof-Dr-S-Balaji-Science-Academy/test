@@ -2,7 +2,7 @@
  * question-manager.js  (ES module, ProfAdmin "Questions" section)
  * Folder-style browsing (Board → Class → Subject → Chapter), chapter
  * management, the question list, and the LaTeX-aware question editor.
- * Everything here is cosmetic; the real lock is Firestore Rules v5.
+ * Everything here is cosmetic; the real lock is Firestore Rules v8.
  * ───────────────────────────────────────────────────────────────────── */
 import * as Q from "./question-core.js";
 import * as IU from "./image-upload.js";

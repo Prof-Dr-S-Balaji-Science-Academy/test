@@ -1,13 +1,20 @@
 rules_version = '2';
 
-// Rules v5: users and admins (v2), the question bank collections taxonomy,
-// questions and questionKeys (v3), optional ImageKit image fields on
-// questions (stem image) and questionKeys (explanation image) (v4), and the
-// optional Grouping label on questions (v5, Phase 5 bulk upload). All
-// ProfAdmin-only for now.
-// Students cannot read drafts, other levels' questions or any answer key;
-// student-facing question reads arrive with Phase 6.
-// Everything not listed here stays closed (default deny).
+// Rules v8: users and admins (v2), the question bank collections taxonomy,
+// questions and questionKeys (v3), optional ImageKit image fields (v4), the
+// optional Grouping label on questions (v5), student practice mode (v6) and,
+// new in v7 (Phase 7), papers and mock tests: papers (ProfAdmin writes,
+// approved students of the paper's levels read published ones), testSessions
+// (one per student attempt, start time recorded by the server), testLocks
+// (while a test is on, a student cannot read any answer key) and mock-test
+// attempts. New in v8 (Phase 8): a mock-test attempt may also carry the ID of
+// the paper it came from (it must match the paper of its session), so the
+// ProfAdmin analytics can show one paper's results without extra reads. In practice mode an approved student may read the answer key of
+// one published question of their own level at a time; from v7 that is
+// refused while the student has a test in progress (until the test is
+// submitted or its time, plus a short grace period, is over).
+// Students still cannot read drafts, other levels' questions or any other
+// student's records. Everything not listed here stays closed (default deny).
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -25,6 +32,63 @@ service cloud.firestore {
       return signedIn()
         && request.auth.token.email_verified == true
         && exists(/databases/$(database)/documents/admins/$(myEmail()));
+    }
+
+
+    // ───────────── Student access (Phase 6) ─────────────
+
+    function myProfile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    // True only for a signed-in student whose record says approved.
+    function isApprovedStudent() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && myProfile().status == 'approved';
+    }
+
+    // Which board / class / subject a student level may see.
+    function levelSees(level, board, cls, subject) {
+      return (level == 'C10SciStudents' && board == 'CBSE' && cls == '10' && subject == 'Science')
+          || (level == 'C12PhyStudents' && board == 'CBSE' && cls == '12' && subject == 'Physics')
+          || (level == 'C12ChemStudents' && board == 'CBSE' && cls == '12' && subject == 'Chemistry')
+          || (level == 'C12PhyChemStudents' && board == 'CBSE' && cls == '12' && subject in ['Physics', 'Chemistry'])
+          || (level == 'S12PhyStudents' && board == 'State Board' && cls == '12' && subject == 'Physics')
+          || (level == 'S12ChemStudents' && board == 'State Board' && cls == '12' && subject == 'Chemistry')
+          || (level == 'S12PhyChemStudents' && board == 'State Board' && cls == '12' && subject in ['Physics', 'Chemistry']);
+    }
+
+    // A published question that belongs to the signed-in student's own level.
+    function studentCanUse(q) {
+      return q.status == 'published' && myProfile().accessLevel in q.levels;
+    }
+
+    function questionDocFor(id) {
+      return get(/databases/$(database)/documents/questions/$(id)).data;
+    }
+
+    // ───────────── Mock tests (Phase 7) ─────────────
+
+    // The moment a test session stops accepting changes: start + duration + 60 s grace.
+    function sessionEnd(s) {
+      return s.startedAt + duration.value(s.durationMin, 'm') + duration.value(60, 's');
+    }
+
+    function lockPath(uid) {
+      return /databases/$(database)/documents/testLocks/$(uid);
+    }
+
+    function sessionPath(id) {
+      return /databases/$(database)/documents/testSessions/$(id);
+    }
+
+    // True when the signed-in student has no test in progress: no lock, a
+    // released lock, or a lock whose session ran past its end plus grace.
+    function noTestOn() {
+      return !exists(lockPath(request.auth.uid))
+        || get(lockPath(request.auth.uid)).data.active == false
+        || request.time > sessionEnd(get(sessionPath(get(lockPath(request.auth.uid)).data.sessionId)).data);
     }
 
     // The board / class / subjects / level combination must be one of the seven.
@@ -166,7 +230,9 @@ service cloud.firestore {
     // One document per chapter. The internal document ID never changes, so
     // renaming or renumbering a chapter does not orphan its questions.
     match /taxonomy/{chapterId} {
-      allow read: if isAdmin();
+      allow read: if isAdmin()
+        || (isApprovedStudent()
+            && levelSees(myProfile().accessLevel, resource.data.board, resource.data.cls, resource.data.subject));
       allow create: if isAdmin()
         && request.resource.data.keys().hasOnly(['board', 'cls', 'subject', 'chapterNumber', 'chapterName',
                                                  'edition', 'nextSerial', 'createdAt', 'updatedAt'])
@@ -187,7 +253,7 @@ service cloud.firestore {
 
     // The question as a student will eventually see it (no answers here).
     match /questions/{questionId} {
-      allow read: if isAdmin();
+      allow read: if isAdmin() || (isApprovedStudent() && studentCanUse(resource.data));
       allow create: if isAdmin()
         && request.resource.data.keys().hasOnly(['displayId', 'serial', 'chapterId', 'board', 'cls', 'subject',
              'levels', 'type', 'difficulty', 'marks', 'status', 'questionLatex', 'assertionLatex', 'reasonLatex',
@@ -209,10 +275,251 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // Correct answers, model answers and explanations. Never readable by students.
+    // Correct answers, model answers and explanations.
+    // Students may read one key at a time (get, never list) and only for a
+    // published question of their own level, and not while a test is on (v7).
     match /questionKeys/{questionId} {
-      allow read: if isAdmin();
+      allow get: if isAdmin() || (isApprovedStudent() && studentCanUse(questionDocFor(questionId)) && noTestOn());
+      allow list: if isAdmin();
       allow create, update: if isAdmin() && keyOk(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // ───────────── Practice attempts and progress (Phase 6) ─────────────
+
+    function answerOk(a) {
+      return a is map
+        && a.keys().hasOnly(['sel', 'text', 'subs'])
+        && (!('sel' in a) || (a.sel is list && a.sel.size() <= 8))
+        && (!('text' in a) || (a.text is string && a.text.size() <= 200))
+        && (!('subs' in a) || (a.subs is list && a.subs.size() <= 6));
+    }
+
+    function attemptOk(d, aid) {
+      let q = questionDocFor(d.questionId);
+      return studentCanUse(q)
+        && d.uid == request.auth.uid
+        && d.chapterId == q.chapterId
+        && d.board == q.board && d.cls == q.cls && d.subject == q.subject
+        && d.type == q.type && d.difficulty == q.difficulty
+        && d.scored is bool && d.isCorrect is bool
+        && d.timeSpent is number && d.timeSpent >= 0 && d.timeSpent <= 3600
+        && answerOk(d.answer)
+        && (!('subResults' in d) || (d.subResults is list && d.subResults.size() <= 6))
+        && (!('selfRight' in d) || d.selfRight is bool)
+        && d.createdAt == request.time
+        && ((d.mode == 'practice' && !('sessionId' in d) && !('paperId' in d))
+            || (d.mode == 'mock' && mockAttemptOk(d, aid)));
+    }
+
+    // A mock-test attempt: one per answered question of a submitted session
+    // of this student, with the answer exactly as saved in the session. The
+    // document ID is sessionId_questionId, so none can be written twice.
+    function mockAttemptOk(d, aid) {
+      let s = get(sessionPath(d.sessionId)).data;
+      return d.sessionId is string
+        && aid == d.sessionId + '_' + d.questionId
+        && s.uid == request.auth.uid
+        && s.status == 'submitted'
+        && d.questionId in s.questionIds
+        && d.scored == true
+        && d.timeSpent == 0
+        && d.answer == s.answers[d.questionId]
+        && (!('paperId' in d) || d.paperId == s.paperId);
+    }
+
+    // One document per answered question. A student can create their own
+    // and read their own; nobody can edit one. ProfAdmin reads all (Phase 8)
+    // and may delete (removing a student also removes their history).
+    match /attempts/{attemptId} {
+      allow get: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+      allow list: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow create: if isApprovedStudent()
+        && request.resource.data.keys().hasOnly(['uid', 'questionId', 'chapterId', 'board', 'cls', 'subject',
+             'type', 'difficulty', 'mode', 'answer', 'scored', 'isCorrect', 'subResults', 'selfRight',
+             'timeSpent', 'createdAt', 'sessionId', 'paperId'])
+        && request.resource.data.keys().hasAll(['uid', 'questionId', 'chapterId', 'board', 'cls', 'subject',
+             'type', 'difficulty', 'mode', 'answer', 'scored', 'isCorrect', 'timeSpent', 'createdAt'])
+        && attemptOk(request.resource.data, attemptId);
+      allow update: if false;
+      allow delete: if isAdmin();
+    }
+
+    // Progress counters per chapter, kept by the student's own browser in the
+    // same batch as each attempt: { uid, chapters: { <chapterId>: { answered, scored, correct } } }.
+    match /practiceStats/{uid} {
+      allow get: if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow list: if isAdmin();
+      allow create, update: if isApprovedStudent()
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['uid', 'chapters', 'updatedAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.chapters is map
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if isAdmin();
+    }
+
+    // ───────────── Papers (Phase 7, ProfAdmin writes) ─────────────
+
+    function paperOk(d) {
+      return d.board in ['CBSE', 'State Board']
+        && d.cls in ['10', '12']
+        && d.subject in ['Physics', 'Chemistry', 'Science']
+        && d.mode in ['fixed', 'rule']
+        && d.title is string && d.title.size() >= 1 && d.title.size() <= 120
+        && d.description is string && d.description.size() <= 500
+        && d.levels is list && d.levels.size() >= 1 && d.levels.size() <= 2
+        && levelSees(d.levels[0], d.board, d.cls, d.subject)
+        && (d.levels.size() == 1 || levelSees(d.levels[1], d.board, d.cls, d.subject))
+        && d.durationMin is int && d.durationMin >= 1 && d.durationMin <= 300
+        && d.negativeMarking is number && d.negativeMarking >= 0 && d.negativeMarking <= 1
+        && d.showKeys is bool
+        && d.shuffle is bool
+        && (d.mode != 'rule' || d.shuffle == true)
+        && d.access in ['public', 'locked']
+        && d.status in ['draft', 'published']
+        && d.count is int && d.count >= 1 && d.count <= 100
+        && ((d.mode == 'fixed'
+             && !('rules' in d)
+             && d.questionIds is list && d.questionIds.size() == d.count)
+            || (d.mode == 'rule'
+             && !('questionIds' in d)
+             && d.rules is map
+             && d.rules.keys().hasOnly(['chapterIds', 'types', 'mix'])
+             && d.rules.chapterIds is list && d.rules.chapterIds.size() >= 1 && d.rules.chapterIds.size() <= 30
+             && d.rules.types is list && d.rules.types.size() >= 1 && d.rules.types.size() <= 11
+             && d.rules.mix is map
+             && d.rules.mix.keys().hasOnly(['Easy', 'Medium', 'Hard'])
+             && d.rules.mix.Easy is int && d.rules.mix.Easy >= 0
+             && d.rules.mix.Medium is int && d.rules.mix.Medium >= 0
+             && d.rules.mix.Hard is int && d.rules.mix.Hard >= 0
+             && d.count == d.rules.mix.Easy + d.rules.mix.Medium + d.rules.mix.Hard));
+    }
+
+    // Students read only published papers that list their own access level.
+    match /papers/{paperId} {
+      allow read: if isAdmin()
+        || (isApprovedStudent()
+            && resource.data.status == 'published'
+            && myProfile().accessLevel in resource.data.levels);
+      allow create: if isAdmin()
+        && request.resource.data.keys().hasOnly(['board', 'cls', 'subject', 'mode', 'title', 'description', 'levels',
+             'durationMin', 'negativeMarking', 'showKeys', 'shuffle', 'access', 'status', 'count',
+             'questionIds', 'rules', 'createdBy', 'createdAt', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['board', 'cls', 'subject', 'mode', 'title', 'description', 'levels',
+             'durationMin', 'negativeMarking', 'showKeys', 'shuffle', 'access', 'status', 'count',
+             'createdBy', 'createdAt', 'updatedAt'])
+        && paperOk(request.resource.data)
+        && request.resource.data.createdBy == myEmail()
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      // Board, class, subject, mode and creator never change.
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['title', 'description', 'levels', 'durationMin', 'negativeMarking', 'showKeys', 'shuffle',
+                       'access', 'status', 'count', 'questionIds', 'rules', 'updatedAt'])
+        && paperOk(request.resource.data)
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if isAdmin();
+    }
+
+    // ───────────── Test sessions and locks (Phase 7) ─────────────
+
+    function sessionStartOk(d, sid) {
+      let p = get(/databases/$(database)/documents/papers/$(d.paperId)).data;
+      return d.uid == request.auth.uid
+        && p.status == 'published'
+        && p.access == 'public'
+        && myProfile().accessLevel in p.levels
+        && d.level == myProfile().accessLevel
+        && d.board == p.board && d.cls == p.cls && d.subject == p.subject
+        && d.paperTitle == p.title
+        && d.durationMin == p.durationMin
+        && d.negativeMarking == p.negativeMarking
+        && d.startedAt == request.time
+        && d.status == 'in_progress'
+        && d.answers == {}
+        && d.marked == []
+        && d.questionIds is list && d.questionIds.size() == p.count
+        && (p.mode != 'fixed' || d.questionIds.toSet() == p.questionIds.toSet())
+        && d.optionOrder is map && d.optionOrder.size() <= 100
+        && noTestOn()
+        && getAfter(lockPath(request.auth.uid)).data.sessionId == sid;
+    }
+
+    // Saving answers while the test runs (and during the grace period).
+    function sessionSaveOk() {
+      let d = request.resource.data;
+      let ch = d.diff(resource.data).affectedKeys();
+      return ch.hasOnly(['answers', 'marked', 'savedAt'])
+        && d.savedAt == request.time
+        && d.answers is map && d.answers.size() <= 100
+        && d.marked is list && d.marked.size() <= 100
+        && request.time <= sessionEnd(resource.data);
+    }
+
+    // Submitting. The server decides "late". A late submission is accepted,
+    // but the answers saved last stay as they are.
+    function sessionSubmitOk() {
+      let d = request.resource.data;
+      let ch = d.diff(resource.data).affectedKeys();
+      return ch.hasOnly(['status', 'submittedAt', 'late', 'answers', 'marked'])
+        && ch.hasAll(['status', 'submittedAt', 'late'])
+        && d.status == 'submitted'
+        && d.submittedAt == request.time
+        && d.late is bool
+        && d.late == (request.time > sessionEnd(resource.data))
+        && (!d.late || !ch.hasAny(['answers', 'marked']))
+        && d.answers is map && d.answers.size() <= 100
+        && d.marked is list && d.marked.size() <= 100;
+    }
+
+    match /testSessions/{sessionId} {
+      allow get: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+      allow list: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow create: if isApprovedStudent()
+        && request.resource.data.keys().hasOnly(['uid', 'paperId', 'paperTitle', 'board', 'cls', 'subject', 'level',
+             'questionIds', 'optionOrder', 'durationMin', 'negativeMarking', 'startedAt', 'status', 'answers', 'marked'])
+        && request.resource.data.keys().hasAll(['uid', 'paperId', 'paperTitle', 'board', 'cls', 'subject', 'level',
+             'questionIds', 'optionOrder', 'durationMin', 'negativeMarking', 'startedAt', 'status', 'answers', 'marked'])
+        && sessionStartOk(request.resource.data, sessionId);
+      allow update: if isApprovedStudent()
+        && resource.data.uid == request.auth.uid
+        && resource.data.status == 'in_progress'
+        && (sessionSaveOk() || sessionSubmitOk());
+      allow delete: if isAdmin();
+    }
+
+    // One lock per student. It is created with a new session, released when
+    // that session is submitted, and replaced only when no test is on.
+    match /testLocks/{lockUid} {
+      allow get: if signedIn() && (request.auth.uid == lockUid || isAdmin());
+      allow list: if isAdmin();
+      allow create: if isApprovedStudent()
+        && request.auth.uid == lockUid
+        && request.resource.data.keys().hasOnly(['sessionId', 'active', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['sessionId', 'active', 'updatedAt'])
+        && request.resource.data.active == true
+        && request.resource.data.updatedAt == request.time
+        && getAfter(sessionPath(request.resource.data.sessionId)).data.uid == request.auth.uid
+        && getAfter(sessionPath(request.resource.data.sessionId)).data.status == 'in_progress';
+      allow update: if isApprovedStudent()
+        && request.auth.uid == lockUid
+        && request.resource.data.keys().hasOnly(['sessionId', 'active', 'updatedAt'])
+        && request.resource.data.updatedAt == request.time
+        && (
+          // a new test starts, and no earlier test is still on
+          (request.resource.data.active == true
+           && getAfter(sessionPath(request.resource.data.sessionId)).data.uid == request.auth.uid
+           && getAfter(sessionPath(request.resource.data.sessionId)).data.status == 'in_progress'
+           && (resource.data.active == false
+               || request.time > sessionEnd(get(sessionPath(resource.data.sessionId)).data)))
+          ||
+          // the test is submitted: release the lock
+          (request.resource.data.active == false
+           && request.resource.data.sessionId == resource.data.sessionId
+           && getAfter(sessionPath(resource.data.sessionId)).data.status == 'submitted')
+        );
       allow delete: if isAdmin();
     }
   }

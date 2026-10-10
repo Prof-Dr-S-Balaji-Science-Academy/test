@@ -7,7 +7,7 @@
  *      missing images are flagged; NOTHING is saved
  *   4. confirm: images are uploaded and the valid questions are saved
  * The spreadsheet rules live in bulk-core.js. Everything here is cosmetic
- * as far as security goes; the real lock is Firestore Rules v5.
+ * as far as security goes; the real lock is Firestore Rules v8.
  * ───────────────────────────────────────────────────────────────────── */
 import * as Q from "./question-core.js";
 import * as IU from "./image-upload.js";
@@ -182,7 +182,7 @@ async function runImport(list, imageMap, adminEmail, onProgress) {
         console.error(err);
         if (ids.length) result.strayImages += await IU.deleteImages(ids);
         const why = err && err.code === "permission-denied"
-          ? "Permission was refused. Check that the latest Firestore rules (v5) are published."
+          ? "Permission was refused. Check that the latest Firestore rules (v8) are published."
           : "The database could not be reached or refused the save.";
         ready.forEach((r) => result.failed.push({ e: r.e, reason: why + " This question was not saved." }));
         result.stopped = true;

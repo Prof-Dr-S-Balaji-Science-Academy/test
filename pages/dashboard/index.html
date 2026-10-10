@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Your student dashboard." />
+  <meta name="robots" content="noindex, nofollow" />
   <title>Student Dashboard | Prof. Dr. S. Balaji Science Academy</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -12,6 +13,23 @@
   <meta name="theme-color" content="#0052ff" />
   <link rel="stylesheet" href="../../css/styles.css" />
   <link rel="stylesheet" href="../../css/portal.css" />
+  <link rel="stylesheet" href="../../css/practice.css" />
+  <link rel="stylesheet" href="../../css/papers.css" />
+
+  <!-- MathJax 3 with mhchem for question text (same setup as the admin question preview) -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath:  [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        packages: { '[+]': ['mhchem', 'ams'] },
+        tags: 'none'
+      },
+      loader: { load: ['[tex]/mhchem', '[tex]/ams'] },
+      startup: { typeset: false }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
 </head>
 <body>
 
@@ -47,6 +65,7 @@
                 <a href="/pages/mindmap/">Mind Map</a>
               </div>
             </div>
+            <a href="/pages/test.html">Mock Tests</a>
             <a href="../../index.html#attend">How to attend</a>
             <a href="../../index.html#faq">FAQs</a>
             <a href="../../index.html#blog">Blog</a>
@@ -80,6 +99,7 @@
           <a href="/pages/mindmap/">Mind Map</a>
         </div>
       </div>
+      <a href="/pages/test.html">Mock Tests</a>
       <a href="../../index.html#attend">How to attend</a>
       <a href="../../index.html#faq">FAQs</a>
       <a href="../../index.html#blog">Blog</a>
@@ -114,6 +134,9 @@
             </dl>
             <p class="field-hint">Class and subjects can be changed only by the academy.</p>
           </section>
+
+          <div id="d-tests" class="pq-root" hidden></div>
+          <div id="d-practice" class="pq-root" hidden></div>
 
           <div class="locked-grid" id="d-locked">
             <div class="locked-tile"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><h3>Practice questions</h3><p>Locked until your access is approved.</p></div>
@@ -172,7 +195,7 @@
 
     const MESSAGES = {
       pending: { badge: "Pending Approval", text: "Your access is Pending Approval. Once approved you will be able to access all the mock test modules." },
-      approved: { badge: "Approved", text: "Your access is approved. The mock test modules will appear here as they are released." },
+      approved: { badge: "Approved", text: "Your access is approved. Attempt mock tests and practise questions below." },
       rejected: { badge: "Not approved", text: "Your application was not approved. Please contact the academy if you think this is a mistake." },
       suspended: { badge: "Suspended", text: "Your access is currently suspended. Please contact the academy." }
     };
@@ -186,11 +209,48 @@
         if (account.isAdmin) { location.replace(ROUTES.admin); return; }
         if (!isComplete(account.profile)) { location.replace(ROUTES.login); return; }
         render(account.profile);
+        if (account.profile.status === "approved" && account.profile.accessLevel) startPractice(user, account.profile);
       } catch (err) {
         console.error(err);
         $("d-loading").textContent = "We could not load your dashboard. Please refresh the page.";
       }
     });
+
+    let practiceStarted = false;
+    async function startPractice(user, p) {
+      if (practiceStarted) return;
+      practiceStarted = true;
+      const tests = $("d-tests");
+      tests.hidden = false;
+      try {
+        const tmod = await import("../../js/test-ui.js");
+        tmod.initTests(tests, {
+          uid: user.uid, level: p.accessLevel,
+          /* While a test is running, the practice area is hidden. */
+          setBusy: (busy) => { $("d-practice").hidden = !!busy; }
+        });
+      } catch (err) {
+        console.error(err);
+        tests.textContent = "";
+        const e = document.createElement("div");
+        e.className = "portal-error";
+        e.textContent = "The mock test area could not be loaded. Please refresh the page.";
+        tests.append(e);
+      }
+      const host = $("d-practice");
+      host.hidden = false;
+      try {
+        const mod = await import("../../js/practice-ui.js");
+        mod.initPractice(host, { uid: user.uid, level: p.accessLevel });
+      } catch (err) {
+        console.error(err);
+        host.textContent = "";
+        const e = document.createElement("div");
+        e.className = "portal-error";
+        e.textContent = "The practice area could not be loaded. Please refresh the page.";
+        host.append(e);
+      }
+    }
 
     function render(p) {
       const key = MESSAGES[p.status] ? p.status : "pending";

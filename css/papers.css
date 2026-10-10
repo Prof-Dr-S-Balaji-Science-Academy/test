@@ -1,0 +1,78 @@
+/* papers.css: ProfAdmin Papers section and the student mock test (Phase 7).
+ * Uses the shared Coinbase tokens from styles.css. No new colours; green and
+ * red appear only as text and outline colour, always with a text label. */
+
+/* ───── ProfAdmin: paper list and builder ───── */
+.pa-row { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 16px 20px; border-top: 1px solid var(--border); align-items: center; }
+.pa-row:first-child { border-top: 0; }
+@media (min-width: 900px) { .pa-row { grid-template-columns: 1fr auto; gap: 24px; } }
+.pa-main { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pa-form { max-width: 820px; }
+.pa-card { margin: 0 0 24px; }
+.pa-h3 { font-size: 18px; font-weight: 600; margin: 0 0 16px; color: var(--fg); }
+.pa-check { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; font-weight: 600; cursor: pointer; min-height: 44px; }
+.pa-check .check { margin-top: 2px; }
+.pa-sel { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-top: 12px; }
+.pa-selrow { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 12px 16px; border-top: 1px solid var(--border); }
+.pa-selrow:first-child { border-top: 0; }
+.pa-selinfo { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.is-warn-text { color: var(--danger); }
+
+/* ───── Student: paper list ───── */
+.pt-sub { margin-bottom: 12px; }
+.pt-resume { margin-bottom: 8px; }
+.pt-resume .portal-sub { margin-bottom: 16px; }
+.pt-paper, .pt-hist { cursor: default; }
+.pt-paper:hover, .pt-hist:hover { border-color: var(--border); }
+.pt-desc { font-size: 14px; color: var(--fg); overflow-wrap: anywhere; }
+.pt-side { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; text-align: right; }
+.pt-locked { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 9999px; background: var(--surface); color: var(--muted); font-size: 14px; font-weight: 600; }
+
+/* ───── Student: the timed test ───── */
+.pt-bar { position: sticky; top: var(--header-h, 72px); z-index: 15; display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; align-items: center; margin: 0 0 16px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg); }
+.pt-bar-title { display: flex; flex-direction: column; gap: 2px; min-width: 0; grid-column: 1 / -1; }
+.pt-bar-title strong { font-size: 16px; font-weight: 600; overflow-wrap: anywhere; }
+@media (min-width: 640px) {
+  .pt-bar { grid-template-columns: 1fr auto auto; }
+  .pt-bar-title { grid-column: auto; }
+}
+.pt-timer { font-family: var(--font-mono); font-size: 22px; font-weight: 500; color: var(--fg); }
+.pt-timer.is-low { color: var(--danger); }
+.pt-qarea { margin: 0 0 16px; }
+.pt-qacts { justify-content: space-between; }
+.pt-papernote { margin-top: 16px; }
+.pt-clear { margin-top: 8px; min-height: 44px; align-self: flex-start; }
+.pt-opt-static { cursor: default; grid-template-columns: 28px 1fr; }
+.pt-opt-static .pq-flag { grid-column: 2; }
+.pq-opt.is-chosen { border: 2px solid var(--accent); padding: 11px 15px; }
+.pt-gap-s { margin-top: 12px; }
+
+/* Question navigator */
+.pt-nav { padding: 16px; }
+@media (min-width: 640px) { .pt-nav { padding: 24px; } }
+.pt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 8px; }
+.pt-num { min-height: 44px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); color: var(--fg); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.pt-num.is-answered { background: var(--surface); }
+.pt-num.is-paper { border-style: dashed; }
+.pt-num.is-marked { box-shadow: inset 0 -4px 0 var(--accent); }
+.pt-num.is-current { border: 2px solid var(--accent); }
+.pt-num:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.pt-legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 16px; font-size: 13px; color: var(--muted); }
+.pt-key { display: inline-flex; align-items: center; gap: 8px; }
+.pt-sw { display: inline-block; width: 16px; height: 16px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); }
+.pt-sw.is-answered { background: var(--surface); }
+.pt-sw.is-marked { box-shadow: inset 0 -4px 0 var(--accent); }
+.pt-sw.is-paper { border-style: dashed; }
+
+/* ───── Student: result and review ───── */
+.pt-backbtn { margin-bottom: 8px; }
+.pt-review { margin-bottom: 16px; }
+.pt-chip { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 9999px; background: var(--surface); font-size: 12px; font-weight: 700; color: var(--fg); }
+.pt-chip.is-correct { color: var(--success); }
+.pt-chip.is-wrong { color: var(--danger); }
+
+/* ───── Confirmation box ───── */
+.pt-dialog { width: min(92vw, 440px); padding: 24px; border: 1px solid var(--border); border-radius: 24px; background: var(--bg); color: var(--fg); }
+.pt-dialog::backdrop { background: rgba(10, 11, 13, 0.5); }
+.pt-dlg-title { margin: 0 0 8px; font-size: 20px; font-weight: 600; }
+.pt-dlg-text { margin: 0 0 8px; font-size: 15px; line-height: 1.5; color: var(--muted); }

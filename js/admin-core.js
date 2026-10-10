@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────────────────────────────
  * admin-core.js  (ES module, ProfAdmin console data layer)
  * All Firestore reads/writes used by pages/admin/. The real lock is the
- * Firestore Security Rules (Rules v2): only accounts listed in `admins`
+ * Firestore Security Rules (Rules v2, extended up to v8): only accounts listed in `admins`
  * can read the student list or change status / access level / delete.
  * ───────────────────────────────────────────────────────────────────── */
 import {
@@ -99,17 +99,45 @@ export function changeLevel(uid, level) {
   return updateDoc(doc(db, "users", uid), { accessLevel: level });
 }
 
-export function deleteOne(uid) {
+/* Deleting a student also removes their practice and mock test history
+ * (L-39, L-64): every attempt record (practice and mock), every test session,
+ * the answer-key lock and the progress counters. History goes first, so if it
+ * fails the student record is still there and the deletion can be retried. */
+async function purgeHistory(uid) {
+  for (;;) {
+    const snap = await getDocs(query(collection(db, "attempts"), where("uid", "==", uid), limit(BATCH_MAX)));
+    if (snap.empty) break;
+    const batch = writeBatch(db);
+    snap.docs.forEach((d) => batch.delete(d.ref));
+    await batch.commit();
+    if (snap.size < BATCH_MAX) break;
+  }
+  for (;;) {
+    const snap = await getDocs(query(collection(db, "testSessions"), where("uid", "==", uid), limit(BATCH_MAX)));
+    if (snap.empty) break;
+    const batch = writeBatch(db);
+    snap.docs.forEach((d) => batch.delete(d.ref));
+    await batch.commit();
+    if (snap.size < BATCH_MAX) break;
+  }
+  await deleteDoc(doc(db, "testLocks", uid));
+  await deleteDoc(doc(db, "practiceStats", uid));
+}
+
+export async function deleteOne(uid) {
+  await purgeHistory(uid);
   return deleteDoc(doc(db, "users", uid));
 }
 
 export async function deleteMany(uids) {
   let done = 0;
   for (let i = 0; i < uids.length; i += BATCH_MAX) {
+    const chunk = uids.slice(i, i + BATCH_MAX);
+    for (const uid of chunk) await purgeHistory(uid);
     const batch = writeBatch(db);
-    uids.slice(i, i + BATCH_MAX).forEach((uid) => batch.delete(doc(db, "users", uid)));
+    chunk.forEach((uid) => batch.delete(doc(db, "users", uid)));
     await batch.commit();
-    done += Math.min(BATCH_MAX, uids.length - i);
+    done += chunk.length;
   }
   return done;
 }

@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="ProfAdmin console." />
+  <meta name="robots" content="noindex, nofollow" />
   <title>ProfAdmin | Prof. Dr. S. Balaji Science Academy</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -14,6 +15,9 @@
   <link rel="stylesheet" href="../../css/portal.css" />
   <link rel="stylesheet" href="../../css/admin.css" />
   <link rel="stylesheet" href="../../css/questions.css" />
+  <link rel="stylesheet" href="../../css/papers.css" />
+  <link rel="stylesheet" href="../../css/practice.css" />
+  <link rel="stylesheet" href="../../css/analytics.css" />
 
   <!-- MathJax 3 with mhchem for the question preview (same setup as the formula pages) -->
   <script>
@@ -64,6 +68,7 @@
                 <a href="/pages/mindmap/">Mind Map</a>
               </div>
             </div>
+            <a href="/pages/test.html">Mock Tests</a>
             <a href="../../index.html#attend">How to attend</a>
             <a href="../../index.html#faq">FAQs</a>
             <a href="../../index.html#blog">Blog</a>
@@ -97,6 +102,7 @@
           <a href="/pages/mindmap/">Mind Map</a>
         </div>
       </div>
+      <a href="/pages/test.html">Mock Tests</a>
       <a href="../../index.html#attend">How to attend</a>
       <a href="../../index.html#faq">FAQs</a>
       <a href="../../index.html#blog">Blog</a>
@@ -119,8 +125,8 @@
             <li><button class="admin-tab" id="tab-approvals" role="tab" aria-selected="true" type="button">Approvals <span class="tab-count" id="tab-approvals-count" hidden>0</span></button></li>
             <li><button class="admin-tab" id="tab-students" role="tab" aria-selected="false" type="button">Students</button></li>
             <li><button class="admin-tab" id="tab-questions" role="tab" aria-selected="false" type="button">Questions</button></li>
-            <li><button class="admin-tab" role="tab" aria-selected="false" aria-disabled="true" type="button" title="Available in a later phase">Papers <span class="tab-soon">Soon</span></button></li>
-            <li><button class="admin-tab" role="tab" aria-selected="false" aria-disabled="true" type="button" title="Available in a later phase">Analytics <span class="tab-soon">Soon</span></button></li>
+            <li><button class="admin-tab" id="tab-papers" role="tab" aria-selected="false" type="button">Papers</button></li>
+            <li><button class="admin-tab" id="tab-analytics" role="tab" aria-selected="false" type="button">Analytics</button></li>
           </ul>
 
           <div id="a-notice" class="admin-notice" role="status" hidden></div>
@@ -172,6 +178,10 @@
 
           <!-- Questions (taxonomy, question manager, LaTeX editor) -->
           <section id="v-questions" aria-label="Question bank" hidden></section>
+
+          <!-- Papers (Phase 7) -->
+          <section id="v-papers" aria-label="Papers" hidden></section>
+          <section id="v-analytics" aria-label="Analytics" hidden></section>
         </div>
       </div>
     </div>
@@ -255,6 +265,8 @@
     import { ROUTES, watchAuth, loadAccount, describeRequest } from "../../js/auth-core.js";
     import * as A from "../../js/admin-core.js";
     import { initQuestions } from "../../js/question-manager.js";
+    import { initPapers } from "../../js/paper-admin.js";
+    import { initAnalytics } from "../../js/analytics-ui.js";
 
     const $ = (id) => document.getElementById(id);
     let adminEmail = "";
@@ -265,6 +277,8 @@
     };
     let view = "approvals";
     let questionsUI = null;
+    let papersUI = null;
+    let analyticsUI = null;
 
     /* ---------- Guard: only accounts in `admins` stay here ---------- */
     watchAuth(async (user) => {
@@ -292,7 +306,7 @@
     }
     function failText(err) {
       return err && err.code === "permission-denied"
-        ? "Permission denied. Check that the latest Firestore rules (v5) are published."
+        ? "Permission denied. Check that the latest Firestore rules (v8) are published."
         : "Something went wrong. Please check your connection and try again.";
     }
     const ms = (ts) => (ts && ts.toMillis ? ts.toMillis() : 0);
@@ -700,11 +714,25 @@
       $("tab-approvals").setAttribute("aria-selected", String(v === "approvals"));
       $("tab-students").setAttribute("aria-selected", String(v === "students"));
       $("tab-questions").setAttribute("aria-selected", String(v === "questions"));
+      $("tab-papers").setAttribute("aria-selected", String(v === "papers"));
       $("v-approvals").hidden = v !== "approvals";
       $("v-students").hidden = v !== "students";
       $("v-questions").hidden = v !== "questions";
+      $("tab-analytics").setAttribute("aria-selected", String(v === "analytics"));
+      $("v-papers").hidden = v !== "papers";
+      $("v-analytics").hidden = v !== "analytics";
       notice("");
       if (v === "students" && !S.students.loaded) loadStudents(true);
+      if (v === "papers" && !papersUI) {
+        papersUI = initPapers($("v-papers"), {
+          el: el, notice: notice, failText: failText, confirmDialog: confirmDialog, adminEmail: () => adminEmail
+        });
+      }
+      if (v === "analytics" && !analyticsUI) {
+        analyticsUI = initAnalytics($("v-analytics"), {
+          el: el, notice: notice, failText: failText, confirmDialog: confirmDialog, adminEmail: () => adminEmail
+        });
+      }
       if (v === "questions" && !questionsUI) {
         questionsUI = initQuestions($("v-questions"), {
           el: el, notice: notice, failText: failText, confirmDialog: confirmDialog, adminEmail: () => adminEmail
@@ -717,6 +745,8 @@
     $("tab-approvals").addEventListener("click", () => setView("approvals"));
     $("tab-students").addEventListener("click", () => setView("students"));
     $("tab-questions").addEventListener("click", () => setView("questions"));
+    $("tab-papers").addEventListener("click", () => setView("papers"));
+    $("tab-analytics").addEventListener("click", () => setView("analytics"));
 
     function init() {
       const lv = $("st-level");
