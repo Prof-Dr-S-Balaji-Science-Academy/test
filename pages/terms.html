@@ -10,7 +10,28 @@
   <link rel="apple-touch-icon" href="/assets/icons/icon-192.png" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#0052ff" />
-  <body id="home">
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .legal-wrap { padding-block: var(--space-12) 96px; }
+    .legal { max-width: 760px; margin-inline: auto; }
+    .legal h1 { white-space: normal; overflow-wrap: break-word; margin: var(--space-4) 0 var(--space-4); }
+    .legal .legal-updated { color: var(--muted); font-size: var(--text-sm); margin: 0 0 var(--space-6); }
+    .legal .legal-intro { color: var(--muted); font-size: var(--text-lg); line-height: 1.6; margin: 0 0 var(--space-8); padding-bottom: var(--space-8); border-bottom: 1px solid var(--border); }
+    .legal h2 { font-size: clamp(24px, 3vw, 32px); line-height: 1.15; margin: 48px 0 var(--space-3); }
+    .legal h3 { font-family: var(--font-body); font-size: var(--text-lg); font-weight: 600; line-height: 1.3; margin: var(--space-6) 0 var(--space-2); }
+    .legal p, .legal li { color: var(--muted); font-size: var(--text-base); line-height: 1.7; }
+    .legal p { margin: 0 0 var(--space-4); }
+    .legal ul { margin: 0 0 var(--space-4); padding-left: 22px; }
+    .legal li { margin-bottom: var(--space-2); }
+    .legal strong { color: var(--fg); font-weight: 600; }
+    .legal a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    .legal a:hover { color: var(--accent-active); }
+    .legal-contact { background: var(--surface); border-radius: 24px; padding: var(--space-6) var(--space-8); margin-top: var(--space-12); }
+    .legal-contact p { margin: 0 0 6px; color: var(--fg); }
+    .legal-contact p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body id="home">
 
   <!-- ═══════════════════════════════════════════════════════════════
        STATIC FALLBACK HEADER
@@ -104,7 +125,7 @@
     <section class="legal-wrap">
       <div class="container">
         <article class="legal">
-          <span class="legal-badge">Legal</span>
+          <div class="hero-badge"><span class="dot" aria-hidden="true"></span> LEGAL</div>
           <h1>Terms of Use</h1>
           <p class="legal-updated">Last updated: 10 October 2026</p>
           <p class="legal-intro">Please read these terms before you use the student area of profbalaji.in. They are the rules for using the website, the practice questions and the mock tests.</p>
