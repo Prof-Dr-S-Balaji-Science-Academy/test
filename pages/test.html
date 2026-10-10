@@ -154,6 +154,37 @@
     /* Lock hero-grid to equal columns and allow cells to shrink */
     .hero-grid { grid-template-columns: 1fr 1fr !important; align-items: start !important; }
     .hero-grid > * { min-width: 0 !important; }
+
+    /* ── Pricing ── */
+    .pr-section { background: var(--surface-soft, #f7f7f7); padding: 96px 0; }
+    .pr-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+    .pr-eyebrow { display: inline-block; background: var(--surface); color: var(--fg); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 12px; border-radius: var(--radius-pill); margin-bottom: 16px; }
+    .pr-head h2 { font-size: clamp(32px, 5vw, 52px); font-weight: 400; line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 16px; color: var(--fg); }
+    .pr-head p { color: var(--muted); font-size: 16px; line-height: 1.6; margin: 0; }
+    .pr-grid { display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 920px; margin: 0 auto; }
+    @media (min-width: 768px) { .pr-grid { grid-template-columns: 1.1fr 0.9fr; align-items: stretch; } }
+    .pr-card { display: flex; flex-direction: column; background: #ffffff; color: var(--fg); border: 1px solid var(--border); border-radius: 24px; padding: 32px; min-width: 0; }
+    .pr-featured { background: #0a0b0d; color: #ffffff; border-color: #0a0b0d; }
+    .pr-tag { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 6px 14px; border-radius: var(--radius-pill); margin-bottom: 24px; background: var(--surface); color: var(--fg); }
+    .pr-featured .pr-tag { background: var(--accent); color: #ffffff; }
+    .pr-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin: 0 0 8px; }
+    .pr-old { font-size: clamp(22px, 4vw, 30px); font-weight: 400; color: #a8acb3; text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: #cf202f; }
+    .pr-new { font-size: clamp(64px, 12vw, 96px); font-weight: 400; line-height: 1; letter-spacing: -0.04em; }
+    .pr-amount { font-size: clamp(40px, 7vw, 56px); font-weight: 400; line-height: 1; letter-spacing: -0.03em; }
+    .pr-per { font-size: 14px; color: var(--muted); }
+    .pr-featured .pr-per { color: #a8acb3; }
+    .pr-save { display: inline-block; font-size: 13px; font-weight: 600; color: #05b169; margin: 0 0 24px; }
+    .pr-lead { font-size: 15px; line-height: 1.6; color: var(--muted); margin: 8px 0 24px; }
+    .pr-featured .pr-lead { color: #a8acb3; }
+    .pr-list { list-style: none; margin: 0 0 32px; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    .pr-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; }
+    .pr-list svg { flex-shrink: 0; margin-top: 2px; color: var(--accent); }
+    .pr-featured .pr-list svg { color: #ffffff; }
+    .pr-card .btn { margin-top: auto; width: 100%; box-sizing: border-box; }
+    .pr-card .btn-secondary { border: 1px solid var(--border); background: #ffffff; }
+    .pr-card .btn-secondary:hover { background: var(--surface); color: var(--fg); }
+    .pr-note { text-align: center; font-size: 12px; color: var(--muted); margin: 24px auto 0; max-width: 640px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
   </style>
 </head>
 <body id="home">
@@ -197,12 +228,12 @@
             <div class="nav-dropdown">
               <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
               <div class="nav-dropdown-menu">
+                <a href="../pages/test.html">Mock Tests</a>
                 <a href="../pages/studyplanner/">Study Planner</a>
                 <a href="../pages/periodictable/">Periodic Table</a>
                 <a href="../pages/mindmap/">Mind Map</a>
               </div>
             </div>
-            <a href="../pages/test.html">Mock Tests</a>
             <a href="../index.html#attend">How to attend</a>
             <a href="../index.html#faq">FAQs</a>
             <a href="../index.html#blog">Blog</a>
@@ -231,12 +262,12 @@
       <div class="nav-mobile-dropdown">
         <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
         <div class="nav-mobile-dropdown-menu">
+          <a href="../pages/test.html">Mock Tests</a>
           <a href="../pages/studyplanner/">Study Planner</a>
           <a href="../pages/periodictable/">Periodic Table</a>
           <a href="../pages/mindmap/">Mind Map</a>
         </div>
       </div>
-      <a href="../pages/test.html">Mock Tests</a>
       <a href="../index.html#attend">How to attend</a>
       <a href="../index.html#faq">FAQs</a>
       <a href="../index.html#blog">Blog</a>
@@ -332,6 +363,48 @@
       </div>
     </section>
 
+    <!-- PRICING -->
+    <section class="pr-section" id="pricing" data-od-id="pricing">
+      <div class="container">
+        <div class="pr-head">
+          <span class="pr-eyebrow">Pricing</span>
+          <h2>One simple annual fee. Free for my students.</h2>
+          <p>Full access to practice questions and mock tests for ₹1,000 per academic year, and ₹0 for students of my classroom and online course.</p>
+        </div>
+
+        <div class="pr-grid">
+          <article class="pr-card pr-featured" data-od-id="pricing-students">
+            <span class="pr-tag">Classroom &amp; online students</span>
+            <p class="pr-price">
+              <span class="sr-only">Regular price ₹1,000 per academic year, now ₹0.</span>
+              <s class="pr-old" aria-hidden="true">₹1,000</s>
+              <strong class="pr-new" aria-hidden="true">₹0</strong>
+              <span class="pr-per">per academic year</span>
+            </p>
+            <span class="pr-save">You save ₹1,000</span>
+            <ul class="pr-list">
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Chapter-wise practice with instant answers and explanations</span></li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Timed mock tests, with answers shown after you submit</span></li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Questions written by Prof. Dr. S. Balaji, organised by chapter</span></li>
+            </ul>
+            <a class="btn btn-primary" href="../auth/">Sign Up</a>
+          </article>
+
+          <article class="pr-card" data-od-id="pricing-others">
+            <span class="pr-tag">Everyone else</span>
+            <p class="pr-price">
+              <strong class="pr-amount">₹1,000</strong>
+              <span class="pr-per">per academic year</span>
+            </p>
+            <p class="pr-lead">Not attending my classroom or online course? Email me and I will tell you how to get access to the practice and mock test modules.</p>
+            <a class="btn btn-secondary" href="mailto:contact@profbalaji.in?subject=Mock%20test%20access%20enquiry">Email contact@profbalaji.in</a>
+          </article>
+        </div>
+
+        <p class="pr-note">Access is activated by the academy after you sign up and your enrolment is confirmed.</p>
+      </div>
+    </section>
+
   </main>
 
   <!-- ═══════════════════════════════════════════════════════════════
@@ -354,7 +427,7 @@
             <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <img src="../assets/icons/linkedin.svg" alt="LinkedIn" />
             </a>
-            <a href="mailto:prof@example.com" aria-label="Email">
+            <a href="mailto:contact@profbalaji.in" aria-label="Email">
               <img src="../assets/icons/mail.svg" alt="Email" />
             </a>
             <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
@@ -370,6 +443,7 @@
         </div>
         <div class="footer-bottom" style="justify-content: space-between; flex-direction: column; align-items: center; gap: 8px;">
           <span style="font-size: 12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy . All Rights Reserved.</span>
+          <span class="footer-legal" style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;font-size:12px;"><a href="../pages/privacy.html">Privacy Policy</a><a href="../pages/terms.html">Terms of Use</a></span>
         </div>
       </div>
     </footer>
