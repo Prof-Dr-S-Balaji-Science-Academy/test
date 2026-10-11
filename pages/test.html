@@ -162,7 +162,7 @@
     .pr-head h2 { font-size: clamp(32px, 5vw, 52px); font-weight: 400; line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 16px; color: var(--fg); }
     .pr-head p { color: var(--muted); font-size: 16px; line-height: 1.6; margin: 0; }
     .pr-grid { display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 920px; margin: 0 auto; }
-    @media (min-width: 768px) { .pr-grid { grid-template-columns: 1.1fr 0.9fr; align-items: stretch; } }
+    @media (min-width: 768px) { .pr-grid { grid-template-columns: 1fr 1fr; align-items: stretch; } }
     .pr-card { display: flex; flex-direction: column; background: #ffffff; color: var(--fg); border: 1px solid var(--border); border-radius: 24px; padding: 32px; min-width: 0; }
     .pr-featured { background: #0a0b0d; color: #ffffff; border-color: #0a0b0d; }
     .pr-tag { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 6px 14px; border-radius: var(--radius-pill); margin-bottom: 24px; background: var(--surface); color: var(--fg); }
@@ -184,6 +184,7 @@
     .pr-card .btn-secondary { border: 1px solid var(--border); background: #ffffff; }
     .pr-card .btn-secondary:hover { background: var(--surface); color: var(--fg); }
     .pr-note { text-align: center; font-size: 12px; color: var(--muted); margin: 24px auto 0; max-width: 640px; }
+    [data-auth-cta] { white-space: nowrap; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
   </style>
 </head>
@@ -293,7 +294,7 @@
           <p class="hero-sub">Every question is written by Prof. Dr. S. Balaji, the professor who teaches the course, and is organised by board, class, subject and chapter. Sign up with your Google account, choose your class and subjects, and the academy will activate your access.</p>
 
           <div class="hero-cta">
-            <a class="btn btn-primary" href="../auth/" data-od-id="test-signup">Sign Up</a>
+            <a class="btn btn-primary" href="../auth/" data-od-id="test-signup" data-auth-cta>Sign Up</a>
             <a class="btn btn-secondary" href="../index.html#courses">See Courses</a>
           </div>
         </div>
@@ -355,7 +356,7 @@
 
           <!-- CTAs -->
           <div style="display:flex;gap:10px;margin-top:4px;">
-            <a class="btn btn-primary" href="../auth/" style="flex:1;justify-content:center;">Sign Up</a>
+            <a class="btn btn-primary" href="../auth/" style="flex:1;justify-content:center;" data-auth-cta>Sign Up</a>
             <a class="btn btn-secondary" href="../index.html#contact" data-wa="general" style="flex:1;justify-content:center;">Contact Us</a>
           </div>
 
@@ -387,7 +388,7 @@
               <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Timed mock tests, with answers shown after you submit</span></li>
               <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Questions written by Prof. Dr. S. Balaji, organised by chapter</span></li>
             </ul>
-            <a class="btn btn-primary" href="../auth/">Sign Up</a>
+            <a class="btn btn-primary" href="../auth/" data-auth-cta>Sign Up</a>
           </article>
 
           <article class="pr-card" data-od-id="pricing-others">
@@ -451,6 +452,26 @@
   <!-- ═══ END STATIC FALLBACK FOOTER ═══ -->
 
   <!-- Load shared header/footer (replaces slot divs above) then page logic -->
+  <script>
+    /* Signed-in visitors: the Sign Up buttons become "Dashboard". Uses the same
+       sign-in hint and pb-auth event as the shared header (no extra reads). */
+    (function () {
+      var btns = document.querySelectorAll("[data-auth-cta]");
+      function set(signedIn) {
+        btns.forEach(function (a) {
+          if (!a.dataset.hrefOut) { a.dataset.hrefOut = a.getAttribute("href"); a.dataset.textOut = a.textContent; }
+          a.setAttribute("href", signedIn ? "dashboard/" : a.dataset.hrefOut);
+          a.textContent = signedIn ? "Dashboard" : a.dataset.textOut;
+        });
+      }
+      try {
+        var h = JSON.parse(localStorage.getItem("pb_user_hint") || "null");
+        if (h && (h.name || h.email)) set(true);
+      } catch (e) {}
+      window.addEventListener("pb-auth", function (e) { set(!!(e.detail && e.detail.user)); });
+      if (window.PB_AUTH && window.PB_AUTH.ready) set(!!window.PB_AUTH.user);
+    })();
+  </script>
   <script src="../js/header-footer-loader.js"></script>
   <script src="../js/main.js" defer></script>
 </body>
