@@ -204,12 +204,12 @@ function parseOmml(src) {
     .replace(/<\/?(?!m:)[A-Za-z][^>]*>/gi, "");
   const root = { n: "#root", a: {}, c: [] };
   const stack = [root];
-  const re = /<(\/?)(m:[A-Za-z0-9]+)((?:\s+[^\s=>\/]+\s*=\s*(?:"[^"]*"|'[^']*'))*)\s*(\/?)>|([^<]+)/g;
+  const re = /<(\/?)(m:[A-Za-z0-9]+)((?:\s+[^\s=>\/]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>"'\/]+))?)*)\s*(\/?)>|([^<]+)/g;
   let m;
   while ((m = re.exec(s)) !== null) {
     if (m[5] !== undefined) {
       const top = stack[stack.length - 1];
-      if (top.n === "m:t") top.c.push({ n: "#text", t: decodeEntities(m[5]) });
+      if (top.n === "m:t" || top.n === "m:r") top.c.push({ n: "#text", t: decodeEntities(m[5]) });
       continue;
     }
     const name = m[2].toLowerCase();
@@ -218,8 +218,9 @@ function parseOmml(src) {
       continue;
     }
     const attrs = {};
-    m[3].replace(/([^\s=]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g, (x, k, v1, v2) => {
-      attrs[k.toLowerCase()] = decodeEntities(v1 !== undefined ? v1 : v2);
+    m[3].replace(/([^\s=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>"'\/]+)))?/g, (x, k, v1, v2, v3) => {
+      const v = v1 !== undefined ? v1 : (v2 !== undefined ? v2 : v3);
+      attrs[k.toLowerCase()] = v === undefined ? "" : decodeEntities(v);
       return "";
     });
     const node = { n: name, a: attrs, c: [] };
@@ -250,7 +251,11 @@ function runTex(node, ctx) {
   const rpr = child(node, "m:rpr");
   const sty = rpr ? val(child(rpr, "m:sty")) : "";
   const nor = rpr ? on(child(rpr, "m:nor")) : false;
-  const text = kids(node, "m:t").map(rawText).join("");
+  const text = node.c.map((x) => (x.n === "m:t" || x.n === "#text" ? rawText(x) : "")).join("");
+  return textTex(text, sty, nor, ctx);
+}
+
+function textTex(text, sty, nor, ctx) {
   if (!text) return "";
   if (nor) return "\\text{" + escText(text) + "}";
   const toks = Array.from(text).map((c) => (/^[A-Za-z0-9]$/.test(c) ? c : mapChar(c, ctx.inArr)));
@@ -287,6 +292,7 @@ function one(ch, ctx) {
   if (n === "#text" || /pr$/.test(n)) return "";
   switch (n) {
     case "m:r": return runTex(ch, ctx);
+    case "m:t": return textTex(rawText(ch), "", false, ctx);
     case "m:f": {
       const t = propVal(ch, "m:fpr", "m:type");
       const num = tidy(seq(child(ch, "m:num"), ctx)), den = tidy(seq(child(ch, "m:den"), ctx));
@@ -501,14 +507,17 @@ function fromWordHtml(html, plain) {
   const eqs = [];
   let failed = 0;
   const place = (src, fb) => {
-    const list = ommlEquations(src);
-    if (!list.length) { failed++; return fb ? fb.replace(/<!\[[^\]]*\]>/g, "") : ""; }
+    const list = ommlEquations(src).filter((eq) => /[A-Za-z0-9]/.test(eq.tex.replace(/\\[A-Za-z]+/g, "")));
+    if (!list.length) {
+      try { console.warn("Word paste: an equation could not be read. Start of its data:", String(src).slice(0, 1200)); } catch (e) { /* ignore */ }
+      failed++; return fb ? fb.replace(/<!\[[^\]]*\]>/g, "") : ""; }
     return list.map((eq) => { eqs.push(eq); return TOK_OPEN + (eqs.length - 1) + TOK_CLOSE; }).join(" ");
   };
   frag = frag.replace(/<!--\s*\[if\s+gte\s+msEquation[^\]]*\]>([\s\S]*?)<!\[endif\]-->(\s*<!\[if\s+!msEquation\]>[\s\S]*?<!\[endif\]>)?/gi,
     (m, omml, fb) => place(omml, fb));
   frag = frag.replace(/<m:oMathPara\b[\s\S]*?<\/m:oMathPara>|<m:oMath\b[\s\S]*?<\/m:oMath>/gi, (m) => place(m, ""));
 
+  if (failed) return null;                              // equation data unreadable: use the plain text
   const hasSubSup = /<su[bp][\s>]|vertical-align\s*:\s*(?:sub|super)/i.test(frag);
   const orphanFallback = /<!\[if\s+!msEquation\]>/i.test(frag);
   if (!eqs.length && !hasSubSup) return null;
@@ -685,6 +694,15 @@ class Lin {
       const m = /^[A-Za-z]+/.exec(s.slice(this.i));
       if (m[0].length > 1 && FUNCS.has(m[0])) { this.i += m[0].length; atom = { tex: "\\" + m[0] }; }
       else { this.i++; atom = this.accent({ tex: c }); }
+    } else if (/[\u00C0-\u017F]/.test(c) && /^[A-Za-z][\u0300-\u036F]$/.test(c.normalize("NFD")) && ACC[c.normalize("NFD")[1]]) {
+      this.i++;
+      const d = c.normalize("NFD");
+      atom = { tex: ACC[d[1]] + braced(d[0]) };
+    } else if (c === "|" && !denMode && s.indexOf("|", this.i + 1) > this.i + 1) {
+      const j = s.indexOf("|", this.i + 1);
+      const inner = new Lin(s.slice(this.i + 1, j), this.q).all();
+      this.i = j + 1;
+      atom = { tex: /\\frac|\\sqrt|\^|_/.test(inner) ? "\\left|" + inner + "\\right|" : "|" + inner + "|" };
     } else if (c === "\u221A" || c === "\u221B" || c === "\u221C") {
       atom = this.sqrt(c); canScript = false;
     } else if (c === "\u25A0" || c === "\u2588") {
@@ -738,7 +756,7 @@ function classify(tok) {
   if (/\)\/|\/\(/.test(core)) return "strong";
   if (/\uE010/.test(core)) return "weak";
   if (/^[0-9]+(?:[.,][0-9]+)*$/.test(core)) return "weak";
-  if (/^[A-Za-z]$/.test(core) || /^[0-9]+(?:\.[0-9]+)?[A-Za-z]$/.test(core)) return "weak";
+  if (/^[A-Za-z][\u0300-\u036F\u20D0-\u20FF]?$/.test(core) || /^[0-9]+(?:\.[0-9]+)?[A-Za-z]$/.test(core)) return "weak";
   if (/^[\u0391-\u03C9]+$/.test(core)) return "weak";
   if (/^[()\[\]0-9.,+\-\u2212*\/<>|]+$/.test(core)) return "weak";
   return "prose";
@@ -748,6 +766,7 @@ const OP_START = /^[=+\-\u2212\u00D7\u00F7*\/<>\u2248\u2260\u2264\u2265\u221D^_)
 const OP_END = /[=+\-\u2212\u00D7\u00F7*\/<>\u2248\u2260\u2264\u2265(,]$/;
 
 function convertLine(line, quotes) {
+  line = line.replace(/\s+([\u0300-\u036F\u20D0-\u20FF])/g, "$1");     // Word may put a space before an accent mark
   const prot = line.replace(/"([^"\n]{1,24})"/g, (m, q) => { quotes.push(q); return TQ0 + (quotes.length - 1) + TQ1; });
   const unprotect = (str) => str.replace(/\uE010(\d+)\uE011/g, (m, i) => "\"" + quotes[+i] + "\"");
   const toks = [];
