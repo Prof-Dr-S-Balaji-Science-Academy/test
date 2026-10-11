@@ -8,6 +8,7 @@ import * as Q from "./question-core.js";
 import * as IU from "./image-upload.js";
 import { renderBulkUpload } from "./bulk-upload.js";
 import { cleanPasted, validateLatex, insertSnippet, SYMBOL_GROUPS } from "./latex-tools.js";
+import { convertPaste } from "./word-paste.js";
 
 export function initQuestions(host, api) {
   const el = api.el;
@@ -610,8 +611,12 @@ export function initQuestions(host, api) {
     ta.addEventListener("focus", () => { activeTA = ta; });
     ta.addEventListener("paste", (e) => {
       const raw = e.clipboardData && e.clipboardData.getData("text/plain");
+      const html = e.clipboardData && e.clipboardData.getData("text/html");
       if (!raw) return;
-      const r = cleanPasted(raw);
+      /* Word paste: equations and sub/superscripts from Word's HTML, else Word's linear text. */
+      let r = null;
+      try { r = convertPaste(html, raw); } catch (err) { r = null; }
+      if (!r) r = cleanPasted(raw);
       if (r.text === raw && !r.flags.length) return;
       e.preventDefault();
       insertText(ta, r.text);
