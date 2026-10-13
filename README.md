@@ -8,7 +8,7 @@ Website and mock test platform for profbalaji.in. Plain HTML, CSS and JavaScript
 |---|---|
 | `index.html`, `pages/` | Public site, learning resources, test information page |
 | `auth/` | Google sign-in and first-time onboarding |
-| `pages/dashboard/` | Student dashboard (practice, mock tests, results) |
+| `pages/dashboard/` | Student dashboard (Mock Test Papers, Practice Questions) |
 | `pages/admin/` | ProfAdmin console (approvals, students, catalog, questions, papers, analytics) |
 | `js/`, `css/` | Shared scripts and styles |
 | `firebase/firestore.rules` | Firestore Security Rules (currently v9). Published by hand in the Firebase console |
@@ -54,11 +54,23 @@ Firebase console, Firestore Database, Rules. Paste the whole of `firebase/firest
 The boards, classes, subjects and student access levels are no longer fixed in the code or in the rules. They live in one Firestore document, `catalog/main`, managed in **ProfAdmin, Catalog**.
 
 First release steps, in this order (do them on the test site first):
-1. Publish `firebase/firestore.rules` (v9).
+1. Publish `firebase/firestore.rules` (v10).
 2. Open the ProfAdmin console once. It creates `catalog/main` from the earlier fixed lists (CBSE Class 10 Science, CBSE and State Board Class 12 Physics and Chemistry).
-3. Open **Catalog**, press **Convert student records** once. Students made before this release then hold lists of access levels (`accessLevels`, `requestedLevels`). Until you do this, existing students cannot read questions or papers. It is safe to press again.
 
 Adding a new program such as NEET: Catalog, Add a board (with a short code), then Add a class under it, then Add a subject under the class. Every subject gets its own access level, hidden from the sign-up form until you press **Show on sign-up**. Give an existing student more levels from Students, Manage. Renaming changes only the label shown. A board, class or subject can be deleted only while nothing depends on it.
+
+## Practice and mock tests: what is saved
+
+- **Practice Questions are not saved.** A student answers a chapter's questions, presses Finish, sees the results and can download or share a PDF. Nothing is written to Firebase and nothing is kept once the page is left.
+- **Mock Test Papers are saved against the student.** Only the latest attempt of each paper is kept, with its attempt number (`testResults/{uid}_{paperId}`). Submitting a new attempt replaces the previous one. The results screen and PDF show the attempt number.
+- Analytics read mock-test attempts only.
+
+### Removing old practice data by hand (Firebase console)
+
+Practice used to be saved. To remove what was saved earlier, in Firebase console, Firestore Database, Data:
+1. Delete the whole collection **practiceStats**: open it, use the three dots next to the collection name, choose Delete collection, confirm.
+2. Open the collection **attempts**. Practice records have the field `mode` equal to `practice`. Firestore's console cannot delete by filter, so either (a) delete the whole `attempts` collection if you do not need earlier mock-test question statistics (analytics then starts afresh; in ProfAdmin, Analytics, press Rebuild), or (b) keep it, as analytics ignore practice records anyway.
+3. Publish Rules v10 first, so students can no longer write new practice records.
 
 ## Test site and live site
 

@@ -7,7 +7,7 @@
  *      missing images are flagged; NOTHING is saved
  *   4. confirm: images are uploaded and the valid questions are saved
  * The spreadsheet rules live in bulk-core.js. Everything here is cosmetic
- * as far as security goes; the real lock is Firestore Rules v9.
+ * as far as security goes; the real lock is Firestore Rules v10.
  * ───────────────────────────────────────────────────────────────────── */
 import * as Q from "./question-core.js";
 import * as IU from "./image-upload.js";

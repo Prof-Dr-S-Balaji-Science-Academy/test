@@ -1,9 +1,8 @@
 /* ─────────────────────────────────────────────────────────────────────
  * catalog-admin.js  (ES module, ProfAdmin "Catalog" section, Phase 10)
  * Create, rename and delete boards, classes and subjects, switch each
- * subject's access level on or off for sign-up, and convert student records
- * made before Phase 10. Everything here is cosmetic; the real lock is
- * Firestore Rules v9. All text is inserted with textContent.
+ * subject's access level on or off for sign-up. Everything here is cosmetic; the real lock is
+ * Firestore Rules v10. All text is inserted with textContent.
  * ───────────────────────────────────────────────────────────────────── */
 import * as Cat from "./catalog-core.js";
 
@@ -146,29 +145,6 @@ export function initCatalog(host, api) {
     return card;
   }
 
-  /* ── Student records made before Phase 10 ── */
-  function convertCard() {
-    const card = el("section", "portal-card cg-board");
-    card.append(el("h3", "cg-h3", "Student records"));
-    card.append(el("p", "portal-sub", "Students now hold a list of access levels. After you publish Rules v9, press this once to convert the records made earlier. A student on a combined Physics and Chemistry level gets the two single-subject levels instead. It is safe to press again; converted records are skipped."));
-    const out = el("p", "field-hint", "");
-    const b = btn("Convert student records", "btn-primary", async () => {
-      b.disabled = true;
-      out.textContent = "Converting\u2026";
-      try {
-        const r = await Cat.convertStudents((p) => { out.textContent = "Checked " + p.read + " records\u2026"; });
-        out.textContent = "Checked " + r.read + " records: " + r.converted + " converted, " + r.skipped + " already converted"
-          + (r.failed ? ", " + r.failed + " could not be converted (see the browser console)." : ".");
-      } catch (err) {
-        console.error(err);
-        out.textContent = "Conversion stopped. " + api.failText(err);
-      }
-      b.disabled = false;
-    });
-    card.append(b, out);
-    return card;
-  }
-
   function render() {
     host.textContent = "";
     const head = el("div", "admin-head");
@@ -192,7 +168,6 @@ export function initCatalog(host, api) {
     ], "Add board", (v) => act(() => Cat.addBoard(v[0], v[1]), "Board added. Add its classes and subjects below it.")));
     host.append(add);
 
-    host.append(convertCard());
   }
 
   render();

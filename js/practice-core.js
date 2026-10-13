@@ -1,24 +1,23 @@
 /* ─────────────────────────────────────────────────────────────────────
- * practice-core.js  (ES module, student practice data layer, Phase 6)
- * Reads (all limited by Firestore Rules v6 (and, from v7, closed while a test is on) to the student's own level):
+ * practice-core.js  (ES module, student practice data layer)
+ * Practice is NOT saved (owner decision, Rules v10). Nothing here writes to
+ * Firestore: a practice session lives in the page and is gone when the student
+ * leaves it. Reads (all limited by Firestore Rules v10 (and closed while a test is on) to the student's own level):
  *   taxonomy      the chapters of the student's subjects
  *   questions     published questions of one chapter (no answers)
- *   questionKeys  one answer key, fetched only after the student answers
- *   practiceStats the student's own progress counters (one document)
- * Writes: one attempts document per answered question, plus the progress
- * counters, in a single batch (saved completely or not at all).
- * Marking is done here in the browser. That is acceptable for practice,
- * where the answer is shown straight away; the raw answer is stored so the
- * result can be re-marked by ProfAdmin analytics (Phase 8).
+ *   questionKeys  the answer keys, fetched only when the student finishes
+ * Marking is done here in the browser, which is acceptable for practice,
+ * where the answers are shown at the end.
  * ───────────────────────────────────────────────────────────────────── */
 import {
-  collection, query, where, limit, startAfter, getDocs, getDoc, getCountFromServer,
-  doc, writeBatch, increment, serverTimestamp
+  collection, query, where, limit, startAfter, getDocs, getDoc, getCountFromServer, doc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { db } from "./auth-core.js";
 import { levelInfo } from "./catalog-core.js";
 
 export const PRACTICE_PAGE = 20;
+/* The most questions one practice session holds. */
+export const PRACTICE_MAX = 50;
 
 /* Board, class, label and subject of an access level (from the catalog). */
 export { levelInfo };
@@ -66,18 +65,34 @@ export async function fetchKey(id) {
   return s.exists() ? s.data() : {};
 }
 
-/* ── Progress ── */
-export async function fetchStats(uid) {
-  const s = await getDoc(doc(db, "practiceStats", uid));
-  const chapters = (s.exists() && s.data().chapters) || {};
-  const totals = { answered: 0, scored: 0, correct: 0 };
-  Object.keys(chapters).forEach((k) => {
-    const c = chapters[k] || {};
-    totals.answered += c.answered || 0;
-    totals.scored += c.scored || 0;
-    totals.correct += c.correct || 0;
-  });
-  return { chapters: chapters, totals: totals };
+/* All matching questions of a chapter for one practice session, in question-number
+ * order, up to PRACTICE_MAX. Returns { rows, total } (total = how many match). */
+export async function fetchSessionQuestions(level, chapterId, filters) {
+  const total = await countPublished(level, chapterId, filters);
+  let rows = [], cursor = null, done = false;
+  while (!done && rows.length < PRACTICE_MAX) {
+    const page = await fetchPracticeQuestions(level, chapterId, filters, cursor);
+    rows = rows.concat(page.rows);
+    cursor = page.cursor; done = page.done;
+  }
+  return { rows: rows.slice(0, PRACTICE_MAX), total: total };
+}
+
+/* The answer keys of a finished practice session. denied is true when the server
+ * refuses (a mock test is in progress); the keys are then incomplete. */
+export async function fetchKeys(ids) {
+  const keys = {};
+  let denied = false;
+  for (let i = 0; i < ids.length; i += 6) {
+    await Promise.all(ids.slice(i, i + 6).map(async (id) => {
+      try { keys[id] = await fetchKey(id); }
+      catch (err) {
+        if (err && err.code === "permission-denied") denied = true; else throw err;
+        keys[id] = {};
+      }
+    }));
+  }
+  return { keys: keys, denied: denied };
 }
 
 /* ── Marking ── */
@@ -137,31 +152,4 @@ export function markQuestion(q, key, answer) {
   }
   const r = markPart(q.type, q, key, answer);
   return { scored: r !== null, isCorrect: r === true };
-}
-
-/* ── Recording an attempt ── */
-export async function recordAttempt(uid, q, answer, marked, seconds, selfRight) {
-  const attempt = {
-    uid: uid, questionId: q.id, chapterId: q.chapterId,
-    board: q.board, cls: q.cls, subject: q.subject, type: q.type, difficulty: q.difficulty,
-    mode: "practice", answer: answer,
-    scored: marked.scored, isCorrect: marked.isCorrect,
-    timeSpent: Math.max(0, Math.min(3600, Math.round(seconds || 0))),
-    createdAt: serverTimestamp()
-  };
-  if (marked.subResults) attempt.subResults = marked.subResults;
-  if (typeof selfRight === "boolean") attempt.selfRight = selfRight;
-
-  const batch = writeBatch(db);
-  batch.set(doc(collection(db, "attempts")), attempt);
-  batch.set(doc(db, "practiceStats", uid), {
-    uid: uid,
-    chapters: { [q.chapterId]: {
-      answered: increment(1),
-      scored: increment(marked.scored ? 1 : 0),
-      correct: increment(marked.scored && marked.isCorrect ? 1 : 0)
-    } },
-    updatedAt: serverTimestamp()
-  }, { merge: true });
-  await batch.commit();
 }

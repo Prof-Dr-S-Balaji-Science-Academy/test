@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────────────────────────────────────
  * paper-core.js  (ES module, Phase 7: papers and mock tests data layer)
- * Collections (see firebase/firestore.rules, Rules v9):
+ * Collections (see firebase/firestore.rules, Rules v10):
  *   papers/{id}         paper definitions, written by ProfAdmin only
  *   testSessions/{id}   one per student attempt of a paper. The start time is
  *                       recorded by the server; the deadline is the start time
@@ -8,8 +8,13 @@
  *                       timer from that server time, never from the device clock.
  *   testLocks/{uid}     one per student. While it is active the student cannot
  *                       read any answer key (closes risk R-08).
+ *   testResults/{uid}_{paperId}
+ *                       the student's latest submitted attempt of a paper and its
+ *                       attempt number. Submitting a new attempt overwrites it and
+ *                       deletes the older session of that paper (v10).
  *   attempts/{id}       one record per answered, auto-marked question, written
  *                       after submission (mode "mock", Phase 8 feeds on these).
+ *                       Practice mode is not saved at all.
  * Nothing here is trusted by the server beyond what the rules check. The score
  * is never stored by the browser: it is worked out from the saved answers and
  * the released keys whenever a result is shown.
@@ -119,10 +124,12 @@ export async function fetchActiveSessions(uid) {
   return snap.docs.map(packDoc);
 }
 
-export async function fetchSubmittedSessions(uid) {
-  const snap = await getDocs(query(sessions(), where("uid", "==", uid), where("status", "==", "submitted"), limit(100)));
+/* The student's latest submitted attempt of each paper (one pointer per paper):
+ * { id, paperId, paperTitle, sessionId, attemptNo, late, submittedAt }. */
+export async function fetchLatestResults(uid) {
+  const snap = await getDocs(query(collection(db, "testResults"), where("uid", "==", uid), limit(200)));
   const rows = snap.docs.map(packDoc);
-  const t = (r) => (r.startedAt && r.startedAt.toMillis ? r.startedAt.toMillis() : 0);
+  const t = (r) => (r.submittedAt && r.submittedAt.toMillis ? r.submittedAt.toMillis() : 0);
   rows.sort((a, b) => t(b) - t(a));
   return rows;
 }
@@ -208,16 +215,39 @@ export async function saveProgress(sessionId, answers, marked) {
 /* Submits the test and opens the answer keys (the lock is released in the same
  * batch). The server decides whether the submission is late. A late submission
  * is accepted but keeps the answers saved last (the rules freeze them), so if
- * the first try is refused it is tried again that way. */
+ * the first try is refused it is tried again that way.
+ * Only the latest attempt of a paper is kept (v10): the same batch writes the
+ * testResults pointer with the next attempt number and deletes the student's
+ * older submitted session(s) of this paper. Returns the stored session with
+ * attemptNo added. */
 export async function submitSession(session, answers, marked, probablyLate) {
   const ref = doc(db, "testSessions", session.id);
   const lockRef = doc(db, "testLocks", session.uid);
+  const resRef = doc(db, "testResults", session.uid + "_" + session.paperId);
+
+  /* What is already saved for this paper: the current pointer and any older submitted sessions. */
+  const [prevRes, olderSnap] = await Promise.all([
+    getDoc(resRef),
+    getDocs(query(sessions(), where("uid", "==", session.uid), where("paperId", "==", session.paperId),
+      where("status", "==", "submitted"), limit(100)))
+  ]);
+  const older = olderSnap.docs.filter((d) => d.id !== session.id);
+  const attemptNo = (prevRes.exists() && typeof prevRes.data().attemptNo === "number")
+    ? prevRes.data().attemptNo + 1
+    : older.length + 1;
+
   async function attempt(late) {
     const batch = writeBatch(db);
     const fields = { status: "submitted", submittedAt: serverTimestamp(), late: late };
     if (!late) { fields.answers = answers; fields.marked = marked; }
     batch.update(ref, fields);
     batch.update(lockRef, { active: false, updatedAt: serverTimestamp() });
+    const pointer = {
+      uid: session.uid, paperId: session.paperId, paperTitle: session.paperTitle,
+      sessionId: session.id, attemptNo: attemptNo, late: late, submittedAt: serverTimestamp()
+    };
+    if (prevRes.exists()) batch.update(resRef, pointer); else batch.set(resRef, pointer);
+    older.forEach((d) => batch.delete(d.ref));
     await batch.commit();
   }
   try {
@@ -226,7 +256,9 @@ export async function submitSession(session, answers, marked, probablyLate) {
     if (!err || err.code !== "permission-denied") throw err;
     await attempt(!probablyLate);
   }
-  return fetchSession(session.id);
+  const done = await fetchSession(session.id);
+  if (done) done.attemptNo = attemptNo;
+  return done;
 }
 
 /* Answer keys, once the test is submitted. Returns { keys, denied } where

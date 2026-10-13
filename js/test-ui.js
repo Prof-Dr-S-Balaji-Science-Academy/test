@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────────────────────────────
  * test-ui.js  (ES module, student mock tests, Phase 7)
  * The paper list, the timed test, and the result and review screens.
- * Everything here is display; the real locks are Firestore Rules v9:
+ * Everything here is display; the real locks are Firestore Rules v10:
  *   - questions are served without answers
  *   - the answer keys stay unreadable until the test is submitted
  *   - the start time and the deadline come from the server, never from this
@@ -155,6 +155,7 @@ function buildReport(r) {
   row("Student", student.name || "–");
   row("Email", student.email || "–");
   row("Subject", Cat.scopeLabel(session.board, session.cls, session.subject));
+  if (session.attemptNo) row("Attempt", String(session.attemptNo));
   row("Submitted", fmtWhen(session.submittedAt) || "–");
   row("Score (marked on screen)", res.evalMax > 0 ? res.score + " / " + res.evalMax : "–");
   row("Correct \u00b7 Wrong \u00b7 Not answered", res.correct + " \u00b7 " + res.wrong + " \u00b7 " + res.unanswered);
@@ -216,14 +217,14 @@ export function initTests(host, ctx) {
     const my = ++token;
     ctx.setBusy(false);
     clear();
-    host.append(el("h2", "pq-h2", "Mock tests"));
+    host.append(el("h2", "pq-h2", "Mock Test Papers"));
     if (message) host.append(el("div", "message-box", message));
     const load = loadingBox("Loading mock tests…");
     host.append(load);
     let err = null;
     try {
       const [papers, active, history] = await Promise.all([
-        P.fetchPapersForLevel(ctx.levels), P.fetchActiveSessions(ctx.uid), P.fetchSubmittedSessions(ctx.uid)
+        P.fetchPapersForLevel(ctx.levels), P.fetchActiveSessions(ctx.uid), P.fetchLatestResults(ctx.uid)
       ]);
       T.papers = papers; T.active = active[0] || null; T.history = history; T.loaded = true;
     } catch (e) { console.error(e); err = e; }
@@ -256,14 +257,26 @@ export function initTests(host, ctx) {
     }
 
     if (T.history.length) {
-      host.append(el("h3", "pq-h2 pq-gap pt-sub", "Your tests"));
+      host.append(el("h3", "pq-h2 pq-gap pt-sub", "Your results"));
+      host.append(el("p", "field-hint", "Only your latest attempt of each paper is kept. A new attempt replaces the previous one."));
       const list = el("div", "pq-list");
-      T.history.slice(0, 20).forEach((s) => {
+      T.history.slice(0, 50).forEach((s) => {
         const row = el("div", "pq-row pt-hist");
         const main = el("div", "pq-row-main");
-        main.append(el("strong", null, s.paperTitle), el("span", "pq-row-meta", fmtWhen(s.startedAt) + (s.late ? " · Submitted after the time limit" : "")));
+        main.append(el("strong", null, s.paperTitle), el("span", "pq-row-meta", "Attempt " + s.attemptNo + " · " + fmtWhen(s.submittedAt) + (s.late ? " · Submitted after the time limit" : "")));
         const b = el("button", "btn btn-outline btn-sm", "View result"); b.type = "button";
-        b.addEventListener("click", () => { scrollTop(); showResult(s, false, null); });
+        b.addEventListener("click", async () => {
+          b.disabled = true;
+          try {
+            const full = await P.fetchSession(s.sessionId);
+            if (!full) { b.disabled = false; host.insertBefore(el("div", "portal-error", "This result could not be found."), host.children[1] || null); return; }
+            full.attemptNo = s.attemptNo;
+            scrollTop(); showResult(full, false, null);
+          } catch (e) {
+            console.error(e); b.disabled = false;
+            host.insertBefore(el("div", "portal-error", errText(e)), host.children[1] || null);
+          }
+        });
         row.append(main, b);
         list.append(row);
       });
@@ -607,6 +620,7 @@ export function initTests(host, ctx) {
     host.lastChild.addEventListener("click", () => { renderHome(); scrollTop(); });
 
     host.append(el("h2", "pq-h2", session.paperTitle));
+    if (session.attemptNo) host.append(el("p", "portal-sub", "Attempt " + session.attemptNo));
     if (denied) {
       host.append(el("div", "message-box", "Your answers are saved, but the result cannot be shown while another test is in progress. Finish that test first, then open this result again."));
       return;
@@ -617,6 +631,7 @@ export function initTests(host, ctx) {
     const sum = el("section", "portal-card pq-summary");
     const dl = el("dl", "summary-list");
     const addRow = (a, b) => { const d = el("div"); d.append(el("dt", null, a), el("dd", null, b)); dl.append(d); };
+    if (session.attemptNo) addRow("Attempt", String(session.attemptNo));
     addRow("Score (marked on screen)", res.evalMax > 0 ? res.score + " / " + res.evalMax : "–");
     addRow("Correct · Wrong · Not answered", res.correct + " · " + res.wrong + " · " + res.unanswered);
     if (res.selfCount) addRow("Written on paper", res.selfCount + (res.selfCount === 1 ? " question" : " questions") + " · " + marksText(res.selfMarks));
@@ -634,7 +649,7 @@ export function initTests(host, ctx) {
     const expMsg = el("p", "field-hint pt-export-msg", "");
     expMsg.setAttribute("role", "status");
     let pdfBlob = null, working = false;
-    const pdfName = PDF.pdfFileName(session.paperTitle);
+    const pdfName = PDF.pdfFileName(session.paperTitle + (session.attemptNo ? " attempt " + session.attemptNo : ""));
     async function makePdf() {
       if (pdfBlob) return pdfBlob;
       expMsg.textContent = "Preparing your PDF\u2026";

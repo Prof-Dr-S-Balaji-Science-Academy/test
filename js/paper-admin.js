@@ -3,7 +3,7 @@
  * The paper list and the paper builder: fixed papers (questions picked one
  * by one) and rule-based papers (chapters, types and a difficulty mix; the
  * questions are drawn when a student starts). Everything here is display;
- * the real lock is Firestore Rules v9. All text is inserted with textContent.
+ * the real lock is Firestore Rules v10. All text is inserted with textContent.
  * ───────────────────────────────────────────────────────────────────── */
 import * as Q from "./question-core.js";
 import * as P from "./paper-core.js";

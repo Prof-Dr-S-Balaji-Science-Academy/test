@@ -119,7 +119,15 @@ async function purgeHistory(uid) {
     if (snap.size < BATCH_MAX) break;
   }
   await deleteDoc(doc(db, "testLocks", uid));
-  await deleteDoc(doc(db, "practiceStats", uid));
+  /* The latest-result pointers (one per paper, id uid_paperId). */
+  for (;;) {
+    const snap = await getDocs(query(collection(db, "testResults"), where("uid", "==", uid), limit(BATCH_MAX)));
+    if (snap.empty) break;
+    const batch = writeBatch(db);
+    snap.docs.forEach((d) => batch.delete(d.ref));
+    await batch.commit();
+    if (snap.size < BATCH_MAX) break;
+  }
 }
 
 export async function deleteOne(uid) {

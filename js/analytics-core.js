@@ -7,7 +7,7 @@
  *     (IndexedDB); nothing is read from Firestore until ProfAdmin presses Update.
  *   - Question details and answer keys are read one document at a time, only
  *     for questions that are opened, and saved in the browser the same way.
- * The real lock is Firestore Rules v9: only ProfAdmin may list attempts.
+ * The real lock is Firestore Rules v10: only ProfAdmin may list attempts.
  * ───────────────────────────────────────────────────────────────────── */
 import {
   collection, query, orderBy, startAfter, limit, getDocs, getDoc, doc, documentId, Timestamp

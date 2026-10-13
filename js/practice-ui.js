@@ -1,15 +1,16 @@
 /* ─────────────────────────────────────────────────────────────────────
- * practice-ui.js  (ES module, student dashboard + practice mode, Phase 6)
+ * practice-ui.js  (ES module, student practice mode; practice is not saved, Rules v10)
  * Subject → chapter → practice, limited to the student's own access level.
- * Everything here is display; the real lock is Firestore Rules v9.
+ * Everything here is display; the real lock is Firestore Rules v10.
  * All text from the database is inserted with textContent (never as HTML)
  * and LaTeX is typeset by MathJax, which the dashboard page loads.
  * ───────────────────────────────────────────────────────────────────── */
 import { typeLabel, TYPES, DIFFICULTIES } from "./question-core.js";
 import {
-  levelInfo, fetchChapters, countPublished, fetchPracticeQuestions, fetchKey, fetchStats,
-  markQuestion, isWritten, recordAttempt
+  levelInfo, fetchChapters, countPublished, fetchSessionQuestions, fetchKeys,
+  markQuestion, isWritten, PRACTICE_MAX
 } from "./practice-core.js";
+import * as PDF from "./result-pdf.js";
 
 const IMG_PREFIX = "https://ik.imagekit.io/profbalaji/";
 const letter = (i) => String.fromCharCode(65 + i);
@@ -248,6 +249,95 @@ function buildQuestion(q) {
   };
 }
 
+/* ───────────────────── Practice result report (PDF, same layout as the mock test PDF) ───────────────────── */
+
+function reportPart(type, item, key, ans) {
+  key = key || {}; ans = ans || {};
+  const root = el("div", "rp-part");
+  if (type === "assertion_reason") {
+    const a = el("div", "pq-ar"); a.append(el("strong", null, "Assertion (A): "), latexBlock("pq-inline", item.assertionLatex));
+    const r = el("div", "pq-ar"); r.append(el("strong", null, "Reason (R): "), latexBlock("pq-inline", item.reasonLatex));
+    root.append(a, r);
+  } else {
+    root.append(latexBlock("pq-stem", item.questionLatex));
+  }
+  if (type === "mcq_single" || type === "mcq_multi" || type === "assertion_reason" || type === "true_false") {
+    const texts = type === "true_false" ? ["True", "False"] : (item.options || []);
+    const chosen = ans.sel || [], rights = key.correct || [];
+    texts.forEach((t, i) => {
+      const lab = el("div", "rp-opt" + (chosen.indexOf(i) !== -1 ? " is-chosen" : "") + (rights.indexOf(i) !== -1 ? " is-right" : ""));
+      lab.append(el("span", "rp-opt-l", letter(i)), latexBlock("rp-opt-t", t));
+      root.append(lab);
+    });
+    root.append(el("div", "rp-ans", "Your answer: " + (chosen.length ? chosen.map(letter).join(", ") : "not answered")));
+    root.append(el("div", "rp-ans rp-ans-right", "Correct answer: " + (rights.length ? rights.map(letter).join(", ") : "not available")));
+  } else if (type === "fill_blank") {
+    root.append(el("div", "rp-ans", "Your answer: " + (ans.text ? ans.text : "not answered")));
+    root.append(el("div", "rp-ans rp-ans-right", "Accepted answer: " + ((key.acceptedAnswers || []).join(", ") || "not available")));
+  } else if (type === "numerical") {
+    root.append(el("div", "rp-ans", "Your answer: " + (ans.text ? ans.text : "not answered")));
+    root.append(el("div", "rp-ans rp-ans-right", "Correct answer: " + (typeof key.numericAnswer === "number" ? key.numericAnswer : "not available") + (key.tolerance > 0 ? " (within ±" + key.tolerance + ")" : "")));
+  } else if (type === "match") {
+    (item.matchLeft || []).forEach((t, i) => { const r = el("div", "rp-opt"); r.append(el("span", "rp-opt-l", String(i + 1)), latexBlock("rp-opt-t", t)); root.append(r); });
+    (item.matchRight || []).forEach((t, i) => { const r = el("div", "rp-opt"); r.append(el("span", "rp-opt-l", letter(i)), latexBlock("rp-opt-t", t)); root.append(r); });
+    const mine = (ans.sel || []).map((v, i) => (i + 1) + " \u2192 " + (v >= 0 ? letter(v) : "–")).join(", ");
+    root.append(el("div", "rp-ans", "Your matches: " + (mine || "not answered")));
+    root.append(el("div", "rp-ans rp-ans-right", "Correct matches: " + ((key.matchMap || []).map((m, i) => (i + 1) + " \u2192 " + letter(m)).join(", ") || "not available")));
+  } else {
+    root.append(el("div", "rp-ans", "Model answer:"));
+    root.append(latexBlock("", key.modelAnswerLatex || ""));
+  }
+  return root;
+}
+
+function buildPracticeReport(r) {
+  const { chapter, subjectLabel, rows, answers, keys, marks, status, summary, student } = r;
+  const root = el("div", "rp-root");
+  root.setAttribute("aria-hidden", "true");
+  const head = el("div", "rp-block rp-head");
+  head.append(el("div", "rp-brand", "Prof. Dr. S. Balaji Science Academy"),
+    el("div", "rp-title", "Chapter " + chapter.chapterNumber + ": " + chapter.chapterName),
+    el("div", "rp-sub", "Practice result"));
+  const list = el("div", "rp-rows");
+  const row = (k, v) => { const d = el("div", "rp-row"); d.append(el("span", "rp-k", k), el("span", "rp-v", v)); list.append(d); };
+  row("Student", student.name || "–");
+  row("Email", student.email || "–");
+  row("Subject", subjectLabel);
+  row("Date", new Date().toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" }));
+  row("Questions", String(rows.length));
+  row("Correct (auto-marked)", summary.scored ? summary.correct + " / " + summary.scored + " (" + pct(summary.correct, summary.scored) + ")" : "–");
+  row("Correct \u00b7 Wrong \u00b7 Not answered", summary.correct + " \u00b7 " + summary.wrong + " \u00b7 " + summary.unanswered);
+  head.append(list);
+  head.append(el("div", "rp-note", "Practice results are not saved by the academy. This PDF is your own copy."));
+  root.append(head);
+
+  rows.forEach((q, i) => {
+    const card = el("div", "rp-block rp-q");
+    const tags = el("div", "rp-tags");
+    tags.append(el("span", "rp-tag", "Question " + (i + 1)), el("span", "rp-tag", marksText(q.marks)), el("span", "rp-tag", typeLabel(q.type)));
+    const st = status[i];
+    tags.append(el("span", "rp-chip rp-" + st.kind, st.text));
+    card.append(tags);
+    const key = keys[q.id] || {}, ans = answers[i] || {};
+    if (q.type === "case_based") {
+      card.append(latexBlock("pq-stem", q.questionLatex));
+      const im = imageBox(q.imageUrl, "Figure for the question");
+      if (im) card.append(im);
+      (q.subQuestions || []).forEach((s, k) => {
+        card.append(el("div", "rp-ans", "Sub-question " + (k + 1) + " \u00b7 " + typeLabel(s.type) + " \u00b7 " + marksText(s.marks)));
+        card.append(reportPart(s.type, s, (key.subKeys || [])[k], (ans.subs || [])[k]));
+      });
+    } else {
+      const part = reportPart(q.type, q, key, ans);
+      const im = imageBox(q.imageUrl, "Figure for the question");
+      if (im) part.insertBefore(im, part.children[q.type === "assertion_reason" ? 2 : 1] || null);
+      card.append(part);
+    }
+    root.append(card);
+  });
+  return root;
+}
+
 /* ───────────────────────────── The practice app ───────────────────────────── */
 
 export function initPractice(host, ctx) {
@@ -256,16 +346,13 @@ export function initPractice(host, ctx) {
   const levelIds = ctx.levels || (ctx.level ? [ctx.level] : []);
   const infos = levelIds.map((l) => levelInfo(l)).filter(Boolean);
   const infoOf = (key) => infos.find((i) => i.level === key);
-  const info = infos[0];
   const S = {
-    stats: { chapters: {}, totals: { answered: 0, scored: 0, correct: 0 } },
-    statsLoaded: false,
     chapters: {},           // subject -> chapter rows
     counts: {},             // chapter ID -> number of published questions
     filters: { difficulty: "", type: "" },
-    session: null
+    subject: "", chapterId: "",
+    session: null           // lives in this page only; never saved
   };
-  let current = { name: "home" };
   let renderToken = 0;
 
   if (!infos.length) {
@@ -278,17 +365,11 @@ export function initPractice(host, ctx) {
       ? "Permission was refused. Please contact the academy if this keeps happening."
       : "Something went wrong. Please check your connection and try again.";
   }
-
-  function clear() {
-    clearMath(host);
-    host.textContent = "";
-  }
-
+  function clear() { clearMath(host); host.textContent = ""; }
   function scrollTop() { try { window.scrollTo({ top: 0 }); } catch (e) { /* ignore */ } }
 
   /* ── Navigation (browser Back works between screens) ── */
   function go(view) {
-    current = view;
     try { history.pushState({ pq: view }, ""); } catch (e) { /* ignore */ }
     show(view);
   }
@@ -302,11 +383,7 @@ export function initPractice(host, ctx) {
     }
     return renderHome();
   }
-  window.addEventListener("popstate", (e) => {
-    const v = e.state && e.state.pq;
-    current = v || { name: "home" };
-    show(current);
-  });
+  window.addEventListener("popstate", (e) => { show((e.state && e.state.pq) || { name: "home" }); });
   try { history.replaceState({ pq: { name: "home" } }, ""); } catch (e) { /* ignore */ }
 
   function backButton(label, onClick) {
@@ -318,39 +395,12 @@ export function initPractice(host, ctx) {
     return b;
   }
 
-  async function ensureStats() {
-    if (S.statsLoaded) return;
-    try { S.stats = await fetchStats(ctx.uid); S.statsLoaded = true; } catch (e) { console.error(e); }
-  }
-
-  function chapterStats(id) {
-    const c = S.stats.chapters[id] || {};
-    return { answered: c.answered || 0, scored: c.scored || 0, correct: c.correct || 0 };
-  }
-
-  /* ── Home: summary and subjects ── */
-  async function renderHome() {
-    const token = ++renderToken;
+  /* ── Home: subjects ── */
+  function renderHome() {
+    renderToken++;
     clear();
-    const loading = el("div", "portal-loading", "Loading…");
-    loading.setAttribute("role", "status");
-    host.append(loading);
-    await ensureStats();
-    if (token !== renderToken) return;
-    clear();
-
-    const t = S.stats.totals;
-    const sum = el("section", "portal-card pq-summary");
-    sum.append(el("h2", "pq-h2", "Your practice"));
-    const dl = el("dl", "summary-list");
-    [["Questions answered", String(t.answered)], ["Correct (auto-marked)", pct(t.correct, t.scored)]].forEach((p) => {
-      const d = el("div"); d.append(el("dt", null, p[0]), el("dd", null, p[1])); dl.append(d);
-    });
-    sum.append(dl);
-    sum.append(el("p", "field-hint", "Written answers (very short, short and long) are self-assessed and are not part of the percentage."));
-    host.append(sum);
-
-    host.append(el("h2", "pq-h2 pq-gap", "Practice questions"));
+    host.append(el("h2", "pq-h2", "Practice Questions"));
+    host.append(el("p", "portal-sub", "Practise a chapter and see your results at the end. Practice is not saved; you can download your result as a PDF."));
     const grid = el("div", "pq-grid");
     infos.forEach((inf) => {
       const b = el("button", "pq-tile");
@@ -373,7 +423,6 @@ export function initPractice(host, ctx) {
     const loading = el("div", "portal-loading", "Loading chapters…");
     loading.setAttribute("role", "status");
     host.append(loading);
-    await ensureStats();
     try {
       if (!S.chapters[subject]) S.chapters[subject] = await fetchChapters(infoOf(subject), infoOf(subject).subject);
     } catch (err) {
@@ -396,22 +445,19 @@ export function initPractice(host, ctx) {
       b.type = "button";
       const main = el("div", "pq-row-main");
       main.append(el("strong", null, "Chapter " + c.chapterNumber + ": " + c.chapterName));
-      const st = chapterStats(c.id);
       const meta = el("span", "pq-row-meta", "Counting questions…");
       main.append(meta);
       b.append(main);
       b.insertAdjacentHTML("beforeend", ARROW_SVG);
       b.addEventListener("click", () => go({ name: "chapter", subject: subject, chapterId: c.id }));
       list.append(b);
-      const show = (n) => {
-        const bits = [n + (n === 1 ? " question" : " questions")];
-        if (st.answered) bits.push(st.answered + " answered", pct(st.correct, st.scored) + " correct");
-        meta.textContent = bits.join(" · ");
+      const showCount = (n) => {
+        meta.textContent = n + (n === 1 ? " question" : " questions");
         if (n === 0) { b.disabled = true; meta.textContent = "No questions yet"; }
       };
-      if (S.counts[c.id] != null) show(S.counts[c.id]);
+      if (S.counts[c.id] != null) showCount(S.counts[c.id]);
       else {
-        countPublished(subject, c.id).then((n) => { S.counts[c.id] = n; show(n); })
+        countPublished(subject, c.id).then((n) => { S.counts[c.id] = n; showCount(n); })
           .catch((err) => { console.error(err); meta.textContent = "Could not count questions"; });
       }
     });
@@ -438,19 +484,15 @@ export function initPractice(host, ctx) {
     }
     if (token !== renderToken) return;
     if (!ch) { host.append(el("div", "message-box", "This chapter is no longer available.")); return; }
-    await ensureStats();
-    if (token !== renderToken) return;
 
     host.append(el("h2", "pq-h2", "Chapter " + ch.chapterNumber + ": " + ch.chapterName));
-    const st = chapterStats(ch.id);
-    host.append(el("p", "portal-sub",
-      st.answered ? (st.answered + " answered · " + pct(st.correct, st.scored) + " correct (auto-marked)") : "You have not answered any question in this chapter yet."));
+    host.append(el("p", "portal-sub", "Answer the questions, then press Finish to see your results and the correct answers. Up to " + PRACTICE_MAX + " questions are given at a time, in question-number order."));
 
     const card = el("section", "portal-card");
     const fd = el("fieldset", "field");
     fd.append(el("legend", "field-label", "Difficulty"));
     const choices = el("div", "choices");
-    [["", "All"]].concat(DIFFICULTIES.map((d) => [d, d])).forEach((p, i) => {
+    [["", "All"]].concat(DIFFICULTIES.map((d) => [d, d])).forEach((p) => {
       const lab = el("label", "choice");
       const inp = el("input");
       inp.type = "radio"; inp.name = "pq-diff"; inp.value = p[0];
@@ -481,18 +523,12 @@ export function initPractice(host, ctx) {
       start.disabled = true; msg.hidden = true;
       try {
         const filters = { difficulty: S.filters.difficulty || null, type: S.filters.type || null };
-        const [total, first] = await Promise.all([
-          countPublished(subject, ch.id, filters),
-          fetchPracticeQuestions(subject, ch.id, filters, null)
-        ]);
-        if (!first.rows.length) {
+        const got = await fetchSessionQuestions(subject, ch.id, filters);
+        if (!got.rows.length) {
           msg.textContent = "No questions match these choices yet. Try different filters.";
           msg.hidden = false; start.disabled = false; return;
         }
-        S.session = {
-          chapter: ch, filters: filters, rows: first.rows, cursor: first.cursor, done: first.done,
-          total: Math.max(total, first.rows.length), index: 0, answered: 0, correct: 0, scored: 0, finished: false
-        };
+        S.session = { chapter: ch, subject: subject, rows: got.rows, total: got.total, cards: got.rows.map(buildQuestion), idx: 0, shown: {}, results: null };
         go({ name: "session" });
       } catch (err) {
         console.error(err);
@@ -503,187 +539,223 @@ export function initPractice(host, ctx) {
     host.append(card);
   }
 
-  /* ── Practice session ── */
+  /* ── Practice session: answer everything, then Finish ── */
+  const paperOnly = (q) => isWritten(q.type) || (q.type === "case_based" && (q.subQuestions || []).every((s) => isWritten(s.type)));
+
   function renderSession() {
+    const s = S.session;
+    renderToken++;
+    if (s.results) { renderResults(); return; }
+    clear();
+    host.append(backButton("Chapter " + s.chapter.chapterNumber, () => {
+      if (window.confirm("Leave this practice? Your answers are not saved.")) { S.session = null; history.back(); }
+    }));
+    const head = el("div", "pq-sesshead");
+    const headTitle = el("strong"); const headMeta = el("span", "pq-row-meta", s.chapter.chapterName);
+    head.append(headTitle, headMeta);
+    const qArea = el("div", "pt-qarea");
+    const actions = el("div", "pq-actions pt-qacts");
+    const prev = el("button", "btn btn-outline", "Previous"); prev.type = "button";
+    const next = el("button", "btn btn-outline", "Next"); next.type = "button";
+    actions.append(prev, next);
+    const nav = el("section", "portal-card pt-nav");
+    const msg = el("div", "portal-error"); msg.hidden = true;
+    const finishBtn = el("button", "btn btn-primary", "Finish and see results"); finishBtn.type = "button";
+    host.append(head, qArea, actions, nav, msg, finishBtn);
+
+    const doneOf = (i) => !paperOnly(s.rows[i]) && s.cards[i].isComplete();
+
+    function drawNav() {
+      nav.textContent = "";
+      nav.append(el("div", "pq-sublabel", "Questions"));
+      const grid = el("div", "pt-grid");
+      s.rows.forEach((q, i) => {
+        const b = el("button", "pt-num", String(i + 1)); b.type = "button";
+        if (i === s.idx) b.classList.add("is-current");
+        if (doneOf(i)) b.classList.add("is-answered");
+        if (paperOnly(q)) b.classList.add("is-paper");
+        b.setAttribute("aria-label", "Question " + (i + 1) + (doneOf(i) ? ", answered" : ""));
+        b.addEventListener("click", () => { s.idx = i; draw(); scrollTop(); });
+        grid.append(b);
+      });
+      nav.append(grid);
+      const legend = el("div", "pt-legend");
+      [["Answered", "is-answered"], ["Model answer at the end", "is-paper"]].forEach((l) => {
+        const k = el("span", "pt-key"); k.append(el("i", "pt-sw " + l[1]), document.createTextNode(l[0])); legend.append(k);
+      });
+      nav.append(legend);
+    }
+
+    function draw() {
+      qArea.textContent = "";
+      headTitle.textContent = "Question " + (s.idx + 1) + " of " + s.rows.length;
+      qArea.append(s.cards[s.idx].root);
+      if (!s.shown[s.idx]) { s.shown[s.idx] = true; typeset(s.cards[s.idx].root); }
+      prev.disabled = s.idx === 0;
+      next.disabled = s.idx === s.rows.length - 1;
+      drawNav();
+    }
+    prev.addEventListener("click", () => { s.idx -= 1; draw(); scrollTop(); });
+    next.addEventListener("click", () => { s.idx += 1; draw(); scrollTop(); });
+    qArea.addEventListener("input", drawNav);
+    qArea.addEventListener("change", drawNav);
+
+    finishBtn.addEventListener("click", async () => {
+      const open = s.rows.filter((q, i) => !paperOnly(q) && !s.cards[i].isComplete()).length;
+      const text = (open ? "You have " + open + " unanswered " + (open === 1 ? "question" : "questions") + ". " : "") + "After finishing you cannot change your answers. Finish now?";
+      if (!window.confirm(text)) return;
+      finishBtn.disabled = true; msg.hidden = true;
+      finishBtn.textContent = "Checking your answers…";
+      try {
+        const got = await fetchKeys(s.rows.map((q) => q.id));
+        if (got.denied) {
+          msg.textContent = "Answers are locked while a mock test is in progress. Finish or submit the test, then press Finish again. Your answers here are kept until you leave this page.";
+          msg.hidden = false;
+        } else {
+          finalise(got.keys);
+          scrollTop();
+          renderResults();
+          return;
+        }
+      } catch (err) {
+        console.error(err);
+        msg.textContent = errorText(err); msg.hidden = false;
+      }
+      finishBtn.disabled = false; finishBtn.textContent = "Finish and see results";
+    });
+
+    draw();
+  }
+
+  /* Marks every question once the keys are in. Nothing is saved anywhere. */
+  function finalise(keys) {
+    const s = S.session;
+    const answers = s.cards.map((c) => c.getAnswer());
+    const marks = s.rows.map((q, i) => markQuestion(q, keys[q.id], answers[i]));
+    const sum = { correct: 0, wrong: 0, unanswered: 0, scored: 0 };
+    const status = s.rows.map((q, i) => {
+      const m = marks[i];
+      if (!m.scored) return { kind: "paper", text: "Compare with model answer" };
+      sum.scored += 1;
+      if (q.type === "case_based") {
+        const auto = m.subResults.filter((r) => r !== null);
+        const good = auto.filter((r) => r === true).length;
+        if (m.isCorrect) sum.correct += 1; else if (!good && !s.cards[i].isComplete()) sum.unanswered += 1; else sum.wrong += 1;
+        return { kind: m.isCorrect ? "correct" : "wrong", text: good + " of " + auto.length + " parts correct" };
+      }
+      if (!s.cards[i].isComplete()) { sum.unanswered += 1; return { kind: "unanswered", text: "Not answered" }; }
+      if (m.isCorrect) { sum.correct += 1; return { kind: "correct", text: "Correct" }; }
+      sum.wrong += 1; return { kind: "wrong", text: "Incorrect" };
+    });
+    s.results = { keys: keys, answers: answers, marks: marks, status: status, summary: sum };
+  }
+
+  /* ── Results: summary, PDF, and every question with its answer and explanation ── */
+  function renderResults() {
     const s = S.session;
     renderToken++;
     clear();
     host.append(backButton("Chapter " + s.chapter.chapterNumber, () => { S.session = null; history.back(); }));
+    host.append(el("h2", "pq-h2", "Practice results"));
+    host.append(el("p", "portal-sub", "Chapter " + s.chapter.chapterNumber + ": " + s.chapter.chapterName));
+    const R = s.results, sm = R.summary;
 
-    if (s.finished) { renderFinished(); return; }
-
-    const q = s.rows[s.index];
-    const head = el("div", "pq-sesshead");
-    head.append(el("strong", null, "Question " + (s.index + 1) + " of " + s.total),
-      el("span", "pq-row-meta", s.chapter.chapterName));
-    host.append(head);
-
-    const card = buildQuestion(q);
-    host.append(card.root);
-    const startedAt = Date.now();
-
-    const feedback = el("div", "pq-feedback"); feedback.hidden = true;
-    const actions = el("div", "pq-actions");
-    const writtenWhole = isWritten(q.type);
-    const check = el("button", "btn btn-primary", writtenWhole ? "Show model answer" : "Check answer");
-    check.type = "button";
-    check.disabled = !card.isComplete();
-    const skip = el("button", "btn btn-secondary", "Skip");
-    skip.type = "button";
-    actions.append(check, skip);
-    host.append(actions, feedback);
-
-    card.root.addEventListener("input", () => { check.disabled = !card.isComplete(); });
-    card.root.addEventListener("change", () => { check.disabled = !card.isComplete(); });
-    skip.addEventListener("click", () => advance());
-
-    const note = el("div", "portal-error"); note.hidden = true;
-    host.insertBefore(note, feedback);
-
-    check.addEventListener("click", async () => {
-      check.disabled = true; skip.disabled = true; note.hidden = true;
-      const seconds = (Date.now() - startedAt) / 1000;
-      const answer = card.getAnswer();
-      let key;
-      try { key = await fetchKey(q.id); }
-      catch (err) {
-        console.error(err);
-        note.textContent = (err && err.code === "permission-denied")
-          ? "Answers are locked while a mock test is in progress. Finish or submit the test, then try again."
-          : errorText(err);
-        note.hidden = false;
-        check.disabled = !card.isComplete(); skip.disabled = false;
-        return;
-      }
-      const marked = markQuestion(q, key, answer);
-      card.lock();
-      card.reveal(key);
-      actions.hidden = true;
-      showFeedback(q, key, marked);
-
-      if (writtenWhole) {
-        const ask = el("div", "pq-self");
-        ask.append(el("p", "pq-hint", "How did your answer compare with the model answer?"));
-        const row = el("div", "pq-actions");
-        const yes = el("button", "btn btn-primary", "I got it right");
-        const no = el("button", "btn btn-secondary", "I need more practice");
-        yes.type = no.type = "button";
-        row.append(yes, no);
-        ask.append(row);
-        feedback.append(ask);
-        const save = (right) => { yes.disabled = no.disabled = true; persist(q, answer, marked, seconds, right, ask); };
-        yes.addEventListener("click", () => save(true));
-        no.addEventListener("click", () => save(false));
-      } else {
-        persist(q, answer, marked, seconds, undefined, feedback);
-      }
-      typeset(host);
-    });
-
-    function showFeedback(qq, key, marked) {
-      feedback.hidden = false;
-      const banner = el("div", "pq-banner");
-      if (!marked.scored) {
-        banner.textContent = "Compare your answer with the model answer.";
-      } else if (qq.type === "case_based") {
-        const auto = marked.subResults.filter((r) => r !== null);
-        const good = auto.filter((r) => r === true).length;
-        banner.textContent = good + " of " + auto.length + " auto-marked " + (auto.length === 1 ? "part" : "parts") + " correct";
-        banner.classList.add(marked.isCorrect ? "is-correct" : "is-wrong");
-      } else {
-        banner.textContent = marked.isCorrect ? "Correct" : "Incorrect";
-        banner.classList.add(marked.isCorrect ? "is-correct" : "is-wrong");
-      }
-      feedback.append(banner);
-      if ((key.explanationLatex || "").trim() || imageBox(key.explanationImageUrl, "x")) {
-        const ex = el("div", "pq-explain");
-        ex.append(el("div", "pq-sublabel", "Explanation"));
-        if ((key.explanationLatex || "").trim()) ex.append(latexBlock("", key.explanationLatex));
-        const im = imageBox(key.explanationImageUrl, "Figure for the explanation");
-        if (im) ex.append(im);
-        feedback.append(ex);
-      }
-    }
-
-    /* Saves the attempt once; on failure the student can try saving again. */
-    async function persist(qq, answer, marked, seconds, selfRight, box) {
-      const status = el("div", "pq-savestate");
-      box.append(status);
-      async function attempt() {
-        status.textContent = "Saving…";
-        try {
-          await recordAttempt(ctx.uid, qq, answer, marked, seconds, selfRight);
-        } catch (err) {
-          console.error(err);
-          status.textContent = "";
-          status.append(document.createTextNode(errorText(err) + " Your answer has not been saved. "));
-          const retry = el("button", "link-btn", "Try saving again");
-          retry.type = "button";
-          retry.addEventListener("click", attempt);
-          status.append(retry);
-          return;
-        }
-        status.remove();
-        const c = S.stats.chapters[qq.chapterId] = S.stats.chapters[qq.chapterId] || {};
-        c.answered = (c.answered || 0) + 1;
-        if (marked.scored) { c.scored = (c.scored || 0) + 1; if (marked.isCorrect) c.correct = (c.correct || 0) + 1; }
-        S.stats.totals.answered += 1;
-        if (marked.scored) { S.stats.totals.scored += 1; if (marked.isCorrect) S.stats.totals.correct += 1; }
-        s.answered += 1;
-        if (marked.scored) { s.scored += 1; if (marked.isCorrect) s.correct += 1; }
-        const next = el("button", "btn btn-primary", s.index + 1 >= s.total ? "Finish" : "Next question");
-        next.type = "button";
-        next.addEventListener("click", () => advance());
-        const row = el("div", "pq-actions");
-        row.append(next);
-        feedback.append(row);
-      }
-      attempt();
-    }
-
-    typeset(host);
-  }
-
-  async function advance() {
-    const s = S.session;
-    if (s.index + 1 >= s.rows.length && !s.done) {
-      try {
-        const more = await fetchPracticeQuestions(S.subject, s.chapter.id, s.filters, s.cursor);
-        s.rows = s.rows.concat(more.rows);
-        s.cursor = more.cursor || s.cursor;
-        s.done = more.done;
-        s.total = Math.max(s.total, s.rows.length);
-      } catch (err) {
-        console.error(err);
-        host.append(el("div", "portal-error", errorText(err)));
-        return;
-      }
-    }
-    if (s.index + 1 >= s.rows.length) s.finished = true;
-    else s.index += 1;
-    scrollTop();
-    renderSession();
-  }
-
-  function renderFinished() {
-    const s = S.session;
-    host.append(el("h2", "pq-h2", "Practice complete"));
-    const card = el("section", "portal-card");
+    const sumCard = el("section", "portal-card pq-summary");
     const dl = el("dl", "summary-list");
-    [["Questions answered", String(s.answered)], ["Correct (auto-marked)", pct(s.correct, s.scored)]].forEach((p) => {
-      const d = el("div"); d.append(el("dt", null, p[0]), el("dd", null, p[1])); dl.append(d);
-    });
-    card.append(dl);
+    [["Questions", String(s.rows.length)],
+      ["Correct (auto-marked)", sm.scored ? sm.correct + " / " + sm.scored + " (" + pct(sm.correct, sm.scored) + ")" : "–"],
+      ["Correct · Wrong · Not answered", sm.correct + " · " + sm.wrong + " · " + sm.unanswered]
+    ].forEach((p) => { const d = el("div"); d.append(el("dt", null, p[0]), el("dd", null, p[1])); dl.append(d); });
+    sumCard.append(dl);
+    sumCard.append(el("p", "field-hint", "Written answers are not marked here; compare them with the model answer. Practice is not saved: once you leave this page, this result is gone unless you download it."));
+
+    const exp = el("div", "pt-export");
+    const dlBtn = el("button", "btn btn-primary", "Download PDF"); dlBtn.type = "button";
+    const shBtn = PDF.canShareFiles() ? el("button", "btn btn-secondary", "Share PDF") : null;
+    if (shBtn) shBtn.type = "button";
+    const expMsg = el("p", "field-hint pt-export-msg", ""); expMsg.setAttribute("role", "status");
+    let pdfBlob = null, working = false;
+    const inf = infoOf(s.subject);
+    const pdfName = PDF.pdfFileName("Practice " + s.chapter.chapterName);
+    async function makePdf() {
+      if (pdfBlob) return pdfBlob;
+      expMsg.textContent = "Preparing your PDF\u2026";
+      const root = buildPracticeReport({
+        chapter: s.chapter, subjectLabel: inf ? inf.label : "", rows: s.rows, answers: R.answers, keys: R.keys,
+        marks: R.marks, status: R.status, summary: sm, student: { name: ctx.name, email: ctx.email }
+      });
+      document.body.appendChild(root);
+      try {
+        pdfBlob = await PDF.reportToPdf(root, (i, n) => { expMsg.textContent = "Preparing your PDF\u2026 " + i + " of " + n; });
+      } finally { clearMath(root); root.remove(); }
+      return pdfBlob;
+    }
+    async function runExport(share) {
+      if (working) return;
+      working = true; dlBtn.disabled = true; if (shBtn) shBtn.disabled = true;
+      try {
+        const blob = await makePdf();
+        if (share) {
+          try {
+            const done = await PDF.shareBlob(blob, pdfName, "Practice result", "My practice result: " + s.chapter.chapterName);
+            expMsg.textContent = done ? "" : "Sharing was cancelled. Your PDF is ready; press Share PDF again.";
+          } catch (e) {
+            console.error(e);
+            expMsg.textContent = "Your PDF is ready. Press Share PDF once more to open the share sheet, or use Download PDF.";
+          }
+        } else {
+          PDF.downloadBlob(blob, pdfName);
+          expMsg.textContent = "Your PDF has been downloaded.";
+        }
+      } catch (e) {
+        console.error(e);
+        expMsg.textContent = "The PDF could not be made. Please check your connection and try again.";
+      }
+      working = false; dlBtn.disabled = false; if (shBtn) shBtn.disabled = false;
+    }
+    dlBtn.addEventListener("click", () => runExport(false));
+    if (shBtn) shBtn.addEventListener("click", () => runExport(true));
+    exp.append(dlBtn);
+    if (shBtn) exp.append(shBtn);
+    sumCard.append(exp, expMsg);
+    host.append(sumCard);
+
+    host.append(el("h3", "pq-h2 pq-gap pt-sub", "Review"));
+    if (!s.reviewEls) {
+      s.reviewEls = s.rows.map((q, i) => {
+        const wrap = el("div", "pq-review");
+        const st = R.status[i];
+        const chipRow = el("div", "pq-tags");
+        chipRow.append(el("span", "q-tag", "Question " + (i + 1)), el("span", "pt-chip " + (st.kind === "correct" ? "is-correct" : st.kind === "wrong" ? "is-wrong" : ""), st.text));
+        wrap.append(chipRow);
+        const card = s.cards[i];
+        card.lock();
+        card.reveal(R.keys[q.id] || {});
+        wrap.append(card.root);
+        const key = R.keys[q.id] || {};
+        if ((key.explanationLatex || "").trim() || imageBox(key.explanationImageUrl, "x")) {
+          const ex = el("div", "pq-explain");
+          ex.append(el("div", "pq-sublabel", "Explanation"));
+          if ((key.explanationLatex || "").trim()) ex.append(latexBlock("", key.explanationLatex));
+          const im = imageBox(key.explanationImageUrl, "Figure for the explanation");
+          if (im) ex.append(im);
+          wrap.append(ex);
+        }
+        return wrap;
+      });
+    }
+    s.reviewEls.forEach((w) => host.append(w));
+    typeset(host);
+
     const row = el("div", "pq-actions");
     const again = el("button", "btn btn-primary", "Practise again");
     again.type = "button";
     again.addEventListener("click", () => { S.session = null; history.back(); });
     const home = el("button", "btn btn-secondary", "All subjects");
     home.type = "button";
-    home.addEventListener("click", () => { S.session = null; S.statsLoaded = true; go({ name: "home" }); });
+    home.addEventListener("click", () => { S.session = null; go({ name: "home" }); });
     row.append(again, home);
-    card.append(row);
-    host.append(card);
+    host.append(row);
   }
 
   renderHome();

@@ -19,7 +19,7 @@ export function initAnalytics(host, api) {
   const S = {
     ready: false, busy: false, progress: "",
     rows: [], info: { updatedAt: 0, count: 0 },
-    mode: "all", view: "chapter",
+    mode: "mock", view: "chapter",
     scopeKey: "", chapterId: "", paperId: "",
     chapters: {}, papers: [], papersLoaded: false,
     sort: "id", fDiff: "all", fType: "all", fFlag: false,
@@ -161,9 +161,6 @@ export function initAnalytics(host, api) {
       render();
     })));
     if (S.view !== "paper") {
-      box.append(field("Source", select([
-        { value: "all", label: "Practice and mock tests" }, { value: "practice", label: "Practice only" }, { value: "mock", label: "Mock tests only" }
-      ], S.mode, (v) => { S.mode = v; S.shown = SHOW_STEP; render(); })));
       const items = [{ value: "", label: "Choose a subject" }].concat(scopes.map((s) => ({ value: s.key, label: s.label })));
       box.append(field("Subject", select(items, S.scopeKey, async (v) => {
         S.scopeKey = v; S.chapterId = ""; S.shown = SHOW_STEP;
@@ -205,7 +202,7 @@ export function initAnalytics(host, api) {
   /* ── Subject: one line per chapter ── */
   function renderSubject(body) {
     const rows = L.filterRows(S.rows, currentFilter());
-    if (!rows.length) { body.append(empty("No attempts for this subject with this source yet.")); return; }
+    if (!rows.length) { body.append(empty("No attempts for this subject yet.")); return; }
     const chs = S.chapters[S.scopeKey];
     if (!chs) { body.append(el("div", "portal-loading", "Loading chapters…")); loadChapters(S.scopeKey).then(render); return; }
     const aggs = L.aggregate(rows);
@@ -218,8 +215,8 @@ export function initAnalytics(host, api) {
     body.append(tiles(L.overall(aggs), L.overall(aggs).questions, false));
     const tools = el("div", "an-tools");
     tools.append(btn("Export CSV", "btn-outline", () => exportCsv(
-      ["Chapter", "Questions attempted", "Attempts", "Scored attempts", "Correct %", "Average time (practice)"],
-      ordered.map((o) => [o.title, o.r.questions, o.r.attempts, o.r.scored, o.r.pct === null ? "" : o.r.pct, o.r.avgSecs === null ? "" : Math.round(o.r.avgSecs)]),
+      ["Chapter", "Questions attempted", "Attempts", "Scored attempts", "Correct %"],
+      ordered.map((o) => [o.title, o.r.questions, o.r.attempts, o.r.scored, o.r.pct === null ? "" : o.r.pct]),
       "subject-" + (scopeOf(S.scopeKey).subject))));
     body.append(tools);
 
@@ -230,7 +227,7 @@ export function initAnalytics(host, api) {
       main.append(el("div", "a-name", o.title));
       main.append(metrics([
         ["Questions", String(o.r.questions)], ["Attempts", String(o.r.attempts)],
-        ["Correct", L.fmtPct(o.r.pct)], ["Avg time", L.fmtSecs(o.r.avgSecs)]
+        ["Correct", L.fmtPct(o.r.pct)]
       ]));
       row.append(main);
       if (o.id) {
@@ -250,7 +247,7 @@ export function initAnalytics(host, api) {
     if (!rows.length) {
       body.append(empty(S.view === "paper"
         ? "No attempts saved for this paper. Attempts made before Rules v8 was published do not record their paper, so they appear only in the chapter and subject views."
-        : "No attempts for this chapter with this source yet."));
+        : "No attempts for this chapter yet."));
       return;
     }
     const aggs = L.aggregate(rows);
@@ -296,7 +293,6 @@ export function initAnalytics(host, api) {
       attempts: (x, y) => y.a.attempts - x.a.attempts,
       low: (x, y) => num(x.a.pct, 101) - num(y.a.pct, 101),
       high: (x, y) => num(y.a.pct, -1) - num(x.a.pct, -1),
-      time: (x, y) => num(y.a.avgSecs, -1) - num(x.a.avgSecs, -1),
       flag: (x, y) => (y.flag ? 1 : 0) - (x.flag ? 1 : 0) || x.name.localeCompare(y.name, undefined, { numeric: true })
     }[S.sort];
     list = list.slice().sort(cmp);
@@ -311,9 +307,9 @@ export function initAnalytics(host, api) {
       render();
     }));
     acts.append(btn("Export CSV", "btn-outline", () => exportCsv(
-      ["Question ID", "Type", "Tagged difficulty", "Marks", "Attempts", "Scored attempts", "Correct %", "Average time (practice)", "Most chosen wrong option", "Difficulty flag"],
+      ["Question ID", "Type", "Tagged difficulty", "Marks", "Attempts", "Scored attempts", "Correct %", "Most chosen wrong option", "Difficulty flag"],
       list.map((v) => [v.name, typeLabel(v.a.type), v.diff, v.m && v.m.marks !== undefined ? v.m.marks : "", v.a.attempts, v.a.scored,
-        v.a.pct === null ? "" : v.a.pct, v.a.avgSecs === null ? "" : Math.round(v.a.avgSecs),
+        v.a.pct === null ? "" : v.a.pct,
         v.a.topWrong ? L.optionLabel(v.a.type, v.a.topWrong.idx) : "", v.flag ? v.flag.short : ""]),
       S.view === "paper" ? "paper" : "chapter")));
     tools.append(acts);
@@ -336,7 +332,6 @@ export function initAnalytics(host, api) {
     add("Questions attempted", String(questions));
     add("Attempts", String(ov.attempts));
     add("Correct (auto-marked)", L.fmtPct(ov.pct));
-    add("Average time (practice)", L.fmtSecs(ov.avgSecs));
     if (perQuestion) add("Flagged questions", String(flagged || 0));
     if (tests !== null && tests !== undefined) add("Tests taken", String(tests));
     return box;
@@ -374,7 +369,6 @@ export function initAnalytics(host, api) {
     row.append(metrics([
       ["Attempts", String(a.attempts)],
       ["Correct", a.pct === null ? "Self-assessed" : L.fmtPct(a.pct) + scoredNote],
-      ["Avg time", L.fmtSecs(a.avgSecs)],
       ["Most chosen wrong", wrongText(v)]
     ]));
 

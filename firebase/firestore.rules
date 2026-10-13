@@ -1,5 +1,13 @@
 rules_version = '2';
 
+// Rules v10 (Phase 10, later change): practice mode is no longer saved. Practice
+// attempts and practiceStats can no longer be written by students (the
+// practiceStats collection has no rule at all now). Mock tests keep only the
+// latest attempt of each paper: a new document testResults/{uid}_{paperId}
+// points at the student's latest submitted session and carries its attempt
+// number; when a new attempt is submitted the student's browser deletes the
+// older session of that paper, which the rules allow only once the
+// testResults pointer names a different session.
 // Rules v9 (Phase 10): the boards, classes, subjects and access levels are no
 // longer fixed in these rules. They live in one document, catalog/main, that
 // ProfAdmin edits (everyone signed in may read it). A student now holds a LIST
@@ -324,7 +332,7 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // ───────────── Practice attempts and progress (Phase 6) ─────────────
+    // ───────────── Attempts (Phase 6; practice is not saved from v10, mock tests only) ─────────────
 
     function answerOk(a) {
       return a is map
@@ -347,8 +355,8 @@ service cloud.firestore {
         && (!('subResults' in d) || (d.subResults is list && d.subResults.size() <= 6))
         && (!('selfRight' in d) || d.selfRight is bool)
         && d.createdAt == request.time
-        && ((d.mode == 'practice' && !('sessionId' in d) && !('paperId' in d))
-            || (d.mode == 'mock' && mockAttemptOk(d, aid)));
+        && d.mode == 'mock'
+        && mockAttemptOk(d, aid);
     }
 
     // A mock-test attempt: one per answered question of a submitted session
@@ -381,20 +389,6 @@ service cloud.firestore {
              'type', 'difficulty', 'mode', 'answer', 'scored', 'isCorrect', 'timeSpent', 'createdAt'])
         && attemptOk(request.resource.data, attemptId);
       allow update: if false;
-      allow delete: if isAdmin();
-    }
-
-    // Progress counters per chapter, kept by the student's own browser in the
-    // same batch as each attempt: { uid, chapters: { <chapterId>: { answered, scored, correct } } }.
-    match /practiceStats/{uid} {
-      allow get: if signedIn() && (request.auth.uid == uid || isAdmin());
-      allow list: if isAdmin();
-      allow create, update: if isApprovedStudent()
-        && request.auth.uid == uid
-        && request.resource.data.keys().hasOnly(['uid', 'chapters', 'updatedAt'])
-        && request.resource.data.uid == request.auth.uid
-        && request.resource.data.chapters is map
-        && request.resource.data.updatedAt == request.time;
       allow delete: if isAdmin();
     }
 
@@ -525,6 +519,52 @@ service cloud.firestore {
         && resource.data.uid == request.auth.uid
         && resource.data.status == 'in_progress'
         && (sessionSaveOk() || sessionSubmitOk());
+      // ProfAdmin may delete any session. A student may delete only their own
+      // submitted session that a newer attempt has replaced: the testResults
+      // pointer (in the same batch) must name a different session.
+      allow delete: if isAdmin()
+        || (isApprovedStudent()
+            && resource.data.uid == request.auth.uid
+            && resource.data.status == 'submitted'
+            && exists(resultPath(resource.data.uid + '_' + resource.data.paperId))
+            && getAfter(resultPath(resource.data.uid + '_' + resource.data.paperId)).data.sessionId != sessionId);
+    }
+
+    // ───────────── Latest mock result per paper (v10) ─────────────
+    // One document per student per paper: testResults/{uid}_{paperId}. It names
+    // the latest submitted session and its attempt number. Submitting a new
+    // attempt overwrites it with the next number (always previous + 1).
+    function resultPath(rid) {
+      return /databases/$(database)/documents/testResults/$(rid);
+    }
+
+    function resultOk(d, rid) {
+      let s = getAfter(sessionPath(d.sessionId)).data;
+      return d.uid == request.auth.uid
+        && rid == d.uid + '_' + d.paperId
+        && d.sessionId is string
+        && s.uid == request.auth.uid
+        && s.paperId == d.paperId
+        && s.status == 'submitted'
+        && d.paperTitle == s.paperTitle
+        && d.late == s.late
+        && d.attemptNo is int && d.attemptNo >= 1 && d.attemptNo <= 10000
+        && d.submittedAt == request.time;
+    }
+
+    match /testResults/{rid} {
+      allow get: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+      allow list: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow create: if isApprovedStudent()
+        && request.resource.data.keys().hasOnly(['uid', 'paperId', 'paperTitle', 'sessionId', 'attemptNo', 'late', 'submittedAt'])
+        && request.resource.data.keys().hasAll(['uid', 'paperId', 'paperTitle', 'sessionId', 'attemptNo', 'late', 'submittedAt'])
+        && resultOk(request.resource.data, rid);
+      allow update: if isApprovedStudent()
+        && resource.data.uid == request.auth.uid
+        && request.resource.data.keys().hasOnly(['uid', 'paperId', 'paperTitle', 'sessionId', 'attemptNo', 'late', 'submittedAt'])
+        && request.resource.data.attemptNo == resource.data.attemptNo + 1
+        && request.resource.data.sessionId != resource.data.sessionId
+        && resultOk(request.resource.data, rid);
       allow delete: if isAdmin();
     }
 
