@@ -6,6 +6,7 @@
  * Update; see analytics-core.js. All text is inserted with textContent.
  * ───────────────────────────────────────────────────────────────────── */
 import * as Q from "./question-core.js";
+import * as Cat from "./catalog-core.js";
 import * as P from "./paper-core.js";
 import * as C from "./analytics-core.js";
 import * as L from "./analytics-logic.js";
@@ -28,8 +29,8 @@ export function initAnalytics(host, api) {
   let uid = 0;
 
   const scopes = [];
-  Q.FOLDERS.forEach((f) => f.subjects.forEach((s) => scopes.push({
-    key: f.board + "|" + f.cls + "|" + s, board: f.board, cls: f.cls, subject: s, label: f.label + " · " + s
+  Q.folders().forEach((f) => f.subjects.forEach((s) => scopes.push({
+    key: f.board + "|" + f.cls + "|" + s, board: f.board, cls: f.cls, subject: s, label: Cat.scopeLabel(f.board, f.cls, s)
   })));
   const scopeOf = (key) => scopes.find((s) => s.key === key) || null;
   const typeLabel = (id) => { const t = Q.TYPES.find((x) => x.id === id); return t ? t.label : id; };

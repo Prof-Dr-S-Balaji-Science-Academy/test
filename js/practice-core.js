@@ -15,19 +15,13 @@ import {
   collection, query, where, limit, startAfter, getDocs, getDoc, getCountFromServer,
   doc, writeBatch, increment, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { db, COURSES } from "./auth-core.js";
+import { db } from "./auth-core.js";
+import { levelInfo } from "./catalog-core.js";
 
 export const PRACTICE_PAGE = 20;
 
-/* Board, class, label and subjects for an access level. */
-export function levelInfo(level) {
-  for (const c of COURSES) {
-    for (const s of c.subjects) {
-      if (s.level === level) return { level: level, board: c.board, cls: c.cls, label: c.label, subjects: s.list.slice() };
-    }
-  }
-  return null;
-}
+/* Board, class, label and subject of an access level (from the catalog). */
+export { levelInfo };
 
 /* ── Chapters and counts ── */
 export async function fetchChapters(info, subject) {

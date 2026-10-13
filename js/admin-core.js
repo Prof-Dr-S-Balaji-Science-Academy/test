@@ -1,28 +1,26 @@
 /* ─────────────────────────────────────────────────────────────────────
  * admin-core.js  (ES module, ProfAdmin console data layer)
  * All Firestore reads/writes used by pages/admin/. The real lock is the
- * Firestore Security Rules (Rules v2, extended up to v8): only accounts listed in `admins`
+ * Firestore Security Rules (Rules v2, extended up to v9): only accounts listed in `admins`
  * can read the student list or change status / access level / delete.
  * ───────────────────────────────────────────────────────────────────── */
 import {
   collection, query, where, orderBy, limit, startAfter, getDocs, getCountFromServer,
   doc, updateDoc, deleteDoc, writeBatch, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { db, COURSES } from "./auth-core.js";
+import { db } from "./auth-core.js";
+import * as Cat from "./catalog-core.js";
 
 export const PAGE_SIZE = 50;
 const BATCH_MAX = 400; // Firestore allows 500 writes per batch; stay below it.
 
-/* The seven access levels with readable labels, built from the same list the
- * onboarding form uses so the two can never disagree. */
-export const LEVELS = [];
-COURSES.forEach((c) => c.subjects.forEach((s) => {
-  LEVELS.push({ value: s.level, label: c.label + " · " + s.label });
-}));
-export const levelLabel = (v) => {
-  const f = LEVELS.find((l) => l.value === v);
-  return f ? f.label : (v || "");
-};
+/* Access levels come from the catalog (Phase 10). LEVELS is rebuilt on every
+ * call so that levels added or hidden in the Catalog section show up at once. */
+export function levels() {
+  return Cat.allLevelIds().map((id) => ({ value: id, label: Cat.levelLabel(id), active: Cat.levelActive(id) }));
+}
+export const levelLabel = (v) => Cat.levelLabel(v);
+export const levelsText = (list) => (list || []).map((l) => Cat.levelLabel(l)).join(", ");
 
 const users = () => collection(db, "users");
 const pack = (snap) => snap.docs.map((d) => ({ uid: d.id, ...d.data() }));
@@ -57,25 +55,25 @@ export async function countPending() {
 }
 
 /* ── Writes ── */
-const approveFields = (level, adminEmail) => ({
+const approveFields = (levels, adminEmail) => ({
   status: "approved",
-  accessLevel: level,
+  accessLevels: levels,
   rejectionReason: "",
   approvedAt: serverTimestamp(),
   approvedBy: adminEmail
 });
 
-export function approveOne(uid, level, adminEmail) {
-  return updateDoc(doc(db, "users", uid), approveFields(level, adminEmail));
+export function approveOne(uid, levels, adminEmail) {
+  return updateDoc(doc(db, "users", uid), approveFields(levels, adminEmail));
 }
 
-/* items: [{ uid, level }]. Committed in batches; returns how many were saved. */
+/* items: [{ uid, levels }]. Committed in batches; returns how many were saved. */
 export async function approveMany(items, adminEmail) {
   let done = 0;
   for (let i = 0; i < items.length; i += BATCH_MAX) {
     const batch = writeBatch(db);
     items.slice(i, i + BATCH_MAX).forEach((it) => {
-      batch.update(doc(db, "users", it.uid), approveFields(it.level, adminEmail));
+      batch.update(doc(db, "users", it.uid), approveFields(it.levels, adminEmail));
     });
     await batch.commit();
     done += Math.min(BATCH_MAX, items.length - i);
@@ -86,7 +84,7 @@ export async function approveMany(items, adminEmail) {
 export function rejectOne(uid, reason) {
   return updateDoc(doc(db, "users", uid), {
     status: "rejected",
-    accessLevel: "",
+    accessLevels: [],
     rejectionReason: (reason || "").trim().slice(0, 300)
   });
 }
@@ -95,8 +93,8 @@ export function setStatus(uid, status) {
   return updateDoc(doc(db, "users", uid), { status: status });
 }
 
-export function changeLevel(uid, level) {
-  return updateDoc(doc(db, "users", uid), { accessLevel: level });
+export function changeLevels(uid, levels) {
+  return updateDoc(doc(db, "users", uid), { accessLevels: levels });
 }
 
 /* Deleting a student also removes their practice and mock test history

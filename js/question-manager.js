@@ -2,13 +2,14 @@
  * question-manager.js  (ES module, ProfAdmin "Questions" section)
  * Folder-style browsing (Board → Class → Subject → Chapter), chapter
  * management, the question list, and the LaTeX-aware question editor.
- * Everything here is cosmetic; the real lock is Firestore Rules v8.
+ * Everything here is cosmetic; the real lock is Firestore Rules v9.
  * ───────────────────────────────────────────────────────────────────── */
 import * as Q from "./question-core.js";
 import * as IU from "./image-upload.js";
 import { renderBulkUpload } from "./bulk-upload.js";
 import { cleanPasted, validateLatex, insertSnippet, SYMBOL_GROUPS } from "./latex-tools.js";
 import { convertPaste } from "./word-paste.js";
+import * as Cat from "./catalog-core.js";
 
 export function initQuestions(host, api) {
   const el = api.el;
@@ -96,9 +97,9 @@ export function initQuestions(host, api) {
     const imp = S.importing;
     const stay = () => closeBulk(false);   // leave Bulk upload, back to the folder it was opened from
     add("Questions", (deep || imp) ? () => goTo(0) : null);
-    if (S.board) add(S.board, S.cls ? () => goTo(1) : (imp ? stay : null));
-    if (S.cls) add("Class " + S.cls, S.subject ? () => goTo(2) : (imp ? stay : null));
-    if (S.subject) add(S.subject, S.chapter ? () => goTo(3) : (imp ? stay : null));
+    if (S.board) add(Cat.boardName(S.board), S.cls ? () => goTo(1) : (imp ? stay : null));
+    if (S.cls) add(Cat.className(S.board, S.cls), S.subject ? () => goTo(2) : (imp ? stay : null));
+    if (S.subject) add(Cat.subjectName(S.board, S.cls, S.subject), S.chapter ? () => goTo(3) : (imp ? stay : null));
     if (S.chapter) add("Chapter " + S.chapter.chapterNumber, S.edit ? () => closeEditor() : (imp ? stay : null));
     if (S.edit) add(S.edit.existing ? "Edit question" : "New question", null);
     if (imp) add("Bulk upload", null);
@@ -182,27 +183,26 @@ export function initQuestions(host, api) {
     const bh = head("Question bank", "Choose a board to open its folders.");
     bh.append(bulkBtn());
     host.append(bh);
-    const boards = [];
-    Q.FOLDERS.forEach((f) => { if (boards.indexOf(f.board) === -1) boards.push(f.board); });
+    const boards = Cat.boardList();
+    if (!boards.length) { host.append(el("div", "a-empty", "No boards yet. Add them in the Catalog section.")); return; }
     host.append(folderGrid(boards.map((b) => ({
-      title: b,
-      sub: Q.FOLDERS.filter((f) => f.board === b).map((f) => "Class " + f.cls).join(", "),
-      go: () => { S.board = b; render(); }
+      title: b.name,
+      sub: Cat.classList(b.id).map((c) => c.name).join(", ") || "No classes yet",
+      go: () => { S.board = b.id; render(); }
     }))));
   }
   function renderClasses() {
-    host.append(head(S.board, "Choose a class."));
-    host.append(folderGrid(Q.FOLDERS.filter((f) => f.board === S.board).map((f) => ({
-      title: "Class " + f.cls, sub: f.subjects.join(", "),
-      go: () => { S.cls = f.cls; render(); }
+    host.append(head(Cat.boardName(S.board), "Choose a class."));
+    host.append(folderGrid(Cat.classList(S.board).map((c) => ({
+      title: c.name, sub: Cat.subjectList(S.board, c.id).map((x) => x.name).join(", ") || "No subjects yet",
+      go: () => { S.cls = c.id; render(); }
     }))));
   }
   function renderSubjects() {
-    const f = Q.FOLDERS.find((x) => x.board === S.board && x.cls === S.cls);
-    host.append(head(S.board + " \u00b7 Class " + S.cls, "Choose a subject."));
-    host.append(folderGrid(f.subjects.map((s) => ({
-      title: s, sub: "Chapters and questions",
-      go: () => { S.subject = s; S.chapters = []; S.chaptersLoaded = false; render(); loadChapters(); }
+    host.append(head(Cat.boardName(S.board) + " \u00b7 " + Cat.className(S.board, S.cls), "Choose a subject."));
+    host.append(folderGrid(Cat.subjectList(S.board, S.cls).map((x) => ({
+      title: x.name, sub: "Chapters and questions",
+      go: () => { S.subject = x.id; S.chapters = []; S.chaptersLoaded = false; render(); loadChapters(); }
     }))));
   }
 
@@ -225,7 +225,7 @@ export function initQuestions(host, api) {
   }
 
   function renderChapters() {
-    const h = head(S.subject, S.board + " \u00b7 Class " + S.cls);
+    const h = head(Cat.subjectName(S.board, S.cls, S.subject), Cat.boardName(S.board) + " \u00b7 " + Cat.className(S.board, S.cls));
     const add = el("button", "btn btn-primary btn-sm", "Add chapter");
     add.type = "button";
     add.addEventListener("click", () => openChapterDialog(null));
@@ -377,7 +377,7 @@ export function initQuestions(host, api) {
     const c = S.chapter;
     const shown = visibleQuestions();
     const h = head("Chapter " + c.chapterNumber + ": " + c.chapterName,
-      S.board + " \u00b7 Class " + S.cls + " \u00b7 " + S.subject + (c.edition ? " \u00b7 " + c.edition : ""));
+      Cat.scopeLabel(S.board, S.cls, S.subject) + (c.edition ? " \u00b7 " + c.edition : ""));
     const addBtn = el("button", "btn btn-primary btn-sm", "Add question");
     addBtn.type = "button";
     addBtn.addEventListener("click", () => { S.edit = { existing: null, key: {} }; render(); window.scrollTo(0, 0); });
@@ -1179,7 +1179,7 @@ export function initQuestions(host, api) {
     activeTA = null;
 
     const h = head(existing ? "Edit question" : "New question",
-      "Chapter " + chapter.chapterNumber + ": " + chapter.chapterName + " \u00b7 " + S.board + " \u00b7 Class " + S.cls + " \u00b7 " + S.subject);
+      "Chapter " + chapter.chapterNumber + ": " + chapter.chapterName + " \u00b7 " + Cat.scopeLabel(S.board, S.cls, S.subject));
     host.append(h);
     const idLine = el("p", "field-hint", existing
       ? "Question ID " + existing.displayId + ". Status: " + (existing.status === "published" ? "Published" : "Draft") + ". The question type and chapter cannot be changed; to move a question, create it again in the other chapter."

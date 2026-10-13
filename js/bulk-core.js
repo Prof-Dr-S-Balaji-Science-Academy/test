@@ -89,7 +89,7 @@ function instructionLines(cfg) {
     ["Nothing is saved until you have seen the check report and confirmed the import.", ""],
     ["", ""],
     ["Columns common to every sheet", "head"],
-    ["Board, Class, Subject: pick from the dropdowns. Only the real combinations work: CBSE Class 10 Science, CBSE Class 12 Physics or Chemistry, State Board Class 12 Physics or Chemistry.", ""],
+    ["Board, Class, Subject: pick from the dropdowns. The three must be a real combination in your catalog (ProfAdmin, Catalog), for example a subject of that board and class. Boards, classes and subjects you add in the Catalog appear here the next time you download the template.", ""],
     ["Chapter No: the chapter number you gave the chapter in ProfAdmin. The chapter must already exist; see the \"Chapters\" sheet for the chapters that existed when you downloaded this template. If two chapters of a subject share a number, the row cannot be matched and is reported as a problem.", ""],
     ["Difficulty: Easy, Medium or Hard.", ""],
     ["Marks: a positive number in steps of 0.5, up to 100 (case-based questions take the total of their sub-question marks instead).", ""],
@@ -161,10 +161,14 @@ export function buildTemplate(ExcelJS, cfg, chaptersByFolder) {
   /* Hidden dropdown lists */
   const lists = wb.addWorksheet("Lists", { state: "hidden" });
   const boards = [], classes = [], subjects = [];
-  cfg.FOLDERS.forEach((f) => {
-    if (boards.indexOf(f.board) === -1) boards.push(f.board);
-    if (classes.indexOf(f.cls) === -1) classes.push(f.cls);
-    f.subjects.forEach((s) => { if (subjects.indexOf(s) === -1) subjects.push(s); });
+  cfg.folders().forEach((f) => {
+    const bn = cfg.names.board(f.board), cn = cfg.names.cls(f.board, f.cls);
+    if (boards.indexOf(bn) === -1) boards.push(bn);
+    if (classes.indexOf(cn) === -1) classes.push(cn);
+    f.subjects.forEach((sub) => {
+      const sn = cfg.names.subject(f.board, f.cls, sub);
+      if (subjects.indexOf(sn) === -1) subjects.push(sn);
+    });
   });
   const LIST = {
     board: addList(lists, 1, "Board", boards),
@@ -185,7 +189,11 @@ export function buildTemplate(ExcelJS, cfg, chaptersByFolder) {
   };
 
   const T = (id) => cfg.typeLabel(id);
-  const base = { "Board": "CBSE", "Class": 12, "Subject": "Physics", "Chapter No": 1, "Difficulty": "Medium", "Status": "Draft" };
+  const f0 = cfg.folders().find((f) => f.subjects.length) || { board: "", cls: "", subjects: [""] };
+  const base = {
+    "Board": cfg.names.board(f0.board), "Class": cfg.names.cls(f0.board, f0.cls), "Subject": cfg.names.subject(f0.board, f0.cls, f0.subjects[0]),
+    "Chapter No": 1, "Difficulty": "Medium", "Status": "Draft"
+  };
   const examples = {
     objective: [
       { ...base, "Type": T("mcq_single"), "Marks": 1, "Grouping": "newton-2nd-law",
@@ -259,7 +267,7 @@ export function buildTemplate(ExcelJS, cfg, chaptersByFolder) {
   let r = 2;
   (chaptersByFolder || []).forEach((f) => {
     (f.chapters || []).forEach((c) => {
-      [f.board, Number(f.cls), f.subject, c.chapterNumber, c.chapterName, c.edition || ""].forEach((v, i) => { chs.getCell(r, i + 1).value = v; });
+      [cfg.names.board(f.board), cfg.names.cls(f.board, f.cls), cfg.names.subject(f.board, f.cls, f.subject), c.chapterNumber, c.chapterName, c.edition || ""].forEach((v, i) => { chs.getCell(r, i + 1).value = v; });
       r += 1;
     });
   });
@@ -302,8 +310,6 @@ function readSheet(ws, spec, fileErrors) {
   return rows;
 }
 
-const BOARDS = { "cbse": "CBSE", "state board": "State Board" };
-const SUBJECTS = { "physics": "Physics", "chemistry": "Chemistry", "science": "Science" };
 
 function parseMarks(t) {
   const n = parseFloat(t);
@@ -312,15 +318,11 @@ function parseMarks(t) {
 }
 
 /* Board, class, subject, chapter number, difficulty, status, grouping. */
-function readCommon(v, errs) {
+function readCommon(cfg, v, errs) {
   const out = {};
-  out.board = BOARDS[norm(v["Board"])];
-  if (!out.board) errs.push("Board must be CBSE or State Board.");
-  const cls = String(v["Class"]).replace(/\.0+$/, "").trim();
-  out.cls = (cls === "10" || cls === "12") ? cls : "";
-  if (!out.cls) errs.push("Class must be 10 or 12.");
-  out.subject = SUBJECTS[norm(v["Subject"])];
-  if (!out.subject) errs.push("Subject must be Physics, Chemistry or Science.");
+  const sc = cfg.resolveScope(v["Board"], v["Class"], v["Subject"]);
+  out.board = sc.board; out.cls = sc.cls; out.subject = sc.subject;
+  sc.errs.forEach((m) => errs.push(m));
   const chn = String(v["Chapter No"]).replace(/\.0+$/, "").trim();
   out.chapterNumber = /^\d{1,2}$/.test(chn) && +chn >= 1 ? +chn : 0;
   if (!out.chapterNumber) errs.push("Chapter No must be a whole number from 1 to 99.");
@@ -437,7 +439,7 @@ function finishEntry(cfg, e, common) {
     e.fields.status = common.status;
     if (common.grouping) e.fields.grouping = common.grouping;
     if (common.board && common.cls && common.subject && !cfg.levelsFor(common.board, common.cls, common.subject).length) {
-      e.errs.push("This board, class and subject combination does not exist in the question bank.");
+      e.errs.push("This board, class and subject combination has no access level in the catalog.");
     }
   }
   /* LaTeX problems block a published question; a draft keeps them as a warning (as in the editor). */
@@ -459,7 +461,7 @@ function buildObjective(cfg, item, types) {
   const v = item.v;
   const e = newEntry(SHEETS.objective.name, [item.rowNo], "Objective, row " + item.rowNo);
   const E = (m) => e.errs.push(m);
-  const common = readCommon(v, e.errs);
+  const common = readCommon(cfg, v, e.errs);
   const type = types[norm(v["Type"])];
   if (!type || OBJECTIVE_TYPES.indexOf(type) === -1) E("Type must be one of: " + OBJECTIVE_TYPES.map((t) => cfg.typeLabel(t)).join("; ") + ".");
   const marks = parseMarks(v["Marks"]);
@@ -496,7 +498,7 @@ function buildMatch(cfg, item) {
   const v = item.v;
   const e = newEntry(SHEETS.match.name, [item.rowNo], "Match, row " + item.rowNo);
   const E = (m) => e.errs.push(m);
-  const common = readCommon(v, e.errs);
+  const common = readCommon(cfg, v, e.errs);
   const marks = parseMarks(v["Marks"]);
   if (isNaN(marks)) E("Marks must be a positive number in steps of 0.5 (up to 100).");
   e.fields.type = "match"; e.fields.marks = isNaN(marks) ? 0 : marks;
@@ -531,7 +533,7 @@ function buildWritten(cfg, item, types) {
   const v = item.v;
   const e = newEntry(SHEETS.written.name, [item.rowNo], "Written, row " + item.rowNo);
   const E = (m) => e.errs.push(m);
-  const common = readCommon(v, e.errs);
+  const common = readCommon(cfg, v, e.errs);
   const type = types[norm(v["Type"])];
   if (!type || WRITTEN_TYPES.indexOf(type) === -1) E("Type must be one of: " + WRITTEN_TYPES.map((t) => cfg.typeLabel(t)).join("; ") + ".");
   const marks = parseMarks(v["Marks"]);
@@ -553,7 +555,7 @@ function buildCase(cfg, caseId, items, types) {
   const e = newEntry(SHEETS.case.name, nos, label);
   const E = (m) => e.errs.push(m);
   const v = first.v;
-  const common = readCommon(v, e.errs);
+  const common = readCommon(cfg, v, e.errs);
   /* Later rows of the case may not point at a different chapter. */
   items.slice(1).forEach((it) => {
     const w = it.v;

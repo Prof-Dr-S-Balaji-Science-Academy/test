@@ -9,9 +9,9 @@ Website and mock test platform for profbalaji.in. Plain HTML, CSS and JavaScript
 | `index.html`, `pages/` | Public site, learning resources, test information page |
 | `auth/` | Google sign-in and first-time onboarding |
 | `pages/dashboard/` | Student dashboard (practice, mock tests, results) |
-| `pages/admin/` | ProfAdmin console (approvals, students, questions, papers, analytics) |
+| `pages/admin/` | ProfAdmin console (approvals, students, catalog, questions, papers, analytics) |
 | `js/`, `css/` | Shared scripts and styles |
-| `firebase/firestore.rules` | Firestore Security Rules (currently v8). Published by hand in the Firebase console |
+| `firebase/firestore.rules` | Firestore Security Rules (currently v9). Published by hand in the Firebase console |
 | `worker/imagekit-auth.js` | Cloudflare Worker script. Pasted into Cloudflare by hand, not used by the website |
 | `CNAME` | Custom domain. Differs between the test repo and the main repo, see below |
 | `sitemap.xml` | Public pages only. Sign-in, dashboard and admin pages are left out on purpose |
@@ -48,6 +48,17 @@ Nothing in the repo changes when the private key is rotated.
 ## Publishing the Security Rules
 
 Firebase console, Firestore Database, Rules. Paste the whole of `firebase/firestore.rules` and Publish. Do this whenever a release says the rules changed.
+
+## Phase 10: catalog and several access levels per student
+
+The boards, classes, subjects and student access levels are no longer fixed in the code or in the rules. They live in one Firestore document, `catalog/main`, managed in **ProfAdmin, Catalog**.
+
+First release steps, in this order (do them on the test site first):
+1. Publish `firebase/firestore.rules` (v9).
+2. Open the ProfAdmin console once. It creates `catalog/main` from the earlier fixed lists (CBSE Class 10 Science, CBSE and State Board Class 12 Physics and Chemistry).
+3. Open **Catalog**, press **Convert student records** once. Students made before this release then hold lists of access levels (`accessLevels`, `requestedLevels`). Until you do this, existing students cannot read questions or papers. It is safe to press again.
+
+Adding a new program such as NEET: Catalog, Add a board (with a short code), then Add a class under it, then Add a subject under the class. Every subject gets its own access level, hidden from the sign-up form until you press **Show on sign-up**. Give an existing student more levels from Students, Manage. Renaming changes only the label shown. A board, class or subject can be deleted only while nothing depends on it.
 
 ## Test site and live site
 

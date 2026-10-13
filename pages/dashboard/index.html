@@ -130,7 +130,7 @@
             <dl class="summary-list">
               <div><dt>Class</dt><dd id="d-course"></dd></div>
               <div><dt>Subjects</dt><dd id="d-subjects"></dd></div>
-              <div><dt>Access level</dt><dd id="d-level"></dd></div>
+              <div><dt>Access levels</dt><dd id="d-level"></dd></div>
             </dl>
             <p class="field-hint">Class and subjects can be changed only by the academy.</p>
           </section>
@@ -190,7 +190,8 @@
 
   <script src="../../js/header-footer-loader.js"></script>
   <script type="module">
-    import { ROUTES, watchAuth, loadAccount, isComplete, describeRequest } from "../../js/auth-core.js";
+    import { ROUTES, watchAuth, loadAccount, isComplete } from "../../js/auth-core.js";
+    import * as Cat from "../../js/catalog-core.js";
 
     const $ = (id) => document.getElementById(id);
 
@@ -209,8 +210,9 @@
         const account = await loadAccount(user);
         if (account.isAdmin) { location.replace(ROUTES.admin); return; }
         if (!isComplete(account.profile)) { location.replace(ROUTES.login); return; }
+        await Cat.loadCatalog();
         render(account.profile);
-        if (account.profile.status === "approved" && account.profile.accessLevel) startPractice(user, account.profile);
+        if (account.profile.status === "approved" && Cat.profileLevels(account.profile).length) startPractice(user, account.profile);
       } catch (err) {
         console.error(err);
         $("d-loading").textContent = "We could not load your dashboard. Please refresh the page.";
@@ -226,7 +228,7 @@
       try {
         const tmod = await import("../../js/test-ui.js");
         tmod.initTests(tests, {
-          uid: user.uid, level: p.accessLevel,
+          uid: user.uid, levels: Cat.profileLevels(p), name: p.name || "", email: p.email || user.email || "",
           /* While a test is running, the practice area is hidden. */
           setBusy: (busy) => { $("d-practice").hidden = !!busy; }
         });
@@ -242,7 +244,7 @@
       host.hidden = false;
       try {
         const mod = await import("../../js/practice-ui.js");
-        mod.initPractice(host, { uid: user.uid, level: p.accessLevel });
+        mod.initPractice(host, { uid: user.uid, levels: Cat.profileLevels(p) });
       } catch (err) {
         console.error(err);
         host.textContent = "";
@@ -264,10 +266,11 @@
         text = "Your application was not approved. Reason: " + p.rejectionReason;
       }
       $("d-message-text").textContent = text;
-      const req = describeRequest(p);
+      const held = Cat.profileLevels(p);
+      const req = Cat.describeLevels(held.length ? held : Cat.requestedLevelsOf(p));
       $("d-course").textContent = req.course;
       $("d-subjects").textContent = req.subjects;
-      $("d-level").textContent = (key === "approved" && p.accessLevel) ? p.accessLevel : "Awaiting approval";
+      $("d-level").textContent = (key === "approved" && held.length) ? held.map((l) => Cat.levelLabel(l)).join(", ") : "Awaiting approval";
       $("d-locked").hidden = (key === "approved");
       $("d-loading").hidden = true;
       $("d-content").hidden = false;

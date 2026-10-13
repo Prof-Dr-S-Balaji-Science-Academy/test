@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────────────────────────────────────
  * paper-core.js  (ES module, Phase 7: papers and mock tests data layer)
- * Collections (see firebase/firestore.rules, Rules v8):
+ * Collections (see firebase/firestore.rules, Rules v9):
  *   papers/{id}         paper definitions, written by ProfAdmin only
  *   testSessions/{id}   one per student attempt of a paper. The start time is
  *                       recorded by the server; the deadline is the start time
@@ -90,10 +90,19 @@ export async function poolCounts(chapterIds, types) {
 
 /* ───────────────────────── Student: papers and sessions ───────────────────────── */
 
-/* Published papers of the student's own level (public and locked). */
-export async function fetchPapersForLevel(level) {
-  const snap = await getDocs(query(papers(), where("status", "==", "published"), where("levels", "array-contains", level)));
-  const rows = snap.docs.map(packDoc);
+/* Published papers of the student's own levels (public and locked). A student may hold
+ * several levels, so one query is made per level and the results are merged. */
+export async function fetchPapersForLevel(levels) {
+  const list = Array.isArray(levels) ? levels : [levels];
+  const snaps = await Promise.all(list.map((level) =>
+    getDocs(query(papers(), where("status", "==", "published"), where("levels", "array-contains", level)))));
+  const seen = new Set();
+  const rows = [];
+  snaps.forEach((snap) => snap.docs.forEach((d) => {
+    if (seen.has(d.id)) return;
+    seen.add(d.id);
+    rows.push(packDoc(d));
+  }));
   rows.sort((a, b) => String(a.title).localeCompare(String(b.title)));
   return rows;
 }

@@ -4,8 +4,8 @@
  *   taxonomy/{chapterId}        one document per chapter (stable internal ID)
  *   questions/{chapterId}_{NNNN}  the question as a student may see it
  *   questionKeys/{same id}      correct answers, model answers, explanation
- * Board, class and subject folders are fixed (derived from the seven access
- * levels); only chapters are stored. Questions link to the chapter's internal
+ * Board, class and subject folders come from the catalog (catalog-core.js);
+ * only chapters are stored here. Questions link to the chapter's internal
  * ID, so renaming or renumbering a chapter never orphans a question (D-19).
  * Images (Phase 4): the stem image (imageUrl, imageFileId) lives on the
  * question; the explanation image (explanationImageUrl, explanationImageFileId)
@@ -18,29 +18,13 @@ import {
   collection, query, where, limit, startAfter, getDocs, getDoc, getCountFromServer,
   doc, documentId, runTransaction, writeBatch, setDoc, updateDoc, serverTimestamp, deleteField
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { db, COURSES } from "./auth-core.js";
+import { db } from "./auth-core.js";
+import { folders, levelsFor, idPrefix } from "./catalog-core.js";
 
 export const PAGE_SIZE = 50;
 
-/* ── Fixed folders: Board → Class → Subject ── */
-export const FOLDERS = COURSES.map((c) => {
-  const subjects = [];
-  c.subjects.forEach((s) => s.list.forEach((n) => { if (subjects.indexOf(n) === -1) subjects.push(n); }));
-  return { board: c.board, cls: c.cls, label: c.label, subjects: subjects };
-});
-
-export const BOARD_CODE = { "CBSE": "CBSE", "State Board": "SB" };
-export const SUBJECT_CODE = { "Physics": "PHY", "Chemistry": "CHE", "Science": "SCI" };
-
-/* Access levels allowed to see a question of this board / class / subject. */
-export function levelsFor(board, cls, subject) {
-  const out = [];
-  COURSES.forEach((c) => {
-    if (c.board !== board || c.cls !== cls) return;
-    c.subjects.forEach((s) => { if (s.list.indexOf(subject) !== -1) out.push(s.level); });
-  });
-  return out;
-}
+/* ── Folders: Board → Class → Subject, from the catalog (Phase 10) ── */
+export { folders, levelsFor };
 
 /* ── Question types (D-03b). kind drives the editor and, later, marking ── */
 export const TYPES = [
@@ -168,7 +152,7 @@ export async function createQuestion(chapter, adminEmail, fields, keys) {
     const c = cs.data();
     const serial = c.nextSerial || 1;
     const id = chapter.id + "_" + pad(serial, 4);
-    const displayId = BOARD_CODE[c.board] + c.cls + "-" + SUBJECT_CODE[c.subject] + "-C" + pad(c.chapterNumber, 2) + "-" + pad(serial, 4);
+    const displayId = idPrefix(c.board, c.cls, c.subject) + "-C" + pad(c.chapterNumber, 2) + "-" + pad(serial, 4);
     tx.set(doc(db, "questions", id), {
       ...forCreate(fields),
       displayId: displayId, serial: serial, chapterId: chapter.id,
@@ -245,7 +229,7 @@ export async function createQuestionsBulk(chapterId, adminEmail, entries) {
   entries.forEach((e, i) => {
     const serial = base.first + i;
     const id = chapterId + "_" + pad(serial, 4);
-    const displayId = BOARD_CODE[c.board] + c.cls + "-" + SUBJECT_CODE[c.subject] + "-C" + pad(c.chapterNumber, 2) + "-" + pad(serial, 4);
+    const displayId = idPrefix(c.board, c.cls, c.subject) + "-C" + pad(c.chapterNumber, 2) + "-" + pad(serial, 4);
     batch.set(doc(db, "questions", id), {
       ...forCreate(e.fields),
       displayId: displayId, serial: serial, chapterId: chapterId,

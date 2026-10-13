@@ -76,3 +76,30 @@
 .pt-dialog::backdrop { background: rgba(10, 11, 13, 0.5); }
 .pt-dlg-title { margin: 0 0 8px; font-size: 20px; font-weight: 600; }
 .pt-dlg-text { margin: 0 0 8px; font-size: 15px; line-height: 1.5; color: var(--muted); }
+
+/* ───────── PDF result export (Phase 10) ───────── */
+.pt-export { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.pt-export-msg { margin: 8px 0 0; min-height: 1.5em; }
+.rp-root { position: fixed; left: -10000px; top: 0; width: 760px; background: #fff; color: #0a0b0d; font-family: var(--font-body); font-size: 15px; line-height: 1.5; pointer-events: none; }
+.rp-block { background: #fff; padding: 16px 20px; box-sizing: border-box; }
+.rp-head { border-bottom: 2px solid #0052ff; }
+.rp-brand { font-size: 13px; font-weight: 600; color: #0052ff; letter-spacing: 0.02em; }
+.rp-title { font-family: var(--font-display); font-size: 28px; line-height: 1.15; margin: 6px 0 2px; }
+.rp-sub { color: #5b616e; margin-bottom: 12px; }
+.rp-row { display: flex; gap: 12px; padding: 5px 0; border-top: 1px solid #dee1e6; }
+.rp-k { flex: 0 0 250px; color: #5b616e; }
+.rp-v { flex: 1; font-weight: 600; overflow-wrap: anywhere; }
+.rp-note { margin-top: 8px; font-size: 13px; color: #5b616e; }
+.rp-q { border: 1px solid #dee1e6; border-radius: 12px; margin: 10px 0; }
+.rp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.rp-tag, .rp-chip { display: inline-block; padding: 2px 10px; border-radius: 9999px; background: #eef0f3; font-size: 12px; font-weight: 600; }
+.rp-chip.rp-correct { background: #dcf5e8; color: #05804a; }
+.rp-chip.rp-wrong { background: #fbe2e4; color: #cf202f; }
+.rp-opt { display: flex; gap: 10px; align-items: flex-start; padding: 6px 10px; margin-top: 6px; border: 1px solid #dee1e6; border-radius: 10px; }
+.rp-opt.is-chosen { border-color: #0052ff; background: #eef3ff; }
+.rp-opt.is-right { border-color: #05b169; background: #e8f8f0; }
+.rp-opt-l { font-weight: 700; min-width: 18px; }
+.rp-opt-t { flex: 1; min-width: 0; }
+.rp-ans { margin-top: 10px; font-weight: 600; }
+.rp-ans-right { margin-top: 2px; color: #05804a; }
+.rp-root .pq-img { max-width: 100%; max-height: 260px; }

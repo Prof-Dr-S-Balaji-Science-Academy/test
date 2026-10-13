@@ -1,5 +1,11 @@
 rules_version = '2';
 
+// Rules v9 (Phase 10): the boards, classes, subjects and access levels are no
+// longer fixed in these rules. They live in one document, catalog/main, that
+// ProfAdmin edits (everyone signed in may read it). A student now holds a LIST
+// of access levels (users.accessLevels, at most 8) instead of one, and may
+// apply for several (users.requestedLevels). Every rule that used to compare
+// one level now accepts any of the student's levels.
 // Rules v8: users and admins (v2), the question bank collections taxonomy,
 // questions and questionKeys (v3), optional ImageKit image fields (v4), the
 // optional Grouping label on questions (v5), student practice mode (v6) and,
@@ -48,20 +54,52 @@ service cloud.firestore {
         && myProfile().status == 'approved';
     }
 
-    // Which board / class / subject a student level may see.
-    function levelSees(level, board, cls, subject) {
-      return (level == 'C10SciStudents' && board == 'CBSE' && cls == '10' && subject == 'Science')
-          || (level == 'C12PhyStudents' && board == 'CBSE' && cls == '12' && subject == 'Physics')
-          || (level == 'C12ChemStudents' && board == 'CBSE' && cls == '12' && subject == 'Chemistry')
-          || (level == 'C12PhyChemStudents' && board == 'CBSE' && cls == '12' && subject in ['Physics', 'Chemistry'])
-          || (level == 'S12PhyStudents' && board == 'State Board' && cls == '12' && subject == 'Physics')
-          || (level == 'S12ChemStudents' && board == 'State Board' && cls == '12' && subject == 'Chemistry')
-          || (level == 'S12PhyChemStudents' && board == 'State Board' && cls == '12' && subject in ['Physics', 'Chemistry']);
+    // ───────────── The catalog (Phase 10) ─────────────
+
+    function cat() {
+      return get(/databases/$(database)/documents/catalog/main).data;
     }
 
-    // A published question that belongs to the signed-in student's own level.
+    // A board / class / subject that exists in the catalog.
+    function inCatalog(board, cls, subject) {
+      return (board + '|' + cls + '|' + subject) in cat().subjects;
+    }
+
+    // Which board / class / subject a student level may see.
+    function levelSees(level, board, cls, subject) {
+      return level in cat().levels
+        && cat().levels[level].board == board
+        && cat().levels[level].cls == cls
+        && cat().levels[level].subject == subject;
+    }
+
+    // ───────────── Several levels per student (Phase 10) ─────────────
+    // Rules cannot loop, so a student's levels (at most 8) are checked slot by slot.
+
+    function myLevelAt(i, theirs) {
+      return myProfile().accessLevels.size() > i && myProfile().accessLevels[i] in theirs;
+    }
+
+    // True when at least one of the student's levels is in the given list.
+    function anyLevel(theirs) {
+      return myLevelAt(0, theirs) || myLevelAt(1, theirs) || myLevelAt(2, theirs) || myLevelAt(3, theirs)
+          || myLevelAt(4, theirs) || myLevelAt(5, theirs) || myLevelAt(6, theirs) || myLevelAt(7, theirs);
+    }
+
+    function mySeesAt(i, board, cls, subject) {
+      return myProfile().accessLevels.size() > i && levelSees(myProfile().accessLevels[i], board, cls, subject);
+    }
+
+    // True when at least one of the student's levels covers this board / class / subject.
+    function anyLevelSees(board, cls, subject) {
+      return mySeesAt(0, board, cls, subject) || mySeesAt(1, board, cls, subject) || mySeesAt(2, board, cls, subject)
+          || mySeesAt(3, board, cls, subject) || mySeesAt(4, board, cls, subject) || mySeesAt(5, board, cls, subject)
+          || mySeesAt(6, board, cls, subject) || mySeesAt(7, board, cls, subject);
+    }
+
+    // A published question that belongs to one of the signed-in student's levels.
     function studentCanUse(q) {
-      return q.status == 'published' && myProfile().accessLevel in q.levels;
+      return q.status == 'published' && anyLevel(q.levels);
     }
 
     function questionDocFor(id) {
@@ -91,42 +129,49 @@ service cloud.firestore {
         || request.time > sessionEnd(get(sessionPath(get(lockPath(request.auth.uid)).data.sessionId)).data);
     }
 
-    // The board / class / subjects / level combination must be one of the seven.
-    function levelMatches(d) {
-      return (d.requestedLevel == 'C10SciStudents'
-              && d.requestedBoard == 'CBSE' && d.requestedClass == '10'
-              && d.requestedSubjects == ['Science'])
-          || (d.requestedLevel == 'C12PhyStudents'
-              && d.requestedBoard == 'CBSE' && d.requestedClass == '12'
-              && d.requestedSubjects == ['Physics'])
-          || (d.requestedLevel == 'C12ChemStudents'
-              && d.requestedBoard == 'CBSE' && d.requestedClass == '12'
-              && d.requestedSubjects == ['Chemistry'])
-          || (d.requestedLevel == 'C12PhyChemStudents'
-              && d.requestedBoard == 'CBSE' && d.requestedClass == '12'
-              && d.requestedSubjects == ['Physics', 'Chemistry'])
-          || (d.requestedLevel == 'S12PhyStudents'
-              && d.requestedBoard == 'State Board' && d.requestedClass == '12'
-              && d.requestedSubjects == ['Physics'])
-          || (d.requestedLevel == 'S12ChemStudents'
-              && d.requestedBoard == 'State Board' && d.requestedClass == '12'
-              && d.requestedSubjects == ['Chemistry'])
-          || (d.requestedLevel == 'S12PhyChemStudents'
-              && d.requestedBoard == 'State Board' && d.requestedClass == '12'
-              && d.requestedSubjects == ['Physics', 'Chemistry']);
+    // What a student may ask for: one to eight access levels that are open for sign-up.
+    function requestOk(d) {
+      return d.requestedLevels is list
+        && d.requestedLevels.size() >= 1 && d.requestedLevels.size() <= 8
+        && d.requestedLevels.hasOnly(cat().activeLevelIds);
     }
 
-    // What a ProfAdmin may change on a student record: only these five fields.
+    // What a ProfAdmin may change on a student record: only these fields.
+    // requestedLevels is included for the one-time conversion of older records.
     function adminUserUpdateOk() {
       let d = request.resource.data;
       let changed = d.diff(resource.data).affectedKeys();
-      return changed.hasOnly(['status', 'accessLevel', 'rejectionReason', 'approvedAt', 'approvedBy'])
+      return changed.hasOnly(['status', 'accessLevels', 'requestedLevels', 'rejectionReason', 'approvedAt', 'approvedBy'])
         && d.status in ['pending', 'approved', 'rejected', 'suspended']
-        && (d.accessLevel == '' || d.accessLevel in ['C10SciStudents', 'C12PhyStudents', 'C12ChemStudents', 'C12PhyChemStudents',
-                'S12PhyStudents', 'S12ChemStudents', 'S12PhyChemStudents'])
-        && (d.status != 'approved' || d.accessLevel != '')
+        && (!changed.hasAny(['accessLevels'])
+            || (d.accessLevels is list && d.accessLevels.size() <= 8 && d.accessLevels.hasOnly(cat().allLevelIds)))
+        && (!changed.hasAny(['requestedLevels'])
+            || (d.requestedLevels is list && d.requestedLevels.size() <= 8 && d.requestedLevels.hasOnly(cat().allLevelIds)))
+        && (d.status != 'approved' || ('accessLevels' in d && d.accessLevels.size() >= 1))
         && (!('rejectionReason' in d) || (d.rejectionReason is string && d.rejectionReason.size() <= 300))
         && (!changed.hasAny(['approvedBy']) || d.approvedBy == myEmail());
+    }
+
+    // ───────────── Catalog (Phase 10) ─────────────
+    // One document, catalog/main. Anyone signed in may read it (it holds only
+    // names and codes); only ProfAdmin may create or change it; it is never deleted.
+    function catalogOk(d) {
+      return d.keys().hasOnly(['boards', 'classes', 'subjects', 'levels', 'activeLevelIds', 'allLevelIds', 'updatedAt'])
+        && d.keys().hasAll(['boards', 'classes', 'subjects', 'levels', 'activeLevelIds', 'allLevelIds', 'updatedAt'])
+        && d.boards is map && d.boards.size() <= 50
+        && d.classes is map && d.classes.size() <= 300
+        && d.subjects is map && d.subjects.size() <= 1000
+        && d.levels is map && d.levels.size() <= 1000
+        && d.activeLevelIds is list && d.activeLevelIds.size() <= 1000
+        && d.allLevelIds is list && d.allLevelIds.size() <= 1000
+        && d.updatedAt == request.time;
+    }
+
+    match /catalog/{docId} {
+      allow get: if signedIn() && docId == 'main';
+      allow list: if false;
+      allow create, update: if isAdmin() && docId == 'main' && catalogOk(request.resource.data);
+      allow delete: if false;
     }
 
     // A signed-in user may check only their own admin entry. No listing,
@@ -142,15 +187,13 @@ service cloud.firestore {
       allow list: if isAdmin();
 
       // A student can create only their own record, as pending with no access
-      // level. Students can never update or delete it; only a ProfAdmin can.
+      // levels. Students can never update or delete it; only a ProfAdmin can.
       allow create: if signedIn()
         && request.auth.uid == uid
         && request.resource.data.keys().hasOnly([
-             'name', 'email', 'photoURL', 'requestedBoard', 'requestedClass',
-             'requestedSubjects', 'requestedLevel', 'status', 'accessLevel', 'createdAt'])
+             'name', 'email', 'photoURL', 'requestedLevels', 'status', 'accessLevels', 'createdAt'])
         && request.resource.data.keys().hasAll([
-             'name', 'email', 'photoURL', 'requestedBoard', 'requestedClass',
-             'requestedSubjects', 'requestedLevel', 'status', 'accessLevel', 'createdAt'])
+             'name', 'email', 'photoURL', 'requestedLevels', 'status', 'accessLevels', 'createdAt'])
         && request.resource.data.name is string
         && request.resource.data.name.size() > 0
         && request.resource.data.name.size() <= 80
@@ -158,9 +201,9 @@ service cloud.firestore {
         && request.resource.data.photoURL is string
         && request.resource.data.photoURL.size() <= 500
         && request.resource.data.status == 'pending'
-        && request.resource.data.accessLevel == ''
+        && request.resource.data.accessLevels == []
         && request.resource.data.createdAt == request.time
-        && levelMatches(request.resource.data);
+        && requestOk(request.resource.data);
 
       allow update: if isAdmin() && adminUserUpdateOk();
       allow delete: if isAdmin();
@@ -169,9 +212,7 @@ service cloud.firestore {
     // ───────────── Question bank (Phase 3, images Phase 4, grouping Phase 5, ProfAdmin only) ─────────────
 
     function chapterOk(d) {
-      return d.board in ['CBSE', 'State Board']
-        && d.cls in ['10', '12']
-        && d.subject in ['Physics', 'Chemistry', 'Science']
+      return inCatalog(d.board, d.cls, d.subject)
         && d.chapterNumber is int && d.chapterNumber >= 1 && d.chapterNumber <= 99
         && d.chapterName is string && d.chapterName.size() >= 1 && d.chapterName.size() <= 120
         && d.edition is string && d.edition.size() <= 40
@@ -189,9 +230,7 @@ service cloud.firestore {
     }
 
     function questionOk(d) {
-      return d.board in ['CBSE', 'State Board']
-        && d.cls in ['10', '12']
-        && d.subject in ['Physics', 'Chemistry', 'Science']
+      return inCatalog(d.board, d.cls, d.subject)
         && d.type in ['mcq_single', 'mcq_multi', 'true_false', 'fill_blank', 'numerical', 'assertion_reason',
                       'match', 'case_based', 'very_short', 'short', 'long']
         && d.difficulty in ['Easy', 'Medium', 'Hard']
@@ -232,7 +271,7 @@ service cloud.firestore {
     match /taxonomy/{chapterId} {
       allow read: if isAdmin()
         || (isApprovedStudent()
-            && levelSees(myProfile().accessLevel, resource.data.board, resource.data.cls, resource.data.subject));
+            && anyLevelSees(resource.data.board, resource.data.cls, resource.data.subject));
       allow create: if isAdmin()
         && request.resource.data.keys().hasOnly(['board', 'cls', 'subject', 'chapterNumber', 'chapterName',
                                                  'edition', 'nextSerial', 'createdAt', 'updatedAt'])
@@ -362,15 +401,14 @@ service cloud.firestore {
     // ───────────── Papers (Phase 7, ProfAdmin writes) ─────────────
 
     function paperOk(d) {
-      return d.board in ['CBSE', 'State Board']
-        && d.cls in ['10', '12']
-        && d.subject in ['Physics', 'Chemistry', 'Science']
+      return inCatalog(d.board, d.cls, d.subject)
         && d.mode in ['fixed', 'rule']
         && d.title is string && d.title.size() >= 1 && d.title.size() <= 120
         && d.description is string && d.description.size() <= 500
         && d.levels is list && d.levels.size() >= 1 && d.levels.size() <= 2
         && levelSees(d.levels[0], d.board, d.cls, d.subject)
-        && (d.levels.size() == 1 || levelSees(d.levels[1], d.board, d.cls, d.subject))
+        && (d.levels.size() == 1 || levelSees(d.levels[1], d.board, d.cls, d.subject)
+            || !(d.levels[1] in cat().levels))
         && d.durationMin is int && d.durationMin >= 1 && d.durationMin <= 300
         && d.negativeMarking is number && d.negativeMarking >= 0 && d.negativeMarking <= 1
         && d.showKeys is bool
@@ -401,7 +439,7 @@ service cloud.firestore {
       allow read: if isAdmin()
         || (isApprovedStudent()
             && resource.data.status == 'published'
-            && myProfile().accessLevel in resource.data.levels);
+            && anyLevel(resource.data.levels));
       allow create: if isAdmin()
         && request.resource.data.keys().hasOnly(['board', 'cls', 'subject', 'mode', 'title', 'description', 'levels',
              'durationMin', 'negativeMarking', 'showKeys', 'shuffle', 'access', 'status', 'count',
@@ -430,8 +468,8 @@ service cloud.firestore {
       return d.uid == request.auth.uid
         && p.status == 'published'
         && p.access == 'public'
-        && myProfile().accessLevel in p.levels
-        && d.level == myProfile().accessLevel
+        && d.level in myProfile().accessLevels
+        && d.level in p.levels
         && d.board == p.board && d.cls == p.cls && d.subject == p.subject
         && d.paperTitle == p.title
         && d.durationMin == p.durationMin

@@ -3,12 +3,13 @@
  * The paper list and the paper builder: fixed papers (questions picked one
  * by one) and rule-based papers (chapters, types and a difficulty mix; the
  * questions are drawn when a student starts). Everything here is display;
- * the real lock is Firestore Rules v8. All text is inserted with textContent.
+ * the real lock is Firestore Rules v9. All text is inserted with textContent.
  * ───────────────────────────────────────────────────────────────────── */
 import * as Q from "./question-core.js";
 import * as P from "./paper-core.js";
 import * as L from "./paper-logic.js";
 import { levelLabel } from "./admin-core.js";
+import * as Cat from "./catalog-core.js";
 
 export function initPapers(host, api) {
   const el = api.el;
@@ -16,8 +17,8 @@ export function initPapers(host, api) {
   let uid = 0;
 
   const scopes = [];
-  Q.FOLDERS.forEach((f) => f.subjects.forEach((s) => scopes.push({
-    key: f.board + "|" + f.cls + "|" + s, board: f.board, cls: f.cls, subject: s, label: f.label + " · " + s
+  Q.folders().forEach((f) => f.subjects.forEach((s) => scopes.push({
+    key: f.board + "|" + f.cls + "|" + s, board: f.board, cls: f.cls, subject: s, label: Cat.scopeLabel(f.board, f.cls, s)
   })));
   const scopeLabel = (p) => { const s = scopes.find((x) => x.board === p.board && x.cls === p.cls && x.subject === p.subject); return s ? s.label : ""; };
   const fmtDate = (ts) => (ts && ts.toDate ? ts.toDate().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "");

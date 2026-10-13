@@ -120,20 +120,14 @@
 
         <section id="p-onboard" class="portal-card" hidden>
           <h1 class="portal-title">Apply for access</h1>
-          <p class="portal-sub">Tell us your class and subjects. The academy reviews every application before access is opened.</p>
+          <p class="portal-sub">Tell us your classes and subjects. The academy reviews every application before access is opened.</p>
           <form id="onboard-form" novalidate>
             <div class="field">
               <label class="field-label" for="f-name">Name</label>
               <input class="input" id="f-name" name="name" type="text" maxlength="80" autocomplete="name" required />
             </div>
-            <fieldset class="field">
-              <legend class="field-label">Class</legend>
-              <div class="choices" id="f-course"></div>
-            </fieldset>
-            <fieldset class="field" id="f-subject-wrap" hidden>
-              <legend class="field-label">Subjects</legend>
-              <div class="choices" id="f-subject"></div>
-            </fieldset>
+            <p class="field-hint" style="margin:0 0 12px">Tick every class and subject you want to apply for. You can choose more than one.</p>
+            <div id="f-programs"></div>
             <div id="onboard-error" class="portal-error" role="alert" hidden></div>
             <button id="btn-submit" class="btn btn-primary btn-block" type="submit">Submit application</button>
           </form>
@@ -188,7 +182,8 @@
 
   <script src="../js/header-footer-loader.js"></script>
   <script type="module">
-    import { COURSES, ROUTES, watchAuth, signInWithGoogle, signOutUser, loadAccount, isComplete, submitApplication } from "../js/auth-core.js";
+    import { ROUTES, watchAuth, signInWithGoogle, signOutUser, loadAccount, isComplete, submitApplication } from "../js/auth-core.js";
+    import { loadCatalog, activeLevelIds, levelInfo, MAX_STUDENT_LEVELS } from "../js/catalog-core.js";
 
     const $ = (id) => document.getElementById(id);
     const panels = { loading: $("p-loading"), signin: $("p-signin"), onboard: $("p-onboard") };
@@ -208,6 +203,7 @@
         const account = await loadAccount(user);
         if (account.isAdmin) { location.replace(ROUTES.admin); return; }
         if (isComplete(account.profile)) { location.replace(ROUTES.dashboard); return; }
+        await loadCatalog();
         prepareForm(user);
         show("onboard");
       } catch (err) {
@@ -240,11 +236,11 @@
     $("btn-switch").addEventListener("click", () => { signOutUser(); });
 
     /* ---- Onboarding form ---- */
-    function radio(container, name, value, label, checked) {
+    function checkbox(container, value, label) {
       const wrap = document.createElement("label");
       wrap.className = "choice";
       const input = document.createElement("input");
-      input.type = "radio"; input.name = name; input.value = value; input.checked = !!checked;
+      input.type = "checkbox"; input.name = "level"; input.value = value;
       const span = document.createElement("span");
       span.textContent = label;
       wrap.append(input, span);
@@ -252,27 +248,40 @@
       return input;
     }
 
-    function renderSubjects(courseId) {
-      const course = COURSES.find((c) => c.id === courseId);
-      const box = $("f-subject");
-      box.textContent = "";
-      $("f-subject-wrap").hidden = !course;
-      if (!course) return;
-      course.subjects.forEach((s) => radio(box, "subject", s.label, s.label, course.subjects.length === 1));
-    }
-
+    /* The programs ProfAdmin has opened for sign-up, grouped by board and class. */
     function prepareForm(user) {
       $("who-email").textContent = user.email || "";
       if (formReady) return;
       formReady = true;
       $("f-name").value = user.displayName || "";
-      const courseBox = $("f-course");
-      courseBox.textContent = "";
-      COURSES.forEach((c) => {
-        const input = radio(courseBox, "course", c.id, c.label, false);
-        input.addEventListener("change", () => renderSubjects(c.id));
+      const box = $("f-programs");
+      box.textContent = "";
+      const groups = [];
+      activeLevelIds().forEach((id) => {
+        const info = levelInfo(id);
+        if (!info) return;
+        let g = groups.find((x) => x.label === info.label);
+        if (!g) { g = { label: info.label, items: [] }; groups.push(g); }
+        g.items.push(info);
       });
-      renderSubjects(null);
+      if (!groups.length) {
+        const m = document.createElement("div");
+        m.className = "portal-error";
+        m.textContent = "No classes are open for applications right now. Please contact the academy.";
+        box.append(m);
+      }
+      groups.forEach((g) => {
+        const fs = document.createElement("fieldset");
+        fs.className = "field";
+        const lg = document.createElement("legend");
+        lg.className = "field-label";
+        lg.textContent = g.label;
+        const choices = document.createElement("div");
+        choices.className = "choices";
+        g.items.forEach((info) => checkbox(choices, info.level, info.subjectName));
+        fs.append(lg, choices);
+        box.append(fs);
+      });
       setMsg($("onboard-error"), "");
     }
 
@@ -280,15 +289,14 @@
       e.preventDefault();
       setMsg($("onboard-error"), "");
       const name = $("f-name").value.trim();
-      const courseEl = document.querySelector('input[name="course"]:checked');
-      const subjectEl = document.querySelector('input[name="subject"]:checked');
+      const levelIds = Array.from(document.querySelectorAll('input[name="level"]:checked')).map((x) => x.value);
       if (!name) { setMsg($("onboard-error"), "Please enter your name."); return; }
-      if (!courseEl) { setMsg($("onboard-error"), "Please choose your class."); return; }
-      if (!subjectEl) { setMsg($("onboard-error"), "Please choose your subjects."); return; }
+      if (!levelIds.length) { setMsg($("onboard-error"), "Please tick at least one class and subject."); return; }
+      if (levelIds.length > MAX_STUDENT_LEVELS) { setMsg($("onboard-error"), "You can choose at most " + MAX_STUDENT_LEVELS + " subjects."); return; }
       const btn = $("btn-submit");
       btn.disabled = true;
       try {
-        await submitApplication(currentUser, { name, courseId: courseEl.value, subjectLabel: subjectEl.value });
+        await submitApplication(currentUser, { name, levelIds });
         location.replace(ROUTES.dashboard);
       } catch (err) {
         console.error(err);

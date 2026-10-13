@@ -7,11 +7,12 @@
  *      missing images are flagged; NOTHING is saved
  *   4. confirm: images are uploaded and the valid questions are saved
  * The spreadsheet rules live in bulk-core.js. Everything here is cosmetic
- * as far as security goes; the real lock is Firestore Rules v8.
+ * as far as security goes; the real lock is Firestore Rules v9.
  * ───────────────────────────────────────────────────────────────────── */
 import * as Q from "./question-core.js";
 import * as IU from "./image-upload.js";
 import * as B from "./bulk-core.js";
+import * as Cat from "./catalog-core.js";
 import { validateLatex } from "./latex-tools.js";
 
 const EXCELJS_URL = "https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js";
@@ -21,7 +22,8 @@ const CHUNK = 25;   // questions saved per step (images are uploaded for one ste
 
 const cfg = {
   TYPES: Q.TYPES, SUB_TYPES: Q.SUB_TYPES, AR_OPTIONS: Q.AR_OPTIONS, DIFFICULTIES: Q.DIFFICULTIES,
-  FOLDERS: Q.FOLDERS, levelsFor: Q.levelsFor, typeLabel: Q.typeLabel, validateLatex: validateLatex
+  folders: Q.folders, levelsFor: Q.levelsFor, resolveScope: Cat.resolveScope,
+  names: { board: Cat.boardName, cls: Cat.className, subject: Cat.subjectName }, typeLabel: Q.typeLabel, validateLatex: validateLatex
 };
 
 /* ── The Excel library is loaded only when this screen is opened ── */
@@ -74,9 +76,9 @@ async function checkFile(file, imageFiles) {
     if (e.state === "error") continue;
     const list = (await chaptersOf(e)).filter((c) => c.chapterNumber === e.chapterNumber);
     if (!list.length) {
-      e.errs.push("Chapter " + e.chapterNumber + " does not exist in " + e.board + ", Class " + e.cls + ", " + e.subject + ". Create the chapter in the Questions section first.");
+      e.errs.push("Chapter " + e.chapterNumber + " does not exist in " + Cat.scopeLabel(e.board, e.cls, e.subject) + ". Create the chapter in the Questions section first.");
     } else if (list.length > 1) {
-      e.errs.push("More than one chapter in " + e.board + ", Class " + e.cls + ", " + e.subject + " has the number " + e.chapterNumber
+      e.errs.push("More than one chapter in " + Cat.scopeLabel(e.board, e.cls, e.subject) + " has the number " + e.chapterNumber
         + ", so this row cannot be matched to one chapter. Give the chapters different numbers first.");
     } else e.chapter = list[0];
   }
@@ -182,7 +184,7 @@ async function runImport(list, imageMap, adminEmail, onProgress) {
         console.error(err);
         if (ids.length) result.strayImages += await IU.deleteImages(ids);
         const why = err && err.code === "permission-denied"
-          ? "Permission was refused. Check that the latest Firestore rules (v8) are published."
+          ? "Permission was refused. Check that the latest Firestore rules (v9) are published."
           : "The database could not be reached or refused the save.";
         ready.forEach((r) => result.failed.push({ e: r.e, reason: why + " This question was not saved." }));
         result.stopped = true;
@@ -242,7 +244,7 @@ export function renderBulkUpload(host, o) {
     try {
       const ExcelJS = await loadExcel();
       const folders = [];
-      Q.FOLDERS.forEach((f) => f.subjects.forEach((s) => folders.push({ board: f.board, cls: f.cls, subject: s, chapters: [] })));
+      Q.folders().forEach((f) => f.subjects.forEach((s) => folders.push({ board: f.board, cls: f.cls, subject: s, chapters: [] })));
       await Promise.all(folders.map(async (f) => { f.chapters = await Q.fetchChapters(f.board, f.cls, f.subject); }));
       const wb = B.buildTemplate(ExcelJS, cfg, folders);
       saveBlob(new Blob([await wb.xlsx.writeBuffer()], { type: XLSX_MIME }), "question-upload-template.xlsx");
@@ -387,7 +389,7 @@ export function renderBulkUpload(host, o) {
       ready.slice(0, 100).forEach((e) => {
         const row = el("div", "bu-item");
         const top = el("div", "q-qtop");
-        top.append(tag(e.board + " \u00b7 Class " + e.cls + " \u00b7 " + e.subject), tag("Ch " + e.chapterNumber), tag(Q.typeLabel(e.fields.type)),
+        top.append(tag(Cat.scopeLabel(e.board, e.cls, e.subject)), tag("Ch " + e.chapterNumber), tag(Q.typeLabel(e.fields.type)),
           tag(e.fields.difficulty), tag(e.fields.marks + (e.fields.marks === 1 ? " mark" : " marks")),
           tag(e.fields.status === "published" ? "Published" : "Draft"));
         if (e.fields.grouping) top.append(tag("Group: " + e.fields.grouping));

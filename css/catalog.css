@@ -1,0 +1,29 @@
+/* catalog.css: ProfAdmin Catalog section (Phase 10). Builds on tokens and admin.css. */
+.cg-board { margin: 0 0 16px; padding: 24px; border-radius: 24px; }
+.cg-h3 { font-family: var(--font-display); font-weight: 400; font-size: 24px; line-height: 1.2; letter-spacing: -0.3px; margin: 0 0 8px; }
+.cg-row { display: grid; grid-template-columns: 1fr; gap: 8px; align-items: center; padding: 12px 0; }
+.cg-board-head { padding-top: 0; border-bottom: 1px solid var(--border); }
+.cg-board-head .cg-title { font-size: 20px; font-weight: 600; }
+.cg-class { margin: 16px 0 0; padding: 4px 16px 16px; border: 1px solid var(--border); border-radius: 16px; }
+.cg-class-head { border-bottom: 1px solid var(--border); }
+.cg-class-head .cg-title { font-weight: 600; }
+.cg-subject { border-top: 1px solid var(--border); }
+.cg-subject:first-of-type { border-top: 0; }
+.cg-name { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-width: 0; }
+.cg-title { font-weight: 600; overflow-wrap: anywhere; }
+.cg-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.cg-empty { padding: 12px 0; color: var(--muted); font-size: 14px; }
+.cg-add { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+.cg-add-title { flex: 1 0 100%; font-size: 13px; font-weight: 600; color: var(--muted); }
+.cg-input { flex: 1 1 200px; width: auto; min-height: 40px; border-radius: 9999px; background: var(--surface); border-color: transparent; padding-inline: 16px; }
+.cg-input:focus { background: var(--bg); padding-inline: 15px; }
+.cg-input.cg-code { flex: 0 1 120px; }
+.cg-name .cg-input { flex: 1 1 180px; }
+@media (min-width: 760px) {
+  .cg-row { grid-template-columns: minmax(0, 1.4fr) auto auto; gap: 16px; }
+  .cg-subject { grid-template-columns: minmax(0, 1.4fr) 180px auto; }
+  .cg-acts { justify-content: flex-end; }
+}
+.lv-checks { display: grid; gap: 8px; max-height: 260px; overflow: auto; padding: 4px 2px; }
+.lv-check { display: flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; }
+.lv-check small { color: var(--muted); }

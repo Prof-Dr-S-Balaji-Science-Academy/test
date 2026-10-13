@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────────────────────────────
  * test-ui.js  (ES module, student mock tests, Phase 7)
  * The paper list, the timed test, and the result and review screens.
- * Everything here is display; the real locks are Firestore Rules v8:
+ * Everything here is display; the real locks are Firestore Rules v9:
  *   - questions are served without answers
  *   - the answer keys stay unreadable until the test is submitted
  *   - the start time and the deadline come from the server, never from this
@@ -14,6 +14,8 @@
 import { typeLabel } from "./question-core.js";
 import * as P from "./paper-core.js";
 import * as L from "./paper-logic.js";
+import * as Cat from "./catalog-core.js";
+import * as PDF from "./result-pdf.js";
 import { el, typeset, clearMath, latexBlock, imageBox } from "./practice-ui.js";
 
 const letter = (i) => String.fromCharCode(65 + i);
@@ -135,11 +137,72 @@ function explanationBlock(key) {
   return ex;
 }
 
+/* ═══════════════════════════ PDF result report (Phase 10) ═══════════════════════════
+ * Built off-screen and drawn into a PDF by result-pdf.js. It lists the questions
+ * answered on screen: the question, the options, what the student chose and, only when
+ * the paper shows its answer key, the right answer. Explanations are not included. */
+function buildReport(r) {
+  const { session, qs, keys, answers, res, showKeys, student } = r;
+  const root = el("div", "rp-root");
+  root.setAttribute("aria-hidden", "true");
+
+  const head = el("div", "rp-block rp-head");
+  head.append(el("div", "rp-brand", "Prof. Dr. S. Balaji Science Academy"),
+    el("div", "rp-title", session.paperTitle || "Mock test"),
+    el("div", "rp-sub", "Mock test result"));
+  const rows = el("div", "rp-rows");
+  const row = (k, v) => { const d = el("div", "rp-row"); d.append(el("span", "rp-k", k), el("span", "rp-v", v)); rows.append(d); };
+  row("Student", student.name || "–");
+  row("Email", student.email || "–");
+  row("Subject", Cat.scopeLabel(session.board, session.cls, session.subject));
+  row("Submitted", fmtWhen(session.submittedAt) || "–");
+  row("Score (marked on screen)", res.evalMax > 0 ? res.score + " / " + res.evalMax : "–");
+  row("Correct \u00b7 Wrong \u00b7 Not answered", res.correct + " \u00b7 " + res.wrong + " \u00b7 " + res.unanswered);
+  if (res.selfCount) row("Written on paper", res.selfCount + (res.selfCount === 1 ? " question" : " questions") + " \u00b7 " + marksText(res.selfMarks));
+  if (session.late) row("Submitted after the time limit", "Yes");
+  head.append(rows);
+  if ((session.negativeMarking || 0) > 0) head.append(el("div", "rp-note", "Negative marking applied: a wrong answer loses " + L.round2((session.negativeMarking || 0) * 100) + "% of that question's marks."));
+  if (res.selfCount) head.append(el("div", "rp-note", "Questions written on paper are not marked here and are not listed below."));
+  if (!showKeys) head.append(el("div", "rp-note", "The answer key is not shown for this paper."));
+  root.append(head);
+
+  (session.questionIds || []).forEach((id, i) => {
+    const q = qs[id];
+    if (!q || !L.isEvaluated(q.type)) return;
+    const rr = res.per[id] || { status: "unanswered", delta: 0 };
+    const key = keys[id] || {};
+    const card = el("div", "rp-block rp-q");
+    const tags = el("div", "rp-tags");
+    tags.append(el("span", "rp-tag", "Question " + (i + 1)), el("span", "rp-tag", marksText(q.marks)), el("span", "rp-tag", typeLabel(q.type)));
+    const label = { correct: "Correct", wrong: "Incorrect", unanswered: "Not answered" }[rr.status] || "";
+    tags.append(el("span", "rp-chip rp-" + rr.status, label + (rr.delta ? " (" + (rr.delta > 0 ? "+" : "") + rr.delta + ")" : "")));
+    card.append(tags, evaluatedStem(q));
+    const chosen = answers[id] && answers[id].sel ? answers[id].sel : [];
+    const rights = key.correct || [];
+    const mine = [], right = [];
+    L.displayOptions(q, (session.optionOrder || {})[id]).forEach((o, pos) => {
+      const isSel = chosen.indexOf(o.orig) !== -1;
+      const isRight = rights.indexOf(o.orig) !== -1;
+      if (isSel) mine.push(letter(pos));
+      if (isRight) right.push(letter(pos));
+      const lab = el("div", "rp-opt" + (isSel ? " is-chosen" : "") + (showKeys && isRight ? " is-right" : ""));
+      lab.append(el("span", "rp-opt-l", letter(pos)), latexBlock("rp-opt-t", o.text));
+      card.append(lab);
+    });
+    card.append(el("div", "rp-ans", "Your answer: " + (mine.length ? mine.join(", ") : "not answered")));
+    if (showKeys) card.append(el("div", "rp-ans rp-ans-right", "Correct answer: " + (right.length ? right.join(", ") : "not available")));
+    root.append(card);
+  });
+  return root;
+}
+
 /* ═══════════════════════════ The mock test app ═══════════════════════════ */
 
 export function initTests(host, ctx) {
   const T = { papers: [], active: null, history: [], loaded: false };
   let token = 0;
+  /* A student may hold several levels: a paper is taken under the first of their levels that the paper is set for. */
+  const levelOf = (paper) => (ctx.levels || []).find((l) => (paper.levels || []).indexOf(l) !== -1) || (ctx.levels || [])[0];
 
   const errText = (err) => (err && err.code === "permission-denied"
     ? "Permission was refused. Please contact the academy if this keeps happening."
@@ -160,7 +223,7 @@ export function initTests(host, ctx) {
     let err = null;
     try {
       const [papers, active, history] = await Promise.all([
-        P.fetchPapersForLevel(ctx.level), P.fetchActiveSessions(ctx.uid), P.fetchSubmittedSessions(ctx.uid)
+        P.fetchPapersForLevel(ctx.levels), P.fetchActiveSessions(ctx.uid), P.fetchSubmittedSessions(ctx.uid)
       ]);
       T.papers = papers; T.active = active[0] || null; T.history = history; T.loaded = true;
     } catch (e) { console.error(e); err = e; }
@@ -282,14 +345,14 @@ export function initTests(host, ctx) {
         rows = paper.questionIds.map((id) => map[id]);
         order = paper.shuffle ? L.shuffled(paper.questionIds) : paper.questionIds.slice();
       } else {
-        const pool = await P.loadRulePool(ctx.level, paper.rules);
+        const pool = await P.loadRulePool(levelOf(paper), paper.rules);
         const pick = L.pickRuleQuestions(pool, paper.rules.mix);
         if (!pick.ok) { fail("This paper cannot be made right now because it does not have enough questions. Please tell the academy."); return; }
         rows = pick.picked;
         order = L.shuffled(rows.map((q) => q.id));
       }
       const optionOrder = L.buildOptionOrder(rows, paper.shuffle);
-      const session = await P.startSession(ctx.uid, paper, ctx.level, order, optionOrder);
+      const session = await P.startSession(ctx.uid, paper, levelOf(paper), order, optionOrder);
       const qs = {};
       rows.forEach((q) => { qs[q.id] = q; });
       const offset = session.startedAt.toMillis() - Date.now();
@@ -562,6 +625,57 @@ export function initTests(host, ctx) {
     if (res.selfCount) sum.append(el("p", "field-hint", "Questions written on paper are not marked here. Compare them with the answer key if shown, or submit your answer sheet to your teacher."));
     if (session.late) sum.append(el("p", "field-hint", "This test was submitted after the time limit."));
     if (!showKeys) sum.append(el("p", "field-hint", "The answer key is not shown for this paper."));
+    /* Export: download the result as a PDF, or share it (phones) with the academy through any chat app. */
+    const exp = el("div", "pt-export");
+    const dlBtn = el("button", "btn btn-primary", "Download PDF");
+    dlBtn.type = "button";
+    const shBtn = PDF.canShareFiles() ? el("button", "btn btn-secondary", "Share PDF") : null;
+    if (shBtn) shBtn.type = "button";
+    const expMsg = el("p", "field-hint pt-export-msg", "");
+    expMsg.setAttribute("role", "status");
+    let pdfBlob = null, working = false;
+    const pdfName = PDF.pdfFileName(session.paperTitle);
+    async function makePdf() {
+      if (pdfBlob) return pdfBlob;
+      expMsg.textContent = "Preparing your PDF\u2026";
+      const root = buildReport({ session, qs, keys, answers, res, showKeys, student: { name: ctx.name, email: ctx.email } });
+      document.body.appendChild(root);
+      try {
+        pdfBlob = await PDF.reportToPdf(root, (i, n) => { expMsg.textContent = "Preparing your PDF\u2026 " + i + " of " + n; });
+      } finally {
+        clearMath(root);
+        root.remove();
+      }
+      return pdfBlob;
+    }
+    async function runExport(share) {
+      if (working) return;
+      working = true; dlBtn.disabled = true; if (shBtn) shBtn.disabled = true;
+      try {
+        const blob = await makePdf();
+        if (share) {
+          try {
+            const done = await PDF.shareBlob(blob, pdfName, session.paperTitle + " result", "My mock test result: " + session.paperTitle);
+            expMsg.textContent = done ? "" : "Sharing was cancelled. Your PDF is ready; press Share PDF again.";
+          } catch (e) {
+            console.error(e);
+            expMsg.textContent = "Your PDF is ready. Press Share PDF once more to open the share sheet, or use Download PDF.";
+          }
+        } else {
+          PDF.downloadBlob(blob, pdfName);
+          expMsg.textContent = "Your PDF has been downloaded.";
+        }
+      } catch (e) {
+        console.error(e);
+        expMsg.textContent = "The PDF could not be made. Please check your connection and try again.";
+      }
+      working = false; dlBtn.disabled = false; if (shBtn) shBtn.disabled = false;
+    }
+    dlBtn.addEventListener("click", () => runExport(false));
+    if (shBtn) shBtn.addEventListener("click", () => runExport(true));
+    exp.append(dlBtn);
+    if (shBtn) exp.append(shBtn);
+    sum.append(exp, expMsg);
     host.append(sum);
 
     host.append(el("h3", "pq-h2 pq-gap pt-sub", "Review"));

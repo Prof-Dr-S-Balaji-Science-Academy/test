@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────────────────────────────
  * practice-ui.js  (ES module, student dashboard + practice mode, Phase 6)
  * Subject → chapter → practice, limited to the student's own access level.
- * Everything here is display; the real lock is Firestore Rules v8.
+ * Everything here is display; the real lock is Firestore Rules v9.
  * All text from the database is inserted with textContent (never as HTML)
  * and LaTeX is typeset by MathJax, which the dashboard page loads.
  * ───────────────────────────────────────────────────────────────────── */
@@ -251,7 +251,12 @@ function buildQuestion(q) {
 /* ───────────────────────────── The practice app ───────────────────────────── */
 
 export function initPractice(host, ctx) {
-  const info = levelInfo(ctx.level);
+  /* A student may hold several access levels; each is one subject of one class. The
+  "subject" key used by the screens below is the access level's ID. */
+  const levelIds = ctx.levels || (ctx.level ? [ctx.level] : []);
+  const infos = levelIds.map((l) => levelInfo(l)).filter(Boolean);
+  const infoOf = (key) => infos.find((i) => i.level === key);
+  const info = infos[0];
   const S = {
     stats: { chapters: {}, totals: { answered: 0, scored: 0, correct: 0 } },
     statsLoaded: false,
@@ -263,7 +268,7 @@ export function initPractice(host, ctx) {
   let current = { name: "home" };
   let renderToken = 0;
 
-  if (!info) {
+  if (!infos.length) {
     host.append(el("div", "portal-error", "Your access level could not be recognised. Please contact the academy."));
     return;
   }
@@ -347,12 +352,12 @@ export function initPractice(host, ctx) {
 
     host.append(el("h2", "pq-h2 pq-gap", "Practice questions"));
     const grid = el("div", "pq-grid");
-    info.subjects.forEach((s) => {
+    infos.forEach((inf) => {
       const b = el("button", "pq-tile");
       b.type = "button";
-      b.append(el("strong", null, s), el("span", null, info.label));
+      b.append(el("strong", null, inf.subjectName), el("span", null, inf.label));
       b.insertAdjacentHTML("beforeend", ARROW_SVG);
-      b.addEventListener("click", () => { S.subject = s; go({ name: "chapters", subject: s }); });
+      b.addEventListener("click", () => { S.subject = inf.level; go({ name: "chapters", subject: inf.level }); });
       grid.append(b);
     });
     host.append(grid);
@@ -364,13 +369,13 @@ export function initPractice(host, ctx) {
     const token = ++renderToken;
     clear();
     host.append(backButton("All subjects", () => history.back()));
-    host.append(el("h2", "pq-h2", subject));
+    host.append(el("h2", "pq-h2", infoOf(subject) ? infoOf(subject).subjectName : subject));
     const loading = el("div", "portal-loading", "Loading chapters…");
     loading.setAttribute("role", "status");
     host.append(loading);
     await ensureStats();
     try {
-      if (!S.chapters[subject]) S.chapters[subject] = await fetchChapters(info, subject);
+      if (!S.chapters[subject]) S.chapters[subject] = await fetchChapters(infoOf(subject), infoOf(subject).subject);
     } catch (err) {
       console.error(err);
       if (token !== renderToken) return;
@@ -406,7 +411,7 @@ export function initPractice(host, ctx) {
       };
       if (S.counts[c.id] != null) show(S.counts[c.id]);
       else {
-        countPublished(ctx.level, c.id).then((n) => { S.counts[c.id] = n; show(n); })
+        countPublished(subject, c.id).then((n) => { S.counts[c.id] = n; show(n); })
           .catch((err) => { console.error(err); meta.textContent = "Could not count questions"; });
       }
     });
@@ -418,11 +423,11 @@ export function initPractice(host, ctx) {
     S.subject = subject; S.chapterId = chapterId;
     const token = ++renderToken;
     clear();
-    host.append(backButton(subject, () => history.back()));
+    host.append(backButton(infoOf(subject) ? infoOf(subject).subjectName : subject, () => history.back()));
     let ch = (S.chapters[subject] || []).find((c) => c.id === chapterId);
     if (!ch) {
       try {
-        S.chapters[subject] = await fetchChapters(info, subject);
+        S.chapters[subject] = await fetchChapters(infoOf(subject), infoOf(subject).subject);
         ch = S.chapters[subject].find((c) => c.id === chapterId);
       } catch (err) {
         console.error(err);
@@ -477,8 +482,8 @@ export function initPractice(host, ctx) {
       try {
         const filters = { difficulty: S.filters.difficulty || null, type: S.filters.type || null };
         const [total, first] = await Promise.all([
-          countPublished(ctx.level, ch.id, filters),
-          fetchPracticeQuestions(ctx.level, ch.id, filters, null)
+          countPublished(subject, ch.id, filters),
+          fetchPracticeQuestions(subject, ch.id, filters, null)
         ]);
         if (!first.rows.length) {
           msg.textContent = "No questions match these choices yet. Try different filters.";
@@ -643,7 +648,7 @@ export function initPractice(host, ctx) {
     const s = S.session;
     if (s.index + 1 >= s.rows.length && !s.done) {
       try {
-        const more = await fetchPracticeQuestions(ctx.level, s.chapter.id, s.filters, s.cursor);
+        const more = await fetchPracticeQuestions(S.subject, s.chapter.id, s.filters, s.cursor);
         s.rows = s.rows.concat(more.rows);
         s.cursor = more.cursor || s.cursor;
         s.done = more.done;

@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="../../css/papers.css" />
   <link rel="stylesheet" href="../../css/practice.css" />
   <link rel="stylesheet" href="../../css/analytics.css" />
+  <link rel="stylesheet" href="../../css/catalog.css" />
 
   <!-- MathJax 3 with mhchem for the question preview (same setup as the formula pages) -->
   <script>
@@ -124,6 +125,7 @@
           <ul class="admin-nav" role="tablist" aria-label="ProfAdmin sections">
             <li><button class="admin-tab" id="tab-approvals" role="tab" aria-selected="true" type="button">Approvals <span class="tab-count" id="tab-approvals-count" hidden>0</span></button></li>
             <li><button class="admin-tab" id="tab-students" role="tab" aria-selected="false" type="button">Students</button></li>
+            <li><button class="admin-tab" id="tab-catalog" role="tab" aria-selected="false" type="button">Catalog</button></li>
             <li><button class="admin-tab" id="tab-questions" role="tab" aria-selected="false" type="button">Questions</button></li>
             <li><button class="admin-tab" id="tab-papers" role="tab" aria-selected="false" type="button">Papers</button></li>
             <li><button class="admin-tab" id="tab-analytics" role="tab" aria-selected="false" type="button">Analytics</button></li>
@@ -176,6 +178,9 @@
             <div class="a-more"><button class="btn btn-outline" id="st-more" type="button" hidden>Load more</button></div>
           </section>
 
+          <!-- Catalog (Phase 10) -->
+          <section id="v-catalog" aria-label="Catalog" hidden></section>
+
           <!-- Questions (taxonomy, question manager, LaTeX editor) -->
           <section id="v-questions" aria-label="Question bank" hidden></section>
 
@@ -194,8 +199,8 @@
         <div><dt>Status</dt><dd id="m-status"></dd></div>
       </dl>
       <div class="field" id="m-level-wrap">
-        <label class="field-label" for="m-level" id="m-level-label">Access level</label>
-        <select class="input" id="m-level"></select>
+        <span class="field-label" id="m-level-label">Access levels</span>
+        <div class="lv-checks" id="m-level" role="group" aria-labelledby="m-level-label"></div>
       </div>
       <div class="field" id="m-reason-wrap" hidden>
         <label class="field-label" for="m-reason">Rejection reason (optional)</label>
@@ -263,7 +268,9 @@
 
   <script src="../../js/header-footer-loader.js"></script>
   <script type="module">
-    import { ROUTES, watchAuth, loadAccount, describeRequest } from "../../js/auth-core.js";
+    import { ROUTES, watchAuth, loadAccount } from "../../js/auth-core.js";
+    import * as Cat from "../../js/catalog-core.js";
+    import { initCatalog } from "../../js/catalog-admin.js";
     import * as A from "../../js/admin-core.js";
     import { initQuestions } from "../../js/question-manager.js";
     import { initPapers } from "../../js/paper-admin.js";
@@ -280,6 +287,7 @@
     let questionsUI = null;
     let papersUI = null;
     let analyticsUI = null;
+    let catalogUI = null;
 
     /* ---------- Guard: only accounts in `admins` stay here ---------- */
     watchAuth(async (user) => {
@@ -307,13 +315,16 @@
     }
     function failText(err) {
       return err && err.code === "permission-denied"
-        ? "Permission denied. Check that the latest Firestore rules (v8) are published."
+        ? "Permission denied. Check that the latest Firestore rules (v9) are published."
         : "Something went wrong. Please check your connection and try again.";
     }
     const ms = (ts) => (ts && ts.toMillis ? ts.toMillis() : 0);
     const fmtDate = (ts) => (ts && ts.toDate
       ? ts.toDate().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "");
-    const effLevel = (u) => u.accessLevel || u.requestedLevel || "";
+    /* The levels a student holds (approved or suspended) or has applied for (pending or rejected).
+       Records made before Phase 10 are read as converted, so this works before the conversion button is pressed. */
+    const heldLevels = (u) => Cat.profileLevels(u);
+    const effLevels = (u) => (heldLevels(u).length ? heldLevels(u) : Cat.requestedLevelsOf(u));
     const STATUS_TEXT = { pending: "Pending", approved: "Approved", rejected: "Rejected", suspended: "Suspended" };
     const statusText = (s) => STATUS_TEXT[s] || "Pending";
     const el = (tag, cls, text) => {
@@ -386,16 +397,16 @@
       const who = el("div");
       who.append(el("div", "a-name", u.name || "(no name)"), el("div", "a-sub", u.email || ""));
 
-      const req = describeRequest(u);
+      const req = Cat.describeLevels(effLevels(u));
       const cls = el("div", "a-cell");
       cls.append(el("div", "a-name", req.course), el("div", "a-sub", req.subjects));
 
       const lvl = el("div", "a-cell");
       if (kind === "students") {
         const b = el("span", "badge" + (u.status === "approved" ? " is-approved" : (u.status === "pending" ? "" : " is-" + u.status)), statusText(u.status));
-        lvl.append(b, el("div", "a-sub", A.levelLabel(effLevel(u))));
+        lvl.append(b, el("div", "a-sub", A.levelsText(effLevels(u))));
       } else {
-        lvl.append(el("div", "a-sub", "Requested"), el("div", "a-name", A.levelLabel(u.requestedLevel)));
+        lvl.append(el("div", "a-sub", "Requested"), el("div", "a-name", A.levelsText(Cat.requestedLevelsOf(u))));
       }
 
       const date = el("div", "a-cell");
@@ -480,14 +491,20 @@
       if (!chosen.length) return;
       const ok = await confirmDialog({
         title: "Approve " + chosen.length + " student" + (chosen.length === 1 ? "" : "s") + "?",
-        text: "Each student is approved for the class, subjects and access level they applied for. To change a level, approve that student individually with Review.",
+        text: "Each student is approved for every class and subject they applied for. To give a different set of levels, approve that student individually with Review.",
         ok: "Approve"
       });
       if (!ok) return;
       $("ap-bulk").disabled = true;
       try {
-        const n = await A.approveMany(chosen.map((u) => ({ uid: u.uid, level: u.requestedLevel })), adminEmail);
-        chosen.forEach((u) => patchRow(u.uid, { status: "approved", accessLevel: u.requestedLevel, rejectionReason: "" }));
+        const items = chosen.map((u) => ({ uid: u.uid, levels: Cat.requestedLevelsOf(u).filter((l) => Cat.levelsFor && Cat.allLevelIds().indexOf(l) !== -1) }));
+        if (items.some((it) => !it.levels.length)) {
+          notice("Some selected applicants have no valid access level. Open them with Review instead.", true);
+          updateBulk("pending");
+          return;
+        }
+        const n = await A.approveMany(items, adminEmail);
+        items.forEach((it) => patchRow(it.uid, { status: "approved", accessLevels: it.levels, rejectionReason: "" }));
         renderAll();
         notice("Approved " + n + " student" + (n === 1 ? "" : "s") + ".");
       } catch (err) {
@@ -503,7 +520,7 @@
       const q = s.q.trim().toLowerCase();
       return s.rows.filter((u) => {
         if (s.status !== "all" && (u.status || "pending") !== s.status) return false;
-        if (s.level !== "all" && effLevel(u) !== s.level) return false;
+        if (s.level !== "all" && effLevels(u).indexOf(s.level) === -1) return false;
         if (q && !((u.name || "").toLowerCase().includes(q) || (u.email || "").toLowerCase().includes(q))) return false;
         return true;
       });
@@ -604,21 +621,26 @@
     function openManage(u) {
       const d = $("dlg-manage");
       const st = u.status || "pending";
-      const req = describeRequest(u);
+      const req = Cat.describeLevels(Cat.requestedLevelsOf(u));
       $("m-title").textContent = u.name || "Student";
       $("m-email").textContent = u.email || "";
-      $("m-applied").textContent = req.course + " \u00b7 " + req.subjects + " (" + A.levelLabel(u.requestedLevel) + ")";
-      $("m-status").textContent = statusText(st) + (u.accessLevel ? " \u00b7 " + A.levelLabel(u.accessLevel) : "")
+      $("m-applied").textContent = A.levelsText(Cat.requestedLevelsOf(u)) || (req.course + " \u00b7 " + req.subjects);
+      $("m-status").textContent = statusText(st) + (heldLevels(u).length ? " \u00b7 " + A.levelsText(heldLevels(u)) : "")
         + (st === "rejected" && u.rejectionReason ? " \u00b7 Reason: " + u.rejectionReason : "");
+      /* One tick box per access level; the student's own levels (or, before approval, the ones they asked for) start ticked. */
       const sel = $("m-level");
       sel.textContent = "";
-      A.LEVELS.forEach((l) => {
-        const o = el("option", null, l.label);
-        o.value = l.value;
-        sel.append(o);
+      const start = new Set(heldLevels(u).length ? heldLevels(u) : Cat.requestedLevelsOf(u));
+      A.levels().forEach((l) => {
+        const lab = el("label", "lv-check");
+        const cb = el("input", "check");
+        cb.type = "checkbox"; cb.value = l.value; cb.checked = start.has(l.value);
+        lab.append(cb, el("span", null, l.label));
+        if (!l.active) lab.append(el("small", null, "(hidden from sign-up)"));
+        sel.append(lab);
       });
-      sel.value = u.accessLevel || u.requestedLevel;
-      $("m-level-label").textContent = (st === "approved" || st === "suspended") ? "Access level" : "Access level to grant";
+      const chosenLevels = () => Array.from(sel.querySelectorAll("input:checked")).map((x) => x.value);
+      $("m-level-label").textContent = (st === "approved" || st === "suspended") ? "Access levels" : "Access levels to grant";
       $("m-reason").value = "";
       $("m-reason-wrap").hidden = st !== "pending";
       $("m-error").hidden = true;
@@ -650,39 +672,56 @@
         }
       };
 
-      const approve = () => run(
-        () => A.approveOne(u.uid, sel.value, adminEmail),
-        () => patchRow(u.uid, { status: "approved", accessLevel: sel.value, rejectionReason: "" }),
-        (u.name || "Student") + " approved.");
+      /* At least one level is needed, and the rules allow at most 8. */
+      const levelsOk = () => {
+        const n = chosenLevels().length;
+        if (n >= 1 && n <= 8) return true;
+        $("m-error").textContent = n ? "A student can hold at most 8 access levels." : "Tick at least one access level.";
+        $("m-error").hidden = false;
+        return false;
+      };
+      const approve = () => {
+        if (!levelsOk()) return;
+        const lv = chosenLevels();
+        return run(
+          () => A.approveOne(u.uid, lv, adminEmail),
+          () => patchRow(u.uid, { status: "approved", accessLevels: lv, rejectionReason: "" }),
+          (u.name || "Student") + " approved.");
+      };
 
       if (st === "pending") {
         btn("Approve", "btn-primary", approve);
         btn("Reject", "btn-outline", () => {
           const reason = $("m-reason").value.trim();
           run(() => A.rejectOne(u.uid, reason),
-              () => patchRow(u.uid, { status: "rejected", accessLevel: "", rejectionReason: reason }),
+              () => patchRow(u.uid, { status: "rejected", accessLevels: [], rejectionReason: reason }),
               (u.name || "Student") + " rejected.");
         });
       } else if (st === "rejected") {
         btn("Approve", "btn-primary", approve);
       } else if (st === "approved") {
-        btn("Save level", "btn-primary", () => run(
-          () => A.changeLevel(u.uid, sel.value),
-          () => patchRow(u.uid, { accessLevel: sel.value }),
-          "Access level updated."));
+        btn("Save levels", "btn-primary", () => {
+          if (!levelsOk()) return;
+          const lv = chosenLevels();
+          run(() => A.changeLevels(u.uid, lv), () => patchRow(u.uid, { accessLevels: lv }), "Access levels updated.");
+        });
         btn("Suspend", "btn-outline", () => run(
           () => A.setStatus(u.uid, "suspended"),
           () => patchRow(u.uid, { status: "suspended" }),
           (u.name || "Student") + " suspended."));
       } else if (st === "suspended") {
-        btn("Reactivate", "btn-primary", () => run(
-          () => (u.accessLevel ? A.setStatus(u.uid, "approved") : A.approveOne(u.uid, sel.value, adminEmail)),
-          () => patchRow(u.uid, u.accessLevel ? { status: "approved" } : { status: "approved", accessLevel: sel.value }),
-          (u.name || "Student") + " reactivated."));
-        btn("Save level", "btn-outline", () => run(
-          () => A.changeLevel(u.uid, sel.value),
-          () => patchRow(u.uid, { accessLevel: sel.value }),
-          "Access level updated."));
+        btn("Reactivate", "btn-primary", () => {
+          if (!levelsOk()) return;
+          const lv = chosenLevels();
+          run(() => A.approveOne(u.uid, lv, adminEmail),
+              () => patchRow(u.uid, { status: "approved", accessLevels: lv }),
+              (u.name || "Student") + " reactivated.");
+        });
+        btn("Save levels", "btn-outline", () => {
+          if (!levelsOk()) return;
+          const lv = chosenLevels();
+          run(() => A.changeLevels(u.uid, lv), () => patchRow(u.uid, { accessLevels: lv }), "Access levels updated.");
+        });
       }
 
       actions.append(el("span", "spacer"));
@@ -715,6 +754,8 @@
       $("tab-approvals").setAttribute("aria-selected", String(v === "approvals"));
       $("tab-students").setAttribute("aria-selected", String(v === "students"));
       $("tab-questions").setAttribute("aria-selected", String(v === "questions"));
+      $("tab-catalog").setAttribute("aria-selected", String(v === "catalog"));
+      $("v-catalog").hidden = v !== "catalog";
       $("tab-papers").setAttribute("aria-selected", String(v === "papers"));
       $("v-approvals").hidden = v !== "approvals";
       $("v-students").hidden = v !== "students";
@@ -724,6 +765,17 @@
       $("v-analytics").hidden = v !== "analytics";
       notice("");
       if (v === "students" && !S.students.loaded) loadStudents(true);
+      if (v === "catalog" && !catalogUI) {
+        catalogUI = initCatalog($("v-catalog"), {
+          el: el, notice: notice, failText: failText, confirmDialog: confirmDialog,
+          /* Other sections read the catalog when they are built, so they are rebuilt on next use. */
+          onChange: () => {
+            fillLevelFilter();
+            [["v-questions", () => { questionsUI = null; }], ["v-papers", () => { papersUI = null; }], ["v-analytics", () => { analyticsUI = null; }]]
+              .forEach((p) => { $(p[0]).textContent = ""; p[1](); });
+          }
+        });
+      }
       if (v === "papers" && !papersUI) {
         papersUI = initPapers($("v-papers"), {
           el: el, notice: notice, failText: failText, confirmDialog: confirmDialog, adminEmail: () => adminEmail
@@ -746,15 +798,31 @@
     $("tab-approvals").addEventListener("click", () => setView("approvals"));
     $("tab-students").addEventListener("click", () => setView("students"));
     $("tab-questions").addEventListener("click", () => setView("questions"));
+    $("tab-catalog").addEventListener("click", () => setView("catalog"));
     $("tab-papers").addEventListener("click", () => setView("papers"));
     $("tab-analytics").addEventListener("click", () => setView("analytics"));
 
-    function init() {
+    function fillLevelFilter() {
       const lv = $("st-level");
+      const keep = lv.value || "all";
+      lv.textContent = "";
       const all = el("option", null, "All access levels");
       all.value = "all";
       lv.append(all);
-      A.LEVELS.forEach((l) => { const o = el("option", null, l.label); o.value = l.value; lv.append(o); });
+      A.levels().forEach((l) => { const o = el("option", null, l.label); o.value = l.value; lv.append(o); });
+      lv.value = Array.from(lv.options).some((o) => o.value === keep) ? keep : "all";
+    }
+
+    async function init() {
+      /* The catalog (boards, classes, subjects, access levels) is read first; on the very first
+         visit after Phase 10 it is created from the earlier fixed lists. */
+      try {
+        await Cat.loadCatalog({ seed: true });
+      } catch (err) {
+        console.error(err);
+        notice("The catalog could not be loaded. " + failText(err), true);
+      }
+      fillLevelFilter();
       loadPending(true);
       refreshCount();
     }
